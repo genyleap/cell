@@ -174,6 +174,9 @@ namespace Cell::Defines {
 #define CELL_VALID_MAC 0x1    // 1 is valid Example: (76:54:2E:D5:D8:45)
 #define CELL_INVALID_MAC 0x0  // 0 is invalid
 
+#define CELL_VALID_URL 0x1    // 1 is valid
+#define CELL_INVALID_URL 0x0  // 0 is invalid
+
 // Defines for domain
 
 #define CELL_VALID_DOMAIN 0x1    // 1 is valid
@@ -204,6 +207,10 @@ namespace Cell::Defines {
 // Defines for URL
 #define CELL_VALID_URL 0x1    // 1 is valid
 #define CELL_INVALID_URL 0x0  // 0 is invalid
+
+// Defines for Email
+#define CELL_VALID_EMAIL 0x1    // 1 is valid
+#define CELL_INVALID_EMAIL 0x0  // 0 is invalid
 
 // Defines for Username
 #define CELL_VALID_USERNAME 0x1    // 1 is valid

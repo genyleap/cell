@@ -23,14 +23,27 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Regexation)
 
+template <typename T>
+concept Regexable = requires(T a) {
+    { std::regex(a) };
+};
+
+namespace regpatch
+{
+template <typename T> std::string to_string( const T& n )
+{
+    std::ostringstream stm ;
+    stm << n ;
+    return stm.str() ;
+}
+}
 /*!
  * \brief The Regex class
  */
-class Regex
-{
+class __cell_export Regex {
 public:
-    Regex() = default;
-    ~Regex() = delete;
+    Regex();
+    ~Regex();
 
     /*!
      * @brief reverse
@@ -43,7 +56,18 @@ public:
      * @param email
      * @return
      */
-    bool isEmailValid(const std::string& email);
+    template <typename T> requires Regexable<T>
+        bool isEmailValid(const T& input) {
+        const std::regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_EMAIL;
+        }
+        else
+        {
+            return CELL_INVALID_EMAIL;
+        }
+    }
 
     /*!
      * @brief vowelReplace
@@ -81,21 +105,69 @@ public:
      * @param url
      * @return
      */
-    bool isUrlValid(const std::string& url);
+    template <typename T> requires Regexable<T>
+        bool isUrlValid(const T& input) {
+        const std::regex pattern(".*\\..*");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_URL;
+        }
+        else
+        {
+            return CELL_INVALID_URL;
+        }
+    }
 
     /*!
      * @brief isIpv4Valid
      * @param input
      * @return
      */
-    bool isIpv4Valid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isIpv4Valid(const T& input) {
+        const std::regex pattern
+            ("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+             "\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+             "\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+             "\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_IPV4;
+        }
+        else
+        {
+            return CELL_VALID_IPV4;
+        }
+    }
 
     /*!
      * @brief isIpv6Valid
      * @param input
      * @return
      */
-    bool isIpv6Valid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isIpv6Valid(const T& input) {
+        const std::regex pattern
+            ("(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}"
+             "|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}"
+             "|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}"
+             "|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}"
+             "|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}"
+             "|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}"
+             "|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})"
+             "|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}"
+             "|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]"
+             "|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]"
+             "|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_IPV6;
+        }
+        else
+        {
+            return CELL_VALID_IPV6;
+        }
+    }
 
     /*===============================================
      * Matching Mac Addresses (Physical address)    #
@@ -106,7 +178,18 @@ public:
      * IEEE 802 standards use 48 bites or 6 bytes to represent a MAC address. This
      * format gives 281,474,976,710,656 possible unique MAC addresses.*/
 
-    bool isMacValid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isMacValid(const T& input) {
+        const std::regex pattern("^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_MAC;
+        }
+        else
+        {
+            return CELL_INVALID_MAC;
+        }
+    }
 
     /* ==============================================
      # Domain validation                            #
@@ -129,7 +212,19 @@ public:
      Indication.
     */
 
-    bool isDomainValid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isDomainValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("^([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,6}$");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_DOMAIN;
+        }
+        else
+        {
+            return CELL_INVALID_DOMAIN;
+        }
+    }
 
     /* =============================================
      * Http validation
@@ -140,7 +235,19 @@ public:
      * foundation of data communication for the World Wide Web
      */
 
-    bool isHttpValid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isHttpValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("(http:\\/\\/).*");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_INVALID_HTTP;
+        }
+        else
+        {
+            return CELL_INVALID_HTTP;
+        }
+    }
 
     /* =============================================
      * Https validation
@@ -155,7 +262,19 @@ public:
      * privacy and integrity of the exchanged data.
      */
 
-    bool isHttpsValid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isHttpsValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("(https:\\/\\/).*");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_INVALID_HTTPS;
+        }
+        else
+        {
+            return CELL_INVALID_HTTPS;
+        }
+    }
 
     /* =============================================
      * Ftp validation
@@ -171,8 +290,20 @@ public:
      * @brief isFtpValid
      * @param input
      * @return
-     */
-    bool isFtpValid(const std::string& input);
+     */    
+    template <typename T> requires Regexable<T>
+        bool isFtpValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("(ftp:\\/\\/).*");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_FTP;
+        }
+        else
+        {
+            return CELL_INVALID_FTP;
+        }
+    }
 
     /*!
      * @brief isPasswordValid
@@ -181,49 +312,166 @@ public:
      * @param length
      * @return
      */
-    bool isPasswordValid(const std::string& input, const int &mode, const int &length);
+    template <typename T> requires Regexable<T>
+        bool isPasswordValid(const T& input, const T mode, const T& length) {
+        // Safe Password that allow only with a number, a lowercase, a uppercase, and a special character
+        // define a regular expression
+        // Mode 0 = Simple regex contains (lowercase, upercase and numbers)
+        // Mode 1 = Complex regex contains (lowercase, upercase and numbers)
+        std::string regPattern;
+        std::string lh = regpatch::to_string(length);
+        if(mode == CELL_PASSWORD_MODE_1) {
+            regPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{" + lh + ",}$";
+        } else if(mode == CELL_PASSWORD_MODE_0) {
+            regPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{" + lh + ",}$";
+        }
+        const std::regex pattern (regPattern);
+        if(std::regex_match(input,pattern)) {
+            return CELL_VALID_PASSWORD; //return CELL_VALID flag (0x1) = 1
+        }
+        else
+        {
+            return CELL_INVALID_PASSWORD;//return CELL_INVALID flag (0x0) = 0
+        }
+    }
 
     /*!
      * @brief isAlphanumericValid
      * @param input
      * @return
      */
-    bool isAlphanumericValid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isAlphanumericValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_ALPHANUMERIC;
+        }
+        else
+        {
+            return CELL_INVALID_ALPHANUMERIC;
+        }
+    }
 
     /*!
      * @brief isNumberValid
      * @param input
      * @return
      */
-    bool isNumberValid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isNumberValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("^[0-9]+$");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_NUMERIC;
+        }
+        else
+        {
+            return CELL_INVALID_NUMERIC;
+        }
+    }
 
     /*!
      * @brief isVariableValid
      * @param input
      * @return
-     */
-    bool isVariableValid(const std::string& input);
+     */    
+    template <typename T> requires Regexable<T>
+        bool isVariableValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_VARIABLE;
+        }
+        else
+        {
+            return CELL_INVALID_VARIABLE;
+        }
+    }
 
     /*!
      * @brief isHttpImageurlValid
      * @param input
      * @return
-     */
-    bool isHttpImageurlValid(const std::string& input);
+     */    
+    template <typename T> requires Regexable<T>
+        bool isHttpImageUrlValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("(?:(?:https?)+\\:\\/\\/+[a-zA-Z0-9\\/\\._-]{1,})+(?:(?:jpe?g|png|gif))");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_ISBN;
+        }
+        else
+        {
+            return CELL_INVALID_ISBN;
+        }
+    }
 
     /*!
      * @brief isUsernameValid
      * @param input
      * @return
      */
-    bool isUsernameValid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isUsernameValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("(?=^.{3,20}$)^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_USERNAME;
+        }
+        else
+        {
+            return CELL_INVALID_USERNAME;
+        }
+    }
+
+    /* =============================================
+     * ISBN (International Standard Book Number)
+     * =============================================
+     *
+     * ISBN is the acronym for International Standard Book Number. This 10 or
+     * 13-digit number identifies a specific book, an edition of a book, or a
+     * book-like product (such as an audiobook). Since 1970 each published book
+     * has a unique ISBN. In 2007, assigned ISBNs changed from 10 digits to 13.
+     */
+    template <typename T> requires Regexable<T>
+        bool isIsbnValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("^ISBN\\s(?=[-0-9xX ]{13}$)(?:[0-9]+[- ]){3}[0-9]*[xX0-9]$");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_ISBN;
+        }
+        else
+        {
+            return CELL_INVALID_ISBN;
+        }
+    }
 
     /*!
      * @brief isIrMobileValid
      * @param input
      * @return
      */
-    bool isIrMobileValid(const std::string& input);
+
+    template <typename T> requires Regexable<T>
+        bool isIrMobileValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("(9|09|98\\d)\\d{9}");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_MOBILE;
+        }
+        else
+        {
+            return CELL_INVALID_MOBILE;
+        }
+    }
 
     /* =============================================
      * Hex validation
@@ -242,7 +490,19 @@ public:
      * depending on the choice of notation.
      */
 
-    bool isHexValid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isHexValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern("^(0[xX])?[A-Fa-f0-9]+$");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_HEX;
+        }
+        else
+        {
+            return CELL_INVALID_HEX;
+        }
+    }
 
     /* =============================================
      * HTML tag validation
@@ -253,7 +513,73 @@ public:
      * pages.
      */
 
-    bool isHtmlValid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isHtmlValid(const T& input) {
+        std::regex regex_obj(input);
+        const std::regex pattern(
+            "(<\\s*html[^>]*>(.*?)<\\s*/\\s*html>)"           //html
+            "|(<\\s*h1[^>]*>(.*?)<\\s*/\\s*h1>)"              //h1
+            "|(<\\s*h2[^>]*>(.*?)<\\s*/\\s*h2>)"              //h2
+            "|(<\\s*h3[^>]*>(.*?)<\\s*/\\s*h3>)"              //h3
+            "|(<\\s*h4[^>]*>(.*?)<\\s*/\\s*h4>)"              //h4
+            "|(<\\s*h5[^>]*>(.*?)<\\s*/\\s*h5>)"              //h5
+            "|(<\\s*h6[^>]*>(.*?)<\\s*/\\s*h6>)"              //h6
+            "|(<\\s*a[^>]*>(.*?)<\\s*/\\s*a>)"                //Defines a hyperlink
+            "|(<\\s*abbr[^>]*>(.*?)<\\s*/\\s*abbr>)"          //Defines an abbreviation or an acronym
+            "|(<\\s*acronym[^>]*>(.*?)<\\s*/\\s*acronym>)"    //Not supported in HTML5. Use <abbr> instead.(Defines an acronym).
+            "|(<\\s*address[^>]*>(.*?)<\\s*/\\s*address>)"    //Defines contact information for the author/owner of a document
+            "|(<\\s*applet[^>]*>(.*?)<\\s*/\\s*applet>)"      //Not supported in HTML5. Use <embed> or <object> instead.(Defines an embedded applet).
+            "|(<\\s*address[^>]*>(.*?)<\\s*/\\s*address>)"    //Defines an area inside an image-map
+            "|(<\\s*area[^>]*>(.*?)<\\s*/\\s*area>)"          //Defines contact information for the author/owner of a document
+            "|(<\\s*article[^>]*>(.*?)<\\s*/\\s*article>)"    //Defines an article
+            "|(<\\s*aside[^>]*>(.*?)<\\s*/\\s*aside>)"        //Defines content aside from the page content
+            "|(<\\s*audio[^>]*>(.*?)<\\s*/\\s*audio>)"        //Defines sound content
+            "|(<\\s*b[^>]*>(.*?)<\\s*/\\s*b>)"                //Defines bold text
+            "|(<\\s*base[^>]*>(.*?)<\\s*/\\s*base>)"          //Specifies the base URL/target for all relative URLs in a document
+            "|(<\\s*basefont[^>]*>(.*?)<\\s*/\\s*basefont>)"  //Not supported in HTML5. Use CSS instead. Specifies a default color, size, and font for all text in a document.
+            "|(<\\s*bdi[^>]*>(.*?)<\\s*/\\s*bdi>)"            //Isolates a part of text that might be formatted in a different direction from other text outside it
+            "|(<\\s*bdo[^>]*>(.*?)<\\s*/\\s*bdo>)"            //Overrides the current text direction
+            "|(<\\s*big[^>]*>(.*?)<\\s*/\\s*big>)"            //Not supported in HTML5. Use CSS instead.(Defines big text).
+            "|(<\\s*blockquote[^>]*>(.*?)<\\s*/\\s*blockquote>)" //Defines a section that is quoted from another source
+            "|(<\\s*body[^>]*>(.*?)<\\s*/\\s*body>)"          //Defines the document's body
+            "|(<\\s*br[^>]*>(.*?)<\\s*/\\s*br>)"              //Defines a single line break
+            "|(<\\s*button[^>]*>(.*?)<\\s*/\\s*button>)"      //Defines a clickable button
+            "|(<\\s*canvas[^>]*>(.*?)<\\s*/\\s*canvas>)"      //Used to draw graphics, on the fly, via scripting (usually JavaScript)
+            "|(<\\s*caption[^>]*>(.*?)<\\s*/\\s*caption>)"    //Defines a table caption
+            "|(<\\s*center[^>]*>(.*?)<\\s*/\\s*center>)"      //Not supported in HTML5. Use CSS instead.
+            "|(<\\s*cite[^>]*>(.*?)<\\s*/\\s*cite>)"          //Defines a table caption
+            "|(<\\s*caption[^>]*>(.*?)<\\s*/\\s*caption>)"    //Defines the title of a work
+            "|(<\\s*code[^>]*>(.*?)<\\s*/\\s*code>)"          //Defines a piece of computer code
+            "|(<\\s*col[^>]*>(.*?)<\\s*/\\s*col>)"            //Specifies column properties for each column within a <colgroup> element
+            "|(<\\s*hr[^>]*>(.*?)<\\s*/\\s*hr>)"              //Defines a thematic change in the content
+            "|(<\\s*title[^>]*>(.*?)<\\s*/\\s*title>)"        //Defines a title for the document
+            "|(<\\s*link[^>]*>(.*?)<\\s*/\\s*link >)"         //Defines the relationship between a document and an external resource (most used to link to style sheets)
+            "|(<\\s*div[^>]*>(.*?)<\\s*/\\s*div>)"            //div
+            "|(<\\s*span[^>]*>(.*?)<\\s*/\\s*span>)"          //span
+            "|(<\\s*main[^>]*>(.*?)<\\s*/\\s*main>)"          //Specifies the main content of a document
+            "|(<\\s*ul[^>]*>(.*?)<\\s*/\\s*ul>)"              //Defines an unordered list
+            "|(<\\s*li[^>]*>(.*?)<\\s*/\\s*li>)"              //Defines a list item
+            "|(<\\s*section[^>]*>(.*?)<\\s*/\\s*section>)"    //Defines a section in a document
+            "|(<\\s*meta[^>]*>(.*?)<\\s*/\\s*meta>)"          //Defines metadata about an HTML document
+            "|(<\\s*label[^>]*>(.*?)<\\s*/\\s*label>)"        //Defines a label for an <input> element
+            "|(<\\s*form[^>]*>(.*?)<\\s*/\\s*form>)"          //form
+            "|(<\\s*svg[^>]*>(.*?)<\\s*/\\s*svg>)"            //svg
+            "|(<\\s*tr[^>]*>(.*?)<\\s*/\\s*tr>)"              //Defines a row in a table
+            "|(<\\s*td[^>]*>(.*?)<\\s*/\\s*td>)"              //td
+            "|(<\\s*img[^>]*>(.*?)<\\s*/\\s*img>)"            //img
+            //Add more...
+            );
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_HTML;
+        }
+        else
+        {
+            return CELL_INVALID_HTML;
+        }
+    }
+
+
 
     /* =============================================
      * Base64_encode — Encodes data with MIME base64
@@ -265,38 +591,37 @@ public:
      * transfer encoding.
      */
 
-    bool isBase64Valid(const std::string& input);
-
-    /* =============================================
-     * ISBN (International Standard Book Number)
-     * =============================================
-     *
-     * ISBN is the acronym for International Standard Book Number. This 10 or
-     * 13-digit number identifies a specific book, an edition of a book, or a
-     * book-like product (such as an audiobook). Since 1970 each published book
-     * has a unique ISBN. In 2007, assigned ISBNs changed from 10 digits to 13.
-     */
-
-    bool isIsbnValid(const std::string& input);
+    template <typename T> requires Regexable<T>
+        bool isBase64Valid(const T& input) {
+        const std::regex pattern("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_BASE64;
+        }
+        else
+        {
+            return CELL_INVALID_BASE64;
+        }
+    }
 
     /*!
      * \brief isPersianValid
      * \param input
      * \return
      */
-    bool isPersianValid(const std::wstring &input);
-
-};
-
-namespace regpatch
-{
-    template <typename T> std::string to_string( const T& n )
-    {
-        std::ostringstream stm ;
-        stm << n ;
-        return stm.str() ;
+    template <typename T> requires Regexable<T>
+        bool isPersianValid(const T& input) {
+        std::wregex pattern(L"[ چجحخهعغفقثصضکمنتالبیسشوپدذرزطظًًٌٍَُِّْ؛«»ةآأإيئؤ؟ءٔ‌ٰژطك‌]+");
+        if(std::regex_match(input, pattern))
+        {
+            return CELL_VALID_PERSIAN;
+        }
+        else
+        {
+            return CELL_INVALID_PERSIAN;
+        }
     }
-}
+};
 
 CELL_NAMESPACE_END
 
