@@ -1,4 +1,11 @@
-#include "core.hpp"
+#ifdef __has_include
+# if __has_include("core.hpp")
+#   include "core.hpp"
+#else
+#   error "Cell's "core.hpp" was not found!"
+# endif
+#endif
+
 #include "logger.hpp"
 #include "config.hpp"
 #include "database.hpp"

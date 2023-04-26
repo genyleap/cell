@@ -26,6 +26,15 @@
 # endif
 #endif
 
+#ifdef __has_include
+# if __has_include("logger.hpp")
+#   include "logger.hpp"
+#else
+#   error "Cell's "logger.hpp" was not found!"
+# endif
+#endif
+
+
 CELL_USING_NAMESPACE Cell::System;
 
 CELL_USING_NAMESPACE Cell::FileSystem;
