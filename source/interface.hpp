@@ -1,19 +1,19 @@
 /*!
+ * Gen3 License
  *
- * Copyright (c) 2021 Kambiz Asadzadeh
- * Copyright (c) 2023 Genyleap
+ * @file        interface.hpp
+ * @brief       This file is part of the Cell engine.
+ * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
+ * @package     libCell
+ * @copyright   Copyright (c) 2022 The Genyleap. All rights reserved.
+ * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
  */
 
-#ifndef INTERFACE_HPP
-#define INTERFACE_HPP
 
-#ifdef __has_include
-# if __has_include(<common.hpp>)
-#   include <common.hpp>
-# endif
-#else
-#   include <common.hpp>
-#endif
+#ifndef CELL_INTERFACE_HPP
+#define CELL_INTERFACE_HPP
+
+#include "common.hpp"
 
 class Interface
 {
@@ -21,4 +21,4 @@ public:
   Interface();
 };
 
-#endif // INTERFACE_HPP
+#endif // CELL_INTERFACE_HPP
