@@ -28,7 +28,7 @@ concept Regexable = requires(T a) {
     { std::regex(a) };
 };
 
-namespace regpatch
+namespace Helper::Regex
 {
 template <typename T> std::string to_string( const T& n )
 {
@@ -214,7 +214,6 @@ public:
 
     template <typename T> requires Regexable<T>
         bool isDomainValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("^([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,6}$");
         if(std::regex_match(input, pattern))
         {
@@ -237,7 +236,6 @@ public:
 
     template <typename T> requires Regexable<T>
         bool isHttpValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("(http:\\/\\/).*");
         if(std::regex_match(input, pattern))
         {
@@ -264,7 +262,6 @@ public:
 
     template <typename T> requires Regexable<T>
         bool isHttpsValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("(https:\\/\\/).*");
         if(std::regex_match(input, pattern))
         {
@@ -293,7 +290,6 @@ public:
      */    
     template <typename T> requires Regexable<T>
         bool isFtpValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("(ftp:\\/\\/).*");
         if(std::regex_match(input, pattern))
         {
@@ -319,7 +315,7 @@ public:
         // Mode 0 = Simple regex contains (lowercase, upercase and numbers)
         // Mode 1 = Complex regex contains (lowercase, upercase and numbers)
         std::string regPattern;
-        std::string lh = regpatch::to_string(length);
+        std::string lh = Helper::Regex::to_string(length);
         if(mode == CELL_PASSWORD_MODE_1) {
             regPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{" + lh + ",}$";
         } else if(mode == CELL_PASSWORD_MODE_0) {
@@ -342,7 +338,6 @@ public:
      */
     template <typename T> requires Regexable<T>
         bool isAlphanumericValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$");
         if(std::regex_match(input, pattern))
         {
@@ -361,7 +356,6 @@ public:
      */
     template <typename T> requires Regexable<T>
         bool isNumberValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("^[0-9]+$");
         if(std::regex_match(input, pattern))
         {
@@ -380,7 +374,6 @@ public:
      */    
     template <typename T> requires Regexable<T>
         bool isVariableValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*");
         if(std::regex_match(input, pattern))
         {
@@ -399,7 +392,6 @@ public:
      */    
     template <typename T> requires Regexable<T>
         bool isHttpImageUrlValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("(?:(?:https?)+\\:\\/\\/+[a-zA-Z0-9\\/\\._-]{1,})+(?:(?:jpe?g|png|gif))");
         if(std::regex_match(input, pattern))
         {
@@ -418,7 +410,6 @@ public:
      */
     template <typename T> requires Regexable<T>
         bool isUsernameValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("(?=^.{3,20}$)^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$");
         if(std::regex_match(input, pattern))
         {
@@ -441,7 +432,6 @@ public:
      */
     template <typename T> requires Regexable<T>
         bool isIsbnValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("^ISBN\\s(?=[-0-9xX ]{13}$)(?:[0-9]+[- ]){3}[0-9]*[xX0-9]$");
         if(std::regex_match(input, pattern))
         {
@@ -461,7 +451,6 @@ public:
 
     template <typename T> requires Regexable<T>
         bool isIrMobileValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("(9|09|98\\d)\\d{9}");
         if(std::regex_match(input, pattern))
         {
@@ -492,7 +481,6 @@ public:
 
     template <typename T> requires Regexable<T>
         bool isHexValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern("^(0[xX])?[A-Fa-f0-9]+$");
         if(std::regex_match(input, pattern))
         {
@@ -515,7 +503,6 @@ public:
 
     template <typename T> requires Regexable<T>
         bool isHtmlValid(const T& input) {
-        std::regex regex_obj(input);
         const std::regex pattern(
             "(<\\s*html[^>]*>(.*?)<\\s*/\\s*html>)"           //html
             "|(<\\s*h1[^>]*>(.*?)<\\s*/\\s*h1>)"              //h1
