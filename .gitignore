@@ -35,4 +35,6 @@
 .DS_Store
 
 # Final Output
+build/
 build/ProjectTemplate
+third-party/
