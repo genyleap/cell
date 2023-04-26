@@ -1,4 +1,10 @@
-#include "base.hpp"
+#ifdef __has_include
+# if __has_include("base.hpp")
+#   include "base.hpp"
+#else
+#   error "Cell's base was not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

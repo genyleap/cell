@@ -1,4 +1,10 @@
-#include "plugininterface.hpp"
+#ifdef __has_include
+# if __has_include("plugininterface.hpp")
+#   include "plugininterface.hpp"
+#else
+#   error "Cell's plugininterface not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

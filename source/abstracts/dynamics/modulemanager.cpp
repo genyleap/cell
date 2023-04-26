@@ -1,4 +1,10 @@
-#include "modulemanager.hpp"
+#ifdef __has_include
+# if __has_include("modulemanager.hpp")
+#   include "modulemanager.hpp"
+#else
+#   error "Cell's modulemanager not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

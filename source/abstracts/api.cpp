@@ -1,4 +1,10 @@
-#include "api.hpp"
+#ifdef __has_include
+# if __has_include("api.hpp")
+#   include "api.hpp"
+#else
+#   error "Cell's api was not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

@@ -1,4 +1,10 @@
-#include "bearertoken.hpp"
+#ifdef __has_include
+# if __has_include("bearertoken.hpp")
+#   include "bearertoken.hpp"
+#else
+#   error "Cell's bearertoken not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

@@ -1,4 +1,10 @@
-#include "digestauth.hpp"
+#ifdef __has_include
+# if __has_include("digestauth.hpp")
+#   include "digestauth.hpp"
+#else
+#   error "Cell's digestauth not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

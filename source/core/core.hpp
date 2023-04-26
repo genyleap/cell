@@ -45,6 +45,10 @@
 # endif
 #endif
 
+#include "tags.hpp"
+#include "share.hpp"
+#include "message.hpp"
+
 CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell::System)

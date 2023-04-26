@@ -1,4 +1,10 @@
-#include "apikey.hpp"
+#ifdef __has_include
+# if __has_include("apikey.hpp")
+#   include "apikey.hpp"
+#else
+#   error "Cell's apikey not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

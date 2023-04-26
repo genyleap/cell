@@ -1,4 +1,10 @@
-#include "moduleinterface.hpp"
+#ifdef __has_include
+# if __has_include("moduleinterface.hpp")
+#   include "moduleinterface.hpp"
+#else
+#   error "Cell's moduleinterface not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

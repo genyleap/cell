@@ -1,4 +1,10 @@
-#include "cache.hpp"
+#ifdef __has_include
+# if __has_include("cache.hpp")
+#   include "cache.hpp"
+#else
+#   error "Cell's cache was not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

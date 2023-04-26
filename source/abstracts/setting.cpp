@@ -1,4 +1,10 @@
-#include "setting.hpp"
+#ifdef __has_include
+# if __has_include("setting.hpp")
+#   include "setting.hpp"
+#else
+#   error "Cell's setting was not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

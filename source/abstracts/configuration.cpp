@@ -1,4 +1,10 @@
-#include "configuration.hpp"
+#ifdef __has_include
+# if __has_include("configuration.hpp")
+#   include "configuration.hpp"
+#else
+#   error "Cell's configuration was not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

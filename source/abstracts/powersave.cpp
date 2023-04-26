@@ -1,4 +1,10 @@
-#include "powersave.hpp"
+#ifdef __has_include
+# if __has_include("powersave.hpp")
+#   include "powersave.hpp"
+#else
+#   error "Cell's powersave was not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 

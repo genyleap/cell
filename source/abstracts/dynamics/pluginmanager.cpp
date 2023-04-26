@@ -1,4 +1,10 @@
-#include "pluginmanager.hpp"
+#ifdef __has_include
+# if __has_include("pluginmanager.hpp")
+#   include "pluginmanager.hpp"
+#else
+#   error "Cell's pluginmanager not found!"
+# endif
+#endif
 
 CELL_USING_NAMESPACE Cell;
 
