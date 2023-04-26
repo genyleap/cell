@@ -443,13 +443,6 @@ public:
     void findAndReplaceLink(std::string& data, std::string toSearch, std::string replaceUrl);
 
     /*!
-     * @brief Some links have symptoms that need to be corrected, this function can provide it.
-     * @param uri for example [page_one+1] ~ should be page-page1
-     * @returns string type of fixed link.
-     */
-    std::string linkConvertor(const std::string& uri);
-
-    /*!
      * @brief There are some differences in the fields of queries for some drivers that we can filter them with this function.
      * @param fields is list of the fields.
      * @returns as filtered list of fields.
@@ -642,7 +635,7 @@ public:
     /*!
      * \brief Lanuage translator engine.
      */
-//    Translation::Translator* translator{__cell_nullptr};
+    //    Translation::Translator* translator{__cell_nullptr};
 
     bool m_multilang {};
 
@@ -659,7 +652,7 @@ public:
 struct ApplicationData final
 {
     SystemInfo systemInfo{};
-//    Multilangual::LanguageStruct languageStruct{};
+    //    Multilangual::LanguageStruct languageStruct{};
     OptionalString path    {__cell_unknown};
     OptionalString templateId  {__cell_unknown};
     OptionalString templateErrorId  {__cell_unknown};
@@ -724,8 +717,8 @@ public:
     Scope<Version>  version {};
     Scope<SystemInfo>  systemInfo {};
 
-//    Translation::Translator* translator{__cell_nullptr}; //alternative translator for engine.
-//    Multilangual::Language* language{__cell_nullptr};
+    //    Translation::Translator* translator{__cell_nullptr}; //alternative translator for engine.
+    //    Multilangual::Language* language{__cell_nullptr};
 
 private:
     static Application* appPtr;

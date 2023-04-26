@@ -7,7 +7,6 @@
 #endif
 
 CELL_USING_NAMESPACE Cell;
-
 CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell)
@@ -51,5 +50,49 @@ VectorString LinkParser::items()
 {
     return m_item;
 }
+
+std::string LinkParser::beautify(const std::string& uri)
+{
+    std::string str = uri;
+    for (char& c : str)
+    {
+        int tmp;
+        switch(c) {
+        case ' ':
+        case '_':
+        case ',': tmp = '-'; break;
+        case '.': tmp = '_'; break;
+        case '+': tmp = 'plus'; break;
+        default:
+            continue;
+        }
+        c = tmp;
+    }
+    std::transform(str.begin(), str.end(), str.begin(), [](char ch) {
+        return std::tolower(ch);
+    });
+    return str;
+}
+
+std::string LinkParser::recorrectUrl(std::string& url)
+{
+    std::regex httpRegex("https?://");
+    std::regex wwwRegex("www\\.");
+    // Check if URL already has a valid protocol
+    if (!std::regex_search(url.begin(), url.end(), httpRegex)) {
+        url = "https://" + std::string(url);
+    }
+    // Remove any redundant "www" subdomains from the URL
+    url = std::regex_replace(url.data(), wwwRegex, "");
+    // Check if subdomain exists
+    std::regex subdomainRegex("https?://\\S+\\.");
+    if (!std::regex_search(url.data(), subdomainRegex)) {
+        // Add default subdomain "www" if not present
+        url = std::regex_replace(url.data(), httpRegex, "https://www.");
+    }
+    // Return the corrected URL
+    return url.data();
+}
+
 
 CELL_NAMESPACE_END

@@ -22,28 +22,46 @@
 
 CELL_NAMESPACE_BEGIN(Cell)
 
-/*!
- * \brief The LinkParser class
+/**
+ * @class LinkParser
+ * @brief Class to parse web links and extract items from them.
  */
-class LinkParser
+class __cell_export LinkParser
 {
 public:
     LinkParser();
     ~LinkParser();
-    /*!
-     * \brief parse function will parse the simple url.
-     * \param url is the url string.
+
+    /**
+     * @brief Parse the given URL and extract items from it.
+     * @param url The URL to parse.
      */
     void parse(std::string& url);
 
-    /*!
-     * \brief items will returns elements of link.
-     * \return as array.
+    /**
+     * @brief Get the extracted items from the parsed URL.
+     * @return A vector of strings containing the extracted items.
      */
     Types::VectorString items();
 
+    /**
+     * @brief Beautify the given URI by replacing spaces and other characters.
+     * @details Some links have symptoms that need to be corrected, this function can provide it.
+     * for example [page_one+1] ~ should be page-page1.
+     * @param uri The URI to beautify.
+     * @return A beautified version of the URI.
+     */
+    std::string beautify(const std::string& uri);
+
+    /**
+     * @brief recorrectUrl function will fix the given URL.
+     * @param url as url string.
+     * @return fixed url with protocol only.
+     */
+    std::string recorrectUrl(std::string& url);
+
 private:
-    Types::VectorString m_item{};
+    Types::VectorString m_item{}; /*!< A vector of strings to hold the extracted items from the URL */
 };
 
 CELL_NAMESPACE_END
