@@ -28,15 +28,15 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
  */
 struct PowerSavingStruct final
 {
-    Types::u8           batteryEnergy       {10};
-    Types::OptionalBool backgroundUpdate    {false};
-    Types::OptionalBool preloadMedia        {false};
-    Types::OptionalBool interfaceEffect     {false};
-    Types::OptionalBool emojiAnimation      {false};
-    Types::OptionalBool stickerAnimation    {false};
-    Types::OptionalBool autoplayGIFs        {false};
-    Types::OptionalBool autoplayVideo       {false};
-    Types::OptionalBool autoplayMusic       {false};
+    Types::u8           batteryEnergy       { CELL_BATTERY_ENERGY };
+    Types::OptionalBool backgroundUpdate    { false };
+    Types::OptionalBool preloadMedia        { false };
+    Types::OptionalBool interfaceEffect     { false };
+    Types::OptionalBool emojiAnimation      { false };
+    Types::OptionalBool stickerAnimation    { false };
+    Types::OptionalBool autoplayGIFs        { false };
+    Types::OptionalBool autoplayVideo       { false };
+    Types::OptionalBool autoplayMusic       { false };
 };
 
 /*!

@@ -156,6 +156,8 @@ namespace Cell::Defines {
 #define CELL_PROTOCOL_HTTP    "http://"       // UNSECURTED PROTOCOL (USING PORT : 80)
 #define CELL_PROTOCOL_FTP     "ftp://"        // FTP PTOTOCOL - FTP data transfer (USING PORT : 20)
 
+#define CELL_BATTERY_ENERGY 10
+
 //! System actions
 #define CELL_EXIT 0;
 
