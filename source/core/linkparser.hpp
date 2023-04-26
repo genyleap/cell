@@ -20,7 +20,7 @@
 # endif
 #endif
 
-CELL_NAMESPACE_BEGIN(Cell)
+CELL_NAMESPACE_BEGIN(Cell::Web)
 
 /**
  * @class LinkParser
@@ -59,6 +59,13 @@ public:
      * @return fixed url with protocol only.
      */
     std::string recorrectUrl(std::string& url);
+
+    /**
+     * @brief decodeUrl function takes a URL in the percent-encoded format and returns the corresponding UTF-8 string.
+     * @param url as percent-encoded format.
+     * @return a url as UTF-8 string.
+     */
+    std::string decodeUrl(const std::string& url);
 
 private:
     Types::VectorString m_item{}; /*!< A vector of strings to hold the extracted items from the URL */

@@ -9,7 +9,7 @@
 CELL_USING_NAMESPACE Cell;
 CELL_USING_NAMESPACE Cell::Types;
 
-CELL_NAMESPACE_BEGIN(Cell)
+CELL_NAMESPACE_BEGIN(Cell::Web)
 
 LinkParser::LinkParser()
 {
@@ -36,7 +36,6 @@ void LinkParser::parse(std::string& url)
         {
             url.erase(pos, https.length());
         }
-
     }
     std::stringstream s(url.starts_with("/") ? url.substr(1,url.length()) : url);
     while (s.good()) {
@@ -94,5 +93,22 @@ std::string LinkParser::recorrectUrl(std::string& url)
     return url.data();
 }
 
+std::string LinkParser::decodeUrl(const std::string& url)
+{
+    std::stringstream ss;
+    uint value;
+    int start = 0, end = 0;
+    while ((end = url.find('%', start)) != std::string::npos)
+    {
+        ss << url.substr(start, end - start);
+        if (end + 2 <= url.length()) {
+            value = std::stoul(url.substr(end + 1, 2), nullptr, 16);
+            ss << static_cast<char>(value);
+        }
+        start = end + 3;
+    }
+    ss << url.substr(start);
+    return ss.str();
+}
 
 CELL_NAMESPACE_END
