@@ -1,8 +1,8 @@
 # -------------------- PROJECT TEMPLATE INFO ---------------------------------------------
-#   Title   :                       Project Template
-#   Version :                       1.1.222
+#   Title   :                       Cell
+#   Version :                       0.8.323
 #   Author  :                       Kambiz Asadzadeh
-#   Url     :                       https://github.com/genyleap/Project-Template
+#   Url     :                       https://github.com/genyleap/cell
 #   Organization  :                 The Genyleap
 # ----------------------------------------------------------------------------------------
 
@@ -19,12 +19,12 @@ include(FetchContent)
 
 # ------ PROJECT INFO ------
 # Options
-set(PROJECT_NAME "ProjectTemplate" CACHE STRING "Project Name.") #You can change "ProjectTemplate" with your project name.
+set(PROJECT_NAME "Cell" CACHE STRING "Project Name.") #You can change "ProjectTemplate" with your project name.
 set(PROJECT_TARGET ${PROJECT_NAME} CACHE STRING "Project Target Name.")
 
-set(PROJECT_VERSION_MAJOR 1)
-set(PROJECT_VERSION_MINOR 1)
-set(PROJECT_VERSION_PATCH 222)
+set(PROJECT_VERSION_MAJOR 0)
+set(PROJECT_VERSION_MINOR 8)
+set(PROJECT_VERSION_PATCH 323)
 
 # ---- Project settings ----
 set_property(GLOBAL APPEND PROPERTY USE_FOLDERS ON)
@@ -32,7 +32,7 @@ set_property(GLOBAL APPEND PROPERTY USE_FOLDERS ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 if(NOT DEFINED CMAKE_CXX_STANDARD)
-    set(CMAKE_CXX_STANDARD 23)
+    set(CMAKE_CXX_STANDARD 20)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
     set(CMAKE_CXX_EXTENSIONS ON)
 endif()
@@ -41,7 +41,7 @@ set(PROJECT_CREATOR "Kambiz Asadzadeh" CACHE STRING "Creator of your project.") 
 
 set(PROJECT_ORGANIZATION "The Genyleap" CACHE STRING "Organization name.") #Your project creator.
 
-set(PROJECT_LICENSE_TYPE "MIT" CACHE STRING "Project License Type.") #Your project license type.
+set(PROJECT_LICENSE_TYPE "Gen3" CACHE STRING "Project License Type.") #Your project license type.
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
   execute_process(
@@ -70,13 +70,13 @@ set(PROJECT_USAGE_TYPE "application" CACHE STRING "Usage Type.")
 #Use these keys [stl, qt, qtwidget, qtquick]
 set(PROJECT_MAIN_TYPE "stl" CACHE STRING "Library System.")
 
-set(DEVELOPER_BUNDLE_IDENTIFIER com.kambizasadzadeh.app.${PROJECT_NAME} CACHE STRING "Developer Bundle Identifier.")
+set(DEVELOPER_BUNDLE_IDENTIFIER com.genyleap.app.${PROJECT_NAME} CACHE STRING "Developer Bundle Identifier.")
 
 #You can replace your project description with this string.
-set(PROJECT_DESCRIPTION "A template for modern C++ projects with useful features for developing cross-platform projects." CACHE STRING "Project Description")
+set(PROJECT_DESCRIPTION "Cell Engine is a new and exclusive cross-platform computer application engine based on modern C++." CACHE STRING "Project Description")
 
 #Your project website address.
-set(PROJECT_HOMEPAGE_URL "https://github.com/genyleap/Project-Template" CACHE STRING "Project URL.")
+set(PROJECT_HOMEPAGE_URL "https://github.com/genyleap/cell" CACHE STRING "Project URL.")
 
 #Project pre-configuration system.
 configure_file(
@@ -148,6 +148,30 @@ endif()
 file(GLOB PRECOMPILED precompiled/pch.hpp)
 file(GLOB HEADERS source/${SUFFIX_HPPHEADER})
 file(GLOB SOURCES source/${SUFFIX_SOURCE})
+
+#include cell's file.
+include_directories(${PROJECT_SOURCE_DIR}/include/cell/)
+
+file(
+    GLOB HEADERS
+    source/${SUFFIX_HPPHEADER}
+    source/core/${SUFFIX_HPPHEADER}
+    source/translator/${SUFFIX_HPPHEADER}
+    source/abstracts/${SUFFIX_HPPHEADER}
+    source/abstracts/apis/${SUFFIX_HPPHEADER}
+    source/abstracts/account/${SUFFIX_HPPHEADER}
+    source/abstracts/dynamics/${SUFFIX_HPPHEADER}
+)
+file(
+    GLOB SOURCES
+    source/${SUFFIX_SOURCE}
+    source/core/${SUFFIX_SOURCE}
+    source/translator/${SUFFIX_SOURCE}
+    source/abstracts/${SUFFIX_SOURCE}
+    source/abstracts/apis/${SUFFIX_SOURCE}
+    source/abstracts/account/${SUFFIX_SOURCE}
+    source/abstracts/dynamics/${SUFFIX_SOURCE}
+)
 
 file(GLOB EXAMPLES
      source/examples/${SUFFIX_HPPHEADER}
