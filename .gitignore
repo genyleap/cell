@@ -38,3 +38,4 @@
 build/
 build/ProjectTemplate
 third-party/
+CMakeLists.txt.user
