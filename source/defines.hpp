@@ -158,6 +158,82 @@ namespace Cell::Defines {
 
 #define CELL_BATTERY_ENERGY 10
 
+// Defines for IPv4 and v6
+#define CELL_VALID_IPV4 0x1     // 1 is valid ip : 127.0.0.1
+#define CELL_VALID_IPV6 0x1     // 1 is valid ipv6 = // 92001:cdba:0000:0000:0000:0000:3257:9652)-(2001:cdba:0:0:0:0:3257:9652) // - (2001:cdba::3257:9652)
+#define CELL_INVALID_IPV6 0x0   // 0 is invalid ip v4
+#define CELL_INVALID_IPV4 0x0   // 0 is invalid ip v6
+
+// Modes for password types
+#define CELL_PASSWORD_MODE_0 0x0    // 1 is simple mode
+#define CELL_PASSWORD_MODE_1 0x1    // 0 is complex mode
+#define CELL_VALID_PASSWORD  0x1    // 1 is valid Simple : (Kambiz1234@#$@) Complex : Kambiz1234!@#$%
+#define CELL_INVALID_PASSWORD 0x0   // 0 is invalid
+
+// Defines for mac address
+#define CELL_VALID_MAC 0x1    // 1 is valid Example: (76:54:2E:D5:D8:45)
+#define CELL_INVALID_MAC 0x0  // 0 is invalid
+
+// Defines for domain
+
+#define CELL_VALID_DOMAIN 0x1    // 1 is valid
+#define CELL_INVALID_DOMAIN 0x0  // 0 is invalid
+
+// Defines for http and https
+#define CELL_VALID_HTTP 0x1     // 1 is valid
+#define CELL_VALID_HTTPS 0x1    // 1 is valid
+#define CELL_INVALID_HTTP 0x0   // 0 is invalid
+#define CELL_INVALID_HTTPS 0x0  // 0 is invalid
+
+// Defines for ftp
+#define CELL_VALID_FTP 0x1    // 1 is valid
+#define CELL_INVALID_FTP 0x0  // 0 is invalid
+
+// Defines for alphanumeric
+#define CELL_VALID_ALPHANUMERIC 0x1    // 1 is valid
+#define CELL_INVALID_ALPHANUMERIC 0x0  // 0 is invalid
+
+// Defines for variable
+#define CELL_VALID_VARIABLE 0x1    // 1 is valid
+#define CELL_INVALID_VARIABLE 0x0  // 0 is invalid
+
+// Defines for variable
+#define CELL_VALID_NUMERIC 0x1    // 1 is valid
+#define CELL_INVALID_NUMERIC 0x0  // 0 is invalid
+
+// Defines for URL
+#define CELL_VALID_URL 0x1    // 1 is valid
+#define CELL_INVALID_URL 0x0  // 0 is invalid
+
+// Defines for Username
+#define CELL_VALID_USERNAME 0x1    // 1 is valid
+#define CELL_INVALID_USERNAME 0x0  // 0 is invalid
+
+// Defines for Mobile
+#define CELL_VALID_MOBILE 0x1    // 1 is valid
+#define CELL_INVALID_MOBILE 0x0  // 0 is invalid
+
+// Defines for Hex
+#define CELL_VALID_HEX 0x1    // 1 is valid
+#define CELL_INVALID_HEX 0x0  // 0 is invalid
+
+// Defines for Html
+#define CELL_VALID_HTML 0x1    // 1 is valid
+#define CELL_INVALID_HTML 0x0  // 0 is invalid
+
+// Defines for base64
+#define CELL_VALID_BASE64 0x1    // 1 is valid
+#define CELL_INVALID_BASE64 0x0  // 0 is invalid
+
+// Defines for ISBN code
+#define CELL_VALID_ISBN 0x1    // 1 is valid
+#define CELL_INVALID_ISBN 0x0  // 0 is invalid
+
+// Defines for Persian language
+#define CELL_VALID_PERSIAN 0x1    // 1 is valid
+#define CELL_INVALID_PERSIAN 0x0  // 0 is invalid
+
+
 //! System actions
 #define CELL_EXIT 0;
 
