@@ -1,6 +1,7 @@
 # Cell Engine
 Welcome to the Cell development repository!
-G E N Y L E A P ™ Cell is an exclusive cross-platform software engine which enables you to build super high-end software products.
+
+G E N Y L E A P ™ Cell is an exclusive cross-platform software engine which enables you to build super high-end products.
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
 
