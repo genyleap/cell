@@ -13,8 +13,21 @@
 #ifndef CELL_MODULE_INTERFACE_ABSTRACT_HPP
 #define CELL_MODULE_INTERFACE_ABSTRACT_HPP
 
-#include "common.hpp"
-#include "module.hpp"
+#ifdef __has_include
+# if __has_include("common.hpp")
+#   include "common.hpp"
+#else
+#   error "Cell's "common.hpp" was not found!"
+# endif
+#endif
+
+#ifdef __has_include
+# if __has_include("module.hpp")
+#   include "module.hpp"
+#else
+#   error "Cell's "module.hpp" was not found!"
+# endif
+#endif
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 

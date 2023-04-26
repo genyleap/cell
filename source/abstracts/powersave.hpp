@@ -13,7 +13,13 @@
 #ifndef CELL_POWERSAVE_ABSTRACT_HPP
 #define CELL_POWERSAVE_ABSTRACT_HPP
 
-#include "common.hpp"
+#ifdef __has_include
+# if __has_include("common.hpp")
+#   include "common.hpp"
+#else
+#   error "Cell's "common.hpp" was not found!"
+# endif
+#endif
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 

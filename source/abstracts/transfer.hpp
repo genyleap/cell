@@ -13,8 +13,21 @@
 #ifndef CELL_TRANSFER_ABSTRACT_HPP
 #define CELL_TRANSFER_ABSTRACT_HPP
 
-#include "common.hpp"
-#include "api.hpp"
+#ifdef __has_include
+# if __has_include("common.hpp")
+#   include "common.hpp"
+#else
+#   error "Cell's "common.hpp" was not found!"
+# endif
+#endif
+
+#ifdef __has_include
+# if __has_include("api.hpp")
+#   include "api.hpp"
+#else
+#   error "Cell's "api.hpp" was not found!"
+# endif
+#endif
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 

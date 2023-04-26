@@ -27,7 +27,6 @@
 #endif
 
 CELL_USING_NAMESPACE Cell::System;
-
 CELL_USING_NAMESPACE Cell::eLogger;
 
 CELL_NAMESPACE_BEGIN(Cell::FileSystem)
