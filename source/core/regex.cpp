@@ -34,7 +34,7 @@ Regex::~Regex()
 
 void Regex::reverse(char s[]) {
     int i, j;
-    for (i = strlen(s) - 1, j = 0; j <= i; j++, i--) {
+    for (i = strlen(s) - 1, j = __cell_zero; j <= i; j++, i--) {
         int t = s[i];
         s[i] = s[j];
         s[j] = t;

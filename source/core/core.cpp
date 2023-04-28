@@ -106,13 +106,13 @@ EngineInterface::EngineInterface()
            //! Page Size
            //! ToDo...
     {
-        if(!isset(m_bootParameter->pageSize)) { m_bootParameter->pageSize = 0; }
+        if(!isset(m_bootParameter->pageSize)) { m_bootParameter->pageSize = __cell_zero; }
     }
 
            //! Page Speed
            //! ToDo...
     {
-        if(!isset(m_bootParameter->pageSpeed)) { m_bootParameter->pageSpeed = 0; }
+        if(!isset(m_bootParameter->pageSpeed)) { m_bootParameter->pageSpeed = __cell_zero; }
     }
 
            //! Init Time
@@ -418,7 +418,7 @@ std::string Engine::htmlEntityDecode(const std::string& content)
     std::string process = content;
     size_t found;
 
-    for (int j = 0; j < 15; j++) {
+    for (int j = __cell_zero; j < 15; j++) {
         do {
             found = process.find(subs[j]);
             if (found != std::string::npos)
@@ -472,7 +472,7 @@ std::vector<std::string> Engine::filteredQueryFields(VectorString& fields)
   //        ///!Nothing...
   //        if(config->currentRdbms() == Database::CELL_RDBMS::MySQL)
   //        {
-  //            std::for_each(fields.begin(), fields.end(), [](auto& s){ s.insert(0, "`");});
+  //            std::for_each(fields.begin(), fields.end(), [](auto& s){ s.insert(__cell_zero, "`");});
   //            for(auto& s : fields)
   //            {
   //                s+="`";

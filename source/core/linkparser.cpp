@@ -97,7 +97,7 @@ std::string LinkParser::decodeUrl(const std::string& url)
 {
     std::stringstream ss;
     uint value;
-    int start = 0, end = 0;
+    int start = __cell_zero, end = __cell_zero;
     while ((end = url.find('%', start)) != std::string::npos)
     {
         ss << url.substr(start, end - start);

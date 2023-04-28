@@ -121,7 +121,7 @@ void FileManager::edit(const std::filesystem::path& filePath, const std::string&
     setState(true, false);
     inputFile.close();
     // Replace all occurrences of oldStr with newStr
-    size_t pos = 0;
+    size_t pos = __cell_zero;
     while ((pos = fileContents.find(oldStr, pos)) != std::string::npos)
     {
         fileContents.replace(pos, oldStr.length(), newStr);
