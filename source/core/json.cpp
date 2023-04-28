@@ -58,14 +58,14 @@ bool JsonParser::parse(const JSonType& data, const InputType inputType) __cell_n
 {
 #ifdef USE_BOOST
     try {
-        auto fileIO = FileIO();
+        auto fileIO = FileManager();
         switch (inputType) {
         case InputType::RawData:
             m_root = boost::json::parse(std::get<std::string>(data));
             break;
         case InputType::File:
-            auto fileIO = FileIO();
-            if (!fileIO.open(std::get<std::string>(data)))
+            auto d = fileIO.read(std::get<std::string>(data));
+            if (!fileIO.isOpen())
             {
                 if(DeveloperMode::IsEnable)
                 {
@@ -77,29 +77,28 @@ bool JsonParser::parse(const JSonType& data, const InputType inputType) __cell_n
                     Log("Json File opened!", LoggerType::Success);
                 }
             }
-            auto data = fileIO.readAll();
-            if (data.empty())
+            if (d.empty())
             {
                 if(DeveloperMode::IsEnable)
                 {
                     Log("Failed to read data from file", LoggerType::Critical);
                 }
-                if(fileIO.close())
+                if(fileIO.isClose())
                 {
                     if(DeveloperMode::IsEnable)
                     {
-                        Log("Json file closed!", LoggerType::Critical);
+                        Log("Json file closed!", LoggerType::Info);
                     }
                 }
             }
-            if(fileIO.close())
+            if(fileIO.isClose())
             {
                 if(DeveloperMode::IsEnable)
                 {
-                    Log("Json file closed!", LoggerType::Critical);
+                    Log("Json file closed!", LoggerType::Info);
                 }
             }
-            m_root = boost::json::parse(data);
+            m_root = boost::json::parse(d);
             break;
         }
         return true;
@@ -112,14 +111,14 @@ bool JsonParser::parse(const JSonType& data, const InputType inputType) __cell_n
 #else
     Json::Reader reader{};
     try {
-        auto fileIO = FileIO();
+        auto fileIO = FileManager();
         switch (inputType) {
         case InputType::RawData:
             reader.parse(std::get<std::string>(data), m_root);
             break;
         case InputType::File:
-            auto fileIO = FileIO();
-            if (!fileIO.open(std::get<std::string>(data)))
+            auto d = fileIO.read(std::get<std::string>(data));
+            if (!fileIO.isOpen())
             {
                 if(DeveloperMode::IsEnable)
                 {
@@ -131,30 +130,32 @@ bool JsonParser::parse(const JSonType& data, const InputType inputType) __cell_n
                     Log("Json File opened!", LoggerType::Success);
                 }
             }
-            auto data = fileIO.readRawAll();
-            if (!data.is_open())
+            if (!fileIO.isOpen())
             {
                 if(DeveloperMode::IsEnable)
                 {
                     Log("Failed to read data from file", LoggerType::Critical);
                 }
-                if(fileIO.close())
+                if(fileIO.isClose())
                 {
                     if(DeveloperMode::IsEnable)
                     {
-                        Log("Json file closed!", LoggerType::Critical);
+                        Log("Json file closed!", LoggerType::Info);
                     }
                 }
             }
-            if(fileIO.close())
+            if(fileIO.isClose())
             {
                 if(DeveloperMode::IsEnable)
                 {
-                    Log("Json file closed!", LoggerType::Critical);
+                    Log("Json file closed!", LoggerType::Info);
                 }
             }
             Json::CharReaderBuilder builder;
-            if(!Json::parseFromStream(builder, data, &m_root, nullptr))
+
+            std::istringstream is(d);
+
+            if(!Json::parseFromStream(builder, is, &m_root, nullptr))
             {
                 if(DeveloperMode::IsEnable)
                 {
@@ -184,37 +185,37 @@ bool JsonParser::parse(const JSonType& data) __cell_noexcept
         }
         if (std::holds_alternative<std::ifstream>(data))
         {
-            auto fileIO = FileIO();
-            if (!fileIO.open(std::get<std::string>(data)))
+            auto fileIO = FileManager();
+            auto d = fileIO.read(std::get<std::string>(data));
+            if (!fileIO.isOpen())
             {
                 if(DeveloperMode::IsEnable)
                 {
                     Log("Failed to open: " + FROM_CELL_STRING(std::get<std::string>(data)), LoggerType::Critical);
                 }
             }
-            auto data = fileIO.readAll();
-            if (data.empty())
+            if (d.empty())
             {
                 if(DeveloperMode::IsEnable)
                 {
                     Log("Failed to read data from file", LoggerType::Critical);
                 }
-                if(fileIO.close())
+                if(fileIO.isClose())
                 {
                     if(DeveloperMode::IsEnable)
                     {
-                        Log("Json file closed!", LoggerType::Critical);
+                        Log("Json file closed!", LoggerType::Info);
                     }
                 }
             }
-            if(fileIO.close())
+            if(fileIO.isClose())
             {
                 if(DeveloperMode::IsEnable)
                 {
-                    Log("Json file closed!", LoggerType::Critical);
+                    Log("Json file closed!", LoggerType::Info);
                 }
             }
-            m_root = boost::json::parse(data);
+            m_root = boost::json::parse(d);
         }
         return true;
     } catch (const boost::json::error_code& e) {
