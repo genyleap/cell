@@ -25,7 +25,7 @@
 # if __has_include("core/version.hpp")
 #   include "core/version.hpp"
 #else
-#   error "Cell's "core/version.hppp" was not found!"
+#   error "Cell's "core/version.hpp" was not found!"
 # endif
 #endif
 
