@@ -385,6 +385,30 @@ private:
     bool m_status{false};
 };
 
+struct Ping {
+    Ping(const std::string& address) : m_address(address) {}
+    std::future<bool> ping() const {
+        return std::async(std::launch::async, [this]() {
+            std::lock_guard<std::mutex> lock(m_mutex);
+            // Build the ping command
+            std::string command = "ping -c 4 " + m_address;
+            // Execute the ping command
+            int result = std::system(command.c_str());
+            // Check the result of the ping command
+            if (result == 0) {
+                std::cout << "Ping succeeded." << std::endl;
+                return true;
+            } else {
+                std::cout << "Ping failed." << std::endl;
+                return false;
+            }
+        });
+    }
+private:
+    std::string m_address;
+    mutable std::mutex m_mutex;
+};
+
 /*!
  * @brief The Engine class
  */
@@ -586,6 +610,14 @@ public:
      */
     std::string getLanguage();
 
+
+    /**
+     * @brief ping function will pings address.
+     * @param address as string.
+     * @return status of ping result.
+     */
+    bool ping(const std::string& address);
+
     /*!
      * @brief A URI is an identifier of a specific resource. Like a page, or book, or a document.
      * @returns uri.
@@ -725,8 +757,8 @@ public:
     Scope<Version>  version {};
     Scope<SystemInfo>  systemInfo {};
 
-    //    Translation::Translator* translator{__cell_nullptr}; //alternative translator for engine.
-    //    Multilangual::Language* language{__cell_nullptr};
+           //    Translation::Translator* translator{__cell_nullptr}; //alternative translator for engine.
+           //    Multilangual::Language* language{__cell_nullptr};
 
 private:
     static Application* appPtr;

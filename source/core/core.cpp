@@ -580,6 +580,15 @@ std::string Engine::getLanguage()
     return m_languageStr;
 }
 
+
+bool Engine::ping(const std::string& address)
+{
+    Ping p(address);
+    auto future = p.ping();
+    bool success = future.get();
+    return success ? true : false;
+}
+
 std::map <std::string, std::string> Engine::langs()
 {
   //    std::map<std::string, std::string> l = {};
@@ -767,9 +776,9 @@ void Engine::elementErase(std::string& input, const std::string& chars) __cell_n
 {
     // Create a view of chars_to_remove as a ranges::set_view
     auto chars_set = chars | std::views::transform([](char c) {
-    return std::ranges::single_view(c);}) | std::views::join| std::views::common;
+                         return std::ranges::single_view(c);}) | std::views::join| std::views::common;
 
-    // Use std::erase_if with the chars_set to remove the specified characters from the string
+           // Use std::erase_if with the chars_set to remove the specified characters from the string
     std::erase_if(input, [&chars_set](char c) {
         return std::ranges::find(chars_set, c) != end(chars_set);
     });
@@ -783,16 +792,16 @@ std::string Engine::whiteSpaceReduce(std::string_view input) __cell_noexcept
         return std::isspace(c);
     };
 
-    // Create a range that filters out whitespace
+           // Create a range that filters out whitespace
     auto range = input | std::views::filter([is_space](char c) { return !is_space(c); });
 
-    // Use the filtered range to create a new string without whitespace
+           // Use the filtered range to create a new string without whitespace
     std::string output{};
 
-    // Append the contents of "range" to "output"
+           // Append the contents of "range" to "output"
     std::ranges::copy(range, std::back_inserter(output));
 
-    // Return the new string
+           // Return the new string
     return output;
 }
 
@@ -803,15 +812,15 @@ std::string Engine::whiteSpaceLeading(std::string_view input) __cell_noexcept
         return !std::isspace(c);
     };
 
-    // Find the first character in the string that is not a white space character.
+           // Find the first character in the string that is not a white space character.
     auto begin = std::ranges::find_if(input, not_space);
 
-    // Create a new string that begins with the first non-white space character
+           // Create a new string that begins with the first non-white space character
     std::string output {
         input.substr(std::distance(input.begin(), begin))
     };
 
-    // Return the new string
+           // Return the new string
     return output;
 }
 
