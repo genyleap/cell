@@ -299,7 +299,7 @@ Engine::Engine()
 
 Engine::~Engine()
 {
-    //    __cell_safe_delete(translator);
+  //    __cell_safe_delete(translator);
 }
 
 bool Engine::initialize()
@@ -467,40 +467,40 @@ void Engine::findAndReplaceLink(std::string& data, std::string toSearch, std::st
 
 std::vector<std::string> Engine::filteredQueryFields(VectorString& fields)
 {
-    //    Scope<Configuration> config(new Configuration(ConfigType::File));
-    //    if(config->currentRdbms() == Database::CELL_RDBMS::PostgreSQL)
-    //        ///!Nothing...
-    //        if(config->currentRdbms() == Database::CELL_RDBMS::MySQL)
-    //        {
-    //            std::for_each(fields.begin(), fields.end(), [](auto& s){ s.insert(0, "`");});
-    //            for(auto& s : fields)
-    //            {
-    //                s+="`";
-    //            }
-    //        }
-    //    return fields;
+  //    Scope<Configuration> config(new Configuration(ConfigType::File));
+  //    if(config->currentRdbms() == Database::CELL_RDBMS::PostgreSQL)
+  //        ///!Nothing...
+  //        if(config->currentRdbms() == Database::CELL_RDBMS::MySQL)
+  //        {
+  //            std::for_each(fields.begin(), fields.end(), [](auto& s){ s.insert(0, "`");});
+  //            for(auto& s : fields)
+  //            {
+  //                s+="`";
+  //            }
+  //        }
+  //    return fields;
 }
 
 std::string Engine::tablePrefix()
 {
   //Table prefix
-    //    std::string prefix = Configuration::GET["table_prefix"].asString();
-    //    if(!isset(prefix)) {
-    //        if(System::DeveloperMode::IsEnable)
-    //            Log("Table prefix not found!", LoggerType::Warning);
-    //    }
-    //    return prefix;
+  //    std::string prefix = Configuration::GET["table_prefix"].asString();
+  //    if(!isset(prefix)) {
+  //        if(System::DeveloperMode::IsEnable)
+  //            Log("Table prefix not found!", LoggerType::Warning);
+  //    }
+  //    return prefix;
 }
 
 std::string Engine::tableUnicode()
 {
   //Table unicode
-    //    std::string unicode = Configuration::GET["table_unicode"].asString();
-    //    if(!isset(unicode)) {
-    //        if(System::DeveloperMode::IsEnable)
-    //            Log("Table unicode not found!", LoggerType::Warning);
-    //    }
-    //    return unicode;
+  //    std::string unicode = Configuration::GET["table_unicode"].asString();
+  //    if(!isset(unicode)) {
+  //        if(System::DeveloperMode::IsEnable)
+  //            Log("Table unicode not found!", LoggerType::Warning);
+  //    }
+  //    return unicode;
 }
 
 std::string Engine::mixedTablePrefix(const std::string& p, const std::string& t)
@@ -527,35 +527,35 @@ std::string Engine::table(std::string_view tableName, TableType tableType)
 
 VectorString Engine::tableFilter(const std::vector<std::string>& tables, TableType tableType)
 {
-    //    std::string valueStruct = Configuration::GET["table_value_struct"].asString();
-    //    std::vector<std::string> res{};
-    //    switch (tableType)
-    //    {
-    //    case TableType::MixedStruct:
-    //        res=tables;
-    //        break;
-    //    case TableType::KeyStruct:
-    //        res=tables;
-    //        for(const auto& t : tables) {
-    //            if(t.ends_with(valueStruct)) {
-    //                res.erase(std::remove(res.begin(), res.end(), t), res.end());
-    //            }
-    //        }
-    //        break;
-    //    case TableType::ValueSturct:
-    //        res=tables;
-    //        for(const auto& t : tables) {
-    //            if(!t.ends_with(valueStruct)) {
-    //                res.erase(std::remove(res.begin(), res.end(), t), res.end());
-    //            }
-    //        }
-    //        break;
-    //    default:
-    //        res=tables;
-    //        break;
-    //    }
+  //    std::string valueStruct = Configuration::GET["table_value_struct"].asString();
+  //    std::vector<std::string> res{};
+  //    switch (tableType)
+  //    {
+  //    case TableType::MixedStruct:
+  //        res=tables;
+  //        break;
+  //    case TableType::KeyStruct:
+  //        res=tables;
+  //        for(const auto& t : tables) {
+  //            if(t.ends_with(valueStruct)) {
+  //                res.erase(std::remove(res.begin(), res.end(), t), res.end());
+  //            }
+  //        }
+  //        break;
+  //    case TableType::ValueSturct:
+  //        res=tables;
+  //        for(const auto& t : tables) {
+  //            if(!t.ends_with(valueStruct)) {
+  //                res.erase(std::remove(res.begin(), res.end(), t), res.end());
+  //            }
+  //        }
+  //        break;
+  //    default:
+  //        res=tables;
+  //        break;
+  //    }
 
-    //    return res;
+           //    return res;
 }
 
 std::string Engine::fullReplacer(const std::string& content, const MapString& map)
@@ -589,28 +589,28 @@ std::string Engine::getLanguage()
 
 std::map <std::string, std::string> Engine::langs()
 {
-    //    std::map<std::string, std::string> l = {};
-    //    //!Getting language from configuration file
-    //    for(auto &var : Configuration::GET["langs"]) {
-    //        l.insert(Types::PairString(var["uri"].asString(),var["code"].asString()));
-    //        this->langUri.push_back("/" + std::string(var["uri"].asString()));
-    //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/");
-    //    }
-    //    return l;
+  //    std::map<std::string, std::string> l = {};
+  //    //!Getting language from configuration file
+  //    for(auto &var : Configuration::GET["langs"]) {
+  //        l.insert(Types::PairString(var["uri"].asString(),var["code"].asString()));
+  //        this->langUri.push_back("/" + std::string(var["uri"].asString()));
+  //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/");
+  //    }
+  //    return l;
 }
 
 std::map <std::string, std::string> Engine::langsByPath(const std::string& path)
 {
-    //    std::map<std::string, std::string> l = {};
-    //    //!Getting language from configuration file
-    //    for(auto &var : Configuration::GET["langs"]) {
-    //        l.insert(Types::PairString(var["uri"].asString(),var["code"].asString()));
-    //        this->langUri.push_back("/" + std::string(var["uri"].asString()));
-    //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/");
-    //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/" + std::string(path.empty() ? "" : path));
-    //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/" + std::string(path.empty() ? "" : path + "/"));
-    //    }
-    //    return l;
+  //    std::map<std::string, std::string> l = {};
+  //    //!Getting language from configuration file
+  //    for(auto &var : Configuration::GET["langs"]) {
+  //        l.insert(Types::PairString(var["uri"].asString(),var["code"].asString()));
+  //        this->langUri.push_back("/" + std::string(var["uri"].asString()));
+  //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/");
+  //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/" + std::string(path.empty() ? "" : path));
+  //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/" + std::string(path.empty() ? "" : path + "/"));
+  //    }
+  //    return l;
 }
 
 std::string Engine::reducePath(const std::string& path)
@@ -646,8 +646,8 @@ std::string Engine::removeDashes(const std::string& src) __cell_const_noexcept
 std::string Engine::defaultLanguage()
 {
   //Default language
-    //    std::string def = Configuration::GET["default_lang"].asString();
-    //    return def;
+  //    std::string def = Configuration::GET["default_lang"].asString();
+  //    return def;
 }
 
 std::string Engine::join(const std::vector<std::string>& strings,  const SepratorType& sep, const SepratorStyle& sepStyle) __cell_noexcept
@@ -770,57 +770,67 @@ std::string Engine::join(const std::vector<std::string>& strings,  const Seprato
     return res;
 }
 
-void Engine::elementErase(std::string& content) noexcept
+void Engine::elementErase(std::string& input, const std::string& chars) __cell_noexcept
 {
-    try {
-        std::erase_if(content, [](const char c) {
-            return c == '`' or c == '/' or c =='\\' or c == '~' or c == '?'
-                   or c == '|' or c == '(' or c == ')' or c == '[' or c == ']'
-                   or c == '{' or c == '}' or c == '-';
-        });
-    }
-    catch(const Exception& e) {
-        if(DeveloperMode::IsEnable) {
-            Log(FROM_CELL_STRING(e.what()), eLogger::LoggerType::Critical);
-        }
-    }
+    // Create a view of chars_to_remove as a ranges::set_view
+    auto chars_set = chars | std::views::transform([](char c) {
+    return std::ranges::single_view(c);}) | std::views::join| std::views::common;
+
+    // Use std::erase_if with the chars_set to remove the specified characters from the string
+    std::erase_if(input, [&chars_set](char c) {
+        return std::ranges::find(chars_set, c) != end(chars_set);
+    });
 }
 
-std::string Engine::whiteSpaceReduce(std::string& input) noexcept
+std::string Engine::whiteSpaceReduce(std::string_view input) __cell_noexcept
 {
-    try {
-        if(!input.empty()) {
-            input.erase(std::remove(input.begin(), input.end(), ' '), input.end());
-        }
-    }
-    catch(const Exception& e) {
-        if(DeveloperMode::IsEnable) {
-            Log(FROM_CELL_STRING(e.what()), eLogger::LoggerType::Critical);
-        }
-    }
-    return input;
+    // Lambda function to filter out whitespace
+    auto is_space = [](char c)
+    {
+        return std::isspace(c);
+    };
+
+    // Create a range that filters out whitespace
+    auto range = input | std::views::filter([is_space](char c) { return !is_space(c); });
+
+    // Use the filtered range to create a new string without whitespace
+    std::string output{};
+
+    // Append the contents of "range" to "output"
+    std::ranges::copy(range, std::back_inserter(output));
+
+    // Return the new string
+    return output;
 }
 
-std::string Engine::whiteSpaceLeading(std::string& input) noexcept
+std::string Engine::whiteSpaceLeading(std::string_view input) __cell_noexcept
 {
-    try {
-        if(!input.empty()) {
-            while (std::isspace(*input.begin())) {
-                input.erase(input.begin());
-            }
-        }
-    }
-    catch(const Exception& e) {
-        if(DeveloperMode::IsEnable) {
-            Log(FROM_CELL_STRING(e.what()), eLogger::LoggerType::Critical);
-        }
-    }
-    return input;
+    // Define a lambda function named not_space that takes a char and returns whether it is not a white space character.
+    auto not_space = [] (char c) {
+        return !std::isspace(c);
+    };
+
+    // Find the first character in the string that is not a white space character.
+    auto begin = std::ranges::find_if(input, not_space);
+
+    // Create a new string that begins with the first non-white space character
+    std::string output {
+        input.substr(std::distance(input.begin(), begin))
+    };
+
+    // Return the new string
+    return output;
 }
 
 void Engine::setIsMultilanguage(const bool value)
 {
     m_multilang = value;
+}
+
+bool Engine::isFilePath(const std::filesystem::path& input)
+{
+    std::filesystem::path path(input);
+    return (std::filesystem::is_regular_file(path) || std::filesystem::is_directory(path));
 }
 
 bool Engine::isMultilanguage() const noexcept
@@ -863,9 +873,9 @@ Application::Application(const ApplicationData& appData)
 
 Application::~Application()
 {
-    //    __cell_safe_delete(translator);
-    //    __cell_safe_delete(appDataPtr);
-    //    __cell_safe_delete(language);
+  //    __cell_safe_delete(translator);
+  //    __cell_safe_delete(appDataPtr);
+  //    __cell_safe_delete(language);
 }
 
 Application* Application::appPtr;

@@ -502,24 +502,25 @@ public:
     __cell_no_discard std::string join(const VectorString& strings, const SepratorType& sep, const SepratorStyle& sepStyle) __cell_noexcept;
 
     /*!
-     * \brief elementErase function will removes certain characters from a string.
-     * \param content is the main content of string.
+     * \brief elementErase function removes certain characters from a string.
+     * \param content is the main input of string.
+     * \param chars containing the characters to remove.
      */
-    void elementErase(std::string& content) __cell_noexcept;
+    void elementErase(std::string& input, const std::string& chars) __cell_noexcept;
 
     /*!
-     * \brief whiteSpaceLeading function will Reduce multiple whitespaces to a single white space.
-     * \param input as string.
+     * \brief whiteSpaceLeading function will reduce multiple whitespaces to a single white space.
+     * \param input as string_view.
      * \return final content output after reducing single white space.
      */
-    __cell_no_discard std::string whiteSpaceReduce(std::string& input) __cell_noexcept;
+    __cell_no_discard std::string whiteSpaceReduce(std::string_view input) __cell_noexcept;
 
     /*!
      * \brief whiteSpaceLeading function will removes leading whitespace from content.
      * \param input as string.
      * \return final content output after leading white spaces.
      */
-    __cell_no_discard std::string whiteSpaceLeading(std::string& input) __cell_noexcept;
+    __cell_no_discard std::string whiteSpaceLeading(std::string_view input) __cell_noexcept;
 
     /*!
      * @brief  It may help to distinguish between tables and views depending on what your naming convention is.
@@ -630,7 +631,14 @@ public:
      * \brief isMultilanguage function will returns true if the page url is based on multi-language method such as [en-us, fa-ir].
      * \return bool [true if it's true.]
      */
-    bool isMultilanguage() __cell_const_noexcept;
+    __cell_no_discard bool isMultilanguage() __cell_const_noexcept;
+
+    /**
+     * @brief isFilePath function uses the C++ filesystem library to check if the given parameter is a file or directory path.
+     * @param input
+     * @return true if it is a path. Otherwise, it returns false, indicating that the parameter is just a string or content.
+     */
+    __cell_no_discard bool isFilePath(const std::filesystem::path& input);
 
     /*!
      * \brief Lanuage translator engine.
