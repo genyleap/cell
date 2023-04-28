@@ -35,6 +35,56 @@ struct UrlStructure
     Types::OptionalString subdirectory {}; ///< A subdirectory — also known as a subfolder — helps people as well as web crawlers understand which particular section of a webpage they’re on.
 };
 
+/**
+ * @brief The Domain class
+ * Represents a domain and provides methods for extracting its components.
+ */
+class __cell_export Domain {
+public:
+    Domain(const std::string& url);
+    ~Domain();
+
+    /**
+     * @brief Returns the raw second-level domain (SLD) of the domain.
+     * @return A string representing the raw SLD of the domain.
+     */
+    std::string getRawSLD() const;
+
+    /**
+     * @brief Returns the second-level domain (SLD) of the domain.
+     * @return A string representing the SLD of the domain.
+     */
+    std::string getSLD() const;
+
+    /**
+     * @brief Returns the top-level domain (TLD) of the domain.
+     * @return A string representing the TLD of the domain.
+     */
+    std::string getTLD() const;
+
+    /**
+     * @brief Returns a vector of subdomains of the domain.
+     * @return A vector of strings representing the subdomains of the domain.
+     */
+    std::vector<std::string> getSubdomains() const;
+
+    /**
+     * @brief Returns the protocol and domain of the URL.
+     * @return A string representing the protocol and domain of the URL.
+     */
+    std::string getProtocolAndDomain() const;
+
+    /**
+     * @brief Returns the protocol of the URL.
+     * @return A string representing the protocol of the URL.
+     */
+    std::string getProtocol();
+
+private:
+    UrlStructure urlStructure {};
+};
+
+
 /*!
  * \brief The LanguageUrl class
  */

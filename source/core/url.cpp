@@ -20,6 +20,90 @@ CELL_USING_NAMESPACE Cell::System;
 
 CELL_NAMESPACE_BEGIN(Cell)
 
+Domain::Domain(const std::string& url)
+{
+    // Find the position of the scheme (i.e., "http", "https", etc.) in the URL.
+    std::string::size_type pos = url.find("://");
+
+    // If the scheme is found, extract it and update the position to after the "://" characters.
+    if (pos != std::string::npos) {
+        urlStructure.scheme = url.substr(0, pos);
+        pos += 3;
+    } else { // Otherwise, the scheme is assumed to be empty and the position is set to the beginning of the URL.
+        pos = 0;
+    }
+
+    // Find the next occurrence of the "/" character after the scheme (if any) to determine the domain.
+    std::string::size_type next = url.find("/", pos);
+
+    // If a slash is found, extract the domain.
+    if (next != std::string::npos) {
+        auto level = url.substr(pos, next - pos);
+        urlStructure.subdomain      = level;
+        urlStructure.secondLevel    = level;
+        urlStructure.topLevel       = level;
+
+    } else { // Otherwise, the domain is the remaining part of the URL after the scheme (if any).
+        urlStructure.subdomain      = url.substr(pos);
+        urlStructure.secondLevel    = url.substr(pos);
+        urlStructure.topLevel       = url.substr(pos);
+    }
+}
+
+std::string Domain::getRawSLD() const
+{
+    std::string::size_type last_dot = urlStructure.secondLevel.value().rfind(".");
+    if (last_dot == std::string::npos) {
+        return urlStructure.secondLevel.value();
+    }
+    std::string::size_type second_last_dot = urlStructure.secondLevel.value().rfind(".", last_dot - 1);
+    if (second_last_dot == std::string::npos) {
+        return urlStructure.secondLevel.value().substr(0, last_dot);
+    }
+    return urlStructure.secondLevel.value().substr(second_last_dot + 1, last_dot - second_last_dot - 1);
+}
+
+std::string Domain::getSLD() const
+{
+    std::string::size_type pos = urlStructure.secondLevel.value().rfind(".");
+    if (pos != std::string::npos && pos > 0) {
+        std::string::size_type sld_pos = urlStructure.secondLevel.value().rfind(".", pos - 1);
+        if (sld_pos != std::string::npos) {
+            return urlStructure.secondLevel.value().substr(sld_pos + 1);
+        }
+    }
+    return urlStructure.secondLevel.value();
+}
+
+std::vector<std::string> Domain::getSubdomains() const
+{
+    std::vector<std::string> subdomains;
+    std::string::size_type pos = 0;
+    std::string::size_type next = urlStructure.subdomain.value().find(".");
+    if (next != std::string::npos && next > 0) {
+        subdomains.push_back(urlStructure.subdomain.value().substr(pos, next - pos));
+    }
+    return subdomains;
+}
+
+std::string Domain::getTLD() const
+{
+    std::string::size_type pos = urlStructure.topLevel.value().find_last_of(".");
+    if (pos != std::string::npos && pos > 0 && pos < urlStructure.topLevel.value().size() - 1) {
+        return urlStructure.topLevel.value().substr(pos + 1);
+    }
+    return "";
+}
+
+std::string Domain::getProtocolAndDomain() const
+{
+    return urlStructure.scheme.value() + "://" + urlStructure.secondLevel.value();
+}
+
+Domain::~Domain()
+{
+}
+
 /*!
  * \brief Constructs url class.
  */
