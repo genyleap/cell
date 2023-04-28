@@ -15,27 +15,7 @@
 #   include <precompiled/pch.hpp>
 #endif
 
-#ifdef __has_include
-# if __has_include(<cstdint>)
-#   include <cstdint>
-# endif
-#endif
-
-#if defined(USE_JSON) && !defined(USE_BOOST)
-#   include <json/json.h>
-using JSonValue = Json::Value;
-#   elif defined(USE_BOOST)
-#   include <boost/json.hpp>
-using JSonValue = boost::json::value;
-#   elif !defined(USE_JSON) && !defined(USE_BOOST)
-#if __cpp_lib_json
-#   include <json>
-#else
-#error There is no any json library!
-#endif
-#endif
-
-namespace Cell::Types {
+namespace Types {
 
 using schar        = signed char;
 using uchar        = unsigned char;
@@ -98,7 +78,6 @@ using MapList           = std::pair<std::string, std::map<std::string, std::stri
 using MapVector         = std::pair<std::string, std::vector<std::string>>;
 using IteratorConfig    = std::map<std::string, std::string>::iterator;
 using LanguageType      = std::map<std::string, std::string>;
-using LanguageCodes     = std::vector<std::string>;
 using MetaList          = std::map<std::string, std::string>;
 using ResourceType      = std::map<std::string, std::string>;
 using MapConfig         = std::map<std::string, std::string>;
@@ -113,16 +92,9 @@ using OptionalNumeric   = std::optional<int>;
 using OptionalBool      = std::optional<bool>;
 
 #if defined(USE_JSON) && !defined(USE_BOOST)
-namespace JSon             = Json;
-using JSonValue            = Json::Value;
-using JSonParser           = Json::Reader;
-using OptionalJsonVal      = std::optional<Json::Value>;
-using JSonException        = Json::Exception;
+namespace JSon      = Json;
 #   elif defined(USE_BOOST)
-namespace JSon             = boost::json;
-using JSonValue            = boost::json::value;
-using JSonParser           = boost::json::stream_parser;
-using OptionalJsonVal      = std::optional<boost::json::value>;
+namespace JSon      = boost::json;
 #   elif !defined(USE_JSON) && !defined(USE_BOOST)
 #if __cpp_lib_json
 namespace JSon      = std::json;
@@ -132,8 +104,6 @@ namespace JSon      = std::json;
 using TableNames        = std::vector<std::string>;
 using QueryType         = std::vector<std::string>;
 using TranslateType     = std::string;
-
-using JSonType = std::variant<std::string, std::ifstream>;
 
 template<typename T1, typename T2> using Map      = std::map<T1, T2>;
 template<typename T1, typename T2> using MultiMap = std::multimap<T1, T2>;
