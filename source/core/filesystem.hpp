@@ -25,6 +25,9 @@ CELL_NAMESPACE_BEGIN(Cell::FileSystem)
 
 namespace fs = std::filesystem;
 
+using ListOfFiles = std::unordered_multimap<std::string, std::string>; ///<! Key [path], Value[name]
+using FilePath = std::filesystem::path;
+
 /**
  * @brief The FileState class
  */
@@ -48,28 +51,42 @@ public:
      * @param path The path to the file.
      * @return True if the file was created successfully, false otherwise.
      */
-    __cell_no_discard bool createFile(const std::filesystem::path& path);
+    __cell_no_discard bool createFile(const FilePath& path);
 
     /**
      * @brief Creates a new directory at the specified path.
      * @param path The path to the directory.
      * @return True if the directory was created successfully, false otherwise.
      */
-    __cell_no_discard bool createDir(const std::filesystem::path& path);
+    __cell_no_discard bool createDir(const FilePath& path);
 
     /**
      * @brief Deletes the file at the specified path.
      * @param path The path to the file.
      * @return True if the file was deleted successfully, false otherwise.
      */
-    __cell_no_discard bool deleteFile(const std::filesystem::path& path);
+    __cell_no_discard bool deleteFile(const FilePath& path);
+
+    /**
+     * @brief Deletes all file at the specified path.
+     * @param path The path to the files.
+     * @return True if the data was deleted successfully, false otherwise.
+     */
+    __cell_no_discard bool deleteFiles(const FilePath& path);
+
+    /**
+     * @brief Deletes all selected files at the specified path.
+     * @param files is the list of file based on key[path] and value[name];
+     * @return True if the data was deleted successfully, false otherwise.
+     */
+    __cell_no_discard bool deleteSelectedFiles(ListOfFiles& files);
 
     /**
      * @brief Deletes the directory at the specified path.
      * @param path The path to the directory.
      * @return True if the directory was deleted successfully, false otherwise.
      */
-    __cell_no_discard bool deleteDir(const std::filesystem::path& path);
+    __cell_no_discard bool deleteDir(const FilePath& path);
 
     /**
      * @brief Reads the contents of the file at the specified path.
@@ -77,7 +94,7 @@ public:
      * @return The contents of the file as a string.
      */
     __cell_no_discard_message("This function has a return value as data string!")
-        std::string read(const std::filesystem::path& filePath);
+        std::string read(const FilePath& filePath);
 
     /**
      * @brief Reads the raw binary data of the file at the specified path.
@@ -85,7 +102,7 @@ public:
      * @return The raw binary data of the file as a string.
      */
     __cell_no_discard_message("This function has a return value as data raw string!")
-        std::string readRawData(const std::filesystem::path& filePath);
+        std::string readRawData(const FilePath& filePath);
 
     /**
      * @brief Reads the contents of the file at the specified path.
@@ -99,7 +116,7 @@ public:
      * @param filePath The path to the file.
      * @param data The data to write to the file.
      */
-    void write(const std::filesystem::path& filePath, const std::string& data);
+    void write(const FilePath& filePath, const std::string& data);
 
     /**
      * @brief Replaces all occurrences of oldStr with newStr in the file at the specified path.
@@ -107,28 +124,28 @@ public:
      * @param oldStr The string to replace.
      * @param newStr The string to replace oldStr with.
      */
-    void edit(const std::filesystem::path& filePath, const std::string& oldStr, const std::string& newStr);
+    void edit(const FilePath& filePath, const std::string& oldStr, const std::string& newStr);
 
     /**
      * @brief Changes the permissions of the file or directory at the specified path.
      * @param filePath The path to the file or directory.
      * @param permissions The new permissions to set.
      */
-    void changePermissions(const std::filesystem::path& filePath, const std::filesystem::perms& permissions);
+    void changePermissions(const FilePath& filePath, const std::filesystem::perms& permissions);
 
     /**
      * @brief Lists the files in the directory at the specified path.
      * @param path The path to the directory.
      * @return A vector of file names in the directory.
      */
-    __cell_no_discard std::vector<std::string> listFilesOfDir(const std::filesystem::path& path);
+    __cell_no_discard std::vector<std::string> listFilesOfDir(const FilePath& path);
 
     /**
      * @brief Lists the subdirectories in the directory at the specified path.
      * @param path The path to the directory.
      * @return A vector of subdirectory names in the directory.
      */
-    __cell_no_discard std::vector<std::string> listDir(const std::filesystem::path& path);
+    __cell_no_discard std::vector<std::string> listDir(const FilePath& path);
 
     /**
      * @brief isOpen function will gets state of file.
@@ -217,7 +234,7 @@ public:
      * @brief Construct a new FileInfo object for the specified file path.
      * @param filePath The path to the file for which information will be obtained.
      */
-    FileInfo(const std::filesystem::path& filePath);
+    FileInfo(const FilePath& filePath);
 
     /**
      * @brief Destroy the FileInfo object.
@@ -266,7 +283,7 @@ public:
      * @param filePath The path to the file to detect the type of.
      * @return A string describing the file type.
      */
-    static std::string detectFileType(const std::filesystem::path& filePath);
+    static std::string detectFileType(const FilePath& filePath);
 };
 
 CELL_NAMESPACE_END

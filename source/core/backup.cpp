@@ -43,14 +43,14 @@ void FileBackup::setProgressCallback(const StateFunction& callback)
     backupStruct.progressCallback = callback;
 }
 
-FutureState FileBackup::backupAsync()
+FutureState FileBackup::backupAsync() __cell_noexcept
 {
     return std::async(std::launch::async, [this]() {
         return backupSync();
     });
 }
 
-bool FileBackup::backupSync()
+bool FileBackup::backupSync() __cell_noexcept
 {
     const auto fileName = backupStruct.fileName.value();
 

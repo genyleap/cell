@@ -45,7 +45,7 @@ FileManager::~FileManager()
     }
 }
 
-std::string FileManager::read(const std::filesystem::path& filePath)
+std::string FileManager::read(const FilePath& filePath)
 {
     std::ifstream inputFile(filePath);
     if (!inputFile.is_open())
@@ -64,7 +64,7 @@ std::string FileManager::read(const std::filesystem::path& filePath)
     return fileContents;
 }
 
-std::string FileManager::readRawData(const std::filesystem::path& filePath)
+std::string FileManager::readRawData(const FilePath& filePath)
 {
     // Open the file and read its contents as raw binary data
     std::ifstream inputFile(filePath, std::ios::binary);
@@ -88,7 +88,7 @@ std::string FileManager::readData() const
     return m_data;
 }
 
-void FileManager::write(const std::filesystem::path& filePath, const std::string& data)
+void FileManager::write(const FilePath& filePath, const std::string& data)
 {
     std::ofstream outputFile(filePath);
     if (!outputFile.is_open()) {
@@ -105,7 +105,7 @@ void FileManager::write(const std::filesystem::path& filePath, const std::string
     outputFile.close();
 }
 
-void FileManager::edit(const std::filesystem::path& filePath, const std::string& oldStr, const std::string& newStr)
+void FileManager::edit(const FilePath& filePath, const std::string& oldStr, const std::string& newStr)
 {
     // Open the file and read its contents
     std::ifstream inputFile(filePath);
@@ -143,7 +143,7 @@ void FileManager::edit(const std::filesystem::path& filePath, const std::string&
     outputFile.close();
 }
 
-bool FileManager::createFile(const std::filesystem::path& path)
+bool FileManager::createFile(const FilePath& path)
 {
     std::ofstream file(path);
     if(file.is_open())
@@ -155,12 +155,12 @@ bool FileManager::createFile(const std::filesystem::path& path)
     return file.good();
 }
 
-bool FileManager::createDir(const std::filesystem::path& path)
+bool FileManager::createDir(const FilePath& path)
 {
     return fs::create_directory(path);
 }
 
-std::vector<std::string> FileManager::listDir(const std::filesystem::path& path)
+std::vector<std::string> FileManager::listDir(const FilePath& path)
 {
     std::vector<std::string> result;
     for (const auto& entry : fs::directory_iterator(path))
@@ -173,7 +173,7 @@ std::vector<std::string> FileManager::listDir(const std::filesystem::path& path)
     return result;
 }
 
-std::vector<std::string> FileManager::listFilesOfDir(const std::filesystem::path& path)
+std::vector<std::string> FileManager::listFilesOfDir(const FilePath& path)
 {
     std::vector<std::string> result;
     for (const auto& entry : fs::directory_iterator(path))
@@ -183,17 +183,69 @@ std::vector<std::string> FileManager::listFilesOfDir(const std::filesystem::path
     return result;
 }
 
-bool FileManager::deleteFile(const std::filesystem::path& path)
+bool FileManager::deleteFile(const FilePath& path)
 {
     return fs::remove(path);
 }
 
-bool FileManager::deleteDir(const std::filesystem::path& path)
+bool FileManager::deleteFiles(const FilePath& path)
+{
+    std::string folderAndFile {};
+    bool status {false};
+    for (const auto& file : listFilesOfDir(path))
+    {
+        folderAndFile = path.string() + file;
+        status = deleteFile(folderAndFile);
+    }
+    return status;
+}
+
+bool FileManager::deleteSelectedFiles(ListOfFiles& files)
+{
+    if (files.empty())
+    {
+        if(DeveloperMode::IsEnable)
+        {
+            Log("Error: no files provided for deletion.", LoggerType::Critical);
+        }
+        return false;
+    }
+    bool allFilesDeleted = true;
+    std::string folderAndFile {};
+    for (const auto& [key, value] : files)
+    {
+        folderAndFile = key + value;
+        // Check if the file exists before attempting to delete it.
+        if (!Fs::exists(folderAndFile)) {
+            if(DeveloperMode::IsEnable)
+            {
+                Log("Warning: file " + folderAndFile + " does not exist.", LoggerType::Warning);
+            }
+            allFilesDeleted = false;
+            continue;
+        }
+
+        // Attempt to delete the file.
+        bool status = deleteFile(folderAndFile);
+
+        // Log or handle any errors that occur during deletion.
+        if (!status) {
+            if(DeveloperMode::IsEnable)
+            {
+                Log("Error: could not delete file " + folderAndFile, LoggerType::Critical);
+            }
+            allFilesDeleted = false;
+        }
+    }
+    return allFilesDeleted;
+}
+
+bool FileManager::deleteDir(const FilePath& path)
 {
     return fs::remove_all(path);
 }
 
-void FileManager::changePermissions(const std::filesystem::path& filePath, const std::filesystem::perms& permissions)
+void FileManager::changePermissions(const FilePath& filePath, const std::filesystem::perms& permissions)
 {
     try {
         std::filesystem::permissions(filePath, permissions);
@@ -226,7 +278,7 @@ void FileManager::setState(bool open, bool close)
     fileState.open = open;
 }
 
-FileInfo::FileInfo(const std::filesystem::path& filePath)
+FileInfo::FileInfo(const FilePath& filePath)
 {
     std::error_code ec;
 
@@ -290,7 +342,7 @@ FileTypeDetector::~FileTypeDetector()
 {
 }
 
-std::string FileTypeDetector::detectFileType(const std::filesystem::path& filePath)
+std::string FileTypeDetector::detectFileType(const FilePath& filePath)
 {
     std::string extension = filePath.extension().string();
     std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) { return std::tolower(c); });
