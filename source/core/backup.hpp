@@ -23,6 +23,36 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Maintenance)
 
+using StateFunction = std::function<void(int)>;
+using FutureState   = std::future<bool>;
+
+/**
+ * @brief The BackupStruct class
+ */
+struct BackupStruct final
+{
+    Types::OptionalString fileName              {}; ///<! Filename
+    std::function<void(int)> progressCallback   {}; ///<! Progress callback.
+};
+
+/**
+ * @brief The FileBackup class
+ */
+class __cell_export FileBackup {
+public:
+    FileBackup(const std::string& fileName);
+    ~FileBackup();
+
+    void setProgressCallback(const StateFunction& callback);
+
+    __cell_no_discard FutureState backupAsync() __cell_noexcept;
+
+    __cell_no_discard bool backupSync() __cell_noexcept;
+
+private:
+    BackupStruct backupStruct {};
+};
+
 
 CELL_NAMESPACE_END
 

@@ -129,6 +129,8 @@ namespace JSon      = std::json;
 #endif
 #endif
 
+namespace Fs = std::filesystem;
+
 using TableNames        = std::vector<std::string>;
 using QueryType         = std::vector<std::string>;
 using TranslateType     = std::string;
@@ -145,6 +147,7 @@ template<typename T> using Variant       = std::variant<T>;
 
 
 using Function          = std::function<void(void)>;
+
 using PackagedTask      = std::packaged_task<void(void)>;
 using MultiThreadVector = std::vector<std::thread>;
 using StringStream      = std::basic_stringstream<char>;
