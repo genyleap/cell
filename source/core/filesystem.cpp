@@ -157,15 +157,15 @@ bool FileManager::createFile(const FilePath& path)
 
 bool FileManager::createDir(const FilePath& path)
 {
-    return fs::create_directory(path);
+    return Fs::create_directory(path);
 }
 
 std::vector<std::string> FileManager::listDir(const FilePath& path)
 {
     std::vector<std::string> result;
-    for (const auto& entry : fs::directory_iterator(path))
+    for (const auto& entry : Fs::directory_iterator(path))
     {
-        if (fs::is_directory(entry) && !entry.path().has_extension())
+        if (Fs::is_directory(entry) && !entry.path().has_extension())
         {
             result.push_back(entry.path().filename().string());
         }
@@ -176,7 +176,7 @@ std::vector<std::string> FileManager::listDir(const FilePath& path)
 std::vector<std::string> FileManager::listFilesOfDir(const FilePath& path)
 {
     std::vector<std::string> result;
-    for (const auto& entry : fs::directory_iterator(path))
+    for (const auto& entry : Fs::directory_iterator(path))
     {
         result.push_back(entry.path().filename().string());
     }
@@ -185,7 +185,7 @@ std::vector<std::string> FileManager::listFilesOfDir(const FilePath& path)
 
 bool FileManager::deleteFile(const FilePath& path)
 {
-    return fs::remove(path);
+    return Fs::remove(path);
 }
 
 bool FileManager::deleteFiles(const FilePath& path)
@@ -242,7 +242,7 @@ bool FileManager::deleteSelectedFiles(ListOfFiles& files)
 
 bool FileManager::deleteDir(const FilePath& path)
 {
-    return fs::remove_all(path);
+    return Fs::remove_all(path);
 }
 
 void FileManager::changePermissions(const FilePath& filePath, const std::filesystem::perms& permissions)

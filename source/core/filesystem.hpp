@@ -23,8 +23,6 @@
 
 CELL_NAMESPACE_BEGIN(Cell::FileSystem)
 
-namespace fs = std::filesystem;
-
 using ListOfFiles = std::unordered_multimap<std::string, std::string>; ///<! Key [path], Value[name]
 using FilePath = std::filesystem::path;
 
