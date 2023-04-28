@@ -121,7 +121,7 @@ std::string stringFormat(const std::string& format, Args ... args)
  * @param cmd holds the commands for function.
  * @returns data from terminal.
  */
-__cell_maybe_unused std::string command(const std::string& cm);
+int command(const std::string& cm);
 
 /*!
  * @brief Maybe we need to convert stringstream to standard string.

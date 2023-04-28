@@ -51,38 +51,38 @@ public:
     /**
      * @brief checkForUpdates
      */
-    __cell_virtual void checkForUpdates();
+    __cell_virtual void checkForUpdates() __cell_const_noexcept = __cell_zero;
 
     /**
      * @brief download
      */
-    __cell_virtual void download();
+    __cell_virtual void download() __cell_const_noexcept = __cell_zero;
 
     /**
      * @brief install
      */
-    __cell_virtual void install();
+    __cell_virtual void install() __cell_const_noexcept = __cell_zero;
 
     /**
      * @brief update
      */
-    __cell_virtual void update();
+    __cell_virtual void update() __cell_const_noexcept = __cell_zero;
 
     /**
      * @brief betaUpdate
      */
-    __cell_virtual void betaUpdate();
+    __cell_virtual void betaUpdate() __cell_const_noexcept = __cell_zero;
 
     /**
      * @brief upgrade
      */
-    __cell_virtual void upgrade();
+    __cell_virtual void upgrade() __cell_const_noexcept = __cell_zero;
 
     /**
      * @brief automaticallyUpdate
      * @return
      */
-    __cell_no_discard __cell_virtual bool isAutomatically();
+    __cell_no_discard __cell_virtual bool isAutomatically() __cell_const_noexcept = __cell_zero;
 
     /*!
      * \brief get function will gets output of access string.

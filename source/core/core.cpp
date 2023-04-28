@@ -345,31 +345,24 @@ std::string Engine::copyright() __cell_noexcept
 #endif
 }
 
-std::string command(const std::string& cmd) {
-    // Support Unix base.
-    std::string c = cmd;
-    std::string data;
-    FILE *stream;
-    const int max_buffer = 256;
-    char buffer[max_buffer];
-    c.append(" 2>&1");
+int command(const std::string& cmd)
+{
 #ifdef PLATFORM_WINDOWS
-    stream = _popen(c.c_str(), "r");
+    PROCESS_INFORMATION pi;
+    STARTUPINFO si = { sizeof(si) };
+    if (!CreateProcess(NULL, (LPSTR)command, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
+        return false;
+    WaitForSingleObject(pi.hProcess, INFINITE);
+    DWORD exitCode;
+    if (!GetExitCodeProcess(pi.hProcess, &exitCode))
+        return false;
+    CloseHandle(pi.hProcess);
+    CloseHandle(pi.hThread);
+    return exitCode == 0;
 #else
-    stream = popen(c.c_str(), "r");
+    int result = std::system(cmd.c_str());
+    return WIFEXITED(result) && WEXITSTATUS(result) == 0;
 #endif
-    if (stream)
-    {
-        while (!feof(stream))
-            if (fgets(buffer, max_buffer, stream) != nullptr)
-                data.append(buffer);
-#ifdef PLATFORM_WINDOWS
-        _pclose(stream);
-#else
-        pclose(stream);
-#endif
-    }
-    return data;
 }
 
 std::string convertStream(std::stringstream const& data) __cell_noexcept

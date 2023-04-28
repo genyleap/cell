@@ -158,6 +158,11 @@ namespace Cell::Defines {
 
 #define CELL_BATTERY_ENERGY 10
 
+///<! ping -c 1 is a command that sends one ICMP echo request to the specified destination and waits for a reply.
+/// It is used to test the reachability of a network host and to measure the round-trip time for messages sent from the originating host to a destination computer on an Internet Protocol (IP) network, as well as for checking the network congestion.
+/// The -c 1 option specifies that only one packet should be sent.
+#define CELL_PING_COMMAND "ping -c 1 "
+
 // Defines for IPv4 and v6
 #define CELL_VALID_IPV4 0x1     // 1 is valid ip : 127.0.0.1
 #define CELL_VALID_IPV6 0x1     // 1 is valid ipv6 = // 92001:cdba:0000:0000:0000:0000:3257:9652)-(2001:cdba:0:0:0:0:3257:9652) // - (2001:cdba::3257:9652)
