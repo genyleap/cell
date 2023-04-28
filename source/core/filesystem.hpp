@@ -25,7 +25,9 @@ CELL_NAMESPACE_BEGIN(Cell::FileSystem)
 
 namespace fs = std::filesystem;
 
-
+/**
+ * @brief The FileState class
+ */
 struct FileState final
 {
     bool open;
@@ -83,14 +85,14 @@ public:
      * @return The raw binary data of the file as a string.
      */
     __cell_no_discard_message("This function has a return value as data raw string!")
-    std::string readRawData(const std::filesystem::path& filePath);
+        std::string readRawData(const std::filesystem::path& filePath);
 
     /**
      * @brief Reads the contents of the file at the specified path.
      * @return The contents of the file as a string.
      */
     __cell_no_discard_message("This function has a return value as data!")
-    std::string readData() const;
+        std::string readData() const;
 
     /**
      * @brief Writes the specified data to the file at the specified path.
@@ -148,35 +150,123 @@ private:
     std::string m_data{};
 };
 
-class __cell_export FileInfo {
-public:
-    FileInfo(const std::filesystem::path& filePath);
-    ~FileInfo();
-
-    std::string fileName() const;
-    long long fileSize() const;
-    std::string lastWriteTime() const;
-    std::string creationTime() const;
-
-private:
-    std::string m_filePath;
-    std::string m_fileName;
-    long long m_fileSize;
-    std::chrono::system_clock::time_point m_lastWriteTime;
-    std::chrono::system_clock::time_point m_creationTime;
+static const std::map<std::string, std::string> fileTypes = {
+    { ".txt", "Text File" },
+    { ".doc", "Microsoft Word Document" },
+    { ".docx", "Microsoft Word Document" },
+    { ".xls", "Microsoft Excel Spreadsheet" },
+    { ".xlsx", "Microsoft Excel Spreadsheet" },
+    { ".ppt", "Microsoft PowerPoint Presentation" },
+    { ".pptx", "Microsoft PowerPoint Presentation" },
+    { ".pdf", "PDF Document" },
+    { ".html", "HTML Document" },
+    { ".htm", "HTML Document" },
+    { ".xml", "XML Document" },
+    { ".json", "JSON Document" },
+    { ".cpp", "C++ Source Code" },
+    { ".cuh", "C++ Cuda Header Code" },
+    { ".c++", "C++ Source Code" },
+    { ".cxx", "C++ Source Code" },
+    { ".hpp", "C++ Modern Header Code" },
+    { ".ixx", "C++ Module File" },
+    { ".mxx", "C++ Module File" },
+    { ".cppm", "C++ Module File" },
+    { ".ccm", "C++ Module File" },
+    { ".cxxm", "C++ Module File" },
+    { ".c++m", "C++ Module File" },
+    { ".h", "C Header Code" },
+    { ".c", "C Source Code" },
+    { ".java", "Java Source Code" },
+    { ".py", "Python Source Code" },
+    { ".rb", "Ruby Source Code" },
+    { ".php", "PHP Source Code" },
+    { ".rs", "Rust Source Code" },
+    { ".js", "JavaScript Source Code" },
+    { ".css", "Cascading Style Sheet" },
+    { ".scss", "Sass CSS File" },
+    { ".less", "Less CSS File" },
+    { ".jsx", "React JSX File" },
+    { ".tsx", "TypeScript JSX File" },
+    { ".ts", "TypeScript Source Code" },
+    { ".go", "Go Source Code" },
+    { ".swift", "Swift Source Code" },
+    { ".kt", "Kotlin Source Code" }
 };
 
+/**
+ * @brief Structure for holding file information.
+ * This structure holds file information that is retrieved from the operating system.
+ */
+struct InfoStruct final
+{
+    std::string filePath;   ///<! Path of file.
+    std::string fileName;   ///<! Name of file.
+    std::chrono::system_clock::time_point lastWriteTime;    ///<! Latest write time on the file.
+    std::chrono::system_clock::time_point creationTime;     ///<! File creation time.
+    Types::llong fileSize; ///<! Size of file.
+};
+
+/**
+ * @brief A class for obtaining information about a file.
+ * This class provides methods to obtain various information about a file,
+ * including its name, last write time, creation time, and file size.
+ */
+class __cell_export FileInfo {
+public:
+    /**
+     * @brief Construct a new FileInfo object for the specified file path.
+     * @param filePath The path to the file for which information will be obtained.
+     */
+    FileInfo(const std::filesystem::path& filePath);
+
+    /**
+     * @brief Destroy the FileInfo object.
+     */
+    ~FileInfo();
+
+    /**
+     * @brief Get the name of the file.
+     * @return The name of the file as a string.
+     */
+    std::string fileName() const;
+
+    /**
+     * @brief Get the last write time of the file.
+     * @return The last write time of the file as a string.
+     */
+    std::string lastWriteTime() const;
+
+    /**
+     * @brief Get the creation time of the file.
+     * @return The creation time of the file as a string.
+     */
+    std::string creationTime() const;
+
+    /**
+     * @brief Get the size of the file in bytes.
+     * @return The size of the file in bytes.
+     */
+    Types::llong fileSize() const;
+
+private:
+
+    InfoStruct infoStruct {}; ///<! Structure for holding file information.
+};
+
+/**
+ * @brief The FileTypeDetector class provides a static method to detect the type of a file based on its extension.
+ */
 class __cell_export FileTypeDetector {
 public:
     FileTypeDetector();
     ~FileTypeDetector();
-    static std::string detectFileType(const std::filesystem::path& filePath);
-};
 
-struct FileStruct final
-{
-    std::string filename {};    ///<! The name of the file.
-    std::fstream content {};    ///<! The content of the file.
+    /**
+     * @brief Detects the type of a file based on its extension.
+     * @param filePath The path to the file to detect the type of.
+     * @return A string describing the file type.
+     */
+    static std::string detectFileType(const std::filesystem::path& filePath);
 };
 
 CELL_NAMESPACE_END

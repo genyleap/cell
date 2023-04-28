@@ -39,6 +39,10 @@ FileManager::~FileManager()
 {
     setState(false, true);
     m_data.clear();
+    if(DeveloperMode::IsEnable)
+    {
+        eLogger::Log("File states has been reset!", eLogger::LoggerType::Info);
+    }
 }
 
 std::string FileManager::read(const std::filesystem::path& filePath)
@@ -47,6 +51,10 @@ std::string FileManager::read(const std::filesystem::path& filePath)
     if (!inputFile.is_open())
     {
         setState(false, true);
+        if(DeveloperMode::IsEnable)
+        {
+            eLogger::Log("Failed to open file for reading", eLogger::LoggerType::Critical);
+        }
         throw std::runtime_error("Failed to open file for reading");
     }
     setState(true, false);
@@ -62,6 +70,10 @@ std::string FileManager::readRawData(const std::filesystem::path& filePath)
     std::ifstream inputFile(filePath, std::ios::binary);
     if (!inputFile.is_open()) {
         setState(false, true);
+        if(DeveloperMode::IsEnable)
+        {
+            eLogger::Log("Failed to open file for reading raw data", eLogger::LoggerType::Critical);
+        }
         throw std::runtime_error("Failed to open file for reading raw data");
     }
     std::string rawData((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
@@ -81,6 +93,10 @@ void FileManager::write(const std::filesystem::path& filePath, const std::string
     std::ofstream outputFile(filePath);
     if (!outputFile.is_open()) {
         setState(false, true);
+        if(DeveloperMode::IsEnable)
+        {
+            eLogger::Log("Failed to open file for writing", eLogger::LoggerType::Critical);
+        }
         throw std::runtime_error("Failed to open file for writing");
     }
     setState(true, false);
@@ -95,6 +111,10 @@ void FileManager::edit(const std::filesystem::path& filePath, const std::string&
     std::ifstream inputFile(filePath);
     if (!inputFile.is_open()) {
         setState(false, true);
+        if(DeveloperMode::IsEnable)
+        {
+            eLogger::Log("Failed to open file for editing", eLogger::LoggerType::Critical);
+        }
         throw std::runtime_error("Failed to open file for editing");
     }
     std::string fileContents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
@@ -110,6 +130,10 @@ void FileManager::edit(const std::filesystem::path& filePath, const std::string&
     // Open the file for writing and write the modified contents
     std::ofstream outputFile(filePath);
     if (!outputFile.is_open()) {
+        if(DeveloperMode::IsEnable)
+        {
+            eLogger::Log("Failed to open file for writing", eLogger::LoggerType::Critical);
+        }
         throw std::runtime_error("Failed to open file for writing");
         setState(false, true);
     }
@@ -152,7 +176,8 @@ std::vector<std::string> FileManager::listDir(const std::filesystem::path& path)
 std::vector<std::string> FileManager::listFilesOfDir(const std::filesystem::path& path)
 {
     std::vector<std::string> result;
-    for (const auto& entry : fs::directory_iterator(path)) {
+    for (const auto& entry : fs::directory_iterator(path))
+    {
         result.push_back(entry.path().filename().string());
     }
     return result;
@@ -172,8 +197,15 @@ void FileManager::changePermissions(const std::filesystem::path& filePath, const
 {
     try {
         std::filesystem::permissions(filePath, permissions);
-        std::cout << "File permissions changed successfully.\n";
+        if(DeveloperMode::IsEnable)
+        {
+            eLogger::Log("File permissions changed successfully.", eLogger::LoggerType::Success);
+        }
     } catch (const std::filesystem::filesystem_error& e) {
+        if(DeveloperMode::IsEnable)
+        {
+            eLogger::Log("Failed to change file permissions.", eLogger::LoggerType::Critical);
+        }
         throw std::runtime_error("Failed to change file permissions: " + std::string(e.what()));
     }
 }
@@ -198,26 +230,25 @@ FileInfo::FileInfo(const std::filesystem::path& filePath)
 {
     std::error_code ec;
 
-    m_filePath = filePath;
+    infoStruct.filePath = filePath;
 
-    m_fileName = filePath.filename().string();
+    infoStruct.fileName = filePath.filename().string();
 
-    m_fileSize = std::filesystem::file_size(filePath, ec);
+    infoStruct.fileSize = std::filesystem::file_size(filePath, ec);
 
-    if (ec) { m_fileSize = -1; }
+    if (ec) { infoStruct.fileSize = -1; }
 
     auto writeTime = std::filesystem::last_write_time(filePath, ec);
     if (ec) {
         writeTime = decltype(writeTime)::clock::time_point::min();
     }
-    m_lastWriteTime = std::chrono::time_point_cast<std::chrono::system_clock::duration>(writeTime - std::filesystem::file_time_type::clock::now() + std::chrono::system_clock::now());
+    infoStruct.lastWriteTime = std::chrono::time_point_cast<std::chrono::system_clock::duration>(writeTime - std::filesystem::file_time_type::clock::now() + std::chrono::system_clock::now());
 
     std::filesystem::file_time_type createTime = std::filesystem::last_write_time(filePath, ec);
     if (ec) {
         createTime = decltype(createTime)::clock::time_point::min();
     }
-    m_creationTime = std::chrono::time_point_cast<std::chrono::system_clock::duration>(createTime - std::filesystem::file_time_type::clock::now() + std::chrono::system_clock::now());
-
+    infoStruct.creationTime = std::chrono::time_point_cast<std::chrono::system_clock::duration>(createTime - std::filesystem::file_time_type::clock::now() + std::chrono::system_clock::now());
 }
 
 FileInfo::~FileInfo()
@@ -226,29 +257,28 @@ FileInfo::~FileInfo()
 
 std::string FileInfo::fileName() const
 {
-    return m_fileName;
+    return infoStruct.fileName;
 }
 
 long long FileInfo::fileSize() const
 {
-    return m_fileSize;
+    return infoStruct.fileSize;
 }
 
 std::string FileInfo::lastWriteTime() const
 {
-    std::filesystem::file_time_type lastModifiedTime = std::filesystem::last_write_time(m_filePath);
+    std::filesystem::file_time_type lastModifiedTime = std::filesystem::last_write_time(infoStruct.filePath);
     // Convert the file time type to a time point
     auto lastModifiedTimePoint = std::chrono::time_point_cast<std::chrono::system_clock::duration>(lastModifiedTime - std::filesystem::file_time_type::clock::now() + std::chrono::system_clock::now());
     // Convert the time point to a time string
     std::time_t lastModifiedTimeT = std::chrono::system_clock::to_time_t(lastModifiedTimePoint);
     std::string lastModifiedTimeString = std::ctime(&lastModifiedTimeT);
-
     return lastModifiedTimeString;
 }
 
 std::string FileInfo::creationTime() const
 {
-    auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::time_point(m_creationTime));
+    auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::time_point(infoStruct.creationTime));
     return std::asctime(std::localtime(&time));
 }
 
@@ -264,34 +294,14 @@ std::string FileTypeDetector::detectFileType(const std::filesystem::path& filePa
 {
     std::string extension = filePath.extension().string();
     std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) { return std::tolower(c); });
-
-    if (extension == ".txt") {
-        return "Text File";
-    } else if (extension == ".doc" || extension == ".docx") {
-        return "Microsoft Word Document";
-    } else if (extension == ".xls" || extension == ".xlsx") {
-        return "Microsoft Excel Spreadsheet";
-    } else if (extension == ".ppt" || extension == ".pptx") {
-        return "Microsoft PowerPoint Presentation";
-    } else if (extension == ".pdf") {
-        return "PDF Document";
-    } else if (extension == ".html" || extension == ".htm") {
-        return "HTML Document";
-    } else if (extension == ".xml") {
-        return "XML Document";
-    } else if (extension == ".json") {
-        return "JSON Document";
-    } else if (extension == ".cpp" || extension == ".hpp" || extension == ".h" || extension == ".cxx" || extension == ".hxx") {
-        return "C++ Source Code";
-    } else if (extension == ".java") {
-        return "Java Source Code";
-    } else if (extension == ".py") {
-        return "Python Source Code";
-    } else if (extension == ".rb") {
-        return "Ruby Source Code";
-    } else if (extension == ".php") {
-        return "PHP Source Code";
+    auto iter = fileTypes.find(extension);
+    if (iter != fileTypes.end()) {
+        return iter->second;
     } else {
+        if(DeveloperMode::IsEnable)
+        {
+            eLogger::Log("Unknown File Type", eLogger::LoggerType::Critical);
+        }
         return "Unknown File Type";
     }
 }

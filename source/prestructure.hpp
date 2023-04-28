@@ -28,7 +28,7 @@ CELL_NAMESPACE_BEGIN(Cell)
  */
 __cell_enum_class SystemStatus : Types::u8
 {
-    Off             = 0x1, ///!< The system is off.
+    Off             = 0x1, ///< The system is off.
     On              = 0x2, ///< The system is on.
     Suspened        = 0x3, ///< The system is on suspended mode.
     Ready           = 0x4, ///< The system is ready.
