@@ -23,60 +23,163 @@
 
 CELL_NAMESPACE_BEGIN(Cell::FileSystem)
 
+namespace fs = std::filesystem;
+
+
+struct FileState final
+{
+    bool open;
+    bool close;
+};
+
+/**
+ @brief A class for managing files and directories.
+*/
+class __cell_export FileManager {
+public:
+
+    FileManager();
+    ~FileManager();
+
+    /**
+     * @brief Creates a new file at the specified path.
+     * @param path The path to the file.
+     * @return True if the file was created successfully, false otherwise.
+     */
+    __cell_no_discard bool createFile(const std::filesystem::path& path);
+
+    /**
+     * @brief Creates a new directory at the specified path.
+     * @param path The path to the directory.
+     * @return True if the directory was created successfully, false otherwise.
+     */
+    __cell_no_discard bool createDir(const std::filesystem::path& path);
+
+    /**
+     * @brief Deletes the file at the specified path.
+     * @param path The path to the file.
+     * @return True if the file was deleted successfully, false otherwise.
+     */
+    __cell_no_discard bool deleteFile(const std::filesystem::path& path);
+
+    /**
+     * @brief Deletes the directory at the specified path.
+     * @param path The path to the directory.
+     * @return True if the directory was deleted successfully, false otherwise.
+     */
+    __cell_no_discard bool deleteDir(const std::filesystem::path& path);
+
+    /**
+     * @brief Reads the contents of the file at the specified path.
+     * @param filePath The path to the file.
+     * @return The contents of the file as a string.
+     */
+    __cell_no_discard_message("This function has a return value as data string!")
+        std::string read(const std::filesystem::path& filePath);
+
+    /**
+     * @brief Reads the raw binary data of the file at the specified path.
+     * @param filePath The path to the file.
+     * @return The raw binary data of the file as a string.
+     */
+    __cell_no_discard_message("This function has a return value as data raw string!")
+    std::string readRawData(const std::filesystem::path& filePath);
+
+    /**
+     * @brief Reads the contents of the file at the specified path.
+     * @return The contents of the file as a string.
+     */
+    __cell_no_discard_message("This function has a return value as data!")
+    std::string readData() const;
+
+    /**
+     * @brief Writes the specified data to the file at the specified path.
+     * @param filePath The path to the file.
+     * @param data The data to write to the file.
+     */
+    void write(const std::filesystem::path& filePath, const std::string& data);
+
+    /**
+     * @brief Replaces all occurrences of oldStr with newStr in the file at the specified path.
+     * @param filePath The path to the file.
+     * @param oldStr The string to replace.
+     * @param newStr The string to replace oldStr with.
+     */
+    void edit(const std::filesystem::path& filePath, const std::string& oldStr, const std::string& newStr);
+
+    /**
+     * @brief Changes the permissions of the file or directory at the specified path.
+     * @param filePath The path to the file or directory.
+     * @param permissions The new permissions to set.
+     */
+    void changePermissions(const std::filesystem::path& filePath, const std::filesystem::perms& permissions);
+
+    /**
+     * @brief Lists the files in the directory at the specified path.
+     * @param path The path to the directory.
+     * @return A vector of file names in the directory.
+     */
+    __cell_no_discard std::vector<std::string> listFilesOfDir(const std::filesystem::path& path);
+
+    /**
+     * @brief Lists the subdirectories in the directory at the specified path.
+     * @param path The path to the directory.
+     * @return A vector of subdirectory names in the directory.
+     */
+    __cell_no_discard std::vector<std::string> listDir(const std::filesystem::path& path);
+
+    /**
+     * @brief isOpen function will gets state of file.
+     * @return true if file was opened!
+     */
+    __cell_no_discard  bool isOpen();
+
+    /**
+     * @brief isOpen function will gets state of file.
+     * @return false if file was closed!
+     */
+    __cell_no_discard bool isClose();
+
+protected:
+    void setState(bool open, bool close);
+
+private:
+    FileState fileState;
+    std::string m_data{};
+};
+
+class __cell_export FileInfo {
+public:
+    FileInfo(const std::filesystem::path& filePath);
+    ~FileInfo();
+
+    std::string fileName() const;
+    long long fileSize() const;
+    std::string lastWriteTime() const;
+    std::string creationTime() const;
+
+private:
+    std::string m_filePath;
+    std::string m_fileName;
+    long long m_fileSize;
+    std::chrono::system_clock::time_point m_lastWriteTime;
+    std::chrono::system_clock::time_point m_creationTime;
+};
+
+class __cell_export FileTypeDetector {
+public:
+    FileTypeDetector();
+    ~FileTypeDetector();
+    static std::string detectFileType(const std::filesystem::path& filePath);
+};
+
 struct FileStruct final
 {
     std::string filename {};    ///<! The name of the file.
     std::fstream content {};    ///<! The content of the file.
 };
 
-class __cell_export FileIO {
-public:
-    FileIO();
-    ~FileIO();
-
-    /**
-     * @brief Opens a file.
-     * @param fileName The file name.
-     * @return bool Returns true if the file was opened successfully, false otherwise.
-     */
-    __cell_no_discard bool open(const std::string& fileName);
-
-    /**
-     * @brief Checks if the file is currently open.
-     * @return bool Returns true if the file is open, false otherwise.
-     */
-    __cell_no_discard bool close();
-
-    /**
-     * @brief Checks if the file is currently open.
-     * @return bool Returns true if the file is open, false otherwise.
-     */
-    __cell_no_discard bool isOpen() const;
-
-    /**
-     * @brief Writes data to the file.
-     * @param data The data to write to the file.
-     * @return bool Returns true if the write operation was successful, false otherwise.
-     */
-    __cell_no_discard bool write(const std::string& data);
-
-    /**
-     * @brief Reads all contents of the file as raw (ifstream).
-     * @return std::ifstream Returns the contents of the file as a ifstream.
-     */
-    __cell_no_discard std::ifstream readRawAll() const;
-
-    /**
-     * @brief Reads all contents of the file.
-     * @return std::string Returns the contents of the file as a string.
-     */
-    __cell_no_discard std::string readAll() const;
-
-
-private:
-    FileStruct fileStruct;
-};
-
 CELL_NAMESPACE_END
+
 
 #endif // CELL_FILESYSTEM_HPP
