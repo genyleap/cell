@@ -41,7 +41,7 @@ FileManager::~FileManager()
     m_data.clear();
     if(DeveloperMode::IsEnable)
     {
-        eLogger::Log("File states has been reset!", eLogger::LoggerType::Info);
+        Log("File states has been reset!", LoggerType::Info);
     }
 }
 
@@ -53,7 +53,7 @@ std::string FileManager::read(const FilePath& filePath)
         setState(false, true);
         if(DeveloperMode::IsEnable)
         {
-            eLogger::Log("Failed to open file for reading", eLogger::LoggerType::Critical);
+            Log("Failed to open file for reading", LoggerType::Critical);
         }
         throw std::runtime_error("Failed to open file for reading");
     }
@@ -72,7 +72,7 @@ std::string FileManager::readRawData(const FilePath& filePath)
         setState(false, true);
         if(DeveloperMode::IsEnable)
         {
-            eLogger::Log("Failed to open file for reading raw data", eLogger::LoggerType::Critical);
+            Log("Failed to open file for reading raw data", LoggerType::Critical);
         }
         throw std::runtime_error("Failed to open file for reading raw data");
     }
@@ -95,7 +95,7 @@ void FileManager::write(const FilePath& filePath, const std::string& data)
         setState(false, true);
         if(DeveloperMode::IsEnable)
         {
-            eLogger::Log("Failed to open file for writing", eLogger::LoggerType::Critical);
+            Log("Failed to open file for writing", LoggerType::Critical);
         }
         throw std::runtime_error("Failed to open file for writing");
     }
@@ -113,7 +113,7 @@ void FileManager::edit(const FilePath& filePath, const std::string& oldStr, cons
         setState(false, true);
         if(DeveloperMode::IsEnable)
         {
-            eLogger::Log("Failed to open file for editing", eLogger::LoggerType::Critical);
+            Log("Failed to open file for editing", LoggerType::Critical);
         }
         throw std::runtime_error("Failed to open file for editing");
     }
@@ -132,7 +132,7 @@ void FileManager::edit(const FilePath& filePath, const std::string& oldStr, cons
     if (!outputFile.is_open()) {
         if(DeveloperMode::IsEnable)
         {
-            eLogger::Log("Failed to open file for writing", eLogger::LoggerType::Critical);
+            Log("Failed to open file for writing", LoggerType::Critical);
         }
         throw std::runtime_error("Failed to open file for writing");
         setState(false, true);
@@ -251,12 +251,12 @@ void FileManager::changePermissions(const FilePath& filePath, const std::filesys
         std::filesystem::permissions(filePath, permissions);
         if(DeveloperMode::IsEnable)
         {
-            eLogger::Log("File permissions changed successfully.", eLogger::LoggerType::Success);
+            Log("File permissions changed successfully.", LoggerType::Success);
         }
     } catch (const std::filesystem::filesystem_error& e) {
         if(DeveloperMode::IsEnable)
         {
-            eLogger::Log("Failed to change file permissions.", eLogger::LoggerType::Critical);
+            Log("Failed to change file permissions.", LoggerType::Critical);
         }
         throw std::runtime_error("Failed to change file permissions: " + std::string(e.what()));
     }
@@ -352,7 +352,7 @@ std::string FileTypeDetector::detectFileType(const FilePath& filePath)
     } else {
         if(DeveloperMode::IsEnable)
         {
-            eLogger::Log("Unknown File Type", eLogger::LoggerType::Critical);
+            Log("Unknown File Type", LoggerType::Critical);
         }
         return "Unknown File Type";
     }
