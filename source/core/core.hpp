@@ -610,6 +610,14 @@ public:
      */
     std::string getLanguage();
 
+    /**
+     * @brief URL encoding is the process of encoding special characters and reserved characters in a URL or web address to make sure that it conforms to the uniform resource identifier (URI) specification.
+     * URL encoding is used to replace special characters in a URL with their corresponding escape sequences, which consist of a percent sign followed by two hexadecimal digits.
+     * For example, the space character ( ) would be encoded as "%20". This is necessary because some special characters have special meanings in a URL and must be encoded to avoid ambiguity or misinterpretation by web servers or browsers.
+     * @param str as a input data.
+     * @return as encoded string.
+     */
+    std::string urlEncode(const std::string& str);
 
     /**
      * @brief ping function will pings address.

@@ -580,6 +580,28 @@ std::string Engine::getLanguage()
     return m_languageStr;
 }
 
+/**
+ * This implementation iterates over each character in the input string str, and keeps alphanumeric and a few other accepted characters intact.
+ * Any other characters are percent-encoded using the % symbol followed by the hexadecimal representation of their ASCII code.
+ * The resulting percent-encoded string is returned.
+ */
+std::string Engine::urlEncode(const std::string& str)
+{
+    std::ostringstream escaped;
+    escaped.fill('0');
+    escaped << std::hex;
+    for (char c : str) {
+        // Keep alphanumeric and other safe characters as-is
+        if (std::isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~') {
+            escaped << c;
+        } else { // Any other characters are percent-encoded
+            escaped << std::uppercase;
+            escaped << '%' << std::setw(2) << static_cast<int>(static_cast<unsigned char>(c));
+            escaped << std::nouppercase;
+        }
+    }
+    return escaped.str();
+}
 
 bool Engine::ping(const std::string& address)
 {

@@ -29,18 +29,39 @@
 # endif
 #endif
 
+#ifdef __has_include
+# if __has_include("core/core.hpp")
+#   include "core/core.hpp"
+#else
+#   error "Cell's "core/core.hpp" was not found!"
+# endif
+#endif
+
 CELL_NAMESPACE_BEGIN(Cell::Modules::Network)
+
+//! Function that creates and returns a unique_ptr to Engine.
+std::unique_ptr<System::Engine> createEngineObject();
 
 struct RequestStruct final
 {
-    Types::SmartCurlPtr     curlHandlePtr   {Types::curl_easy_init(), &Types::curl_easy_cleanup};
-    std::string             url             {   };  ///<! Url address.
-    Types::VectorString     headers         {   };  ///<! List of http headers.
-    std::string             data            {   };  ///<! Http data.
-    std::string             response        {   };  ///<! Http response.
-    std::string             authUsername    {   };  ///<! Username [for authorization]
-    std::string             authPassword    {   };  ///<! Password [for authorization]
+    // Pointer to Types::CURL
+    Types::SmartCurlPtr     curlHandlePtr   { Types::curl_easy_init(), &Types::curl_easy_cleanup};
+
+    // The query parameters to be sent with the HTTP request.
+    Types::HttpQueryString  queries         {   };
+
+    Types::OptionalString   url             { __cell_null_str  };  ///<! Url address.
+    Types::OptionalString   data            { __cell_null_str  };  ///<! Http data.
+    Types::VectorString     headers         { __cell_null_str  };  ///<! List of http headers.
+
+
+
+    Types::OptionalString   response        { __cell_null_str  };  ///<! Http response.
+    Types::OptionalString   authUsername    { __cell_null_str  };  ///<! Username [for authorization]
+    Types::OptionalString   authPassword    { __cell_null_str  };  ///<! Password [for authorization]
+
     long                    timeout         {30L};  ///<! Default timeout of 30 seconds
+
     Types::Mutex            curlHandleMutex; ///<! mutex to guard curlHandlePtr
 };
 
@@ -79,6 +100,12 @@ public:
      * @param data The data to send with the request.
      */
     void setData(const std::string& data);
+
+    /**
+     * @brief Sets the query parameters to be sent with the HTTP request.
+     * @param params The key-value pairs to add to the URL.
+     */
+    void setQuery(const Types::HttpQueryString& params);
 
     /**
      * @brief Sets the timeout for the HTTP request.
@@ -134,13 +161,15 @@ public:
      */
     Types::FutureStringObject performDeleteAsync();
 
+
+private:
+
     /**
      * @brief Returns the mutex used to synchronize access to libcurl.
      * @return The mutex object.
      */
     Types::Mutex& getMutex();
 
-private:
     /**
      * @brief Static function to handle the libcurl write callback.
      * @return as size_t.
@@ -179,7 +208,6 @@ private:
 
 private:
     RequestStruct requestStruct {}; ///<!The struct to hold libcurl options and data.
-
 };
 
 

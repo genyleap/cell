@@ -109,6 +109,8 @@ using VectorString      = std::vector<std::string>;
 using VectorSection     = std::vector<std::string>;
 using OptionalString    = std::optional<std::string>;
 
+using HttpQueryString   = std::unordered_map<std::string, std::string>;
+
 using OptionalNumeric   = std::optional<int>;
 using OptionalBool      = std::optional<bool>;
 

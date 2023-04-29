@@ -30,6 +30,19 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::Network)
 
 HttpRequest::HttpRequest(const std::string& url)
 {
+    /**
+     * RAII (Resource Acquisition Is Initialization) technique to acquire a new resource and automatically manage it using the std::unique_ptr smart pointer.
+     * The std::unique_ptr class automatically destroys the previously owned object, if any, and takes ownership of the newly created System::Engine object when the new object is acquired.
+     * When the std::unique_ptr object goes out of scope, it automatically destroys the owned object. This way, the resource is automatically managed without the need for explicit memory allocation and deallocation or the use of explicit destructors.
+     */
+
+    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
+    if(engineSmartPtr->initialize())
+    {
+        //ToDo..!
+    }
+
+    // Initialize cURL
     curl_global_init(CURL_GLOBAL_ALL);
     requestStruct.curlHandlePtr.reset(curl_easy_init());
     if (!requestStruct.curlHandlePtr) {
@@ -58,7 +71,7 @@ void HttpRequest::setAuthUsernamePassword(const std::string& username, const std
     requestStruct.authUsername = username;
     requestStruct.authPassword = password;
     curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_USERPWD, (requestStruct.authUsername + ":" + requestStruct.authPassword).c_str());
+    curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_USERPWD, (requestStruct.authUsername.value() + ":" + requestStruct.authPassword.value()).c_str());
 
 }
 
@@ -67,8 +80,32 @@ void HttpRequest::addHeader(const std::string& header)
     requestStruct.headers.push_back(header);
 }
 
-void HttpRequest::setData(const std::string& data) {
+void HttpRequest::setData(const std::string& data)
+{
     requestStruct.data = data;
+}
+
+void HttpRequest::setQuery(const HttpQueryString& params)
+{
+    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
+    std::string queryStr;
+    bool firstParam = true;
+    for (const auto& [param, value] : requestStruct.queries = std::move(params))
+    {
+        if (firstParam) {
+            queryStr += "?";
+            firstParam = false;
+        }
+        else {
+            queryStr += "&";
+        }
+
+        queryStr += engineSmartPtr->urlEncode(param) + "=" + engineSmartPtr->urlEncode(value);
+    }
+    if(!requestStruct.url.has_value())
+    {
+        requestStruct.url.value() += queryStr;
+    }
 }
 
 void HttpRequest::setTimeout(long timeout)
@@ -148,8 +185,8 @@ size_t HttpRequest::writeCallback(char* ptr, size_t size, size_t nmemb, void* us
 
 int HttpRequest::authCallback(char* buffer, size_t size, size_t nitems, void* userdata)
 {
-    const std::string& username = static_cast<RequestStruct*>(userdata)->authUsername;
-    const std::string& password = static_cast<RequestStruct*>(userdata)->authPassword;
+    const std::string& username = static_cast<RequestStruct*>(userdata)->authUsername.value();
+    const std::string& password = static_cast<RequestStruct*>(userdata)->authPassword.value();
 
     size_t length = username.length() + password.length() + 1; // +1 for the colon separator
     if (length > size * nitems) {
@@ -177,25 +214,26 @@ std::string HttpRequest::performRequest(const std::string& method)
     curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_CUSTOMREQUEST, method.c_str());
 
     // Set the URL
-    curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_URL, requestStruct.url.c_str());
+    curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_URL, requestStruct.url.value().c_str());
 
     // Set the headers
     struct curl_slist* headerList = nullptr;
     for (const auto& header : requestStruct.headers) {
         headerList = curl_slist_append(headerList, header.c_str());
     }
+
     curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_HTTPHEADER, headerList);
 
     // Set the data
-    curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_POSTFIELDS, requestStruct.data.c_str());
-    curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_POSTFIELDSIZE, requestStruct.data.size());
+    curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_POSTFIELDS, requestStruct.data->c_str());
+    curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_POSTFIELDSIZE, requestStruct.data->size());
 
     // Set the timeout
     curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_TIMEOUT, requestStruct.timeout);
 
     // Set the authentication callback
-    if (!requestStruct.authUsername.empty() && !requestStruct.authPassword.empty()) {
-        curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_USERPWD, (requestStruct.authUsername + ":" + requestStruct.authPassword).c_str());
+    if (!requestStruct.authUsername.value().empty() && !requestStruct.authPassword.value().empty()) {
+        curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_USERPWD, (requestStruct.authUsername.value() + ":" + requestStruct.authPassword.value()).c_str());
         curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_HTTPAUTH, CURLAUTH_ANY);
         curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_XFERINFOFUNCTION, &HttpRequest::authCallback);
         curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_XFERINFODATA, &requestStruct);
@@ -232,7 +270,7 @@ std::string HttpRequest::performRequest(const std::string& method)
     }
 
     // Return the response
-    return requestStruct.response;
+    return requestStruct.response.value();
 }
 
 void HttpRequest::performAsyncThread(PromiseStringObject&& promise, const std::string& method)
@@ -255,5 +293,16 @@ void HttpRequest::performAsyncThread(PromiseStringObject&& promise, const std::s
         promise.set_exception(std::current_exception());
     }
 }
+
+// Definition of the createMyClassObject function
+std::unique_ptr<System::Engine> createEngineObject()
+{
+    // Allocate memory for a MyClass object using 'new'
+    Engine* myClassPtr = new Engine;
+
+    // Wrap the raw pointer in a unique_ptr and return it
+    return std::unique_ptr<Engine>(myClassPtr);
+}
+
 
 CELL_NAMESPACE_END
