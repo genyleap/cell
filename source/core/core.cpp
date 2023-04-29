@@ -603,6 +603,109 @@ std::string Engine::urlEncode(const std::string& str)
     return escaped.str();
 }
 
+std::string Engine::escapeJson(const std::string &input)
+{
+    std::string output;
+    output.reserve(input.length());
+    for (std::string::size_type i = 0; i < input.length(); ++i)
+    {
+        switch (input[i]) {
+        case '"':
+            output += "\\\"";
+            break;
+        case '/':
+            output += "\\/";
+            break;
+        case '\b':
+            output += "\\b";
+            break;
+        case '\f':
+            output += "\\f";
+            break;
+        case '\n':
+            output += "\\n";
+            break;
+        case '\r':
+            output += "\\r";
+            break;
+        case '\t':
+            output += "\\t";
+            break;
+        case '\\':
+            output += "\\\\";
+            break;
+        default:
+            output += input[i];
+            break;
+        }
+    }
+    return whiteSpaceReduce(output);
+}
+
+std::string Engine::unescapeJson(const std::string& input)
+{
+    State s = UNESCAPED;
+    std::string output;
+    output.reserve(input.length());
+
+    for (std::string::size_type i = 0; i < input.length(); ++i)
+    {
+        switch(s)
+        {
+        case ESCAPED:
+        {
+            switch(input[i])
+            {
+            case '"':
+                output += '\"';
+                break;
+            case '/':
+                output += '/';
+                break;
+            case 'b':
+                output += '\b';
+                break;
+            case 'f':
+                output += '\f';
+                break;
+            case 'n':
+                output += '\n';
+                break;
+            case 'r':
+                output += '\r';
+                break;
+            case 't':
+                output += '\t';
+                break;
+            case '\\':
+                output += '\\';
+                break;
+            default:
+                output += input[i];
+                break;
+            }
+
+            s = UNESCAPED;
+            break;
+        }
+            case UNESCAPED:
+            {
+                switch(input[i])
+                {
+                    case '\\':
+                        s = ESCAPED;
+                        break;
+                    default:
+                        output += input[i];
+                        break;
+                }
+            }
+        }
+    }
+    return output;
+}
+
+
 bool Engine::ping(const std::string& address)
 {
     Ping p(address);
@@ -867,6 +970,15 @@ bool Engine::isMultilanguage() const noexcept
 void Engine::setPath(const std::string &p)
 {
     currentPath = p;
+}
+
+// Definition of the createEngineObject function
+std::unique_ptr<System::Engine> createEngineObject()
+{
+    // Allocate memory for a Engine object using 'new'
+    Engine* cellEnginePtr = new Engine;
+    // Wrap the raw pointer in a unique_ptr and return it
+    return std::unique_ptr<Engine>(cellEnginePtr);
 }
 
 Application::Application(const ApplicationData& appData)

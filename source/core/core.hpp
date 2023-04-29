@@ -473,6 +473,11 @@ public:
      */
     std::vector<std::string> filteredQueryFields(VectorString& fields);
 
+    /**
+     * @brief The State enum
+     */
+    enum State { ESCAPED, UNESCAPED };
+
     /*!
      * @brief The SepratorType enum
      */
@@ -611,13 +616,31 @@ public:
     std::string getLanguage();
 
     /**
-     * @brief URL encoding is the process of encoding special characters and reserved characters in a URL or web address to make sure that it conforms to the uniform resource identifier (URI) specification.
+     * @brief encodes a string so that it can be safely used as a part of a URL by converting certain characters to their hexadecimal representation.
+     * @details URL encoding is the process of encoding special characters and reserved characters in a URL or web address to make sure that it conforms to the uniform resource identifier (URI) specification.
      * URL encoding is used to replace special characters in a URL with their corresponding escape sequences, which consist of a percent sign followed by two hexadecimal digits.
      * For example, the space character ( ) would be encoded as "%20". This is necessary because some special characters have special meanings in a URL and must be encoded to avoid ambiguity or misinterpretation by web servers or browsers.
+     *
      * @param str as a input data.
      * @return as encoded string.
      */
     std::string urlEncode(const std::string& str);
+
+    /**
+     * @brief escapeJson escapes certain characters in a string so that it can be safely used as a JSON string value.
+     * For example, it will replace double quotes with \".
+     * @param input as string parameter.
+     * @return as string.
+     */
+    std::string escapeJson(const std::string& input);
+
+    /**
+     * @brief unescapeJson does the opposite of escapeJson and will unescape certain characters in a JSON string value.
+     * For example, it will replace \" with a double quote.
+     * @param input as string parameter.
+     * @return as string.
+     */
+    std::string unescapeJson(const std::string& input);
 
     /**
      * @brief ping function will pings address.
@@ -694,6 +717,9 @@ public:
     mutable std::string currentPath{};
 };
 
+//! Function that creates and returns a unique_ptr to Engine.
+std::unique_ptr<System::Engine> createEngineObject();
+
 /*!
  * \brief The ApplicationData class
  */
@@ -709,6 +735,7 @@ struct ApplicationData final
     Version::ReleaseType releaseType{};
     ///ToDo... We need to add user info and extra data...
 };
+
 
 /*!
  * \brief The Application class

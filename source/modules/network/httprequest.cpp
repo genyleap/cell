@@ -28,6 +28,31 @@ CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::Network)
 
+void HttpRequest::setContentType(Headers c){
+
+    switch (c) {
+    case Headers::X_Urlencoded:
+        headerType = ContentTypeHeader::APPLICATION_X_WWW_FROM_URLENCODED;
+        break;
+    case Headers::JSon:
+        headerType = ContentTypeHeader::APPLICATION_JSON;
+        break;
+    case Headers::XHtml:
+        headerType = ContentTypeHeader::APPLICATION_XHTML;
+        break;
+    case Headers::Xml:
+        headerType = ContentTypeHeader::APPLICATION_XML;
+        break;
+    case Headers::Html:
+        headerType = ContentTypeHeader::TEXT_HTML;
+        break;
+    case Headers::MultiPart:
+        headerType = ContentTypeHeader::MULTIPART_FROM_DATA;
+        break;
+    }
+
+}
+
 HttpRequest::HttpRequest(const std::string& url)
 {
     /**
@@ -99,7 +124,6 @@ void HttpRequest::setQuery(const HttpQueryString& params)
         else {
             queryStr += "&";
         }
-
         queryStr += engineSmartPtr->urlEncode(param) + "=" + engineSmartPtr->urlEncode(value);
     }
     if(!requestStruct.url.has_value())
@@ -208,6 +232,8 @@ void HttpRequest::performRequestWithGuard(const FunctionCurl& func)
 
 std::string HttpRequest::performRequest(const std::string& method)
 {
+    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
+
     LockGuard lock(requestStruct.curlHandleMutex);
 
     // Set the method
@@ -215,6 +241,7 @@ std::string HttpRequest::performRequest(const std::string& method)
 
     // Set the URL
     curl_easy_setopt(requestStruct.curlHandlePtr.get(), CURLOPT_URL, requestStruct.url.value().c_str());
+
 
     // Set the headers
     struct curl_slist* headerList = nullptr;
@@ -261,12 +288,45 @@ std::string HttpRequest::performRequest(const std::string& method)
     // Check the response code
     long responseCode = 0;
     curl_easy_getinfo(requestStruct.curlHandlePtr.get(), CURLINFO_RESPONSE_CODE, &responseCode);
-    if (responseCode == 401) {
+
+    switch (responseCode) {
+    case ReturnCode::Ret400:
+        if(DeveloperMode::IsEnable)
+        {
+            Log("Bad request!", LoggerType::Critical);
+        }
+        throw RuntimeError(CodeMessage::Ret400.data());
+        break;
+    case ReturnCode::Ret401:
+        if(DeveloperMode::IsEnable)
+        {
+            Log("Authentication failed!", LoggerType::Critical);
+        }
+        throw RuntimeError(CodeMessage::Ret400.data());
+        break;
+    case ReturnCode::Ret200:
+        if(DeveloperMode::IsEnable)
+        {
+            Log("The request was received, understood, and accepted!", LoggerType::Info);
+        }
+        break;
+    default:
+        break;
+    }
+    if (responseCode == ReturnCode::Ret401)
+    {
         if(DeveloperMode::IsEnable)
         {
             Log("Authentication failed!", LoggerType::Critical);
         }
         throw RuntimeError("Authentication failed");
+    }
+    if (responseCode == ReturnCode::Ret200)
+    {
+        if(DeveloperMode::IsEnable)
+        {
+            Log("Success!", LoggerType::Success);
+        }
     }
 
     // Return the response
@@ -293,16 +353,5 @@ void HttpRequest::performAsyncThread(PromiseStringObject&& promise, const std::s
         promise.set_exception(std::current_exception());
     }
 }
-
-// Definition of the createMyClassObject function
-std::unique_ptr<System::Engine> createEngineObject()
-{
-    // Allocate memory for a MyClass object using 'new'
-    Engine* myClassPtr = new Engine;
-
-    // Wrap the raw pointer in a unique_ptr and return it
-    return std::unique_ptr<Engine>(myClassPtr);
-}
-
 
 CELL_NAMESPACE_END
