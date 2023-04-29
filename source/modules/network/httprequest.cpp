@@ -28,7 +28,6 @@ CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::Network)
 
-
 HttpRequest::HttpRequest(const std::string& url)
 {
     curl_global_init(CURL_GLOBAL_ALL);
@@ -82,9 +81,47 @@ std::string HttpRequest::performGet()
     return performRequest(CELL_GET);
 }
 
+FutureStringObject HttpRequest::performGetAsync()
+{
+    PromiseStringObject promise;
+    FutureStringObject future = promise.get_future();
+
+    // We use a lambda function to perform the HTTP request asynchronously
+    std::thread t([this, promise = std::move(promise)]() mutable {
+        try {
+            std::string result = performRequest(CELL_GET);
+            promise.set_value(std::move(result));
+        } catch (...) {
+            promise.set_exception(std::current_exception());
+        }
+    });
+    // Detach the thread so it runs independently from the main thread
+    t.detach();
+    return future;
+}
+
 std::string HttpRequest::performPost()
 {
     return HttpRequest::performRequest(CELL_POST);
+}
+
+FutureStringObject HttpRequest::performPostAsync()
+{
+    PromiseStringObject promise;
+    FutureStringObject future = promise.get_future();
+
+    // We use a lambda function to perform the HTTP request asynchronously
+    std::thread t([this, promise = std::move(promise)]() mutable {
+        try {
+            std::string result = performRequest(CELL_POST);
+            promise.set_value(std::move(result));
+        } catch (...) {
+            promise.set_exception(std::current_exception());
+        }
+    });
+    // Detach the thread so it runs independently from the main thread
+    t.detach();
+    return future;
 }
 
 std::string HttpRequest::performPut()
@@ -92,9 +129,47 @@ std::string HttpRequest::performPut()
     return HttpRequest::performRequest(CELL_PUT);
 }
 
+FutureStringObject HttpRequest::performPutAsync()
+{
+    PromiseStringObject promise;
+    FutureStringObject future = promise.get_future();
+
+    // We use a lambda function to perform the HTTP request asynchronously
+    std::thread t([this, promise = std::move(promise)]() mutable {
+        try {
+            std::string result = performRequest(CELL_PUT);
+            promise.set_value(std::move(result));
+        } catch (...) {
+            promise.set_exception(std::current_exception());
+        }
+    });
+    // Detach the thread so it runs independently from the main thread
+    t.detach();
+    return future;
+}
+
 std::string HttpRequest::performDelete()
 {
     return HttpRequest::performRequest(CELL_DELETE);
+}
+
+FutureStringObject HttpRequest::performDeleteAsync()
+{
+    PromiseStringObject promise;
+    FutureStringObject future = promise.get_future();
+
+    // We use a lambda function to perform the HTTP request asynchronously
+    std::thread t([this, promise = std::move(promise)]() mutable {
+        try {
+            std::string result = performRequest(CELL_DELETE);
+            promise.set_value(std::move(result));
+        } catch (...) {
+            promise.set_exception(std::current_exception());
+        }
+    });
+    // Detach the thread so it runs independently from the main thread
+    t.detach();
+    return future;
 }
 
 Mutex& HttpRequest::getMutex()

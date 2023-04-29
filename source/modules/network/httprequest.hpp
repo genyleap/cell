@@ -93,10 +93,22 @@ public:
     std::string performGet();
 
     /**
+     * @brief Asynchronously performs a GET request and returns a future object that will hold the response.
+     * @return A future object holding the response string. The future will be valid until the response is received or an error occurs.
+     */
+    Types::FutureStringObject performGetAsync();
+
+    /**
      * @brief Performs an HTTP POST request.
      * @return The response body as a string.
      */
     std::string performPost();
+
+    /**
+     * @brief Asynchronously performs a POST request and returns a future object that will hold the response.
+     * @return A future object holding the response string. The future will be valid until the response is received or an error occurs.
+     */
+    Types::FutureStringObject performPostAsync();
 
     /**
      * @brief Performs an HTTP PUT request.
@@ -105,10 +117,22 @@ public:
     std::string performPut();
 
     /**
+     * @brief Asynchronously performs a Put request and returns a future object that will hold the response.
+     * @return A future object holding the response string. The future will be valid until the response is received or an error occurs.
+     */
+    Types::FutureStringObject performPutAsync();
+
+    /**
      * @brief Performs an HTTP DELETE request.
      * @return The response body as a string.
      */
     std::string performDelete();
+
+    /**
+     * @brief Asynchronously performs a DELETE request and returns a future object that will hold the response.
+     * @return A future object holding the response string. The future will be valid until the response is received or an error occurs.
+     */
+    Types::FutureStringObject performDeleteAsync();
 
     /**
      * @brief Returns the mutex used to synchronize access to libcurl.
