@@ -165,6 +165,18 @@ private:
      * @param func The function to call with the libcurl handle.
      */
     void performRequestWithGuard(const Types::FunctionCurl& func);
+
+private:
+
+    /**
+     * @brief This function takes an rvalue reference to a PromiseStringObject and a string specifying the HTTP request method.
+     * @param promise is a rvalue reference to an object of type Types::PromiseStringObject.
+     * This object is used to store the result of the asynchronous operation and provide it to the caller through a future object.
+     * @param method is a const reference to a string that specifies the HTTP method to use for the request.
+     * It can be one of "GET", "POST", "PUT", or "DELETE". The function will use this method to perform the HTTP request asynchronously.
+     */
+    void performAsyncThread(Types::PromiseStringObject&& promise, const std::string& method);
+
 private:
     RequestStruct requestStruct {}; ///<!The struct to hold libcurl options and data.
 

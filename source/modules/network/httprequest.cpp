@@ -85,17 +85,7 @@ FutureStringObject HttpRequest::performGetAsync()
 {
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
-
-    // We use a lambda function to perform the HTTP request asynchronously
-    std::thread t([this, promise = std::move(promise)]() mutable {
-        try {
-            std::string result = performRequest(CELL_GET);
-            promise.set_value(std::move(result));
-        } catch (...) {
-            promise.set_exception(std::current_exception());
-        }
-    });
-    // Detach the thread so it runs independently from the main thread
+    std::thread t(&HttpRequest::performAsyncThread, this, std::move(promise), CELL_GET);
     t.detach();
     return future;
 }
@@ -109,17 +99,7 @@ FutureStringObject HttpRequest::performPostAsync()
 {
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
-
-    // We use a lambda function to perform the HTTP request asynchronously
-    std::thread t([this, promise = std::move(promise)]() mutable {
-        try {
-            std::string result = performRequest(CELL_POST);
-            promise.set_value(std::move(result));
-        } catch (...) {
-            promise.set_exception(std::current_exception());
-        }
-    });
-    // Detach the thread so it runs independently from the main thread
+    std::thread t(&HttpRequest::performAsyncThread, this, std::move(promise), CELL_POST);
     t.detach();
     return future;
 }
@@ -133,17 +113,7 @@ FutureStringObject HttpRequest::performPutAsync()
 {
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
-
-    // We use a lambda function to perform the HTTP request asynchronously
-    std::thread t([this, promise = std::move(promise)]() mutable {
-        try {
-            std::string result = performRequest(CELL_PUT);
-            promise.set_value(std::move(result));
-        } catch (...) {
-            promise.set_exception(std::current_exception());
-        }
-    });
-    // Detach the thread so it runs independently from the main thread
+    std::thread t(&HttpRequest::performAsyncThread, this, std::move(promise), CELL_PUT);
     t.detach();
     return future;
 }
@@ -157,17 +127,7 @@ FutureStringObject HttpRequest::performDeleteAsync()
 {
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
-
-    // We use a lambda function to perform the HTTP request asynchronously
-    std::thread t([this, promise = std::move(promise)]() mutable {
-        try {
-            std::string result = performRequest(CELL_DELETE);
-            promise.set_value(std::move(result));
-        } catch (...) {
-            promise.set_exception(std::current_exception());
-        }
-    });
-    // Detach the thread so it runs independently from the main thread
+    std::thread t(&HttpRequest::performAsyncThread, this, std::move(promise), CELL_DELETE);
     t.detach();
     return future;
 }
@@ -273,6 +233,27 @@ std::string HttpRequest::performRequest(const std::string& method)
 
     // Return the response
     return requestStruct.response;
+}
+
+void HttpRequest::performAsyncThread(PromiseStringObject&& promise, const std::string& method)
+{
+    // Wrap the promise in a try-catch block to handle any exceptions that may occur during execution.
+    try {
+        // Perform the HTTP request using the method.
+        std::string result = performRequest(method);
+        // The result is moved into the promise object using set_value() function.
+        promise.set_value(std::move(result));
+    } catch (const std::exception& ex) {
+        if(DeveloperMode::IsEnable)
+        {
+            Log(std::string("HttpRequest::performAsyncThread failed: ") + ex.what(), LoggerType::Critical);
+        }
+        // Set the exception on the promise if an exception occurs
+        promise.set_exception(std::make_exception_ptr(std::runtime_error(std::string("HttpRequest::performAsyncThread failed: ") + ex.what())));
+    } catch (...) {
+        // If an exception occurs, the exception object is moved into the promise object using set_exception() function  .
+        promise.set_exception(std::current_exception());
+    }
 }
 
 CELL_NAMESPACE_END
