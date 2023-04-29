@@ -145,15 +145,27 @@ template<typename T> using Vector        = std::vector<T>;
 template<typename T> using Optional      = std::optional<T>;
 template<typename T> using Variant       = std::variant<T>;
 
+#ifdef USE_CURL
+#include <curl/curl.h>
+using CELL_CURL = CURL;
+using CELL_CURLPTR = CURL*;
+using SmartCurlPtr = std::unique_ptr<Types::CURL, decltype(&Types::curl_easy_cleanup)>;
+using FunctionCurl = std::function<void(Types::CURL*)>;
+#endif
 
-using Function          = std::function<void(void)>;
+using Function              = std::function<void(void)>;
+using LockGuard             = std::lock_guard<std::mutex>;
+using FutureStringObject    = std::future<std::string>;
+using PromiseStringObject   = std::promise<std::string>;
 
-using PackagedTask      = std::packaged_task<void(void)>;
-using MultiThreadVector = std::vector<std::thread>;
-using StringStream      = std::basic_stringstream<char>;
-using String            = std::string;
-using IfStreamer        = std::ifstream;
-using StringStream      = std::stringstream;
+using Mutex                 = std::mutex;
+using PackagedTask          = std::packaged_task<void(void)>;
+using MultiThreadVector     = std::vector<std::thread>;
+using StringStream          = std::basic_stringstream<char>;
+using String                = std::string;
+using IfStreamer            = std::ifstream;
+using StringStream          = std::stringstream;
+using RuntimeError          = std::runtime_error;
 
 }
 
