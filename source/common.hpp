@@ -129,6 +129,7 @@ struct STATICS final {
 #define __cell_null_str ""
 #define __cell_space " "
 #define __cell_zero 0
+#define __cell_one 1
 #define __cell_newline "\n"
 #define __cell_compiler_counter __COUNTER__
 #define __cell_compiler_line __LINE__

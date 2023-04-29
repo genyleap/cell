@@ -213,6 +213,7 @@ enum ReturnCode {
     Ret405    = 405,
     Ret406    = 406,
     Ret407    = 407,
+    Ret408    = 408,
     Ret409    = 409,
     Ret411    = 411,
     Ret412    = 412,
@@ -260,6 +261,9 @@ struct RequestStruct final
     long                    timeout         {30L};  ///<! Default timeout of 30 seconds
 
     Types::Mutex            curlHandleMutex; ///<! mutex to guard curlHandlePtr
+
+
+    std::chrono::time_point<std::chrono::high_resolution_clock> lastRequestTime;
 };
 
 /**
@@ -268,6 +272,8 @@ struct RequestStruct final
  */
 class HttpRequest {
 public:
+
+    HttpRequest();
     /**
      * @brief Constructs an HttpRequest object with the given URL.
      * @param url The URL of the HTTP request.
@@ -277,7 +283,7 @@ public:
     /**
      * Destructor for the HttpRequest object.
      */
-    virtual ~HttpRequest();
+    __cell_virtual ~HttpRequest();
 
     /**
      * @brief setContentType will sets string of standard headers.
@@ -312,9 +318,29 @@ public:
 
     /**
      * @brief Sets the timeout for the HTTP request.
+     * @details Is a function that sets the timeout value for an HTTP request. It specifies the maximum amount of time that the client should wait for a response from the server before timing out.
      * @param timeout The timeout in seconds.
      */
-    void setTimeout(long timeout);
+    __cell_virtual void setTimeout(long timeout) final;
+
+    /**
+     * Sets the rate limit threshold for rate limiting.
+     *
+     * @param limit The maximum number of requests allowed within the time duration.
+     * @param requestsPerSecond is second.
+     */
+    __cell_virtual void setRateLimit(const unsigned int requestsPerSecond) final;
+
+    /**
+     * @brief rateLimit
+     * @return
+     */
+    unsigned int rateLimit();
+    /**
+     * @brief isEnableLimit checks rate limitation status.
+     * @return The response status as a boolean.
+     */
+    bool isEnableRateLimit();
 
     /**
      * @brief Performs an HTTP GET request.
@@ -411,8 +437,10 @@ private:
 
     inline static std::string_view headerType = {""};
 
-private:
-    RequestStruct requestStruct {}; ///<!The struct to hold libcurl options and data.
+    static unsigned int m_rateLimit;
+
+protected:
+    RequestStruct requestStruct; ///<!The struct to hold libcurl options and data.
 };
 
 

@@ -960,6 +960,21 @@ bool Engine::isFilePath(const std::filesystem::path& input)
     return (std::filesystem::is_regular_file(path) || std::filesystem::is_directory(path));
 }
 
+// Function to calculate the time since the last request and sleep for the appropriate amount of time.
+void Engine::delayIfNeeded(std::chrono::time_point<std::chrono::high_resolution_clock>& lastRequestTime, unsigned int rateLimit)
+{
+    // Calculate the time since the last request in seconds.
+    unsigned int timeSinceLastRequest = std::chrono::duration_cast<std::chrono::duration<unsigned int>>
+        (std::chrono::high_resolution_clock::now() - lastRequestTime).count();
+    // If the time since the last request is less than the rate limit, sleep for the appropriate amount of time.
+    if (timeSinceLastRequest < rateLimit) {
+        std::this_thread::sleep_for(std::chrono::duration<unsigned int>(rateLimit - timeSinceLastRequest));
+    }
+
+    // Update the last request time to the current time.
+    lastRequestTime = std::chrono::high_resolution_clock::now();
+}
+
 bool Engine::isMultilanguage() const noexcept
 {
     bool ret = {false};

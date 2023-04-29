@@ -53,6 +53,10 @@ void HttpRequest::setContentType(Headers c){
 
 }
 
+HttpRequest::HttpRequest()
+{
+}
+
 HttpRequest::HttpRequest(const std::string& url)
 {
     /**
@@ -139,11 +143,21 @@ void HttpRequest::setTimeout(long timeout)
 
 std::string HttpRequest::performGet()
 {
+    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
+
+    // Enforce a rate limit on the HTTP requests being made.
+    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+
     return performRequest(CELL_GET);
 }
 
 FutureStringObject HttpRequest::performGetAsync()
 {
+    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
+
+    // Enforce a rate limit on the HTTP requests being made.
+    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
     std::thread t(&HttpRequest::performAsyncThread, this, std::move(promise), CELL_GET);
@@ -153,11 +167,21 @@ FutureStringObject HttpRequest::performGetAsync()
 
 std::string HttpRequest::performPost()
 {
+    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
+
+    // Enforce a rate limit on the HTTP requests being made.
+    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+
     return HttpRequest::performRequest(CELL_POST);
 }
 
 FutureStringObject HttpRequest::performPostAsync()
 {
+    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
+
+    // Enforce a rate limit on the HTTP requests being made.
+    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
     std::thread t(&HttpRequest::performAsyncThread, this, std::move(promise), CELL_POST);
@@ -167,11 +191,21 @@ FutureStringObject HttpRequest::performPostAsync()
 
 std::string HttpRequest::performPut()
 {
+    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
+
+    // Enforce a rate limit on the HTTP requests being made.
+    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+
     return HttpRequest::performRequest(CELL_PUT);
 }
 
 FutureStringObject HttpRequest::performPutAsync()
 {
+    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
+
+    // Enforce a rate limit on the HTTP requests being made.
+    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
     std::thread t(&HttpRequest::performAsyncThread, this, std::move(promise), CELL_PUT);
@@ -186,6 +220,11 @@ std::string HttpRequest::performDelete()
 
 FutureStringObject HttpRequest::performDeleteAsync()
 {
+    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
+
+    // Enforce a rate limit on the HTTP requests being made.
+    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
     std::thread t(&HttpRequest::performAsyncThread, this, std::move(promise), CELL_DELETE);
@@ -286,7 +325,7 @@ std::string HttpRequest::performRequest(const std::string& method)
     }
 
     // Check the response code
-    long responseCode = 0;
+    long responseCode = __cell_zero;
     curl_easy_getinfo(requestStruct.curlHandlePtr.get(), CURLINFO_RESPONSE_CODE, &responseCode);
 
     switch (responseCode) {
@@ -301,6 +340,13 @@ std::string HttpRequest::performRequest(const std::string& method)
         if(DeveloperMode::IsEnable)
         {
             Log("Authentication failed!", LoggerType::Critical);
+        }
+        throw RuntimeError(CodeMessage::Ret400.data());
+        break;
+    case ReturnCode::Ret408:
+        if(DeveloperMode::IsEnable)
+        {
+            Log("Timeout failed!", LoggerType::Critical);
         }
         throw RuntimeError(CodeMessage::Ret400.data());
         break;
@@ -341,17 +387,43 @@ void HttpRequest::performAsyncThread(PromiseStringObject&& promise, const std::s
         std::string result = performRequest(method);
         // The result is moved into the promise object using set_value() function.
         promise.set_value(std::move(result));
-    } catch (const std::exception& ex) {
+    } catch (const std::exception& e) {
         if(DeveloperMode::IsEnable)
         {
-            Log(std::string("HttpRequest::performAsyncThread failed: ") + ex.what(), LoggerType::Critical);
+            Log(std::string("HttpRequest::performAsyncThread failed: ") + e.what(), LoggerType::Critical);
         }
         // Set the exception on the promise if an exception occurs
-        promise.set_exception(std::make_exception_ptr(std::runtime_error(std::string("HttpRequest::performAsyncThread failed: ") + ex.what())));
+        promise.set_exception(std::make_exception_ptr(std::runtime_error(std::string("HttpRequest::performAsyncThread failed: ") + e.what())));
     } catch (...) {
         // If an exception occurs, the exception object is moved into the promise object using set_exception() function  .
         promise.set_exception(std::current_exception());
     }
 }
+
+/**
+ * @details This code helps to ensure that requests are not made too frequently,
+ * which can help avoid hitting rate limits or overwhelming a server with too many requests.
+ */
+void HttpRequest::setRateLimit(const unsigned int requestsPerSecond)
+{
+    HttpRequest::m_rateLimit  = requestsPerSecond;
+}
+
+unsigned int HttpRequest::m_rateLimit = __cell_zero;
+
+unsigned int HttpRequest::rateLimit()
+{
+    return m_rateLimit;
+}
+
+bool HttpRequest::isEnableRateLimit()
+{
+    if(m_rateLimit > __cell_zero)
+    {
+        return true;
+    }
+    return true;
+}
+
 
 CELL_NAMESPACE_END

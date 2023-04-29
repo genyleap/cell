@@ -169,6 +169,8 @@ using IfStreamer            = std::ifstream;
 using StringStream          = std::stringstream;
 using RuntimeError          = std::runtime_error;
 
+#define DO_NOTHING  void();
+
 }
 
 #endif // PROJECT_TYPES_HPP

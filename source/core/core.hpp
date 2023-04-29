@@ -703,6 +703,15 @@ public:
      */
     __cell_no_discard bool isFilePath(const std::filesystem::path& input);
 
+    // Function to calculate the time since the last request and sleep for the appropriate amount of time.
+
+    /**
+     * @brief A function to calculate the time since the last request and sleep for the appropriate amount of time based on the rate limit.
+     * @param lastRequestTime as last time for check [Initialize the last request time to the current time].
+     * @param rateLimit for delay limitation.
+     */
+    void delayIfNeeded(std::chrono::time_point<std::chrono::high_resolution_clock>& lastRequestTime, unsigned int rateLimit);
+
     /*!
      * \brief Lanuage translator engine.
      */
