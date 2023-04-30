@@ -123,6 +123,13 @@ std::string stringFormat(const std::string& format, Args ... args)
  */
 int command(const std::string& cm);
 
+/**
+ * @brief This function executes a command specified as a string, captures the output of the command and returns it as a string.
+ * @param cmd as a command.
+ * @return as string of result.
+ */
+__cell_no_discard std::string execute(const char* cmd);
+
 /*!
  * @brief Maybe we need to convert stringstream to standard string.
  * @param data as stringstream content.
@@ -515,6 +522,13 @@ public:
         LeftCurlyBracket,
         RightCurlyBracket
     };
+
+    /**
+     * @brief convertMemorySize converts values between different units of measurement.
+     * @param bytes
+     * @return
+     */
+    Types::OptionalString convertMemorySize(Types::ullong bytes);
 
     /*!
      * @brief The SepratorStyle enum

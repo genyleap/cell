@@ -25,7 +25,7 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::Hardware)
 /**
  * @brief The MemoryInfo class
  */
-struct MemoryInfo
+struct MemoryInfo final
 {
     Types::llong totalMemory    {}; ///<! Total physical memory size.
     Types::llong usedMemory     {}; ///<! Total physical used memory Size.
@@ -35,10 +35,17 @@ struct MemoryInfo
 /**
  * @brief The CpuInfo class
  */
-struct CpuInfo
+struct CpuInfo final
 {
     std::string brandString     {}; ///<! Processor brand as string [Intel, AMD, Apple and etc].
     Types::uint count           {}; ///<! Total physical processor core.
+};
+
+struct ProductInfo final
+{
+    Types::OptionalString productName;
+    Types::OptionalString productVersion;
+    Types::OptionalString productBuildVersion;
 };
 
 /**
@@ -55,6 +62,7 @@ struct InformationData final
 
     CpuInfo     processorInfo;
     MemoryInfo  memoryInfo;
+    ProductInfo productInfo;
 };
 
 class __cell_export SystemInformation
@@ -104,6 +112,12 @@ public:
      * @return as MemoryInfo object.
      */
     MemoryInfo            getMemoryInfo();
+
+    /**
+     * @brief getProductInfo function will gets product data such as name, version and build number.
+     * @return as ProductInfo object.
+     */
+    ProductInfo getProductInfo();
 
 private:
     InformationData informationData {};

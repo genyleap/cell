@@ -10,7 +10,7 @@
 
 #if defined(PLATFORM_MAC)
 #include <sys/socket.h>
-#include <sys/sysctl.h>
+//#include <sys/sysctl.h>
 #include <net/if.h>
 #include <net/if_dl.h>
 #include <IOKit/IOKitLib.h>

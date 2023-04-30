@@ -365,6 +365,24 @@ int command(const std::string& cmd)
 #endif
 }
 
+__cell_no_discard std::string execute(const char* cmd)
+{
+    constexpr size_t buffer_size = 4096;
+    std::array<char, buffer_size> buffer;
+    std::string result;
+    std::FILE* pipe = popen(cmd, "r");
+    if (!pipe) {
+        throw std::runtime_error("popen() failed!");
+    }
+    size_t n;
+    while ((n = std::fread(buffer.data(), 1, buffer_size, pipe)) > 0)
+    {
+        result.append(buffer.data(), n);
+    }
+    pclose(pipe);
+    return result;
+}
+
 std::string convertStream(std::stringstream const& data) __cell_noexcept
 {
   //ToDo...
@@ -471,7 +489,22 @@ std::vector<std::string> Engine::filteredQueryFields(VectorString& fields)
   //                s+="`";
   //            }
   //        }
-  //    return fields;
+    //    return fields;
+}
+
+Types::OptionalString Engine::convertMemorySize(Types::ullong bytes)
+{
+    const char* units[] = {"B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"};
+    const int numUnits = sizeof(units) / sizeof(units[0]);
+    int index = 0;
+    double value = static_cast<double>(bytes);
+    while (value >= 1024.0 && index < numUnits - 1) {
+        value /= 1024.0;
+        index++;
+    }
+    char buffer[32];
+    snprintf(buffer, sizeof(buffer), "%.2f %s", value, units[index]);
+    return buffer;
 }
 
 std::string Engine::tablePrefix()

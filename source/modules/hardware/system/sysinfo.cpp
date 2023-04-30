@@ -10,8 +10,8 @@
 #include <mach/mach.h>
 #else
 #include <unistd.h>
-#include <sys/sysctl.h>
 #include <sys/sysinfo.h>
+#include <sys/utsname.h>
 #endif
 
 #ifdef __has_include
@@ -57,6 +57,120 @@ OptionalString SystemInformation::getOsName()
 {
 
 }
+
+//!Dedicated for Win32 WMI System.
+#ifdef PLATFORM_WINFOWS
+std::string getFromWmi(const std::string_view query, const std::string_view key)
+{
+    std::string resutl;
+
+    HRESULT hr = CoInitializeEx(0, COINIT_MULTITHREADED);
+    if (FAILED(hr)) {
+        return resutl;
+    }
+
+    hr = CoInitializeSecurity(
+        nullptr,
+        -1,
+        nullptr,
+        nullptr,
+        RPC_C_AUTHN_LEVEL_DEFAULT,
+        RPC_C_IMP_LEVEL_IMPERSONATE,
+        nullptr,
+        EOAC_NONE,
+        nullptr);
+    if (FAILED(hr)) {
+        CoUninitialize();
+        return resutl;
+    }
+
+    IWbemLocator* pLoc = nullptr;
+    hr = CoCreateInstance(
+        CLSID_WbemLocator,
+        nullptr,
+        CLSCTX_INPROC_SERVER,
+        IID_IWbemLocator,
+        reinterpret_cast<LPVOID*>(&pLoc));
+    if (FAILED(hr)) {
+        CoUninitialize();
+        return resutl;
+    }
+
+    IWbemServices* pSvc = nullptr;
+    hr = pLoc->ConnectServer(
+        _bstr_t(L"ROOT\\CIMV2"),
+        nullptr,
+        nullptr,
+        0,
+        0,
+        0,
+        0,
+        &pSvc);
+    if (FAILED(hr)) {
+        pLoc->Release();
+        CoUninitialize();
+        return resutl;
+    }
+
+    hr = CoSetProxyBlanket(
+        pSvc,
+        RPC_C_AUTHN_WINNT,
+        RPC_C_AUTHZ_NONE,
+        nullptr,
+        RPC_C_AUTHN_LEVEL_CALL,
+        RPC_C_IMP_LEVEL_IMPERSONATE,
+        nullptr,
+        EOAC_NONE);
+    if (FAILED(hr)) {
+        pSvc->Release();
+        pLoc->Release();
+        CoUninitialize();
+        return resutl;
+    }
+
+    IEnumWbemClassObject* pEnumerator = nullptr;
+    bstr_t bstr(query.data());
+    hr = pSvc->ExecQuery(
+        bstr_t("WQL"),
+        bstr_t("SELECT * FROM " + bstr),
+        WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
+        nullptr,
+        &pEnumerator);
+    if (FAILED(hr)) {
+        pSvc->Release();
+        pLoc->Release();
+        CoUninitialize();
+        return resutl;
+    }
+
+    IWbemClassObject* pclsObj = nullptr;
+    ULONG uReturn = 0;
+    hr = pEnumerator->Next(WBEM_INFINITE, 1, &pclsObj, &uReturn);
+    if (FAILED(hr)) {
+        pEnumerator->Release();
+        pSvc->Release();
+        pLoc->Release();
+        CoUninitialize();
+        return resutl;
+    }
+
+    VARIANT vtProp;
+    bstr_t kstr(key.data());
+    hr = pclsObj->Get(kstr, 0, &vtProp, 0, 0);
+    if (SUCCEEDED(hr)) {
+        resutl = std::string(_bstr_t(vtProp));
+        VariantClear(&vtProp);
+    }
+
+    pclsObj->Release();
+    pEnumerator->Release();
+    pSvc->Release();
+    pLoc->Release();
+    CoUninitialize();
+
+    return resutl;
+}
+#endif
 
 OptionalString SystemInformation::getHostName()
 {
@@ -125,7 +239,7 @@ OptionalString SystemInformation::getKernelName()
         (DeveloperMode::IsEnable) ? Log("Failed to get kernel name", LoggerType::Critical) : DO_NOTHING;
         informationData.kernelName = "Unknown";
     }
-#else
+#elif defined(PLATFORM_MAC)
     int name[] = {CTL_KERN, KERN_OSTYPE};
     char kernel_name[128];
     size_t length = sizeof(kernel_name);
@@ -135,6 +249,14 @@ OptionalString SystemInformation::getKernelName()
         (DeveloperMode::IsEnable) ? Log("Failed to get kernel name", LoggerType::Critical) : DO_NOTHING;
         informationData.kernelName = "Unknown";
     }
+#else
+    std::string kernel_name;
+    struct utsname uts;
+    if(uname(&uts) == -1) {
+        return 1;
+    }
+    kernel_name = uts.sysname;
+    informationData.kernelName = kernel_name;
 #endif
     return informationData.kernelName;
 }
@@ -150,7 +272,7 @@ OptionalString SystemInformation::getKernelVersion()
         (DeveloperMode::IsEnable) ? Log("Failed to get kernel name", LoggerType::Critical) : DO_NOTHING;
         informationData.kernelName = "Unknown";
     }
-#else
+#elif defined(PLATFORM_MAC)
     int name[] = {CTL_KERN, KERN_OSRELEASE};
     char version[128];
     size_t length = sizeof(version);
@@ -160,6 +282,16 @@ OptionalString SystemInformation::getKernelVersion()
         (DeveloperMode::IsEnable) ? Log("Failed to get kernel version", LoggerType::Critical) : DO_NOTHING;
         informationData.kernelVersion = "Unknown";
     }
+#else
+    std::string kernel_ver;
+    std::ifstream infile("/proc/version");
+    if (infile.is_open()) {
+        getline(infile, kernel_ver, ' ');
+        getline(infile, kernel_ver, ' ');
+        getline(infile, kernel_ver, ' ');
+        infile.close();
+    }
+    informationData.kernelVersion = kernel_ver;
 #endif
     return informationData.kernelVersion;
 }
@@ -211,18 +343,12 @@ CpuInfo SystemInformation::getCpuInfo()
 MemoryInfo SystemInformation::getMemoryInfo()
 {
 #ifdef PLATFORM_WINDOWS
-    MEMORYSTATUSEX statex;
-    statex.dwLength = sizeof(statex);
-    GlobalMemoryStatusEx(&statex);
-    informationData.memoryInfo.totalMemory = statex.ullTotalPhys;
-    informationData.memoryInfo.usedMemory = statex.ullTotalPhys;
-    memStatus.dwLength = sizeof(MEMORYSTATUSEX);
-    if (!GlobalMemoryStatusEx(&memStatus)) {
-        std::cerr << "Failed to get memory status\n";
-        (DeveloperMode::IsEnable) ? Log("Failed to get total memory", LoggerType::Critical) : DO_NOTHING;
-        informationData.freeMemory = 0;
-    }
-    informationData.freeMemory = memStatus.ullAvailPhys;
+    MEMORYSTATUSEX memInfo;
+    memInfo.dwLength = sizeof(MEMORYSTATUSEX);
+    GlobalMemoryStatusEx(&memInfo);
+    informationData.memoryInfo.freeMemory  = memInfo.ullAvailPhys;
+    informationData.memoryInfo.usedMemory  = memInfo.ullTotalPhys - memInfo.ullAvailPhys;
+    informationData.memoryInfo.totalMemory = memInfo.ullTotalPhys;
 #elif defined(PLATFORM_MAC)
     long pages = sysconf(_SC_PHYS_PAGES);
     long page_size = sysconf(_SC_PAGE_SIZE);
@@ -267,6 +393,91 @@ MemoryInfo SystemInformation::getMemoryInfo()
     informationData.memoryInfo.freeMemory = info.freeram;
 #endif
     return informationData.memoryInfo;
+}
+
+ProductInfo SystemInformation::getProductInfo()
+{
+#ifdef PLATFORM_WINDOWS
+    // Name
+    informationData.productInfo.productName = getFromWmi("Win32_OperatingSystem", "Caption");
+    // Version
+    informationData.productInfo.productVersion = getFromWmi("Win32_OperatingSystem", "Version");
+    // Build
+    informationData.productInfo.productBuildVersion = getFromWmi("Win32_OperatingSystem", "BuildNumber");
+#elif defined(PLATFORM_MAC)
+    size_t len = 0;
+    // Name
+    const char* cmd = "sw_vers -productName";
+    std::string osName = execute(cmd);
+    osName.erase(std::remove(osName.begin(), osName.end(), '\n'), osName.end());
+    informationData.productInfo.productName = osName;
+    // Version
+    const char* name = "kern.osproductversion";
+    sysctlbyname(name, NULL, &len, NULL, 0);
+    char* version = new char[len];
+    if (sysctlbyname(name, version, &len, NULL, 0) == 0) {
+        version[len - 1] = '\0'; // explicitly add a null character
+        informationData.productInfo.productVersion = version;
+    }
+    delete[] version;
+    // Build
+    std::string buildVersion;
+    sysctlbyname("kern.osversion", NULL, &len, NULL, 0);
+    if (len > 0) {
+        char* buf = new char[len];
+        if (sysctlbyname("kern.osversion", buf, &len, NULL, 0) == 0) {
+            buildVersion = std::string(buf, len-1);
+            informationData.productInfo.productBuildVersion = buildVersion;
+        }
+        delete[] buf;
+    }
+#else
+    // Name
+    std::string line;
+    std::string name;
+    std::ifstream file("/etc/os-release");
+    if (file.is_open())
+    {
+        while (std::getline(file, line))
+        {
+            if (line.find("PRETTY_NAME") != std::string::npos)
+            {
+                auto start = line.find_first_of("\"") + 1;
+                auto end = line.find_last_of("\"");
+                name = line.substr(start, end - start);
+                break;
+            }
+        }
+        file.close();
+    }
+    informationData.productInfo.productName = name;
+    // Version
+    std::string command_ver = "lsb_release -ds";
+    std::array<char, 128> buffer_ver;
+    std::string version;
+    std::shared_ptr<FILE> pipeVer(popen(command_ver.c_str(), "r"), pclose);
+    if (!pipeVer) {
+        throw std::runtime_error("popen() failed!");
+    }
+    while (fgets(buffer_ver.data(), buffer_ver.size(), pipeVer.get()) != nullptr) {
+        version += buffer_ver.data();
+    }
+    informationData.productInfo.productVersion = version;
+    // Build
+    std::string command_build = "uname -r";
+    std::array<char, 128> buffer_build;
+    std::string build;
+    std::shared_ptr<FILE> pipeBuild(popen(command_build.c_str(), "r"), pclose);
+    if (!pipeBuild) {
+        throw std::runtime_error("popen() failed!");
+    }
+    while (fgets(buffer_build.data(), buffer_build.size(), pipeBuild.get()) != nullptr) {
+        build += buffer_build.data();
+    }
+    informationData.productInfo.productBuildVersion = build;
+
+#endif
+    return informationData.productInfo;
 }
 
 CELL_NAMESPACE_END
