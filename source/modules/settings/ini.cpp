@@ -120,12 +120,12 @@ bool IniSetting::get(const std::string& section, const std::string& key, std::st
     return false;
 }
 
-void IniSetting::set(const std::string& section, const std::string& key, const std::string& value)
+void IniSetting::setValue(const std::string& section, const std::string& key, const std::string& value)
 {
     iniStructure.data[section][key] = value;
 }
 
-void IniSetting::writeComment(const std::string& section, const std::string& comment)
+void IniSetting::addComment(const std::string& section, const std::string& comment)
 {
     if (iniStructure.comments.find(section) == iniStructure.comments.end()) {
         iniStructure.comments[section] = {};

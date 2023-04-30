@@ -70,7 +70,7 @@ public:
      * @param key The name of the key.
      * @param value The value to set.
      */
-    void set(const std::string& section, const std::string& key, const std::string& value);
+    void setValue(const std::string& section, const std::string& key, const std::string& value);
 
     /**
      * @brief Adds a comment to the given section.
@@ -78,7 +78,7 @@ public:
      * @param section The name of the section to add the comment to.
      * @param comment The comment to add.
      */
-    void writeComment(const std::string& section, const std::string& comment);
+    void addComment(const std::string& section, const std::string& comment);
 
 private:
     IniStructure iniStructure {};
