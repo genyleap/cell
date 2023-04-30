@@ -64,7 +64,7 @@ std::string FileManager::read(const FilePath& filePath)
     return fileContents;
 }
 
-std::string FileManager::readRawData(const FilePath& filePath)
+std::ifstream FileManager::readRawData(const FilePath& filePath)
 {
     // Open the file and read its contents as raw binary data
     std::ifstream inputFile(filePath, std::ios::binary);
@@ -76,11 +76,9 @@ std::string FileManager::readRawData(const FilePath& filePath)
         }
         throw std::runtime_error("Failed to open file for reading raw data");
     }
-    std::string rawData((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
     setState(true, false);
     inputFile.close();
-    m_data = rawData;
-    return rawData;
+    return inputFile;
 }
 
 std::string FileManager::readData() const
@@ -103,6 +101,32 @@ void FileManager::write(const FilePath& filePath, const std::string& data)
     outputFile << data;
     m_data = data;
     outputFile.close();
+}
+
+std::ofstream FileManager::stream(const FilePath& filename)
+{
+    std::ofstream file(filename);
+    if (!file) {
+        if(DeveloperMode::IsEnable)
+        {
+            Log("Failed to open file for write!", LoggerType::Critical);
+        }
+        throw std::runtime_error("Failed to open file");
+    }
+    return file;
+}
+
+std::ifstream FileManager::get(const FilePath& filename)
+{
+    std::ifstream file(filename);
+    if (!file) {
+        if(DeveloperMode::IsEnable)
+        {
+            Log("Failed to open file for read!", LoggerType::Critical);
+        }
+        throw std::runtime_error("Failed to open file");
+    }
+    return file;
 }
 
 void FileManager::edit(const FilePath& filePath, const std::string& oldStr, const std::string& newStr)

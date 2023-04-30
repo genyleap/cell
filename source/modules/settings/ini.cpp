@@ -15,6 +15,14 @@
 #endif
 
 #ifdef __has_include
+# if __has_include("core/filesystem.hpp")
+#   include "core/filesystem.hpp"
+#else
+#   error "Cell's "core/filesystem.hpp" was not found!"
+# endif
+#endif
+
+#ifdef __has_include
 # if __has_include("core/logger.hpp")
 #   include "core/logger.hpp"
 #else
@@ -22,15 +30,17 @@
 # endif
 #endif
 
-CELL_USING_NAMESPACE Cell::System;
-CELL_USING_NAMESPACE Cell::eLogger;
 CELL_USING_NAMESPACE Cell::Types;
+CELL_USING_NAMESPACE Cell::System;
+CELL_USING_NAMESPACE Cell::FileSystem;
+CELL_USING_NAMESPACE Cell::eLogger;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
 
 bool IniFileManager::read(const std::string& filename)
 {
-    std::ifstream file(filename);
+    auto fileIO = FileManager();
+    auto file = fileIO.get(filename);
     if (!file.is_open()) {
         (DeveloperMode::IsEnable) ? Log("Error opening file " + filename , LoggerType::Critical) : DO_NOTHING;
         return false;
@@ -65,11 +75,11 @@ bool IniFileManager::read(const std::string& filename)
 
 bool IniFileManager::write(const std::string& filename)
 {
-    std::ofstream file(filename);
+    auto fileIO = FileManager();
+    auto file = fileIO.stream(filename);
     if (!file) {
         return false;
     }
-
     for (auto& section : iniStructure.data) {
         if (!iniStructure.comments[section.first].empty()) {
             for (auto& comment : iniStructure.comments[section.first]) {
@@ -77,7 +87,6 @@ bool IniFileManager::write(const std::string& filename)
             }
         }
         file << "[" << section.first << "]" << std::endl;
-
         for (auto& key : section.second) {
             if (!iniStructure.comments[section.first + "." + key.first].empty()) {
                 for (auto& comment : iniStructure.comments[section.first + "." + key.first]) {
@@ -86,10 +95,9 @@ bool IniFileManager::write(const std::string& filename)
             }
             file << key.first << "=" << key.second << std::endl;
         }
-
         file << std::endl;
     }
-
+    file.close();
     return true;
 }
 

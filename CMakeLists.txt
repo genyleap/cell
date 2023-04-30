@@ -6,7 +6,7 @@
 #   Organization  :                 The Genyleap
 # ----------------------------------------------------------------------------------------
 
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.18)
 cmake_policy(SET CMP0048 NEW)
 
 # Add include path for cmake modules
@@ -156,6 +156,9 @@ file(
     GLOB HEADERS
     source/${SUFFIX_HPPHEADER}
     source/core/${SUFFIX_HPPHEADER}
+    source/modules/network/${SUFFIX_HPPHEADER}
+    source/modules/hardware/system/${SUFFIX_HPPHEADER}
+    source/modules/settings/${SUFFIX_HPPHEADER}
     source/translator/${SUFFIX_HPPHEADER}
     source/abstracts/${SUFFIX_HPPHEADER}
     source/abstracts/apis/${SUFFIX_HPPHEADER}
@@ -166,6 +169,9 @@ file(
     GLOB SOURCES
     source/${SUFFIX_SOURCE}
     source/core/${SUFFIX_SOURCE}
+    source/modules/network/${SUFFIX_SOURCE}
+    source/modules/hardware/system/${SUFFIX_SOURCE}
+    source/modules/settings/${SUFFIX_SOURCE}
     source/translator/${SUFFIX_SOURCE}
     source/abstracts/${SUFFIX_SOURCE}
     source/abstracts/apis/${SUFFIX_SOURCE}

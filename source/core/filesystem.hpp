@@ -100,7 +100,7 @@ public:
      * @return The raw binary data of the file as a string.
      */
     __cell_no_discard_message("This function has a return value as data raw string!")
-        std::string readRawData(const FilePath& filePath);
+        std::ifstream readRawData(const FilePath& filePath);
 
     /**
      * @brief Reads the contents of the file at the specified path.
@@ -115,6 +115,14 @@ public:
      * @param data The data to write to the file.
      */
     void write(const FilePath& filePath, const std::string& data);
+
+    /**
+     * @brief Streams the specified data to the file at the specified path.
+     * @param filePath The path to the file.
+     */
+    std::ofstream stream(const FilePath& filename);
+
+    std::ifstream get(const FilePath& filename);
 
     /**
      * @brief Replaces all occurrences of oldStr with newStr in the file at the specified path.
