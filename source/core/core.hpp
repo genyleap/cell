@@ -67,7 +67,7 @@ struct DeveloperMode {
 template <typename T>
 /*!
  * @brief IsSet — Determine if a variable is declared and is different than null
- * @returns true if var exists and has any value other than null. false otherwise.
+ * @return true if var exists and has any value other than null. false otherwise.
  */
 __cell_no_discard_message("Checks if the variable has no value.")
     static auto IsSet(T t) __cell_noexcept_expr(true)
@@ -119,7 +119,7 @@ std::string stringFormat(const std::string& format, Args ... args)
 /*!
  * @brief Invokes the command processor to execute a command.
  * @param cmd holds the commands for function.
- * @returns data from terminal.
+ * @return data from terminal.
  */
 int command(const std::string& cm);
 
@@ -133,7 +133,7 @@ __cell_no_discard std::string execute(const char* cmd);
 /*!
  * @brief Maybe we need to convert stringstream to standard string.
  * @param data as stringstream content.
- * @returns as std::string output.
+ * @return as std::string output.
  */
 __cell_no_discard std::string convertStream(std::stringstream const& data) __cell_noexcept;
 
@@ -146,6 +146,98 @@ __cell_no_discard std::string_view regenUrl(T1 const& url, T2 const len) __cell_
     if(!url.empty)
         return url.substr(len);
 }
+
+/**
+ * @brief This is an enumeration (enum) that defines different types of text encoding.
+ * Each element of the enum represents a specific encoding type, and can be used to identify or select the encoding when working with text data.
+ * The enum contains a range of common text encodings, including UTF-8, UTF-16LE, UTF-16BE, UTF-32LE, UTF-32BE, various ISO-8859 encodings, Windows code pages, Chinese and Japanese encodings, and others.
+ * Using an enum to represent text encodings can make code more readable and maintainable, as it provides a clear and concise way to refer to different encodings, and can help prevent errors due to typos or incorrect string literals.
+ */
+enum class Encoding {
+    UTF8,
+    UTF16LE,
+    UTF16BE,
+    UTF32LE,
+    UTF32BE,
+    ISO8859_1,
+    ISO8859_2,
+    ISO8859_3,
+    ISO8859_4,
+    ISO8859_5,
+    ISO8859_6,
+    ISO8859_7,
+    ISO8859_8,
+    ISO8859_9,
+    ISO8859_10,
+    WINDOWS1250,
+    WINDOWS1251,
+    WINDOWS1252,
+    WINDOWS1253,
+    WINDOWS1254,
+    WINDOWS1255,
+    WINDOWS1256,
+    WINDOWS1257,
+    WINDOWS1258,
+    GB2312,
+    GBK,
+    GB18030,
+    BIG5,
+    EUCJP,
+    SHIFTJIS,
+    JOHAB,
+    EUCKR,
+    KOI8R,
+    KOI8U,
+    MACCYRILLIC,
+    MACROMAN,
+    UCS2,
+    UNKNOWN
+};
+
+using EncodingList = std::map<Encoding, std::string>;
+
+const EncodingList encodingList {
+    { Encoding::UTF8, "UTF-8" },
+    { Encoding::UTF16LE, "UTF-16LE" },
+    { Encoding::UTF16BE, "UTF-16BE" },
+    { Encoding::UTF32LE, "UTF-32LE" },
+    { Encoding::UTF32BE, "UTF-32BE" },
+    { Encoding::ISO8859_1, "ISO-8859-1" },
+    { Encoding::ISO8859_2, "ISO-8859-2" },
+    { Encoding::ISO8859_3, "ISO-8859-3" },
+    { Encoding::ISO8859_4, "ISO-8859-4" },
+    { Encoding::ISO8859_5, "ISO-8859-5" },
+    { Encoding::ISO8859_6, "ISO-8859-6" },
+    { Encoding::ISO8859_7, "ISO-8859-7" },
+    { Encoding::ISO8859_8, "ISO-8859-8" },
+    { Encoding::ISO8859_9, "ISO-8859-9" },
+    { Encoding::ISO8859_10, "ISO-8859-10" },
+    { Encoding::WINDOWS1250, "Windows-1250" },
+    { Encoding::WINDOWS1251, "Windows-1251" },
+    { Encoding::WINDOWS1252, "Windows-1252" },
+    { Encoding::WINDOWS1253, "Windows-1253" },
+    { Encoding::WINDOWS1254, "Windows-1254" },
+    { Encoding::WINDOWS1255, "Windows-1255" },
+    { Encoding::WINDOWS1256, "Windows-1256" },
+    { Encoding::WINDOWS1257, "Windows-1257" },
+    { Encoding::WINDOWS1258, "Windows-1258" },
+    { Encoding::GB2312, "GB2312" },
+    { Encoding::GBK, "GBK" },
+    { Encoding::GB18030, "GB18030" },
+    { Encoding::BIG5, "Big5" },
+    { Encoding::EUCJP, "EUC-JP" },
+    { Encoding::SHIFTJIS, "Shift_JIS" },
+    { Encoding::JOHAB, "Johab" },
+    { Encoding::EUCKR, "EUC-KR" },
+    { Encoding::KOI8R, "KOI8-R" },
+    { Encoding::KOI8U, "KOI8-U" },
+    { Encoding::MACCYRILLIC, "macCyrillic" },
+    { Encoding::MACROMAN, "macRoman" },
+    { Encoding::UCS2, "UCS-2" },
+    { Encoding::UNKNOWN, "Unknown" }
+};
+
+
 
 /*!
  * @brief The StorageType enum
@@ -304,85 +396,85 @@ public:
 
     /*!
      * @brief initialize starter!
-     * @returns true if the system starts successfully.
+     * @return true if the system starts successfully.
      */
     virtual bool initialize() = __cell_zero;
 
     /*!
      * @brief Getting current fast boot status.
-     * @returns true if system has been booted as fast as possible.
+     * @return true if system has been booted as fast as possible.
      */
     virtual bool                            getFastBoot         () final;
 
     /*!
      * @brief Getting current system init time duration.
-     * @returns returns as time.
+     * @return returns as time.
      */
     virtual std::time_t                     getInitTime         () final;
 
     /*!
      * @brief Getting current system state.
-     * @returns returns string of system state, for example version and etc.
+     * @return returns string of system state, for example version and etc.
      */
     virtual std::optional<std::string>      getSaveState        () final;
 
     /*!
      * @brief Getting current loaded page size.
-     * @returns returns as unsigned int 32 for page size.
+     * @return returns as unsigned int 32 for page size.
      */
     virtual std::optional<u32>              getPageSize         () final;
 
     /*!
      * @brief Getting current system current page init time duration.
-     * @returns returns as time.
+     * @return returns as time.
      */
     virtual std::time_t                     getPageInitTime     () final;
 
     /*!
      * @brief Getting current page speed load.
-     * @returns returns as counter of page speed.
+     * @return returns as counter of page speed.
      */
     virtual std::optional<u32>              getPageSpeed        () final;
 
     /*!
      * @brief Getting current system state index.
-     * @returns returns as signed integer for state index.
+     * @return returns as signed integer for state index.
      */
     virtual std::optional<s32>              getStateIndex       () final;
 
     /*!
      * @brief Getting current installed host type.
-     * @returns returns as HostType enum.
+     * @return returns as HostType enum.
      */
     virtual std::optional<HostType>         getHostType         () final;
 
     /*!
      * @brief Getting current system user mode.
-     * @returns returns as UserMode enum.
+     * @return returns as UserMode enum.
      */
     virtual std::optional<UserMode>         getUserMode         () final;
 
     /*!
      * @brief Getting current system sync mode.
-     * @returns returns as SyncDevice enum.
+     * @return returns as SyncDevice enum.
      */
     virtual std::optional<SyncDevice>       getSyncMode         () final;
 
     /*!
      * @brief Getting current system type.
-     * @returns returns as SystemType enum.
+     * @return returns as SystemType enum.
      */
     virtual std::optional<SystemType>       getSystemType       () final;
 
     /*!
      * @brief Getting current system license.
-     * @returns returns as SystemLicense enum.
+     * @return returns as SystemLicense enum.
      */
     virtual std::optional<SystemLicense>    getSystemLicense    () final;
 
     /*!
      * @brief Getting current state of the system.
-     * @returns returns as SystemStatus enum.
+     * @return returns as SystemStatus enum.
      */
     virtual std::optional<SystemStatus>     getSystemStatus     () final;
 
@@ -431,21 +523,21 @@ public:
 
     /*!
      * @brief initialize starter!
-     * @returns true if the system starts successfully.
+     * @return true if the system starts successfully.
      */
     __cell_no_discard bool initialize() override;
 
     /*!
      * System copyrights.
      * @brief Please do not delete or modify them, unless, of course, you have a little respect for the developers.
-     * @returns output as static copyright by system.
+     * @return output as static copyright by system.
      */
     __cell_no_discard static std::string copyright() __cell_noexcept;
 
     /*!
      * @brief Convert HTML entities to their corresponding characters.
      * @param The input string.
-     * @returns output as string.
+     * @return output as string.
      */
     static std::string htmlEntityDecode(const std::string& content);
 
@@ -453,7 +545,7 @@ public:
      * @brief String find is used to find the first occurrence of sub-string in the specified string being called upon.
      * @param list contains of strings.
      * @param search is for searching as key.
-     * @returns true if the desired content is found and replaced.
+     * @return true if the desired content is found and replaced.
      */
     bool findSubString(const std::vector<std::string>& list, const std::string& search);
 
@@ -476,7 +568,7 @@ public:
     /*!
      * @brief There are some differences in the fields of queries for some drivers that we can filter them with this function.
      * @param fields is list of the fields.
-     * @returns as filtered list of fields.
+     * @return as filtered list of fields.
      */
     std::vector<std::string> filteredQueryFields(VectorString& fields);
 
@@ -540,7 +632,7 @@ public:
      * @param strings are list of strings.
      * @param sep is character of seprator.
      * @param sepStyle is style of seprator.
-     * @returns as string of result.
+     * @return as string of result.
      */
     __cell_no_discard std::string join(const VectorString& strings, const SepratorType& sep, const SepratorStyle& sepStyle) __cell_noexcept;
 
@@ -567,45 +659,45 @@ public:
 
     /*!
      * @brief  It may help to distinguish between tables and views depending on what your naming convention is.
-     * @returns string name of prefix.
+     * @return string name of prefix.
      */
     static std::string tablePrefix();
 
     /**
      * Table unicode base.
      * @brief   It may help to distinguish between tables and views depending on what your naming convention is.
-     * @returns  string unicode of unicode.
+     * @return  string unicode of unicode.
      */
     static std::string tableUnicode();
 
     /**
      * @brief   It may help to mixing table prefixes for more details.
-     * @returns  string final table name after mixed.
+     * @return  string final table name after mixed.
      */
     static std::string mixedTablePrefix(const std::string& p, const std::string& t);
 
     /**
      * @brief   It may help to mixing table prefixes for more details.
-     * @returns  string final table name after mixed.
+     * @return  string final table name after mixed.
      */
     static std::string table(std::string_view tableName, TableType tableType);
 
     /**
      * @brief It may help to filter tables.
-     * @returns as tables.
+     * @return as tables.
      */
     VectorString tableFilter(const VectorString& tables, TableType tableType);
 
     /*!
      * @brief Sometimes we need to remove dashes from the uri or content based data.
      * @param src is a content source.
-     * @returns string of final output.
+     * @return string of final output.
      */
     __cell_no_discard std::string removeDashes(const std::string& src) __cell_const_noexcept;
 
     /*!
      * @brief We need to get current language based on your selected translator value on page.
-     * @returns string for name of language that is used.
+     * @return string for name of language that is used.
      */
     static std::string defaultLanguage();
 
@@ -613,9 +705,16 @@ public:
      * @brief Before displaying the contents of the pages, we need to replace some characters.
      * @param content as raw content.
      * @param map as data for replacing.
-     * @returns content as string.
+     * @return content as string.
      */
     std::string fullReplacer(const std::string& content, const MapString& map);
+
+    /**
+     * @brief The trim function takes a string s as input, removes any leading and trailing whitespace characters from it, and returns the resulting string.
+     * @param s as input value.
+     * @return a trimmed version of output.
+     */
+    static std::string trim(std::string_view str);
 
     /**
      * @brief A function of the engine that performs a case-insensitive comparison of two strings.
@@ -634,7 +733,7 @@ public:
 
     /*!
      * @brief getLanguage function will returns language name as string.
-     * @returns string.
+     * @return string.
      */
     std::string getLanguage();
 
@@ -674,37 +773,37 @@ public:
 
     /*!
      * @brief A URI is an identifier of a specific resource. Like a page, or book, or a document.
-     * @returns uri.
+     * @return uri.
      */
     std::vector <std::string> langUri;
 
     /*!
      * @brief array Languages available on the system
-     * @returns map of languages.
+     * @return map of languages.
      */
     std::map <std::string, std::string> langs();
 
     /*!
      * @brief array getting language by path
-     * @returns map of languages based on their path.
+     * @return map of languages based on their path.
      */
     std::map <std::string, std::string> langsByPath(const std::string& path);
 
     /*!
      * @brief Path reducing function.
-     * @returns string of reduced path.
+     * @return string of reduced path.
      */
     std::string reducePath(const std::string& path);
 
     /*!
      * @brief Services name.
-     * @returns string services name.
+     * @return string services name.
      */
     std::vector <std::string> services;
 
     /*!
      * @brief Recommended container for module settings.
-     * @returns array of modules.
+     * @return array of modules.
      */
     std::vector <std::string> module;
 

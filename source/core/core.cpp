@@ -603,6 +603,20 @@ std::string Engine::fullReplacer(const std::string& content, const MapString& ma
     return rawContent;
 }
 
+std::string Engine::trim(std::string_view str)
+{
+    // Find the position of the first non-whitespace character
+    const auto first = str.find_first_not_of(" \t\n\r\f\v");
+    // If the string is all whitespace, return an empty string
+    if (first == std::string_view::npos) {
+        return "";
+    }
+    // Find the position of the last non-whitespace character
+    const auto last = str.find_last_not_of(" \t\n\r\f\v");
+    // Construct and return the trimmed string
+    return str.substr(first, last - first + 1).data();
+}
+
 bool Engine::caseInsensitiveCompare(const std::string& l, const std::string& r)
 {
     return l.size() == r.size() && std::ranges::equal(l, r, [](char c1, char c2) {

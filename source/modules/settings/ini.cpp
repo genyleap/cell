@@ -37,7 +37,7 @@ CELL_USING_NAMESPACE Cell::eLogger;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
 
-bool IniFileManager::read(const std::string& filename)
+bool IniSetting::read(const std::string& filename)
 {
     auto fileIO = FileManager();
     auto file = fileIO.get(filename);
@@ -73,7 +73,7 @@ bool IniFileManager::read(const std::string& filename)
     return true;
 }
 
-bool IniFileManager::write(const std::string& filename)
+bool IniSetting::write(const std::string& filename)
 {
     auto fileIO = FileManager();
     auto file = fileIO.stream(filename);
@@ -101,7 +101,7 @@ bool IniFileManager::write(const std::string& filename)
     return true;
 }
 
-bool IniFileManager::get(const std::string& section, const std::string& key, std::string& value, const std::string& defaultValue) const
+bool IniSetting::get(const std::string& section, const std::string& key, std::string& value, const std::string& defaultValue) const
 {
     auto sectionIter = std::find_if(iniStructure.data.begin(), iniStructure.data.end(), [&](const auto& s) {
         return Engine::caseInsensitiveCompare(s.first, section);
@@ -120,12 +120,12 @@ bool IniFileManager::get(const std::string& section, const std::string& key, std
     return false;
 }
 
-void IniFileManager::set(const std::string& section, const std::string& key, const std::string& value)
+void IniSetting::set(const std::string& section, const std::string& key, const std::string& value)
 {
     iniStructure.data[section][key] = value;
 }
 
-void IniFileManager::writeComment(const std::string& section, const std::string& comment)
+void IniSetting::writeComment(const std::string& section, const std::string& comment)
 {
     if (iniStructure.comments.find(section) == iniStructure.comments.end()) {
         iniStructure.comments[section] = {};

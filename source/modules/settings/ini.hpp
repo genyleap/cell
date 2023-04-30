@@ -1,7 +1,7 @@
 /*!
  * @file        ini.hpp
  * @brief       This file is part of the Cell Engine.
- * @details     INI Manager.
+ * @details     INI Setting Manager.
  * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
  * @package     The Genyleap
  * @since       29 Apr 2023
@@ -35,7 +35,7 @@ struct IniStructure final
 /**
  * @brief A class for reading and writing INI files.
  */
-class __cell_export IniFileManager {
+class __cell_export IniSetting {
 public:
     /**
      * @brief Reads an INI file and stores the data in memory.
@@ -87,4 +87,4 @@ private:
 
 CELL_NAMESPACE_END
 
-#endif // CELL_RESTAPI_HPP
+#endif // CELL_INI_HPP
