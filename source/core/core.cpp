@@ -88,80 +88,80 @@ EngineInterface::EngineInterface()
            //! Fast Boot
            //! ToDo...
     {
-        if(!isset(m_bootParameter->fastBoot)) { m_bootParameter->fastBoot = true; }
+        if(!m_bootParameter->fastBoot) { m_bootParameter->fastBoot = true; }
     }
 
            //! System Type
            //! ToDo...
     {
-        if(!isset(m_bootParameter->systemType)) { m_bootParameter->systemType = SystemType::Default; }
+        if(!m_bootParameter->systemType) { m_bootParameter->systemType = SystemType::Default; }
     }
 
            //! Page Init Time
            //! ToDo...
     {
-        if(!isset(m_bootParameter->pageInitTime)) { m_bootParameter->pageInitTime = 1316615272; }
+        if(!m_bootParameter->pageInitTime) { m_bootParameter->pageInitTime = 1316615272; }
     }
 
            //! Page Size
            //! ToDo...
     {
-        if(!isset(m_bootParameter->pageSize)) { m_bootParameter->pageSize = __cell_zero; }
+        if(!m_bootParameter->pageSize) { m_bootParameter->pageSize = __cell_zero; }
     }
 
            //! Page Speed
            //! ToDo...
     {
-        if(!isset(m_bootParameter->pageSpeed)) { m_bootParameter->pageSpeed = __cell_zero; }
+        if(!m_bootParameter->pageSpeed) { m_bootParameter->pageSpeed = __cell_zero; }
     }
 
            //! Init Time
            //! ToDo...
     {
-        if(!isset(m_bootParameter->initTime)) { m_bootParameter->initTime = 1316615272; }
+        if(!m_bootParameter->initTime) { m_bootParameter->initTime = 1316615272; }
     }
 
            //! User Mode
            //! ToDo...
     {
-        if(!isset(m_bootParameter->userMode)) { m_bootParameter->userMode = UserMode::Guest; }
+        if(!m_bootParameter->userMode) { m_bootParameter->userMode = UserMode::Guest; }
     }
 
            //! System License
            //! ToDo...
     {
-        if(!isset(m_bootParameter->systemLicense)) { m_bootParameter->systemLicense = SystemLicense::Free; }
+        if(!m_bootParameter->systemLicense) { m_bootParameter->systemLicense = SystemLicense::Free; }
     }
 
            //! System Status
            //! ToDo...
     {
-        if(!isset(m_bootParameter->systemStatus)) { m_bootParameter->systemStatus = SystemStatus::Unknown; }
+        if(!m_bootParameter->systemStatus) { m_bootParameter->systemStatus = SystemStatus::Unknown; }
     }
 
 
            //! Sync Device
            //! ToDo...
     {
-        if(!isset(m_bootParameter->syncDevice)) { m_bootParameter->syncDevice = SyncDevice::WebOnly; }
+        if(!m_bootParameter->syncDevice) { m_bootParameter->syncDevice = SyncDevice::WebOnly; }
     }
 
            //! Storage Type
            //! ToDo...
     {
-        if(!isset(m_bootParameter->storageType)) { m_bootParameter->storageType = StorageType::Empty; }
+        if(!m_bootParameter->storageType) { m_bootParameter->storageType = StorageType::Empty; }
     }
 
            //! State Index
            //! ToDo...
     {
-        if(!isset(m_bootParameter->stateIndex)) { m_bootParameter->stateIndex = 0x1; }
+        if(!m_bootParameter->stateIndex) { m_bootParameter->stateIndex = 0x1; }
     }
 
            //! Save State
            //! ToDo...
     {
-        if(!isset(m_bootParameter->saveState)) { m_bootParameter->saveState = "0x9ax0000000"; }
+        if(!m_bootParameter->saveState) { m_bootParameter->saveState = "0x9ax0000000"; }
     }
 
            //! Host Type
@@ -191,7 +191,7 @@ std::time_t EngineInterface::getInitTime()
 
 Optional<std::string> EngineInterface::getSaveState()
 {
-    if (isset(m_bootParameter->saveState)) {
+    if (m_bootParameter->saveState) {
         return m_bootParameter->saveState;
     } else {
         return std::nullopt;
@@ -200,7 +200,7 @@ Optional<std::string> EngineInterface::getSaveState()
 
 Optional<u32> EngineInterface::getPageSize()
 {
-    if (isset(m_bootParameter->pageSize)) {
+    if (m_bootParameter->pageSize) {
         return m_bootParameter->pageSize;
     } else {
         return std::nullopt;
@@ -214,7 +214,7 @@ std::time_t EngineInterface::getPageInitTime()
 
 Optional<u32> EngineInterface::getPageSpeed()
 {
-    if (isset(m_bootParameter->pageSpeed)) {
+    if (m_bootParameter->pageSpeed) {
         return m_bootParameter->pageSpeed;
     } else {
         return std::nullopt;
@@ -223,7 +223,7 @@ Optional<u32> EngineInterface::getPageSpeed()
 
 Optional<s32> EngineInterface::getStateIndex()
 {
-    if (isset(m_bootParameter->stateIndex)) {
+    if (m_bootParameter->stateIndex) {
         return m_bootParameter->stateIndex;
     } else {
         return std::nullopt;
@@ -237,7 +237,7 @@ bool EngineInterface::getFastBoot()
 
 Optional<HostType> EngineInterface::getHostType()
 {
-    if (isset(m_bootParameter->hostType)) {
+    if (m_bootParameter->hostType) {
         return m_bootParameter->hostType;
     } else {
         return std::nullopt;
@@ -246,7 +246,7 @@ Optional<HostType> EngineInterface::getHostType()
 
 Optional<UserMode> EngineInterface::getUserMode()
 {
-    if (isset(m_bootParameter->userMode)) {
+    if (m_bootParameter->userMode) {
         return m_bootParameter->userMode;
     } else {
         return std::nullopt;
@@ -255,7 +255,7 @@ Optional<UserMode> EngineInterface::getUserMode()
 
 Optional<SyncDevice> EngineInterface::getSyncMode()
 {
-    if (isset(m_bootParameter->syncDevice)) {
+    if (m_bootParameter->syncDevice) {
         return m_bootParameter->syncDevice;
     } else {
         return std::nullopt;
@@ -264,7 +264,7 @@ Optional<SyncDevice> EngineInterface::getSyncMode()
 
 Optional<SystemType> EngineInterface::getSystemType()
 {
-    if (isset(m_bootParameter->systemType)) {
+    if (m_bootParameter->systemType) {
         return m_bootParameter->systemType;
     } else {
         return std::nullopt;
@@ -273,7 +273,7 @@ Optional<SystemType> EngineInterface::getSystemType()
 
 Optional<SystemLicense> EngineInterface::getSystemLicense()
 {
-    if (isset(m_bootParameter->systemLicense)) {
+    if (m_bootParameter->systemLicense) {
         return m_bootParameter->systemLicense;
     } else {
         return std::nullopt;
@@ -282,7 +282,7 @@ Optional<SystemLicense> EngineInterface::getSystemLicense()
 
 Optional<SystemStatus> EngineInterface::getSystemStatus()
 {
-    if (isset(m_bootParameter->systemStatus)) {
+    if (m_bootParameter->systemStatus) {
         return m_bootParameter->systemStatus;
     } else {
         return std::nullopt;
@@ -478,7 +478,7 @@ std::string Engine::tablePrefix()
 {
   //Table prefix
   //    std::string prefix = Configuration::GET["table_prefix"].asString();
-  //    if(!isset(prefix)) {
+  //    if(!prefix)) {
   //        if(System::DeveloperMode::IsEnable)
   //            Log("Table prefix not found!", LoggerType::Warning);
   //    }
@@ -489,7 +489,7 @@ std::string Engine::tableUnicode()
 {
   //Table unicode
   //    std::string unicode = Configuration::GET["table_unicode"].asString();
-  //    if(!isset(unicode)) {
+  //    if(!unicode)) {
   //        if(System::DeveloperMode::IsEnable)
   //            Log("Table unicode not found!", LoggerType::Warning);
   //    }
@@ -500,7 +500,7 @@ std::string Engine::mixedTablePrefix(const std::string& p, const std::string& t)
 {
     std::string res;
     res = FROM_CELL_STRING(p) + FROM_CELL_STRING(t);
-    if(!isset(res)) {
+    if(!res.empty()) {
         if(System::DeveloperMode::IsEnable)
             Log("Table prefix not found!", LoggerType::Warning);
     }
@@ -511,7 +511,7 @@ std::string Engine::table(std::string_view tableName, TableType tableType)
 {
     std::string res{};
     res = FROM_CELL_STRING(mixedTablePrefix(tablePrefix(), tableName.data()));
-    if(!isset(res)) {
+    if(!res.empty()) {
         if(System::DeveloperMode::IsEnable)
             Log("Table not found!", LoggerType::Warning);
     }
@@ -978,7 +978,7 @@ void Engine::delayIfNeeded(std::chrono::time_point<std::chrono::high_resolution_
 bool Engine::isMultilanguage() const noexcept
 {
     bool ret = {false};
-    isset(m_multilang) ? ret = true : false;
+    (m_multilang) ? ret = true : false;
     return ret;
 }
 

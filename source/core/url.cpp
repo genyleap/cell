@@ -118,7 +118,7 @@ Url::Url(const std::string& uri)
     __cell_safe_instance(m_urlStructure, UrlStructure);
     __cell_safe_instance(m_languageUrl, LanguageUrl);
 
-    if(!isset(m_languageUrl->uri.has_value()))
+    if(!m_languageUrl->uri.has_value())
     {
         m_languageUrl->uri = uri;
     }
@@ -152,7 +152,7 @@ UrlStructure Url::getAsStructure() __cell_const_noexcept
 OptionalString Url::getAsUrl() __cell_const_noexcept
 {
     std::string url {};
-    if(!isset(m_languageUrl->uri.has_value()))
+    if(!m_languageUrl->uri.has_value())
     {
         url.append(m_urlStructure->scheme.value());
         url.append(m_urlStructure->subdomain.value());
@@ -165,7 +165,7 @@ OptionalString Url::getAsUrl() __cell_const_noexcept
 
 void Url::setLanguageUri(const std::string& uri) __cell_const_noexcept
 {
-    if(!isset(m_languageUrl->uri.has_value()))
+    if(!m_languageUrl->uri.has_value())
     {
         m_languageUrl->uri = uri;
     }
@@ -173,7 +173,7 @@ void Url::setLanguageUri(const std::string& uri) __cell_const_noexcept
 
 OptionalString Url::getLanguageUri() __cell_const_noexcept
 {
-    if (isset(m_languageUrl->uri.value())) {
+    if (m_languageUrl->uri.has_value()) {
         return m_languageUrl->uri.value();
     } else {
         return std::nullopt;

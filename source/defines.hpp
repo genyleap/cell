@@ -158,6 +158,8 @@ namespace Cell::Defines {
 
 #define CELL_BATTERY_ENERGY 10
 
+#define CELL_DEFAULT_HTTP_TIMEOUT   30
+
 ///<! ping -c 1 is a command that sends one ICMP echo request to the specified destination and waits for a reply.
 /// It is used to test the reachability of a network host and to measure the round-trip time for messages sent from the originating host to a destination computer on an Internet Protocol (IP) network, as well as for checking the network congestion.
 /// The -c 1 option specifies that only one packet should be sent.
@@ -245,6 +247,12 @@ namespace Cell::Defines {
 #define CELL_VALID_PERSIAN 0x1    // 1 is valid
 #define CELL_INVALID_PERSIAN 0x0  // 0 is invalid
 
+// Http Methods
+
+#define CELL_GET    "GET"
+#define CELL_POST   "POST"
+#define CELL_PUT    "PUT"
+#define CELL_DELETE "DELETE"
 
 //! System actions
 #define CELL_EXIT 0;

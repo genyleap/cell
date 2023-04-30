@@ -66,11 +66,11 @@ struct DeveloperMode {
 
 template <typename T>
 /*!
- * @brief isset — Determine if a variable is declared and is different than null
+ * @brief IsSet — Determine if a variable is declared and is different than null
  * @returns true if var exists and has any value other than null. false otherwise.
  */
 __cell_no_discard_message("Checks if the variable has no value.")
-    static auto isset(T t) __cell_noexcept_expr(true)
+    static auto IsSet(T t) __cell_noexcept_expr(true)
 {
     if (const auto it = t; it != T {})
         // on success
