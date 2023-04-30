@@ -617,6 +617,15 @@ public:
      */
     std::string fullReplacer(const std::string& content, const MapString& map);
 
+    /**
+     * @brief A function of the engine that performs a case-insensitive comparison of two strings.
+     * It takes two std::string parameters and returns a bool indicating whether the strings are equal when compared in a case-insensitive manner.
+     * @param variable one.
+     * @param variable two.
+     * @return as boolean.
+     */
+    static bool caseInsensitiveCompare(const std::string& l, const std::string& r);
+
     /*!
      * @brief setLanguage function sets language from user.
      * @param l as language string.

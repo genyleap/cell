@@ -489,7 +489,7 @@ std::vector<std::string> Engine::filteredQueryFields(VectorString& fields)
   //                s+="`";
   //            }
   //        }
-    //    return fields;
+  //    return fields;
 }
 
 Types::OptionalString Engine::convertMemorySize(Types::ullong bytes)
@@ -601,6 +601,13 @@ std::string Engine::fullReplacer(const std::string& content, const MapString& ma
         }
     }
     return rawContent;
+}
+
+bool Engine::caseInsensitiveCompare(const std::string& l, const std::string& r)
+{
+    return l.size() == r.size() && std::ranges::equal(l, r, [](char c1, char c2) {
+               return std::tolower(c1) == std::tolower(c2);
+           });
 }
 
 void Engine::setLanguage(const std::string& l)
@@ -721,18 +728,18 @@ std::string Engine::unescapeJson(const std::string& input)
             s = UNESCAPED;
             break;
         }
-            case UNESCAPED:
+        case UNESCAPED:
+        {
+            switch(input[i])
             {
-                switch(input[i])
-                {
-                    case '\\':
-                        s = ESCAPED;
-                        break;
-                    default:
-                        output += input[i];
-                        break;
-                }
+            case '\\':
+                s = ESCAPED;
+                break;
+            default:
+                output += input[i];
+                break;
             }
+        }
         }
     }
     return output;
@@ -998,13 +1005,13 @@ void Engine::delayIfNeeded(std::chrono::time_point<std::chrono::high_resolution_
 {
     // Calculate the time since the last request in seconds.
     unsigned int timeSinceLastRequest = std::chrono::duration_cast<std::chrono::duration<unsigned int>>
-        (std::chrono::high_resolution_clock::now() - lastRequestTime).count();
+                                        (std::chrono::high_resolution_clock::now() - lastRequestTime).count();
     // If the time since the last request is less than the rate limit, sleep for the appropriate amount of time.
     if (timeSinceLastRequest < rateLimit) {
         std::this_thread::sleep_for(std::chrono::duration<unsigned int>(rateLimit - timeSinceLastRequest));
     }
 
-    // Update the last request time to the current time.
+           // Update the last request time to the current time.
     lastRequestTime = std::chrono::high_resolution_clock::now();
 }
 
