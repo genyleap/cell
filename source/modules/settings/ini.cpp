@@ -73,7 +73,7 @@ bool IniSetting::read(const std::string& filename)
     return true;
 }
 
-bool IniSetting::write(const std::string& filename)
+bool IniSetting::save(const std::string& filename)
 {
     auto fileIO = FileManager();
     auto file = fileIO.stream(filename);

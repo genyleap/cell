@@ -51,7 +51,7 @@ public:
      * @param filename The name of the file to write to.
      * @return True if the file was successfully written, false otherwise.
      */
-    bool write(const std::string& filename);
+    bool save(const std::string& filename);
 
     /**
      * @brief Gets the value associated with a given section and key.
