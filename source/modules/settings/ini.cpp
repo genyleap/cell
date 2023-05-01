@@ -37,6 +37,14 @@ CELL_USING_NAMESPACE Cell::eLogger;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
 
+IniSetting::IniSetting()
+{
+}
+
+IniSetting::~IniSetting()
+{
+}
+
 bool IniSetting::read(const std::string& filename)
 {
     iniStructure.filename = filename;

@@ -26,7 +26,7 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
 /**
  * @brief The structure holding the data of the Yaml setting.
  */
-struct YamlStructure
+struct YamlStructure final
 {
     Types::OptionalString   filename        {}; ///<! The filename of the Yaml configuration file
     Types::SettingComment   comments        {}; ///<! The map of vectors of strings containing comments for each section

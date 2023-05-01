@@ -23,14 +23,14 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
 
-using IniData = std::map<std::string, std::map<std::string, std::string>>;
-using IniComment = std::map<std::string, std::vector<std::string>>;
-
+/**
+ * @brief The structure holding the data of the XML setting.
+ */
 struct IniStructure final
 {
-    Types::OptionalString filename   {}; ///<! The filename of the Ini configuration file.
-    Types::SettingData settingData   {}; ///<! The INI data stored in memory.
-    IniComment comments              {}; ///<! The comments associated with each section.
+    Types::OptionalString   filename    {}; ///<! The filename of the Ini configuration file.
+    Types::SettingComment   comments    {}; ///<! The comments associated with each section.
+    Types::SettingData      settingData {}; ///<! The INI data stored in memory.
 };
 
 /**
@@ -38,6 +38,16 @@ struct IniStructure final
  */
 class __cell_export IniSetting {
 public:
+    /**
+     * @brief Constructs a IniSetting object.
+     */
+    IniSetting();
+
+    /**
+     * @brief Destroys the YamlSetting object.
+     */
+    ~IniSetting();
+
     /**
      * @brief Reads an INI file and stores the data in memory.
      *
