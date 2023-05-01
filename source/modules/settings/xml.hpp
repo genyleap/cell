@@ -28,21 +28,28 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
  */
 struct XmlStructure
 {
-    Types::OptionalString filename  {}; ///<! the filename of the XML configuration file
-    std::map<std::string, std::vector<std::string>> comments; ///<! a map of vectors of strings containing comments for each section
-    std::map<std::string, std::map<std::string, std::string>> settingData; ///<! a map of maps containing configuration data for each section
+    Types::OptionalString filename      {}; ///<! the filename of the XML configuration file
+    Types::SettingComment comments      {}; ///<! a map of vectors of strings containing comments for each section
+    Types::SettingData    settingData   {}; ///<! a map of maps containing configuration data for each section
 };
 
 constexpr const std::string_view settingBegin  = { "<settings>" };
 constexpr const std::string_view settingEnd    = { "</settings>"};
 
+/**
+ * @brief A class for reading and writing settings in Xml format.
+ * The XmlSetting class provides methods for reading and writing settings stored in Xml format.
+ * It can read settings from a file and save settings to a file.
+ */
 class __cell_export XmlSetting {
 public:
     /**
      * @brief Constructs an XmlSetting object with the given filename.
      * @param filename The filename of the XML setting file.
      */
-    XmlSetting(const std::string& filename);
+    XmlSetting();
+    ~XmlSetting();
+
 
     /**
      * @brief Sets the value of a key in a section.
@@ -63,6 +70,7 @@ public:
 
     /**
      * @brief Saves the current setting to the XML file.
+     *
      * @return True if the setting is saved successfully; false otherwise.
      */
     bool save();
@@ -71,7 +79,7 @@ public:
      * @brief Loads the setting from the XML file.
      * @return True if the setting is loaded successfully; false otherwise.
      */
-    bool load();
+    bool read(const std::string& filename);
 
     /**
      * @brief Adds a comment to a section.

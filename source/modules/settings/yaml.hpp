@@ -28,11 +28,16 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
  */
 struct YamlStructure
 {
-    Types::OptionalString filename  {}; ///<! the filename of the Yaml configuration file
-    std::map<std::string, std::vector<std::string>> comments; ///<! a map of vectors of strings containing comments for each section
-    std::map<std::string, std::map<std::string, std::string>> settingData; ///<! a map of maps containing configuration data for each section
+    Types::OptionalString   filename        {}; ///<! The filename of the Yaml configuration file
+    Types::SettingComment   comments        {}; ///<! The map of vectors of strings containing comments for each section
+    Types::SettingData      settingData     {}; ///<! The map of maps containing configuration data for each section
 };
 
+/**
+ * @brief A class for reading and writing settings in Yaml format.
+ * The YamlSetting class provides methods for reading and writing settings stored in Yaml format.
+ * It can read settings from a file and save settings to a file.
+ */
 class __cell_export YamlSetting {
 public:
     /**
@@ -55,10 +60,9 @@ public:
     /**
      * @brief Saves configuration settings to a YAML file.
      *
-     * @param filename The path to the YAML file to save.
      * @return true if the file was saved successfully, false otherwise.
      */
-    bool save(const std::string& filename);
+    bool save();
 
     /**
      * @brief Gets the value of a configuration setting.

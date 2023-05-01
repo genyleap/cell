@@ -39,8 +39,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
 
 bool IniSetting::read(const std::string& filename)
 {
+    iniStructure.filename = filename;
     auto fileIO = FileManager();
-    auto file = fileIO.get(filename);
+    auto file = fileIO.get(iniStructure.filename.value());
     if (!file.is_open()) {
         (DeveloperMode::IsEnable) ? Log("Error opening file " + filename , LoggerType::Critical) : DO_NOTHING;
         return false;
@@ -62,7 +63,7 @@ bool IniSetting::read(const std::string& filename)
         std::string key, value;
         if (std::getline(iss, key, '=') && std::getline(iss, value)) {
             // Add the key-value pair to the IniData map
-            iniStructure.data[current_section][key] = value;
+            iniStructure.settingData[current_section][key] = value;
         } else {
             // Invalid line format
             (DeveloperMode::IsEnable) ? Log("Error parsing line in file " + filename , LoggerType::Critical) : DO_NOTHING;
@@ -73,14 +74,14 @@ bool IniSetting::read(const std::string& filename)
     return true;
 }
 
-bool IniSetting::save(const std::string& filename)
+bool IniSetting::save()
 {
     auto fileIO = FileManager();
-    auto file = fileIO.stream(filename);
+    auto file = fileIO.stream(iniStructure.filename.value());
     if (!file) {
         return false;
     }
-    for (auto& section : iniStructure.data) {
+    for (auto& section : iniStructure.settingData) {
         if (!iniStructure.comments[section.first].empty()) {
             for (auto& comment : iniStructure.comments[section.first]) {
                 file << ";" << comment << std::endl;
@@ -101,12 +102,12 @@ bool IniSetting::save(const std::string& filename)
     return true;
 }
 
-bool IniSetting::get(const std::string& section, const std::string& key, std::string& value, const std::string& defaultValue) const
+bool IniSetting::getValue(const std::string& section, const std::string& key, std::string& value, const std::string& defaultValue) const
 {
-    auto sectionIter = std::find_if(iniStructure.data.begin(), iniStructure.data.end(), [&](const auto& s) {
+    auto sectionIter = std::find_if(iniStructure.settingData.begin(), iniStructure.settingData.end(), [&](const auto& s) {
         return Engine::caseInsensitiveCompare(s.first, section);
     });
-    if (sectionIter != iniStructure.data.end()) {
+    if (sectionIter != iniStructure.settingData.end()) {
         const auto& sectionData = sectionIter->second;
 
         auto keyIter = std::find_if(sectionData.begin(), sectionData.end(), [&](const auto& k) {
@@ -122,7 +123,7 @@ bool IniSetting::get(const std::string& section, const std::string& key, std::st
 
 void IniSetting::setValue(const std::string& section, const std::string& key, const std::string& value)
 {
-    iniStructure.data[section][key] = value;
+    iniStructure.settingData[section][key] = value;
 }
 
 void IniSetting::addComment(const std::string& section, const std::string& comment)

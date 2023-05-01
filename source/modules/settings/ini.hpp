@@ -28,8 +28,9 @@ using IniComment = std::map<std::string, std::vector<std::string>>;
 
 struct IniStructure final
 {
-    IniData data        {}; ///<! The INI data stored in memory.
-    IniComment comments {}; ///<! The comments associated with each section.
+    Types::OptionalString filename   {}; ///<! The filename of the Ini configuration file.
+    Types::SettingData settingData   {}; ///<! The INI data stored in memory.
+    IniComment comments              {}; ///<! The comments associated with each section.
 };
 
 /**
@@ -48,10 +49,9 @@ public:
     /**
      * @brief Writes the INI data to a file.
      *
-     * @param filename The name of the file to write to.
      * @return True if the file was successfully written, false otherwise.
      */
-    bool save(const std::string& filename);
+    bool save();
 
     /**
      * @brief Gets the value associated with a given section and key.
@@ -61,7 +61,7 @@ public:
      * @param value A reference to the string where the value will be stored.
      * @return True if the value was found, false otherwise.
      */
-    bool get(const std::string& section, const std::string& key, std::string& value, const std::string& defaultValue = "") const;
+    bool getValue(const std::string& section, const std::string& key, std::string& value, const std::string& defaultValue = "") const;
 
     /**
      * @brief Sets the value associated with a given section and key.

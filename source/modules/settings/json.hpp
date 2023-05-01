@@ -53,11 +53,9 @@ public:
     /**
      * @brief Saves the current JSON data to a file.
      *
-     * @param filename The name of the file to save to.
-     *
      * @return True if the save was successful, false otherwise.
      */
-    bool save(const std::string& filename) const;
+    bool save();
 
     /**
      * @brief Gets the value associated with a given key and section.
@@ -84,13 +82,13 @@ public:
      * @brief Sets the comment associated with a given key and section.
      *
      * @param section The section to set the comment in.
-     * @param key The key to set the comment for.
      * @param comment The comment to set.
      */
-    void setComment(const std::string& section, const std::string& key, const std::string& comment);
+    void addComment(const std::string& section, const std::string& comment);
 
 private:
-    Types::JSonValue m_jsonValue {}; /**< The JSON value representing the settings file. */
+    Types::JSonValue m_jsonValue        {}; ///<! The JSON value representing the settings file. */
+    Types::OptionalString m_filename    {}; ///<! The filename of the Json configuration file
 };
 
 CELL_NAMESPACE_END

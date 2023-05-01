@@ -114,6 +114,10 @@ using HttpQueryString   = std::unordered_map<std::string, std::string>;
 using OptionalNumeric   = std::optional<int>;
 using OptionalBool      = std::optional<bool>;
 
+//! For Settings.
+using SettingComment    = std::map<std::string, std::vector<std::string>>;
+using SettingData       = std::map<std::string, std::map<std::string, std::string>>;
+
 #if defined(USE_JSON) && !defined(USE_BOOST)
 namespace JSon             = Json;
 using JSonValue            = Json::Value;

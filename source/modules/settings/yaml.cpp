@@ -45,7 +45,9 @@ YamlSetting::~YamlSetting()
 {
 }
 
-bool YamlSetting::read(const std::string& filename) {
+bool YamlSetting::read(const std::string& filename)
+{
+    yamlStructure.filename = filename;
     std::ifstream file(filename);
     if (!file) {
         (DeveloperMode::IsEnable) ? Log("Failed to read settings file: " + filename , LoggerType::Critical) : DO_NOTHING;
@@ -81,10 +83,10 @@ bool YamlSetting::read(const std::string& filename) {
     return true;
 }
 
-bool YamlSetting::save(const std::string& filename) {
-    std::ofstream file(filename);
+bool YamlSetting::save() {
+    std::ofstream file(yamlStructure.filename.value());
     if (!file) {
-        (DeveloperMode::IsEnable) ? Log("Failed to save settings file: " + filename , LoggerType::Critical) : DO_NOTHING;
+        (DeveloperMode::IsEnable) ? Log("Failed to save settings file: " + yamlStructure.filename.value() , LoggerType::Critical) : DO_NOTHING;
         return false;
     }
     for (const auto& [section, settings] : yamlStructure.settingData) {

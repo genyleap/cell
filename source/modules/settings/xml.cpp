@@ -37,11 +37,13 @@ CELL_USING_NAMESPACE Cell::eLogger;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
 
-XmlSetting::XmlSetting(const std::string& filename)
+XmlSetting::XmlSetting()
 {
-    auto fileIO = FileManager();
-    xmlStructure.filename = filename;
-    load();
+}
+
+
+XmlSetting::~XmlSetting()
+{
 }
 
 void XmlSetting::setValue(const std::string& section, const std::string& key, const std::string& value)
@@ -89,10 +91,11 @@ bool XmlSetting::save()
     return false;
 }
 
-bool XmlSetting::load()
+bool XmlSetting::read(const std::string& filename)
 {
+    xmlStructure.filename = filename;
     auto fileIO = FileManager();
-    auto file = fileIO.get(xmlStructure.filename.value());
+    auto file = fileIO.get(filename);
     if (file.is_open()) {
         std::string line;
         std::string currentSection;
