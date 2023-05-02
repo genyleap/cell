@@ -33,11 +33,11 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 
 struct UpdaterData : public Version
 {
-    Types::Optional<Version>    latestBetaVersion   {}; ///< Latest beta version of software.
-    Types::Optional<Version>    latestVersion       {}; ///< Latest version of software.
-    Types::Optional<Version>    currentVersion      {}; ///< Current version of software.
-    Types::OptionalBool         available           {false};    ///< Update is available!
-    Types::OptionalBool         autoUpdate          {false};    ///< Update automatically.
+    Types::Optional<Version>    latestBetaVersion   {}; //!< Latest beta version of software.
+    Types::Optional<Version>    latestVersion       {}; //!< Latest version of software.
+    Types::Optional<Version>    currentVersion      {}; //!< Current version of software.
+    Types::OptionalBool         available           {false};    //!< Update is available!
+    Types::OptionalBool         autoUpdate          {false};    //!< Update automatically.
 };
 
 /*!

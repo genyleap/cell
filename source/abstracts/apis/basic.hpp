@@ -40,9 +40,9 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts::Apis)
  */
 struct AuthorizationInfo __cell_final
 {
-    OptionalString username;  ///< Username of user.
-    OptionalString password;  ///< Password of user.
-    OptionalString result;    ///< Result of encoded.
+    OptionalString username;  //!< Username of user.
+    OptionalString password;  //!< Password of user.
+    OptionalString result;    //!< Result of encoded.
 };
 
 /*!

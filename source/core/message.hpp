@@ -41,10 +41,10 @@ __cell_enum_class MessageStyle : u8
 
 struct MessageData final
 {
-    OptionalString  message {}; ///< Message to send.
-    OptionalString  author  {}; ///< Author of message.
-    OptionalNumeric postId  {}; ///< Post id for message.
-    MessageStyle    style   {}; ///< Message style for post section.
+    OptionalString  message {}; //!< Message to send.
+    OptionalString  author  {}; //!< Author of message.
+    OptionalNumeric postId  {}; //!< Post id for message.
+    MessageStyle    style   {}; //!< Message style for post section.
 };
 
 /*!

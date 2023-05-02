@@ -27,9 +27,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::Hardware)
  */
 struct MemoryInfo final
 {
-    Types::llong totalMemory    {}; ///<! Total physical memory size.
-    Types::llong usedMemory     {}; ///<! Total physical used memory Size.
-    Types::llong freeMemory     {}; ///<! Total physical free memory Size.
+    Types::llong totalMemory    {}; //!< Total physical memory size.
+    Types::llong usedMemory     {}; //!< Total physical used memory Size.
+    Types::llong freeMemory     {}; //!< Total physical free memory Size.
 };
 
 /**
@@ -37,8 +37,8 @@ struct MemoryInfo final
  */
 struct CpuInfo final
 {
-    std::string brandString     {}; ///<! Processor brand as string [Intel, AMD, Apple and etc].
-    Types::uint count           {}; ///<! Total physical processor core.
+    std::string brandString     {}; //!< Processor brand as string [Intel, AMD, Apple and etc].
+    Types::uint count           {}; //!< Total physical processor core.
 };
 
 struct ProductInfo final

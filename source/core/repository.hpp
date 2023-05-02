@@ -27,9 +27,9 @@ using SpeedCache = std::unordered_map<std::string, double>;
 
 struct RepositoryData final
 {
-    Types::OptionalString           repoUrl {}; ///<! Repository Url.
-    Types::VectorString             mirrors {}; ///<! List of mirrors.
-    SpeedCache                      mirrorSpeedCache;   ///<! Store all the data associated with a particular repository.
+    Types::OptionalString           repoUrl {}; //!< Repository Url.
+    Types::VectorString             mirrors {}; //!< List of mirrors.
+    SpeedCache                      mirrorSpeedCache;   //!< Store all the data associated with a particular repository.
 };
 
 /**
@@ -81,7 +81,7 @@ public:
     double getMirrorSpeed(const std::string& mirrorUrl);
 
 private:
-    RepositoryData repositoryData {}; ///< Repository data, including URL and mirrors.
+    RepositoryData repositoryData {}; //!< Repository data, including URL and mirrors.
 };
 
 CELL_NAMESPACE_END

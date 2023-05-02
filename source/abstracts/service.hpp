@@ -29,11 +29,11 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
  */
 __cell_enum_class ServiceType : Types::u8
 {
-    Self        =   0x1,  ///< This option enables the system to use the desired feature for system's internal purposes only.
-    Api         =   0x2,  ///< This option enables the system to use the desired feature for output api purposes only.
-    Multi       =   0x3,  ///< This option enables the system to use the desired feature for internal and external purposes only.
-    Limited     =   0x4,  ///< This option enables the system to use the desired feature for limited purposes only.
-    Customized  =   0x5   ///< This option enables the system to use the desired feature for customized purposes only.
+    Self        =   0x1,  //!< This option enables the system to use the desired feature for system's internal purposes only.
+    Api         =   0x2,  //!< This option enables the system to use the desired feature for output api purposes only.
+    Multi       =   0x3,  //!< This option enables the system to use the desired feature for internal and external purposes only.
+    Limited     =   0x4,  //!< This option enables the system to use the desired feature for limited purposes only.
+    Customized  =   0x5   //!< This option enables the system to use the desired feature for customized purposes only.
 };
 
 /*!
@@ -41,9 +41,9 @@ __cell_enum_class ServiceType : Types::u8
  */
 __cell_enum_class LicenseType : Types::u8
 {
-    Free            =   0x0,  ///< Making items as a service based on love <3! (Full Free).
-    Commercial      =   0x1,  ///< Making items as a service based on commercial goals.
-    Customized      =   0x2   ///< Making items as a service based on terms and conditions.
+    Free            =   0x0,  //!< Making items as a service based on love <3! (Full Free).
+    Commercial      =   0x1,  //!< Making items as a service based on commercial goals.
+    Customized      =   0x2   //!< Making items as a service based on terms and conditions.
 };
 
 /*!
@@ -51,10 +51,10 @@ __cell_enum_class LicenseType : Types::u8
  */
 __cell_enum_class Status : Types::u8
 {
-    Disabled        =   0x0,  ///< Disabled.
-    InDevelopment   =   0x2,  ///< In Development.
-    Suspended       =   0x3,  ///< Hidden.
-    Active          =   0x4   ///< Active.
+    Disabled        =   0x0,  //!< Disabled.
+    InDevelopment   =   0x2,  //!< In Development.
+    Suspended       =   0x3,  //!< Hidden.
+    Active          =   0x4   //!< Active.
 };
 
 /*!
@@ -62,12 +62,12 @@ __cell_enum_class Status : Types::u8
  */
 __cell_enum_class ActivityType : Types::u8
 {
-    DefaultAsNull           =   0x0,    ///< Activated by no limitation.
-    BasedOnIp               =   0x1,    ///< Active based on IP Address.
-    BasedOnMacAddress       =   0x2,    ///< Active based on Mac Address.
-    BasedOnDNS              =   0x3,    ///< Active based on DNS Address [NS1, NS2, ...].
-    BasedOnDomainAddress    =   0x4,    ///< Active based on Domain Address [domainname.com].
-    BasedOnCustomProperty   =   0x5     ///< Active based on custom propery.
+    DefaultAsNull           =   0x0,    //!< Activated by no limitation.
+    BasedOnIp               =   0x1,    //!< Active based on IP Address.
+    BasedOnMacAddress       =   0x2,    //!< Active based on Mac Address.
+    BasedOnDNS              =   0x3,    //!< Active based on DNS Address [NS1, NS2, ...].
+    BasedOnDomainAddress    =   0x4,    //!< Active based on Domain Address [domainname.com].
+    BasedOnCustomProperty   =   0x5     //!< Active based on custom propery.
 };
 
 /*!
@@ -101,11 +101,11 @@ private:
  */
 struct ServiceData __cell_final
 {
-    Types::OptionalNumeric         uid        {};   ///< Unique identifier.
-    Types::OptionalString          title      {};   ///< Title.
-    Types::OptionalString          descr      {};   ///< Description.
-    Types::Optional<ServiceType>   type       {};   ///< Type based on optional ServiceType.
-    Types::Optional<Status>        status     {};   ///< Status of service.
+    Types::OptionalNumeric         uid        {};   //!< Unique identifier.
+    Types::OptionalString          title      {};   //!< Title.
+    Types::OptionalString          descr      {};   //!< Description.
+    Types::Optional<ServiceType>   type       {};   //!< Type based on optional ServiceType.
+    Types::Optional<Status>        status     {};   //!< Status of service.
 };
 
 /*!
@@ -113,8 +113,8 @@ struct ServiceData __cell_final
  */
 struct ServiceInfo __cell_final
 {
-    SemanticVersion                 version    {};   ///< Version number.
-    Types::Optional<LicenseType>    license    {};   ///< Type of license.
+    SemanticVersion                 version    {};   //!< Version number.
+    Types::Optional<LicenseType>    license    {};   //!< Type of license.
 };
 
 /*!

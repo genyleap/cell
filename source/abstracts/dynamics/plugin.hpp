@@ -56,15 +56,15 @@ __cell_enum_class PermissionType
  */
 struct PluginInfo __cell_final
 {
-    Types::OptionalString              codeName        {}; ///< A unique code for plugin.
-    Types::OptionalString              name            {}; ///< A name for plugin.
-    Types::OptionalString              description     {}; ///< A description for explanation plugin.
-    Types::OptionalString              compiledDate    {}; ///< Compiled date for plugin.
-    Types::Optional<SystemLicense>     license         {}; ///< License type for plugin.
-    PluginType                         pluginType      {}; ///< The type of plugin.
-    Types::Optional<SemanticVersion>   version         {}; ///< Version of plugin.
-    Types::OptionalString              author          {}; ///< Author of plugin.
-    Types::OptionalString              url             {}; ///< Url of plugin.
+    Types::OptionalString              codeName        {}; //!< A unique code for plugin.
+    Types::OptionalString              name            {}; //!< A name for plugin.
+    Types::OptionalString              description     {}; //!< A description for explanation plugin.
+    Types::OptionalString              compiledDate    {}; //!< Compiled date for plugin.
+    Types::Optional<SystemLicense>     license         {}; //!< License type for plugin.
+    PluginType                         pluginType      {}; //!< The type of plugin.
+    Types::Optional<SemanticVersion>   version         {}; //!< Version of plugin.
+    Types::OptionalString              author          {}; //!< Author of plugin.
+    Types::OptionalString              url             {}; //!< Url of plugin.
 };
 
 /*!

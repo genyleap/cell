@@ -56,15 +56,15 @@ __cell_enum_class PermissionType
  */
 struct ModuleInfo __cell_final
 {
-    Types::Optional<Types::u32>        codeName        {}; ///< A unique code for module.
-    Types::OptionalString              name            {}; ///< A name for module.
-    Types::OptionalString              description     {}; ///< A description for explanation module.
-    Types::OptionalString              compiledDate    {}; ///< Compiled date for module.
-    Types::Optional<SystemLicense>     license         {}; ///< License type for module.
-    ModuleType                         moduleType      {}; ///< The type of module.
-    Types::Optional<SemanticVersion>   version         {}; ///< Version of module.
-    Types::OptionalString              author          {}; ///< Author of module.
-    Types::OptionalString              url             {}; ///< Url of module.
+    Types::Optional<Types::u32>        codeName        {}; //!< A unique code for module.
+    Types::OptionalString              name            {}; //!< A name for module.
+    Types::OptionalString              description     {}; //!< A description for explanation module.
+    Types::OptionalString              compiledDate    {}; //!< Compiled date for module.
+    Types::Optional<SystemLicense>     license         {}; //!< License type for module.
+    ModuleType                         moduleType      {}; //!< The type of module.
+    Types::Optional<SemanticVersion>   version         {}; //!< Version of module.
+    Types::OptionalString              author          {}; //!< Author of module.
+    Types::OptionalString              url             {}; //!< Url of module.
 };
 
 CELL_NAMESPACE_END

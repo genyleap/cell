@@ -40,9 +40,9 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts::Apis)
  */
 struct AuthorizationInfo __cell_final
 {
-    OptionalString key;     ///< Key of user.
-    OptionalString value;   ///< Value of user.
-    OptionalString result;  ///< Result of string.
+    OptionalString key;     //!< Key of user.
+    OptionalString value;   //!< Value of user.
+    OptionalString result;  //!< Result of string.
 };
 
 /*!
@@ -50,8 +50,8 @@ struct AuthorizationInfo __cell_final
  */
 __cell_enum_class AddType : u8
 {
-    Header          =   0x0, ///< Add to header.
-    QueryParameter  =   0x1, ///< Add to query as parameter.
+    Header          =   0x0, //!< Add to header.
+    QueryParameter  =   0x1, //!< Add to query as parameter.
 };
 
 /*!

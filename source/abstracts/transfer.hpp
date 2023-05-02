@@ -36,17 +36,17 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
  */
 __cell_enum_class TransferMethodState : Types::u8
 {
-    Internal    =   0x1,  ///< Transfer from internal method.
-    ExternalApi =   0x2,  ///< Transfer from external method like api.
-    Customized  =   0x3   ///< Transfer from an other method.
+    Internal    =   0x1,  //!< Transfer from internal method.
+    ExternalApi =   0x2,  //!< Transfer from external method like api.
+    Customized  =   0x3   //!< Transfer from an other method.
 };
 
 struct TransferData __cell_final
 {
-    TransferMethodState         method   {};  ///< Transfer method for api service.
-    AuthenticationType          auth     {};  ///< Authentication type for api service.
-    Types::OptionalString       path     {};  ///< Path for api service.
-    Types::OptionalString       output   {};  ///< Output from api service.
+    TransferMethodState         method   {};  //!< Transfer method for api service.
+    AuthenticationType          auth     {};  //!< Authentication type for api service.
+    Types::OptionalString       path     {};  //!< Path for api service.
+    Types::OptionalString       output   {};  //!< Output from api service.
 };
 
 /*!

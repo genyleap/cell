@@ -23,7 +23,7 @@
 
 CELL_NAMESPACE_BEGIN(Cell::FileSystem)
 
-using ListOfFiles = std::unordered_multimap<std::string, std::string>; ///<! Key [path], Value[name]
+using ListOfFiles = std::unordered_multimap<std::string, std::string>; //!< Key [path], Value[name]
 using FilePath = std::filesystem::path;
 
 /**
@@ -222,11 +222,11 @@ static const std::map<std::string, std::string> fileTypes = {
  */
 struct InfoStruct final
 {
-    std::string filePath;   ///<! Path of file.
-    std::string fileName;   ///<! Name of file.
-    std::chrono::system_clock::time_point lastWriteTime;    ///<! Latest write time on the file.
-    std::chrono::system_clock::time_point creationTime;     ///<! File creation time.
-    Types::llong fileSize; ///<! Size of file.
+    std::string filePath;   //!< Path of file.
+    std::string fileName;   //!< Name of file.
+    std::chrono::system_clock::time_point lastWriteTime;    //!< Latest write time on the file.
+    std::chrono::system_clock::time_point creationTime;     //!< File creation time.
+    Types::llong fileSize; //!< Size of file.
 };
 
 /**
@@ -273,7 +273,7 @@ public:
 
 private:
 
-    InfoStruct infoStruct {}; ///<! Structure for holding file information.
+    InfoStruct infoStruct {}; //!< Structure for holding file information.
 };
 
 /**

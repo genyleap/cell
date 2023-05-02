@@ -37,10 +37,10 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
  */
 __cell_enum_class PageType : Types::u8
 {
-    Default     =   0x0,    ///< Page as default.
-    Static      =   0x1,    ///< Page as static mode.
-    Dynamic     =   0x2,    ///< Page as dynamic mode.
-    Custom      =   0x3     ///< Page as custom design.
+    Default     =   0x0,    //!< Page as default.
+    Static      =   0x1,    //!< Page as static mode.
+    Dynamic     =   0x2,    //!< Page as dynamic mode.
+    Custom      =   0x3     //!< Page as custom design.
 };
 
 /*!
@@ -68,27 +68,27 @@ __cell_enum_class PageThemeStyle : Types::u8
 struct PageProperties __cell_final
 {
     ///!BASIC
-    OptionalNumeric id              {};    ///< Index of page.
-    OptionalNumeric priority        {};    ///< Index of page position.
-    OptionalString  title           {};    ///< Title (subject) of page.
-    OptionalString  url             {};    ///< Url for page.
-    Tags            tags            {};    ///< Tags list for page.
-    OptionalString  text            {};    ///< Text (main content) for page.
-    OptionalString  documentTitle   {};    ///< Document title (title of page).
-    OptionalString  metaDescr       {};    ///< Meta description (more details) for page.
+    OptionalNumeric id              {};    //!< Index of page.
+    OptionalNumeric priority        {};    //!< Index of page position.
+    OptionalString  title           {};    //!< Title (subject) of page.
+    OptionalString  url             {};    //!< Url for page.
+    Tags            tags            {};    //!< Tags list for page.
+    OptionalString  text            {};    //!< Text (main content) for page.
+    OptionalString  documentTitle   {};    //!< Document title (title of page).
+    OptionalString  metaDescr       {};    //!< Meta description (more details) for page.
     ///!MEDIA
-//    MediaType  cover    {};    ///< Image or video for page.
-//    IconType   icon     {};    ///< Icon for page.
+//    MediaType  cover    {};    //!< Image or video for page.
+//    IconType   icon     {};    //!< Icon for page.
     ///!DATETIME
-    OptionalString  createdDate  {};    ///< Created date time.
-    OptionalString  publishTime  {};    ///< Publishing time.
-    OptionalString  pinnedTime   {};    ///< Pinned time.
-    OptionalString  lastModified {};    ///< Last Modified date-time.
+    OptionalString  createdDate  {};    //!< Created date time.
+    OptionalString  publishTime  {};    //!< Publishing time.
+    OptionalString  pinnedTime   {};    //!< Pinned time.
+    OptionalString  lastModified {};    //!< Last Modified date-time.
     ///!EXTRA
-    OptionalBool    inclueInSitemap            {};  ///< If included in sitemap section.
-    OptionalBool    canBeModeratedFromFrontend {};  ///< Can be moderated from frontend?!
-    OptionalBool    accessByApi {};  ///< Can be access from api output.
-    OptionalString  theme       {};  ///< Page theme.
+    OptionalBool    inclueInSitemap            {};  //!< If included in sitemap section.
+    OptionalBool    canBeModeratedFromFrontend {};  //!< Can be moderated from frontend?!
+    OptionalBool    accessByApi {};  //!< Can be access from api output.
+    OptionalString  theme       {};  //!< Page theme.
 };
 
 /*!

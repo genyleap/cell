@@ -1,7 +1,7 @@
 /*!
  * @file        email.hpp
  * @brief       This file is part of the Cell Engine.
- * @details     Menu and item interface for system.
+ * @details     Email structure and client interface for system.
  * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
  * @package     The Genyleap
  * @since       29 Apr 202e
@@ -28,14 +28,14 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
  */
 struct EmailStruct final
 {
-    Types::OptionalString from      {};
-    Types::OptionalString subject   {};
-    Types::OptionalString body      {};
-    Types::OptionalString htmlBody  {};
+    Types::OptionalString from      {}; //!< An optional string indicating the sender of the email.
+    Types::OptionalString subject   {}; //!< An optional string containing the subject of the email.
+    Types::OptionalString body      {}; //!< An optional string containing the plain text body of the email.
+    Types::OptionalString htmlBody  {}; //!< An optional string containing the HTML formatted body of the email.
 
-    Types::Optional<Types::VectorString> to     {};
-    Types::Optional<Types::VectorString> cc     {};
-    Types::Optional<Types::VectorString> bcc    {};
+    Types::Optional<Types::VectorString> to     {}; //!< An optional vector of strings containing the email addresses of the primary recipients of the email.
+    Types::Optional<Types::VectorString> cc     {}; //!< An optional vector of strings containing the email addresses of the CC (Carbon Copy) recipients of the email.
+    Types::Optional<Types::VectorString> bcc    {}; //!< An optional vector of strings containing the email addresses of the BCC (Blind Carbon Copy) recipients of the email.
 };
 
 class __cell_export Email final {

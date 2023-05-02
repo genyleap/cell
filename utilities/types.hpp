@@ -35,6 +35,60 @@ using JSonValue = boost::json::value;
 #endif
 #endif
 
+#define USE_MYSQL_MARIADB 1
+#define USE_POSTGRESQL 1
+#define USE_SQLITE 1
+#define USE_MSSQL 1
+#define USE_ORACLE 1
+
+#include <variant>
+
+#ifdef USE_MYSQL_MARIADB
+#include "mariadb/mysql.h"
+using MySqlConnectPtr = MYSQL*;
+#endif
+
+#ifdef USE_POSTGRESQL
+#include <libpq-fe.h>
+using PsqlConnectPtr = PGconn*;
+#endif
+
+#ifdef USE_SQLITE
+#include <sqlite3.h>
+using SqliteConnectPtr = sqlite3*;
+#endif
+
+#ifdef USE_MSSQL
+#include <sql.h>
+#include <sqlext.h>
+using MssqlConnectPtr = SQLHANDLE;
+#endif
+
+#ifdef USE_ORACLE
+#include <occi.h>
+using OracleConnectPtr = oracle::occi::Connection*;
+#endif
+
+
+using MySqlPtr = MYSQL*;
+using PostgreSqlPtr = PGconn*;
+using SqlServerPtr = SQLHANDLE;
+using SqlitePtr = sqlite3*;
+using OraclePtr = oracle::occi::Connection*;
+
+
+////!DBS
+//#ifdef USE_MYSQL_MARIADB
+//#include "mariadb/mysql.h"
+//using SqlConnectPtr = MYSQL*;
+//#endif
+////Todo...
+//#ifdef USE_POSTGRESQL
+//#include <libpq-fe.h>
+//using SqlConnectPtr = PGconn*;
+//#endif
+
+
 namespace Cell::Types {
 
 using schar        = signed char;
@@ -134,6 +188,17 @@ using OptionalJsonVal      = std::optional<boost::json::value>;
 namespace JSon      = std::json;
 #endif
 #endif
+
+/**
+ * @brief Represents a connection to a SQL database.
+ * This type alias defines a C++ union type using `std::variant`, which allows for type-safe handling of multiple
+ * possible database connection objects.
+ * The `SqlConnection` typedef is a std::variant type that can hold a connection pointer to one of the following database types:
+ * - Mariadb MySQL, PostgreSql, SqlServer, Oracle and Sqlite.
+ *
+ * The connection pointer returned by each database type should be of type `std::shared_ptr<DatabaseConnection>`.
+ */
+using SqlConnection = std::variant<MySqlPtr, PostgreSqlPtr, SqlServerPtr, OraclePtr, SqlitePtr>;
 
 namespace Fs = std::filesystem;
 

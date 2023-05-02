@@ -29,27 +29,27 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
  */
 __cell_enum_class ServiceType : Types::u8
 {
-    Default       =   0x1,  ///< These types of options are available for all purposes and types of users.
-    Customized    =   0x2,  ///< These types of options are only available for specific purposes or dedicated development.
-    Premium       =   0x3   ///< These types of options are only available for premium users.
+    Default       =   0x1,  //!< These types of options are available for all purposes and types of users.
+    Customized    =   0x2,  //!< These types of options are only available for specific purposes or dedicated development.
+    Premium       =   0x3   //!< These types of options are only available for premium users.
 };
 
 __cell_enum_class Status : Types::u8
 {
-    Disabled    =   0x0,  ///< Disabled.
-    Hidden      =   0x1,  ///< Hidden.
-    Active      =   0x2   ///< Active.
+    Disabled    =   0x0,  //!< Disabled.
+    Hidden      =   0x1,  //!< Hidden.
+    Active      =   0x2   //!< Active.
 };
 
 #if defined(ENABLE_SAFE_ONLY)
-CELL_USING ValueType = std::variant<std::string, bool, s64, u64>;   ///<In this section we will cover data types for value of options.
+CELL_USING ValueType = std::variant<std::string, bool, s64, u64>;   //!<In this section we will cover data types for value of options.
 #else
 struct ValueType __cell_final
 {
-    std::string  AsString;           ///< String type.
-    bool         AsBoolean;          ///< Boolean type.
-    Types::s64   AsSignedInteger;    ///< Integer with signed.
-    Types::u64   AsUnsignedInteger;  ///< Integer with unsigned.
+    std::string  AsString;           //!< String type.
+    bool         AsBoolean;          //!< Boolean type.
+    Types::s64   AsSignedInteger;    //!< Integer with signed.
+    Types::u64   AsUnsignedInteger;  //!< Integer with unsigned.
 };
 #endif
 
@@ -59,15 +59,15 @@ struct ValueType __cell_final
  */
 struct OptionData __cell_final
 {
-    Types::OptionalString      title      {};   ///< Title of setting option.
-    Types::OptionalString      descr      {};   ///< Description of setting option.
-    Types::Optional<ValueType> value      {};   ///< Value of setting option.
-    Types::OptionalJsonVal     json       {};   ///< JSon of setting option.
-    Types::OptionalString      defaultVal {};   ///< Default value of setting option.
-    Types::OptionalString      extra      {};   ///< Extra value of setting option.
-    Types::Optional<Status>    status     {};   ///< Status value of setting option.
-    Types::OptionalNumeric     startGroup {};   ///< Group index value of option.
-    ServiceType                service    {};   ///< Service type for option.
+    Types::OptionalString      title      {};   //!< Title of setting option.
+    Types::OptionalString      descr      {};   //!< Description of setting option.
+    Types::Optional<ValueType> value      {};   //!< Value of setting option.
+    Types::OptionalJsonVal     json       {};   //!< JSon of setting option.
+    Types::OptionalString      defaultVal {};   //!< Default value of setting option.
+    Types::OptionalString      extra      {};   //!< Extra value of setting option.
+    Types::Optional<Status>    status     {};   //!< Status value of setting option.
+    Types::OptionalNumeric     startGroup {};   //!< Group index value of option.
+    ServiceType                service    {};   //!< Service type for option.
 };
 
 class __cell_export AbstractSetting

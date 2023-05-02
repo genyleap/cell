@@ -39,16 +39,16 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts::Apis)
  */
 struct AuthorizationInfo __cell_final
 {
-    OptionalString username;    ///< Username of user.
-    OptionalString password;    ///< Password of user.
-    OptionalString realm;       ///< A string describing a protected area.
-    OptionalString nonce;       ///< A server-specified quoted string that the server can use to control the lifetime in which particular credentials will be considered valid.
-    OptionalString algorithm;   ///< Algorithm used to produce the digest.
-    OptionalString qop;         ///< Quoted string indicating the quality of protection supported by the server.
-    OptionalString nonceCount;  ///< The nonce counter.
-    OptionalString clientNonce; ///< The nonce value is opaque to the client.
-    OptionalString opaque;      ///< A server-specified quoted string that should be returned unchanged in the Authorization.
-    OptionalString result;      ///< Result of final mixed string.
+    OptionalString username;    //!< Username of user.
+    OptionalString password;    //!< Password of user.
+    OptionalString realm;       //!< A string describing a protected area.
+    OptionalString nonce;       //!< A server-specified quoted string that the server can use to control the lifetime in which particular credentials will be considered valid.
+    OptionalString algorithm;   //!< Algorithm used to produce the digest.
+    OptionalString qop;         //!< Quoted string indicating the quality of protection supported by the server.
+    OptionalString nonceCount;  //!< The nonce counter.
+    OptionalString clientNonce; //!< The nonce value is opaque to the client.
+    OptionalString opaque;      //!< A server-specified quoted string that should be returned unchanged in the Authorization.
+    OptionalString result;      //!< Result of final mixed string.
 };
 
 /*!

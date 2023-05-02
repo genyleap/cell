@@ -28,9 +28,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
  */
 struct YamlStructure final
 {
-    Types::OptionalString   filename        {}; ///<! The filename of the Yaml configuration file
-    Types::SettingComment   comments        {}; ///<! The map of vectors of strings containing comments for each section
-    Types::SettingData      settingData     {}; ///<! The map of maps containing configuration data for each section
+    Types::OptionalString   filename        {}; //!< The filename of the Yaml configuration file
+    Types::SettingComment   comments        {}; //!< The map of vectors of strings containing comments for each section
+    Types::SettingData      settingData     {}; //!< The map of maps containing configuration data for each section
 };
 
 /**
@@ -93,7 +93,7 @@ public:
     void addComment(const std::string& section, const std::string& comment);
 
 private:
-    YamlStructure yamlStructure {}; ///<! The YAML data structure representing the configuration file.
+    YamlStructure yamlStructure {}; //!< The YAML data structure representing the configuration file.
 };
 
 

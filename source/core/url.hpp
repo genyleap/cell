@@ -28,11 +28,11 @@ CELL_NAMESPACE_BEGIN(Cell)
  */
 struct UrlStructure
 {
-    Types::OptionalString scheme       {}; ///< The scheme tells web servers which protocol to use when it accesses a page on your website.
-    Types::OptionalString subdomain    {}; ///< A subdomain in a URL indicates which particular page of your website the web browser should serve up.
-    Types::OptionalString secondLevel  {}; ///< Your second-level domain (SLD) is the name of your website.
-    Types::OptionalString topLevel     {}; ///< The top-level domain (TLD) specifies what type of entity your organization registers as on the internet.
-    Types::OptionalString subdirectory {}; ///< A subdirectory — also known as a subfolder — helps people as well as web crawlers understand which particular section of a webpage they’re on.
+    Types::OptionalString scheme       {}; //!< The scheme tells web servers which protocol to use when it accesses a page on your website.
+    Types::OptionalString subdomain    {}; //!< A subdomain in a URL indicates which particular page of your website the web browser should serve up.
+    Types::OptionalString secondLevel  {}; //!< Your second-level domain (SLD) is the name of your website.
+    Types::OptionalString topLevel     {}; //!< The top-level domain (TLD) specifies what type of entity your organization registers as on the internet.
+    Types::OptionalString subdirectory {}; //!< A subdirectory — also known as a subfolder — helps people as well as web crawlers understand which particular section of a webpage they’re on.
 };
 
 /**
@@ -90,7 +90,7 @@ private:
  */
 struct LanguageUrl
 {
-    Types::OptionalString uri {};  ///< Uri for language [https://localhost/{language-uri}=en-us, fa-ir]
+    Types::OptionalString uri {};  //!< Uri for language [https://localhost/{language-uri}=en-us, fa-ir]
 };
 
 /*!

@@ -160,16 +160,16 @@ enum class HTTP_METHOD {
  */
 enum class HTTP_MESSAGE_SUCCESS
 {
-    Ok                  = 200,  ///<! OK
-    Created             = 201,  ///<! Created
-    Accepted            = 202,  ///<! Accepted
-    Non_AI              = 203,  ///<! Non-Authoritative Information (since HTTP/1.1)
-    No_Content          = 204,  ///<! No Content
-    Reset_Content       = 205,  ///<! Reset Content
-    Partial_Content     = 206,  ///<! Partial Content
-    Multi_Status        = 207,  ///<! Multi-Status (WebDAV; RFC 4918)
-    Already_Reported    = 208,  ///<! Already Reported (WebDAV; RFC 5842)
-    IM_Used             = 226   ///<! IM Used (RFC 3229)
+    Ok                  = 200,  //!< OK
+    Created             = 201,  //!< Created
+    Accepted            = 202,  //!< Accepted
+    Non_AI              = 203,  //!< Non-Authoritative Information (since HTTP/1.1)
+    No_Content          = 204,  //!< No Content
+    Reset_Content       = 205,  //!< Reset Content
+    Partial_Content     = 206,  //!< Partial Content
+    Multi_Status        = 207,  //!< Multi-Status (WebDAV; RFC 4918)
+    Already_Reported    = 208,  //!< Already Reported (WebDAV; RFC 5842)
+    IM_Used             = 226   //!< IM Used (RFC 3229)
 };
 
 /*!
@@ -248,19 +248,19 @@ struct RequestStruct final
            // The query parameters to be sent with the HTTP request.
     Types::HttpQueryString  queries         {   };
 
-    Types::OptionalString   url             { __cell_null_str  };  ///<! Url address.
-    Types::OptionalString   data            { __cell_null_str  };  ///<! Http data.
-    Types::VectorString     headers         { __cell_null_str  };  ///<! List of http headers.
+    Types::OptionalString   url             { __cell_null_str  };  //!< Url address.
+    Types::OptionalString   data            { __cell_null_str  };  //!< Http data.
+    Types::VectorString     headers         { __cell_null_str  };  //!< List of http headers.
 
 
 
-    Types::OptionalString   response        { __cell_null_str  };  ///<! Http response.
-    Types::OptionalString   authUsername    { __cell_null_str  };  ///<! Username [for authorization]
-    Types::OptionalString   authPassword    { __cell_null_str  };  ///<! Password [for authorization]
+    Types::OptionalString   response        { __cell_null_str  };  //!< Http response.
+    Types::OptionalString   authUsername    { __cell_null_str  };  //!< Username [for authorization]
+    Types::OptionalString   authPassword    { __cell_null_str  };  //!< Password [for authorization]
 
-    long                    timeout         {30L};  ///<! Default timeout of 30 seconds
+    long                    timeout         {30L};  //!< Default timeout of 30 seconds
 
-    Types::Mutex            curlHandleMutex; ///<! mutex to guard curlHandlePtr
+    Types::Mutex            curlHandleMutex; //!< mutex to guard curlHandlePtr
 
 
     std::chrono::time_point<std::chrono::high_resolution_clock> lastRequestTime;
@@ -440,7 +440,7 @@ private:
     static unsigned int m_rateLimit;
 
 protected:
-    RequestStruct requestStruct; ///<!The struct to hold libcurl options and data.
+    RequestStruct requestStruct; //!<The struct to hold libcurl options and data.
 };
 
 

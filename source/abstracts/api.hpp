@@ -29,16 +29,16 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
  */
 __cell_enum_class AuthenticationType : Types::u8
 {
-    NoAuth          =   0x0,  ///< No any authorization.
-    ApiKey          =   0x1,  ///< Authentication based on ApiKey.
-    BearerToken     =   0x2,  ///< Authentication based on BearerToken.
-    BasicAuth       =   0x3,  ///< Authentication based on BasicAuth.
-    DigestAuth      =   0x4,  ///< Authentication based on DigestAuth.
-    OAuth1_0        =   0x5,  ///< Authentication based on OAuth1.0.
-    OAuth2_0        =   0x6,  ///< Authentication based on OAuth2.0.
-    Hawk            =   0x7,  ///< Authentication based on Hawk.
-    AwsSignature    =   0x8,  ///< Authentication based on AWS Signature.
-    Customized      =   0x9   ///< Authentication based on Customized method.
+    NoAuth          =   0x0,  //!< No any authorization.
+    ApiKey          =   0x1,  //!< Authentication based on ApiKey.
+    BearerToken     =   0x2,  //!< Authentication based on BearerToken.
+    BasicAuth       =   0x3,  //!< Authentication based on BasicAuth.
+    DigestAuth      =   0x4,  //!< Authentication based on DigestAuth.
+    OAuth1_0        =   0x5,  //!< Authentication based on OAuth1.0.
+    OAuth2_0        =   0x6,  //!< Authentication based on OAuth2.0.
+    Hawk            =   0x7,  //!< Authentication based on Hawk.
+    AwsSignature    =   0x8,  //!< Authentication based on AWS Signature.
+    Customized      =   0x9   //!< Authentication based on Customized method.
 };
 
 /*!

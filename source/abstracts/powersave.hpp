@@ -44,14 +44,14 @@ struct PowerSavingStruct final
  */
 __cell_enum_class SaveType : Types::u8
 {
-    BackgroundUpdate        =   0x1,  ///< This option enables background update faster.
-    PreloadMedia            =   0x2,  ///< This option enables start loading media while in the service list for faster access.
-    InterfaceEffect         =   0x3,  ///< This option enables various effects and animations that make application look amazing.
-    EmojiAnimation          =   0x4,  ///< This option enables loop animated emoji in messages, reactions and status.
-    StickerAnimation        =   0x5,  ///< This option enables loop animated stickers, play full-screen special effects.
-    AutoplayGifs            =   0x6,  ///< This option enables autoplay and loop gifs inside services like chats and in the keyboard.
-    AutoplayVideos          =   0x7,  ///< This option enables autoplay and loop video and video message in some services such as chat.
-    AutoplayMusic           =   0x8   ///< This option enables autoplay and loop music and sound message in some services such as chat.
+    BackgroundUpdate        =   0x1,  //!< This option enables background update faster.
+    PreloadMedia            =   0x2,  //!< This option enables start loading media while in the service list for faster access.
+    InterfaceEffect         =   0x3,  //!< This option enables various effects and animations that make application look amazing.
+    EmojiAnimation          =   0x4,  //!< This option enables loop animated emoji in messages, reactions and status.
+    StickerAnimation        =   0x5,  //!< This option enables loop animated stickers, play full-screen special effects.
+    AutoplayGifs            =   0x6,  //!< This option enables autoplay and loop gifs inside services like chats and in the keyboard.
+    AutoplayVideos          =   0x7,  //!< This option enables autoplay and loop video and video message in some services such as chat.
+    AutoplayMusic           =   0x8   //!< This option enables autoplay and loop music and sound message in some services such as chat.
 };
 
 /*!
@@ -59,9 +59,9 @@ __cell_enum_class SaveType : Types::u8
  */
 __cell_enum_class Mode : Types::u8
 {
-    Automatic =   0x0, ///< Automatically disables all resource-intensive processes when battery is below {%}.
-    On        =   0x1, ///< Always off, never reduce power usage and keep all animations even when battery is low.
-    Off       =   0x2  ///< Always on, always disable all resource-intensive processes, regardless of the battery charge level.
+    Automatic =   0x0, //!< Automatically disables all resource-intensive processes when battery is below {%}.
+    On        =   0x1, //!< Always off, never reduce power usage and keep all animations even when battery is low.
+    Off       =   0x2  //!< Always on, always disable all resource-intensive processes, regardless of the battery charge level.
 };
 
 class __cell_export AbstractPowerSave

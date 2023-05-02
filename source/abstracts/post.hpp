@@ -36,15 +36,15 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
  */
 __cell_enum_class PostStatus : Types::u8
 {
-    Publish,        ///< Viewable by everyone.
-    Future,         ///< Scheduled to be published in a future date.
-    Draft,          ///< Incomplete post viewable by anyone with proper user role.
-    Pending,        ///< Awaiting a user with the publish capability.
-    Private,        ///< Viewable only to Cell users at Administrator level.
-    Trash,          ///< Posts in the Trash are assigned the trash status.
-    AutoDraft,      ///< Revisions that Cell saves automatically while you are editing.
-    Inherit,        ///< Used with a child post (such as Attachments and Revisions) to determine the actual status from the parent post.
-    Custom          ///< As custom status.
+    Publish,        //!< Viewable by everyone.
+    Future,         //!< Scheduled to be published in a future date.
+    Draft,          //!< Incomplete post viewable by anyone with proper user role.
+    Pending,        //!< Awaiting a user with the publish capability.
+    Private,        //!< Viewable only to Cell users at Administrator level.
+    Trash,          //!< Posts in the Trash are assigned the trash status.
+    AutoDraft,      //!< Revisions that Cell saves automatically while you are editing.
+    Inherit,        //!< Used with a child post (such as Attachments and Revisions) to determine the actual status from the parent post.
+    Custom          //!< As custom status.
 };
 
 /*!
@@ -53,32 +53,32 @@ __cell_enum_class PostStatus : Types::u8
 struct PostData final
 {
     ///!BASIC
-    Types::OptionalNumeric id              {};    ///< Index of post.
-    Types::OptionalNumeric priority        {};    ///< Index of post position.
-    Types::OptionalString  title           {};    ///< Title (subject) of post.
-    Types::OptionalString  url             {};    ///< Url for post.
-    Tags            tags                   {};    ///< Tags list for post.
-    Types::OptionalString  text            {};    ///< Text (main content) for post.
-    Types::OptionalString  documentTitle   {};    ///< Document title (title of post).
-    Types::OptionalString  metaDescr       {};    ///< Meta description (more details) for post.
+    Types::OptionalNumeric id              {};    //!< Index of post.
+    Types::OptionalNumeric priority        {};    //!< Index of post position.
+    Types::OptionalString  title           {};    //!< Title (subject) of post.
+    Types::OptionalString  url             {};    //!< Url for post.
+    Tags            tags                   {};    //!< Tags list for post.
+    Types::OptionalString  text            {};    //!< Text (main content) for post.
+    Types::OptionalString  documentTitle   {};    //!< Document title (title of post).
+    Types::OptionalString  metaDescr       {};    //!< Meta description (more details) for post.
     ///!MEDIA
-    System::MediaType  cover               {};    ///< Image or video for post.
-    System::IconType   icon                {};    ///< Icon for post.
+    System::MediaType  cover               {};    //!< Image or video for post.
+    System::IconType   icon                {};    //!< Icon for post.
     ///!DATETIME
-    Types::OptionalString  createdDate     {};    ///< Created date time.
-    Types::OptionalString  publishTime     {};    ///< Publishing time.
-    Types::OptionalString  pinnedTime      {};    ///< Pinned time.
-    Types::OptionalString  lastModified    {};    ///< Last Modified date-time.
+    Types::OptionalString  createdDate     {};    //!< Created date time.
+    Types::OptionalString  publishTime     {};    //!< Publishing time.
+    Types::OptionalString  pinnedTime      {};    //!< Pinned time.
+    Types::OptionalString  lastModified    {};    //!< Last Modified date-time.
     ///!EXTRA
-    Types::OptionalBool    inclueInSitemap            {};  ///< If included in sitemap section.
-    Types::OptionalBool    canBeModeratedFromFrontend {};  ///< Can be moderated from frontend?!
-    Types::OptionalBool    accessByApi     {};  ///< Can be access from api output.
-    Types::OptionalString  theme           {};  ///< Post theme.
-    Types::OptionalString  link            {};  ///< Post link.
-    PostStatus      postStatus      {};  ///< Post status.
-    Share           shareAction     {};  ///< Share action.
-    ShareData       shareData       {};  ///< Share data.
-    Message         message         {};  ///< Messahe for post.
+    Types::OptionalBool    inclueInSitemap            {};  //!< If included in sitemap section.
+    Types::OptionalBool    canBeModeratedFromFrontend {};  //!< Can be moderated from frontend?!
+    Types::OptionalBool    accessByApi     {};  //!< Can be access from api output.
+    Types::OptionalString  theme           {};  //!< Post theme.
+    Types::OptionalString  link            {};  //!< Post link.
+    PostStatus      postStatus      {};  //!< Post status.
+    Share           shareAction     {};  //!< Share action.
+    ShareData       shareData       {};  //!< Share data.
+    Message         message         {};  //!< Messahe for post.
 };
 
 /*!

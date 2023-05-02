@@ -291,7 +291,7 @@ Optional<SystemStatus> EngineInterface::getSystemStatus()
 
 Engine::Engine()
 {
-    ///< New instances.
+    //!< New instances.
     //    __cell_safe_instance(translator, Translation::Translator);
     Scope<Configuration> config(new Configuration(ConfigType::File));
     config->init(SectionType::SystemCore);
@@ -319,15 +319,15 @@ bool Engine::initialize()
     //        Application::get(appData)->engine->setLanguage(lang.getLanguage());
     //        Application::get(appData)->translator->setFile(lang.languageSupport());
     //    }
-    //    ///< Parsing
+    //    //!< Parsing
     //    if(Application::get(appData)->translator->parse()) {
     //        res = true;
     //        if(System::DeveloperMode::IsEnable)
-    //            Log("Language data has been parsed!", LoggerType::Done); ///< Parsing Done!
+    //            Log("Language data has been parsed!", LoggerType::Done); //!< Parsing Done!
     //    } else {
     //        res = false;
     //        if(System::DeveloperMode::IsEnable)
-    //            Log("No parsing...!", LoggerType::Failed);  ///< Parsing Failed!
+    //            Log("No parsing...!", LoggerType::Failed);  //!< Parsing Failed!
     //    }
 
     return res;
@@ -1105,7 +1105,7 @@ Application* Application::get(const ApplicationData& appData)
 void Application::start()
 {
     if(System::DeveloperMode::IsEnable)
-        Log("Engine started!", LoggerType::Info); ///< Engine Start...
+        Log("Engine started!", LoggerType::Info); //!< Engine Start...
     {
         Console::print << "Starting..." << newline;
         Console::print << "=================[Cell System Info]=================\n";

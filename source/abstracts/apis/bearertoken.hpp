@@ -38,7 +38,7 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts::Apis)
  */
 struct AuthorizationInfo __cell_final
 {
-    OptionalString token;  ///< The bearer token is a cryptic string.
+    OptionalString token;  //!< The bearer token is a cryptic string.
 };
 
 /*!

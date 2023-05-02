@@ -25,7 +25,7 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 
 struct CacheMembers __cell_final
 {
-    Types::OptionalString  storage   {}; ///< String path to the "eternal" storage files. About what "eternal cache" is, read below.
+    Types::OptionalString  storage   {}; //!< String path to the "eternal" storage files. About what "eternal cache" is, read below.
 };
 
 /*!

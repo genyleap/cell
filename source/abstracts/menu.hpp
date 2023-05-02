@@ -29,19 +29,19 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
  */
 __cell_enum_class MenuDisplayGroup : Types::u8
 {
-    Default     =   0x1,  ///< Display for all users.
-    Guest       =   0x2,  ///< Display for guest only.
-    User        =   0x3,  ///< Display for user only.
-    Admin       =   0x4,  ///< Display for admin only.
-    Master      =   0x5,  ///< Display for master only.
-    Customized  =   0x6   ///< Display for customized group only.
+    Default     =   0x1,  //!< Display for all users.
+    Guest       =   0x2,  //!< Display for guest only.
+    User        =   0x3,  //!< Display for user only.
+    Admin       =   0x4,  //!< Display for admin only.
+    Master      =   0x5,  //!< Display for master only.
+    Customized  =   0x6   //!< Display for customized group only.
 };
 
 __cell_enum_class ItemStatus : Types::u8
 {
-    Disabled    =   0x0,  ///< Disabled.
-    Hidden      =   0x1,  ///< Hidden.
-    Active      =   0x2   ///< Active.
+    Disabled    =   0x0,  //!< Disabled.
+    Hidden      =   0x1,  //!< Hidden.
+    Active      =   0x2   //!< Active.
 };
 
 /*!
@@ -49,16 +49,16 @@ __cell_enum_class ItemStatus : Types::u8
  */
 struct MenuItemData __cell_final
 {
-    Types::OptionalNumeric         id         {};   ///< Id of menu item.
-    Types::OptionalNumeric         parentId   {};   ///< Parent id of menu item.
-    Types::OptionalBool            isParent   {};   ///< Parent mode of menu item.
-    Types::OptionalString          title      {};   ///< Title of menu item.
-    Types::OptionalString          descr      {};   ///< Description of menu item.
-    Types::OptionalString          url        {};   ///< Url of menu item.
-    Types::OptionalString          params     {};   ///< Params of menu item.
-    Types::Optional<ItemStatus>    status     {};   ///< Status value of menu item.
-    Types::OptionalNumeric         priority   {};   ///< Group index value of menu item.
-    Types::OptionalBool            inSiteMap  {};   ///< InMap status for menu item.
+    Types::OptionalNumeric         id         {};   //!< Id of menu item.
+    Types::OptionalNumeric         parentId   {};   //!< Parent id of menu item.
+    Types::OptionalBool            isParent   {};   //!< Parent mode of menu item.
+    Types::OptionalString          title      {};   //!< Title of menu item.
+    Types::OptionalString          descr      {};   //!< Description of menu item.
+    Types::OptionalString          url        {};   //!< Url of menu item.
+    Types::OptionalString          params     {};   //!< Params of menu item.
+    Types::Optional<ItemStatus>    status     {};   //!< Status value of menu item.
+    Types::OptionalNumeric         priority   {};   //!< Group index value of menu item.
+    Types::OptionalBool            inSiteMap  {};   //!< InMap status for menu item.
 };
 
 class __cell_export AbstractMenuItem

@@ -87,8 +87,8 @@ public:
     void addComment(const std::string& section, const std::string& comment);
 
 private:
-    Types::JSonValue m_jsonValue        {}; ///<! The JSON value representing the settings file. */
-    Types::OptionalString m_filename    {}; ///<! The filename of the Json configuration file
+    Types::JSonValue m_jsonValue        {}; //!< The JSON value representing the settings file. */
+    Types::OptionalString m_filename    {}; //!< The filename of the Json configuration file
 };
 
 CELL_NAMESPACE_END

@@ -41,9 +41,9 @@ using ErrorString   =   std::vector<std::string>;
 struct ModuleInterfaceData final
 {
 public:
-    NameList    nameList    {};     ///< List of modules name.
-    ModuleList  moduleList  {};     ///< List of modules by info.
-    ErrorString errors      {};     ///< List of errors.
+    NameList    nameList    {};     //!< List of modules name.
+    ModuleList  moduleList  {};     //!< List of modules by info.
+    ErrorString errors      {};     //!< List of errors.
 };
 
 class __cell_export AbstractModuleInterface

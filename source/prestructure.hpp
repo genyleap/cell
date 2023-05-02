@@ -28,12 +28,12 @@ CELL_NAMESPACE_BEGIN(Cell)
  */
 __cell_enum_class SystemStatus : Types::u8
 {
-    Off             = 0x1, ///< The system is off.
-    On              = 0x2, ///< The system is on.
-    Suspened        = 0x3, ///< The system is on suspended mode.
-    Ready           = 0x4, ///< The system is ready.
-    Maintainance    = 0x5, ///< The system is under maintainance.
-    Unknown         = 0x6  ///< It is not clear what state the system is in.
+    Off             = 0x1, //!< The system is off.
+    On              = 0x2, //!< The system is on.
+    Suspened        = 0x3, //!< The system is on suspended mode.
+    Ready           = 0x4, //!< The system is ready.
+    Maintainance    = 0x5, //!< The system is under maintainance.
+    Unknown         = 0x6  //!< It is not clear what state the system is in.
 };
 
 /*!
@@ -41,11 +41,11 @@ __cell_enum_class SystemStatus : Types::u8
  */
 __cell_enum_class SystemType: Types::u8
 {
-    Private      = 0x1, ///< Private.
-    General      = 0x2, ///< General.
-    Professional = 0x3, ///< Professional.
-    Premium      = 0x4, ///< Premium.
-    Default      = 0x5  ///< Default.
+    Private      = 0x1, //!< Private.
+    General      = 0x2, //!< General.
+    Professional = 0x3, //!< Professional.
+    Premium      = 0x4, //!< Premium.
+    Default      = 0x5  //!< Default.
 };
 
 /*!
@@ -53,8 +53,8 @@ __cell_enum_class SystemType: Types::u8
  */
 __cell_enum_class SystemLicense: Types::u8
 {
-    Free            = 0x1,  ///< This flag marks the system as the free version.
-    Commercial      = 0x2   ///< This flag marks the system as the commercial version.
+    Free            = 0x1,  //!< This flag marks the system as the free version.
+    Commercial      = 0x2   //!< This flag marks the system as the commercial version.
 };
 
 /*!
@@ -83,7 +83,7 @@ struct SemanticVersion __cell_final
     Types::uint Major                  {__cell_zero};
     Types::uint Minor                  {__cell_zero};
     Types::uint Patch                  {__cell_zero};
-    Types::OptionalString  PreRelease  {__cell_null_str}; ///< Software release life cycle. https://en.wikipedia.org/wiki/Software_release_life_cycle
+    Types::OptionalString  PreRelease  {__cell_null_str}; //!< Software release life cycle. https://en.wikipedia.org/wiki/Software_release_life_cycle
 };
 
 /*!
@@ -93,8 +93,8 @@ struct SemanticVersion __cell_final
  */
 enum class ApplicationType : Types::u8
 {
-    Centralized    =  0x1, ///< A centralized application.
-    Decentralized  =  0x2, ///< A decentralized application (DApp).
+    Centralized    =  0x1, //!< A centralized application.
+    Decentralized  =  0x2, //!< A decentralized application (DApp).
 };
 
 /*!

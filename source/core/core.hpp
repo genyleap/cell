@@ -318,9 +318,9 @@ enum class TerminateType : u8
 
 enum class TableType : u8
 {
-    MixedStruct, ///<Key and Value table
-    KeyStruct,   ///<Only key table
-    ValueSturct  ///<Only value table [with suffix "l"]
+    MixedStruct, //!<Key and Value table
+    KeyStruct,   //!<Only key table
+    ValueSturct  //!<Only value table [with suffix "l"]
 };
 
 struct Termination
@@ -371,20 +371,20 @@ private:
 
 struct __cell_export BootParameter final
 {
-    bool                            fastBoot       {};      ///<This property is set to true when the system is booted with the highest possible state.
-    std::time_t                     initTime       {};      ///<The time spent on execution.
-    std::optional<std::string>      saveState      {};      ///<The system save state applied during a save operation after execution or completion of the operation..
-    std::optional<u32>              pageSize       {};      ///<The size of the requested page.
-    std::time_t                     pageInitTime   {};      ///<The loading time of the requested page.
-    std::optional<u32>              pageSpeed      {};      ///<The loading speed of the requested page.
-    std::optional<s32>              stateIndex     {};      ///<The state of index for any page.
-    std::optional<HostType>         hostType       {};      ///<This attribute specifies the type of site hosting. for example: Linux
-    std::optional<StorageType>      storageType    {};      ///<This attribute specifies the type of storage to use.
-    std::optional<UserMode>         userMode       {};      ///<This attribute specifies the type of user who uses the system.
-    std::optional<SyncDevice>       syncDevice     {};      ///<This attribute specifies the type of devices that are incellted with the system.
-    std::optional<SystemType>       systemType     {};      ///<This attribute determines the type of system consumption.
-    std::optional<SystemLicense>    systemLicense  {};      ///<The type of license to use the system.
-    std::optional<SystemStatus>     systemStatus   {};      ///<This attribute specifies the state the system is in.
+    bool                            fastBoot       {};      //!<This property is set to true when the system is booted with the highest possible state.
+    std::time_t                     initTime       {};      //!<The time spent on execution.
+    std::optional<std::string>      saveState      {};      //!<The system save state applied during a save operation after execution or completion of the operation..
+    std::optional<u32>              pageSize       {};      //!<The size of the requested page.
+    std::time_t                     pageInitTime   {};      //!<The loading time of the requested page.
+    std::optional<u32>              pageSpeed      {};      //!<The loading speed of the requested page.
+    std::optional<s32>              stateIndex     {};      //!<The state of index for any page.
+    std::optional<HostType>         hostType       {};      //!<This attribute specifies the type of site hosting. for example: Linux
+    std::optional<StorageType>      storageType    {};      //!<This attribute specifies the type of storage to use.
+    std::optional<UserMode>         userMode       {};      //!<This attribute specifies the type of user who uses the system.
+    std::optional<SyncDevice>       syncDevice     {};      //!<This attribute specifies the type of devices that are incellted with the system.
+    std::optional<SystemType>       systemType     {};      //!<This attribute determines the type of system consumption.
+    std::optional<SystemLicense>    systemLicense  {};      //!<The type of license to use the system.
+    std::optional<SystemStatus>     systemStatus   {};      //!<This attribute specifies the state the system is in.
 };
 
 class __cell_export EngineInterface

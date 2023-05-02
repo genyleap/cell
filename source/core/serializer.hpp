@@ -30,11 +30,11 @@ CELL_NAMESPACE_BEGIN(Cell::System::Serialization)
  */
 struct DataSerializerStruct final {
 #if defined(USE_BOOST)
-///<! An alias JsonSerialize for the function pointer type std::string(*)(const boost::json::value&), which is the type of boost::json::serialize.
+//!< An alias JsonSerialize for the function pointer type std::string(*)(const boost::json::value&), which is the type of boost::json::serialize.
 using JsonBoostSerialize = std::string(*)(const boost::json::value&);
-JsonBoostSerialize builder = boost::json::serialize; ///<! builder is serialize variable using the alias [based on boost].
+JsonBoostSerialize builder = boost::json::serialize; //!< builder is serialize variable using the alias [based on boost].
 #else
-    Json::StreamWriterBuilder builder;  ///<! builder is serialize variable using the alias. [based on jsoncpp].
+    Json::StreamWriterBuilder builder;  //!< builder is serialize variable using the alias. [based on jsoncpp].
 #endif
 };
 

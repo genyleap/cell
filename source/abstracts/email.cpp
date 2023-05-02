@@ -11,7 +11,7 @@ CELL_USING_NAMESPACE Cell;
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 
 /*!
- * \brief Constructs an abstract menu item.
+ * \brief Constructs an abstract Email item.
  */
 Email::Email(const Types::Optional<Types::VectorString>& to,
              const Types::Optional<Types::VectorString>& cc,
@@ -25,7 +25,7 @@ Email::Email(const Types::Optional<Types::VectorString>& to,
 }
 
 /*!
- * \brief Destroys the menu item.
+ * \brief Destroys the Email.
  */
 Email::~Email()
 {

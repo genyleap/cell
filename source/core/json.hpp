@@ -66,7 +66,7 @@ public:
     Types::JSonValue get(const std::string& key) __cell_noexcept;
 
 private:
-    Types::JSonValue m_root{}; ///<! Root node of the JSON object
+    Types::JSonValue m_root{}; //!< Root node of the JSON object
 };
 
 CELL_NAMESPACE_END

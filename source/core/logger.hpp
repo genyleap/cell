@@ -27,22 +27,22 @@ CELL_NAMESPACE_BEGIN(Cell::eLogger)
  */
 enum LoggerType : Types::u8
 {
-    Default     =   0x0,    ///<Print as default message.
-    Info        =   0x1,    ///<Print as information message.
-    Warning     =   0x2,    ///<Print as warning message.
-    Critical    =   0x3,    ///<Print as critical (error) message.
-    Failed      =   0x4,    ///<Print as failed message.
-    Success     =   0x5,    ///<Print as success message.
-    Done        =   0x6,    ///<Print as done message.
-    Paused      =   0x7,    ///<Print as paused message.
-    InProgress  =   0x8     ///<Print as in progress message.
+    Default     =   0x0,    //!<Print as default message.
+    Info        =   0x1,    //!<Print as information message.
+    Warning     =   0x2,    //!<Print as warning message.
+    Critical    =   0x3,    //!<Print as critical (error) message.
+    Failed      =   0x4,    //!<Print as failed message.
+    Success     =   0x5,    //!<Print as success message.
+    Done        =   0x6,    //!<Print as done message.
+    Paused      =   0x7,    //!<Print as paused message.
+    InProgress  =   0x8     //!<Print as in progress message.
 };
 
 enum class Mode : Types::u8
 {
-    User        =   0x0,    ///<Based on user log.
-    Developer   =   0x1,    ///<Based on developer for debuging log.
-    DataMining  =   0x2     ///<Based on data log.
+    User        =   0x0,    //!<Based on user log.
+    Developer   =   0x1,    //!<Based on developer for debuging log.
+    DataMining  =   0x2     //!<Based on data log.
 };
 
 

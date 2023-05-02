@@ -33,15 +33,15 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 
 //struct PluginDetail
 //{
-//  OptionalString            codeName      {}; ///< Code Name.
-//  OptionalString            name          {}; ///< Name.
-//  OptionalString            description   {}; ///< Description.
-//  OptionalString            compiledDate  {}; ///< Compiled Date.
-//  Optional<SystemLicense>   license       {}; ///< License.
-//  Optional<PluginType>      type          {}; ///< Type.
-//  Optional<SemanticVersion> version       {}; ///< Version.
-//  OptionalString            author        {}; ///< Author.
-//  OptionalString            url           {}; ///< Url.
+//  OptionalString            codeName      {}; //!< Code Name.
+//  OptionalString            name          {}; //!< Name.
+//  OptionalString            description   {}; //!< Description.
+//  OptionalString            compiledDate  {}; //!< Compiled Date.
+//  Optional<SystemLicense>   license       {}; //!< License.
+//  Optional<PluginType>      type          {}; //!< Type.
+//  Optional<SemanticVersion> version       {}; //!< Version.
+//  OptionalString            author        {}; //!< Author.
+//  OptionalString            url           {}; //!< Url.
 //};
 
 using NameList      =   std::vector<std::string>;
@@ -54,9 +54,9 @@ using ErrorString   =   std::vector<std::string>;
 struct PluginInterfaceData final
 {
 public:
-    NameList    nameList    {};     ///< List of plugins name.
-    PluginList  pluginList  {};     ///< List of plugins by info.
-    ErrorString errors      {};     ///< List of errors.
+    NameList    nameList    {};     //!< List of plugins name.
+    PluginList  pluginList  {};     //!< List of plugins by info.
+    ErrorString errors      {};     //!< List of errors.
 };
 
 class __cell_export AbstractPluginInterface

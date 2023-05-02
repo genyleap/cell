@@ -31,8 +31,8 @@ using FutureState   = std::future<bool>;
  */
 struct BackupStruct final
 {
-    Types::OptionalString fileName              {}; ///<! Filename
-    std::function<void(int)> progressCallback   {}; ///<! Progress callback.
+    Types::OptionalString fileName              {}; //!< Filename
+    std::function<void(int)> progressCallback   {}; //!< Progress callback.
 };
 
 /**
@@ -70,7 +70,7 @@ public:
     __cell_no_discard bool backupSync() __cell_noexcept;
 
 private:
-    BackupStruct backupStruct {}; ///<! An internal struct used for backup operations.
+    BackupStruct backupStruct {}; //!< An internal struct used for backup operations.
 };
 
 /**
@@ -78,9 +78,9 @@ private:
  */
 struct RestoreStruct final
 {
-    Types::OptionalString backupFileName        {}; ///<! Backup Filename
-    Types::OptionalString restoreFileName       {}; ///<! Restore Filename
-    std::function<void(int)> progressCallback   {}; ///<! Progress callback.
+    Types::OptionalString backupFileName        {}; //!< Backup Filename
+    Types::OptionalString restoreFileName       {}; //!< Restore Filename
+    std::function<void(int)> progressCallback   {}; //!< Progress callback.
 };
 
 /**
@@ -119,7 +119,7 @@ public:
     __cell_no_discard bool restoreSync() __cell_noexcept;
 
 private:
-    RestoreStruct restoreStruct {}; ///<! An internal struct used for restore operations.
+    RestoreStruct restoreStruct {}; //!< An internal struct used for restore operations.
 };
 
 CELL_NAMESPACE_END
