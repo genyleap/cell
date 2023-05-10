@@ -1,5 +1,5 @@
 # -------------------- PROJECT TEMPLATE INFO ---------------------------------------------
-#   Title   :                       Cell
+#   Title   :                       Cell Engine
 #   Version :                       0.8.323
 #   Author  :                       Kambiz Asadzadeh
 #   Url     :                       https://github.com/genyleap/cell
@@ -19,7 +19,7 @@ include(FetchContent)
 
 # ------ PROJECT INFO ------
 # Options
-set(PROJECT_NAME "Cell" CACHE STRING "Project Name.") #You can change "ProjectTemplate" with your project name.
+set(PROJECT_NAME "CoreInterface" CACHE STRING "Project Name.") #You can change "ProjectTemplate" with your project name.
 set(PROJECT_TARGET ${PROJECT_NAME} CACHE STRING "Project Target Name.")
 
 set(PROJECT_VERSION_MAJOR 0)
@@ -65,7 +65,7 @@ set(PROJECT_VERSION_STRING ${PROJECT_VERSION}-${PROJECT_VERSION_TYPE})
 set(PROJECT_LANGUAGES CXX)
 
 #Use these keys [application, library]
-set(PROJECT_USAGE_TYPE "application" CACHE STRING "Usage Type.")
+set(PROJECT_USAGE_TYPE "library" CACHE STRING "Usage Type.")
 
 #Use these keys [stl, qt, qtwidget, qtquick]
 set(PROJECT_MAIN_TYPE "stl" CACHE STRING "Library System.")
@@ -156,27 +156,50 @@ file(
     GLOB HEADERS
     source/${SUFFIX_HPPHEADER}
     source/core/${SUFFIX_HPPHEADER}
+    source/classes/${SUFFIX_HPPHEADER}
     source/modules/network/${SUFFIX_HPPHEADER}
     source/modules/hardware/system/${SUFFIX_HPPHEADER}
+    source/modules/cryptography/${SUFFIX_HPPHEADER}
     source/modules/settings/${SUFFIX_HPPHEADER}
     source/translator/${SUFFIX_HPPHEADER}
     source/abstracts/${SUFFIX_HPPHEADER}
     source/abstracts/apis/${SUFFIX_HPPHEADER}
     source/abstracts/account/${SUFFIX_HPPHEADER}
+    source/abstracts/database/${SUFFIX_HPPHEADER}
+    source/abstracts/database/mysql/${SUFFIX_HPPHEADER}
+    source/abstracts/database/psql/${SUFFIX_HPPHEADER}
+    source/abstracts/database/mssql/${SUFFIX_HPPHEADER}
+    source/abstracts/database/sqlite/${SUFFIX_HPPHEADER}
+    source/abstracts/database/oracle/${SUFFIX_HPPHEADER}
+    source/abstracts/account/${SUFFIX_HPPHEADER}
     source/abstracts/dynamics/${SUFFIX_HPPHEADER}
+    source/abstracts/modules/webserver/${SUFFIX_HPPHEADER}
+    source/classes/dynamics/${SUFFIX_HPPHEADER}
 )
 file(
     GLOB SOURCES
     source/${SUFFIX_SOURCE}
     source/core/${SUFFIX_SOURCE}
+    source/classes/${SUFFIX_SOURCE}
     source/modules/network/${SUFFIX_SOURCE}
     source/modules/hardware/system/${SUFFIX_SOURCE}
     source/modules/settings/${SUFFIX_SOURCE}
+    source/modules/cryptography/${SUFFIX_SOURCE}
     source/translator/${SUFFIX_SOURCE}
     source/abstracts/${SUFFIX_SOURCE}
     source/abstracts/apis/${SUFFIX_SOURCE}
     source/abstracts/account/${SUFFIX_SOURCE}
+    source/abstracts/database/${SUFFIX_SOURCE}
+    source/abstracts/database/mysql/${SUFFIX_SOURCE}
+    source/abstracts/database/psql/${SUFFIX_SOURCE}
+    source/abstracts/database/mssql/${SUFFIX_SOURCE}
+    source/abstracts/database/sqlite/${SUFFIX_SOURCE}
+    source/abstracts/database/oracle/${SUFFIX_SOURCE}
+    source/abstracts/account/${SUFFIX_SOURCE}
     source/abstracts/dynamics/${SUFFIX_SOURCE}
+    source/abstracts/modules/webserver/${SUFFIX_SOURCE}
+    source/classes/dynamics/${SUFFIX_SOURCE}
+
 )
 
 file(GLOB EXAMPLES
@@ -243,6 +266,39 @@ file(GLOB SOURCESFILE
     ${EXAMPLES}
     )
 
+
+# ------ PROJECT DIRECTORIES ------
+
+set(dir ${CMAKE_CURRENT_SOURCE_DIR}/build/)
+set(EXECUTABLE_OUTPUT_PATH ${dir}/final CACHE PATH "Build directory" FORCE)
+set(LIBRARY_OUTPUT_PATH ${dir}/final CACHE PATH "Build directory" FORCE)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${dir})
+set(CMAKE_BUILD_FILES_DIRECTORY ${dir})
+set(CMAKE_BUILD_DIRECTORY ${dir})
+set(CMAKE_BINARY_DIR  ${dir})
+SET(EXECUTABLE_OUTPUT_PATH ${dir}/final)
+SET(LIBRARY_OUTPUT_PATH ${dir}/final)
+SET(CMAKE_CACHEFILE_DIR ${dir})
+
+message("CMAKE_BUILD_FILES_DIRECTORY: " ${CMAKE_BUILD_FILES_DIRECTORY})
+
+# ------ OUTPUTS CONFIG ------
+
+if(PLATFORM_OS STREQUAL "macOS")
+    if(OS_ARCHITECTURES STREQUAL "")
+      set(OS_ARCHITECTURES ${CMAKE_OSX_ARCHITECTURES})
+      else()
+      set(OS_ARCHITECTURES "x86_64")
+    endif()
+else()
+    if(PROCESSOR_ARCHITECTURE STREQUAL "")
+      set(OS_ARCHITECTURES ${PROCESSOR_ARCHITECTURE})
+      else()
+      set(OS_ARCHITECTURES "x86_64")
+    endif()
+    set(OS_ARCHITECTURES ${PROCESSOR_ARCHITECTURE})
+endif()
+
 source_group("PrecompiledHeaders"  FILES ${PRECOMPILED})
 source_group("Utilities"  FILES ${UTILS})
 source_group("Entry Point (Main)"   FILES ${MAIN_ENTRY_POINT})
@@ -281,7 +337,7 @@ message(STATUS "${Bold}LIBRARY_OUTPUT_PATH${ColourReset}		: ${LIBRARY_OUTPUT_PAT
 message(STATUS "${Bold}CMAKE_CURRENT_SOURCE_DIR${ColourReset}	: ${CMAKE_CURRENT_SOURCE_DIR}")
 message(STATUS "${BoldBlue}------ ${PROJECT_TARGET} End Configuration ------${ColourReset}")
 
-if(GUI_APPLICATION)
+if(GUI_APPLICATION AND PROJECT_MAIN_TYPE STREQUAL "qt" OR PROJECT_MAIN_TYPE STREQUAL "qtwidget" OR PROJECT_MAIN_TYPE STREQUAL "qtquick")
 
     if(USE_QT5_FEATURES)
         if(${PROJECT_MAIN_TYPE} STREQUAL "qt")
@@ -384,8 +440,6 @@ if(GUI_APPLICATION)
         endif()
     endif()
 
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${LIB_MODULES} ${QT_MODULES_LINK} ${OS_LIBS})
-
     #Extra Modules
     target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/source PRIVATE source ${LIB_TARGET_INCLUDE_DIRECTORIES})
     target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/source ${LIB_TARGET_LINK_DIRECTORIES})
@@ -404,7 +458,9 @@ if(ANDROID)
 endif()
 
 if(QT_VERSION_MAJOR GREATER_EQUAL 6.0) #From Qt.6.0
+    if(${PROJECT_MAIN_TYPE} STREQUAL "qtquick")
         qt_import_qml_plugins(${PROJECT_NAME})
+    endif()
     if(QT_VERSION GREATER_EQUAL 6.2) #From Qt6.2
         qt_finalize_target(${PROJECT_NAME})
     endif()
@@ -437,13 +493,15 @@ else()
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/source PRIVATE source
         ${LIB_TARGET_INCLUDE_DIRECTORIES}
-        )
+        ${ODBC_INCLUDE_DIRS}
+    )
 
     target_link_directories(${PROJECT_NAME}
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/source
         ${LIB_TARGET_LINK_DIRECTORIES}
-        )
+        ${ODBC_LIBRARIES}
+    )
 
     set_target_properties(${PROJECT_NAME} PROPERTIES
         MACOSX_BUNDLE_GUI_IDENTIFIER ${DEVELOPER_BUNDLE_IDENTIFIER}
@@ -460,9 +518,21 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC ${LIB_TARGET_COMPILER_DEFINATI
 
 #This command generates installation rules for a project.
 #Install rules specified by calls to the install() command within a source directory. are executed in order during installation.
+#set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS ${LIB_TARGET_PROPERTIES})
+#This command generates installation rules for a project.
+#Install rules specified by calls to the install() command within a source directory. are executed in order during installation.
 install(TARGETS ${PROJECT_NAME} DESTINATION build/bin)
 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config/system-config.json DESTINATION ${CMAKE_BINARY_DIR}/config/)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config DESTINATION ${CMAKE_BINARY_DIR}/final)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/translations DESTINATION ${CMAKE_BINARY_DIR}/final)
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/final/server-log)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR}/final)
+install(DIRECTORY DESTINATION ${CMAKE_BINARY_DIR}/final/server-log)
+
 
 #Ignore unused files.
 list(APPEND CPACK_SOURCE_IGNORE_FILES /.git/ /build/ .gitignore .DS_Store)
+
+
+
+
