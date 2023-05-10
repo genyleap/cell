@@ -26,11 +26,11 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
 /**
  * @brief The structure holding the data of the XML setting.
  */
-struct XmlStructure
+struct XmlStructure final
 {
-    Types::OptionalString filename      {}; ///<! the filename of the XML configuration file
-    Types::SettingComment comments      {}; ///<! a map of vectors of strings containing comments for each section
-    Types::SettingData    settingData   {}; ///<! a map of maps containing configuration data for each section
+    Types::OptionalString filename      {}; //!< the filename of the XML configuration file
+    Types::SettingComment comments      {}; //!< a map of vectors of strings containing comments for each section
+    Types::SettingData    settingData   {}; //!< a map of maps containing configuration data for each section
 };
 
 constexpr const std::string_view settingBegin  = { "<settings>" };
@@ -44,12 +44,14 @@ constexpr const std::string_view settingEnd    = { "</settings>"};
 class __cell_export XmlSetting {
 public:
     /**
-     * @brief Constructs an XmlSetting object with the given filename.
-     * @param filename The filename of the XML setting file.
+     * @brief Constructs a XmlSetting object.
      */
     XmlSetting();
-    ~XmlSetting();
 
+    /**
+     * @brief Constructs a XmlSetting object.
+     */
+    ~XmlSetting();
 
     /**
      * @brief Sets the value of a key in a section.

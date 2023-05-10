@@ -4,7 +4,7 @@
  * @details     Email structure and client interface for system.
  * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
  * @package     The Genyleap
- * @since       29 Apr 202e
+ * @since       29 Apr 2023
  * @copyright   Copyright (c) 2022 The Genyleap. All rights reserved.
  * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
  *

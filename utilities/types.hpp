@@ -35,6 +35,20 @@ using JSonValue = boost::json::value;
 #endif
 #endif
 
+#ifdef __has_include
+# if __has_include(<openssl/aes.h>)
+#   include <openssl/opensslv.h>
+#   include <openssl/core_names.h>
+#   include <openssl/aes.h>
+#   include <openssl/des.h>
+#   include <openssl/bio.h>
+#   include <openssl/evp.h>
+#   include <openssl/rsa.h>
+#   include <openssl/pem.h>
+# endif
+#define ENABLE_OPENSSL 1
+#endif
+
 #define USE_MYSQL_MARIADB 1
 #define USE_POSTGRESQL 1
 #define USE_SQLITE 1

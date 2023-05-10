@@ -129,6 +129,7 @@ struct STATICS final {
 #define __cell_null_str ""
 #define __cell_space " "
 #define __cell_zero 0
+#define __cell_exit 0
 #define __cell_one 1
 #define __cell_newline "\n"
 #define __cell_compiler_counter __COUNTER__
@@ -146,8 +147,14 @@ struct STATICS final {
 template<typename T>
 using Scope = std::unique_ptr<T>;
 
+template<typename T>
+constexpr Scope<T> CreateScope()
+{
+  return std::make_unique<T>();
+}
+
 template<typename T, typename ... Args>
-constexpr Scope<T> CreateScope(Args&& ... args)
+constexpr Scope<T> CreateForwardScope(Args&& ... args)
 {
     return std::make_unique<T>(std::forward<Args>(args)...);
 }
@@ -159,8 +166,14 @@ using Ref = std::shared_ptr<T>;
 
 #define CELL_REF_SHARED_POINTER(Class, alias, param) std::shared_ptr<Class>alias(new Class(param));
 
+template<typename T>
+constexpr Ref<T> CreateRef()
+{
+    return std::make_shared<T>();
+}
+
 template<typename T, typename ... Args>
-constexpr Ref<T> CreateRef(Args&& ... args)
+constexpr Ref<T> CreateForwardRef(Args&& ... args)
 {
     return std::make_shared<T>(std::forward<Args>(args)...);
 }
@@ -181,6 +194,22 @@ object = CreateScope<Class>();\
 
 #define __cell_smart_instance_rhs(object, Class, rhs) \
 object = CreateScope<Class>(rhs);\
+
+#define __cell_smart_forward_instance(object, Class) \
+object = CreateForwardScope<Class>();\
+
+#define __cell_smart_forward_instance_rhs(object, Class, rhs) \
+    object = CreateForwardScope<Class>(rhs);\
+
+#define DeclareSingletonInstance(Class) \
+static Class& instance();
+
+#define CreateSingletonInstance(Class) \
+Class& Class::instance()\
+{\
+    static Class classObject;\
+    return classObject;\
+}
 
 #define __cell_safe_delete(object) \
 if(object!=nullptr)                 \
@@ -215,6 +244,7 @@ object = nullptr;                   \
 # define __cell_const const
 # define __cell_const_noexcept const noexcept
 # define __cell_const_noexcept_override const noexcept override
+# define __cell_noexcept_override noexcept override
 # define __cell_noexcept noexcept
 # define __cell_noexcept_expr(x) noexcept(x)
 # define __cell_constexpr_virtual virtual constexpr

@@ -28,9 +28,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
  */
 struct IniStructure final
 {
-    Types::OptionalString   filename    {}; ///<! The filename of the Ini configuration file.
-    Types::SettingComment   comments    {}; ///<! The comments associated with each section.
-    Types::SettingData      settingData {}; ///<! The INI data stored in memory.
+    Types::OptionalString   filename    {}; //!< The filename of the Ini configuration file.
+    Types::SettingComment   comments    {}; //!< The comments associated with each section.
+    Types::SettingData      settingData {}; //!< The INI data stored in memory.
 };
 
 /**
@@ -44,7 +44,7 @@ public:
     IniSetting();
 
     /**
-     * @brief Destroys the YamlSetting object.
+     * @brief Destroys the IniSetting object.
      */
     ~IniSetting();
 

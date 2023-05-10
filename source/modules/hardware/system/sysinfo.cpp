@@ -59,7 +59,7 @@ OptionalString SystemInformation::getOsName()
 }
 
 //!Dedicated for Win32 WMI System.
-#ifdef PLATFORM_WINFOWS
+#ifdef PLATFORM_WINDOWS
 std::string getFromWmi(const std::string_view query, const std::string_view key)
 {
     std::string resutl;
@@ -174,7 +174,7 @@ std::string getFromWmi(const std::string_view query, const std::string_view key)
 
 OptionalString SystemInformation::getHostName()
 {
-#ifdef PLATFORM_WINFOWS
+#ifdef PLATFORM_WINDOWS
     WSADATA wsa_data;
     int error = WSAStartup(MAKEWORD(2, 2), &wsa_data);
     if (error != 0) {
