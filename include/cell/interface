@@ -1,0 +1,12 @@
+#include "common.hpp"
+
+CELL_USING_NAMESPACE Cell;
+
+#ifdef CELL_ABSTRACTS
+#include "abstracts/configuration.hpp"
+#include "abstracts/device.hpp"
+#include "abstracts/page.hpp"
+#include "abstracts/account/activities.hpp"
+#include "abstracts/account/usermanager.hpp"
+#include "abstracts/account/usermedia.hpp"
+#endif
