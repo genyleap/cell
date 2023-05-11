@@ -1,6 +1,6 @@
 /*!
  * @file        module.hpp
- * @brief       This file is part of the Cell Engine.
+ * @brief       This file is part of the Cell System.
  * @details     Module interface for system.
  * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
  * @package     The Genyleap
@@ -13,23 +13,59 @@
 #ifndef CELL_MODULE_ABSTRACT_HPP
 #define CELL_MODULE_ABSTRACT_HPP
 
+//! Cell's Common.
 #ifdef __has_include
 # if __has_include("common.hpp")
 #   include "common.hpp"
 #else
-#   error "Cell's "common.hpp" was not found!"
+#   error "Cell's common was not found!"
 # endif
 #endif
 
-#ifdef __has_include
-# if __has_include("moduleschema.hpp")
-#   include "moduleschema.hpp"
-#else
-#   error "Cell's "moduleschema.hpp" was not found!"
-# endif
-#endif
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
+
+/*!
+ * \brief The ModuleType enum
+ */
+__cell_enum_class ModuleType : Types::u8
+{
+    Index,      //!< For global user service.
+    Admin,      //!< For administrator service.
+    System,     //!< For system service.
+    Service,    //!< For external or internal service.
+    Default,    //!< For default global service.
+    Custom      //!< For custom global service.
+};
+
+/*!
+ * \brief The PermissionType enum
+ */
+__cell_enum_class PermissionType
+{
+    ReadOnly,
+    EditableOnly,
+    Restricted,
+    FullAccess,
+    ByService
+};
+
+/*!
+ * \brief The ModuleInfo class
+ */
+struct ModuleInfo __cell_final
+{
+    Types::Optional<Types::u32>        codeName        {}; //!< A unique code for module.
+    Types::OptionalString              name            {}; //!< A name for module.
+    Types::OptionalString              description     {}; //!< A description for explanation module.
+    Types::OptionalString              compiledDate    {}; //!< Compiled date for module.
+    Types::Optional<SystemLicense>     license         {}; //!< License type for module.
+    ModuleType                         moduleType      {}; //!< The type of module.
+    Types::Optional<SemanticVersion>   version         {}; //!< Version of module.
+    Types::OptionalString              author          {}; //!< Author of module.
+    Types::OptionalString              url             {}; //!< Url of module.
+};
+
 
 /*!
  * \brief The AbstractBaseClass class
@@ -108,10 +144,16 @@ public:
         return val;
     }
 
+    /*!
+     * \brief type function returns type of module.
+     * \returns as ModuleType.
+     */
+    __cell_virtual ModuleType type() __cell_const_noexcept = __cell_zero;
+
 protected:
     ModuleInfo* m_moduleInfo;
     friend class AbstractModuleManager;
-    void setCodeName(const Types::Optional<Types::u32>& codename);
+    void setCodeName(const Types::OptionalString& codename);
     void setName(const Types::OptionalString& name);
     void setDescription(const Types::OptionalString& desc);
     void setCompiledDate(const Types::OptionalString& compiledDate);

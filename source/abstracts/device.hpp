@@ -41,14 +41,14 @@ enum class DeviceState : u8
 struct DeviceInfo final
 {
     //!Statics
-    OptionalNumeric id          {}; ///< Device ID.
-    OptionalString  title       {}; ///< Device Title.
-    OptionalString  description {}; ///< Device Description.
-    OptionalString  ipAddress   {}; ///< Device IP Address.
-    OptionalString  macAddress  {}; ///< Device Mac Address.
+    OptionalNumeric id          {}; //!< Device ID.
+    OptionalString  title       {}; //!< Device Title.
+    OptionalString  description {}; //!< Device Description.
+    OptionalString  ipAddress   {}; //!< Device IP Address.
+    OptionalString  macAddress  {}; //!< Device Mac Address.
     //!Dynamics
-//    Optional<Cell::System::DeviceType> type   {}; ///< Device Type (Desktop, Mobile and etc.).
-    Optional<DeviceState> state {}; ///< Device State.
+//    Optional<Cell::System::DeviceType> type   {}; //!< Device Type (Desktop, Mobile and etc.).
+    Optional<DeviceState> state {}; //!< Device State.
 };
 
 /*!

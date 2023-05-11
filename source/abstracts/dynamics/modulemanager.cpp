@@ -1,8 +1,9 @@
+//! Cell's Abstract Dynamics.
 #ifdef __has_include
 # if __has_include("modulemanager.hpp")
 #   include "modulemanager.hpp"
 #else
-#   error "Cell's modulemanager not found!"
+#   error "Cell's modulemanager was not found!"
 # endif
 #endif
 
@@ -25,6 +26,5 @@ AbstractModuleManager::~AbstractModuleManager()
 {
     __cell_safe_delete(m_moduleManagerData);
 }
-
 
 CELL_NAMESPACE_END

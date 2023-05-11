@@ -28,15 +28,15 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
  */
 __cell_enum_class PluginType : Types::u8
 {
-    Index,      //!For global user service.
-    Admin,      //!For administrator service.
-    Root,       //!For root service.
-    System,     //!For system service.
-    Cron,       //!For cron job service.
-    Core,       //!For system core service.
-    Theme,      //!For system template.
-    Default,    //!For default global service.
-    Custom      //!For custom global service.
+    Index,      //!< For global user service.
+    Admin,      //!< For administrator service.
+    Root,       //!< For root service.
+    System,     //!< For system service.
+    Cron,       //!< For cron job service.
+    Core,       //!< For system core service.
+    Theme,      //!< For system template.
+    Default,    //!< For default global service.
+    Custom      //!< For custom global service.
 };
 
 /*!

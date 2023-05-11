@@ -1,6 +1,6 @@
 /*!
  * @file        modulemanager.hpp
- * @brief       This file is part of the Cell Engine.
+ * @brief       This file is part of the Cell System.
  * @details     Module manager interface for system.
  * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
  * @package     The Genyleap
@@ -10,30 +10,33 @@
  *
  */
 
-#ifndef CELL_PLUGIN_MANAGER_ABSTRACT_HPP
-#define CELL_PLUGIN_MANAGER_ABSTRACT_HPP
+#ifndef CELL_MODULE_MANAGER_ABSTRACT_HPP
+#define CELL_MODULE_MANAGER_ABSTRACT_HPP
 
+//! Cell's Common.
 #ifdef __has_include
 # if __has_include("common.hpp")
 #   include "common.hpp"
 #else
-#   error "Cell's "common.hpp" was not found!"
+#   error "Cell's common was not found!"
 # endif
 #endif
 
+//! Cell's Module.
 #ifdef __has_include
 # if __has_include("module.hpp")
 #   include "module.hpp"
 #else
-#   error "Cell's "module.hpp" was not found!"
+#   error "Cell's module was not found!"
 # endif
 #endif
 
+//! Cell's Module interface.
 #ifdef __has_include
 # if __has_include("moduleinterface.hpp")
 #   include "moduleinterface.hpp"
 #else
-#   error "Cell's "moduleinterface.hpp" was not found!"
+#   error "Cell's module interface was not found!"
 # endif
 #endif
 
@@ -67,33 +70,31 @@ public:
 class __cell_export AbstractModuleManager
 {
 public:
-    static AbstractModuleManager& instance();
-
+    CELL_DEFAULT_INTERFACE_OCTORS(AbstractModuleManager)
     /*!
      * \brief load function loads the module and returns true if the module was loaded successfully; otherwise returns false.
      * \param module is module name.
      * \returns module.
      */
-    __cell_no_discard_virtual AbstractModule* load(const std::string& module) __cell_const_noexcept = __cell_zero;
+    __cell_no_discard_virtual AbstractModule* load(const std::string& module) = __cell_zero;
 
     /*!
      * \brief unload function unloads the module and returns true if the module could be unloaded; otherwise returns false.
      * \param module
      */
-    __cell_virtual void unload(AbstractModule*& module) __cell_const_noexcept = __cell_zero;
+    __cell_virtual void unload(AbstractModule*& module) = __cell_zero;
 
     /*!
      * \brief isLoaded function returns true if the module is loaded; otherwise returns false.
      * \return bolean of status.
      */
-    __cell_no_discard_virtual bool isLoaded() __cell_const_noexcept = __cell_zero;
+    __cell_no_discard_virtual bool isLoaded() = __cell_zero;
 
 private:
-    CELL_DEFAULT_INTERFACE_OCTORS(AbstractModuleManager)
     ModuleManagerData* m_moduleManagerData;
     bool m_status = {false};
 };
 
 CELL_NAMESPACE_END
 
-#endif  // CELL_PLUGIN_MANAGER_ABSTRACT_HPP
+#endif  // CELL_MODULE_MANAGER_ABSTRACT_HPP

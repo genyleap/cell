@@ -1,6 +1,6 @@
 /*!
  * @file        moduleinterface.hpp
- * @brief       This file is part of the Cell Engine.
+ * @brief       This file is part of the Cell System.
  * @details     Module interface for system.
  * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
  * @package     The Genyleap
@@ -13,21 +13,24 @@
 #ifndef CELL_MODULE_INTERFACE_ABSTRACT_HPP
 #define CELL_MODULE_INTERFACE_ABSTRACT_HPP
 
+//! Cell's Common.
 #ifdef __has_include
 # if __has_include("common.hpp")
 #   include "common.hpp"
 #else
-#   error "Cell's "common.hpp" was not found!"
+#   error "Cell's common was not found!"
 # endif
 #endif
 
+//! Cell's Module.
 #ifdef __has_include
 # if __has_include("module.hpp")
 #   include "module.hpp"
 #else
-#   error "Cell's "module.hpp" was not found!"
+#   error "Cell's module was not found!"
 # endif
 #endif
+
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 
@@ -49,6 +52,7 @@ public:
 class __cell_export AbstractModuleInterface
 {
 public:
+    CELL_DEFAULT_INTERFACE_OCTORS(AbstractModuleInterface)
     //Return a static instance of this class
     static AbstractModuleInterface& instance();
 
@@ -89,10 +93,8 @@ public:
     __cell_no_discard_virtual const ErrorString& getErrors() __cell_const_noexcept = __cell_zero;
 
 private:
-    CELL_DEFAULT_INTERFACE_OCTORS(AbstractModuleInterface)
     ModuleInterfaceData*  m_moduleInterfaceData;
 };
-
 
 CELL_NAMESPACE_END
 
