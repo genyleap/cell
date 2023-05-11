@@ -1,12 +1,15 @@
+//! Cell's Groups.
 #ifdef __has_include
 # if __has_include("groups.hpp")
 #   include "groups.hpp"
 #else
-#   error "Cell's "groups.hpp" was not found!"
+#   error "Cell's groups was not found!"
 # endif
 #endif
 
 CELL_USING_NAMESPACE Cell;
+CELL_USING_NAMESPACE Cell::Abstracts;
+CELL_USING_NAMESPACE Cell::Abstracts::Account;
 
 CELL_NAMESPACE_BEGIN(Cell)
 
@@ -27,22 +30,22 @@ Groups::~Groups()
 }
 
 
-bool Groups::add(const GroupData& groupData) __cell_noexcept
+bool Groups::add(const GroupData& groupData) __cell_const_noexcept
 {
   ///ToDo...
 }
 
-bool Groups::edit(const u32 id, const GroupData& groupData) __cell_noexcept
+bool Groups::edit(const u32 id, const GroupData& groupData) __cell_const_noexcept
 {
   ///ToDo...
 }
 
-bool Groups::remove(const u32 id) __cell_noexcept
+bool Groups::remove(const u32 id) __cell_const_noexcept
 {
   ///ToDo...
 }
 
-GroupData Groups::get(const u32 id) noexcept
+GroupData Groups::get(const u32 id) __cell_const_noexcept
 {
     //m_groupData->....;
     ///ToDo...

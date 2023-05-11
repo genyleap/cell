@@ -1,7 +1,7 @@
 /*!
- * @file        plugin.hpp
+ * @file        module.hpp
  * @brief       This file is part of the Cell System.
- * @details     Plugin for system.
+ * @details     Module for system.
  * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
  * @package     The Genyleap
  * @since       29 Apr 2023
@@ -10,8 +10,8 @@
  *
  */
 
-#ifndef CELL_PLUGIN_HPP
-#define CELL_PLUGIN_HPP
+#ifndef CELL_MODULE_HPP
+#define CELL_MODULE_HPP
 
 #ifdef __has_include
 # if __has_include("common.hpp")
@@ -22,91 +22,93 @@
 #endif
 
 #ifdef __has_include
-# if __has_include("pluginschema.hpp")
-#   include "pluginschema.hpp"
+# if __has_include("moduleschema.hpp")
+#   include "moduleschema.hpp"
 #else
-#   error "Cell's "pluginschema.hpp" was not found!"
+#   error "Cell's "moduleschema.hpp" was not found!"
 # endif
 #endif
 
-class __cell_export Plugin
+CELL_NAMESPACE_BEGIN(Cell::Dynamics)
+
+class __cell_export Module
 {
 public:
-    CELL_DEFAULT_INTERFACE_OCTORS_WITHOUT_IMPL(Plugin)
+    CELL_DEFAULT_INTERFACE_OCTORS(Module)
 
     /*!
-     * \brief getCodeName function returns a unique code of plugin.
+     * \brief getCodeName function returns a unique code of module.
      * \returns a code as unique type.
      */
     __cell_no_discard_virtual Types::OptionalString getCodeName()  __cell_const_noexcept = __cell_zero;
 
     /*!
-     * \brief getName function returns name of plugin.
+     * \brief getName function returns name of module.
      * \returns a name as string.
      */
     __cell_no_discard_virtual Types::OptionalString getName()  __cell_const_noexcept = __cell_zero;
 
     /*!
-     * \brief getDescription function returns description of plugin.
-     * \returns a description about plugin as string.
+     * \brief getDescription function returns description of module.
+     * \returns a description about module as string.
      */
     __cell_no_discard_virtual Types::OptionalString getDescription()  __cell_const_noexcept = __cell_zero;
 
     /*!
-     * \brief getCompiledDate function returns date of plugin's compile date.
+     * \brief getCompiledDate function returns date of module's compile date.
      * \returns a name as string.
      */
     __cell_no_discard_virtual Types::OptionalString getCompiledDate()  __cell_const_noexcept = __cell_zero;
 
     /*!
-     * \brief getLicense function returns license of plugin.
+     * \brief getLicense function returns license of module.
      * \returns a license as SystemLicense.
      */
     __cell_no_discard_virtual Types::Optional<SystemLicense> getLicense()  __cell_const_noexcept = __cell_zero;
 
     /*!
-     * \brief getPluginType function returns type of plugin.
-     * \returns a type as PluginType.
+     * \brief getModuleType function returns type of module.
+     * \returns a type as ModuleType.
      */
-    __cell_no_discard_virtual Types::Optional<PluginType> getPluginType()  __cell_const_noexcept = __cell_zero;
+    __cell_no_discard_virtual Types::Optional<ModuleType> getModuleType()  __cell_const_noexcept = __cell_zero;
 
     /*!
-     * \brief getVersion function returns version of plugin.
+     * \brief getVersion function returns version of module.
      * \returns a version as SemanticVersion.
      */
     __cell_no_discard_virtual Types::Optional<SemanticVersion> getVersion()  __cell_const_noexcept = __cell_zero;
 
     /*!
-     * \brief getAuthor function returns author of plugin.
+     * \brief getAuthor function returns author of module.
      * \returns a name as string.
      */
     __cell_no_discard_virtual Types::OptionalString getAuthor()  __cell_const_noexcept = __cell_zero;
 
     /*!
-     * \brief getUrl function returns url of plugin.
+     * \brief getUrl function returns url of module.
      * \returns a url as string.
      */
     __cell_no_discard_virtual Types::OptionalString getUrl()  __cell_const_noexcept = __cell_zero;
 
     /**
-     * @brief getPermission function will returns plugin permission.
+     * @brief getPermission function will returns module permission.
      * @return an optional type of permision.
      */
     __cell_no_discard_virtual Types::Optional<PermissionType> getPermission()  __cell_const_noexcept = __cell_zero;
 
     /**
-     * @brief getState function will returns plugin status.
+     * @brief getState function will returns module status.
      * @return an optional state.
      */
-    __cell_no_discard_virtual Types::Optional<PluginState> getState()  __cell_const_noexcept = __cell_zero;
+    __cell_no_discard_virtual Types::Optional<ModuleState> getState()  __cell_const_noexcept = __cell_zero;
 
     /*!
-     * \brief run is action function for plugins.
+     * \brief run is action function for modules.
      */
     __cell_virtual void run()  __cell_const_noexcept = __cell_zero;
 
     /*!
-     * \brief runAsTemplate is action function for plugins based on template.
+     * \brief runAsTemplate is action function for modules based on template.
      * \param val is a parameter as multi type support.
      */
     template <typename... Args>
@@ -116,10 +118,12 @@ public:
     }
 
     /*!
-     * \brief type function returns type of plugin.
-     * \returns as PluginType.
+     * \brief type function returns type of module.
+     * \returns as ModuleType.
      */
-    __cell_virtual PluginType type() __cell_const_noexcept = __cell_zero;
+    __cell_virtual ModuleType type() __cell_const_noexcept = __cell_zero;
 };
 
-#endif // CELL_PLUGIN_HPP
+CELL_NAMESPACE_END
+
+#endif // CELL_MODULE_HPP

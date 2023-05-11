@@ -66,21 +66,21 @@ enum class PermissionType : Types::u8
 struct PluginInfo __cell_final
 {
     //!<  Types of usage.
-    PluginType                         pluginType      {}; ///< The type of plugin.
+    PluginType                         pluginType      {}; //!< The type of plugin.
 
     //!< Basic information
-    Types::OptionalString              codeName        {}; ///< A unique code for plugin.
-    Types::OptionalString              name            {}; ///< A name for plugin.
-    Types::OptionalString              description     {}; ///< A description for explanation plugin.
-    Types::OptionalString              compiledDate    {}; ///< Compiled date for plugin.
-    Types::OptionalString              author          {}; ///< Author of plugin.
-    Types::OptionalString              url             {}; ///< Url of plugin.
+    Types::OptionalString              codeName        {}; //!< A unique code for plugin.
+    Types::OptionalString              name            {}; //!< A name for plugin.
+    Types::OptionalString              description     {}; //!< A description for explanation plugin.
+    Types::OptionalString              compiledDate    {}; //!< Compiled date for plugin.
+    Types::OptionalString              author          {}; //!< Author of plugin.
+    Types::OptionalString              url             {}; //!< Url of plugin.
 
     //!< Optionals
-    Types::Optional<SystemLicense>     license         {}; ///< License type for plugin.
-    Types::Optional<SemanticVersion>   version         {}; ///< Version of plugin.
-    Types::Optional<PermissionType>    permission      {}; ///< Permissions of plugin.
-    Types::Optional<PluginState>       state           {}; ///< Status of plugin.
+    Types::Optional<SystemLicense>     license         {}; //!< License type for plugin.
+    Types::Optional<SemanticVersion>   version         {}; //!< Version of plugin.
+    Types::Optional<PermissionType>    permission      {}; //!< Permissions of plugin.
+    Types::Optional<PluginState>       state           {}; //!< Status of plugin.
 };
 
 #endif  // CELL_PLUGIN_SCHEMA_HPP

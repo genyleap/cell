@@ -1,3 +1,15 @@
+/*!
+ * @file        pluginmanager.hpp
+ * @brief       This file is part of the Cell System.
+ * @details     Plugin manager for system.
+ * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
+ * @package     The Genyleap
+ * @since       29 Apr 2023
+ * @copyright   Copyright (c) 2023 The Genyleap. All rights reserved.
+ * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
+ *
+ */
+
 #ifndef CELL_PLUGIN_MANAGER_HPP
 #define CELL_PLUGIN_MANAGER_HPP
 
