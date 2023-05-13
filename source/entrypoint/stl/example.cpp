@@ -8,7 +8,7 @@ CELL_USING_NAMESPACE Cell::eLogger;
 class TestCore
 {
 public:
-    void run()
+    void runInstanceExample()
     {
         auto ev1    = Engine               ();    //!< Simple - safe
         auto ev2    = createEngineObject   ();    //!< Smart Pointer (Perfect RAII) - safe
