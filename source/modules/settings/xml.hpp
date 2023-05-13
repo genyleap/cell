@@ -10,8 +10,8 @@
  *
  */
 
-#ifndef CELL_XML_HPP
-#define CELL_XML_HPP
+#ifndef CELL_SETTING_XML_HPP
+#define CELL_SETTING_XML_HPP
 
 #ifdef __has_include
 # if __has_include("common.hpp")
@@ -96,4 +96,4 @@ private:
 
 CELL_NAMESPACE_END
 
-#endif // CELL_XML_HPP
+#endif // CELL_SETTING_XML_HPP

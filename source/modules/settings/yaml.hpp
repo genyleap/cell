@@ -10,8 +10,8 @@
  *
  */
 
-#ifndef CELL_YAML_HPP
-#define CELL_YAML_HPP
+#ifndef CELL_SETTING_YAML_HPP
+#define CELL_SETTING_YAML_HPP
 
 #ifdef __has_include
 # if __has_include("common.hpp")
@@ -99,4 +99,4 @@ private:
 
 CELL_NAMESPACE_END
 
-#endif // CELL_YAML_HPP
+#endif // CELL_SETTING_YAML_HPP

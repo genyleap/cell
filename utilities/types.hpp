@@ -188,19 +188,19 @@ using SettingComment    = std::map<std::string, std::vector<std::string>>;
 using SettingData       = std::map<std::string, std::map<std::string, std::string>>;
 
 #if defined(USE_JSON) && !defined(USE_BOOST)
-namespace JSon             = Json;
+namespace JsonSpace        = Json;
 using JSonValue            = Json::Value;
 using JSonParser           = Json::Reader;
 using OptionalJsonVal      = std::optional<Json::Value>;
 using JSonException        = Json::Exception;
 #   elif defined(USE_BOOST)
-namespace JSon             = boost::json;
+namespace JsonSpace         = boost::json;
 using JSonValue            = boost::json::value;
 using JSonParser           = boost::json::stream_parser;
 using OptionalJsonVal      = std::optional<boost::json::value>;
 #   elif !defined(USE_JSON) && !defined(USE_BOOST)
 #if __cpp_lib_json
-namespace JSon      = std::json;
+namespace JsonSpace      = std::json;
 #endif
 #endif
 
