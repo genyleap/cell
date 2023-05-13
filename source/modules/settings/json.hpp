@@ -102,7 +102,7 @@ static auto JSON_SETTING_SEQUENCE_BOOLEAN_GET(const T& jvalue, const T1& obj1, c
 #ifdef USE_BOOST
     return jvalue.at(obj1).at(obj2).as_bool();
 #else
-    return jvalue.at(obj1).at(obj2).asBool();
+    return jvalue[obj1][obj2].asBool();
 #endif
 }
 
