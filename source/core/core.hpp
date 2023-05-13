@@ -398,7 +398,8 @@ public:
      * @brief initialize starter!
      * @return true if the system starts successfully.
      */
-    virtual bool initialize() = __cell_zero;
+    __cell_no_discard_message("Pay attention! Note that the engine can only be started once.")
+    virtual bool start() = __cell_zero;
 
     /*!
      * @brief Getting current fast boot status.
@@ -478,7 +479,6 @@ public:
      */
     virtual std::optional<SystemStatus>     getSystemStatus     () final;
 
-
 private:
     BootParameter* m_bootParameter{nullptr};
     bool m_status{false};
@@ -517,13 +517,20 @@ public:
     Engine();
     ~Engine();
 
-    DeclareSingletonInstance(Engine)
+    DeclareSingletonSelf(Engine)
 
     /*!
      * @brief initialize starter!
-     * @return true if the system starts successfully.
+     * @return true if the engine starts successfully.
      */
-    __cell_no_discard bool initialize() override;
+    __cell_no_discard_message("Pay attention! Note that the engine can only be started once.")
+    bool start() override;
+
+    /**
+     * @brief isStarted
+     * @return
+     */
+    bool isStarted();
 
     /*!
      * System copyrights.
@@ -845,6 +852,8 @@ public:
     void setPath(const std::string& p);
 
     mutable std::string currentPath{};
+
+    static Types::OptionalBool isInitialized;
 
 protected:
     Translation::Translator* translatorPtr {   __cell_nullptr  };

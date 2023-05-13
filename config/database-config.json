@@ -1,0 +1,25 @@
+{
+  "table_prefix": "cell_",
+  "table_value_struct": "_l",
+  "table_unicode": "utf-8",
+  "database": [
+    {
+      "rdbms": "postgresql",
+      "host": "127.0.0.1",
+      "name": "tegradb",
+      "username": "root",
+      "password": "",
+      "port": 5432,
+      "status": true
+    },
+    {
+      "rdbms": "mysql",
+      "host": "127.0.0.1",
+      "name": "tegradb",
+      "username": "root",
+      "password": "",
+      "port": 3306,
+      "status": false
+    }
+  ]
+}

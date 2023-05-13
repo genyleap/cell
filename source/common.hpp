@@ -203,6 +203,16 @@ object = CreateForwardScope<Class>();\
 #define __cell_smart_forward_instance_rhs(object, Class, rhs) \
     object = CreateForwardScope<Class>(rhs);\
 
+#define DeclareSingletonSelf(Class) \
+static Class& self();
+
+#define CreateSingletonSelf(Class) \
+Class& Class::self()\
+{\
+        static Class classObject;\
+        return classObject;\
+}
+
 #define DeclareSingletonInstance(Class) \
 static Class& instance();
 

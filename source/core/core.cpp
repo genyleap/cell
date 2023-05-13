@@ -302,23 +302,31 @@ Engine::~Engine()
     __cell_safe_delete(translatorPtr);
 }
 
-CreateSingletonInstance(Engine)
+CreateSingletonSelf(Engine)
 
-Translation::Translator* Engine::translator()
+    Translation::Translator* Engine::translator()
 {
     return translatorPtr;
 }
 
-bool Engine::initialize()
+OptionalBool Engine::isInitialized = false;
+
+bool Engine::start()
 {
-    bool res{false};
+    {
+        //!ToDo... for more initializing...
+    }
+
+    bool res { false };
+
+    // Check if engine has initialized!
+    if((isInitialized.has_value()) && isInitialized.value())
+    {
+        return false;
+    }
 
     auto language = Cell::Multilangual::Language();
 
-    for(const auto& c : language.languageSupport())
-    {
-        std::cout << c << std::endl;
-    }
     Cell::Translation::LanguageFile langFiles { language.languageSupport() };
 
     translatorPtr->setFile(langFiles);
@@ -349,10 +357,21 @@ bool Engine::initialize()
     //        if(System::DeveloperMode::IsEnable)
     //            Log("No parsing...!", LoggerType::Failed);  //!< Parsing Failed!
     //    }
+    isInitialized = true;
+
+    Log("Engine has initialized!", LoggerType::Success);
 
     return res;
 }
 
+bool Engine::isStarted()
+{
+    if(isInitialized.has_value() && isInitialized.value())
+    {
+        return true;
+    }
+    return false;
+}
 
 std::string Engine::copyright() __cell_noexcept
 {
