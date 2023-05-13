@@ -508,18 +508,16 @@ private:
     mutable std::mutex m_mutex;
 };
 
-/*!
+/**
  * @brief The Engine class
  */
 class __cell_export Engine : public EngineInterface
 {
 public:
     Engine();
-    Engine(const Engine& rhsEngine) = delete;
-    Engine(Engine&& rhsEngine) noexcept = delete;
-    Engine& operator=(const Engine& rhsEngine) = delete;
-    Engine& operator=(Engine&& rhsEngine) noexcept = delete;
     ~Engine();
+
+    DeclareSingletonInstance(Engine)
 
     /*!
      * @brief initialize starter!
@@ -837,7 +835,8 @@ public:
     /*!
      * \brief Lanuage translator engine.
      */
-    //    Translation::Translator* translator{__cell_nullptr};
+
+    Translation::Translator* translator();
 
     bool m_multilang {};
 
@@ -846,10 +845,17 @@ public:
     void setPath(const std::string& p);
 
     mutable std::string currentPath{};
+
+protected:
+    Translation::Translator* translatorPtr {   __cell_nullptr  };
+    Multilangual::Language* language    {   __cell_nullptr  };
 };
 
+__cell_no_discard_message("Pay attention! This version of the engine is safe and has a return value!")
+    Types::Optional<Engine> safeEngine() __cell_noexcept;
+
 //! Function that creates and returns a unique_ptr to Engine.
-std::unique_ptr<System::Engine> createEngineObject();
+Scope<Engine> createEngineObject();
 
 /*!
  * \brief The ApplicationData class

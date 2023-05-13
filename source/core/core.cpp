@@ -85,86 +85,86 @@ EngineInterface::EngineInterface()
 {
     m_bootParameter = new BootParameter();
 
-           //! Fast Boot
-           //! ToDo...
+    //! Fast Boot
+    //! ToDo...
     {
         if(!m_bootParameter->fastBoot) { m_bootParameter->fastBoot = true; }
     }
 
-           //! System Type
-           //! ToDo...
+    //! System Type
+    //! ToDo...
     {
         if(!m_bootParameter->systemType) { m_bootParameter->systemType = SystemType::Default; }
     }
 
-           //! Page Init Time
-           //! ToDo...
+    //! Page Init Time
+    //! ToDo...
     {
         if(!m_bootParameter->pageInitTime) { m_bootParameter->pageInitTime = 1316615272; }
     }
 
-           //! Page Size
-           //! ToDo...
+    //! Page Size
+    //! ToDo...
     {
         if(!m_bootParameter->pageSize) { m_bootParameter->pageSize = __cell_zero; }
     }
 
-           //! Page Speed
-           //! ToDo...
+    //! Page Speed
+    //! ToDo...
     {
         if(!m_bootParameter->pageSpeed) { m_bootParameter->pageSpeed = __cell_zero; }
     }
 
-           //! Init Time
-           //! ToDo...
+    //! Init Time
+    //! ToDo...
     {
         if(!m_bootParameter->initTime) { m_bootParameter->initTime = 1316615272; }
     }
 
-           //! User Mode
-           //! ToDo...
+    //! User Mode
+    //! ToDo...
     {
         if(!m_bootParameter->userMode) { m_bootParameter->userMode = UserMode::Guest; }
     }
 
-           //! System License
-           //! ToDo...
+    //! System License
+    //! ToDo...
     {
         if(!m_bootParameter->systemLicense) { m_bootParameter->systemLicense = SystemLicense::Free; }
     }
 
-           //! System Status
-           //! ToDo...
+    //! System Status
+    //! ToDo...
     {
         if(!m_bootParameter->systemStatus) { m_bootParameter->systemStatus = SystemStatus::Unknown; }
     }
 
 
-           //! Sync Device
-           //! ToDo...
+    //! Sync Device
+    //! ToDo...
     {
         if(!m_bootParameter->syncDevice) { m_bootParameter->syncDevice = SyncDevice::WebOnly; }
     }
 
-           //! Storage Type
-           //! ToDo...
+    //! Storage Type
+    //! ToDo...
     {
         if(!m_bootParameter->storageType) { m_bootParameter->storageType = StorageType::Empty; }
     }
 
-           //! State Index
-           //! ToDo...
+    //! State Index
+    //! ToDo...
     {
         if(!m_bootParameter->stateIndex) { m_bootParameter->stateIndex = 0x1; }
     }
 
-           //! Save State
-           //! ToDo...
+    //! Save State
+    //! ToDo...
     {
         if(!m_bootParameter->saveState) { m_bootParameter->saveState = "0x9ax0000000"; }
     }
 
-           //! Host Type
+    //! Host Type
     {
 #ifdef PLATFORM_WINDOWS
         m_bootParameter->hostType = HostType::Windows;
@@ -209,7 +209,7 @@ Optional<u32> EngineInterface::getPageSize()
 
 std::time_t EngineInterface::getPageInitTime()
 {
-  //ToDo...
+    //ToDo...
 }
 
 Optional<u32> EngineInterface::getPageSpeed()
@@ -292,19 +292,39 @@ Optional<SystemStatus> EngineInterface::getSystemStatus()
 Engine::Engine()
 {
     //!< New instances.
-    //    __cell_safe_instance(translator, Translation::Translator);
+    __cell_safe_instance(translatorPtr, Translation::Translator);
     Scope<Configuration> config(new Configuration(ConfigType::File));
     config->init(SectionType::SystemCore);
 }
 
 Engine::~Engine()
 {
-  //    __cell_safe_delete(translator);
+    __cell_safe_delete(translatorPtr);
+}
+
+CreateSingletonInstance(Engine)
+
+Translation::Translator* Engine::translator()
+{
+    return translatorPtr;
 }
 
 bool Engine::initialize()
 {
     bool res{false};
+
+    auto language = Cell::Multilangual::Language();
+
+    for(const auto& c : language.languageSupport())
+    {
+        std::cout << c << std::endl;
+    }
+    Cell::Translation::LanguageFile langFiles { language.languageSupport() };
+
+    translatorPtr->setFile(langFiles);
+
+    translatorPtr->parse() ? res = true : false;
+
     auto config = Configuration(ConfigType::File);
     config.init(SectionType::SystemCore);
     //! Database Connection
@@ -339,7 +359,7 @@ std::string Engine::copyright() __cell_noexcept
 #if defined(CELL_COPYRIGHT)
     return CELL_COPYRIGHT;
 #else
-  // TODO... add output for html template.
+    // TODO... add output for html template.
     Termination t;
     t.terminate(TerminateType::Violation);
 #endif
@@ -385,7 +405,7 @@ __cell_no_discard std::string execute(const char* cmd)
 
 std::string convertStream(std::stringstream const& data) __cell_noexcept
 {
-  //ToDo...
+    //ToDo...
 }
 
 std::string Engine::htmlEntityDecode(const std::string& content)
@@ -478,18 +498,18 @@ void Engine::findAndReplaceLink(std::string& data, std::string toSearch, std::st
 
 std::vector<std::string> Engine::filteredQueryFields(VectorString& fields)
 {
-  //    Scope<Configuration> config(new Configuration(ConfigType::File));
-  //    if(config->currentRdbms() == Database::CELL_RDBMS::PostgreSQL)
-  //        ///!Nothing...
-  //        if(config->currentRdbms() == Database::CELL_RDBMS::MySQL)
-  //        {
-  //            std::for_each(fields.begin(), fields.end(), [](auto& s){ s.insert(__cell_zero, "`");});
-  //            for(auto& s : fields)
-  //            {
-  //                s+="`";
-  //            }
-  //        }
-  //    return fields;
+    //    Scope<Configuration> config(new Configuration(ConfigType::File));
+    //    if(config->currentRdbms() == Database::CELL_RDBMS::PostgreSQL)
+    //        ///!Nothing...
+    //        if(config->currentRdbms() == Database::CELL_RDBMS::MySQL)
+    //        {
+    //            std::for_each(fields.begin(), fields.end(), [](auto& s){ s.insert(__cell_zero, "`");});
+    //            for(auto& s : fields)
+    //            {
+    //                s+="`";
+    //            }
+    //        }
+    //    return fields;
 }
 
 Types::OptionalString Engine::convertMemorySize(Types::ullong bytes)
@@ -509,24 +529,24 @@ Types::OptionalString Engine::convertMemorySize(Types::ullong bytes)
 
 std::string Engine::tablePrefix()
 {
-  //Table prefix
-  //    std::string prefix = Configuration::GET["table_prefix"].asString();
-  //    if(!prefix)) {
-  //        if(System::DeveloperMode::IsEnable)
-  //            Log("Table prefix not found!", LoggerType::Warning);
-  //    }
-  //    return prefix;
+    //Table prefix
+    //    std::string prefix = Configuration::GET["table_prefix"].asString();
+    //    if(!prefix)) {
+    //        if(System::DeveloperMode::IsEnable)
+    //            Log("Table prefix not found!", LoggerType::Warning);
+    //    }
+    //    return prefix;
 }
 
 std::string Engine::tableUnicode()
 {
-  //Table unicode
-  //    std::string unicode = Configuration::GET["table_unicode"].asString();
-  //    if(!unicode)) {
-  //        if(System::DeveloperMode::IsEnable)
-  //            Log("Table unicode not found!", LoggerType::Warning);
-  //    }
-  //    return unicode;
+    //Table unicode
+    //    std::string unicode = Configuration::GET["table_unicode"].asString();
+    //    if(!unicode)) {
+    //        if(System::DeveloperMode::IsEnable)
+    //            Log("Table unicode not found!", LoggerType::Warning);
+    //    }
+    //    return unicode;
 }
 
 std::string Engine::mixedTablePrefix(const std::string& p, const std::string& t)
@@ -553,35 +573,35 @@ std::string Engine::table(std::string_view tableName, TableType tableType)
 
 VectorString Engine::tableFilter(const std::vector<std::string>& tables, TableType tableType)
 {
-  //    std::string valueStruct = Configuration::GET["table_value_struct"].asString();
-  //    std::vector<std::string> res{};
-  //    switch (tableType)
-  //    {
-  //    case TableType::MixedStruct:
-  //        res=tables;
-  //        break;
-  //    case TableType::KeyStruct:
-  //        res=tables;
-  //        for(const auto& t : tables) {
-  //            if(t.ends_with(valueStruct)) {
-  //                res.erase(std::remove(res.begin(), res.end(), t), res.end());
-  //            }
-  //        }
-  //        break;
-  //    case TableType::ValueSturct:
-  //        res=tables;
-  //        for(const auto& t : tables) {
-  //            if(!t.ends_with(valueStruct)) {
-  //                res.erase(std::remove(res.begin(), res.end(), t), res.end());
-  //            }
-  //        }
-  //        break;
-  //    default:
-  //        res=tables;
-  //        break;
-  //    }
+    //    std::string valueStruct = Configuration::GET["table_value_struct"].asString();
+    //    std::vector<std::string> res{};
+    //    switch (tableType)
+    //    {
+    //    case TableType::MixedStruct:
+    //        res=tables;
+    //        break;
+    //    case TableType::KeyStruct:
+    //        res=tables;
+    //        for(const auto& t : tables) {
+    //            if(t.ends_with(valueStruct)) {
+    //                res.erase(std::remove(res.begin(), res.end(), t), res.end());
+    //            }
+    //        }
+    //        break;
+    //    case TableType::ValueSturct:
+    //        res=tables;
+    //        for(const auto& t : tables) {
+    //            if(!t.ends_with(valueStruct)) {
+    //                res.erase(std::remove(res.begin(), res.end(), t), res.end());
+    //            }
+    //        }
+    //        break;
+    //    default:
+    //        res=tables;
+    //        break;
+    //    }
 
-           //    return res;
+    //    return res;
 }
 
 std::string Engine::fullReplacer(const std::string& content, const MapString& map)
@@ -770,28 +790,28 @@ bool Engine::ping(const std::string& address)
 
 std::map <std::string, std::string> Engine::langs()
 {
-  //    std::map<std::string, std::string> l = {};
-  //    //!Getting language from configuration file
-  //    for(auto &var : Configuration::GET["langs"]) {
-  //        l.insert(Types::PairString(var["uri"].asString(),var["code"].asString()));
-  //        this->langUri.push_back("/" + std::string(var["uri"].asString()));
-  //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/");
-  //    }
-  //    return l;
+    //    std::map<std::string, std::string> l = {};
+    //    //!Getting language from configuration file
+    //    for(auto &var : Configuration::GET["langs"]) {
+    //        l.insert(Types::PairString(var["uri"].asString(),var["code"].asString()));
+    //        this->langUri.push_back("/" + std::string(var["uri"].asString()));
+    //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/");
+    //    }
+    //    return l;
 }
 
 std::map <std::string, std::string> Engine::langsByPath(const std::string& path)
 {
-  //    std::map<std::string, std::string> l = {};
-  //    //!Getting language from configuration file
-  //    for(auto &var : Configuration::GET["langs"]) {
-  //        l.insert(Types::PairString(var["uri"].asString(),var["code"].asString()));
-  //        this->langUri.push_back("/" + std::string(var["uri"].asString()));
-  //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/");
-  //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/" + std::string(path.empty() ? "" : path));
-  //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/" + std::string(path.empty() ? "" : path + "/"));
-  //    }
-  //    return l;
+    //    std::map<std::string, std::string> l = {};
+    //    //!Getting language from configuration file
+    //    for(auto &var : Configuration::GET["langs"]) {
+    //        l.insert(Types::PairString(var["uri"].asString(),var["code"].asString()));
+    //        this->langUri.push_back("/" + std::string(var["uri"].asString()));
+    //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/");
+    //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/" + std::string(path.empty() ? "" : path));
+    //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/" + std::string(path.empty() ? "" : path + "/"));
+    //    }
+    //    return l;
 }
 
 std::string Engine::reducePath(const std::string& path)
@@ -826,9 +846,9 @@ std::string Engine::removeDashes(const std::string& src) __cell_const_noexcept
 
 std::string Engine::defaultLanguage()
 {
-  //Default language
-  //    std::string def = Configuration::GET["default_lang"].asString();
-  //    return def;
+    //Default language
+    //    std::string def = Configuration::GET["default_lang"].asString();
+    //    return def;
 }
 
 std::string Engine::join(const std::vector<std::string>& strings,  const SepratorType& sep, const SepratorStyle& sepStyle) __cell_noexcept
@@ -957,7 +977,7 @@ void Engine::elementErase(std::string& input, const std::string& chars) __cell_n
     auto chars_set = chars | std::views::transform([](char c) {
                          return std::ranges::single_view(c);}) | std::views::join| std::views::common;
 
-           // Use std::erase_if with the chars_set to remove the specified characters from the string
+    // Use std::erase_if with the chars_set to remove the specified characters from the string
     std::erase_if(input, [&chars_set](char c) {
         return std::ranges::find(chars_set, c) != end(chars_set);
     });
@@ -971,16 +991,16 @@ std::string Engine::whiteSpaceReduce(std::string_view input) __cell_noexcept
         return std::isspace(c);
     };
 
-           // Create a range that filters out whitespace
+    // Create a range that filters out whitespace
     auto range = input | std::views::filter([is_space](char c) { return !is_space(c); });
 
-           // Use the filtered range to create a new string without whitespace
+    // Use the filtered range to create a new string without whitespace
     std::string output{};
 
-           // Append the contents of "range" to "output"
+    // Append the contents of "range" to "output"
     std::ranges::copy(range, std::back_inserter(output));
 
-           // Return the new string
+    // Return the new string
     return output;
 }
 
@@ -991,15 +1011,15 @@ std::string Engine::whiteSpaceLeading(std::string_view input) __cell_noexcept
         return !std::isspace(c);
     };
 
-           // Find the first character in the string that is not a white space character.
+    // Find the first character in the string that is not a white space character.
     auto begin = std::ranges::find_if(input, not_space);
 
-           // Create a new string that begins with the first non-white space character
+    // Create a new string that begins with the first non-white space character
     std::string output {
         input.substr(std::distance(input.begin(), begin))
     };
 
-           // Return the new string
+    // Return the new string
     return output;
 }
 
@@ -1025,7 +1045,7 @@ void Engine::delayIfNeeded(std::chrono::time_point<std::chrono::high_resolution_
         std::this_thread::sleep_for(std::chrono::duration<unsigned int>(rateLimit - timeSinceLastRequest));
     }
 
-           // Update the last request time to the current time.
+    // Update the last request time to the current time.
     lastRequestTime = std::chrono::high_resolution_clock::now();
 }
 
@@ -1042,12 +1062,17 @@ void Engine::setPath(const std::string &p)
 }
 
 // Definition of the createEngineObject function
-std::unique_ptr<System::Engine> createEngineObject()
+Scope<System::Engine> createEngineObject()
 {
     // Allocate memory for a Engine object using 'new'
     Engine* cellEnginePtr = new Engine;
     // Wrap the raw pointer in a unique_ptr and return it
     return std::unique_ptr<Engine>(cellEnginePtr);
+}
+
+Types::Optional<Engine> safeEngine() __cell_noexcept
+{
+    return std::make_optional(Engine());
 }
 
 Application::Application(const ApplicationData& appData)
@@ -1078,9 +1103,9 @@ Application::Application(const ApplicationData& appData)
 
 Application::~Application()
 {
-  //    __cell_safe_delete(translator);
-  //    __cell_safe_delete(appDataPtr);
-  //    __cell_safe_delete(language);
+    //    __cell_safe_delete(translator);
+    //    __cell_safe_delete(appDataPtr);
+    //    __cell_safe_delete(language);
 }
 
 Application* Application::appPtr;
@@ -1117,19 +1142,19 @@ void Application::start()
         Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
                        << " code name : "
                        << systemInfo->codeName.value() + " ]"<< " ⇙" << newline;
-                                      Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
+                              Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
                        << " version : "
                        << version->getAsString() + " ]"
                        << " ⇙" << newline;
-                                      Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
+                              Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
                        << " license type : "
                        << this->license().value() + " ]"
                        << " ⇙" << newline;
-                                      Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
+                              Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
                        << " system type : "
                        << this->type().value() + " ]"
                        << " ⇙" << newline;
-                                      Console::print << newline;
+                              Console::print << newline;
         Console::print << Terminal::NativeTerminal::Default;
         Console::print << "=================[--------------]=================\n";
         Console::print << newline;
