@@ -369,121 +369,6 @@ private:
     ExceptionData* m_exceptionData;
 };
 
-struct __cell_export BootParameter final
-{
-    bool                            fastBoot       {};      //!<This property is set to true when the system is booted with the highest possible state.
-    std::time_t                     initTime       {};      //!<The time spent on execution.
-    std::optional<std::string>      saveState      {};      //!<The system save state applied during a save operation after execution or completion of the operation..
-    std::optional<u32>              pageSize       {};      //!<The size of the requested page.
-    std::time_t                     pageInitTime   {};      //!<The loading time of the requested page.
-    std::optional<u32>              pageSpeed      {};      //!<The loading speed of the requested page.
-    std::optional<s32>              stateIndex     {};      //!<The state of index for any page.
-    std::optional<HostType>         hostType       {};      //!<This attribute specifies the type of site hosting. for example: Linux
-    std::optional<StorageType>      storageType    {};      //!<This attribute specifies the type of storage to use.
-    std::optional<UserMode>         userMode       {};      //!<This attribute specifies the type of user who uses the system.
-    std::optional<SyncDevice>       syncDevice     {};      //!<This attribute specifies the type of devices that are incellted with the system.
-    std::optional<SystemType>       systemType     {};      //!<This attribute determines the type of system consumption.
-    std::optional<SystemLicense>    systemLicense  {};      //!<The type of license to use the system.
-    std::optional<SystemStatus>     systemStatus   {};      //!<This attribute specifies the state the system is in.
-};
-
-class __cell_export EngineInterface
-{
-public:
-    EngineInterface();
-    EngineInterface(const BootParameter& bootParameter);
-    virtual ~EngineInterface();
-
-    /*!
-     * @brief initialize starter!
-     * @return true if the system starts successfully.
-     */
-    __cell_no_discard_message("Pay attention! Note that the engine can only be started once.")
-    virtual bool start() = __cell_zero;
-
-    /*!
-     * @brief Getting current fast boot status.
-     * @return true if system has been booted as fast as possible.
-     */
-    virtual bool                            getFastBoot         () final;
-
-    /*!
-     * @brief Getting current system init time duration.
-     * @return returns as time.
-     */
-    virtual std::time_t                     getInitTime         () final;
-
-    /*!
-     * @brief Getting current system state.
-     * @return returns string of system state, for example version and etc.
-     */
-    virtual std::optional<std::string>      getSaveState        () final;
-
-    /*!
-     * @brief Getting current loaded page size.
-     * @return returns as unsigned int 32 for page size.
-     */
-    virtual std::optional<u32>              getPageSize         () final;
-
-    /*!
-     * @brief Getting current system current page init time duration.
-     * @return returns as time.
-     */
-    virtual std::time_t                     getPageInitTime     () final;
-
-    /*!
-     * @brief Getting current page speed load.
-     * @return returns as counter of page speed.
-     */
-    virtual std::optional<u32>              getPageSpeed        () final;
-
-    /*!
-     * @brief Getting current system state index.
-     * @return returns as signed integer for state index.
-     */
-    virtual std::optional<s32>              getStateIndex       () final;
-
-    /*!
-     * @brief Getting current installed host type.
-     * @return returns as HostType enum.
-     */
-    virtual std::optional<HostType>         getHostType         () final;
-
-    /*!
-     * @brief Getting current system user mode.
-     * @return returns as UserMode enum.
-     */
-    virtual std::optional<UserMode>         getUserMode         () final;
-
-    /*!
-     * @brief Getting current system sync mode.
-     * @return returns as SyncDevice enum.
-     */
-    virtual std::optional<SyncDevice>       getSyncMode         () final;
-
-    /*!
-     * @brief Getting current system type.
-     * @return returns as SystemType enum.
-     */
-    virtual std::optional<SystemType>       getSystemType       () final;
-
-    /*!
-     * @brief Getting current system license.
-     * @return returns as SystemLicense enum.
-     */
-    virtual std::optional<SystemLicense>    getSystemLicense    () final;
-
-    /*!
-     * @brief Getting current state of the system.
-     * @return returns as SystemStatus enum.
-     */
-    virtual std::optional<SystemStatus>     getSystemStatus     () final;
-
-private:
-    BootParameter* m_bootParameter{nullptr};
-    bool m_status{false};
-};
-
 struct Ping {
     Ping(const std::string& address) : m_address(address) {}
     std::future<bool> ping() const {
@@ -508,23 +393,267 @@ private:
     mutable std::mutex m_mutex;
 };
 
+struct __cell_export BootParameter final
+{
+    bool                            fastBoot       {};      //!< This property is set to true when the system is booted with the highest possible state.
+    std::time_t                     initTime       {};      //!< The time spent on execution.
+    Types::Optional<std::string>    saveState      {};      //!< The system save state applied during a save operation after execution or completion of the operation..
+    Types::Optional<u32>            pageSize       {};      //!< The size of the requested page.
+    std::time_t                     pageInitTime   {};      //!< The loading time of the requested page.
+    Types::Optional<u32>            pageSpeed      {};      //!< The loading speed of the requested page.
+    Types::Optional<s32>            stateIndex     {};      //!< The state of index for any page.
+    Types::Optional<HostType>       hostType       {};      //!< This attribute specifies the type of site hosting. for example: Linux
+    Types::Optional<StorageType>    storageType    {};      //!< This attribute specifies the type of storage to use.
+    Types::Optional<UserMode>       userMode       {};      //!< This attribute specifies the type of user who uses the system.
+    Types::Optional<SyncDevice>     syncDevice     {};      //!< This attribute specifies the type of devices that are incellted with the system.
+    Types::Optional<SystemType>     systemType     {};      //!< This attribute determines the type of system consumption.
+    Types::Optional<SystemLicense>  systemLicense  {};      //!< The type of license to use the system.
+    Types::Optional<SystemStatus>   systemStatus   {};      //!< This attribute specifies the state the system is in.
+};
+
+class __cell_export MachineInterface
+{
+public:
+    MachineInterface();
+    MachineInterface(const BootParameter& bootParameter);
+    virtual ~MachineInterface();
+
+    /*!
+     * @brief initialize starter!
+     */
+    virtual void turnOn() = __cell_zero;
+
+    /**
+     * @brief turnOff
+     */
+    virtual void turnOff() = __cell_zero;
+
+    /**
+     * @brief reboot
+     */
+    virtual void reboot() = __cell_zero;
+
+    /*!
+     * @brief Getting current fast boot status.
+     * @return true if system has been booted as fast as possible.
+     */
+    virtual bool getFastBoot()  = __cell_zero;
+
+    /*!
+     * @brief Getting current system init time duration.
+     * @return returns as time.
+     */
+    virtual std::time_t getInitTime() = __cell_zero;
+
+    /*!
+     * @brief Getting current system state.
+     * @return returns string of system state, for example version and etc.
+     */
+    virtual Types::Optional<std::string>  getSaveState() = __cell_zero;
+
+    /*!
+     * @brief Getting current loaded page size.
+     * @return returns as unsigned int 32 for page size.
+     */
+    virtual Types::Optional<u32> getPageSize() = __cell_zero;
+
+    /*!
+     * @brief Getting current system current page init time duration.
+     * @return returns as time.
+     */
+    virtual std::time_t getPageInitTime() = __cell_zero;
+
+    /*!
+     * @brief Getting current page speed load.
+     * @return returns as counter of page speed.
+     */
+    virtual Types::Optional<u32> getPageSpeed() = __cell_zero;
+
+    /*!
+     * @brief Getting current system state index.
+     * @return returns as signed integer for state index.
+     */
+    virtual Types::Optional<s32> getStateIndex() = __cell_zero;
+
+    /*!
+     * @brief Getting current installed host type.
+     * @return returns as HostType enum.
+     */
+    virtual Types::Optional<HostType> getHostType() = __cell_zero;
+
+    /*!
+     * @brief Getting current system user mode.
+     * @return returns as UserMode enum.
+     */
+    virtual Types::Optional<UserMode> getUserMode() = __cell_zero;
+
+    /*!
+     * @brief Getting current system sync mode.
+     * @return returns as SyncDevice enum.
+     */
+    virtual Types::Optional<SyncDevice> getSyncMode() = __cell_zero;
+
+    /*!
+     * @brief Getting current system type.
+     * @return returns as SystemType enum.
+     */
+    virtual Types::Optional<SystemType> getSystemType() = __cell_zero;
+
+    /*!
+     * @brief Getting current system license.
+     * @return returns as SystemLicense enum.
+     */
+    virtual Types::Optional<SystemLicense> getSystemLicense() = __cell_zero;
+
+    /*!
+     * @brief Getting current state of the system.
+     * @return returns as SystemStatus enum.
+     */
+    virtual Types::Optional<SystemStatus> getSystemStatus() = __cell_zero;
+};
+
+/**
+ * @brief The Machine class
+ */
+struct Machine : public MachineInterface
+{
+    Machine();
+    Machine(const BootParameter& bootParameter);
+    ~Machine();
+    /*!
+     * @brief Getting current fast boot status.
+     * @return true if system has been booted as fast as possible.
+     */
+    bool getFastBoot() override;
+
+    /*!
+     * @brief Getting current system init time duration.
+     * @return returns as time.
+     */
+    std::time_t getInitTime() override;
+
+    /*!
+     * @brief Getting current system state.
+     * @return returns string of system state, for example version and etc.
+     */
+    Types::Optional<std::string>  getSaveState() override;
+
+    /*!
+     * @brief Getting current loaded page size.
+     * @return returns as unsigned int 32 for page size.
+     */
+    Types::Optional<u32> getPageSize() override;
+
+    /*!
+     * @brief Getting current system current page init time duration.
+     * @return returns as time.
+     */
+    std::time_t getPageInitTime() override;
+
+    /*!
+     * @brief Getting current page speed load.
+     * @return returns as counter of page speed.
+     */
+    Types::Optional<u32> getPageSpeed() override;
+
+    /*!
+     * @brief Getting current system state index.
+     * @return returns as signed integer for state index.
+     */
+    Types::Optional<s32> getStateIndex() override;
+
+    /*!
+     * @brief Getting current installed host type.
+     * @return returns as HostType enum.
+     */
+    Types::Optional<HostType> getHostType() override;
+
+    /*!
+     * @brief Getting current system user mode.
+     * @return returns as UserMode enum.
+     */
+    Types::Optional<UserMode> getUserMode() override;
+
+    /*!
+     * @brief Getting current system sync mode.
+     * @return returns as SyncDevice enum.
+     */
+    Types::Optional<SyncDevice> getSyncMode() override;
+
+    /*!
+     * @brief Getting current system type.
+     * @return returns as SystemType enum.
+     */
+    Types::Optional<SystemType> getSystemType() override;
+
+    /*!
+     * @brief Getting current system license.
+     * @return returns as SystemLicense enum.
+     */
+    Types::Optional<SystemLicense> getSystemLicense() override;
+
+    /*!
+     * @brief Getting current state of the system.
+     * @return returns as SystemStatus enum.
+     */
+    Types::Optional<SystemStatus> getSystemStatus() override;
+
+    void turnOn() override;
+
+    void turnOff() override;
+
+    void reboot() override;
+
+private:
+    BootParameter m_bootParameter;
+};
+
 /**
  * @brief The Engine class
  */
-class __cell_export Engine : public EngineInterface
+class __cell_export Engine final
 {
 public:
     Engine();
     ~Engine();
 
+    /* This is singleton object for engine */
     DeclareSingletonSelf(Engine)
+
+        /**
+     * @brief get function will return Engine class as optional method.
+     * @return as static optional class.
+     */
+        static Types::Optional<Engine>& get()
+    {
+        static Types::Optional<Engine> optionalEngine = std::make_optional<Engine>();
+        return optionalEngine;
+    }
 
     /*!
      * @brief initialize starter!
      * @return true if the engine starts successfully.
      */
     __cell_no_discard_message("Pay attention! Note that the engine can only be started once.")
-    bool start() override;
+        bool start();
+
+    /**
+     * @brief stop the engine.
+     * @return true if engine status.
+     */
+    bool stop();
+
+    /**
+     * @brief restart the engine.
+     * @return true if engine status.
+     */
+    bool restart();
+
+    /**
+     * @brief machine is instance from hardware system.
+     * @return as Machine source.
+     */
+    Machine machine();
 
     /**
      * @brief isStarted
@@ -830,8 +959,6 @@ public:
      */
     __cell_no_discard bool isFilePath(const std::filesystem::path& input);
 
-    // Function to calculate the time since the last request and sleep for the appropriate amount of time.
-
     /**
      * @brief A function to calculate the time since the last request and sleep for the appropriate amount of time based on the rate limit.
      * @param lastRequestTime as last time for check [Initialize the last request time to the current time].
@@ -843,9 +970,11 @@ public:
      * \brief Lanuage translator engine.
      */
 
-    Translation::Translator* translator();
+    Translation::Translator& translator();
 
     bool m_multilang {};
+
+    inline static bool autoStart = false;
 
     std::string m_languageStr {__cell_null_str};
 
@@ -856,8 +985,7 @@ public:
     static Types::OptionalBool isInitialized;
 
 protected:
-    Translation::Translator* translatorPtr {   __cell_nullptr  };
-    Multilangual::Language* language    {   __cell_nullptr  };
+    Translation::Translator m_translator;
 };
 
 __cell_no_discard_message("Pay attention! This version of the engine is safe and has a return value!")
@@ -872,7 +1000,6 @@ Scope<Engine> createEngineObject();
 struct ApplicationData final
 {
     SystemInfo systemInfo{};
-    //    Multilangual::LanguageStruct languageStruct{};
     OptionalString path    {__cell_unknown};
     OptionalString templateId  {__cell_unknown};
     OptionalString templateErrorId  {__cell_unknown};
@@ -937,9 +1064,6 @@ public:
     Scope<Engine>   engine  {};
     Scope<Version>  version {};
     Scope<SystemInfo>  systemInfo {};
-
-           //    Translation::Translator* translator{__cell_nullptr}; //alternative translator for engine.
-           //    Multilangual::Language* language{__cell_nullptr};
 
 private:
     static Application* appPtr;

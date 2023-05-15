@@ -81,257 +81,288 @@ void Termination::terminate(TerminateType terminateType)
     }
 }
 
-EngineInterface::EngineInterface()
+MachineInterface::MachineInterface()
 {
-    m_bootParameter = new BootParameter();
+}
 
+MachineInterface::~MachineInterface()
+{
+}
+
+void Machine::turnOn()
+{
+    //Todo... need to physical api!
+}
+
+void Machine::turnOff()
+{
+    system("shutdown /s /t 0");
+}
+
+void Machine::reboot()
+{
+    system("shutdown /r /t 0");
+}
+
+
+Engine::Engine()
+{
+    //!< New instances.
+    Scope<Configuration> config(new Configuration(ConfigType::File));
+    config->init(SectionType::SystemCore);
+    if(autoStart) {
+        if(start())
+        {
+            Log("Engine ha set for auto start mode!", LoggerType::Default);
+        }
+    }
+}
+
+CreateSingletonSelf(Engine)
+
+    Engine::~Engine()
+{
+}
+
+Machine::Machine()
+{
     //! Fast Boot
     //! ToDo...
     {
-        if(!m_bootParameter->fastBoot) { m_bootParameter->fastBoot = true; }
+        if(!m_bootParameter.fastBoot) { m_bootParameter.fastBoot = true; }
     }
 
     //! System Type
     //! ToDo...
     {
-        if(!m_bootParameter->systemType) { m_bootParameter->systemType = SystemType::Default; }
+        if(!m_bootParameter.systemType) { m_bootParameter.systemType = SystemType::Default; }
     }
 
     //! Page Init Time
     //! ToDo...
     {
-        if(!m_bootParameter->pageInitTime) { m_bootParameter->pageInitTime = 1316615272; }
+        if(!m_bootParameter.pageInitTime) { m_bootParameter.pageInitTime = 1316615272; }
     }
 
     //! Page Size
     //! ToDo...
     {
-        if(!m_bootParameter->pageSize) { m_bootParameter->pageSize = __cell_zero; }
+        if(!m_bootParameter.pageSize) { m_bootParameter.pageSize = __cell_zero; }
     }
 
     //! Page Speed
     //! ToDo...
     {
-        if(!m_bootParameter->pageSpeed) { m_bootParameter->pageSpeed = __cell_zero; }
+        if(!m_bootParameter.pageSpeed) { m_bootParameter.pageSpeed = __cell_zero; }
     }
 
     //! Init Time
     //! ToDo...
     {
-        if(!m_bootParameter->initTime) { m_bootParameter->initTime = 1316615272; }
+        if(!m_bootParameter.initTime) { m_bootParameter.initTime = 1316615272; }
     }
 
     //! User Mode
     //! ToDo...
     {
-        if(!m_bootParameter->userMode) { m_bootParameter->userMode = UserMode::Guest; }
+        if(!m_bootParameter.userMode) { m_bootParameter.userMode = UserMode::Guest; }
     }
 
     //! System License
     //! ToDo...
     {
-        if(!m_bootParameter->systemLicense) { m_bootParameter->systemLicense = SystemLicense::Free; }
+        if(!m_bootParameter.systemLicense) { m_bootParameter.systemLicense = SystemLicense::Free; }
     }
 
     //! System Status
     //! ToDo...
     {
-        if(!m_bootParameter->systemStatus) { m_bootParameter->systemStatus = SystemStatus::Unknown; }
+        if(!m_bootParameter.systemStatus) { m_bootParameter.systemStatus = SystemStatus::Unknown; }
     }
 
 
     //! Sync Device
     //! ToDo...
     {
-        if(!m_bootParameter->syncDevice) { m_bootParameter->syncDevice = SyncDevice::WebOnly; }
+        if(!m_bootParameter.syncDevice) { m_bootParameter.syncDevice = SyncDevice::WebOnly; }
     }
 
     //! Storage Type
     //! ToDo...
     {
-        if(!m_bootParameter->storageType) { m_bootParameter->storageType = StorageType::Empty; }
+        if(!m_bootParameter.storageType) { m_bootParameter.storageType = StorageType::Empty; }
     }
 
     //! State Index
     //! ToDo...
     {
-        if(!m_bootParameter->stateIndex) { m_bootParameter->stateIndex = 0x1; }
+        if(!m_bootParameter.stateIndex) { m_bootParameter.stateIndex = 0x1; }
     }
 
     //! Save State
     //! ToDo...
     {
-        if(!m_bootParameter->saveState) { m_bootParameter->saveState = "0x9ax0000000"; }
+        if(!m_bootParameter.saveState) { m_bootParameter.saveState = "0x9ax0000000"; }
     }
 
     //! Host Type
     {
 #ifdef PLATFORM_WINDOWS
-        m_bootParameter->hostType = HostType::Windows;
+        m_bootParameter.hostType = HostType::Windows;
 #elif defined(PLATFORM_LINUX)
-        m_bootParameter->hostType = HostType::Linux;
+        m_bootParameter.hostType = HostType::Linux;
 #elif defined(PLATFORM_MAC)
-        m_bootParameter->hostType = HostType::macOS;
+        m_bootParameter.hostType = HostType::macOS;
 #else
-        m_bootParameter->hostType = HostType::Unknown;
+        m_bootParameter.hostType = HostType::Unknown;
 #endif
     }
-
 }
 
-EngineInterface::~EngineInterface()
-{
-    __cell_safe_delete(m_bootParameter);
-}
-
-std::time_t EngineInterface::getInitTime()
+Machine::Machine(const BootParameter& bootParameter)
 {
 
 }
 
-Optional<std::string> EngineInterface::getSaveState()
+Machine::~Machine()
 {
-    if (m_bootParameter->saveState) {
-        return m_bootParameter->saveState;
+
+}
+
+bool Machine::getFastBoot()
+{
+    return m_bootParameter.fastBoot;
+}
+
+std::time_t Machine::getInitTime()
+{
+    return std::time_t();
+}
+
+Optional<std::string> Machine::getSaveState()
+{
+    if (m_bootParameter.saveState) {
+        return m_bootParameter.saveState;
     } else {
         return std::nullopt;
     }
 }
 
-Optional<u32> EngineInterface::getPageSize()
+Optional<u32> Machine::getPageSize()
 {
-    if (m_bootParameter->pageSize) {
-        return m_bootParameter->pageSize;
+    if (m_bootParameter.pageSize) {
+        return m_bootParameter.pageSize;
     } else {
         return std::nullopt;
     }
 }
 
-std::time_t EngineInterface::getPageInitTime()
+std::time_t Machine::getPageInitTime()
 {
     //ToDo...
+    return std::time_t();
 }
 
-Optional<u32> EngineInterface::getPageSpeed()
+Optional<u32> Machine::getPageSpeed()
 {
-    if (m_bootParameter->pageSpeed) {
-        return m_bootParameter->pageSpeed;
+    if (m_bootParameter.pageSpeed) {
+        return m_bootParameter.pageSpeed;
     } else {
         return std::nullopt;
     }
 }
 
-Optional<s32> EngineInterface::getStateIndex()
+Optional<s32> Machine::getStateIndex()
 {
-    if (m_bootParameter->stateIndex) {
-        return m_bootParameter->stateIndex;
+    if (m_bootParameter.stateIndex) {
+        return m_bootParameter.stateIndex;
     } else {
         return std::nullopt;
     }
 }
 
-bool EngineInterface::getFastBoot()
+Optional<HostType> Machine::getHostType()
 {
-    return m_bootParameter->fastBoot;
-}
-
-Optional<HostType> EngineInterface::getHostType()
-{
-    if (m_bootParameter->hostType) {
-        return m_bootParameter->hostType;
+    if (m_bootParameter.hostType) {
+        return m_bootParameter.hostType;
     } else {
         return std::nullopt;
     }
 }
 
-Optional<UserMode> EngineInterface::getUserMode()
+Optional<UserMode> Machine::getUserMode()
 {
-    if (m_bootParameter->userMode) {
-        return m_bootParameter->userMode;
+    if (m_bootParameter.userMode) {
+        return m_bootParameter.userMode;
     } else {
         return std::nullopt;
     }
 }
 
-Optional<SyncDevice> EngineInterface::getSyncMode()
+Optional<SyncDevice> Machine::getSyncMode()
 {
-    if (m_bootParameter->syncDevice) {
-        return m_bootParameter->syncDevice;
+    if (m_bootParameter.syncDevice) {
+        return m_bootParameter.syncDevice;
     } else {
         return std::nullopt;
     }
 }
 
-Optional<SystemType> EngineInterface::getSystemType()
+Optional<SystemType> Machine::getSystemType()
 {
-    if (m_bootParameter->systemType) {
-        return m_bootParameter->systemType;
+    if (m_bootParameter.systemType) {
+        return m_bootParameter.systemType;
     } else {
         return std::nullopt;
     }
 }
 
-Optional<SystemLicense> EngineInterface::getSystemLicense()
+Optional<SystemLicense> Machine::getSystemLicense()
 {
-    if (m_bootParameter->systemLicense) {
-        return m_bootParameter->systemLicense;
+    if (m_bootParameter.systemLicense) {
+        return m_bootParameter.systemLicense;
     } else {
         return std::nullopt;
     }
 }
 
-Optional<SystemStatus> EngineInterface::getSystemStatus()
+Optional<SystemStatus> Machine::getSystemStatus()
 {
-    if (m_bootParameter->systemStatus) {
-        return m_bootParameter->systemStatus;
+    if (m_bootParameter.systemStatus) {
+        return m_bootParameter.systemStatus;
     } else {
         return std::nullopt;
     }
 }
 
-Engine::Engine()
-{
-    //!< New instances.
-    __cell_safe_instance(translatorPtr, Translation::Translator);
-    Scope<Configuration> config(new Configuration(ConfigType::File));
-    config->init(SectionType::SystemCore);
-}
 
-Engine::~Engine()
+Translation::Translator& Engine::translator()
 {
-    __cell_safe_delete(translatorPtr);
-}
-
-CreateSingletonSelf(Engine)
-
-    Translation::Translator* Engine::translator()
-{
-    return translatorPtr;
+    return m_translator;
 }
 
 OptionalBool Engine::isInitialized = false;
 
 bool Engine::start()
 {
-    {
-        //!ToDo... for more initializing...
-    }
-
     bool res { false };
 
     // Check if engine has initialized!
-    if((isInitialized.has_value()) && isInitialized.value())
-    {
-        return false;
-    }
+    //    if((isInitialized.has_value()) && isInitialized.value())
+    //    {
+    //        return false;
+    //    }
 
-    auto language = Cell::Multilangual::Language();
 
-    Cell::Translation::LanguageFile langFiles { language.languageSupport() };
+    std::thread t([&]() {
+        auto language = Cell::Multilangual::Language();
+        Cell::Translation::LanguageFile langFiles { language.languageSupport() };
+        m_translator.setFile(langFiles);
+        m_translator.parse() ? res = true : false;
+    });
 
-    translatorPtr->setFile(langFiles);
+    t.join();
 
-    translatorPtr->parse() ? res = true : false;
 
     auto config = Configuration(ConfigType::File);
     config.init(SectionType::SystemCore);
@@ -362,6 +393,22 @@ bool Engine::start()
     Log("Engine has initialized!", LoggerType::Success);
 
     return res;
+}
+
+
+bool Engine::stop()
+{
+
+}
+
+bool Engine::restart()
+{
+
+}
+
+Machine Engine::machine()
+{
+    return Machine();
 }
 
 bool Engine::isStarted()
@@ -425,6 +472,7 @@ __cell_no_discard std::string execute(const char* cmd)
 std::string convertStream(std::stringstream const& data) __cell_noexcept
 {
     //ToDo...
+    return std::string();
 }
 
 std::string Engine::htmlEntityDecode(const std::string& content)
@@ -529,6 +577,7 @@ std::vector<std::string> Engine::filteredQueryFields(VectorString& fields)
     //            }
     //        }
     //    return fields;
+    return std::vector<std::string>();
 }
 
 Types::OptionalString Engine::convertMemorySize(Types::ullong bytes)
@@ -555,6 +604,7 @@ std::string Engine::tablePrefix()
     //            Log("Table prefix not found!", LoggerType::Warning);
     //    }
     //    return prefix;
+    return "tb";
 }
 
 std::string Engine::tableUnicode()
@@ -566,6 +616,7 @@ std::string Engine::tableUnicode()
     //            Log("Table unicode not found!", LoggerType::Warning);
     //    }
     //    return unicode;
+    return std::string();
 }
 
 std::string Engine::mixedTablePrefix(const std::string& p, const std::string& t)
@@ -621,6 +672,7 @@ VectorString Engine::tableFilter(const std::vector<std::string>& tables, TableTy
     //    }
 
     //    return res;
+    return VectorString();
 }
 
 std::string Engine::fullReplacer(const std::string& content, const MapString& map)
@@ -817,6 +869,7 @@ std::map <std::string, std::string> Engine::langs()
     //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/");
     //    }
     //    return l;
+    return std::map <std::string, std::string>();
 }
 
 std::map <std::string, std::string> Engine::langsByPath(const std::string& path)
@@ -831,6 +884,7 @@ std::map <std::string, std::string> Engine::langsByPath(const std::string& path)
     //        this->langUri.push_back("/" + std::string(var["uri"].asString()) + "/" + std::string(path.empty() ? "" : path + "/"));
     //    }
     //    return l;
+    return std::map <std::string, std::string>();
 }
 
 std::string Engine::reducePath(const std::string& path)
@@ -868,6 +922,7 @@ std::string Engine::defaultLanguage()
     //Default language
     //    std::string def = Configuration::GET["default_lang"].asString();
     //    return def;
+    return std::string();
 }
 
 std::string Engine::join(const std::vector<std::string>& strings,  const SepratorType& sep, const SepratorStyle& sepStyle) __cell_noexcept
