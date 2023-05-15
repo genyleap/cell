@@ -228,6 +228,8 @@ if(object!=nullptr)                 \
 { delete object;}                   \
 object = nullptr;                   \
 
+#define __cell_null_optional std::nullopt
+
 #define __cell_abort abort();
 
 #define __cell_assert(x) assert(x);
