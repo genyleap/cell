@@ -14,15 +14,76 @@
 # endif
 #endif
 
+#ifdef __has_include
+# if __has_include("filesystem.hpp")
+#   include "filesystem.hpp"
+#else
+#   error "Cell's "filesystem.hpp" was not found!"
+# endif
+#endif
+
 CELL_USING_NAMESPACE Cell::Terminal;
 
 CELL_NAMESPACE_BEGIN(Cell::eLogger)
+
+void Logger::set(const ConfigStruct& config)
+{
+    configStruct = config;
+    if(get().has_value()) {
+        get().emplace(config);
+    }
+}
+
+bool Logger::validateConfig(const ConfigStruct& config)
+{
+    // Perform validation checks on the configuration and return true if the configuration is valid, false otherwise
+    // Ensure that the report mode and trace mode are not both set to None
+    if (config.reportMode == ReportMode::None && config.traceMode == TraceMode::None)
+    {
+        return false;
+    }
+    return true;  // Configuration is considered valid
+}
+
+void Logger::adjustConfig(ConfigStruct& config)
+{
+    // Perform adjustments or modifications to the configuration if needed.
+    // If the storage is set to Database and the output format is RawText, change it to Csv
+    if (config.storage == Storage::Database)
+    {
+        if(config.outputFormat == OutputFormat::RawText || config.outputFormat == OutputFormat::Xml || config.outputFormat == OutputFormat::Json || config.outputFormat == OutputFormat::Dedicated)
+        {
+            config.outputFormat = OutputFormat::Csv;
+        }
+    }
+}
+
+Types::Optional<ConfigStruct> Logger::get()
+{
+    if (configStruct) {
+        // Perform additional validation or modification before returning the configuration.
+        if (validateConfig(*configStruct)) {
+            // Optionally perform some modification or adjustment to the configuration.
+            adjustConfig(*configStruct);
+            return *configStruct;
+        }
+    }
+    return __cell_null_optional;
+}
+
+Logger::Logger()
+{
+}
 
 Logger::~Logger()
 {
     std::ostream& streamInStyle  = std::cout;
     streamInStyle << NativeTerminal::Reset << __cell_newline;
 }
+
+FileSystem::FileManager fileManager = FileSystem::FileManager();
+
+Types::Optional<ConfigStruct> Logger::configStruct = ConfigStruct();
 
 void Logger::echo(const unsigned int    counter,
                   const time_t          occurTime,
@@ -42,11 +103,42 @@ void Logger::echo(const unsigned int    counter,
     std::string          beginStyle      = __cell_null_str;
     std::string          endStyle        = __cell_null_str;
 
+    namespace fs = std::filesystem;
+
+    const std::string folderPath = LogFolder.data();
+
+    std::string logfileTemp = folderPath + "/" + LogFilePrefix.data();
+
+    //! Maybe we can produce the file based on time in this section.
+    //! Use std::chrono...
+    //! Todo...
+    if(configStruct.value().outputFormat == OutputFormat::Dedicated)
+        logfileTemp.append(FileFormats::Dedicated.data());
+    if(configStruct.value().outputFormat == OutputFormat::RawText)
+        logfileTemp.append(FileFormats::RawText.data());
+    if(configStruct.value().outputFormat == OutputFormat::Json)
+        logfileTemp.append(FileFormats::Json.data());
+    if(configStruct.value().outputFormat == OutputFormat::Xml)
+        logfileTemp.append(FileFormats::Xml.data());
+    if(configStruct.value().outputFormat == OutputFormat::Csv)
+        logfileTemp.append(FileFormats::Csv.data());
+
+    // Create the folder if it does not exist
+    if (!fs::exists(folderPath)) {
+        if (!fs::create_directory(folderPath)) {
+            std::cerr << "Failed to create folder." << std::endl;
+            return;
+        }
+    }
+
+    // Open the log file in append mode
+    std::ofstream logFile(logfileTemp, std::ios::app);
+
     switch (type) {
     case LoggerType::Default:
         typeStr     =  "Default";
         streamInStyle       << NativeTerminal::Default;
-        beginStyle  = "\033[0;90m";
+        beginStyle  = "\033[0m";
         endStyle    = "\033[0m";
         break;
     case LoggerType::Info:
@@ -70,7 +162,7 @@ void Logger::echo(const unsigned int    counter,
     case LoggerType::Failed:
         typeStr =  "Failed" ;
         streamInStyle       << NativeTerminal::Error;
-        beginStyle  = "\033[1;91m";
+        beginStyle  = "\033[41m";
         endStyle    = "\033[0m";
         break;
     case LoggerType::Success:
@@ -82,13 +174,13 @@ void Logger::echo(const unsigned int    counter,
     case LoggerType::Done:
         typeStr =  "Done" ;
         streamInStyle       << NativeTerminal::Done;
-        beginStyle  = "\033[1;92m";
+        beginStyle  = "\033[42m";
         endStyle    = "\033[0m";
         break;
     case LoggerType::Paused:
         typeStr =  "Paused" ;
         streamInStyle       << NativeTerminal::Paused;
-        beginStyle  = "\033[1;96m";
+        beginStyle  = "\033[0;36m";
         endStyle    = "\033[0m";
         break;
     case LoggerType::InProgress:
@@ -107,6 +199,37 @@ void Logger::echo(const unsigned int    counter,
                       << std::put_time(localtime(&occurTime), "%Y/%m/%d %H:%M:%S") << " }"
                       << NativeTerminal::Reset << __cell_newline;
 
+        if(configStruct->storage == Storage::Disable)
+        {
+            // Todo..
+        }
+        if(configStruct->storage == Storage::InFile)
+        {
+            if (logFile.is_open())
+            {
+                // Write the current time and the message to the file
+                logFile << " => Log Id : [" << counter
+                        << "] : ["  << typeStr << "] "
+                        << message << " { DateTime: "
+                        << std::put_time(localtime(&occurTime), "%Y/%m/%d %H:%M:%S") << " }"
+                        << __cell_newline;
+                // Close the file
+                logFile.close();
+            }
+            else
+            {
+                std::cout << "Failed to open log file." << std::endl;
+            }
+        }
+        if(configStruct->storage == Storage::External)
+        {
+            // Todo..
+        }
+        if(configStruct->storage == Storage::Database)
+        {
+            // Todo..
+        }
+
         std::lock_guard<std::mutex> lock(mutex_l);
 
     } else if(LoggerModel == Mode::Developer) {
@@ -121,6 +244,41 @@ void Logger::echo(const unsigned int    counter,
                       << std::put_time(localtime(&occurTime), "%Y/%m/%d %H:%M:%S") << " }"
                       << NativeTerminal::Reset << __cell_newline;
 
+        if(configStruct->storage == Storage::Disable)
+        {
+            // Todo..
+        }
+        if(configStruct->storage == Storage::InFile)
+        {
+            if (logFile.is_open())
+            {
+                // Write the current time and the message to the file
+                logFile << " => Log Id : [" << counter  << "]"
+                        << "[ Line : "  << line << "] "
+                        << "[ Function : "  << function << "] "
+                        << "[ Thread Id : "  << strThreadId.str() << "] "
+                        << "[ File : "  << file << "] "
+                        << "] : ["    << typeStr << "] "
+                        << message    << " { DateTime: "
+                        << std::put_time(localtime(&occurTime), "%Y/%m/%d %H:%M:%S") << " }" << __cell_newline;
+                // Close the file
+                logFile.close();
+            }
+            else
+            {
+                std::cout << "Failed to open log file." << std::endl;
+            }
+
+        }
+        if(configStruct->storage == Storage::External)
+        {
+            // Todo..
+        }
+        if(configStruct->storage == Storage::Database)
+        {
+            // Todo..
+        }
+
         std::lock_guard<std::mutex> lock(mutex_l);
 
     } else if(LoggerModel == Mode::DataMining) {
@@ -134,8 +292,47 @@ void Logger::echo(const unsigned int    counter,
                       << message    << " { DateTime: "
                       << std::put_time(localtime(&occurTime), "%Y/%m/%d %H:%M:%S") << " }"
                       << NativeTerminal::Reset << __cell_newline;
+
+        if(configStruct->storage == Storage::Disable)
+        {
+            // Todo..
+        }
+        if(configStruct->storage == Storage::InFile)
+        {
+            if (logFile.is_open())
+            {
+                // Write the current time and the message to the file
+                logFile << " => Log Id : [" << counter  << "]"
+                        << "[ Line : "  << line << "] "
+                        << "[ Function : "  << function << "] "
+                        << "[ Thread Id : "  << strThreadId.str() << "] "
+                        << "[ File : "  << file << "] "
+                        << "] : ["    << typeStr << "] "
+                        << message    << " { DateTime: "
+                        << std::put_time(localtime(&occurTime), "%Y/%m/%d %H:%M:%S") << " }" << __cell_newline;
+                // Close the file
+                logFile.close();
+            }
+            else
+            {
+                std::cout << "Failed to open log file." << std::endl;
+            }
+
+        }
+        if(configStruct->storage == Storage::External)
+        {
+            // Todo..
+        }
+        if(configStruct->storage == Storage::Database)
+        {
+            // Todo..
+        }
+
         std::lock_guard<std::mutex> lock(mutex_l);
     }
+
+    // Close the file
+    logFile.close();
 }
 
 

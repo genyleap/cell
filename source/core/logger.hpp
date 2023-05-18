@@ -20,6 +20,14 @@
 # endif
 #endif
 
+#ifdef __has_include
+# if __has_include("core/filesystem.hpp")
+#   include "core/filesystem.hpp"
+#else
+#   error "Cell's "core/filesystem.hpp" was not found!"
+# endif
+#endif
+
 CELL_NAMESPACE_BEGIN(Cell::eLogger)
 
 /*!
@@ -38,6 +46,74 @@ enum LoggerType : Types::u8
     InProgress  =   0x8     //!<Print as in progress message.
 };
 
+static constexpr std::string_view LogFolder = "logs";
+static constexpr std::string_view LogFilePrefix = "log";
+
+struct FileFormats final
+{
+    static constexpr std::string_view Dedicated = ".clog";
+    static constexpr std::string_view RawText = ".txt";
+    static constexpr std::string_view Json = ".json";
+    static constexpr std::string_view Xml = ".xml";
+    static constexpr std::string_view Csv = ".csv";
+};
+
+/**
+ * @brief The OutputFormat enum
+ * Dedicated format is an extension such as .clog, ._clog for engine.
+ */
+enum class OutputFormat { Dedicated = 0x0, Json = 0x1, Xml = 0x2, RawText = 0x3, Csv = 0x4};
+
+/**
+ * @brief The ReportMode enum
+ * User reports are from apps used by the current user.
+ * System reports are from operating system components that affect all users.
+ * If you’re logged in as an administrator user, you can view all reports.
+ * If you’re not logged in as an administrator, you can only view user reports.
+ */
+enum ReportMode : Types::u8
+{
+    None        =   0x0,   //!< Logs from nothing.
+
+    Crash       =   0x1,    //!< System and user reports about apps or processes that crash.
+    //!< Crash report names have the .cips extension.
+
+    Spin        =   0x2,    //!< System and user reports with details about app or process issues.
+    //!< Spin report names have a .cspin extension.
+
+    Log         =   0x3,    //!< System and user reports with information about events that occur when the system or specific apps are processing.
+    //!< Log report names have an extension such as .clog, ._clog, or .its.
+
+    Diagnostic  =   0x4,    //!< System and user reports with information about hardware resources, system response times, and more.
+    //!< Diagnostic report names have an extension such as .cdiag or .cdpsub.
+    Analytics   =   0x5,    //!< Contents of the Message Tracer Store data found at cell/logs/DiagnosticMessages.
+
+    System      =   0x6     //!< Contents of the legacy system log file at /cell/logs/system.clog.
+
+};
+
+/**
+ * @brief The Software enum
+ */
+enum Software : Types::u8
+{
+    Core, Modules, Plugins
+};
+
+/**
+ * @brief The TraceMode enum
+ */
+enum class TraceMode : Types::u8
+{
+    None        =   0x0,   //!< Logs from nothing.
+    Hardware    =   0x1,   //!< Logs from low level hardware.
+    Software    =   0x2,   //!< Logs from core & high-level, modules and plugins.
+    User        =   0x3,   //!< Logs from user actions.
+    Mixed       =   0x4,   //!< Logs from all sections.
+    Custom      =   0x5,   //!< Logs from custom sections.
+    Other       =   0x6,   //!< Logs from other sections.
+};
+
 enum class Mode : Types::u8
 {
     User        =   0x0,    //!<Based on user log.
@@ -46,9 +122,28 @@ enum class Mode : Types::u8
 };
 
 
-#define Log(message, type)                                                                  \
+enum class Storage : Types::u8
+{
+    Disable    =   0x0,    //!< Disable (No writing).
+    InFile     =   0x1,    //!< Write in file.
+    External   =   0x2,    //!< Write in external storage.
+    Database   =   0x3     //!< Write in database.
+};
+
+/**
+ * @brief The ConfigStruct class
+ */
+struct ConfigStruct
+{
+    ReportMode      reportMode      {   ReportMode::System      };
+    TraceMode       traceMode       {   TraceMode::Mixed        };
+    OutputFormat    outputFormat    {   OutputFormat::RawText   };
+    Storage         storage         {   Storage::Disable        };
+};
+
+#define Log(message, type)                                                                 \
 Logger::echo(__cell_compiler_counter,                                                      \
-             std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()),        \
+             std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()),       \
              __cell_compiler_line,                                                         \
              __cell_compiler_function,                                                     \
              __cell_compiler_file,                                                         \
@@ -61,7 +156,7 @@ class Logger;
 class __cell_export Logger
 {
 public:
-    Logger() = default;
+    Logger();
     Logger(const Logger& rhsLogger) = delete;
     Logger(Logger&& rhsLogger) noexcept = delete;
     Logger& operator=(const Logger& rhsLogger) = delete;
@@ -69,6 +164,7 @@ public:
     ~Logger();
 
     inline static Mode LoggerModel = Mode::User;
+    inline static Storage StorageMode = Storage::Disable;
 
     /*!
      * \brief echo function will prints all data inline of usage!
@@ -88,6 +184,16 @@ public:
         std::string_view    file,
         std::string_view    message,
         const int           type);
+
+    void set(const ConfigStruct& config);
+    Types::Optional<ConfigStruct> get();
+    void reset();
+
+private:
+    static FileSystem::FileManager fileManager;
+    bool validateConfig(const ConfigStruct& config);
+    void adjustConfig(ConfigStruct& config);
+    static Types::Optional<ConfigStruct> configStruct;
 
 };
 
