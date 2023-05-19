@@ -50,20 +50,74 @@ struct DisplayInfo final
 struct GpuInfo final
 {
     /**
+     * @brief The GraphicCard class
+     */
+    struct GraphicCard final
+    {
+        Types::OptionalString           name         {};
+        Types::OptionalString           brand        {};
+        Types::Optional<Types::u8>      dieSize      {};
+        Types::Optional<Types::u8>      revision     {};
+        Types::Optional<Types::u8>      transistors  {};
+        Types::OptionalString           releaseDate  {};
+        Types::OptionalBool             crossSupport {};
+    };
+
+    /**
+     * @brief The Graphic3dApi class
+     */
+    struct Graphic3dApi final
+    {
+        Types::OptionalString   title           {};     //!< Title of api.
+        Types::OptionalString   version         {};     //!< Version of api.
+
+        enum class MultipleGraphicCard : Types::u8
+        {
+            None, SLI, Crossfire
+        };
+
+        MultipleGraphicCard multiGpuSupport;     //!< Cross Card Support.
+    };
+
+    /**
      * @brief Struct representing 3D API support.
      */
     struct Api3dSupport
     {
-        Types::u32 direct3d {}; //!< DirectX version.
-        Types::u32 opengl   {}; //!< OpenGL version.
-        Types::u32 metal    {}; //!< Metal version.
-        Types::u32 vulkan   {}; //!< Vulkan version.
+        Graphic3dApi direct3d {}; //!< DirectX version.
+        Graphic3dApi opengl   {}; //!< OpenGL version.
+        Graphic3dApi metal    {}; //!< Metal version.
+        Graphic3dApi vulkan   {}; //!< Vulkan version.
+    };
+
+    /**
+     * @brief The MemoryInfo class
+     */
+    struct MemoryInfo final
+    {
+        Types::OptionalString   type            {}; //!< Memory type such as DDR,GDDR and versions.
+        Types::OptionalString   busWidth        {}; //!< Memory bus width.
+        Types::OptionalString   bandwidth       {}; //!< Memory band width.
+        Types::llong            totalMemorySize {}; //!< Total physical memory size.
+        Types::llong            usedMemorySize  {}; //!< Total physical used memory Size.
+        Types::llong            freeMemorySize  {}; //!< Total physical free memory Size.
+    };
+
+    struct ClockInfo final
+    {
+        Types::llong   base     {}; //!< GPU base clock speed.
+        Types::llong   memory   {}; //!< GPU memory base clock speed.
+        Types::llong   boost    {}; //!< GPU boost clock speed.
     };
 
     Types::OptionalString           chipsetModel     {}; //!< GPU chipset model.
     Types::OptionalString           type             {}; //!< GPU type or name.
+    Types::OptionalString           technology       {}; //!< GPU technology info.
+    Types::OptionalString           releaseDate      {}; //!< Graphic Card release date.
     Types::OptionalString           bus              {}; //!< Bus type.
     Types::OptionalString           vendor           {}; //!< GPU vendor.
+    Types::Optional<ClockInfo>      clockInfo        {}; //!< Clock speed info.
+    Types::Optional<MemoryInfo>     memorySize       {}; //!< Video memory size.
     Types::Optional<Api3dSupport>   api3dSupport     {}; //!< 3D API support information.
     Types::OptionalNumeric          totalCores       {}; //!< Total number of GPU cores.
 };
