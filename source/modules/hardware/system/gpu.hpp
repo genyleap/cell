@@ -71,6 +71,9 @@ struct GpuInfo final
         Types::OptionalString   title           {};     //!< Title of api.
         Types::OptionalString   version         {};     //!< Version of api.
 
+        /**
+         * @brief The MultipleGraphicCard enum
+         */
         enum class MultipleGraphicCard : Types::u8
         {
             None, SLI, Crossfire
@@ -97,17 +100,32 @@ struct GpuInfo final
     {
         Types::OptionalString   type            {}; //!< Memory type such as DDR,GDDR and versions.
         Types::OptionalString   busWidth        {}; //!< Memory bus width.
-        Types::OptionalString   bandwidth       {}; //!< Memory band width.
+        Types::OptionalString   bandWidth       {}; //!< Memory band width.
         Types::llong            totalMemorySize {}; //!< Total physical memory size.
         Types::llong            usedMemorySize  {}; //!< Total physical used memory Size.
         Types::llong            freeMemorySize  {}; //!< Total physical free memory Size.
     };
 
+    /**
+     * @brief The ClockInfo class
+     */
     struct ClockInfo final
     {
         Types::llong   base     {}; //!< GPU base clock speed.
         Types::llong   memory   {}; //!< GPU memory base clock speed.
         Types::llong   boost    {}; //!< GPU boost clock speed.
+    };
+
+    /**
+     * @brief The Computing enum
+     */
+    struct Computing
+    {
+        enum t { Default, OpenCL, Cuda, PhysX, DirectCompute };
+        Types::OptionalBool openCl          {false};
+        Types::OptionalBool cuda            {false};
+        Types::OptionalBool physx           {false};
+        Types::OptionalBool directCompute   {false};
     };
 
     Types::OptionalString           chipsetModel     {}; //!< GPU chipset model.
@@ -120,6 +138,7 @@ struct GpuInfo final
     Types::Optional<MemoryInfo>     memorySize       {}; //!< Video memory size.
     Types::Optional<Api3dSupport>   api3dSupport     {}; //!< 3D API support information.
     Types::OptionalNumeric          totalCores       {}; //!< Total number of GPU cores.
+    Types::Optional<Computing>      computing        {}; //!< Computing technology.
 };
 
 
