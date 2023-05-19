@@ -20,7 +20,7 @@
 #   error "Cell's "common.hpp" was not found!"
 # endif
 #endif
-CELL_NAMESPACE_BEGIN(Cell::Modules::Hardware)
+CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 
 /**
  * @brief Struct representing display information.

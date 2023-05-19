@@ -15,8 +15,8 @@
 #endif
 
 #ifdef __has_include
-# if __has_include("gpu.hpp")
-#   include "gpu.hpp"
+# if __has_include("cpu.hpp")
+#   include "cpu.hpp"
 #else
 #   error "Cell's "gpu.hpp" was not found!"
 # endif
@@ -45,26 +45,5 @@ CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 
-GraphicInformation::GraphicInformation()
-{
-}
-
-GraphicInformation::~GraphicInformation()
-{
-}
-
-std::vector<GpuInfo> GraphicInformation::get()
-{
-#if defined(PLATFORM_WINDOWS)
-//! Todo...
-#elif defined(PLATFORM_MAC)
-//! Todo...
-#elif defined(PLATFORM_LINUX)
-//! Todo...
-#endif
-    return std::vector<GpuInfo>();
-
-
-}
 
 CELL_NAMESPACE_END
