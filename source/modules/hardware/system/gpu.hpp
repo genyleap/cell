@@ -117,28 +117,44 @@ struct GpuInfo final
     };
 
     /**
-     * @brief The Computing enum
+     * @brief The Computing
      */
     struct Computing
     {
-        enum t { Default, OpenCL, Cuda, PhysX, DirectCompute };
+        enum t { OpenCL, Cuda, PhysX, DirectCompute, DirectMl };
         Types::OptionalBool openCl          {false};
         Types::OptionalBool cuda            {false};
         Types::OptionalBool physx           {false};
+        Types::OptionalBool directCompute   {false};
+        Types::OptionalBool directMl        {false};
+    };
+
+    /**
+     * @brief The Technologies
+     */
+    struct Technologies
+    {
+        enum t { Vulkan, RayTracing, OpenGL };
+        Types::OptionalBool vulkan          {false};
+        Types::OptionalBool rayTracing      {false};
+        Types::OptionalBool openGl          {false};
         Types::OptionalBool directCompute   {false};
     };
 
     Types::OptionalString           chipsetModel     {}; //!< GPU chipset model.
     Types::OptionalString           type             {}; //!< GPU type or name.
-    Types::OptionalString           technology       {}; //!< GPU technology info.
     Types::OptionalString           releaseDate      {}; //!< Graphic Card release date.
     Types::OptionalString           bus              {}; //!< Bus type.
     Types::OptionalString           vendor           {}; //!< GPU vendor.
+    Types::OptionalString           biosVersion      {}; //!< GPU bios version.
+    Types::OptionalString           driverVersion    {}; //!< GPU driver version.
+    Types::OptionalString           digitalSignature {}; //!< Driver digital signature.
     Types::Optional<ClockInfo>      clockInfo        {}; //!< Clock speed info.
     Types::Optional<MemoryInfo>     memorySize       {}; //!< Video memory size.
     Types::Optional<Api3dSupport>   api3dSupport     {}; //!< 3D API support information.
     Types::OptionalNumeric          totalCores       {}; //!< Total number of GPU cores.
     Types::Optional<Computing>      computing        {}; //!< Computing technology.
+    Types::Optional<Technologies>   technologies     {}; //!< Graphic technologies support.
 };
 
 
