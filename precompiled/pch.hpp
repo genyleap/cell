@@ -340,15 +340,14 @@
 #endif
 #endif
 
-#if defined(PLATFORM_MAC) && !defined(PLATFORM_MOBILE)
-#include "unix/pch.hpp"
-#elif defined(PLATFORM_MAC) && defined(PLATFORM_MOBILE)
-#include "unix/pch.hpp"
+#if defined(PLATFORM_MAC)
+#   include "unix/pch.hpp"
 #elif defined(PLATFORM_LINUX)
-#include "linux/pch.hpp"
+#   include "linux/pch.hpp"
 #elif defined(PLATFORM_FREEBSD)
-#include "unix/pch.hpp"
+#   include "unix/pch.hpp"
 #elif defined(PLATFORM_WINDOWS)
-#include "win32/pch.hpp"
+#   include "win32/pch.hpp"
 #endif
+
 #endif // PCH_HPP
