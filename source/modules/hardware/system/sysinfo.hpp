@@ -19,49 +19,68 @@
 #   error "Cell's "common.hpp" was not found!"
 #endif
 
+#if __has_include("mainboard.hpp")
+#   include "mainboard.hpp"
+#else
+#   error "Cell's "mainboard.hpp" was not found!"
+#endif
+
+#if __has_include("firmware.hpp")
+#   include "firmware.hpp"
+#else
+#   error "Cell's "firmware.hpp" was not found!"
+#endif
+
+#if __has_include("cpu.hpp")
+#   include "cpu.hpp"
+#else
+#   error "Cell's "cpu.hpp" was not found!"
+#endif
+
+#if __has_include("memory.hpp")
+#   include "memory.hpp"
+#else
+#   error "Cell's "memory.hpp" was not found!"
+#endif
+
+#if __has_include("gpu.hpp")
+#   include "gpu.hpp"
+#else
+#   error "Cell's "gpu.hpp" was not found!"
+#endif
+
+#if __has_include("os.hpp")
+#   include "os.hpp"
+#else
+#   error "Cell's "os.hpp" was not found!"
+#endif
+
+#if __has_include("product.hpp")
+#   include "product.hpp"
+#else
+#   error "Cell's "product.hpp" was not found!"
+#endif
+
+
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
-
-/**
- * @brief The MemoryInfo class
- */
-struct MemoryInfo final
-{
-    Types::llong totalMemory    {}; //!< Total physical memory size.
-    Types::llong usedMemory     {}; //!< Total physical used memory Size.
-    Types::llong freeMemory     {}; //!< Total physical free memory Size.
-};
-
-/**
- * @brief The CpuInfo class
- */
-struct CpuInfo final
-{
-    std::string brandString     {}; //!< Processor brand as string [Intel, AMD, Apple and etc].
-    Types::uint count           {}; //!< Total physical processor core.
-};
-
-struct ProductInfo final
-{
-    Types::OptionalString productName;
-    Types::OptionalString productVersion;
-    Types::OptionalString productBuildVersion;
-};
 
 /**
  * @brief The InformationData class
  */
 struct InformationData final
 {
-    std::string osName;
-    std::string hostName;
-    std::string userName;
-    std::string kernelName;
-    std::string kernelVersion;
-    Types::uint numProcessors;
+    /* Hardware Data */
+    FirmwareInfo    firmware        {};
+    MainboardInfo   mainBoard       {};
+    CpuInfo         processor       {};
+    GpuInfo         videoGraphic    {};
+    MemoryInfo      mainMemory      {};
 
-    CpuInfo     processorInfo;
-    MemoryInfo  memoryInfo;
-    ProductInfo productInfo;
+    /* Software Data */
+    ProductInfo     productInfo     {};
+    OsInfo          osInfo          {};
+
+    /* Extra Data */
 };
 
 class __cell_export SystemInformation
@@ -99,6 +118,18 @@ public:
      * @return as an optional string.
      */
     Types::OptionalString getUserName();
+
+    /**
+     * @brief The MainboardInfo() method returns a MainboardInfo object that contains information about the Motherboard.
+     * @return as MainboardInfo object.
+     */
+    MainboardInfo getMainboardInfo();
+
+    /**
+     * @brief The FirmwareInfo() method returns a FirmwareInfo object that contains information about the Firmware [BIOS/UEFI].
+     * @return as FirmwareInfo object.
+     */
+    FirmwareInfo getFirmwareInfo();
 
     /**
      * @brief The getCpuInfo() method returns a CpuInfo object that contains information about the CPU, such as the name and number of cores.

@@ -23,5 +23,12 @@ CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 
+FirmwareInfo::FirmwareInfo()
+{
+}
+
+FirmwareInfo::~FirmwareInfo()
+{
+}
 
 CELL_NAMESPACE_END

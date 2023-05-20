@@ -23,5 +23,12 @@ CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 
+MemoryInfo::MemoryInfo()
+{
+}
+
+MemoryInfo::~MemoryInfo()
+{
+}
 
 CELL_NAMESPACE_END

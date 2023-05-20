@@ -1,23 +1,7 @@
-#ifdef _WIN32
-#include <Winsock2.h>
-#include <WS2tcpip.h>
-#include <windows.h>
-//!libs
-#pragma comment(lib, "Ws2_32.lib")
-#elif __APPLE__
-#include <unistd.h>
-#include <sys/sysctl.h>
-#include <mach/mach.h>
+#if __has_include("product.hpp")
+#   include "product.hpp"
 #else
-#include <unistd.h>
-#include <sys/sysinfo.h>
-#include <sys/utsname.h>
-#endif
-
-#if __has_include("cpu.hpp")
-#   include "cpu.hpp"
-#else
-#   error "Cell's "gpu.hpp" was not found!"
+#   error "Cell's "product.hpp" was not found!"
 #endif
 
 #if __has_include("core/core.hpp")
@@ -39,11 +23,11 @@ CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 
-CpuInfo::CpuInfo()
+ProductInfo::ProductInfo()
 {
 }
 
-CpuInfo::~CpuInfo()
+ProductInfo::~ProductInfo()
 {
 }
 
