@@ -107,6 +107,36 @@ struct GpuInfo final
     };
 
     /**
+     * @brief The MemoryType enum class represents different types of graphics double data rate (GDDR) memory.
+     * @details The `MemoryType` enum class you provided represents different types of graphics double data rate (GDDR) memory.
+     *
+     * GDDR memory is a specialized type of memory specifically designed for graphics processing units (GPUs). Here's a brief overview of the different GDDR memory types:
+     * 1. GDDR: GDDR, or GDDR1, was the first generation of graphics double data rate memory. It provided improved performance compared to standard DDR memory and was primarily used in early graphics cards.
+     * 2. GDDR2: GDDR2 improved upon GDDR1 by offering higher data transfer rates, increased memory bandwidth, and reduced power consumption. It was utilized in mid-range graphics cards.
+     * 3. GDDR3: GDDR3 further enhanced performance by increasing the data transfer rates and memory density compared to GDDR2. It introduced higher clock speeds, improved power management features, and was widely adopted in high-end graphics cards.
+     * 4. GDDR4: GDDR4 introduced even higher data transfer rates and increased memory capacities compared to GDDR3. However, it did not gain widespread adoption and was quickly surpassed by newer memory technologies.
+     * 5. GDDR5: GDDR5 marked a significant leap in performance and capabilities. It offered higher data transfer rates, increased memory densities, and improved power efficiency compared to GDDR4. GDDR5 became the standard memory type for high-performance graphics cards.
+     * 6. GDDR5X: GDDR5X is an enhanced version of GDDR5 that further increased the memory bandwidth and data transfer rates. It was designed as a bridge technology between GDDR5 and the next-generation GDDR6 memory.
+     * 7. GDDR6: GDDR6 introduced a substantial increase in memory bandwidth and data transfer rates compared to GDDR5. It offered improved performance, power efficiency, and memory capacities, making it suitable for high-end graphics cards.
+     * 8. GDDR6X: GDDR6X is an advanced version of GDDR6 that further pushed the memory bandwidth limits. It introduced innovative signaling techniques to achieve even higher data transfer rates, primarily used in top-of-the-line graphics cards.
+     *
+     * Each GDDR memory type represents advancements in memory technology to meet the increasing demands of graphics-intensive applications and gaming.
+     * It's important to note that the specific features, timings, and performance characteristics of GDDR memory modules may vary depending on the manufacturer and the specific product.
+     */
+    enum class MemoryType
+    {
+        GDDR,    //!< GDDR memory type.
+        GDDR2,   //!< GDDR2 memory type.
+        GDDR3,   //!< GDDR3 memory type.
+        GDDR4,   //!< GDDR4 memory type.
+        GDDR5,   //!< GDDR5 memory type.
+        GDDR5X,  //!< GDDR5X memory type.
+        GDDR6,   //!< GDDR6 memory type.
+        GDDR6X   //!< GDDR6X memory type.
+    };
+
+
+    /**
      * @brief The ClockInfo class
      */
     struct ClockInfo final
@@ -142,7 +172,8 @@ struct GpuInfo final
     };
 
     Types::OptionalString           chipsetModel     {}; //!< GPU chipset model.
-    Types::OptionalString           type             {}; //!< GPU type or name.
+    Types::OptionalString           name             {}; //!< GPU type or name.
+    Types::Optional<MemoryType>     type             {}; //!< GPU memory type technology.
     Types::OptionalString           releaseDate      {}; //!< Graphic Card release date.
     Types::OptionalString           bus              {}; //!< Bus type.
     Types::OptionalString           vendor           {}; //!< GPU vendor.
