@@ -1,29 +1,23 @@
-#ifdef __has_include
-# if __has_include("filesystem.hpp")
+#if __has_include("filesystem.hpp")
 #   include "filesystem.hpp"
 #define header_is_avaialble
 #else
 #   error "Cell's filesystem.hpp was not found!"
 #undef header_is_avaialble
-# endif
 #endif
 
 #ifdef header_is_avaialble
 
-#ifdef __has_include
-# if __has_include(<core>)
+#if __has_include(<core>)
 #   include <core>
 #else
 #   error "Cell's <core> was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("logger.hpp")
+#if __has_include("logger.hpp")
 #   include "logger.hpp"
 #else
 #   error "Cell's "logger.hpp" was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell::Types;

@@ -1,9 +1,7 @@
-#ifdef __has_include
-# if __has_include("transfer.hpp")
+#if __has_include("transfer.hpp")
 #   include "transfer.hpp"
 #else
 #   error "Cell's transfer was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell;

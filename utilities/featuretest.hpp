@@ -6,15 +6,10 @@
 
 #ifndef FEATURETEST_HPP
 #define FEATURETEST_HPP
-
-#ifdef __has_include
-# if __has_include(<precompiled/pch.hpp>)
+#if __has_include(<precompiled/pch.hpp>)
 # include <precompiled/pch.hpp>
 # endif
-# endif
-
-#ifdef __has_include
-# if __has_include(<version>)
+#if __has_include(<version>)
 #   include <version>
 # endif
 
@@ -344,7 +339,5 @@ inline void show(char const* title, CompilerFeature (&features)[N]) {
         print_compiler_feature(x);
     }
 }
-
-#endif
 
 #endif // FEATURETEST_HPP

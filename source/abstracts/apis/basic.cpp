@@ -1,9 +1,7 @@
-#ifdef __has_include
-# if __has_include("basic.hpp")
+#if __has_include("basic.hpp")
 #   include "basic.hpp"
 #else
 #   error "Cell's basic not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell;

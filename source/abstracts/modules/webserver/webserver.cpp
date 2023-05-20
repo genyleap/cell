@@ -1,9 +1,7 @@
-#ifdef __has_include
-# if __has_include("webserver.hpp")
+#if __has_include("webserver.hpp")
 #   include "webserver.hpp"
 #else
 #   error "Cell's webserver was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell;

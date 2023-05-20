@@ -7,11 +7,8 @@
 
 #ifndef UNIX_PCH_HPP
 #define UNIX_PCH_HPP
-
-#ifdef __has_include
-# if __has_include(<utilities/preprocessor.hpp>)
+#if __has_include(<utilities/preprocessor.hpp>)
 #   include <utilities/preprocessor.hpp>
-# endif
 #else
 #   include <utilities/preprocessor.hpp>
 #endif

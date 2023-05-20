@@ -13,44 +13,34 @@
 #ifndef CELL_POST_ABSTRACT_HPP
 #define CELL_POST_ABSTRACT_HPP
 
-#ifdef __has_include
-# if __has_include("common.hpp")
+#if __has_include("common.hpp")
 #   include "common.hpp"
 #else
 #   error "Cell's common not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/core.hpp")
+#if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
 #   error "Cell's core not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/message.hpp")
+#if __has_include("core/message.hpp")
 #   include "core/message.hpp"
 #else
 #   error "Cell's message not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/share.hpp")
+#if __has_include("core/share.hpp")
 #   include "core/share.hpp"
 #else
 #   error "Cell's share not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/tags.hpp")
+#if __has_include("core/tags.hpp")
 #   include "core/tags.hpp"
 #else
 #   error "Cell's tags not found!"
-# endif
 #endif
 
 

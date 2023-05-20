@@ -1,10 +1,8 @@
 //! Cell's Abstract Dynamics.
-#ifdef __has_include
-# if __has_include("moduleinterface.hpp")
+#if __has_include("moduleinterface.hpp")
 #   include "moduleinterface.hpp"
 #else
 #   error "Cell's moduleinterface was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell;

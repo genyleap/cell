@@ -1,9 +1,7 @@
-#ifdef __has_include
-# if __has_include("updater.hpp")
+#if __has_include("updater.hpp")
 #   include "updater.hpp"
 #else
 #   error "Cell's updater was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell;

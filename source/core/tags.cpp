@@ -1,9 +1,7 @@
-#ifdef __has_include
-# if __has_include("tags.hpp")
+#if __has_include("tags.hpp")
 #   include "tags.hpp"
 #else
 #   error "Cell's "tags.hpp" was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell::Types;

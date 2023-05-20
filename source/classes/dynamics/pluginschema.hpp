@@ -14,21 +14,17 @@
 #define CELL_PLUGIN_SCHEMA_HPP
 
 //!<  Cell's Common.
-#ifdef __has_include
-# if __has_include("common.hpp")
+#if __has_include("common.hpp")
 #   include "common.hpp"
 #else
 #   error "Cell's common was not found!"
-# endif
 #endif
 
 //!<  Cell's Common.
-#ifdef __has_include
-# if __has_include("abstracts/account/groups.hpp")
+#if __has_include("abstracts/account/groups.hpp")
 #   include "abstracts/account/groups.hpp"
 #else
 #   error "Cell's abstracts/account/groups.hpp was not found!"
-# endif
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::Dynamics)

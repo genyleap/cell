@@ -1,25 +1,19 @@
-﻿#ifdef __has_include
-# if __has_include("logger.hpp")
+﻿#if __has_include("logger.hpp")
 #   include "logger.hpp"
 #else
 #   error "Cell's "logger.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("terminal.hpp")
+#if __has_include("terminal.hpp")
 #   include "terminal.hpp"
 #else
 #   error "Cell's "terminal.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("filesystem.hpp")
+#if __has_include("filesystem.hpp")
 #   include "filesystem.hpp"
 #else
 #   error "Cell's "filesystem.hpp" was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell::Terminal;

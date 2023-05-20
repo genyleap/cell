@@ -1,17 +1,13 @@
-#ifdef __has_include
-# if __has_include("pluginmanager.hpp")
+#if __has_include("pluginmanager.hpp")
 #   include "pluginmanager.hpp"
 #else
 #   error "Cell's "pluginmanager.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/logger.hpp")
+#if __has_include("core/logger.hpp")
 #   include "core/logger.hpp"
 #else
 #   error "Cell's "core/logger.hpp" was not found!"
-# endif
 #endif
 
 

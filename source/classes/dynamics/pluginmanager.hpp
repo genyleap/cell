@@ -13,12 +13,10 @@
 #ifndef CELL_PLUGIN_MANAGER_HPP
 #define CELL_PLUGIN_MANAGER_HPP
 
-#ifdef __has_include
-# if __has_include("plugin.hpp")
+#if __has_include("plugin.hpp")
 #   include "plugin.hpp"
 #else
 #   error "Cell's "plugin.hpp" was not found!"
-# endif
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::Dynamics)

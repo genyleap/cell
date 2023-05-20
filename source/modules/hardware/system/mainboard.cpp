@@ -1,27 +1,20 @@
-#ifdef __has_include
-# if __has_include("motherboard.hpp")
-#   include "motherboard.hpp"
+#if __has_include("mainboard.hpp")
+#   include "mainboard.hpp"
 #else
-#   error "Cell's "motherboard.hpp" was not found!"
-# endif
+#   error "Cell's "mainboard.hpp" was not found!"
 #endif
 
-#ifdef __has_include
-# if __has_include("core/core.hpp")
+#if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
 #   error "Cell's "core/logger.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/logger.hpp")
+#if __has_include("core/logger.hpp")
 #   include "core/logger.hpp"
 #else
 #   error "Cell's "core/logger.hpp" was not found!"
-# endif
 #endif
-
 
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::eLogger;
@@ -29,5 +22,19 @@ CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 
+MainboardInfo::MainboardInfo()
+{
+
+}
+
+MainboardInfo::~MainboardInfo()
+{
+
+}
+
+MainboardInfo::BoardInfo MainboardInfo::get() __cell_const_noexcept
+{
+
+}
 
 CELL_NAMESPACE_END

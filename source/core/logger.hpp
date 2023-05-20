@@ -12,29 +12,23 @@
 #ifndef CELL_LOGGER_HPP
 #define CELL_LOGGER_HPP
 
-#ifdef __has_include
-# if __has_include("common.hpp")
+#if __has_include("common.hpp")
 #   include "common.hpp"
 #else
 #   error "Cell's "common.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/core.hpp")
+#if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
 #   error "Cell's "core/core.hpp" was not found!"
-# endif
 #endif
 
 
-#ifdef __has_include
-# if __has_include("core/filesystem.hpp")
+#if __has_include("core/filesystem.hpp")
 #   include "core/filesystem.hpp"
 #else
 #   error "Cell's "core/filesystem.hpp" was not found!"
-# endif
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::eLogger)

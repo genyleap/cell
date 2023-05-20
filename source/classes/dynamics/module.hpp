@@ -13,20 +13,16 @@
 #ifndef CELL_MODULE_HPP
 #define CELL_MODULE_HPP
 
-#ifdef __has_include
-# if __has_include("common.hpp")
+#if __has_include("common.hpp")
 #   include "common.hpp"
 #else
 #   error "Cell's "common.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("moduleschema.hpp")
+#if __has_include("moduleschema.hpp")
 #   include "moduleschema.hpp"
 #else
 #   error "Cell's "moduleschema.hpp" was not found!"
-# endif
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::Dynamics)

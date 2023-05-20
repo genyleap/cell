@@ -1,25 +1,19 @@
-#ifdef __has_include
-# if __has_include("restapi.hpp")
+#if __has_include("restapi.hpp")
 #   include "restapi.hpp"
 #else
 #   error "Cell's "restapi.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/core.hpp")
+#if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
 #   error "Cell's "core/core.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/logger.hpp")
+#if __has_include("core/logger.hpp")
 #   include "core/logger.hpp"
 #else
 #   error "Cell's "core/logger.hpp" was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell::System;

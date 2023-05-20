@@ -33,22 +33,11 @@
 ///!
 #endif
 
-//#if defined(CXX_STANDARD_20)
-//#ifdef __has_cpp_attribute
-//#  if __has_cpp_attribute(__cpp_modules)
-//#   pragma message("Your project is based on modern solution for componentization of C++ libraries and programs.")
-//#else
-//#   pragma message("Your project is based on classic precompiled-header system. [enable module technique in C++]")
-//#endif
-//#endif
-
 #if __cplusplus > 201703
-#ifdef __has_include
-#  if __has_include("precompiled/pch.hpp")
+#if __has_include("precompiled/pch.hpp")
 #    include "precompiled/pch.hpp"
-#  else
+#else
 #     pragma message("Your project is based on classic precompiled-header system.")
-#  endif
 #endif
 #else
 # include "precompiled/pch.hpp"

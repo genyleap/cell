@@ -1,9 +1,7 @@
-#ifdef __has_include
-# if __has_include("menu.hpp")
+#if __has_include("menu.hpp")
 #   include "menu.hpp"
 #else
 #   error "Cell's menu was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell;

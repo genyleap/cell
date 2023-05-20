@@ -1,9 +1,7 @@
-#ifdef __has_include
-# if __has_include("response.hpp")
+#if __has_include("response.hpp")
 #   include "response.hpp"
 #else
 #   error "Cell's response was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell;

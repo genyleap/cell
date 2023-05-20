@@ -1,9 +1,7 @@
-#ifdef __has_include
-# if __has_include("post.hpp")
+#if __has_include("post.hpp")
 #   include "post.hpp"
 #else
 #   error "Cell's post was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell;

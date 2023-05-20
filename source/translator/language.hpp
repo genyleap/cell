@@ -13,20 +13,16 @@
 #ifndef CELL_LANGUAGE_HPP
 #define CELL_LANGUAGE_HPP
 
-#ifdef __has_include
-# if __has_include("common.hpp")
+#if __has_include("common.hpp")
 #   include "common.hpp"
 #else
 #   error "Cell's "common.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/url.hpp")
+#if __has_include("core/url.hpp")
 #   include "core/url.hpp"
 #else
 #   error "Cell's "core/url.hpp" was not found!"
-# endif
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::Multilangual)

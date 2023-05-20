@@ -1,25 +1,19 @@
-#ifdef __has_include
-# if __has_include("serializer.hpp")
+#if __has_include("serializer.hpp")
 #   include "serializer.hpp"
 #else
 #   error "Cell's "serializer.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core.hpp")
+#if __has_include("core.hpp")
 #   include "core.hpp"
 #else
 #   error "Cell's "core.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("logger.hpp")
+#if __has_include("logger.hpp")
 #   include "logger.hpp"
 #else
 #   error "Cell's "logger.hpp" was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell::eLogger;

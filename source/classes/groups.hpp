@@ -14,21 +14,17 @@
 #define CELL_GROUPS_HPP
 
 //! Cell's Core (Basic Requirements).
-#ifdef __has_include
-# if __has_include(<requirements>)
+#if __has_include(<requirements>)
 #   include <requirements>
 #else
 #   error "Cell's requirements was not found!"
-# endif
 #endif
 
 //! Cell's Abstraction (Interfaces).
-#ifdef __has_include
-# if __has_include(<interface>)
+#if __has_include(<interface>)
 #   include <interface>
 #else
 #   error "The abstractions of Cell was not found!"
-# endif
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell)

@@ -13,11 +13,8 @@
  * Can reduce the compilation time of C++ files.
  * Can reduce the number of lines of code that the compiler must process (in some cases, by several orders of magnitude).
  */
-
-#ifdef __has_include
-# if __has_include(<utilities/preprocessor.hpp>)
+#if __has_include(<utilities/preprocessor.hpp>)
 #   include <utilities/preprocessor.hpp>
-# endif
 #else
 #   include <utilities/preprocessor.hpp>
 #endif
@@ -50,11 +47,8 @@
 
 //!Added in the C++20 standard
 #if defined(CXX_STANDARD_20)
-//!Concepts
-#ifdef __has_include
-# if __has_include(<concepts>)
+#if __has_include(<concepts>)
 #   include <concepts>
-# endif
 #endif
 #endif
 
@@ -81,10 +75,8 @@
 
 //!Container views
 #if defined(CXX_STANDARD_20)
-#ifdef __has_include
-# if __has_include(<span>)
+#if __has_include(<span>)
 #   include <span>
-# endif
 #endif
 #endif
 
@@ -101,10 +93,8 @@
 #include <cstdlib>
 
 #if defined(CXX_STANDARD_20)
-#ifdef __has_include
-# if __has_include(<execution>)
+#if __has_include(<execution>)
 #   include <execution>
-# endif
 #endif
 #endif
 
@@ -112,10 +102,8 @@
 #include <memory>
 
 #if defined(CXX_STANDARD_20)
-#ifdef __has_include
-# if __has_include(<memory_resource>)
+#if __has_include(<memory_resource>)
 #   include <memory_resource>
-# endif
 #endif
 #endif
 
@@ -141,10 +129,8 @@
 #include <cstdio>
 
 #ifdef CXX_STANDARD_20
-#ifdef __has_include
-# if __has_include(<filesystem>)
+#if __has_include(<filesystem>)
 #   include <filesystem>
-# endif
 #endif
 #endif
 
@@ -159,10 +145,8 @@
 #include <streambuf>
 
 #if defined(CXX_STANDARD_20)
-#ifdef __has_include
-# if __has_include(<syncstream>)
+#if __has_include(<syncstream>)
 #   include <syncstream>
-# endif
 #endif
 #endif
 
@@ -176,26 +160,20 @@
 
 
 #if defined(CXX_STANDARD_20)
-#ifdef __has_include
-# if __has_include(<compare>)
+#if __has_include(<compare>)
 #   include <compare>
-# endif
 #endif
 #endif
 
 #if defined(CXX_STANDARD_20)
-#ifdef __has_include
-# if __has_include(<contract>)
+#if __has_include(<contract>)
 #   include <contract>
-# endif
 #endif
 #endif
 
 #if defined(CXX_STANDARD_20)
-#ifdef __has_include
-# if __has_include(<coroutine>)
+#if __has_include(<coroutine>)
 #   include <coroutine>
-# endif
 #endif
 #endif
 
@@ -212,19 +190,15 @@
 #include <typeinfo>
 
 #if defined(CXX_STANDARD_20)
-#ifdef __has_include
-# if __has_include(<version>)
+#if __has_include(<version>)
 #   include <version>
-# endif
 #endif
 #endif
 
 //!Ranges
 #if defined(CXX_STANDARD_20)
-#ifdef __has_include
-# if __has_include(<ranges>)
+#if __has_include(<ranges>)
 #   include <ranges>
-# endif
 #endif
 #endif
 
@@ -238,10 +212,8 @@
 #include <cstring>
 
 #if defined(CXX_STANDARD_20)
-#ifdef __has_include
-# if __has_include(<cuchar>)
+#if __has_include(<cuchar>)
 #   include <cuchar>
-# endif
 #endif
 #endif
 
@@ -285,10 +257,8 @@
 
 //!Math and numerics
 #if defined(CXX_STANDARD_20)
-#ifdef __has_include
-# if __has_include(<bit>)
+#if __has_include(<bit>)
 #   include <bit>
-# endif
 #endif
 #endif
 #include <cfenv>
@@ -302,16 +272,12 @@
 #include <valarray>
 
 //!Memory management
-#ifdef __has_include
-# if __has_include(<allocators>)
+#if __has_include(<allocators>)
 #   include <allocators>
-# endif
 #endif
 #include <memory>
-#ifdef __has_include
-# if __has_include(<memory_resource>)
+#if __has_include(<memory_resource>)
 #   include <memory_resource>
-# endif
 #endif
 #include <new>
 #include <scoped_allocator>
@@ -323,7 +289,7 @@
 #if __cpp_lib_json
 #    include <json>
 #else
-# if __has_include(<boost/json.hpp>)
+#if __has_include(<boost/json.hpp>)
 #    include <boost/json.hpp>
 # elif __has_include(<json/json.h>)
 #    include <json/json.h>
@@ -333,7 +299,7 @@
 #if __cpp_lib_format
 #    include <format>
 #else
-# if __has_include(<boost/format.hpp>)
+#if __has_include(<boost/format.hpp>)
 #    include <boost/format.hpp>
 # elif __has_include(<fmt/format.h>)
 #    include <fmt/format.h>

@@ -1,33 +1,25 @@
-#ifdef __has_include
-# if __has_include("config.hpp")
+#if __has_include("config.hpp")
 #   include "config.hpp"
 #else
 #   error "Cell's "config.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core.hpp")
+#if __has_include("core.hpp")
 #   include "core.hpp"
 #else
 #   error "Cell's "core.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("logger.hpp")
+#if __has_include("logger.hpp")
 #   include "logger.hpp"
 #else
 #   error "Cell's "logger.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("json.hpp")
+#if __has_include("json.hpp")
 #   include "json.hpp"
 #else
 #   error "Cell's "json.hpp" was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell;

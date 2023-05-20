@@ -13,20 +13,13 @@
 #ifndef CELL_SMS_ABSTRACT_HPP
 #define CELL_SMS_ABSTRACT_HPP
 
-#ifdef __has_include
-# if __has_include("common.hpp")
+#if __has_include("common.hpp")
 #   include "common.hpp"
 #else
 #   error "Cell's "common.hpp" was not found!"
-# endif
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
-
-#include <string>
-#include <vector>
-#include <optional>
-
 
 /**
  * @brief The SmsStruct struct represents the internal structure of an SMS message.

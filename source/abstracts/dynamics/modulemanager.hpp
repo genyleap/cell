@@ -14,30 +14,24 @@
 #define CELL_MODULE_MANAGER_ABSTRACT_HPP
 
 //! Cell's Common.
-#ifdef __has_include
-# if __has_include("common.hpp")
+#if __has_include("common.hpp")
 #   include "common.hpp"
 #else
 #   error "Cell's common was not found!"
-# endif
 #endif
 
 //! Cell's Module.
-#ifdef __has_include
-# if __has_include("module.hpp")
+#if __has_include("module.hpp")
 #   include "module.hpp"
 #else
 #   error "Cell's module was not found!"
-# endif
 #endif
 
 //! Cell's Module interface.
-#ifdef __has_include
-# if __has_include("moduleinterface.hpp")
+#if __has_include("moduleinterface.hpp")
 #   include "moduleinterface.hpp"
 #else
 #   error "Cell's module interface was not found!"
-# endif
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)

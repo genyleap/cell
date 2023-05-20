@@ -1,41 +1,31 @@
-#ifdef __has_include
-# if __has_include("json.hpp")
+#if __has_include("json.hpp")
 #   include "json.hpp"
 #else
 #   error "Cell's "ini.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/core.hpp")
+#if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
 #   error "Cell's "core/core.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/filesystem.hpp")
+#if __has_include("core/filesystem.hpp")
 #   include "core/filesystem.hpp"
 #else
 #   error "Cell's "core/filesystem.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/logger.hpp")
+#if __has_include("core/logger.hpp")
 #   include "core/logger.hpp"
 #else
 #   error "Cell's "core/logger.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/serializer.hpp")
+#if __has_include("core/serializer.hpp")
 #   include "core/serializer.hpp"
 #else
 #   error "Cell's "core/serializer.hpp" was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell::Types;

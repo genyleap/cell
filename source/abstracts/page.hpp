@@ -13,28 +13,22 @@
 #ifndef CELL_PAGE_ABSTRACT_HPP
 #define CELL_PAGE_ABSTRACT_HPP
 
-#ifdef __has_include
-# if __has_include("common.hpp")
+#if __has_include("common.hpp")
 #   include "common.hpp"
 #else
 #   error "Cell's "common.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/core.hpp")
+#if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
 #   error "Cell's "core.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/tags.hpp")
+#if __has_include("core/tags.hpp")
 #   include "core/tags.hpp"
 #else
 #   error "Cell's "tags.hpp" was not found!"
-# endif
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)

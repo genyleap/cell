@@ -14,21 +14,17 @@
 #define CELL_DEVICE_ABSTRACT_HPP
 
 //! Cell's Common.
-#ifdef __has_include
-# if __has_include(<common>)
+#if __has_include(<common>)
 #   include <common>
 #else
 #   error "Cell's common was not found!"
-# endif
 #endif
 
 //! Cell's Core (Core Only).
-#ifdef __has_include
-# if __has_include(<core>)
+#if __has_include(<core>)
 #   include <core>
 #else
 #   error "Cell's requirements was not found!"
-# endif
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)

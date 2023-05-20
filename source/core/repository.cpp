@@ -1,25 +1,19 @@
-#ifdef __has_include
-# if __has_include("repository.hpp")
+#if __has_include("repository.hpp")
 #   include "repository.hpp"
 #else
 #   error "Cell's "repository.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core.hpp")
+#if __has_include("core.hpp")
 #   include "core.hpp"
 #else
 #   error "Cell's "core.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("logger.hpp")
+#if __has_include("logger.hpp")
 #   include "logger.hpp"
 #else
 #   error "Cell's "logger.hpp" was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell::System;

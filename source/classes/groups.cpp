@@ -1,10 +1,8 @@
 //! Cell's Groups.
-#ifdef __has_include
-# if __has_include("groups.hpp")
+#if __has_include("groups.hpp")
 #   include "groups.hpp"
 #else
 #   error "Cell's groups was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell;

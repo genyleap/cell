@@ -1,9 +1,7 @@
-#ifdef __has_include
-# if __has_include("email.hpp")
+#if __has_include("email.hpp")
 #   include "email.hpp"
 #else
 #   error "Cell's email was not found!"
-# endif
 #endif
 
 CELL_USING_NAMESPACE Cell;

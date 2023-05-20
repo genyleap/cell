@@ -6,19 +6,14 @@
 
 #ifndef PROJECT_TYPES_HPP
 #define PROJECT_TYPES_HPP
-
-#ifdef __has_include
-# if __has_include(<precompiled/pch.hpp>)
+#if __has_include(<precompiled/pch.hpp>)
 #   include <precompiled/pch.hpp>
-# endif
 #else
 #   include <precompiled/pch.hpp>
 #endif
 
-#ifdef __has_include
-# if __has_include(<cstdint>)
+#if __has_include(<cstdint>)
 #   include <cstdint>
-# endif
 #endif
 
 #if defined(USE_JSON) && !defined(USE_BOOST)
@@ -34,9 +29,7 @@ using JSonValue = boost::json::value;
 #error There is no any json library!
 #endif
 #endif
-
-#ifdef __has_include
-# if __has_include(<openssl/aes.h>)
+#if __has_include(<openssl/aes.h>)
 #   include <openssl/opensslv.h>
 #   include <openssl/core_names.h>
 #   include <openssl/aes.h>
@@ -45,7 +38,6 @@ using JSonValue = boost::json::value;
 #   include <openssl/evp.h>
 #   include <openssl/rsa.h>
 #   include <openssl/pem.h>
-# endif
 #define ENABLE_OPENSSL 1
 #endif
 

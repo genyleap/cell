@@ -1,9 +1,7 @@
-﻿#ifdef __has_include
-# if __has_include("regex.hpp")
+﻿#if __has_include("regex.hpp")
 #   include "regex.hpp"
 #else
 #   error "Cell's "regex.hpp" was not found!"
-# endif
 #endif
 
 #if defined(_MSC_VER) && _MSC_VER >= 1900

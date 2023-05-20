@@ -1,49 +1,37 @@
-#ifdef __has_include
-# if __has_include("translator.hpp")
+#if __has_include("translator.hpp")
 #   include "translator.hpp"
 #else
 #   error "Cell's "translator.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/json.hpp")
+#if __has_include("core/json.hpp")
 #   include "core/json.hpp"
 #else
 #   error "Cell's "core/json.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/core.hpp")
+#if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
 #   error "Cell's "core/core.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/config.hpp")
+#if __has_include("core/config.hpp")
 #   include "core/config.hpp"
 #else
 #   error "Cell's "core/config.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/logger.hpp")
+#if __has_include("core/logger.hpp")
 #   include "core/logger.hpp"
 #else
 #   error "Cell's "core/logger.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core/filesystem.hpp")
+#if __has_include("core/filesystem.hpp")
 #   include "core/filesystem.hpp"
 #else
 #   error "Cell's "core/filesystem.hpp" was not found!"
-# endif
 #endif
 
 #include <stdio.h>
