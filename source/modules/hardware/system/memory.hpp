@@ -22,7 +22,7 @@
 #endif
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 
-class MemoryInfo final
+class __cell_export MemoryInfo
 {
 public:
     /**

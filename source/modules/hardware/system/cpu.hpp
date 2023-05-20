@@ -25,8 +25,11 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 /**
  * @brief The CpuInfo struct contains information about the CPU.
  */
-struct CpuInfo final
+class __cell_export CpuInfo
 {
+public:
+    CpuInfo();
+    ~CpuInfo();
     /**
      * @brief The Specification struct contains detailed CPU specifications.
      */

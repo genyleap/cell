@@ -25,7 +25,7 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 /**
  * @brief Struct representing display information.
  */
-struct DisplayInfo final
+class __cell_export DisplayInfo
 {
     /**
      * @brief Struct representing screen size.
@@ -47,8 +47,12 @@ struct DisplayInfo final
 /**
  * @brief Struct representing GPU information.
  */
-struct GpuInfo final
+class __cell_export GpuInfo
 {
+public:
+    GpuInfo();
+    ~GpuInfo();
+
     /**
      * @brief The GraphicCard class
      */
