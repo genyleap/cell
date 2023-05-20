@@ -24,6 +24,8 @@
 CELL_USING_NAMESPACE Cell;
 CELL_USING_NAMESPACE Cell::eLogger;
 
+CELL_NAMESPACE_BEGIN(Cell::Dynamics)
+
 using PluginMap  =  std::map<std::string, Plugin*>;
 
 using LibraryMap =  std::map<std::string, void*>;
@@ -173,3 +175,5 @@ bool PluginManager::isLoaded() const
 {
     return m_status;
 }
+
+CELL_NAMESPACE_END

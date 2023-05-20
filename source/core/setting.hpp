@@ -110,19 +110,19 @@ public:
      * \brief getList function will returns list of setting items.
      * \returns list
      */
-    __cell_no_discard SettingType getList() __cell_const_noexcept;
+    __cell_no_discard Types::SettingType getList() __cell_const_noexcept;
 
     /*!
      * \brief option function gets item as option.
      * \returns list of options.
      */
-    VectorString option() const;
+    Types::VectorString option() const;
 
     /*!
      * \brief setOption function will sets value into option.
      * \param val as list of string.
      */
-    void setOption(const VectorString& val);
+    void setOption(const Types::VectorString& val);
 
     /*!
      * \brief saveList function will sets all data inside the list of setting. Any website changes effects on the list data.

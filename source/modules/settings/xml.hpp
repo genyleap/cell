@@ -21,7 +21,7 @@
 # endif
 #endif
 
-CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
+CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Settings)
 
 /**
  * @brief The structure holding the data of the XML setting.

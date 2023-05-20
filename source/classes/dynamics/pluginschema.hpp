@@ -22,7 +22,18 @@
 # endif
 #endif
 
-CELL_USING_NAMESPACE Cell;
+//!<  Cell's Common.
+#ifdef __has_include
+# if __has_include("abstracts/account/groups.hpp")
+#   include "abstracts/account/groups.hpp"
+#else
+#   error "Cell's abstracts/account/groups.hpp was not found!"
+# endif
+#endif
+
+CELL_NAMESPACE_BEGIN(Cell::Dynamics)
+
+using GroupListAccess = std::vector<Cell::Abstracts::Account::GroupData>;
 
 /*!
  * \brief The PluginType enum
@@ -67,6 +78,7 @@ struct PluginInfo __cell_final
 {
     //!<  Types of usage.
     PluginType                         pluginType      {}; //!< The type of plugin.
+    GroupListAccess                    groupAccess     {}; //!< The group of users that can be access to the module.
 
     //!< Basic information
     Types::OptionalString              codeName        {}; //!< A unique code for plugin.
@@ -82,5 +94,7 @@ struct PluginInfo __cell_final
     Types::Optional<PermissionType>    permission      {}; //!< Permissions of plugin.
     Types::Optional<PluginState>       state           {}; //!< Status of plugin.
 };
+
+CELL_NAMESPACE_END
 
 #endif  // CELL_PLUGIN_SCHEMA_HPP

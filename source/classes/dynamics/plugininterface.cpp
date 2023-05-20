@@ -1,5 +1,7 @@
 #include "plugininterface.hpp"
 
+CELL_NAMESPACE_BEGIN(Cell::Dynamics)
+
 class PluginInterfaceImpl
 {
 public:
@@ -47,3 +49,5 @@ const ErrorString& PluginInterface::getErrors() const
 {
   return pImplPtr->pInterfaceData.errors;
 }
+
+CELL_NAMESPACE_END

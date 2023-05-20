@@ -22,6 +22,12 @@
 
 CELL_NAMESPACE_BEGIN(Cell)
 
+struct NetworkInfo final
+{
+    Types::OptionalString name {};
+    Types::OptionalString ip {};
+};
+
 class SystemInformation;
 /*!
  * \brief The SystemInfo class

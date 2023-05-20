@@ -122,6 +122,8 @@ public:
      */
     std::ofstream stream(const FilePath& filename);
 
+    __cell_no_discard static std::string getExecutablePath();
+
     std::ifstream get(const FilePath& filename);
 
     /**

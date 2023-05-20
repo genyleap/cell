@@ -21,12 +21,19 @@
 # endif
 #endif
 
-
 #ifdef __has_include
 # if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
 #   error "Cell's "core.hpp" was not found!"
+# endif
+#endif
+
+#ifdef __has_include
+# if __has_include("core/tags.hpp")
+#   include "core/tags.hpp"
+#else
+#   error "Cell's "tags.hpp" was not found!"
 # endif
 #endif
 
@@ -68,27 +75,27 @@ __cell_enum_class PageThemeStyle : Types::u8
 struct PageProperties __cell_final
 {
     ///!BASIC
-    OptionalNumeric id              {};    //!< Index of page.
-    OptionalNumeric priority        {};    //!< Index of page position.
-    OptionalString  title           {};    //!< Title (subject) of page.
-    OptionalString  url             {};    //!< Url for page.
-    Tags            tags            {};    //!< Tags list for page.
-    OptionalString  text            {};    //!< Text (main content) for page.
-    OptionalString  documentTitle   {};    //!< Document title (title of page).
-    OptionalString  metaDescr       {};    //!< Meta description (more details) for page.
+    Types::OptionalNumeric id              {};    //!< Index of page.
+    Types::OptionalNumeric priority        {};    //!< Index of page position.
+    Types::OptionalString  title           {};    //!< Title (subject) of page.
+    Types::OptionalString  url             {};    //!< Url for page.
+    Tags                   tags            {};    //!< Tags list for page.
+    Types::OptionalString  text            {};    //!< Text (main content) for page.
+    Types::OptionalString  documentTitle   {};    //!< Document title (title of page).
+    Types::OptionalString  metaDescr       {};    //!< Meta description (more details) for page.
     ///!MEDIA
 //    MediaType  cover    {};    //!< Image or video for page.
 //    IconType   icon     {};    //!< Icon for page.
     ///!DATETIME
-    OptionalString  createdDate  {};    //!< Created date time.
-    OptionalString  publishTime  {};    //!< Publishing time.
-    OptionalString  pinnedTime   {};    //!< Pinned time.
-    OptionalString  lastModified {};    //!< Last Modified date-time.
+    Types::OptionalString  createdDate  {};    //!< Created date time.
+    Types::OptionalString  publishTime  {};    //!< Publishing time.
+    Types::OptionalString  pinnedTime   {};    //!< Pinned time.
+    Types::OptionalString  lastModified {};    //!< Last Modified date-time.
     ///!EXTRA
-    OptionalBool    inclueInSitemap            {};  //!< If included in sitemap section.
-    OptionalBool    canBeModeratedFromFrontend {};  //!< Can be moderated from frontend?!
-    OptionalBool    accessByApi {};  //!< Can be access from api output.
-    OptionalString  theme       {};  //!< Page theme.
+    Types::OptionalBool    inclueInSitemap            {};  //!< If included in sitemap section.
+    Types::OptionalBool    canBeModeratedFromFrontend {};  //!< Can be moderated from frontend?!
+    Types::OptionalBool    accessByApi {};  //!< Can be access from api output.
+    Types::OptionalString  theme       {};  //!< Page theme.
 };
 
 /*!
@@ -201,7 +208,7 @@ public:
      * \param id is unique index of page.
      * \returns true, if the page is removed successfully.
      */
-    __cell_no_discard_virtual Types::OptionalBool remove(const u32 id) __cell_const = __cell_zero;
+    __cell_no_discard_virtual Types::OptionalBool remove(const Types::u32 id) __cell_const = __cell_zero;
 
     /*!
      * \brief update function will edit a page by own id.
@@ -209,7 +216,7 @@ public:
      * \param properties are the page's data.
      * \returns true, if the page is updated successfully.
      */
-    __cell_no_discard_virtual Types::OptionalBool update(const u32 id, const PageProperties& properties) __cell_const = __cell_zero;
+    __cell_no_discard_virtual Types::OptionalBool update(const Types::u32 id, const PageProperties& properties) __cell_const = __cell_zero;
 
     /*!
      * \brief move function will move a page to sub page.
@@ -217,21 +224,21 @@ public:
      * \param toParentId is parent page id.
      * \returns true, if the page is moved successfully.
      */
-    __cell_no_discard_virtual Types::OptionalBool move(const u32 id, const u32 toParentId) __cell_const = __cell_zero;
+    __cell_no_discard_virtual Types::OptionalBool move(const Types::u32 id, const Types::u32 toParentId) __cell_const = __cell_zero;
 
     /*!
      * \brief lock function will lock and set a page as uneditable from users.
      * \param id is unique index of page.
      * \returns true, if the page is locked successfully.
      */
-    __cell_no_discard_virtual Types::OptionalBool lock(const u32 id) __cell_const = __cell_zero;
+    __cell_no_discard_virtual Types::OptionalBool lock(const Types::u32 id) __cell_const = __cell_zero;
 
     /*!
      * \brief hide function will hide a page from users.
      * \param id is unique index of page.
      * \returns true, if the page is hidden successfully.
      */
-    __cell_no_discard_virtual Types::OptionalBool hide(const u32 id) __cell_const = __cell_zero;
+    __cell_no_discard_virtual Types::OptionalBool hide(const Types::u32 id) __cell_const = __cell_zero;
 
     /*!
      * \brief status function will change the page status.

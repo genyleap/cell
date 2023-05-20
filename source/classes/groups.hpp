@@ -54,21 +54,21 @@ public:
      * \param groupData is all data for group.
      * \returns boolean.
      */
-    __cell_no_discard bool edit(const u32 id, const Abstracts::Account::GroupData& groupData) __cell_const_noexcept_override;
+    __cell_no_discard bool edit(const Types::u32 id, const Abstracts::Account::GroupData& groupData) __cell_const_noexcept_override;
 
     /*!
      * \brief remove function will removes group by own id.
      * \param id is unique id for group.
      * \returns boolean.
      */
-    __cell_no_discard bool remove(const u32 id) __cell_const_noexcept_override;
+    __cell_no_discard bool remove(const Types::u32 id) __cell_const_noexcept_override;
 
     /*!
      * \brief get function will returns all data from group.
      * \param id is unique id for group.
      * \returns GroupData as own data.
      */
-    __cell_no_discard Abstracts::Account::GroupData get(const u32 id) __cell_const_noexcept_override;
+    __cell_no_discard Abstracts::Account::GroupData get(const Types::u32 id) __cell_const_noexcept_override;
 
 private:
     CELL_DISABLE_COPY(Groups)

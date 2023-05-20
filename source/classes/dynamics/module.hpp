@@ -34,7 +34,7 @@ CELL_NAMESPACE_BEGIN(Cell::Dynamics)
 class __cell_export Module
 {
 public:
-    CELL_DEFAULT_INTERFACE_OCTORS(Module)
+    CELL_DEFAULT_INTERFACE_OCTORS_WITHOUT_IMPL(Module)
 
     /*!
      * \brief getCodeName function returns a unique code of module.

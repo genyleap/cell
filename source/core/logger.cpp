@@ -126,13 +126,16 @@ void Logger::echo(const unsigned int    counter,
     // Create the folder if it does not exist
     if (!fs::exists(folderPath)) {
         if (!fs::create_directory(folderPath)) {
-            std::cerr << "Failed to create folder." << std::endl;
+            (System::DeveloperMode::IsEnable) ? Log("Failed to create folder.", LoggerType::Critical) : DO_NOTHING;
             return;
         }
     }
 
     // Open the log file in append mode
     std::ofstream logFile(logfileTemp, std::ios::app);
+    if (!logFile.is_open()) {
+        (System::DeveloperMode::IsEnable) ? Log("Failed to open log file.", LoggerType::Critical) : DO_NOTHING;
+    }
 
     switch (type) {
     case LoggerType::Default:
@@ -218,7 +221,7 @@ void Logger::echo(const unsigned int    counter,
             }
             else
             {
-                std::cout << "Failed to open log file." << std::endl;
+                (System::DeveloperMode::IsEnable) ? Log("Failed to open log file.", LoggerType::Critical) : DO_NOTHING;
             }
         }
         if(configStruct->storage == Storage::External)
@@ -266,7 +269,7 @@ void Logger::echo(const unsigned int    counter,
             }
             else
             {
-                std::cout << "Failed to open log file." << std::endl;
+                (System::DeveloperMode::IsEnable) ? Log("Failed to open log file.", LoggerType::Critical) : DO_NOTHING;
             }
 
         }
@@ -315,7 +318,7 @@ void Logger::echo(const unsigned int    counter,
             }
             else
             {
-                std::cout << "Failed to open log file." << std::endl;
+                (System::DeveloperMode::IsEnable) ? Log("Failed to open log file.", LoggerType::Critical) : DO_NOTHING;
             }
 
         }
@@ -333,6 +336,103 @@ void Logger::echo(const unsigned int    counter,
 
     // Close the file
     logFile.close();
+}
+
+Tracer::Tracer()
+{
+    namespace fs = std::filesystem;
+
+    const std::string folderPath = TraceFolder.data();
+
+    std::string tracefileTemp = folderPath + "/" + TraceFilePrefix.data();
+
+    //! Maybe we can produce the file based on time in this section.
+    //! Use std::chrono...
+    //! Todo...
+    if(configStruct.value().outputFormat == OutputFormat::Dedicated)
+        tracefileTemp.append(FileFormats::Dedicated.data());
+    if(configStruct.value().outputFormat == OutputFormat::RawText)
+        tracefileTemp.append(FileFormats::RawText.data());
+    if(configStruct.value().outputFormat == OutputFormat::Json)
+        tracefileTemp.append(FileFormats::Json.data());
+    if(configStruct.value().outputFormat == OutputFormat::Xml)
+        tracefileTemp.append(FileFormats::Xml.data());
+    if(configStruct.value().outputFormat == OutputFormat::Csv)
+        tracefileTemp.append(FileFormats::Csv.data());
+
+    // Create the folder if it does not exist
+    if (!fs::exists(folderPath)) {
+        if (!fs::create_directory(folderPath)) {
+            (System::DeveloperMode::IsEnable) ? Log("Failed to create folder.", LoggerType::Critical) : DO_NOTHING;
+            return;
+        }
+    }
+
+    // Open the log file in append mode
+    m_filestream.open(tracefileTemp, std::ios::app);
+    if (!m_filestream.is_open()) {
+        (System::DeveloperMode::IsEnable) ? Log("Failed to open trace file.", LoggerType::Critical) : DO_NOTHING;
+    }
+}
+
+Tracer::~Tracer() {
+    if (m_filestream.is_open()) {
+        m_filestream.close();
+    }
+}
+
+Types::Optional<ConfigStruct> Tracer::configStruct = ConfigStruct();
+
+void Tracer::set(const ConfigStruct& config)
+{
+    configStruct = config;
+    if(get().has_value()) {
+        get().emplace(config);
+    }
+}
+
+void Tracer::log(const std::string& message)
+{
+    if (m_filestream.is_open()) {
+        m_filestream << message << std::endl;
+    }
+}
+
+bool Tracer::validateConfig(const ConfigStruct& config)
+{
+    // Perform validation checks on the configuration and return true if the configuration is valid, false otherwise
+    // Ensure that the report mode and trace mode are not both set to None
+    if (config.reportMode == ReportMode::None && config.traceMode == TraceMode::None)
+    {
+        return false;
+    }
+    return true;  // Configuration is considered valid
+}
+
+void Tracer::adjustConfig(ConfigStruct& config)
+{
+    // Perform adjustments or modifications to the configuration if needed.
+    // If the storage is set to Database and the output format is RawText, change it to Csv
+    if (config.storage == Storage::Database)
+    {
+        if(config.outputFormat == OutputFormat::RawText || config.outputFormat == OutputFormat::Xml || config.outputFormat == OutputFormat::Json || config.outputFormat == OutputFormat::Dedicated)
+        {
+            config.outputFormat = OutputFormat::Csv;
+        }
+    }
+}
+
+Types::Optional<ConfigStruct> Tracer::get()
+{
+    if (configStruct) {
+        // Perform additional validation or modification before returning the configuration.
+        if (validateConfig(*configStruct)) {
+            // Optionally perform some modification or adjustment to the configuration.
+            adjustConfig(*configStruct);
+            return *configStruct;
+        }
+    }
+    return __cell_null_optional;
 }
 
 

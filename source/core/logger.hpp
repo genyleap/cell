@@ -21,6 +21,15 @@
 #endif
 
 #ifdef __has_include
+# if __has_include("core/core.hpp")
+#   include "core/core.hpp"
+#else
+#   error "Cell's "core/core.hpp" was not found!"
+# endif
+#endif
+
+
+#ifdef __has_include
 # if __has_include("core/filesystem.hpp")
 #   include "core/filesystem.hpp"
 #else
@@ -46,23 +55,25 @@ enum LoggerType : Types::u8
     InProgress  =   0x8     //!<Print as in progress message.
 };
 
-static constexpr std::string_view LogFolder = "logs";
-static constexpr std::string_view LogFilePrefix = "log";
+static constexpr std::string_view LogFolder         = "logs";
+static constexpr std::string_view LogFilePrefix     = "log";
+static constexpr std::string_view TraceFolder       = "trace";
+static constexpr std::string_view TraceFilePrefix   = "trc";
 
 struct FileFormats final
 {
-    static constexpr std::string_view Dedicated = ".clog";
-    static constexpr std::string_view RawText = ".txt";
-    static constexpr std::string_view Json = ".json";
-    static constexpr std::string_view Xml = ".xml";
-    static constexpr std::string_view Csv = ".csv";
+    static constexpr std::string_view Dedicated     = ".clog";
+    static constexpr std::string_view RawText       = ".txt";
+    static constexpr std::string_view Json          = ".json";
+    static constexpr std::string_view Xml           = ".xml";
+    static constexpr std::string_view Csv           = ".csv";
 };
 
 /**
  * @brief The OutputFormat enum
  * Dedicated format is an extension such as .clog, ._clog for engine.
  */
-enum class OutputFormat { Dedicated = 0x0, Json = 0x1, Xml = 0x2, RawText = 0x3, Csv = 0x4};
+enum class OutputFormat : Types::u8 { Dedicated = 0x0, Json = 0x1, Xml = 0x2, RawText = 0x3, Csv = 0x4};
 
 /**
  * @brief The ReportMode enum
@@ -149,7 +160,7 @@ Logger::echo(__cell_compiler_counter,                                           
              __cell_compiler_file,                                                         \
              message, type)
 
-class Logger;
+    class Logger;
 /*!
  * \brief The Logger class
  */
@@ -195,6 +206,70 @@ private:
     void adjustConfig(ConfigStruct& config);
     static Types::Optional<ConfigStruct> configStruct;
 
+};
+
+/**
+ * @brief The Tracer class
+ */
+class __cell_export Tracer {
+public:
+    Tracer();
+    ~Tracer();
+
+    void set(const ConfigStruct& config);
+
+    Types::Optional<ConfigStruct> get();
+
+    template<typename Func, typename... Args>
+        requires std::invocable<Func, Args...> && (!std::is_same_v<std::invoke_result_t<Func, Args...>, void>)
+    auto trace(Func&& func, Args&&... args) {
+        auto startTime = std::chrono::steady_clock::now();
+
+        std::string functionName = getFunctionName(func);
+        log("Entering " + functionName);
+
+        // Call the traced function
+        auto result = std::invoke(std::forward<Func>(func), std::forward<Args>(args)...);
+
+        auto endTime = std::chrono::steady_clock::now();
+        auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+
+        log("Exiting " + functionName + " - Elapsed Time: " + std::to_string(elapsedTime.count()) + "ms");
+
+        return result;
+    }
+
+    template<typename Func, typename... Args>
+        requires std::invocable<Func, Args...> && std::is_same_v<std::invoke_result_t<Func, Args...>, void>
+    void trace(Func&& func, Args&&... args) {
+        auto startTime = std::chrono::steady_clock::now();
+
+        std::string functionName = getFunctionName(func);
+        log("Entering " + functionName);
+
+        // Call the traced function
+        std::invoke(std::forward<Func>(func), std::forward<Args>(args)...);
+
+        auto endTime = std::chrono::steady_clock::now();
+        auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+
+        log("Exiting " + functionName + " - Elapsed Time: " + std::to_string(elapsedTime.count()) + "ms");
+    }
+
+private:
+    std::string m_filename {};
+    std::ofstream m_filestream {};
+    static Types::Optional<ConfigStruct> configStruct;
+    void log(const std::string& message);
+    bool validateConfig(const ConfigStruct& config);
+    void adjustConfig(ConfigStruct& config);
+
+    template<typename Func>
+    std::string getFunctionName(Func&& func)
+    {
+        std::string functionName = __cell_compiler_pretty_function;
+        return functionName;
+    }
 };
 
 CELL_NAMESPACE_END

@@ -37,7 +37,7 @@
 # endif
 #endif
 
-CELL_NAMESPACE_BEGIN(Cell::Modules::Network)
+CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Network)
 
 /**
  * @brief The HttpRowHeader class

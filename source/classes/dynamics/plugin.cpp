@@ -5,3 +5,7 @@
 #   error "Cell's plugin not found!"
 # endif
 #endif
+
+CELL_NAMESPACE_BEGIN(Cell::Dynamics)
+
+CELL_NAMESPACE_END

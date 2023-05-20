@@ -35,7 +35,7 @@ CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::FileSystem;
 CELL_USING_NAMESPACE Cell::eLogger;
 
-CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
+CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Settings)
 
 IniSetting::IniSetting()
 {

@@ -31,6 +31,8 @@
 # endif
 #endif
 
+CELL_NAMESPACE_BEGIN(Cell::Dynamics)
+
 using NameList      =   std::vector<std::string>;
 using PluginList    =   std::vector<PluginInfo>;
 using ErrorString   =   std::vector<std::string>;
@@ -98,5 +100,7 @@ private:
   PluginInterfaceData  m_pluginInterfaceData;
 
 };
+
+CELL_NAMESPACE_END
 
 #endif // CELL_PLUGIN_INTERFACE_HPP

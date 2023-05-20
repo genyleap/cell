@@ -31,8 +31,9 @@
 #endif
 
 CELL_USING_NAMESPACE Cell;
+CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::System;
-CELL_USING_NAMESPACE Cell::Modules;
+CELL_USING_NAMESPACE Cell::Modules::BuiltIn;
 CELL_USING_NAMESPACE Cell::eLogger;
 CELL_USING_NAMESPACE Cell::Abstracts;
 
@@ -147,6 +148,7 @@ VectorString Configuration::files()
 std::optional<VariableType> Configuration::get()
 {
     ///ToDo...
+    return false;
 }
 
 void Configuration::write(const KeyValueType& variable)
@@ -169,20 +171,25 @@ void Configuration::remove(const KeyValueType &variable)
 bool Configuration::reset()
 {
     ///ToDo...
+    return false;
 }
 
 bool Configuration::lock()
 {
     ///ToDo...
+    return false;
 }
 
 std::string Configuration::getBaseUrl() __cell_noexcept
 {
+    return __cell_null_str;
 }
 
 bool Configuration::isInstalled() __cell_noexcept
 {
+    return false;
 }
+
 
 void Configuration::lockInstall() __cell_noexcept
 {
@@ -237,29 +244,34 @@ void Configuration::debug(const std::string& debug) __cell_noexcept
 
 RdbmsTypeList Configuration::rdbms() __cell_noexcept
 {
+    return RdbmsTypeList();
 }
 
 std::string Configuration::getPrefix() __cell_noexcept
 {
+  return __cell_null_str;
 }
 
 std::string Configuration::currentRdbms()
 {
+  return __cell_null_str;
 }
 
 std::string Configuration::getDefaultUri() __cell_noexcept
 {
+  return __cell_null_str;
 }
 
 std::vector<std::string> Configuration::getLanguageUris() __cell_noexcept
 {
+  return std::vector<std::string>();
 }
 
 void Configuration::programs(const std::string &pgDumpPath) __cell_noexcept
 {
 }
 
-Modules::Settings::JsonSetting Configuration::Setting()
+Modules::BuiltIn::Settings::JsonSetting Configuration::Setting()
 {
         switch (m_dataConfig->configType) {
     case ConfigType::File:

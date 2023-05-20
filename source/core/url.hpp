@@ -63,10 +63,10 @@ public:
     std::string getTLD() const;
 
     /**
-     * @brief Returns a vector of subdomains of the domain.
-     * @return A vector of strings representing the subdomains of the domain.
+     * @brief Returns a string of subdomain.
+     * @return A string value.
      */
-    std::vector<std::string> getSubdomains() const;
+    std::string getSubdomain() const;
 
     /**
      * @brief Returns the protocol and domain of the URL.

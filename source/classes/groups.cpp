@@ -33,19 +33,22 @@ Groups::~Groups()
 bool Groups::add(const GroupData& groupData) __cell_const_noexcept
 {
   ///ToDo...
+    return false;
 }
 
-bool Groups::edit(const u32 id, const GroupData& groupData) __cell_const_noexcept
+bool Groups::edit(const Types::u32 id, const GroupData& groupData) __cell_const_noexcept
 {
   ///ToDo...
+  return false;
 }
 
-bool Groups::remove(const u32 id) __cell_const_noexcept
+bool Groups::remove(const Types::u32 id) __cell_const_noexcept
 {
   ///ToDo...
+  return false;
 }
 
-GroupData Groups::get(const u32 id) __cell_const_noexcept
+GroupData Groups::get(const Types::u32 id) __cell_const_noexcept
 {
     //m_groupData->....;
     ///ToDo...

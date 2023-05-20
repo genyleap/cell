@@ -220,7 +220,7 @@ public:
      */
     void programs(const std::string& pgDumpPath) __cell_noexcept;
 
-    Modules::Settings::JsonSetting Setting();
+    Modules::BuiltIn::Settings::JsonSetting Setting();
 
 protected:
     __cell_no_discard std::string jsonFile() __cell_noexcept;
@@ -228,7 +228,7 @@ protected:
 private:
     DataConfig*     m_dataConfig;
     Types::VectorString    m_files{};
-    Scope<Modules::Settings::JsonSetting> jsonSetting{};
+    Scope<Modules::BuiltIn::Settings::JsonSetting> jsonSetting{};
 };
 
 CELL_NAMESPACE_END

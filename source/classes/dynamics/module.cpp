@@ -8,14 +8,4 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Dynamics)
 
-Module::Module()
-{
-
-}
-
-Module::~Module()
-{
-
-}
-
 CELL_NAMESPACE_END

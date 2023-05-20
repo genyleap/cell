@@ -15,7 +15,7 @@
 #endif
 
 CELL_USING_NAMESPACE Cell;
-
+CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::System;
 
 CELL_NAMESPACE_BEGIN(Cell)
@@ -75,15 +75,15 @@ std::string Domain::getSLD() const
     return urlStructure.secondLevel.value();
 }
 
-std::vector<std::string> Domain::getSubdomains() const
+std::string Domain::getSubdomain() const
 {
-    std::vector<std::string> subdomains;
+    std::string subdomain;
     std::string::size_type pos = __cell_zero;
     std::string::size_type next = urlStructure.subdomain.value().find(".");
     if (next != std::string::npos && next > __cell_zero) {
-        subdomains.push_back(urlStructure.subdomain.value().substr(pos, next - pos));
+        subdomain = urlStructure.subdomain.value().substr(pos, next - pos);
     }
-    return subdomains;
+    return subdomain;
 }
 
 std::string Domain::getTLD() const
@@ -98,6 +98,11 @@ std::string Domain::getTLD() const
 std::string Domain::getProtocolAndDomain() const
 {
     return urlStructure.scheme.value() + "://" + urlStructure.secondLevel.value();
+}
+
+std::string Domain::getProtocol()
+{
+    return urlStructure.scheme.value();
 }
 
 Domain::~Domain()

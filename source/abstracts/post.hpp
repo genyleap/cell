@@ -29,6 +29,31 @@
 # endif
 #endif
 
+#ifdef __has_include
+# if __has_include("core/message.hpp")
+#   include "core/message.hpp"
+#else
+#   error "Cell's message not found!"
+# endif
+#endif
+
+#ifdef __has_include
+# if __has_include("core/share.hpp")
+#   include "core/share.hpp"
+#else
+#   error "Cell's share not found!"
+# endif
+#endif
+
+#ifdef __has_include
+# if __has_include("core/tags.hpp")
+#   include "core/tags.hpp"
+#else
+#   error "Cell's tags not found!"
+# endif
+#endif
+
+
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 
 /*!
@@ -101,7 +126,7 @@ public:
      * \param id is unique index of post.
      * \returns true, if the post is removed successfully.
      */
-    __cell_no_discard_virtual Types::OptionalBool remove(const u32 id) __cell_const = __cell_zero;
+    __cell_no_discard_virtual Types::OptionalBool remove(const Types::u32 id) __cell_const = __cell_zero;
 
     /*!
      * \brief update function will edit a post by own id.
@@ -109,7 +134,7 @@ public:
      * \param postData are the post's data.
      * \returns true, if the post is updated successfully.
      */
-    __cell_no_discard_virtual Types::OptionalBool update(const u32 id, const PostData& postData) __cell_const = __cell_zero;
+    __cell_no_discard_virtual Types::OptionalBool update(const Types::u32 id, const PostData& postData) __cell_const = __cell_zero;
 
     /*!
      * \brief copy function will copy a post.
@@ -124,21 +149,21 @@ public:
      * \param toParentId is parent post id.
      * \returns true, if the post is moved successfully.
      */
-    __cell_no_discard_virtual Types::OptionalBool move(const u32 id, const u32 toParentId) __cell_const = __cell_zero;
+    __cell_no_discard_virtual Types::OptionalBool move(const Types::u32 id, const Types::u32 toParentId) __cell_const = __cell_zero;
 
     /*!
      * \brief lock function will lock and set a post as uneditable from users.
      * \param id is unique index of post.
      * \returns true, if the post is locked successfully.
      */
-    __cell_no_discard_virtual Types::OptionalBool lock(const u32 id) __cell_const = __cell_zero;
+    __cell_no_discard_virtual Types::OptionalBool lock(const Types::u32 id) __cell_const = __cell_zero;
 
     /*!
      * \brief hide function will hide a post from users.
      * \param id is unique index of post.
      * \returns true, if the post is hidden successfully.
      */
-    __cell_no_discard_virtual Types::OptionalBool hide(const u32 id) __cell_const = __cell_zero;
+    __cell_no_discard_virtual Types::OptionalBool hide(const Types::u32 id) __cell_const = __cell_zero;
 
     /*!
      * \brief status function will change the post status.

@@ -14,7 +14,7 @@
 #include "translator/language.hpp"
 
 CELL_USING_NAMESPACE Cell::eLogger;
-
+CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::Abstracts;
 
 CELL_NAMESPACE_BEGIN(Cell::System)
@@ -120,7 +120,7 @@ Engine::Engine()
 
 CreateSingletonSelf(Engine)
 
-    Engine::~Engine()
+Engine::~Engine()
 {
 }
 
@@ -398,12 +398,12 @@ bool Engine::start()
 
 bool Engine::stop()
 {
-
+    return false; //!Todo..
 }
 
 bool Engine::restart()
 {
-
+    return false; //!Todo..
 }
 
 Machine Engine::machine()
@@ -1123,6 +1123,17 @@ void Engine::delayIfNeeded(std::chrono::time_point<std::chrono::high_resolution_
     lastRequestTime = std::chrono::high_resolution_clock::now();
 }
 
+std::string Engine::extractValue(const std::string& line, const std::string& section)
+{
+    auto colonPos = line.find(section);
+    if (colonPos != std::string::npos) {
+        auto valueStart = line.begin() + colonPos + 2;
+        auto valueEnd = std::ranges::find(line | std::views::drop(colonPos), '\n');
+        return std::string(valueStart, valueEnd);
+    }
+    return "";
+}
+
 bool Engine::isMultilanguage() const noexcept
 {
     bool ret = {false};
@@ -1316,6 +1327,9 @@ OptionalString Application::templateErrorId() __cell_const_noexcept
 OptionalString Application::templateId() __cell_const_noexcept
 {
     return appDataPtr->templateId.value_or(__cell_unknown);
+
+
+
 }
 
 CELL_NAMESPACE_END

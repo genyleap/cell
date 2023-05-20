@@ -35,37 +35,43 @@
 #endif
 
 
+CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::FileSystem;
 CELL_USING_NAMESPACE Cell::eLogger;
 
 CELL_NAMESPACE_BEGIN(Cell::JSon)
 
-JsonParser::JsonParser()
+JsonManager::JsonManager()
 {
 #ifdef USE_BOOST
-    Log("Initialized Json engine: " + FROM_CELL_STRING(ENGINE_BOOST) + "::json", LoggerType::Success);
+    if(DeveloperMode::IsEnable)
+    {
+        Log("Initialized Json engine: " + FROM_CELL_STRING(ENGINE_BOOST) + "::json", LoggerType::Success);
+    }
 #else
-    Log("Initialized Json engine: " + FROM_CELL_STRING(ENGINE_DEFAULT) + "[Default JsonCpp] ", LoggerType::Success);
+    if(DeveloperMode::IsEnable)
+    {
+        Log("Initialized Json engine: " + FROM_CELL_STRING(ENGINE_DEFAULT) + "[Default JsonCpp] ", LoggerType::Success);
+    }
 #endif
 }
 
-JsonParser::~JsonParser()
+JsonManager::~JsonManager()
 {
 }
 
-bool JsonParser::parse(const JSonType& data, const InputType inputType) __cell_noexcept
+bool JsonManager::parse(const JSonType& data, const InputType inputType) __cell_noexcept
 {
 #ifdef USE_BOOST
     try {
-        auto fileIO = FileManager();
         switch (inputType) {
         case InputType::RawData:
             m_root = boost::json::parse(std::get<std::string>(data));
             break;
         case InputType::File:
-            auto d = fileIO.read(std::get<std::string>(data));
-            if (!fileIO.isOpen())
+            auto d = fileManager.read(std::get<std::string>(data));
+            if (!fileManager.isOpen())
             {
                 if(DeveloperMode::IsEnable)
                 {
@@ -83,7 +89,7 @@ bool JsonParser::parse(const JSonType& data, const InputType inputType) __cell_n
                 {
                     Log("Failed to read data from file", LoggerType::Critical);
                 }
-                if(fileIO.isClose())
+                if(fileManager.isClose())
                 {
                     if(DeveloperMode::IsEnable)
                     {
@@ -91,7 +97,7 @@ bool JsonParser::parse(const JSonType& data, const InputType inputType) __cell_n
                     }
                 }
             }
-            if(fileIO.isClose())
+            if(fileManager.isClose())
             {
                 if(DeveloperMode::IsEnable)
                 {
@@ -111,14 +117,13 @@ bool JsonParser::parse(const JSonType& data, const InputType inputType) __cell_n
 #else
     Json::Reader reader{};
     try {
-        auto fileIO = FileManager();
         switch (inputType) {
         case InputType::RawData:
             reader.parse(std::get<std::string>(data), m_root);
             break;
         case InputType::File:
-            auto d = fileIO.read(std::get<std::string>(data));
-            if (!fileIO.isOpen())
+            auto d = fileManager.read(std::get<std::string>(data));
+            if (!fileManager.isOpen())
             {
                 if(DeveloperMode::IsEnable)
                 {
@@ -130,13 +135,13 @@ bool JsonParser::parse(const JSonType& data, const InputType inputType) __cell_n
                     Log("Json File opened!", LoggerType::Success);
                 }
             }
-            if (!fileIO.isOpen())
+            if (!fileManager.isOpen())
             {
                 if(DeveloperMode::IsEnable)
                 {
                     Log("Failed to read data from file", LoggerType::Critical);
                 }
-                if(fileIO.isClose())
+                if(fileManager.isClose())
                 {
                     if(DeveloperMode::IsEnable)
                     {
@@ -144,7 +149,7 @@ bool JsonParser::parse(const JSonType& data, const InputType inputType) __cell_n
                     }
                 }
             }
-            if(fileIO.isClose())
+            if(fileManager.isClose())
             {
                 if(DeveloperMode::IsEnable)
                 {
@@ -175,7 +180,7 @@ bool JsonParser::parse(const JSonType& data, const InputType inputType) __cell_n
 #endif
 }
 
-bool JsonParser::parse(const JSonType& data) __cell_noexcept
+bool JsonManager::parse(const JSonType& data) __cell_noexcept
 {
 #ifdef USE_BOOST
     try {
@@ -185,9 +190,8 @@ bool JsonParser::parse(const JSonType& data) __cell_noexcept
         }
         if (std::holds_alternative<std::ifstream>(data))
         {
-            auto fileIO = FileManager();
-            auto d = fileIO.read(std::get<std::string>(data));
-            if (!fileIO.isOpen())
+            auto d = fileManager.read(std::get<std::string>(data));
+            if (!fileManager.isOpen())
             {
                 if(DeveloperMode::IsEnable)
                 {
@@ -200,7 +204,7 @@ bool JsonParser::parse(const JSonType& data) __cell_noexcept
                 {
                     Log("Failed to read data from file", LoggerType::Critical);
                 }
-                if(fileIO.isClose())
+                if(fileManager.isClose())
                 {
                     if(DeveloperMode::IsEnable)
                     {
@@ -208,7 +212,7 @@ bool JsonParser::parse(const JSonType& data) __cell_noexcept
                     }
                 }
             }
-            if(fileIO.isClose())
+            if(fileManager.isClose())
             {
                 if(DeveloperMode::IsEnable)
                 {
@@ -239,7 +243,7 @@ bool JsonParser::parse(const JSonType& data) __cell_noexcept
 #endif
 }
 
-bool JsonParser::contains(const std::string& key) __cell_noexcept
+bool JsonManager::contains(const std::string& key) __cell_noexcept
 {
 #if defined(USE_BOOST)
     if (m_root.is_object()) {
@@ -256,7 +260,45 @@ bool JsonParser::contains(const std::string& key) __cell_noexcept
 #endif
 }
 
-JSonValue JsonParser::get(const std::string& key) __cell_noexcept
+JSonValue JsonManager::getData() __cell_noexcept
+{
+#if defined(USE_BOOST)
+    if (m_root.is_object()) {
+        auto it = m_root.as_object();
+//        if (it != m_root.as_object().end()) {
+//        vectorJsonPtr.push_back(it);
+
+        return it;
+//        } else {
+//            if(DeveloperMode::IsEnable)
+//            {
+//                eLogger::Log("Parse error: " + FROM_CELL_STRING("Key not found."), eLogger::LoggerType::Critical);
+//            }
+//            return {};
+//        }
+    } else {
+        if(DeveloperMode::IsEnable)
+        {
+            eLogger::Log("Parse error: " + FROM_CELL_STRING("Root is not an object."), eLogger::LoggerType::Critical);
+        }
+        return {};
+    }
+#else
+//    if (m_root.isMember("")) {
+//        return m_root[key];
+//    vectorJsonPtr->push_back(m_root);
+    return m_root;
+//    } else {
+//        if(DeveloperMode::IsEnable)
+//        {
+//            eLogger::Log("Parse error: " + FROM_CELL_STRING("Key not found."), eLogger::LoggerType::Critical);
+//        }
+//        return {};
+//    }
+#endif
+}
+
+JSonValue JsonManager::get(const std::string& key) __cell_noexcept
 {
 #if defined(USE_BOOST)
     if (m_root.is_object()) {
@@ -290,6 +332,17 @@ JSonValue JsonParser::get(const std::string& key) __cell_noexcept
 #endif
 }
 
+std::vector<Types::JSonValue> JsonManager::getVectorJsonPtr()
+{
+    return vectorJsonPtr;
+}
+
+
 #endif
+
+void JsonManager::setVectorJsonPtr(const JSonValue& data)
+{
+    vectorJsonPtr.push_back(std::move(data));
+}
 
 CELL_NAMESPACE_END

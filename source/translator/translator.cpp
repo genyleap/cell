@@ -60,7 +60,7 @@ CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::JSon;
 CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::eLogger;
-CELL_USING_NAMESPACE Cell::Modules::Settings;
+CELL_USING_NAMESPACE Cell::Modules::BuiltIn::Settings;
 
 CELL_NAMESPACE_BEGIN(Cell::Translation)
 

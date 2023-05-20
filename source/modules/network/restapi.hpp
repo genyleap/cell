@@ -29,7 +29,7 @@
 # endif
 #endif
 
-CELL_NAMESPACE_BEGIN(Cell::Modules::Network)
+CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Network)
 
 using Parameter =  std::unordered_map<std::string, std::string>;
 

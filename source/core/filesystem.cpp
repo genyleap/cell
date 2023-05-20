@@ -26,6 +26,7 @@
 # endif
 #endif
 
+CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::eLogger;
 
@@ -38,7 +39,6 @@ FileManager::FileManager()
 FileManager::~FileManager()
 {
     setState(false, true);
-    m_data.clear();
     if(DeveloperMode::IsEnable)
     {
         Log("File states has been reset!", LoggerType::Info);
@@ -240,7 +240,7 @@ bool FileManager::deleteSelectedFiles(ListOfFiles& files)
     {
         folderAndFile = key + value;
         // Check if the file exists before attempting to delete it.
-        if (!Fs::exists(folderAndFile)) {
+        if (!Types::Fs::exists(folderAndFile)) {
             if(DeveloperMode::IsEnable)
             {
                 Log("Warning: file " + folderAndFile + " does not exist.", LoggerType::Warning);
@@ -266,7 +266,7 @@ bool FileManager::deleteSelectedFiles(ListOfFiles& files)
 
 bool FileManager::deleteDir(const FilePath& path)
 {
-    return Fs::remove_all(path);
+    return Types::Fs::remove_all(path);
 }
 
 void FileManager::changePermissions(const FilePath& filePath, const std::filesystem::perms& permissions)
@@ -301,6 +301,44 @@ void FileManager::setState(bool open, bool close)
     fileState.close = close;
     fileState.open = open;
 }
+
+std::string FileManager::getExecutablePath() {
+    std::string expath{};
+#if defined(PLATFORM_MOBILE) && defined(PLATFORM_ANDROID)
+    expath = "assets:/";
+#elif defined(PLATFORM_MOBILE) && defined(PLATFORM_IOS)
+    std::string res = {"/"};
+#elif defined(PLATFORM_MAC)
+    expath = "/";
+    char path[1024];
+    uint32_t size = sizeof(path);
+    if (_NSGetExecutablePath(path, &size) == 0) {
+        std::string v = path;
+        expath = v.substr(0, v.find_last_of("\\/")) + "/";
+    }
+#elif defined(PLATFORM_LINUX)
+    char buff[PATH_MAX];
+    ssize_t len = ::readlink(expath.c_str(), buff, sizeof(buff)-1);
+    if (len != -1) {
+        buff[len] = '\0';
+        return std::string(buff);
+    }
+#elif defined(PLATFORM_WINDOWS)
+    expath = "/";
+    char buffer[MAX_PATH];
+    GetModuleFileNameA(NULL, buffer, MAX_PATH);
+    std::string::size_type pos = std::string(buffer).find_last_of("\\/");
+    expath = std::string(buffer).substr(0, pos);
+#elif defined(PLATFORM_FREEBSD)
+    expath = "/";
+    res = "FreeBSD does not support yet!"
+#elif defined(PLATFORM_SOLARIS)
+    expath = "/";
+    res = "Solaris does not support yet!"
+#endif
+    return expath;
+}
+
 
 FileInfo::FileInfo(const FilePath& filePath)
 {

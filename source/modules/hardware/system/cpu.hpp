@@ -37,6 +37,7 @@ struct CpuInfo final
         Types::OptionalString  stepping     {}; //!< CPU stepping.
         Types::OptionalString  extFamily    {}; //!< Extended CPU family.
         Types::OptionalString  extModel     {}; //!< Extended CPU model.
+        Types::OptionalString  technology   {}; //!< CPU technology (lithography).
         Types::OptionalString  revision     {}; //!< CPU revision.
 
         //! CPU Instructions
@@ -56,8 +57,7 @@ struct CpuInfo final
 
     struct Cache final
     {
-        Types::OptionalString  l1Data    {}; //!< L1 data cache.
-        Types::OptionalString  l1Inst    {}; //!< L1 instruction cache.
+        Types::OptionalString  level1    {}; //!< Level 1 cache.
         Types::OptionalString  level2    {}; //!< Level 2 cache.
         Types::OptionalString  level3    {}; //!< Level 3 cache.
     };

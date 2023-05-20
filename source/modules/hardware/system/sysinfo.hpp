@@ -20,7 +20,7 @@
 #   error "Cell's "common.hpp" was not found!"
 # endif
 #endif
-CELL_NAMESPACE_BEGIN(Cell::Modules::Hardware)
+CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 
 /**
  * @brief The MemoryInfo class
@@ -105,13 +105,13 @@ public:
      * @brief The getCpuInfo() method returns a CpuInfo object that contains information about the CPU, such as the name and number of cores.
      * @return as CpuInfo object.
      */
-    CpuInfo               getCpuInfo();
+    CpuInfo getCpuInfo();
 
     /**
      * @brief The getMemoryInfo() method returns a MemoryInfo object that contains information about the memory, such as the total, used, and free memory.
      * @return as MemoryInfo object.
      */
-    MemoryInfo            getMemoryInfo();
+    MemoryInfo  getMemoryInfo();
 
     /**
      * @brief getProductInfo function will gets product data such as name, version and build number.

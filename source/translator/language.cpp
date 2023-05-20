@@ -34,10 +34,12 @@
 
 
 CELL_USING_NAMESPACE Cell;
+CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::Abstracts;
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::eLogger;
-CELL_USING_NAMESPACE Cell::Modules::Settings;
+CELL_USING_NAMESPACE Cell::Modules::BuiltIn;
+CELL_USING_NAMESPACE Cell::Modules::BuiltIn::Settings;
 
 CELL_NAMESPACE_BEGIN(Cell::Multilangual)
 
@@ -109,7 +111,7 @@ Language::Language(const std::string& uri)
     {
         for(const auto& c : v)
         {
-            viewStr = Modules::Settings::JSON_SETTING_STRING_GET(c, "l");
+            viewStr = Settings::JSON_SETTING_STRING_GET(c, "l");
             lcodes.push_back(viewStr.substr(0, 5).data());
         }
     }
@@ -155,7 +157,7 @@ std::string Language::getLanguageCode() __cell_const_noexcept
     std::string_view default_lang;
     if(config->Setting().getValue(CELL_DEFAULT_LANG, jvalue))
     {
-        default_lang = Modules::Settings::JSON_SETTING_GET(jvalue);
+        default_lang = Settings::JSON_SETTING_GET(jvalue);
     }
     if(config->Setting().getValueMulti(CELL_LANGS, v))
     {
@@ -187,7 +189,7 @@ std::string Language::getLanguage() __cell_const_noexcept
     std::string_view default_lang;
     if(config->Setting().getValue(CELL_DEFAULT_LANG, jvalue))
     {
-        default_lang = Modules::Settings::JSON_SETTING_GET(jvalue);
+        default_lang = Settings::JSON_SETTING_GET(jvalue);
     }
     if(config->Setting().getValueMulti(CELL_LANGS, v))
     {

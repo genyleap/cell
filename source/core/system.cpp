@@ -8,28 +8,9 @@
 # endif
 #endif
 
-#if defined(PLATFORM_MAC)
-#include <sys/socket.h>
-//#include <sys/sysctl.h>
-#include <net/if.h>
-#include <net/if_dl.h>
-#include <IOKit/IOKitLib.h>
-#include <ApplicationServices/ApplicationServices.h>
-#include <ImageIO/ImageIO.h>
-#elif defined(PLATFORM_LINUX)
-#include <sys/socket.h>
-#include <sys/sysctl.h>
-#elif defined(PLATFORM_WINDOWS)
-#include <Windows.h>
-#include <Lmcons.h>
-#include <Iphlpapi.h>
-#include <cassert>
-#pragma comment(lib, "iphlpapi.lib")
-#endif
-
 CELL_USING_NAMESPACE Cell;
-CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::Types;
+CELL_USING_NAMESPACE Cell::System;
 
 CELL_NAMESPACE_BEGIN(Cell)
 

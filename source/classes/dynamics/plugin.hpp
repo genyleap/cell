@@ -29,6 +29,8 @@
 # endif
 #endif
 
+CELL_NAMESPACE_BEGIN(Cell::Dynamics)
+
 class __cell_export Plugin
 {
 public:
@@ -120,6 +122,11 @@ public:
      * \returns as PluginType.
      */
     __cell_virtual PluginType type() __cell_const_noexcept = __cell_zero;
+
+    __cell_virtual PluginInfo getData()  __cell_const_noexcept = __cell_zero;
+
 };
+
+CELL_NAMESPACE_END
 
 #endif // CELL_PLUGIN_HPP

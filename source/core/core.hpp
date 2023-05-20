@@ -45,12 +45,6 @@
 # endif
 #endif
 
-#include "tags.hpp"
-#include "share.hpp"
-#include "message.hpp"
-
-CELL_USING_NAMESPACE Cell::Types;
-
 CELL_NAMESPACE_BEGIN(Cell::System)
 
 /*!
@@ -106,7 +100,7 @@ __cell_constexpr T exchange(T& t, U&& newValue)
 template<typename ... Args>
 std::string stringFormat(const std::string& format, Args ... args)
 {
-    s8 size = snprintf(nullptr, 0, format.c_str(), args ...) + 1; // Extra space for '\0'
+    Types::s8 size = snprintf(nullptr, 0, format.c_str(), args ...) + 1; // Extra space for '\0'
     if (size <= 0)
     {
         throw std::runtime_error("Error during formatting.");
@@ -242,7 +236,7 @@ const EncodingList encodingList {
 /*!
  * @brief The StorageType enum
  */
-enum class StorageType : u8
+enum class StorageType :Types::u8
 {
     Empty           =   0x0,
     File            =   0x1,
@@ -254,7 +248,7 @@ enum class StorageType : u8
     Network         =   0x7
 };
 
-enum class UserMode : u8
+enum class UserMode :Types::u8
 {
     Guest           =   0x0,
     User            =   0x1,
@@ -262,7 +256,7 @@ enum class UserMode : u8
     Customized      =   0x3
 };
 
-enum class SyncDevice : u8
+enum class SyncDevice :Types::u8
 {
     Unknown         =   0x0,
     WebOnly         =   0x1,
@@ -271,7 +265,7 @@ enum class SyncDevice : u8
     CrossPlatform   =   0x4
 };
 
-enum class HostType : u8
+enum class HostType :Types::u8
 {
     Unknown     =   0x0,
     Windows     =   0x1,
@@ -279,7 +273,7 @@ enum class HostType : u8
     Linux       =   0x3
 };
 
-enum class Service : u8
+enum class Service :Types::u8
 {
     Local       =   0x0,
     Installed   =   0x1,
@@ -287,21 +281,21 @@ enum class Service : u8
     Running     =   0x3
 };
 
-enum class IconType : u8
+enum class IconType :Types::u8
 {
     Png,
     Svg,
     FontIcon
 };
 
-enum class MediaType : u8
+enum class MediaType :Types::u8
 {
     Image,
     Video,
     Canvas
 };
 
-enum class ApiModel : u8
+enum class ApiModel :Types::u8
 {
     Unknown,
     Json,
@@ -309,14 +303,14 @@ enum class ApiModel : u8
     GraphQl
 };
 
-enum class TerminateType : u8
+enum class TerminateType :Types::u8
 {
     Unknown,
     Violation,
     UnexpectedError
 };
 
-enum class TableType : u8
+enum class TableType :Types::u8
 {
     MixedStruct, //!<Key and Value table
     KeyStruct,   //!<Only key table
@@ -335,7 +329,7 @@ struct Termination
 /*!
  * @brief The ExceptionMode enum
  */
-enum class ExceptionMode : u8 { Default, StlException, CellException };
+enum class ExceptionMode :Types::u8 { Default, StlException, CellException };
 
 /*!
  * @brief The ExceptionData class
@@ -352,7 +346,7 @@ struct ExceptionData
 class __cell_export Exception : public std::exception
 {
 public:
-    enum Reason : u8
+    enum Reason :Types::u8
     {
         Core,
         Framework,
@@ -398,10 +392,10 @@ struct __cell_export BootParameter final
     bool                            fastBoot       {};      //!< This property is set to true when the system is booted with the highest possible state.
     std::time_t                     initTime       {};      //!< The time spent on execution.
     Types::Optional<std::string>    saveState      {};      //!< The system save state applied during a save operation after execution or completion of the operation..
-    Types::Optional<u32>            pageSize       {};      //!< The size of the requested page.
+    Types::Optional<Types::u32>     pageSize       {};      //!< The size of the requested page.
     std::time_t                     pageInitTime   {};      //!< The loading time of the requested page.
-    Types::Optional<u32>            pageSpeed      {};      //!< The loading speed of the requested page.
-    Types::Optional<s32>            stateIndex     {};      //!< The state of index for any page.
+    Types::Optional<Types::u32>     pageSpeed      {};      //!< The loading speed of the requested page.
+    Types::Optional<Types::s32>     stateIndex     {};      //!< The state of index for any page.
     Types::Optional<HostType>       hostType       {};      //!< This attribute specifies the type of site hosting. for example: Linux
     Types::Optional<StorageType>    storageType    {};      //!< This attribute specifies the type of storage to use.
     Types::Optional<UserMode>       userMode       {};      //!< This attribute specifies the type of user who uses the system.
@@ -455,7 +449,7 @@ public:
      * @brief Getting current loaded page size.
      * @return returns as unsigned int 32 for page size.
      */
-    virtual Types::Optional<u32> getPageSize() = __cell_zero;
+    virtual Types::Optional<Types::u32> getPageSize() = __cell_zero;
 
     /*!
      * @brief Getting current system current page init time duration.
@@ -467,13 +461,13 @@ public:
      * @brief Getting current page speed load.
      * @return returns as counter of page speed.
      */
-    virtual Types::Optional<u32> getPageSpeed() = __cell_zero;
+    virtual Types::Optional<Types::u32> getPageSpeed() = __cell_zero;
 
     /*!
      * @brief Getting current system state index.
      * @return returns as signed integer for state index.
      */
-    virtual Types::Optional<s32> getStateIndex() = __cell_zero;
+    virtual Types::Optional<Types::s32> getStateIndex() = __cell_zero;
 
     /*!
      * @brief Getting current installed host type.
@@ -542,7 +536,7 @@ struct Machine : public MachineInterface
      * @brief Getting current loaded page size.
      * @return returns as unsigned int 32 for page size.
      */
-    Types::Optional<u32> getPageSize() override;
+    Types::Optional<Types::u32> getPageSize() override;
 
     /*!
      * @brief Getting current system current page init time duration.
@@ -554,13 +548,13 @@ struct Machine : public MachineInterface
      * @brief Getting current page speed load.
      * @return returns as counter of page speed.
      */
-    Types::Optional<u32> getPageSpeed() override;
+    Types::Optional<Types::u32> getPageSpeed() override;
 
     /*!
      * @brief Getting current system state index.
      * @return returns as signed integer for state index.
      */
-    Types::Optional<s32> getStateIndex() override;
+    Types::Optional<Types::s32> getStateIndex() override;
 
     /*!
      * @brief Getting current installed host type.
@@ -620,7 +614,7 @@ public:
     /* This is singleton object for engine */
     DeclareSingletonSelf(Engine)
 
-        /**
+     /**
      * @brief get function will return Engine class as optional method.
      * @return as static optional class.
      */
@@ -704,7 +698,7 @@ public:
      * @param fields is list of the fields.
      * @return as filtered list of fields.
      */
-    std::vector<std::string> filteredQueryFields(VectorString& fields);
+    std::vector<std::string> filteredQueryFields(Types::VectorString& fields);
 
     /**
      * @brief The State enum
@@ -714,7 +708,7 @@ public:
     /*!
      * @brief The SepratorType enum
      */
-    enum class SepratorType : u8
+    enum class SepratorType :Types::u8
     {
         Comma,
         Dash,
@@ -759,7 +753,7 @@ public:
     /*!
      * @brief The SepratorStyle enum
      */
-    enum class SepratorStyle : u8 { WithSpace, Mixed };
+    enum class SepratorStyle :Types::u8 { WithSpace, Mixed };
 
     /*!
      * @brief join function will implode a vector of strings into a comma-separated.
@@ -768,7 +762,7 @@ public:
      * @param sepStyle is style of seprator.
      * @return as string of result.
      */
-    __cell_no_discard std::string join(const VectorString& strings, const SepratorType& sep, const SepratorStyle& sepStyle) __cell_noexcept;
+    __cell_no_discard std::string join(const Types::VectorString& strings, const SepratorType& sep, const SepratorStyle& sepStyle) __cell_noexcept;
 
     /*!
      * \brief elementErase function removes certain characters from a string.
@@ -820,7 +814,7 @@ public:
      * @brief It may help to filter tables.
      * @return as tables.
      */
-    VectorString tableFilter(const VectorString& tables, TableType tableType);
+    Types::VectorString tableFilter(const Types::VectorString& tables, TableType tableType);
 
     /*!
      * @brief Sometimes we need to remove dashes from the uri or content based data.
@@ -841,7 +835,7 @@ public:
      * @param map as data for replacing.
      * @return content as string.
      */
-    std::string fullReplacer(const std::string& content, const MapString& map);
+    std::string fullReplacer(const std::string& content, const Types::MapString& map);
 
     /**
      * @brief The trim function takes a string s as input, removes any leading and trailing whitespace characters from it, and returns the resulting string.
@@ -966,6 +960,13 @@ public:
      */
     void delayIfNeeded(std::chrono::time_point<std::chrono::high_resolution_clock>& lastRequestTime, unsigned int rateLimit);
 
+    /**
+     * @brief extractValue
+     * @param line
+     * @return
+     */
+    std::string extractValue(const std::string& line, const std::string& section = ":");
+
     /*!
      * \brief Lanuage translator engine.
      */
@@ -999,13 +1000,13 @@ Scope<Engine> createEngineObject();
  */
 struct ApplicationData final
 {
-    SystemInfo systemInfo{};
-    OptionalString path    {__cell_unknown};
-    OptionalString templateId  {__cell_unknown};
-    OptionalString templateErrorId  {__cell_unknown};
-    OptionalString module  {__cell_unknown};
-    SemanticVersion semanticVersion{};
-    Version::ReleaseType releaseType{};
+    SystemInfo              systemInfo      {};
+    Types::OptionalString   path            {__cell_unknown};
+    Types::OptionalString   templateId      {__cell_unknown};
+    Types::OptionalString   templateErrorId {__cell_unknown};
+    Types::OptionalString   module          {__cell_unknown};
+    SemanticVersion         semanticVersion {};
+    Version::ReleaseType    releaseType     {};
     ///ToDo... We need to add user info and extra data...
 };
 
@@ -1027,39 +1028,39 @@ public:
      */
     void start();
 
-    OptionalString name() __cell_const_noexcept;
+    Types::OptionalString name() __cell_const_noexcept;
 
-    OptionalString codeName() __cell_const_noexcept;
+    Types::OptionalString codeName() __cell_const_noexcept;
 
-    OptionalString type() __cell_const_noexcept;
+    Types::OptionalString type() __cell_const_noexcept;
 
-    OptionalString license() __cell_const_noexcept;
+    Types::OptionalString license() __cell_const_noexcept;
 
-    OptionalString model() __cell_const_noexcept;
+    Types::OptionalString model() __cell_const_noexcept;
 
     /*!
      * \brief path as string.
      * \returns string.
      */
-    OptionalString path() __cell_const_noexcept;
+    Types::OptionalString path() __cell_const_noexcept;
 
     /*!
      * \brief module as module name.
      * \returns string.
      */
-    OptionalString module() __cell_const_noexcept;
+    Types::OptionalString module() __cell_const_noexcept;
 
     /*!
      * \brief templateId will gets error template id.
      * \returns string.
      */
-    OptionalString templateErrorId() __cell_const_noexcept;
+    Types::OptionalString templateErrorId() __cell_const_noexcept;
 
     /*!
      * \brief templateId will gets template id.
      * \returns string.
      */
-    OptionalString templateId() __cell_const_noexcept;
+    Types::OptionalString templateId() __cell_const_noexcept;
 
     Scope<Engine>   engine  {};
     Scope<Version>  version {};

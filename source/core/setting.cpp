@@ -3,6 +3,7 @@
 #include "core/core.hpp"
 
 CELL_USING_NAMESPACE Cell;
+CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::eLogger;
 
@@ -31,7 +32,7 @@ SettingInterface::~SettingInterface()
 
 OptionalString SettingInterface::title()
 {
-    if (isset(m_interfaceData->title)) {
+    if (m_interfaceData->title) {
         return m_interfaceData->title;
     } else {
         return std::nullopt;
@@ -40,7 +41,7 @@ OptionalString SettingInterface::title()
 
 OptionalString SettingInterface::descr()
 {
-    if (isset(m_interfaceData->descr)) {
+    if (m_interfaceData->descr) {
         return m_interfaceData->descr;
     } else {
         return std::nullopt;
@@ -49,7 +50,7 @@ OptionalString SettingInterface::descr()
 
 OptionalString SettingInterface::value()
 {
-    if (isset(m_interfaceData->value)) {
+    if (m_interfaceData->value) {
         return m_interfaceData->value;
     } else {
         return std::nullopt;
@@ -58,7 +59,7 @@ OptionalString SettingInterface::value()
 
 OptionalString SettingInterface::json()
 {
-    if (isset(m_interfaceData->json)) {
+    if (m_interfaceData->json) {
         return m_interfaceData->json;
     } else {
         return std::nullopt;
@@ -67,7 +68,7 @@ OptionalString SettingInterface::json()
 
 OptionalString SettingInterface::defaultVal()
 {
-    if (isset(m_interfaceData->defaultVal)) {
+    if (m_interfaceData->defaultVal) {
         return m_interfaceData->defaultVal;
     } else {
         return std::nullopt;
@@ -76,7 +77,7 @@ OptionalString SettingInterface::defaultVal()
 
 OptionalString SettingInterface::extra()
 {
-    if (isset(m_interfaceData->extra)) {
+    if (m_interfaceData->extra) {
         return m_interfaceData->extra;
     } else {
         return std::nullopt;
@@ -137,6 +138,7 @@ std::string Setting::getOption(const std::string& var)
 SettingType Setting::getList() __cell_const_noexcept
 {
   //ToDo...
+  return SettingType();
 }
 
 std::vector<std::string> Setting::option() const

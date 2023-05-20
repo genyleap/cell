@@ -33,7 +33,7 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 
-enum class DeviceState : u8
+enum class DeviceState : Types::u8
 {
     Online, Offline
 };
@@ -41,14 +41,14 @@ enum class DeviceState : u8
 struct DeviceInfo final
 {
     //!Statics
-    OptionalNumeric id          {}; //!< Device ID.
-    OptionalString  title       {}; //!< Device Title.
-    OptionalString  description {}; //!< Device Description.
-    OptionalString  ipAddress   {}; //!< Device IP Address.
-    OptionalString  macAddress  {}; //!< Device Mac Address.
+    Types::OptionalNumeric id          {}; //!< Device ID.
+    Types::OptionalString  title       {}; //!< Device Title.
+    Types::OptionalString  description {}; //!< Device Description.
+    Types::OptionalString  ipAddress   {}; //!< Device IP Address.
+    Types::OptionalString  macAddress  {}; //!< Device Mac Address.
     //!Dynamics
 //    Optional<Cell::System::DeviceType> type   {}; //!< Device Type (Desktop, Mobile and etc.).
-    Optional<DeviceState> state {}; //!< Device State.
+    Types::Optional<DeviceState> state {}; //!< Device State.
 };
 
 /*!
@@ -71,7 +71,7 @@ public:
      * \param memberId as array is unique user id.
      * \returns DeviceInfo as data.
      */
-    __cell_no_discard_virtual DeviceInfo get(const std::vector<OptionalNumeric>& memberId) __cell_const_noexcept = __cell_zero;
+    __cell_no_discard_virtual DeviceInfo get(const std::vector<Types::OptionalNumeric>& memberId) __cell_const_noexcept = __cell_zero;
 
 
 private:

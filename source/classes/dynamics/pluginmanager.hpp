@@ -21,6 +21,8 @@
 # endif
 #endif
 
+CELL_NAMESPACE_BEGIN(Cell::Dynamics)
+
 // Define the prototype for a function that should exist in the lib
 // that is used to create and return the plugin type in the lib.
 
@@ -63,5 +65,7 @@ private:
   bool m_status = {false};
   Scope<PluginManagerPimpl> implementationPtr;
 };
+
+CELL_NAMESPACE_END
 
 #endif // CELL_PLUGIN_MANAGER_HPP

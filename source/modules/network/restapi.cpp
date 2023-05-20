@@ -26,7 +26,7 @@ CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::eLogger;
 CELL_USING_NAMESPACE Cell::Types;
 
-CELL_NAMESPACE_BEGIN(Cell::Modules::Network)
+CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Network)
 
 RestfulApi::RestfulApi()
 {

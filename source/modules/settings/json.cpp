@@ -44,7 +44,7 @@ CELL_USING_NAMESPACE Cell::FileSystem;
 CELL_USING_NAMESPACE Cell::eLogger;
 CELL_USING_NAMESPACE Cell::System::Serialization;
 
-CELL_NAMESPACE_BEGIN(Cell::Modules::Settings)
+CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Settings)
 
 JsonSetting::JsonSetting()
 {

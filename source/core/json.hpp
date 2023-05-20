@@ -21,6 +21,14 @@
 # endif
 #endif
 
+#ifdef __has_include
+# if __has_include("core/filesystem.hpp")
+#   include "core/filesystem.hpp"
+#else
+#   error "Cell's "core/filesystem.hpp" was not found!"
+# endif
+#endif
+
 CELL_NAMESPACE_BEGIN(Cell::JSon)
 
 /**
@@ -29,12 +37,12 @@ CELL_NAMESPACE_BEGIN(Cell::JSon)
 enum class InputType { File, RawData };
 
 /**
- * @brief The JsonParser class
+ * @brief The JsonManager class
  */
-class __cell_export JsonParser {
+class __cell_export JsonManager {
 public:
-    JsonParser();
-    ~JsonParser();
+    JsonManager();
+    ~JsonManager();
 
     /**
      * Parse a JSON data from a given input and populate root node of the JSON object.
@@ -65,8 +73,16 @@ public:
      */
     Types::JSonValue get(const std::string& key) __cell_noexcept;
 
+    Types::JSonValue getData() __cell_noexcept;
+
+    std::vector<Types::JSonValue> getVectorJsonPtr();
+
+    void setVectorJsonPtr(const JSonValue& data);
+
 private:
     Types::JSonValue m_root{}; //!< Root node of the JSON object
+    std::vector<Types::JSonValue> vectorJsonPtr;
+    Cell::FileSystem::FileManager fileManager{};
 };
 
 CELL_NAMESPACE_END

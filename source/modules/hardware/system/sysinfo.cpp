@@ -43,7 +43,7 @@ CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::eLogger;
 CELL_USING_NAMESPACE Cell::Types;
 
-CELL_NAMESPACE_BEGIN(Cell::Modules::Hardware)
+CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 
 SystemInformation::SystemInformation()
 {
@@ -55,7 +55,7 @@ SystemInformation::~SystemInformation()
 
 OptionalString SystemInformation::getOsName()
 {
-
+    return OptionalString();
 }
 
 //!Dedicated for Win32 WMI System.
