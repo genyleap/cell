@@ -40,22 +40,22 @@ Types::OptionalString TimestampConverter::getRelativeTime(std::time_t unixTime)
         return safeTranslate(lcode,"core", "afew_seconds_ago");
     } else if (timeDifference < 3600) {
         int minutes = timeDifference / 60;
-        return Format::print(safeTranslate(lcode,"core", "minute"), minutes, (minutes > 1 ? pluralWord : ""));
+        return __cell_print_format(safeTranslate(lcode,"core", "minute"), minutes, (minutes > 1 ? pluralWord : ""));
     } else if (timeDifference < 86400) {
         int hours = timeDifference / 3600;
-        return Format::print(safeTranslate(lcode,"core", "hour"), hours, (hours > 1 ? pluralWord : ""));
+        return __cell_print_format(safeTranslate(lcode,"core", "hour"), hours, (hours > 1 ? pluralWord : ""));
     } else if (timeDifference < 604800) {
         int days = timeDifference / 86400;
-        return Format::print(safeTranslate(lcode,"core", "day"), days, (days > 1 ? pluralWord : ""));
+        return __cell_print_format(safeTranslate(lcode,"core", "day"), days, (days > 1 ? pluralWord : ""));
     } else if (timeDifference < 2592000) {
         int weeks = timeDifference / 604800;
-        return Format::print(safeTranslate(lcode,"core", "week"), weeks, (weeks > 1 ? pluralWord : ""));
+        return __cell_print_format(safeTranslate(lcode,"core", "week"), weeks, (weeks > 1 ? pluralWord : ""));
     } else if (timeDifference < 31536000) {
         int months = timeDifference / 2592000;
-        return Format::print(safeTranslate(lcode,"core", "month"), months, (months > 1 ? pluralWord : ""));
+        return __cell_print_format(safeTranslate(lcode,"core", "month"), months, (months > 1 ? pluralWord : ""));
     } else {
         int years = timeDifference / 31536000;
-        return Format::print(safeTranslate(lcode,"core", "year"), years, (years > 1 ? pluralWord : ""));
+        return __cell_print_format(safeTranslate(lcode,"core", "year"), years, (years > 1 ? pluralWord : ""));
     }
 }
 
@@ -144,12 +144,12 @@ Types::OptionalString TimestampConverter::getTimeDuration(std::chrono::seconds s
     seconds %= 60;
     std::stringstream ss;
     if (days > 0)
-        ss << days << Format::print(safeTranslate(lcode,"core", "day"), days, (days > 1 ? pluralWord : "")) << ", ";
+        ss << days      << __cell_print_format(safeTranslate(lcode,"core", "day"), days, (days > 1 ? pluralWord : "")) << ", ";
     if (hours > 0)
-        ss << hours << Format::print(safeTranslate(lcode,"core", "hour"), hours, (hours > 1 ? pluralWord : "")) << ", ";
+        ss << hours     << __cell_print_format(safeTranslate(lcode,"core", "hour"), hours, (hours > 1 ? pluralWord : "")) << ", ";
     if (minutes > 0)
-        ss << minutes << Format::print(safeTranslate(lcode,"core", "minute"), minutes, (minutes > 1 ? pluralWord : "")) << ", ";
-    ss << seconds << Format::print(safeTranslate(lcode,"core", "second"), seconds, (seconds > 1 ? pluralWord : ""));
+        ss << minutes   << __cell_print_format(safeTranslate(lcode,"core", "minute"), minutes, (minutes > 1 ? pluralWord : "")) << ", ";
+        ss << seconds   << __cell_print_format(safeTranslate(lcode,"core", "second"), seconds, (seconds > 1 ? pluralWord : ""));
     return ss.str();
 }
 

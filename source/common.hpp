@@ -273,6 +273,8 @@ object = nullptr;                   \
 #define FROM_CELL_STRING(x) std::string(x)
 #define TO_CELL_STRING(x) std::to_string(x)
 
+#define __cell_print_format Format::print
+
 #define CELL_TRANSLATOR(key, value) Application::get(*Application::appDataSPtr)->translatorPtr->translate(Application::languageSPtr->getLanguageCode(), key, value).defaultValue()
 
 #define CELL_RUNTIME_FORMAT(content, ...) fmt::format(fmt::runtime(content), __VA_ARGS__)
