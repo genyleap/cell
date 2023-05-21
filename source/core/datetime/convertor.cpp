@@ -10,13 +10,6 @@
 #   error "Cell's "core/core.hpp" was not found!"
 #endif
 
-#if __has_include("translator/translator.hpp")
-#   include "translator/translator.hpp"
-#else
-#   error "Cell's "translator/translator.hpp" was not found!"
-#endif
-
-
 CELL_USING_NAMESPACE Cell;
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::Types;
