@@ -32,7 +32,10 @@
 *.app
 
 #Extra
+*.VC.db
+*.VC.VC.opendb
 .DS_Store
+Thumbs.db
 .vs
 .idea
 

@@ -59,7 +59,7 @@ struct LANGUAGE_SHEET final {
 struct CONFIG final {
   static constexpr std::string_view FRAMEWORK_CONFIG_FILE = "config.json";
   static constexpr std::string_view SYSTEM_CONFIG_FILE = "config/system-config.json";
-  static constexpr std::string_view SYSTEM_TRANSLATOR_CONFIG_FILE = "config/translator-config.json";
+  static constexpr std::string_view SYSTEM_TRANSLATOR_CONFIG_FILE = "config/globalization-config.json";
   static constexpr std::string_view SYSTEM_CUSTOM_FILE = "config/custom-setting.json";
   static constexpr std::string_view SYSTEM_DATABASE_FILE = "config/system-database.json";
   static constexpr std::string_view SYSTEM_INTERFACE_FILE = "config/system-interface.json";

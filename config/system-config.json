@@ -1,11 +1,536 @@
 {
-    "language":"english",
-    "debug": true,
-    "system":{
-    "codename":"Template Name",
-    "version":"1.0.0",
-    "last_update":"2020-01-10 07:00:00",
-    "server_host":"127.0.0.1",
-    "encoding":"utf-8"
+  "language": "english",
+  "debug": true,
+  "cookie_prefix": "cell_",
+  "installed": false,
+  "protocol": "http://",
+  "ssl": false,
+  "system": {
+    "codename": "tegra",
+    "version": "0.6-alpha",
+    "last_update": "2022-05-10 07:00:00",
+    "server_host": "127.0.0.1",
+    "cdn": false,
+    "encoding": "utf-8"
+  },
+  "features": {
+    "dynamic": false,
+    "cross-mode": false
+  },
+  "maintenance": {
+    "backup_path": "backups/",
+    "experimental_update": false,
+    "update": false,
+    "db_bakup_path": "/dbs"
+  },
+  "programs": [
+    {
+      "pg_dump": {
+        "path": "/opt/homebrew/Cellar/libpq/14.3/bin/pg_dump"
+      }
     }
+  ],
+  "service": {
+    "platforms": {
+      "server": true,
+      "website": {
+        "ip": "127.0.0.1",
+        "domain": "localhost",
+        "token": "",
+        "status": true
+      },
+      "desktop": {
+        "macos": false,
+        "windows": false,
+        "linux": false,
+        "token": "",
+        "status": false
+      },
+      "mobile": {
+        "ios": false,
+        "android": false,
+        "token": "",
+        "status": false
+      },
+      "iot": {
+        "device_token": "",
+        "status": false
+      },
+      "other": {
+        "token": "",
+        "status": false
+      }
+    },
+    "cross_platform": false,
+    "centeral_server": "127.0.0.1",
+    "sms_token": "",
+    "system": {
+      "license": "",
+      "api": "",
+      "status": false
+    },
+    "app": {
+      "license": "",
+      "api": "",
+      "status": false
+    }
+  },
+  "templates": {
+    "path": "templates/",
+    "user": "Easy",
+    "moderate": "Moderate",
+    "admin": "Admin",
+    "engine": [
+      {
+        "js": [
+          {
+            "id": 1,
+            "key": "core",
+            "type": "cdn",
+            "version": "0.6-alpha",
+            "license": "mit",
+            "url": "https://genyleap.com",
+            "value": "",
+            "status": true
+          },
+          {
+            "id": 2,
+            "key": "core",
+            "type": "local",
+            "version": "0.6-alpha",
+            "license": "mit",
+            "url": "https://genyleap.com",
+            "value": "assets/core/js/core.min.js",
+            "status": true
+          }
+        ],
+        "css": [
+          {
+            "id": 1,
+            "key": "core",
+            "type": "cdn",
+            "direction": "ltr",
+            "version": "0.5-alpha",
+            "license": "mit",
+            "url": "https://",
+            "value": "",
+            "status": true
+          },
+          {
+            "id": 2,
+            "key": "core",
+            "type": "cdn",
+            "direction": "rtl",
+            "version": "0.5-alpha",
+            "license": "mit",
+            "url": "https://",
+            "value": "",
+            "status": true
+          },
+          {
+            "id": 3,
+            "key": "core",
+            "type": "local",
+            "direction": "ltr",
+            "version": "0.5-alpha",
+            "license": "mit",
+            "url": "https://genyleap.com",
+            "value": "assets/core/css/core.min.css",
+            "status": true
+          },
+          {
+            "id": 4,
+            "key": "core",
+            "type": "local",
+            "direction": "rtl",
+            "version": "0.5-alpha",
+            "license": "mit",
+            "url": "https://genyleap.com",
+            "value": "assets/core/css/core.min.rtl.css",
+            "status": true
+          }
+        ]
+      }
+    ],
+    "thirdparty": [
+      {
+        "js": [
+          {
+            "id": 1,
+            "key": "bootstrap",
+            "type": "cdn",
+            "version": "5.0.0",
+            "license": "mit",
+            "url": "https://getbootstrap.com/",
+            "value": "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js",
+            "status": true
+          },
+          {
+            "id": 2,
+            "key": "bootstrap",
+            "type": "local",
+            "version": "5.0.0-beta1",
+            "license": "mit",
+            "url": "https://getbootstrap.com/",
+            "value": "assets/bootstrap/js/bootstrap.bundle.min.js",
+            "status": true
+          },
+          {
+            "id": 3,
+            "key": "jqeury",
+            "type": "cdn",
+            "version": "3.5.1",
+            "license": "mit",
+            "url": "https://jquery.com/",
+            "value": "https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js",
+            "status": true
+          },
+          {
+            "id": 4,
+            "key": "select2",
+            "type": "cdn",
+            "version": "4.0.13",
+            "license": "mit",
+            "url": "https://select2.org/",
+            "value": "https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js",
+            "status": false
+          },
+          {
+            "id": 5,
+            "key": "select2",
+            "type": "local",
+            "version": "4.0.13",
+            "license": "mit",
+            "url": "https://select2.org/",
+            "value": "assets/select2/js/select2.min.js",
+            "status": false
+          },
+          {
+            "id": 6,
+            "key": "popperjs",
+            "type": "cdn",
+            "version": "2.6.0",
+            "license": "mit",
+            "url": "https://popper.js.org/",
+            "value": "https://unpkg.com/popper.js@1.16.1/dist/umd/popper.min.js",
+            "status": false
+          },
+          {
+            "id": 7,
+            "key": "popperjs",
+            "type": "local",
+            "version": "2.6.0",
+            "license": "mit",
+            "url": "https://popper.js.org/",
+            "value": "assets/popperjs/js/popper.min.js",
+            "status": false
+          },
+          {
+            "id": 8,
+            "key": "highlightjs",
+            "type": "cdn",
+            "version": "9.16.2",
+            "license": "mit",
+            "url": "https://highlightjs.org/",
+            "value": "https://unpkg.com/highlightjs",
+            "status": false
+          },
+          {
+            "id": 9,
+            "key": "highlightjs",
+            "type": "local",
+            "version": "9.16.2",
+            "license": "mit",
+            "url": "https://highlightjs.org/",
+            "value": "assets/highlightjs/js/highlight.min.js",
+            "status": false
+          },
+          {
+            "id": 10,
+            "key": "nprogress",
+            "type": "cdn",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://ricostacruz.com/nprogress/",
+            "value": "https://unpkg.com/nprogress@0.2.0/nprogress.js",
+            "status": true
+          },
+          {
+            "id": 11,
+            "key": "nprogress",
+            "type": "local",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://ricostacruz.com/nprogress/",
+            "value": "assets/nprogress/js/nprogress.js",
+            "status": true
+          },
+          {
+            "id": 12,
+            "key": "web3",
+            "type": "local",
+            "version": "1.7.4-rc0",
+            "license": "mit",
+            "url": "https://web3js.readthedocs.io/en/v1.7.3/",
+            "value": "assets/web3/js/web3.min.js",
+            "status": true
+          },
+          {
+            "id": 13,
+            "key": "web3",
+            "type": "cdn",
+            "version": "1.7.4-rc0",
+            "license": "mit",
+            "url": "https://web3js.readthedocs.io/en/v1.7.3/",
+            "value": "https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4-rc.0/web3.min.js",
+            "status": true
+          }
+        ],
+        "css": [
+          {
+            "id": 1,
+            "key": "bootstrap",
+            "type": "cdn",
+            "direction": "ltr",
+            "version": "5.2.0",
+            "license": "mit",
+            "url": "https://getbootstrap.com/",
+            "value": "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css",
+            "status": true
+          },
+          {
+            "id": 2,
+            "key": "bootstrap",
+            "type": "local",
+            "direction": "ltr",
+            "version": "5.2.0",
+            "license": "mit",
+            "url": "https://getbootstrap.com/",
+            "value": "assets/bootstrap/css/bootstrap.min.css",
+            "status": true
+          },
+          {
+            "id": 3,
+            "key": "bootstrap",
+            "type": "cdn",
+            "direction": "rtl",
+            "version": "5.2.0",
+            "license": "mit",
+            "url": "https://getbootstrap.com/",
+            "value": "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.rtl.min.css",
+            "status": true
+          },
+          {
+            "id": 4,
+            "key": "bootstrap",
+            "type": "local",
+            "direction": "rtl",
+            "version": "5.2.0",
+            "license": "mit",
+            "url": "https://getbootstrap.com/",
+            "value": "assets/bootstrap/css/bootstrap.rtl.min.css",
+            "status": true
+          },
+          {
+            "id": 5,
+            "key": "select2",
+            "type": "cdn",
+            "direction": "ltr",
+            "version": "4.0.13",
+            "license": "mit",
+            "url": "https://select2.org/",
+            "value": "https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css",
+            "status": false
+          },
+          {
+            "id": 6,
+            "key": "select2",
+            "type": "local",
+            "direction": "ltr",
+            "version": "4.0.13",
+            "license": "mit",
+            "url": "https://select2.org/",
+            "value": "assets/select2/css/select2.min.css",
+            "status": false
+          },
+          {
+            "id": 6,
+            "key": "select2",
+            "type": "cdn",
+            "direction": "rtl",
+            "version": "4.0.13",
+            "license": "mit",
+            "url": "https://select2.org/",
+            "value": "https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css",
+            "status": false
+          },
+          {
+            "id": 7,
+            "key": "select2",
+            "type": "local",
+            "direction": "rtl",
+            "version": "4.0.13",
+            "license": "mit",
+            "url": "https://select2.org/",
+            "value": "assets/select2/css/select2.min.rtl.css",
+            "status": false
+          },
+          {
+            "id": 8,
+            "key": "highlightjs",
+            "type": "cdn",
+            "direction": "ltr",
+            "version": "9.16.2",
+            "license": "mit",
+            "url": "http://holderjs.com/",
+            "value": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/default.min.css",
+            "status": false
+          },
+          {
+            "id": 9,
+            "key": "highlightjs",
+            "type": "local",
+            "direction": "ltr",
+            "version": "9.16.2",
+            "license": "mit",
+            "url": "http://holderjs.com/",
+            "value": "assets/highlightjs/css/highlightjs.min.css",
+            "status": false
+          },
+          {
+            "id": 10,
+            "key": "highlightjs",
+            "type": "cdn",
+            "direction": "rtl",
+            "version": "9.16.2",
+            "license": "mit",
+            "url": "http://holderjs.com/",
+            "value": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/default.min.css",
+            "status": false
+          },
+          {
+            "id": 11,
+            "key": "highlightjs",
+            "type": "local",
+            "direction": "rtl",
+            "version": "9.16.2",
+            "license": "mit",
+            "url": "http://holderjs.com/",
+            "value": "assets/highlightjs/css/highlightjs.min.rtl.css",
+            "status": false
+          },
+          {
+            "id": 12,
+            "key": "nprogress",
+            "type": "cdn",
+            "direction": "ltr",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://ricostacruz.com/nprogress/",
+            "value": "https://unpkg.com/nprogress@0.2.0/nprogress.css",
+            "status": false
+          },
+          {
+            "id": 13,
+            "key": "nprogress",
+            "type": "local",
+            "direction": "ltr",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://ricostacruz.com/nprogress/",
+            "value": "assets/nprogress/css/nprogress.css",
+            "status": false
+          },
+          {
+            "id": 14,
+            "key": "nprogress",
+            "type": "cdn",
+            "direction": "rtl",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://ricostacruz.com/nprogress/",
+            "value": "https://unpkg.com/nprogress@0.2.0/nprogress.css",
+            "status": false
+          },
+          {
+            "id": 15,
+            "key": "nprogress",
+            "type": "local",
+            "direction": "rtl",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://ricostacruz.com/nprogress/",
+            "value": "assets/nprogress/css/nprogress.rtl.css",
+            "status": false
+          },
+          {
+            "id": 17,
+            "key": "user",
+            "type": "local",
+            "direction": "ltr",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://...",
+            "value": "user/assets/css/theme.min.css",
+            "status": false
+          },
+          {
+            "id": 18,
+            "key": "user",
+            "type": "local",
+            "direction": "rtl",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://...",
+            "value": "user/assets/css/theme.min.rtl.css",
+            "status": false
+          },
+          {
+            "id": 19,
+            "key": "user",
+            "type": "local",
+            "direction": "ltr",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://...",
+            "value": "user/assets/vendor/boxicons/css/boxicons.min.css",
+            "status": true
+          },
+          {
+            "id": 20,
+            "key": "user",
+            "type": "local",
+            "direction": "rtl",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://...",
+            "value": "user/assets/vendor/boxicons/css/boxicons.min.css",
+            "status": true
+          },
+          {
+            "id": 21,
+            "key": "user",
+            "type": "local",
+            "direction": "ltr",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://...",
+            "value": "user/assets/vendor/swiper/swiper-bundle.min.css",
+            "status": true
+          },
+          {
+            "id": 22,
+            "key": "user",
+            "type": "local",
+            "direction": "rtl",
+            "version": "0.2.0",
+            "license": "mit",
+            "url": "https://...",
+            "value": "user/assets/vendor/swiper/swiper-bundle.min.css",
+            "status": true
+          }
+        ]
+      }
+    ]
+  }
 }
