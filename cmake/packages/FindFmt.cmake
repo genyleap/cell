@@ -3,7 +3,7 @@ set(FMT_NAME "Fmt")
 set(FMT_DESCRIPTION "A modern formatting library.")
 
 # Pakcage option.
-option(USE_FMT ${FMT_DESCRIPTION} FALSE)
+option(USE_FMT ${FMT_DESCRIPTION} TRUE)
 if (USE_FMT)
     add_definitions(-DUSE_FMT)
     # Define the repository URL and tag for the Fmt libraries
