@@ -65,10 +65,8 @@ Types::OptionalString TimestampConverter::getFormattedDate(std::time_t unixTime,
     std::tm* timeInfo = std::localtime(&unixTime);
     std::stringstream ss;
     ss << std::put_time(timeInfo, format.c_str());
-
     std::string relativeTime = getRelativeTime(unixTime).value();
-    ss << " (Relative: " << relativeTime << ")";
-
+    ss<< relativeTime;
     return ss.str();
 }
 
