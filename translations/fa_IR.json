@@ -230,6 +230,71 @@
         "status": true
       }
     ],
+    "core": [
+      {
+        "word_key": "in_the_future",
+        "module": "system",
+        "default_value": "در آینده",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "plural_word",
+        "module": "system",
+        "default_value": "",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "afew_seconds_ago",
+        "module": "system",
+        "default_value": "چند ثانیه پیش {}",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "minute",
+        "module": "system",
+        "default_value": "دقیقه پیش {}",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "hour",
+        "module": "system",
+        "default_value": "ساعت پیش {}",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "day",
+        "module": "system",
+        "default_value": "روز پیش {}",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "week",
+        "module": "system",
+        "default_value": "هفته پیش {}",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "month",
+        "module": "system",
+        "default_value": "ماه پیش {}",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "year",
+        "module": "system",
+        "default_value": "سال پیش {}",
+        "custom_value": "",
+        "status": true
+      }
+    ],
     "global": [
       {
         "word_key": "name",

@@ -6,6 +6,7 @@
 
 #ifndef PROJECT_TYPES_HPP
 #define PROJECT_TYPES_HPP
+
 #if __has_include(<precompiled/pch.hpp>)
 #   include <precompiled/pch.hpp>
 #else
@@ -39,6 +40,17 @@ using JSonValue = boost::json::value;
 #   include <openssl/rsa.h>
 #   include <openssl/pem.h>
 #define ENABLE_OPENSSL 1
+#endif
+
+#ifdef USE_FMT
+#   include <fmt/format.h>
+#define USE_FMT_FORMAT
+#elif defined(USE_BOOST) && !defined(USE_FMT)
+#   include <boost/format.hpp>
+#define USE_BOOST_FORMAT
+#elif !defined(USE_BOOST) || !defined(USE_FMT)
+#   include <format>
+#define USE_STL_FORMAT
 #endif
 
 #define USE_MYSQL_MARIADB 1

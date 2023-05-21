@@ -33,10 +33,6 @@ FileManager::FileManager()
 FileManager::~FileManager()
 {
     setState(false, true);
-    if(DeveloperMode::IsEnable)
-    {
-        Log("File states has been reset!", LoggerType::Info);
-    }
 }
 
 std::string FileManager::read(const FilePath& filePath)

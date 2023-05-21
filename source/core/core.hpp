@@ -37,6 +37,12 @@
 #   error "Cell's "translator/translator.hpp" was not found!"
 #endif
 
+#if __has_include("format.hpp")
+#   include "format.hpp"
+#else
+#   error "Cell's "format.hpp" was not found!"
+#endif
+
 CELL_NAMESPACE_BEGIN(Cell::System)
 
 /*!
@@ -1018,6 +1024,21 @@ __cell_no_discard_message("Pay attention! This version of the engine is safe and
 
 //! Function that creates and returns a unique_ptr to Engine.
 Scope<Engine> createEngineObject();
+
+/**
+ * @brief Lambda function to safely translate a given language, section, and key.
+ *
+ * @param language The language code.
+ * @param section The translation section.
+ * @param key The translation key.
+ * @return The translated default value.
+ */
+static const auto& safeTranslate = [](const std::string& language,
+                                      const std::string& section,
+                                      const std::string& key) {
+    return safeEngine()->get()->translator().translate(language, section, key).defaultValue();
+};
+
 
 /*!
  * \brief The ApplicationData class

@@ -677,6 +677,71 @@
         "status": true
       }
     ],
+    "core": [
+      {
+        "word_key": "in_the_future",
+        "module": "system",
+        "default_value": "In the future",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "plural_word",
+        "module": "system",
+        "default_value": "s",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "afew_seconds_ago",
+        "module": "system",
+        "default_value": "A few seconds ago",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "minute",
+        "module": "system",
+        "default_value": "{} minute{} ago",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "hour",
+        "module": "system",
+        "default_value": "{}hour{} ago",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "day",
+        "module": "system",
+        "default_value": "{}day{} ago",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "week",
+        "module": "system",
+        "default_value": "{}week{} ago",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "month",
+        "module": "system",
+        "default_value": "{}month{} ago",
+        "custom_value": "",
+        "status": true
+      },
+      {
+        "word_key": "year",
+        "module": "system",
+        "default_value": "{}year{} ago",
+        "custom_value": "",
+        "status": true
+      }
+    ],
     "global": [
       {
         "word_key": "name",

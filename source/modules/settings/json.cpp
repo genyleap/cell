@@ -107,20 +107,10 @@ bool JsonSetting::save()
 bool JsonSetting::getValue(const std::string& key, JSonValue& value, const std::string& defaultValue) const
 {
 #if !defined(USE_BOOST)
-    if (!m_jsonValue.isMember(key)) {
+    if (!m_jsonValue.isObject()) {
         return false;
     }
-
-    const auto& sectionObj = m_jsonValue[key];
-    if (!sectionObj.isObject() || !sectionObj.isMember(key)) {
-        return false;
-    }
-
-    const auto& keyObj = sectionObj[key];
-    if (!keyObj.isString()) {
-        return false;
-    }
-    value = keyObj.asString();
+    value = m_jsonValue[key];
 #else
     if (!m_jsonValue.is_object()) {
         return false;
