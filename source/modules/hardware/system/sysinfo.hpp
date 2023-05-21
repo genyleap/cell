@@ -90,36 +90,6 @@ public:
     ~SystemInformation();
 
     /**
-     * @brief getOsName function will returns the name of the operating system.
-     * @return as an optional string.
-     */
-    Types::OptionalString getOsName();
-
-    /**
-     * @brief getHostName function will returns the hostname of the system.
-     * @return as an optional string.
-     */
-    Types::OptionalString getHostName();
-
-    /**
-     * @brief getKernelName function will returns the name of the kernel.
-     * @return as an optional string.
-     */
-    Types::OptionalString getKernelName();
-
-    /**
-     * @brief getKernelVersion function will returns the version of the kernel.
-     * @return as an optional string.
-     */
-    Types::OptionalString getKernelVersion();
-
-    /**
-     * @brief getUserName function will returns the name of the user.
-     * @return as an optional string.
-     */
-    Types::OptionalString getUserName();
-
-    /**
      * @brief The MainboardInfo() method returns a MainboardInfo object that contains information about the Motherboard.
      * @return as MainboardInfo object.
      */
@@ -142,6 +112,12 @@ public:
      * @return as MemoryInfo object.
      */
     MemoryInfo  getMemoryInfo();
+
+    /**
+     * @brief The OsInfo() method returns a OsInfo object that contains information about the operation system.
+     * @return as OsInfo object.
+     */
+    OsInfo getOsInfo();
 
     /**
      * @brief getProductInfo function will gets product data such as name, version and build number.

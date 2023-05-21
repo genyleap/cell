@@ -464,6 +464,7 @@ __cell_no_discard std::string execute(const char* cmd)
         result.append(buffer.data(), n);
     }
     pclose(pipe);
+    result.erase(result.find_last_not_of("\r\n") + 1);
     return result;
 }
 

@@ -25,6 +25,23 @@ class __cell_export OsInfo
 {
 public:
     /**
+     * @brief The ProductData class
+     */
+    struct ProductData final
+    {
+        Types::OptionalString   name         {};
+        Types::OptionalString   codename     {};
+        Types::OptionalString   version      {};
+        Types::OptionalString   build        {};
+        Types::OptionalString   releaseDate  {};
+        Types::OptionalString   kernel       {};
+        Types::OptionalString   kernelVer    {};
+        Types::OptionalString   hostname     {};
+        Types::OptionalString   username     {};
+        Types::OptionalString   developer    {};
+        Types::OptionalString   architecture {};
+    };
+    /**
      * @brief Constructs a OsInfo object.
      */
     OsInfo();
@@ -33,6 +50,51 @@ public:
      * @brief Destroys the OsInfo object.
      */
     ~OsInfo();
+
+    /**
+     * @brief getName function will returns the name of the operating system.
+     * @return as an optional string.
+     */
+    Types::OptionalString getName();
+
+    /**
+     * @brief getVersion function will returns the version of the operating system.
+     * @return as an optional string.
+     */
+    Types::OptionalString getVersion();
+
+    /**
+     * @brief getBuildNumber function will returns the build number of the operating system.
+     * @return as an optional string.
+     */
+    Types::OptionalString getBuildNumber();
+
+    /**
+     * @brief getHostName function will returns the hostname of the system.
+     * @return as an optional string.
+     */
+    Types::OptionalString getHostName();
+
+    /**
+     * @brief getKernelName function will returns the name of the kernel.
+     * @return as an optional string.
+     */
+    Types::OptionalString getKernelName();
+
+    /**
+     * @brief getKernelVersion function will returns the version of the kernel.
+     * @return as an optional string.
+     */
+    Types::OptionalString getKernelVersion();
+
+    /**
+     * @brief getUserName function will returns the name of the user.
+     * @return as an optional string.
+     */
+    Types::OptionalString getUserName();
+
+private:
+    ProductData m_productData {};
 
 };
 
