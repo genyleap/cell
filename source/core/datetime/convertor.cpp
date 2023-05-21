@@ -28,7 +28,8 @@ std::time_t TimestampConverter::epochToUnix(std::chrono::seconds epochTime)
     return std::chrono::system_clock::to_time_t(std::chrono::system_clock::time_point(epochTime));
 }
 
-std::chrono::seconds TimestampConverter::unixToEpoch(std::time_t unixTime) {
+std::chrono::seconds TimestampConverter::unixToEpoch(std::time_t unixTime)
+{
     return std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::from_time_t(unixTime).time_since_epoch());
 }
 
@@ -78,7 +79,8 @@ Types::OptionalString TimestampConverter::getFormattedDate(std::time_t unixTime,
     return ss.str();
 }
 
-Types::OptionalString TimestampConverter::epochToHumanReadable(std::chrono::seconds epochTime, bool useGMT) {
+Types::OptionalString TimestampConverter::epochToHumanReadable(std::chrono::seconds epochTime, bool useGMT)
+{
     std::time_t unixTime = epochToUnix(epochTime);
     std::tm* timeInfo;
     if (useGMT) {
@@ -91,7 +93,8 @@ Types::OptionalString TimestampConverter::epochToHumanReadable(std::chrono::seco
     return ss.str();
 }
 
-Types::OptionalString TimestampConverter::epochToHumanReadable(std::chrono::seconds epochTime, const std::string& format, bool useGMT) {
+Types::OptionalString TimestampConverter::epochToHumanReadable(std::chrono::seconds epochTime, const std::string& format, bool useGMT)
+{
     std::time_t unixTime = epochToUnix(epochTime);
     std::tm* timeInfo;
     if (useGMT) {
@@ -104,14 +107,15 @@ Types::OptionalString TimestampConverter::epochToHumanReadable(std::chrono::seco
     return ss.str();
 }
 
-std::chrono::seconds TimestampConverter::humanReadableToEpoch(const std::string& humanReadableDate, bool useGMT) {
+std::chrono::seconds TimestampConverter::humanReadableToEpoch(const std::string& humanReadableDate, bool useGMT)
+{
     std::tm timeInfo = {};
     std::istringstream ss(humanReadableDate);
     if (useGMT) {
         ss >> std::get_time(&timeInfo, "%Y-%m-%d %H:%M:%S");
     } else {
         ss >> std::get_time(&timeInfo, "%Y-%m-%d %H:%M:%S");
-        timeInfo.tm_isdst = -1; // Set daylight saving flag to -1 to let the system determine it
+        timeInfo.tm_isdst = -1; // Set daylight saving flag to -1 to let the system determine it.
     }
 
     std::time_t unixTime;
@@ -124,8 +128,8 @@ std::chrono::seconds TimestampConverter::humanReadableToEpoch(const std::string&
     return unixToEpoch(unixTime);
 }
 
-
-std::chrono::seconds TimestampConverter::humanReadableToEpoch(const std::string& humanReadableDate, const std::string& format, bool useGMT) {
+std::chrono::seconds TimestampConverter::humanReadableToEpoch(const std::string& humanReadableDate, const std::string& format, bool useGMT)
+{
     std::tm timeInfo = {};
     std::istringstream ss(humanReadableDate);
     ss >> std::get_time(&timeInfo, format.c_str());
@@ -138,25 +142,25 @@ std::chrono::seconds TimestampConverter::humanReadableToEpoch(const std::string&
 
 Types::OptionalString TimestampConverter::getTimeDuration(std::chrono::seconds start, std::chrono::seconds end)
 {
+    auto language = Multilangual::Language();
+    auto lcode = language.getLanguageCode();
     std::chrono::seconds duration = end - start;
     int seconds = duration.count();
-
+    const std::string pluralWord = safeTranslate(lcode,"core", "plural_word");
     int days = seconds / 86400;
     seconds %= 86400;
     int hours = seconds / 3600;
     seconds %= 3600;
     int minutes = seconds / 60;
     seconds %= 60;
-
     std::stringstream ss;
     if (days > 0)
-        ss << days << " day" << (days > 1 ? "s" : "") << ", ";
+        ss << days << Format::print(safeTranslate(lcode,"core", "day"), days, (days > 1 ? pluralWord : "")) << ", ";
     if (hours > 0)
-        ss << hours << " hour" << (hours > 1 ? "s" : "") << ", ";
+        ss << hours << Format::print(safeTranslate(lcode,"core", "hour"), hours, (hours > 1 ? pluralWord : "")) << ", ";
     if (minutes > 0)
-        ss << minutes << " minute" << (minutes > 1 ? "s" : "") << ", ";
-    ss << seconds << " second" << (seconds > 1 ? "s" : "");
-
+        ss << minutes << Format::print(safeTranslate(lcode,"core", "minute"), minutes, (minutes > 1 ? pluralWord : "")) << ", ";
+    ss << seconds << Format::print(safeTranslate(lcode,"core", "second"), seconds, (seconds > 1 ? pluralWord : ""));
     return ss.str();
 }
 
