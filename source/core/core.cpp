@@ -1168,6 +1168,11 @@ Types::Optional<Engine> safeEngine() __cell_noexcept
     return std::make_optional(Engine());
 }
 
+Types::Optional<Format> safeFormat() __cell_noexcept
+{
+    return std::make_optional(Format());
+}
+
 Application::Application(const ApplicationData& appData)
 {
     //    __cell_safe_instance_rhs(language, Multilangual::Language, appData.path.value_or(__cell_unknown));

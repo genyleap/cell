@@ -273,16 +273,6 @@ object = nullptr;                   \
 #define FROM_CELL_STRING(x) std::string(x)
 #define TO_CELL_STRING(x) std::to_string(x)
 
-#define __cell_print_format Format::print
-
-#define CELL_TRANSLATOR(key, value) Application::get(*Application::appDataSPtr)->translatorPtr->translate(Application::languageSPtr->getLanguageCode(), key, value).defaultValue()
-
-#define CELL_RUNTIME_FORMAT(content, ...) fmt::format(fmt::runtime(content), __VA_ARGS__)
-
-#define CELL_FORMAT_ARG fmt::arg
-
-#define CELL_COMPILETIME_FORMAT(content, ...) fmt::format(content, __VA_ARGS__)
-
 #define CELL_PAGE_URL_REGEN(x) regen_url(x, 2)
 
 #define BOOLCOMBINER(v1, v2) v1[v2].asBool()
@@ -290,8 +280,6 @@ object = nullptr;                   \
 #define INTCOMBINER(v1, v2) v1[v2].asInt()
 #define DBLCOMBINER(v1, v2) v1[v2].asDouble()
 #define FLTCOMBINER(v1, v2) v1[v2].asFloat()
-
-#define APPLICATION_DB_RUN(rdbms, dbHost, dbPort, dbName, dbUsername, dbPassword) AppFramework::application().createDbClient(FROM_CELL_STRING(rdbms), dbHost, dbPort, dbName, dbUsername, dbPassword).run();
 
 //! EXPORTS & EXTRA
 #if defined(__WINNT) || defined(__WINNT__) || defined(WIN32) || \

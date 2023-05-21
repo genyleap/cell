@@ -1027,6 +1027,8 @@ Scope<Engine> createEngineObject();
 
 Scope<Multilangual::Language> createLanguageObject();
 
+__cell_no_discard_message("Pay attention! This version of the formatter is safe and has a return value!")
+    Types::Optional<Format> safeFormat() __cell_noexcept;
 
 /**
  * @brief Lambda function to safely translate a given language, section, and key.

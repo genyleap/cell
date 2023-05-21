@@ -32,28 +32,36 @@ public:
 
 #ifdef USE_BOOST_FORMAT
         boost::format formatter(convertPlaceholders(formatString));
-        formatter.exceptions(boost::io::all_error_bits ^ (boost::io::too_many_args_bit | boost::io::too_few_args_bit));
         try {
+            formatter.exceptions(boost::io::all_error_bits ^ (boost::io::too_many_args_bit | boost::io::too_few_args_bit));
             formatArgs(formatter, args...);
-        } catch (const boost::io::format_error&) {
-            throw std::runtime_error("Invalid format string or argument mismatch");
+        } catch (const boost::io::format_error& e) {
+            return e.what();
         }
         return formatter.str();
 #endif
 #ifdef USE_FMT_FORMAT
-        auto formatter = fmt::format(fmt::runtime(formatString), args...);
-        return formatter;
-    }
+        try {
+            auto formatter = fmt::format(fmt::runtime(formatString), args...);
+            return formatter;
+        } catch (const fmt::format_error& e) {
+            return e.what();
+        }
 #endif
 #ifdef USE_STL_FORMAT
-    auto formatter = std::format(formatString), args...;
-    return formatter;
-}
+        try {
+            auto formatter = std::format(formatString), args...;
+            return formatter;
+        } catch (const std::format_error& e) {
+            return e.what();
+        }
 #endif
-private:
+    }
 #ifdef USE_BOOST_FORMAT
+private:
     // Helper function to convert {} placeholders to %1%, %2%, etc. format
-    static std::string convertPlaceholders(const std::string& formatString) {
+    static std::string convertPlaceholders(const std::string& formatString)
+    {
         std::string convertedFormatString;
         std::size_t argIndex = 1;
         for (std::size_t i = 0; i < formatString.size(); ++i) {
