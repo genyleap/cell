@@ -30,7 +30,6 @@ Types::OptionalString TimestampConverter::getRelativeTime(std::time_t unixTime)
 {
     std::time_t currentTime = std::time(nullptr);
     std::time_t timeDifference = currentTime - unixTime;
-
     auto lcode = createLanguageObject()->getLanguageCode();
     const std::string pluralWord = safeTranslate(lcode,"core", "plural_word");
     if (timeDifference < 0) {
@@ -39,7 +38,6 @@ Types::OptionalString TimestampConverter::getRelativeTime(std::time_t unixTime)
         return safeTranslate(lcode,"core", "afew_seconds_ago");
     } else if (timeDifference < 3600) {
         int minutes = timeDifference / 60;
-
         return safeFormat()->print(safeTranslate(lcode,"core", "minute"), minutes, (minutes > 1 ? pluralWord : ""));
     } else if (timeDifference < 86400) {
         int hours = timeDifference / 3600;
@@ -149,7 +147,7 @@ Types::OptionalString TimestampConverter::getTimeDuration(std::chrono::seconds s
         ss << hours << safeFormat()->print(safeTranslate(lcode,"core", "hour"), hours, (hours > 1 ? pluralWord : "")) << ", ";
     if (minutes > 0)
         ss << minutes << safeFormat()->print(safeTranslate(lcode,"core", "minute"), minutes, (minutes > 1 ? pluralWord : "")) << ", ";
-    ss << seconds << safeFormat()->print(safeTranslate(lcode,"core", "second"), seconds, (seconds > 1 ? pluralWord : ""));
+        ss << seconds << safeFormat()->print(safeTranslate(lcode,"core", "second"), seconds, (seconds > 1 ? pluralWord : ""));
     return ss.str();
 }
 
