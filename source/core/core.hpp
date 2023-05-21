@@ -1025,6 +1025,9 @@ __cell_no_discard_message("Pay attention! This version of the engine is safe and
 //! Function that creates and returns a unique_ptr to Engine.
 Scope<Engine> createEngineObject();
 
+Scope<Multilangual::Language> createLanguageObject();
+
+
 /**
  * @brief Lambda function to safely translate a given language, section, and key.
  *

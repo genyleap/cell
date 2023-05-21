@@ -1154,6 +1154,15 @@ Scope<System::Engine> createEngineObject()
     return std::unique_ptr<Engine>(cellEnginePtr);
 }
 
+// Definition of the createEngineObject function
+Scope<Multilangual::Language> createLanguageObject()
+{
+    // Allocate memory for a Language object using 'new'
+    Multilangual::Language* cellLanguagePtr = new Multilangual::Language;
+    // Wrap the raw pointer in a unique_ptr and return it
+    return std::unique_ptr<Multilangual::Language>(cellLanguagePtr);
+}
+
 Types::Optional<Engine> safeEngine() __cell_noexcept
 {
     return std::make_optional(Engine());

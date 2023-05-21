@@ -709,35 +709,35 @@
       {
         "word_key": "hour",
         "module": "system",
-        "default_value": "{}hour{} ago",
+        "default_value": "{} hour{} ago",
         "custom_value": "",
         "status": true
       },
       {
         "word_key": "day",
         "module": "system",
-        "default_value": "{}day{} ago",
+        "default_value": "{} day{} ago",
         "custom_value": "",
         "status": true
       },
       {
         "word_key": "week",
         "module": "system",
-        "default_value": "{}week{} ago",
+        "default_value": "{} week{} ago",
         "custom_value": "",
         "status": true
       },
       {
         "word_key": "month",
         "module": "system",
-        "default_value": "{}month{} ago",
+        "default_value": "{} month{} ago",
         "custom_value": "",
         "status": true
       },
       {
         "word_key": "year",
         "module": "system",
-        "default_value": "{}year{} ago",
+        "default_value": "{} year{} ago",
         "custom_value": "",
         "status": true
       }

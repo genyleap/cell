@@ -31,8 +31,7 @@ Types::OptionalString TimestampConverter::getRelativeTime(std::time_t unixTime)
     std::time_t currentTime = std::time(nullptr);
     std::time_t timeDifference = currentTime - unixTime;
 
-    auto language = Multilangual::Language();
-    auto lcode = language.getLanguageCode();
+    auto lcode = createLanguageObject()->getLanguageCode();
     const std::string pluralWord = safeTranslate(lcode,"core", "plural_word");
 
     if (timeDifference < 0) {
@@ -133,8 +132,7 @@ std::chrono::seconds TimestampConverter::humanReadableToEpoch(const std::string&
 
 Types::OptionalString TimestampConverter::getTimeDuration(std::chrono::seconds start, std::chrono::seconds end)
 {
-    auto language = Multilangual::Language();
-    auto lcode = language.getLanguageCode();
+    auto lcode = createLanguageObject()->getLanguageCode();
     std::chrono::seconds duration = end - start;
     int seconds = duration.count();
     const std::string pluralWord = safeTranslate(lcode,"core", "plural_word");
