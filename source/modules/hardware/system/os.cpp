@@ -342,4 +342,29 @@ OptionalString OsInfo::getUserName()
 
 }
 
+OptionalString OsInfo::getDeveloper()
+{
+    std::string registeredSymbol = PLATFORM_DEVELOPER;
+    if (!registeredSymbol.empty()) {
+        return std::make_optional(registeredSymbol);
+    }
+    return std::nullopt;
+}
+
+OptionalString OsInfo::getReleaseDate()
+{
+    // Todo...
+    return std::nullopt;
+}
+
+OptionalString OsInfo::getArchitecture()
+{
+    std::string arch { ARCHITECTURE };
+    if(!arch.empty()) {
+        return arch;
+    }
+    return std::nullopt;
+}
+
+
 CELL_NAMESPACE_END

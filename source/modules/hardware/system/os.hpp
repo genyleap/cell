@@ -93,6 +93,24 @@ public:
      */
     Types::OptionalString getUserName();
 
+    /**
+     * @brief getDeveloper function will returns the developer of the os.
+     * @return as an optional string.
+     */
+    Types::OptionalString getDeveloper();
+
+    /**
+     * @brief getReleaseDate function will returns the released date of the product.
+     * @return as an optional string.
+     */
+    Types::OptionalString getReleaseDate();
+
+    /**
+     * @brief getArchitecture function will returns the architecture of the os.
+     * @return as an optional string.
+     */
+    Types::OptionalString getArchitecture();
+
 private:
     ProductData m_productData {};
 

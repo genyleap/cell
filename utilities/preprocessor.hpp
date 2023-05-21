@@ -786,6 +786,7 @@ required. For example, an array dimension.
  */
 
 #if defined(__APPLE__) && defined(__MACH__)
+#define PLATFORM_DEVELOPER "Apple \u00AE"
 // Detect for x86
 /* Apple OSX and iOS (Darwin). ------------------------------ */
 #include <TargetConditionals.h>
@@ -862,12 +863,14 @@ required. For example, an array dimension.
  */
 
 #if defined(X86_32bit) && defined(__sun) && defined(__SVR4)
+#define PLATFORM_DEVELOPER "Oracle Solaris \u00AE"
 /* Solaris. ------------------------------------------------- */
 #define PLATFORM_OS "Solaris"
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_SOLARIS "Solaris"
 #define PLATFORM_TYPE "SUN (Solaris)"
 #elif defined(X64_64bit) && defined(__sun) && defined(__SVR4)
+#define PLATFORM_DEVELOPER "Oracle Solaris \u00AE"
 /* Solaris. ------------------------------------------------- */
 #define PLATFORM_OS "Solaris"
 #define PLATFORM_ARCH "x64 (64-Bit)"
@@ -883,6 +886,7 @@ required. For example, an array dimension.
  */
 
 #if !defined(__aarch64__) && defined(__ANDROID__) && defined(__ARM_ARCH) || defined(__ARM_ARCH_7A__)
+#define PLATFORM_DEVELOPER "Google \u00AE"
 /* Android. ------------------------------------------------- */
 #define PLATFORM_OS "Linux"
 #define PLATFORM_ANDROID "Linux (Android)"
@@ -898,6 +902,7 @@ required. For example, an array dimension.
 #define PLATFORM_IS_ANDROID
 #elif defined(__aarch64__) && defined(__ANDROID__)
 /* Android. ------------------------------------------------- */
+#define PLATFORM_DEVELOPER "Google \u00AE"
 #define PLATFORM_OS "Linux"
 #define PLATFORM_ANDROID "Linux (Android)"
 #undef PLATFORM_DEVICE
@@ -911,6 +916,7 @@ required. For example, an array dimension.
 #undef PLATFORM_IS_ANDROID
 #define PLATFORM_IS_ANDROID
 #elif defined(X86_64BIT) && !defined(__aarch64__) && !defined(__ARM_ARCH) && defined(__ANDROID__)
+#define PLATFORM_DEVELOPER "Google \u00AE"
 /* Android. ------------------------------------------------- */
 #define PLATFORM_OS "Linux"
 #define PLATFORM_ANDROID "Linux (Android)"
@@ -925,6 +931,7 @@ required. For example, an array dimension.
 #undef PLATFORM_IS_ANDROID
 #define PLATFORM_IS_ANDROID
 #elif defined(X64_64BIT) && !defined(__aarch64__) && !defined(__ARM_ARCH) && defined(__ANDROID__)
+#define PLATFORM_DEVELOPER "Google \u00AE"
 /* Android. ------------------------------------------------- */
 #define PLATFORM_OS "Linux"
 #define PLATFORM_ANDROID "Linux (Android)"
@@ -948,12 +955,14 @@ required. For example, an array dimension.
  */
 
 #if defined(X86_32bit) && defined(__CYGWIN__) && !defined(_WIN32)
+#define PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Cygwin POSIX under Microsoft Windows. -------------------- */
 #define PLATFORM_OS "Microsoft Windows"
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_POSIX_WINDOWS "POSIX under Microsoft Windows"
 #define PLATFORM_TYPE "POSIX under Microsoft Windows"
 #elif defined(X64_64bit) && defined(__CYGWIN__) && !defined(_WIN32)
+#define PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Cygwin POSIX under Microsoft Windows. -------------------- */
 #define PLATFORM_OS "Microsoft Windows"
 #define PLATFORM_ARCH "x64 (64-Bit)"
@@ -965,12 +974,14 @@ required. For example, an array dimension.
 
 /* FreeBSD */
 #if defined(X86_32bit) && defined(__FreeBSD__) || defined(__FreeBSD)
+#define PLATFORM_DEVELOPER "The FreeBSD Project \u00AE"
 #define CELL_P_FREEBSD
 #define PLATFORM_OS "FreeBSD"
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_FREEBSD "Linux (FreeBSD)"
 #define PLATFORM_TYPE "FreeBSD"
 #elif defined(X64_64bit) && defined(__FreeBSD__) || defined(__FreeBSD)
+#define PLATFORM_DEVELOPER "The FreeBSD Project \u00AE"
 #define CELL_P_FREEBSD
 #define PLATFORM_OS "FreeBSD"
 #define PLATFORM_ARCH "x64 (64-Bit)"
@@ -988,12 +999,14 @@ required. For example, an array dimension.
 
 /* Orbis (PS4) variant */
 #if defined(X86_32bit) && defined(CELL_P_FREEBSD) && defined(__ORBIS__)
+#define PLATFORM_DEVELOPER "Sony \u00AE"
 #define PLATFORM_OS "Orbis"
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_ORBIS "Linux (Orbis)"
 #define PLATFORM_PLAYSTATION "Playstation"
 #define PLATFORM_TYPE "Playstation"
 #elif defined(X64_64bit) && defined(CELL_P_FREEBSD) && defined(__ORBIS__)
+#define PLATFORM_DEVELOPER "Sony \u00AE"
 #define PLATFORM_OS "Orbis"
 #define PLATFORM_ARCH "x64 (64-Bit)"
 #define PLATFORM_ORBIS "Linux (Orbis)"
@@ -1004,11 +1017,13 @@ required. For example, an array dimension.
 
 /* OpenBSD */
 #if defined(X86_32bit) && defined(__OpenBSD__) || defined(__OpenBSD)
+#define PLATFORM_DEVELOPER "Theo de Raadt \u00AE"
 #define PLATFORM_OS "Unix-like (BSD)"
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_OPENBSD "OpenBSD"
 #define PLATFORM_TYPE "OpenBSD"
 #elif defined(X64_64bit) && defined(__OpenBSD__) || defined(__OpenBSD)
+#define PLATFORM_DEVELOPER "Theo de Raadt \u00AE"
 #define PLATFORM_OS "Unix-like (BSD)"
 #define PLATFORM_ARCH "x64 (64-Bit)"
 #define PLATFORM_OPENBSD "OpenBSD"
@@ -1018,6 +1033,7 @@ required. For example, an array dimension.
 #endif
 
 #if defined(_XBOX_ONE) && defined(_TITLE)
+#define PLATFORM_DEVELOPER "Microsoft \u00AE"
 #define PLATFORM_OS "Windows 10.x"
 #define PLATFORM_ARCH "AMD64 (x86-64)"
 #define PLATFORM_XBOX "Windows 10 (Xbox)"
@@ -1028,11 +1044,13 @@ required. For example, an array dimension.
 
 /* NetBSD */
 #if defined(X86_32bit) && defined(__NetBSD__) || defined(__NetBSD)
+#define PLATFORM_DEVELOPER "The NetBSD Foundation \u00AE"
 #define PLATFORM_OS "Unix (NetBSD)"
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_BLACKBERRY "NetBSD"
 #define PLATFORM_TYPE "NetBSD"
 #elif defined(X64_64bit) && defined(__NetBSD__) || defined(__NetBSD)
+#define PLATFORM_DEVELOPER "The NetBSD Foundation \u00AE"
 #define PLATFORM_OS "Unix (NetBSD)"
 #define PLATFORM_ARCH "x64 (64-Bit)"
 #define PLATFORM_BLACKBERRY "NetBSD"
@@ -1043,11 +1061,13 @@ required. For example, an array dimension.
 
 /* QNX (Blackberry) variant */
 #if defined(X86_32bit) && defined(__QNXNTO__) || defined(__QNX__)
+#define PLATFORM_DEVELOPER "QNX Software System \u00AE"
 #define PLATFORM_OS "Unix (RTOS)"
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_BLACKBERRY "QNX"
 #define PLATFORM_TYPE "Blackberry"
 #elif defined(X64_64bit) && defined(__QNXNTO__) || defined(__QNX__)
+#define PLATFORM_DEVELOPER "QNX Software System \u00AE"
 #define PLATFORM_OS "Unix (RTOS)"
 #define PLATFORM_ARCH "x64 (64-Bit)"
 #define PLATFORM_BLACKBERRY "QNX"
@@ -1058,11 +1078,13 @@ required. For example, an array dimension.
 
 /* VMS */
 #if defined(X86_32bit) && defined(VMS) || defined(__VMS)
+#define PLATFORM_DEVELOPER "OpenVMS \u00AE"
 #define PLATFORM_OS "OpenVMS"
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_VMS "DEC (OpenVMS)"
 #define PLATFORM_TYPE "DEC"
 #elif defined(X64_64bit) && defined(VMS) || defined(__VMS)
+#define PLATFORM_DEVELOPER "OpenVMS \u00AE"
 #define PLATFORM_OS "OpenVMS"
 #define PLATFORM_ARCH "x64 (64-Bit)"
 #define PLATFORM_VMS "DEC (OpenVMS)"
@@ -1073,11 +1095,13 @@ required. For example, an array dimension.
 
 /* VXWORKS variant */
 #if defined(X86_32bit) && defined(VXWORKS)
+#define PLATFORM_DEVELOPER "Wind River Systems, Siemens EDA \u00AE"
 #define PLATFORM_OS "RTOS"
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_VXWORKS "Monolithic"
 #define PLATFORM_TYPE "VXWORKS"
 #elif defined(X64_64bit) && defined(VXWORKS)
+#define PLATFORM_DEVELOPER "Wind River Systems, Siemens EDA \u00AE"
 #define PLATFORM_OS "RTOS"
 #define PLATFORM_ARCH "x64 (64-Bit)"
 #define PLATFORM_VXWORKS "Monolithic"
@@ -1089,14 +1113,12 @@ required. For example, an array dimension.
 /* Motorola 68K.  Not defined by VBCC, so user must define one of these
  * manually when using VBCC.
  */
-#if defined(X86_32bit) && defined(__m68k__) || defined(M68000) ||              \
-    defined(__MC68K__)
+#if defined(X86_32bit) && defined(__m68k__) || defined(M68000) || defined(__MC68K__)
 #define PLATFORM_OS "68K"
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_MOTOROLA "Motorola (68K)"
 #define PLATFORM_TYPE "Motorola 68K"
-#elif defined(X64_64bit) && defined(__m68k__) || defined(M68000) ||            \
-    defined(__MC68K__)
+#elif defined(X64_64bit) && defined(__m68k__) || defined(M68000) || defined(__MC68K__)
 #define PLATFORM_OS "68K"
 #define PLATFORM_ARCH "x64 (64-Bit)"
 #define PLATFORM_MOTOROLA "Motorola (68K)"
@@ -1104,8 +1126,7 @@ required. For example, an array dimension.
 #endif
 
 /* Ultrix */
-#if defined(X86_32bit) && defined(ultrix) || defined(__ultrix) ||              \
-    defined(__ultrix__)
+#if defined(X86_32bit) && defined(ultrix) || defined(__ultrix) ||  defined(__ultrix__)
 #define PLATFORM_OS "Ultrix Os"
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_ULTRIX "Ultrix"
@@ -1115,8 +1136,7 @@ required. For example, an array dimension.
 #define PLATFORM_ARCH "x86 (32-Bit)"
 #define PLATFORM_ULTRIX "Ultrix"
 #define PLATFORM_TYPE "Ultrix"
-#elif defined(X64_64bit) && defined(ultrix) || defined(__ultrix) ||            \
-    defined(__ultrix__)
+#elif defined(X64_64bit) && defined(ultrix) || defined(__ultrix) || defined(__ultrix__)
 #define PLATFORM_OS "Ultrix Os"
 #define PLATFORM_ARCH "x64 (64-Bit)"
 #define PLATFORM_ULTRIX "Ultrix"
@@ -1138,6 +1158,7 @@ required. For example, an array dimension.
 
 /* Microsoft DOS */
 #if defined(MSDOS) || defined(__MSDOS__) || defined(_MSDOS) || defined(__DOS__)
+#define PLATFORM_DEVELOPER "Microsoft \u00AE"
 #define PLATFORM_OS "Dos"
 #define PLATFORM_DOS "Microsoft-DOS"
 #define PLATFORM_ARCH "16-Bit"
@@ -1155,6 +1176,7 @@ required. For example, an array dimension.
 
 
 #if defined(_WIN32) && !defined(_WIN64) && !defined (WINAPI_FAMILY_PHONE_APP) && (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
+#define PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows (32-bit). ------------------------------ */
 #define PLATFORM_OS "Windows"
 #define PLATFORM_ARCH "x86 (32-Bit)"
@@ -1166,6 +1188,7 @@ required. For example, an array dimension.
 #undef PLATFORM_IS_PC
 #define PLATFORM_IS_PC
 #elif defined(_WIN64) && defined(_WIN32) && !defined(_M_ARM64) && !defined (WINAPI_FAMILY_PHONE_APP) && (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
+#define PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows (64-bit). ------------------------------ */
 #define PLATFORM_OS "Windows"
 #define PLATFORM_ARCH "x64 (64-Bit)"
@@ -1177,6 +1200,7 @@ required. For example, an array dimension.
 #undef PLATFORM_IS_PC
 #define PLATFORM_IS_PC
 #elif defined(_M_ARM64) && defined(_WIN32) && !defined (WINAPI_FAMILY_PHONE_APP) && (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
+#define PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows (64-bit). ------------------------------ */
 #define PLATFORM_OS "Windows"
 #define PLATFORM_ARCH "Arm64 (64-Bit)"
@@ -1189,6 +1213,7 @@ required. For example, an array dimension.
 #define PLATFORM_IS_PC
 /* Microsoft Phone ------------------------------ */
 #elif defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_APP)
+#define PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows Store or Universal Windows Platform - (32-bit).
  * ------------------------------ */
 #define PLATFORM_OS "Windows"
@@ -1215,6 +1240,7 @@ required. For example, an array dimension.
 #define PLATFORM_IS_PC
 /* Microsoft Phone ------------------------------ */
 #elif defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP)
+#define PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows (Phone). ------------------------------ */
 #define PLATFORM_OS "WindowsRT"
 #define PLATFORM_ARCH "x86 (32-Bit)"
@@ -1223,6 +1249,7 @@ required. For example, an array dimension.
 #define PLATFORM_MOBILE
 #define PLATFORM_TYPE "Mobile (Windows Phone)"
 #elif defined(_WIN64) && defined(WINAPI_FAMILY_PHONE_APP)
+#define PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows (Phone). ------------------------------ */
 #define PLATFORM_OS "WindowsRT"
 #define PLATFORM_ARCH "x64 (64-Bit)"
