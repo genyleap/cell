@@ -89,6 +89,38 @@ __cell_constexpr T exchange(T& t, U&& newValue)
     return old;
 }
 
+/**
+ * @brief Reduces the usage of std::optional by returning the value if it exists, or a default value if it is empty.
+ *
+ * @tparam T The type of the optional value.
+ * @param optionalValue The optional value to be reduced.
+ * @param defaultValue The default value to be returned if the optional value is empty. Defaults to a default-constructed value of type T.
+ * @return The value of the optional if it exists, or the default value.
+ */
+template <typename T>
+T reduceOptionalValue(const std::optional<T>& optionalValue, const T& defaultValue = T())
+{
+    return optionalValue ? *optionalValue : defaultValue;
+}
+
+/**
+ * @brief Retrieves the value of a std::optional, throwing an exception if the value is not set.
+ *
+ * @tparam T The type of the optional value.
+ * @param opt The optional value to be retrieved.
+ * @return The value of the optional if it exists.
+ * @throws std::runtime_error if the optional value is not set.
+ */
+template<typename T>
+T retrieveOptionalValue(const std::optional<T>& opt)
+{
+    if (opt.has_value()) {
+        return opt.value();
+    } else {
+        throw std::runtime_error("Optional value is not set.");
+    }
+}
+
 template<typename ... Args>
 std::string stringFormat(const std::string& format, Args ... args)
 {
