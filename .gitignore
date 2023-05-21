@@ -33,6 +33,8 @@
 
 #Extra
 .DS_Store
+.vs
+.idea
 
 # Final Output
 build/
