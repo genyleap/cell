@@ -30,11 +30,13 @@ LanguageTemplate::LanguageTemplate()
 LanguageTemplate::LanguageTemplate(
         const std::string& word_key,
         const std::string& module,
+        const std::string& type,
         const std::string& default_value,
         const std::string& custom_value
         )
     : m_wordKey(word_key),
       m_module(module),
+      m_type(type),
       m_defaultValue(default_value),
       m_customValue(custom_value)
 {
@@ -56,6 +58,11 @@ std::string LanguageTemplate::wordKey() __cell_const_noexcept
 std::string LanguageTemplate::module() __cell_const_noexcept
 {
     return m_module;
+}
+
+std::string LanguageTemplate::type() __cell_const_noexcept
+{
+    return m_type;
 }
 
 std::string LanguageTemplate::defaultValue() __cell_const_noexcept

@@ -333,6 +333,7 @@ void Translator::wordProcess() __cell_noexcept
                     LanguageTemplate words = {
                         JSON_SETTING_STRING_GET(i,"word_key"),
                         JSON_SETTING_STRING_GET(i,"module"),
+                        JSON_SETTING_STRING_GET(i,"type"),
                         JSON_SETTING_STRING_GET(i,"default_value"),
                         JSON_SETTING_STRING_GET(i,"custom_value")
                     };
@@ -351,6 +352,7 @@ void Translator::wordProcess() __cell_noexcept
                     LanguageTemplate words = {
                         JSON_SETTING_STRING_GET(i,"word_key"),
                         JSON_SETTING_STRING_GET(i,"module"),
+                        JSON_SETTING_STRING_GET(i,"type"),
                         JSON_SETTING_STRING_GET(i,"default_value"),
                         JSON_SETTING_STRING_GET(i,"custom_value")
                     };
@@ -436,12 +438,12 @@ LanguageTemplate Translator::translate(const std::string& lang, const std::strin
             m_errorMessage = std::string(e.what());
             m_hasError = true;
             DeveloperMode::IsEnable ? Log("Error Message: [" + key + "]\t" + std::string(e.what()), LoggerType::Warning) : DO_NOTHING
-            return m_template;
+                return m_template;
         }
     }
 }
 
-DictonaryType Translator::data(const std::string& sheet) __cell_noexcept
+DictonaryType Translator::data(const std::string& sheet, const ValueType valueType) __cell_noexcept
 {
     DictonaryType d;
     auto items = jsonParser.getVectorJsonPtr();
@@ -452,10 +454,21 @@ DictonaryType Translator::data(const std::string& sheet) __cell_noexcept
         {
             if(key==sheet)
             {
-                for(const auto& arr : value.as_array())
-                {
-                    d.insert(std::pair(JSON_SETTING_SEQUENCE_STRING_GET(root, CELL_LANGUAGE_SPEC, "code"),
-                                       std::pair(JSON_SETTING_STRING_GET(arr ,"word_key"), JSON_SETTING_STRING_GET(arr ,"default_value"))));
+                switch (valueType) {
+                case ValueType::Default:
+                    for(const auto& arr : value.as_array())
+                    {
+                        d.insert(std::pair(JSON_SETTING_SEQUENCE_STRING_GET(root, CELL_LANGUAGE_SPEC, "code"),
+                                           std::pair(JSON_SETTING_STRING_GET(arr ,"word_key"), JSON_SETTING_STRING_GET(arr ,"default_value"))));
+                    }
+                    break;
+                case ValueType::Custom:
+                    for(const auto& arr : value.as_array())
+                    {
+                        d.insert(std::pair(JSON_SETTING_SEQUENCE_STRING_GET(root, CELL_LANGUAGE_SPEC, "code"),
+                                           std::pair(JSON_SETTING_STRING_GET(arr ,"word_key"), JSON_SETTING_STRING_GET(arr ,"custom_value"))));
+                    }
+                    break;
                 }
             }
         }
@@ -467,10 +480,21 @@ DictonaryType Translator::data(const std::string& sheet) __cell_noexcept
             const JSonValue& value = *it;
             if(key==sheet)
             {
-                for(const auto& arr : value)
-                {
-                    d.insert(std::pair(JSON_SETTING_SEQUENCE_STRING_GET(object, CELL_LANGUAGE_SPEC, "code"),
-                                       std::pair(JSON_SETTING_STRING_GET(arr ,"word_key"), JSON_SETTING_STRING_GET(arr ,"default_value"))));
+                switch (valueType) {
+                case ValueType::Default:
+                    for(const auto& arr : value)
+                    {
+                        d.insert(std::pair(JSON_SETTING_SEQUENCE_STRING_GET(object, CELL_LANGUAGE_SPEC, "code"),
+                                           std::pair(JSON_SETTING_STRING_GET(arr ,"word_key"), JSON_SETTING_STRING_GET(arr ,"default_value"))));
+                    }
+                    break;
+                case ValueType::Custom:
+                    for(const auto& arr : value)
+                    {
+                        d.insert(std::pair(JSON_SETTING_SEQUENCE_STRING_GET(object, CELL_LANGUAGE_SPEC, "code"),
+                                           std::pair(JSON_SETTING_STRING_GET(arr ,"word_key"), JSON_SETTING_STRING_GET(arr ,"custom_value"))));
+                    }
+                    break;
                 }
             }
         }
@@ -478,6 +502,67 @@ DictonaryType Translator::data(const std::string& sheet) __cell_noexcept
     }
     return d;
 }
+
+DictonaryType Translator::data(const std::string& sheet, const std::string& byKey, const ValueType valueType) __cell_noexcept
+{
+    DictonaryType d;
+    auto items = jsonParser.getVectorJsonPtr();
+    for(const auto& root : items)
+    {
+#ifdef USE_BOOST
+        for (const auto& [key, value] : JSON_SETTING_OBJECT_GET(root, "data"))
+        {
+            if(key==sheet)
+            {
+                switch (valueType) {
+                case ValueType::Default:
+                    for(const auto& arr : value.as_array())
+                    {
+                        d.insert(std::pair(JSON_SETTING_SEQUENCE_STRING_GET(root, CELL_LANGUAGE_SPEC, "code"),
+                                           std::pair(JSON_SETTING_STRING_GET(arr ,byKey), JSON_SETTING_STRING_GET(arr ,"default_value"))));
+                    }
+                    break;
+                case ValueType::Custom:
+                    for(const auto& arr : value.as_array())
+                    {
+                        d.insert(std::pair(JSON_SETTING_SEQUENCE_STRING_GET(root, CELL_LANGUAGE_SPEC, "code"),
+                                           std::pair(JSON_SETTING_STRING_GET(arr ,byKey), JSON_SETTING_STRING_GET(arr ,"custom_value"))));
+                    }
+                    break;
+                }
+            }
+        }
+#else
+        JSonValue object = root["data"];
+        for (JSonValue::const_iterator it = object.begin(); it != object.end(); ++it)
+        {
+            const std::string& key = it.key().asString();
+            const JSonValue& value = *it;
+            if(key==sheet)
+            {
+                switch (valueType) {
+                case ValueType::Default:
+                    for(const auto& arr : value)
+                    {
+                        d.insert(std::pair(JSON_SETTING_SEQUENCE_STRING_GET(object, CELL_LANGUAGE_SPEC, "code"),
+                                           std::pair(JSON_SETTING_STRING_GET(arr ,byKey), JSON_SETTING_STRING_GET(arr ,"default_value"))));
+                    }
+                    break;
+                case ValueType::Custom:
+                    for(const auto& arr : value)
+                    {
+                        d.insert(std::pair(JSON_SETTING_SEQUENCE_STRING_GET(object, CELL_LANGUAGE_SPEC, "code"),
+                                           std::pair(JSON_SETTING_STRING_GET(arr ,byKey), JSON_SETTING_STRING_GET(arr ,"custom_value"))));
+                    }
+                    break;
+                }
+            }
+        }
+#endif
+    }
+    return d;
+}
+
 
 // Definition of the createTranslatorObject function
 Scope<Translator> createTranslatorObject()

@@ -44,6 +44,7 @@ public:
     LanguageTemplate();
     LanguageTemplate(const std::string& word_key,
                      const std::string& module,
+                     const std::string& type,
                      const std::string& default_value,
                      const std::string& custom_value);
 
@@ -62,6 +63,12 @@ public:
     __cell_no_discard std::string module () __cell_const_noexcept;
 
     /*!
+     * \brief type function will gets key type as string.
+     * \returns string.
+     */
+    __cell_no_discard std::string type () __cell_const_noexcept;
+
+    /*!
      * \brief defaultValue function will gets default value if there is no any value in custom value.
      * \returns string.
      */
@@ -76,6 +83,7 @@ public:
 private:
     std::string m_wordKey       {};
     std::string m_module        {};
+    std::string m_type          {};
     std::string m_defaultValue  {};
     std::string m_customValue   {};
 };

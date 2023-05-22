@@ -71,6 +71,14 @@ struct TranslatorData final
     std::string       internetTld      {};  //!< Internal TLD.
 };
 
+/**
+ * @brief The ValueType enum
+ */
+enum class ValueType : Types::u8
+{
+    Default, Custom
+};
+
 /*!
  * \brief The Translator class
  */
@@ -269,9 +277,19 @@ public:
     /*!
      * \brief data function will gets all language data from one sheet.
      * \param sheet is sheet name.
+     * \param valueType is type of exist value.
      * \return collection of one sheet.
      */
-    __cell_no_discard DictonaryType data(const std::string& sheet) __cell_noexcept;
+    __cell_no_discard DictonaryType data(const std::string& sheet, const ValueType valueType = ValueType::Default) __cell_noexcept;
+
+    /*!
+     * \brief data function will gets all language data from one sheet.
+     * \param sheet is sheet name.
+     * \param byKey is key type of variable.
+     * \param valueType is type of exist value.
+     * \return collection of one sheet.
+     */
+    __cell_no_discard DictonaryType data(const std::string& sheet, const std::string& byKey, const ValueType valueType = ValueType::Default) __cell_noexcept;
 
 protected:
     JSon::JsonManager jsonParser            {};                 //!< JsonManager class.

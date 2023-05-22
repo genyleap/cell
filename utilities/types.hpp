@@ -227,8 +227,10 @@ using TranslateType     = std::string;
 
 using JSonType = std::variant<std::string, std::ifstream>;
 
+template<typename T1, typename T2> using UnorderedMap      = std::unordered_map<T1, T2>;
 template<typename T1, typename T2> using Map      = std::map<T1, T2>;
 template<typename T1, typename T2> using MultiMap = std::multimap<T1, T2>;
+template<typename T1, typename T2> using UnorderedMultiMap = std::unordered_multimap<T1, T2>;
 template<typename T1, typename T2> using Pair     = std::pair<T1, T2>;
 
 template<typename T> using Vector        = std::vector<T>;
