@@ -36,17 +36,6 @@ CELL_NAMESPACE_BEGIN(Cell::JSon)
 
 JsonManager::JsonManager()
 {
-#ifdef USE_BOOST
-    if(DeveloperMode::IsEnable)
-    {
-        Log("Initialized Json engine: " + FROM_CELL_STRING(ENGINE_BOOST) + "::json", LoggerType::Success);
-    }
-#else
-    if(DeveloperMode::IsEnable)
-    {
-        Log("Initialized Json engine: " + FROM_CELL_STRING(ENGINE_DEFAULT) + "[Default JsonCpp] ", LoggerType::Success);
-    }
-#endif
 }
 
 JsonManager::~JsonManager()
@@ -68,11 +57,6 @@ bool JsonManager::parse(const JSonType& data, const InputType inputType) __cell_
                 if(DeveloperMode::IsEnable)
                 {
                     Log("Failed to open: " + FROM_CELL_STRING(std::get<std::string>(data)), LoggerType::Critical);
-                }
-            } else {
-                if(DeveloperMode::IsEnable)
-                {
-                    Log("Json File opened!", LoggerType::Success);
                 }
             }
             if (d.empty())
@@ -120,11 +104,6 @@ bool JsonManager::parse(const JSonType& data, const InputType inputType) __cell_
                 if(DeveloperMode::IsEnable)
                 {
                     Log("Failed to open: " + FROM_CELL_STRING(std::get<std::string>(data)), LoggerType::Critical);
-                }
-            } else {
-                if(DeveloperMode::IsEnable)
-                {
-                    Log("Json File opened!", LoggerType::Success);
                 }
             }
             if (!fileManager.isOpen())
