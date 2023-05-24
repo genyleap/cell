@@ -330,14 +330,18 @@ void Translator::wordProcess() __cell_noexcept
                 //! key values are: exceptions, global, languages, ...
                 LanguageTemp temp;
                 for (const auto& i : value.as_array()) {
-                    LanguageTemplate words = {
-                        JSON_SETTING_STRING_GET(i,"word_key"),
-                        JSON_SETTING_STRING_GET(i,"module"),
-                        JSON_SETTING_STRING_GET(i,"type"),
-                        JSON_SETTING_STRING_GET(i,"default_value"),
-                        JSON_SETTING_STRING_GET(i,"custom_value")
-                    };
-                    temp.insert(LanguagePair(JSON_SETTING_STRING_GET(i, "word_key"), words));
+                    try {
+                        LanguageTemplate words = {
+                            JSON_SETTING_STRING_GET(i,"word_key"),
+                            JSON_SETTING_STRING_GET(i,"module"),
+                            JSON_SETTING_STRING_GET(i,"type"),
+                            JSON_SETTING_STRING_GET(i,"default_value"),
+                            JSON_SETTING_STRING_GET(i,"custom_value")
+                        };
+                        temp.insert(LanguagePair(JSON_SETTING_STRING_GET(i, "word_key"), words));
+                    } catch (const std::exception& e) {
+                        Log("Error on word process!:" + FROM_CELL_STRING(e.what()), LoggerType::Failed);
+                    }
                 }
                 langSheet[key] = std::move(temp);
             }
@@ -349,14 +353,18 @@ void Translator::wordProcess() __cell_noexcept
                 const JSonValue& value = *it;
                 LanguageTemp temp;
                 for (const auto& i : value) {
-                    LanguageTemplate words = {
-                        JSON_SETTING_STRING_GET(i,"word_key"),
-                        JSON_SETTING_STRING_GET(i,"module"),
-                        JSON_SETTING_STRING_GET(i,"type"),
-                        JSON_SETTING_STRING_GET(i,"default_value"),
-                        JSON_SETTING_STRING_GET(i,"custom_value")
-                    };
-                    temp.insert(LanguagePair(JSON_SETTING_STRING_GET(i, "word_key"), words));
+                    try {
+                        LanguageTemplate words = {
+                            JSON_SETTING_STRING_GET(i,"word_key"),
+                            JSON_SETTING_STRING_GET(i,"module"),
+                            JSON_SETTING_STRING_GET(i,"type"),
+                            JSON_SETTING_STRING_GET(i,"default_value"),
+                            JSON_SETTING_STRING_GET(i,"custom_value")
+                        };
+                        temp.insert(LanguagePair(JSON_SETTING_STRING_GET(i, "word_key"), words));
+                    } catch (const std::exception& e) {
+                        Log("Error on word process!:" + FROM_CELL_STRING(e.what()), LoggerType::Failed);
+                    }
                 }
                 langSheet[key] = std::move(temp);
             }
@@ -373,7 +381,7 @@ void Translator::wordProcess() __cell_noexcept
     }
 }
 
-bool Translator::parse() noexcept
+bool Translator::parse()
 {
     bool res = {false};
     if (init()) {
@@ -558,6 +566,32 @@ DictonaryType Translator::data(const std::string& sheet, const std::string& byKe
                 }
             }
         }
+#endif
+    }
+    return d;
+}
+
+JSonValue Translator::getLanguageSpec(const std::string& code) __cell_noexcept
+{
+    JSonValue d;
+    auto items = jsonParser.getVectorJsonPtr();
+    for(const auto& root : items)
+    {
+#ifdef USE_BOOST
+
+        for (const auto& [key, value] : JSON_SETTING_OBJECT_GET(root, CELL_LANGUAGE_SPEC))
+        {
+//            if(value.at("code").as_string() == code) {
+//                if(value.at("name").as_string() == code)
+//                    d = root;
+//            }
+        }
+
+
+#else
+        JSonValue object = root[CELL_LANGUAGE_SPEC];
+        if(object["code"] == code)
+            d = object;
 #endif
     }
     return d;

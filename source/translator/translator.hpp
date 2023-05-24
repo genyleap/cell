@@ -251,7 +251,7 @@ public:
     /*!
      * \brief parse function will parse the JSON file.
      */
-    __cell_no_discard bool parse() __cell_noexcept;
+    __cell_no_discard bool parse();
 
     /*!
      * \brief parseExternal function is suitable for external device structure such as mobile android and ios storage.
@@ -290,6 +290,13 @@ public:
      * \return collection of one sheet.
      */
     __cell_no_discard DictonaryType data(const std::string& sheet, const std::string& byKey, const ValueType valueType = ValueType::Default) __cell_noexcept;
+
+    /*!
+     * \brief data function will gets all language spec data from one language file.
+     * \return data from language-spec.
+     */
+    __cell_no_discard JSonValue getLanguageSpec(const std::string& code) __cell_noexcept;
+
 
 protected:
     JSon::JsonManager jsonParser            {};                 //!< JsonManager class.

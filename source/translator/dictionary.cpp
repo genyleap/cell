@@ -71,8 +71,8 @@ std::string LanguageTemplate::defaultValue() __cell_const_noexcept
     if(!m_defaultValue.empty()) {
         return m_defaultValue;
     } else {
-        ret = "there is no default value of key [" + wordKey() + "]";
-        DeveloperMode::IsEnable ? Log("there is no default value of key [" + wordKey() + "]", LoggerType::Warning) : DO_NOTHING;
+        ret = "Not defined key [" + wordKey() + "]";
+        DeveloperMode::IsEnable ? Log("Not defined key [" + wordKey() + "]", LoggerType::Warning) : DO_NOTHING;
     }
     return ret;
 }
@@ -83,8 +83,8 @@ std::string LanguageTemplate::customValue() __cell_const_noexcept
     if(!m_customValue.empty()) {
         return m_customValue;
     } else {
-        ret = "there is no custom value of key [" + wordKey() + "]";
-        DeveloperMode::IsEnable ? Log("there is no custom value of key [" + wordKey() + "]", LoggerType::Warning) : DO_NOTHING;
+        ret = "Not defined custom value [" + wordKey() + "]";
+        DeveloperMode::IsEnable ? Log("Not defined custom value [" + wordKey() + "]", LoggerType::Warning) : DO_NOTHING;
     }
     return ret;
 }

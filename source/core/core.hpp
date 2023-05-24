@@ -19,6 +19,12 @@
 #   error "Cell's "common.hpp" was not found!"
 #endif
 
+#if __has_include("core-meta.hpp")
+#   include "core-meta.hpp"
+#else
+#   error "Cell's "core-meta.hpp" was not found!"
+#endif
+
 #if __has_include("version.hpp")
 #   include "version.hpp"
 #else
@@ -644,14 +650,24 @@ public:
     /* This is singleton object for engine */
     DeclareSingletonSelf(Engine)
 
-        /**
+    /**
      * @brief get function will return Engine class as optional method.
      * @return as static optional class.
      */
-        static Types::Optional<Engine>& get()
+    static Types::Optional<Engine>& get()
     {
         static Types::Optional<Engine> optionalEngine = std::make_optional<Engine>();
         return optionalEngine;
+    }
+
+    /**
+     * @brief get function will return MetaEngine class as optional method.
+     * @return as static optional class.
+     */
+    static Types::Optional<Meta::MetaEngine>& meta()
+    {
+        static Types::Optional<Meta::MetaEngine> metaEngine = std::make_optional<Meta::MetaEngine>();
+        return metaEngine;
     }
 
     /*!
@@ -1026,6 +1042,10 @@ __cell_no_discard_message("Pay attention! This version of the engine is safe and
 Scope<Engine> createEngineObject();
 
 Scope<Multilangual::Language> createLanguageObject();
+
+Scope<Meta::MetaEngine> createMetaObject();
+
+Types::Optional<Meta::MetaEngine> safeMetaObject() __cell_noexcept;
 
 __cell_no_discard_message("Pay attention! This version of the formatter is safe and has a return value!")
     Types::Optional<Format> safeFormat() __cell_noexcept;

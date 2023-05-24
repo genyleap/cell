@@ -1154,6 +1154,20 @@ Scope<System::Engine> createEngineObject()
     return std::unique_ptr<Engine>(cellEnginePtr);
 }
 
+Types::Optional<Meta::MetaEngine> safeMetaObject() __cell_noexcept
+{
+    return std::make_optional(Meta::MetaEngine());
+}
+
+// Definition of the createEngineObject function
+Scope<Meta::MetaEngine> createMetaObject()
+{
+    // Allocate memory for a MetaEngine object using 'new'
+    Meta::MetaEngine* cellMetaPtr = new Meta::MetaEngine;
+    // Wrap the raw pointer in a unique_ptr and return it
+    return std::unique_ptr<Meta::MetaEngine>(cellMetaPtr);
+}
+
 // Definition of the createEngineObject function
 Scope<Multilangual::Language> createLanguageObject()
 {
@@ -1162,6 +1176,7 @@ Scope<Multilangual::Language> createLanguageObject()
     // Wrap the raw pointer in a unique_ptr and return it
     return std::unique_ptr<Multilangual::Language>(cellLanguagePtr);
 }
+
 
 Types::Optional<Engine> safeEngine() __cell_noexcept
 {
