@@ -578,20 +578,16 @@ JSonValue Translator::getLanguageSpec(const std::string& code) __cell_noexcept
     for(const auto& root : items)
     {
 #ifdef USE_BOOST
-
-        for (const auto& [key, value] : JSON_SETTING_OBJECT_GET(root, CELL_LANGUAGE_SPEC))
+        JSonValue object = root.at(CELL_LANGUAGE_SPEC);
+        if(object.at("code").as_string() == code)
         {
-//            if(value.at("code").as_string() == code) {
-//                if(value.at("name").as_string() == code)
-//                    d = root;
-//            }
+            d = std::move(object);
         }
-
-
 #else
         JSonValue object = root[CELL_LANGUAGE_SPEC];
-        if(object["code"] == code)
-            d = object;
+        if(object["code"] == code) {
+            d = std::move(object);
+        }
 #endif
     }
     return d;

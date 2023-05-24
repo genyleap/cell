@@ -146,6 +146,7 @@ std::string Language::getLanguageCode() __cell_const_noexcept
     std::vector<JSonValue> v;
     JSonValue jvalue;
     std::string_view viewUri, viewCode, viewName {};
+    bool viewStatus {false};
     std::string_view default_lang;
     if(config->Setting().getValue(CELL_DEFAULT_LANG, jvalue))
     {
@@ -155,13 +156,18 @@ std::string Language::getLanguageCode() __cell_const_noexcept
     {
         for(const auto& c : v)
         {
-            viewUri  = JSON_SETTING_STRING_GET(c, "uri");
-            viewName = JSON_SETTING_STRING_GET(c, "code");
-            viewCode = JSON_SETTING_STRING_GET(c, "l");
-            if(viewUri == path.substr(1, 5)) {
-                lcode = viewUri.substr(0,5);
-            } else {
-                if(viewName == default_lang) { lcode = viewCode.substr(0,5);}
+            viewUri     =   JSON_SETTING_STRING_GET(c, "uri");
+            viewName    =   JSON_SETTING_STRING_GET(c, "code");
+            viewCode    =   JSON_SETTING_STRING_GET(c, "l");
+            viewStatus  =   JSON_SETTING_BOOLEAN_GET(c, "status"); //! Status of language.
+
+            if(viewStatus) // Return only enabled languages.
+            {
+                if(viewUri == path.substr(1, 5)) {
+                    lcode = viewUri.substr(0,5);
+                } else {
+                    if(viewName == default_lang) { lcode = viewCode.substr(0,5);}
+                }
             }
         }
     }
