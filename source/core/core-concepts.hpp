@@ -39,6 +39,15 @@ concept ConvertibleToString = requires(T t) {
     { std::ostringstream() << t } -> std::convertible_to<std::string>;
 };
 
+
+/**
+ * @brief Concept to check if a type is convertible to std::string_view.
+ *
+ * This concept verifies that the template argument is convertible to std::string_view.
+ */
+template <typename T>
+concept ConvertibleToStringView = std::convertible_to<T, std::string_view>;
+
 CELL_NAMESPACE_END
 
 #endif // CELL_CORE_CONCEPTS_HPP

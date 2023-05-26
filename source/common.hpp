@@ -253,7 +253,6 @@ object = nullptr;                   \
 # define __cell_constexpr_virtual virtual constexpr
 # define __cell_constexpr constexpr
 # define __cell_static_constexpr static constexpr
-# define __cell_static_constexpr static constexpr
 # define __cell_inline_static_constexpr inline static constexpr
 # define __cell_inline_static_const inline static const
 # define __cell_inline_static inline static

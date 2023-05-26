@@ -43,6 +43,13 @@
 #   error "Cell's "translator/translator.hpp" was not found!"
 #endif
 
+#if __has_include("logger.hpp")
+#   include "logger.hpp"
+#else
+#   error "Cell's "logger.hpp" was not found!"
+#endif
+
+
 #if __has_include("format.hpp")
 #   include "format.hpp"
 #else

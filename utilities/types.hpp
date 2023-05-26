@@ -20,9 +20,11 @@
 #if defined(USE_JSON) && !defined(USE_BOOST)
 #   include <json/json.h>
 using JSonValue = Json::Value;
+using JSonArray = JSonValue;
 #   elif defined(USE_BOOST)
 #   include <boost/json.hpp>
 using JSonValue = boost::json::value;
+using JSonArray = boost::json::array;
 #   elif !defined(USE_JSON) && !defined(USE_BOOST)
 #if __cpp_lib_json
 #   include <json>
@@ -115,6 +117,7 @@ using ushort       = unsigned short;
 using uint         = unsigned int;
 using ulong        = unsigned long;
 using ullong       = unsigned long long;
+using ullongInt    = unsigned long long int;
 using llong        = long long;
 
 //! Fixed width integer types (since C++11)
@@ -123,6 +126,14 @@ using s8  = std::int8_t;
 using s16 = std::int16_t;
 using s32 = std::int32_t;
 using s64 = std::int64_t;
+
+#ifdef USE_BOOST
+using s128 = __int128;
+using u128 = unsigned __int128;
+#else
+using s128 = __int128;
+using u128 = unsigned __int128;
+#endif
 
 //! Fastest signed integer type with width of at least 8, 16, 32 and 64 bits respectively.
 using fs8  = std::int_fast8_t;
@@ -218,6 +229,8 @@ namespace JsonSpace      = std::json;
  * The connection pointer returned by each database type should be of type `std::shared_ptr<DatabaseConnection>`.
  */
 using SqlConnection = std::variant<MySqlPtr, PostgreSqlPtr, SqlServerPtr, OraclePtr, SqlitePtr>;
+
+using BigNumberVariant = std::variant<uint, u64, u128>;
 
 namespace Fs = std::filesystem;
 
