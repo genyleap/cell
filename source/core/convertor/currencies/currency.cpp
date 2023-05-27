@@ -155,11 +155,11 @@ Types::OptionalString Currency::toWord(double amount)
 
     auto currentLang        = createLanguageObject()->getLanguageCode();
     auto items              = safeEngine()->get()->translator().getLanguageSpec(currentLang);
-    auto it                 = meta->getJsonObject<JSonValue>(items, safeMetaObject()->returnView(CURRENCIES));
+    auto it                 = meta->getJsonObject<JSonValue>(items, meta->returnView(CURRENCIES));
 
-    std::string baseUnitStr     { meta->getJsonObject<std::string>(it, safeMetaObject()->returnView(VIEW_FORMAT), safeMetaObject()->returnView(MIN_CURRENCY_UNIT))          };
-    std::string andUnitStr      { meta->getJsonObject<std::string>(it, safeMetaObject()->returnView(VIEW_FORMAT), safeMetaObject()->returnView(CURRENCY_MIXED_FORM))        };
-    std::string fractionalUnit  { meta->getJsonObject<std::string>(it, safeMetaObject()->returnView(VIEW_FORMAT), safeMetaObject()->returnView(FRACTIONAL_MONETARY_UNIT))   };
+    std::string baseUnitStr     { meta->getJsonObject<std::string>(it, meta->returnView(VIEW_FORMAT), meta->returnView(MIN_CURRENCY_UNIT))          };
+    std::string andUnitStr      { meta->getJsonObject<std::string>(it, meta->returnView(VIEW_FORMAT), meta->returnView(CURRENCY_MIXED_FORM))        };
+    std::string fractionalUnit  { meta->getJsonObject<std::string>(it, meta->returnView(VIEW_FORMAT), meta->returnView(FRACTIONAL_MONETARY_UNIT))   };
 
     std::string p = safeTranslate(currentLang,"core", "currency_plural_form");
     std::string pluralWord = p.c_str() ? __cell_space : __cell_null_str;
