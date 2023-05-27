@@ -64,7 +64,7 @@ bool Translator::initExternal(const std::vector<std::string>& file) __cell_noexc
         }
         m_hasError = false;
         res = true;
-    } catch (std::exception& e) {
+    } catch (const Exception& e) {
         DeveloperMode::IsEnable ? Log("Error Message " + std::string(e.what()), LoggerType::Critical) : DO_NOTHING;
         m_hasError = true;
         m_errorMessage = std::string(e.what());
@@ -92,7 +92,7 @@ bool Translator::init() __cell_noexcept
             } else {
                 DeveloperMode::IsEnable ? Log("The file [" + file + "] does not exist!", LoggerType::Critical) : DO_NOTHING;
             }
-        } catch (std::exception& e) {
+        } catch (const Exception& e) {
             Log("Error Message " + std::string(e.what()), LoggerType::Critical);
             m_hasError = true;
             m_errorMessage = std::string(e.what());
@@ -347,7 +347,7 @@ void Translator::wordProcess() __cell_noexcept
                         };
                         temp.insert(LanguagePair(safeEngine()->meta()->getJsonObject<std::string>(i, meta->returnView(TRANSLATOR_CONSTANTS::WORD_KEY)), words));
                     }
-                } catch (const std::exception& e) {
+                } catch (const Exception& e) {
                     Log("Error on word process!:" + FROM_CELL_STRING(e.what()), LoggerType::Failed);
                 }
                 langSheet[key] = std::move(temp);
