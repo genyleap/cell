@@ -55,13 +55,13 @@ using LanguageTemp = Types::Map<std::string, LanguageTemplate>;
 
 struct TRANSLATOR_CONSTANTS final
 {
-    static constexpr std::string_view CODE           {"data"};
-    static constexpr std::string_view DATA_VIEW      {"data"};
-    static constexpr std::string_view DEFAULT_VALUE  {"default_value"};
-    static constexpr std::string_view COSTUM_VALUE   {"custom_value"};
-    static constexpr std::string_view WORD_KEY       {"word_key"};
-    static constexpr std::string_view TYPE           {"type"};
-    static constexpr std::string_view MODULE         {"module"};
+    __cell_static_const_constexpr std::string_view CODE           {"data"};
+    __cell_static_const_constexpr std::string_view DATA_VIEW      {"data"};
+    __cell_static_const_constexpr std::string_view DEFAULT_VALUE  {"default_value"};
+    __cell_static_const_constexpr std::string_view COSTUM_VALUE   {"custom_value"};
+    __cell_static_const_constexpr std::string_view WORD_KEY       {"word_key"};
+    __cell_static_const_constexpr std::string_view TYPE           {"type"};
+    __cell_static_const_constexpr std::string_view MODULE         {"module"};
 };
 
 /*!

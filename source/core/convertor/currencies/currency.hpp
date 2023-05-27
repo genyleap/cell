@@ -53,16 +53,16 @@ public:
 
     // Static constexpr variables representing string views
 
-    __cell_static_constexpr std::string_view DIGITS      {"digits"};                    //!< String view representing digits.
-    __cell_static_constexpr std::string_view UNIT_WORDS  {"unit_words"};                //!< String view representing unit words.
-    __cell_static_constexpr std::string_view TENS_WORDS  {"tens_words"};                //!< String view representing tens words.
-    __cell_static_constexpr std::string_view DIGIT_WORDS {"digit_words"};               //!< String view representing digit words
-    __cell_static_constexpr std::string_view CURRENCIES  {"currencies"};                //!< String view representing currencies.
-    __cell_static_constexpr std::string_view VIEW_FORMAT {"view_format"};               //!< String view representing view format.
+    __cell_static_const_constexpr std::string_view DIGITS      {"digits"};                    //!< String view representing digits.
+    __cell_static_const_constexpr std::string_view UNIT_WORDS  {"unit_words"};                //!< String view representing unit words.
+    __cell_static_const_constexpr std::string_view TENS_WORDS  {"tens_words"};                //!< String view representing tens words.
+    __cell_static_const_constexpr std::string_view DIGIT_WORDS {"digit_words"};               //!< String view representing digit words
+    __cell_static_const_constexpr std::string_view CURRENCIES  {"currencies"};                //!< String view representing currencies.
+    __cell_static_const_constexpr std::string_view VIEW_FORMAT {"view_format"};               //!< String view representing view format.
 
-    __cell_static_constexpr std::string_view MIN_CURRENCY_UNIT         {"main_currency_unit"};         //!< String view representing the main currency unit.
-    __cell_static_constexpr std::string_view CURRENCY_MIXED_FORM       {"currency_mixed_form"};        //!<String view representing the mixed form of the currency.
-    __cell_static_constexpr std::string_view FRACTIONAL_MONETARY_UNIT  {"fractional_monetary_unit"};   //!<String view representing the fractional monetary unit.
+    __cell_static_const_constexpr std::string_view MIN_CURRENCY_UNIT         {"main_currency_unit"};         //!< String view representing the main currency unit.
+    __cell_static_const_constexpr std::string_view CURRENCY_MIXED_FORM       {"currency_mixed_form"};        //!<String view representing the mixed form of the currency.
+    __cell_static_const_constexpr std::string_view FRACTIONAL_MONETARY_UNIT  {"fractional_monetary_unit"};   //!<String view representing the fractional monetary unit.
 
 private:
     std::vector<std::string> units      {__cell_null_str};                      //!< Vector of units.
