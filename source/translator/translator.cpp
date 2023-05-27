@@ -16,12 +16,6 @@
 #   error "Cell's "core/core.hpp" was not found!"
 #endif
 
-#if __has_include("core/config.hpp")
-#   include "core/config.hpp"
-#else
-#   error "Cell's "core/config.hpp" was not found!"
-#endif
-
 #if __has_include("core/logger.hpp")
 #   include "core/logger.hpp"
 #else
@@ -48,7 +42,6 @@ CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::JSon;
 CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::eLogger;
-CELL_USING_NAMESPACE Cell::Modules::BuiltIn::Settings;
 
 CELL_NAMESPACE_BEGIN(Cell::Translation)
 
