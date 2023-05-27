@@ -24,7 +24,6 @@ CELL_NAMESPACE_BEGIN(Cell::Translation)
 
 LanguageTemplate::LanguageTemplate()
 {
-
 }
 
 LanguageTemplate::LanguageTemplate(
