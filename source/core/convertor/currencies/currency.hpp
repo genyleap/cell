@@ -19,10 +19,10 @@
 #   error "Cell's "common.hpp" was not found!"
 #endif
 
-#if __has_include("meta-convertor.hpp")
-#   include "meta-convertor.hpp"
+#if __has_include("meta-currency.hpp")
+#   include "meta-currency.hpp"
 #else
-#   error "Cell's "meta-convertor.hpp" was not found!"
+#   error "Cell's "meta-currency.hpp" was not found!"
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::Convertors::Currencies)

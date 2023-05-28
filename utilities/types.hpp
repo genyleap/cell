@@ -193,6 +193,7 @@ using SettingType       = std::map<int, std::string>;
 using VectorString      = std::vector<std::string>;
 using VectorSection     = std::vector<std::string>;
 using OptionalString    = std::optional<std::string>;
+using OptionalWString   = std::optional<std::wstring>;
 
 using HttpQueryString   = std::unordered_map<std::string, std::string>;
 using Headers           = std::unordered_map<std::string, std::string>;

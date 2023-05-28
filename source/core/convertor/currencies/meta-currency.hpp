@@ -1,5 +1,5 @@
 /*!
- * @file        meta-convertor.hpp
+ * @file        meta-currency.hpp
  * @brief       This file is part of the Cell Engine.
  * @details     Corrency meta convertor.
  * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>

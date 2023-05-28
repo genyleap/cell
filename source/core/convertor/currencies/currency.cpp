@@ -10,17 +10,9 @@
 #   error "Cell's "core/core.hpp" was not found!"
 #endif
 
-#if __has_include("modules/settings/json.hpp")
-#   include "modules/settings/json.hpp"
-#else
-#   error "Cell's "modules/settings/json.hpp" was not found!"
-#endif
-
-
 CELL_USING_NAMESPACE Cell;
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::eLogger;
-CELL_USING_NAMESPACE Cell::Modules::BuiltIn::Settings;
 CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::JSon;
 
