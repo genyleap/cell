@@ -29,9 +29,144 @@ CELL_USING_NAMESPACE Cell::Concepts;
 
 CELL_NAMESPACE_BEGIN(Cell::Meta)
 
+/**
+ * @brief A class template to provide a unified interface for clearing containers.
+ * @tparam Container The container type.
+ */
+template<typename Container>
+class ContainerCleaner {
+public:
+    /**
+     * @brief Clears the container.
+     * @param container The container to be cleared.
+     */
+    void clear(Container& container) {
+        container.clear();
+    }
+};
+
+/**
+ * @brief A partial specialization of ContainerCleaner for std::queue.
+ * @tparam T The value type of the queue.
+ */
+template<typename T>
+class ContainerCleaner<std::queue<T>> {
+public:
+    /**
+     * @brief Clears the queue by removing all elements.
+     * @param container The queue to be cleared.
+     */
+    void clear(std::queue<T>& container) {
+        while (!container.empty()) {
+            container.pop();
+        }
+    }
+};
+
+/**
+ * @brief A partial specialization of ContainerCleaner for std::stack.
+ * @tparam T The value type of the stack.
+ */
+template<typename T>
+class ContainerCleaner<std::stack<T>> {
+public:
+    /**
+     * @brief Clears the stack by removing all elements.
+     * @param container The stack to be cleared.
+     */
+    void clear(std::stack<T>& container) {
+        while (!container.empty()) {
+            container.pop();
+        }
+    }
+};
+
+/**
+ * @brief A partial specialization of ContainerCleaner for std::map.
+ * @tparam Key The key type of the map.
+ * @tparam Value The value type of the map.
+ */
+template<typename Key, typename Value>
+class ContainerCleaner<std::map<Key, Value>> {
+public:
+    /**
+     * @brief Clears the map by removing all elements.
+     * @param container The map to be cleared.
+     */
+    void clear(std::map<Key, Value>& container) {
+        container.clear();
+    }
+};
+
+/**
+ * @brief A partial specialization of ContainerCleaner for std::unordered_map.
+ * @tparam Key The key type of the unordered map.
+ * @tparam Value The value type of the unordered map.
+ */
+template<typename Key, typename Value>
+class ContainerCleaner<std::unordered_map<Key, Value>> {
+public:
+    /**
+     * @brief Clears the unordered map by removing all elements.
+     * @param container The unordered map to be cleared.
+     */
+    void clear(std::unordered_map<Key, Value>& container) {
+        container.clear();
+    }
+};
+
+/**
+ * @brief A partial specialization of ContainerCleaner for std::array.
+ * @tparam T The value type of the array.
+ * @tparam Size The size of the array.
+ */
+template<typename T, std::size_t Size>
+class ContainerCleaner<std::array<T, Size>> {
+public:
+    /**
+     * @brief Clears the array by assigning default-constructed values to all elements.
+     * @param container The array to be cleared.
+     */
+    void clear(std::array<T, Size>& container) {
+        container.fill(T());
+    }
+};
+
+/**
+ * @brief A partial specialization of ContainerCleaner for std::forward_list.
+ * @tparam T The value type of the forward list.
+ */
+template<typename T>
+class ContainerCleaner<std::forward_list<T>> {
+public:
+    /**
+     * @brief Clears the forward list by removing all elements.
+     * @param container The forward list to be cleared.
+     */
+    void clear(std::forward_list<T>& container) {
+        container.clear();
+    }
+};
 
 class MetaEngine {
 public:
+
+    /**
+     * @brief Clears or cleans the data from a container.
+     *
+     * This function clears or cleans the data from the given container.
+     * It can handle various types of containers, such as std::vector, std::list, std::map, etc.
+     *
+     * @tparam Container The container type.
+     * @param container The container to be cleared or cleaned.
+     */
+    template<typename Container>
+    void clearContainer(Container&& container) {
+        ContainerCleaner<std::remove_reference_t<Container>> cleaner;
+        cleaner.clear(std::forward<Container>(container));
+    }
+
+
     /**
      * @brief Applies fixed precision formatting to a value.
      *

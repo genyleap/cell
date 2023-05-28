@@ -11,10 +11,42 @@
 #endif
 
 CELL_USING_NAMESPACE Cell;
-CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::Types;
+CELL_USING_NAMESPACE Cell::System;
+CELL_USING_NAMESPACE Cell::eLogger;
+CELL_USING_NAMESPACE Cell::JSon;
 
 CELL_NAMESPACE_BEGIN(Cell::Convertor::Units)
+
+Length::Length()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == LENGTH)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_lengthData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_lengthData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Length::~Length()
+{
+    safeEngine()->meta()->clearContainer(m_lengthData);
+}
 
 double Length::convert(double value, LengthUnit fromUnit, LengthUnit toUnit)
 {
@@ -29,7 +61,7 @@ double Length::convert(double value, LengthUnit fromUnit, LengthUnit toUnit)
         { LengthUnit::Yard, 0.9144 },
         { LengthUnit::Foot, 0.3048 },
         { LengthUnit::Inch, 0.0254 },
-        { LengthUnit::LightYear, 9.461e15 }
+        { LengthUnit::LightYear, 9.46073047258E+15 }
     };
 
     double meters = value * conversionFactors.at(fromUnit);
@@ -38,32 +70,41 @@ double Length::convert(double value, LengthUnit fromUnit, LengthUnit toUnit)
 
 std::string Length::toString(LengthUnit unit)
 {
-    switch (unit) {
-    case LengthUnit::Meter:
-        return "meter";
-    case LengthUnit::Kilometer:
-        return "kilometer";
-    case LengthUnit::Centimeter:
-        return "centimeter";
-    case LengthUnit::Millimeter:
-        return "millimeter";
-    case LengthUnit::Micrometer:
-        return "micrometer";
-    case LengthUnit::Nanometer:
-        return "nanometer";
-    case LengthUnit::Mile:
-        return "mile";
-    case LengthUnit::Yard:
-        return "yard";
-    case LengthUnit::Foot:
-        return "foot";
-    case LengthUnit::Inch:
-        return "inch";
-    case LengthUnit::LightYear:
-        return "light year";
-    default:
+    if (unit >= LengthUnit::Meter && unit <= LengthUnit::LightYear) {
+        return m_lengthData[static_cast<Types::size>(unit)];
+    } else {
         return "unknown";
     }
+}
+
+Temperature::Temperature()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == TEMPERATURE)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_temperatureData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_temperatureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Temperature::~Temperature()
+{
+    safeEngine()->meta()->clearContainer(m_temperatureData);
 }
 
 double Temperature::convert(double value, TemperatureUnit fromUnit, TemperatureUnit toUnit)
@@ -105,16 +146,41 @@ double Temperature::convert(double value, TemperatureUnit fromUnit, TemperatureU
 
 std::string Temperature::toString(TemperatureUnit unit)
 {
-    switch (unit) {
-    case TemperatureUnit::Celsius:
-        return "Celsius";
-    case TemperatureUnit::Fahrenheit:
-        return "Fahrenheit";
-    case TemperatureUnit::Kelvin:
-        return "Kelvin";
-    default:
-        return "Unknown";
+    if (unit >= TemperatureUnit::Celsius && unit <= TemperatureUnit::Kelvin) {
+        return m_temperatureData[static_cast<Types::size>(unit)];
+    } else {
+        return "unknown";
     }
+}
+
+Area::Area()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == AREA)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_areaData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_areaData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Area::~Area()
+{
+    safeEngine()->meta()->clearContainer(m_areaData);
 }
 
 double Area::convert(double value, AreaUnit fromUnit, AreaUnit toUnit)
@@ -143,32 +209,41 @@ double Area::convert(double value, AreaUnit fromUnit, AreaUnit toUnit)
 
 std::string Area::toString(AreaUnit unit)
 {
-    switch (unit) {
-    case AreaUnit::SquareMeter:
-        return "Square meter";
-    case AreaUnit::SquareKilometer:
-        return "Square kilometer";
-    case AreaUnit::SquareCentimeter:
-        return "Square centimeter";
-    case AreaUnit::SquareMillimeter:
-        return "Square millimeter";
-    case AreaUnit::SquareMicrometer:
-        return "Square micrometer";
-    case AreaUnit::Hectare:
-        return "Hectare";
-    case AreaUnit::SquareMile:
-        return "Square mile";
-    case AreaUnit::SquareYard:
-        return "Square yard";
-    case AreaUnit::SquareFoot:
-        return "Square foot";
-    case AreaUnit::SquareInch:
-        return "Square inch";
-    case AreaUnit::Acre:
-        return "Acre";
-    default:
-        return "Unknown";
+    if (unit >= AreaUnit::SquareMeter && unit <= AreaUnit::Acre) {
+        return m_areaData[static_cast<Types::size>(unit)];
+    } else {
+        return "unknown";
     }
+}
+
+Weight::Weight()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == WEIGHT)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_weightData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_weightData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Weight::~Weight()
+{
+    safeEngine()->meta()->clearContainer(m_weightData);
 }
 
 double Weight::convert(double value, WeightUnit fromUnit, WeightUnit toUnit)
@@ -197,32 +272,41 @@ double Weight::convert(double value, WeightUnit fromUnit, WeightUnit toUnit)
 
 std::string Weight::toString(WeightUnit unit)
 {
-    switch (unit) {
-    case WeightUnit::Kilogram:
-        return "Kilogram";
-    case WeightUnit::Gram:
-        return "Gram";
-    case WeightUnit::Milligram:
-        return "Milligram";
-    case WeightUnit::Microgram:
-        return "Microgram";
-    case WeightUnit::MetricTon:
-        return "Metric ton";
-    case WeightUnit::LongTon:
-        return "Long ton";
-    case WeightUnit::ShortTon:
-        return "Short ton";
-    case WeightUnit::Pound:
-        return "Pound";
-    case WeightUnit::Ounce:
-        return "Ounce";
-    case WeightUnit::Carrat:
-        return "Carrat";
-    case WeightUnit::AtomicMassUnit:
-        return "Atomic mass unit";
-    default:
-        return "Unknown";
+    if (unit >= WeightUnit::Kilogram && unit <= WeightUnit::AtomicMassUnit) {
+        return m_weightData[static_cast<Types::size>(unit)];
+    } else {
+        return "unknown";
     }
+}
+
+Time::Time()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == TIME)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_timeData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_timeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Time::~Time()
+{
+    safeEngine()->meta()->clearContainer(m_timeData);
 }
 
 double Time::convert(double value, TimeUnit fromUnit, TimeUnit toUnit)
@@ -248,32 +332,41 @@ double Time::convert(double value, TimeUnit fromUnit, TimeUnit toUnit)
 
 std::string Time::toString(TimeUnit unit)
 {
-    switch (unit) {
-    case TimeUnit::Second:
-        return "Second";
-    case TimeUnit::Millisecond:
-        return "Millisecond";
-    case TimeUnit::Microsecond:
-        return "Microsecond";
-    case TimeUnit::Nanosecond:
-        return "Nanosecond";
-    case TimeUnit::Picosecond:
-        return "Picosecond";
-    case TimeUnit::Minute:
-        return "Minute";
-    case TimeUnit::Hour:
-        return "Hour";
-    case TimeUnit::Day:
-        return "Day";
-    case TimeUnit::Week:
-        return "Week";
-    case TimeUnit::Month:
-        return "Month";
-    case TimeUnit::Year:
-        return "Year";
-    default:
-        return "Unknown";
+    if (unit >= TimeUnit::Second && unit <= TimeUnit::Year) {
+        return m_timeData[static_cast<Types::size>(unit)];
+    } else {
+        return "unknown";
     }
+}
+
+Speed::Speed()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == SPEED)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_speedData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_speedData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Speed::~Speed()
+{
+    safeEngine()->meta()->clearContainer(m_speedData);
 }
 
 double Speed::convert(double value, SpeedUnit fromUnit, SpeedUnit toUnit)
@@ -292,20 +385,41 @@ double Speed::convert(double value, SpeedUnit fromUnit, SpeedUnit toUnit)
 
 std::string Speed::toString(SpeedUnit unit)
 {
-    switch (unit) {
-    case SpeedUnit::MeterPerSecond:
-        return "meter/second";
-    case SpeedUnit::KilometerPerHour:
-        return "kilometer/hour";
-    case SpeedUnit::MilePerHour:
-        return "mile/hour";
-    case SpeedUnit::FootPerSecond:
-        return "foot/second";
-    case SpeedUnit::Knot:
-        return "knot";
-    default:
+    if (unit >= SpeedUnit::MeterPerSecond && unit <= SpeedUnit::Knot) {
+        return m_speedData[static_cast<Types::size>(unit)];
+    } else {
         return "unknown";
     }
+}
+
+Energy::Energy()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == ENERGY)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_energyData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_energyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Energy::~Energy()
+{
+    safeEngine()->meta()->clearContainer(m_energyData);
 }
 
 double Energy::convert(double value, EnergyUnit fromUnit, EnergyUnit toUnit)
@@ -327,26 +441,41 @@ double Energy::convert(double value, EnergyUnit fromUnit, EnergyUnit toUnit)
 
 std::string Energy::toString(EnergyUnit unit)
 {
-    switch (unit) {
-    case EnergyUnit::Joule:
-        return "Joule";
-    case EnergyUnit::Kilojoule:
-        return "Kilojoule";
-    case EnergyUnit::Calorie:
-        return "Calorie";
-    case EnergyUnit::Kilocalorie:
-        return "Kilocalorie";
-    case EnergyUnit::ElectronVolt:
-        return "Electron Volt";
-    case EnergyUnit::BritishThermalUnit:
-        return "British Thermal Unit";
-    case EnergyUnit::FootPound:
-        return "Foot-Pound";
-    case EnergyUnit::Erg:
-        return "Erg";
-    default:
+    if (unit >= EnergyUnit::Joule && unit <= EnergyUnit::Erg) {
+        return m_energyData[static_cast<Types::size>(unit)];
+    } else {
         return "unknown";
     }
+}
+
+Power::Power()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == POWER)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_powerData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_powerData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Power::~Power()
+{
+    safeEngine()->meta()->clearContainer(m_powerData);
 }
 
 double Power::convert(double value, PowerUnit fromUnit, PowerUnit toUnit)
@@ -366,22 +495,41 @@ double Power::convert(double value, PowerUnit fromUnit, PowerUnit toUnit)
 
 std::string Power::toString(PowerUnit unit)
 {
-    switch (unit) {
-    case PowerUnit::Watt:
-        return "Watt";
-    case PowerUnit::Kilowatt:
-        return "Kilowatt";
-    case PowerUnit::Megawatt:
-        return "Megawatt";
-    case PowerUnit::Gigawatt:
-        return "Gigawatt";
-    case PowerUnit::Horsepower:
-        return "Horsepower";
-    case PowerUnit::FootPoundPerMinute:
-        return "Foot-Pound per minute";
-    default:
+    if (unit >= PowerUnit::Watt && unit <= PowerUnit::FootPoundPerMinute) {
+        return m_powerData[static_cast<Types::size>(unit)];
+    } else {
         return "unknown";
     }
+}
+
+Pressure::Pressure()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == PRESSURE)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_pressureData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_pressureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Pressure::~Pressure()
+{
+    safeEngine()->meta()->clearContainer(m_pressureData);
 }
 
 double Pressure::convert(double value, PressureUnit fromUnit, PressureUnit toUnit)
@@ -403,26 +551,41 @@ double Pressure::convert(double value, PressureUnit fromUnit, PressureUnit toUni
 
 std::string Pressure::toString(PressureUnit unit)
 {
-    switch (unit) {
-    case PressureUnit::Pascal:
-        return "Pascal";
-    case PressureUnit::Kilopascal:
-        return "Kilopascal";
-    case PressureUnit::Megapascal:
-        return "Megapascal";
-    case PressureUnit::Bar:
-        return "Bar";
-    case PressureUnit::Millibar:
-        return "Millibar";
-    case PressureUnit::PoundPerSquareInch:
-        return "Pound per square inch (psi)";
-    case PressureUnit::Atmosphere:
-        return "Atmosphere";
-    case PressureUnit::Torr:
-        return "Torr";
-    default:
+    if (unit >= PressureUnit::Pascal && unit <= PressureUnit::Torr) {
+        return m_pressureData[static_cast<Types::size>(unit)];
+    } else {
         return "unknown";
     }
+}
+
+Angle::Angle()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == ANGLE)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_angleData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_angleData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Angle::~Angle()
+{
+    safeEngine()->meta()->clearContainer(m_angleData);
 }
 
 double Angle::convert(double value, AngleUnit fromUnit, AngleUnit toUnit)
@@ -442,22 +605,41 @@ double Angle::convert(double value, AngleUnit fromUnit, AngleUnit toUnit)
 
 std::string Angle::toString(AngleUnit unit)
 {
-    switch (unit) {
-    case AngleUnit::Degree:
-        return "Degree";
-    case AngleUnit::Radian:
-        return "Radian";
-    case AngleUnit::Grad:
-        return "Grad";
-    case AngleUnit::Minute:
-        return "Minute of arc";
-    case AngleUnit::Second:
-        return "Second of arc";
-    case AngleUnit::Revolution:
-        return "Revolution";
-    default:
+    if (unit >= AngleUnit::Degree && unit <= AngleUnit::Revolution) {
+        return m_angleData[static_cast<Types::size>(unit)];
+    } else {
         return "unknown";
     }
+}
+
+Currency::Currency()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == CURRENCY)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_currencyData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_currencyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Currency::~Currency()
+{
+    safeEngine()->meta()->clearContainer(m_currencyData);
 }
 
 double Currency::convert(double value, CurrencyUnit fromUnit, CurrencyUnit toUnit)
@@ -491,36 +673,41 @@ double Currency::convert(double value, CurrencyUnit fromUnit, CurrencyUnit toUni
 
 std::string Currency::toString(CurrencyUnit unit)
 {
-    switch (unit) {
-    case CurrencyUnit::USD:
-        return "United States Dollar";
-    case CurrencyUnit::EUR:
-        return "Euro";
-    case CurrencyUnit::GBP:
-        return "British Pound";
-    case CurrencyUnit::JPY:
-        return "Japanese Yen";
-    case CurrencyUnit::CAD:
-        return "Canadian Dollar";
-    case CurrencyUnit::AUD:
-        return "Australian Dollar";
-    case CurrencyUnit::CHF:
-        return "Swiss Franc";
-    case CurrencyUnit::CNY:
-        return "Chinese Yuan";
-    case CurrencyUnit::SEK:
-        return "Swedish Krona";
-    case CurrencyUnit::NZD:
-        return "New Zealand Dollar";
-    case CurrencyUnit::INR:
-        return "Indian Rupee";
-    case CurrencyUnit::MXN:
-        return "Mexican Peso";
-    case CurrencyUnit::IRR:
-        return "Iranian Rial";
-    default:
-        return "Unknown";
+    if (unit >= CurrencyUnit::USD && unit <= CurrencyUnit::MXN) {
+        return m_currencyData[static_cast<Types::size>(unit)];
+    } else {
+        return "unknown";
     }
+}
+
+Volume::Volume()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& ks : object.getAsObject())
+        {
+            if(ks.key == VOLUME)
+            {
+                const auto& objectArray = object.getAsArray(ks.value);
+                for (std::size_t i = 0; i < objectArray.size() && i < m_volumeData.size(); ++i)
+                {
+                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    m_volumeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Volume::~Volume()
+{
+    safeEngine()->meta()->clearContainer(m_volumeData);
 }
 
 double Volume::convert(double value, VolumeUnit fromUnit, VolumeUnit toUnit)
@@ -549,38 +736,9 @@ double Volume::convert(double value, VolumeUnit fromUnit, VolumeUnit toUnit)
 
 std::string Volume::toString(VolumeUnit unit)
 {
-    switch (unit) {
-    case VolumeUnit::CubicMeter:
-        return "cubic meter";
-    case VolumeUnit::CubicKilometer:
-        return "cubic kilometer";
-    case VolumeUnit::CubicCentimeter:
-        return "cubic centimeter";
-    case VolumeUnit::CubicMillimeter:
-        return "cubic millimeter";
-    case VolumeUnit::Liter:
-        return "liter";
-    case VolumeUnit::Milliliter:
-        return "milliliter";
-    case VolumeUnit::USGallon:
-        return "US gallon";
-    case VolumeUnit::USDryGallon:
-        return "US dry gallon";
-    case VolumeUnit::ImperialGallon:
-        return "imperial gallon";
-    case VolumeUnit::ImperialQuart:
-        return "imperial quart";
-    case VolumeUnit::ImperialPint:
-        return "imperial pint";
-    case VolumeUnit::ImperialCup:
-        return "imperial cup";
-    case VolumeUnit::ImperialFluidOunce:
-        return "imperial fluid ounce";
-    case VolumeUnit::ImperialTablespoon:
-        return "imperial tablespoon";
-    case VolumeUnit::ImperialTeaspoon:
-        return "imperial teaspoon";
-    default:
+    if (unit >= VolumeUnit::CubicMeter && unit <= VolumeUnit::ImperialTeaspoon) {
+        return m_volumeData[static_cast<Types::size>(unit)];
+    } else {
         return "unknown";
     }
 }

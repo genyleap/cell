@@ -27,6 +27,13 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Convertor::Units)
 
+struct UnitItems final
+{
+    JSonValue items;
+};
+
+static const constexpr std::string_view UNITS {"units"};
+
 /**
  * @brief Enumeration of length units.
  */
@@ -50,6 +57,8 @@ enum class LengthUnit
  */
 class Length : public Abstracts::Convertor::UnitConverter<LengthUnit> {
 public:
+    Length();
+    ~Length();
     /**
      * @brief Converts a value from one length unit to another.
      *
@@ -67,6 +76,11 @@ public:
      * @return The string representation of the LengthUnit.
      */
     std::string toString(LengthUnit unit);
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 11> m_lengthData;
+    static const constexpr std::string_view LENGTH {"length"};
 };
 
 /**
@@ -84,6 +98,8 @@ enum class TemperatureUnit
  */
 class Temperature : public Abstracts::Convertor::UnitConverter<TemperatureUnit> {
 public:
+    Temperature();
+    ~Temperature();
     /**
      * @brief Converts a temperature value from one unit to another.
      *
@@ -101,6 +117,11 @@ public:
      * @return The string representation of the TemperatureUnit.
      */
     std::string toString(TemperatureUnit unit);
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 4> m_temperatureData;
+    static const constexpr std::string_view TEMPERATURE {"temperature"};
 };
 
 /**
@@ -126,6 +147,8 @@ enum class AreaUnit
  */
 class Area : public Abstracts::Convertor::UnitConverter<AreaUnit> {
 public:
+    Area();
+    ~Area();
     /**
      * @brief Converts an area value from one unit to another.
      *
@@ -143,6 +166,11 @@ public:
      * @return The string representation of the AreaUnit.
      */
     std::string toString(AreaUnit unit);
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 11> m_areaData;
+    static const constexpr std::string_view AREA {"area"};
 };
 
 /**
@@ -168,6 +196,9 @@ enum class WeightUnit
  */
 class Weight : public Abstracts::Convertor::UnitConverter<WeightUnit> {
 public:
+    Weight();
+    ~Weight();
+
     /**
      * @brief Converts a weight value from one unit to another.
      *
@@ -185,6 +216,11 @@ public:
      * @return The string representation of the WeightUnit.
      */
     std::string toString(WeightUnit unit);
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 11> m_weightData;
+    static const constexpr std::string_view WEIGHT {"weight"};
 };
 
 /**
@@ -212,6 +248,8 @@ enum class TimeUnit
  */
 class Time : public Abstracts::Convertor::UnitConverter<TimeUnit> {
 public:
+    Time();
+    ~Time();
     /**
      * @brief Converts a time value from one unit to another.
      * @param value The value to be converted.
@@ -227,6 +265,11 @@ public:
      * @return The string representation of the TimeUnit value.
      */
     std::string toString(TimeUnit unit);
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 11> m_timeData;
+    static const constexpr std::string_view TIME {"time"};
 };
 
 /**
@@ -246,6 +289,9 @@ enum class SpeedUnit
  */
 class Speed : public Abstracts::Convertor::UnitConverter<SpeedUnit> {
 public:
+    Speed();
+    ~Speed();
+
     /**
      * @brief Converts a speed value from one unit to another.
      * @param value The value to convert.
@@ -261,6 +307,11 @@ public:
      * @return The string representation of the speed unit.
      */
     std::string toString(SpeedUnit unit);
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 5> m_speedData;
+    static const constexpr std::string_view SPEED {"speed"};
 };
 
 /**
@@ -283,6 +334,9 @@ enum class EnergyUnit
  */
 class Energy : public Abstracts::Convertor::UnitConverter<EnergyUnit> {
 public:
+    Energy();
+    ~Energy();
+
     /**
      * @brief Converts an energy value from one unit to another.
      * @param value The value to convert.
@@ -298,6 +352,11 @@ public:
      * @return The string representation of the energy unit.
      */
     std::string toString(EnergyUnit unit);
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 8> m_energyData;
+    static const constexpr std::string_view ENERGY {"energy"};
 };
 
 
@@ -319,6 +378,8 @@ enum class PowerUnit
  */
 class Power : public Abstracts::Convertor::UnitConverter<PowerUnit> {
 public:
+    Power();
+    ~Power();
     /**
      * @brief Converts a power value from one unit to another.
      * @param value The value to convert.
@@ -334,6 +395,11 @@ public:
      * @return The string representation of the power unit.
      */
     std::string toString(PowerUnit unit);
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 6> m_powerData;
+    static const constexpr std::string_view POWER {"power"};
 };
 
 /**
@@ -356,6 +422,8 @@ enum class PressureUnit
  */
 class Pressure : public Abstracts::Convertor::UnitConverter<PressureUnit> {
 public:
+    Pressure();
+    ~Pressure();
     /**
      * @brief Converts a pressure value from one unit to another.
      * @param value The value to convert.
@@ -371,6 +439,11 @@ public:
      * @return The string representation of the pressure unit.
      */
     std::string toString(PressureUnit unit);
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 8> m_pressureData;
+    static const constexpr std::string_view PRESSURE {"pressure"};
 };
 
 /**
@@ -391,6 +464,8 @@ enum class AngleUnit
  */
 class Angle : public Abstracts::Convertor::UnitConverter<AngleUnit> {
 public:
+    Angle();
+    ~Angle();
     /**
      * @brief Converts an angle value from one unit to another.
      * @param value The value to convert.
@@ -406,6 +481,11 @@ public:
      * @return The string representation of the angle unit.
      */
     std::string toString(AngleUnit unit);
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 6> m_angleData;
+    static const constexpr std::string_view ANGLE {"angle"};
 };
 
 /**
@@ -434,6 +514,9 @@ enum class CurrencyUnit
 class Currency : public Abstracts::Convertor::UnitConverter<CurrencyUnit>
 {
 public:
+    Currency();
+    ~Currency();
+
     /**
      * @brief Converts a currency value from one unit to another.
      * @param value The value to convert.
@@ -449,6 +532,11 @@ public:
      * @return The string representation of the currency unit.
      */
     std::string toString(CurrencyUnit unit);
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 13> m_currencyData;
+    static const constexpr std::string_view CURRENCY {"currency"};
 };
 
 enum class VolumeUnit
@@ -473,6 +561,9 @@ enum class VolumeUnit
 class Volume : public Abstracts::Convertor::UnitConverter<VolumeUnit>
 {
 public:
+    Volume();
+    ~Volume();
+
     /**
      * @brief Converts a volume value from one unit to another.
      * @param value The value to be converted.
@@ -488,6 +579,11 @@ public:
      * @return The string representation of the unit.
      */
     std::string toString(VolumeUnit unit) __cell_override;
+
+private:
+    UnitItems unitItems {};
+    std::array<std::string, 15> m_volumeData;
+    static const constexpr std::string_view VOLUME {"volume"};
 };
 
 CELL_NAMESPACE_END

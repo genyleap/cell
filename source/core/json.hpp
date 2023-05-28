@@ -257,6 +257,14 @@ public:
 #endif
     }
 
+    bool hasKey()
+    {
+        if(!m_jKeyValue.empty())
+            return true;
+        else
+            return false;
+    }
+
 private:
     Types::JSonValue            m_jvalue    {};   //!< The JSON value.
     Types::OptionalString       m_key       {};   //!< The JSON key.

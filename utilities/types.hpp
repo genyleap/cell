@@ -173,6 +173,8 @@ using f64  = double;
 
 using b8   = bool;
 
+using size   = size_t;
+
 using umax = std::uintmax_t; //! Maximum-width unsigned integer type
 using uptr = std::uintptr_t; //! Unsigned integer type capable of holding a pointer to void.
 
