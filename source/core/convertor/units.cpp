@@ -30,7 +30,7 @@ Length::Length()
             if(key == LENGTH)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_lengthData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_lengthData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_lengthData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
@@ -89,7 +89,7 @@ Temperature::Temperature()
             if(key == TEMPERATURE)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_temperatureData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_temperatureData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_temperatureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
@@ -165,7 +165,7 @@ Area::Area()
             if(key == AREA)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_areaData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_areaData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_areaData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
@@ -228,7 +228,7 @@ Weight::Weight()
             if(key == WEIGHT)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_weightData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_weightData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_weightData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
@@ -291,7 +291,7 @@ Time::Time()
             if(key == TIME)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_timeData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_timeData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_timeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
@@ -351,7 +351,7 @@ Speed::Speed()
             if(key == SPEED)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_speedData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_speedData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_speedData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
@@ -404,7 +404,7 @@ Energy::Energy()
             if(key == ENERGY)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_energyData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_energyData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_energyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
@@ -460,7 +460,7 @@ Power::Power()
             if(key == POWER)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_powerData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_powerData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_powerData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
@@ -514,7 +514,7 @@ Pressure::Pressure()
             if(key == PRESSURE)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_pressureData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_pressureData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_pressureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
@@ -570,7 +570,7 @@ Angle::Angle()
             if(key == ANGLE)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_angleData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_angleData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_angleData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
@@ -624,7 +624,7 @@ Currency::Currency()
             if(key == CURRENCY)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_currencyData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_currencyData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_currencyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
@@ -692,7 +692,7 @@ Volume::Volume()
             if(key == VOLUME)
             {
                 const auto& objectArray = object.getAsArray(value);
-                for (std::size_t i = 0; i < objectArray.size() && i < m_volumeData.size(); ++i)
+                for (Types::size i = 0; i < objectArray.size() && i < m_volumeData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_volumeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
