@@ -209,6 +209,17 @@ public:
         return str.data();
     }
 
+    /**
+     * @brief Returns a nested JSON object within a given JSON value based on a sequence of keys.
+     *
+     * This function traverses the nested JSON structure using the provided keys and returns the
+     * JSON object located at the specified path.
+     *
+     * @tparam Args The types of the keys used to traverse the JSON structure.
+     * @param jvalue The JSON value to traverse.
+     * @param args The keys used to access the nested JSON object.
+     * @return The nested JSON object found at the specified path.
+     */
     template <typename... Args>
     static auto returnJsonAsObj(const JSonValue& jvalue, const Args&... args) {
         const auto* result = &jvalue;
@@ -226,6 +237,12 @@ public:
         JSonArray   value;  //!< As Array value.
     };
 
+    /**
+     * @brief Extracts key-value pairs from a JSON object and returns them as a std::map.
+     *
+     * @param object The JSON object from which to extract key-value pairs.
+     * @return A std::map containing the extracted key-value pairs.
+     */
     std::map<std::string, RetJsonKeyValue> extractJsonKeyValues(const JSonValue& object)
     {
         std::map<std::string, RetJsonKeyValue> keyValues;
@@ -265,7 +282,32 @@ public:
         std::unordered_map<std::string, RetObjectStruct>  asObject;   //!< Object value
     };
 
+    /**
+     * @brief Retrieves a JSON object from the specified index within a JSON value.
+     *
+     * @param jsonValue The JSON value from which to retrieve the object.
+     * @param index The index of the JSON object to retrieve.
+     * @return The JSON object at the specified index, or a default value if the index is out of range.
+     */
+    JSonValue getJsonObjectByIndex(const JSonValue& jsonValue, const unsigned int index)
+    {
+#ifdef USE_BOOST
+        return jsonValue.at(index);
+#else
+        return jsonValue.get(index, JSonValue::null);
+#endif
+    }
 
+    /**
+     * @brief Retrieves a JSON value from a JSON object by accessing nested elements using variadic arguments.
+     *
+     * @tparam T The desired type to convert the JSON value into.
+     * @tparam Args The types of the variadic arguments representing the nested indices or keys to access the elements.
+     * @param jsonValue The JSON value from which to retrieve the nested JSON value.
+     * @param args Variadic arguments representing the nested indices or keys to access the elements.
+     * @return The JSON value obtained by accessing the nested elements in the specified JSON value, converted to the desired type T.
+     * @throws std::runtime_error if the conversion to the desired type is not supported.
+     */
     template <typename T, typename... Args>
     T getJsonObject(const JSonValue& jsonValue, Args&&... args)
     {
@@ -330,6 +372,13 @@ public:
 #endif
     }
 
+    /**
+     * @brief Returns a JSON array from a JSON value by accessing nested elements using variadic arguments.
+     *
+     * @param jvalue The JSON value from which to retrieve the JSON array.
+     * @param args Variadic arguments representing the nested indices or keys to access the elements.
+     * @return The JSON array obtained by accessing the nested elements in the specified JSON value.
+     */
     template <typename... Args>
     static auto returnJsonAsArr(const JSonValue& jvalue, const Args&... args) {
         const auto* result = &jvalue;
@@ -341,7 +390,6 @@ public:
         return result;
 #endif
     }
-
 
     /**
      * @brief Structure representing a JSON value with various data types.

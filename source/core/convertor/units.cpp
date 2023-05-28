@@ -25,14 +25,14 @@ Length::Length()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == LENGTH)
+            if(key == LENGTH)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_lengthData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_lengthData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
@@ -84,14 +84,14 @@ Temperature::Temperature()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == TEMPERATURE)
+            if(key == TEMPERATURE)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_temperatureData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_temperatureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
@@ -160,14 +160,14 @@ Area::Area()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == AREA)
+            if(key == AREA)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_areaData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_areaData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
@@ -223,14 +223,14 @@ Weight::Weight()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == WEIGHT)
+            if(key == WEIGHT)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_weightData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_weightData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
@@ -286,14 +286,14 @@ Time::Time()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == TIME)
+            if(key == TIME)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_timeData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_timeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
@@ -346,14 +346,14 @@ Speed::Speed()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == SPEED)
+            if(key == SPEED)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_speedData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_speedData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
@@ -399,14 +399,14 @@ Energy::Energy()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == ENERGY)
+            if(key == ENERGY)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_energyData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_energyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
@@ -455,14 +455,14 @@ Power::Power()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == POWER)
+            if(key == POWER)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_powerData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_powerData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
@@ -509,14 +509,14 @@ Pressure::Pressure()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == PRESSURE)
+            if(key == PRESSURE)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_pressureData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_pressureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
@@ -565,14 +565,14 @@ Angle::Angle()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == ANGLE)
+            if(key == ANGLE)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_angleData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_angleData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
@@ -619,14 +619,14 @@ Currency::Currency()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == CURRENCY)
+            if(key == CURRENCY)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_currencyData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_currencyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
@@ -687,14 +687,14 @@ Volume::Volume()
     unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& ks : object.getAsObject())
+        for (const auto& [key, value] : object.getAsObject())
         {
-            if(ks.key == VOLUME)
+            if(key == VOLUME)
             {
-                const auto& objectArray = object.getAsArray(ks.value);
+                const auto& objectArray = object.getAsArray(value);
                 for (std::size_t i = 0; i < objectArray.size() && i < m_volumeData.size(); ++i)
                 {
-                    const JSonValue& o = objectArray.get(i, JSonValue::null);
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
                     m_volumeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
                 }
             }
