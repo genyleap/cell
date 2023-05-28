@@ -25,7 +25,7 @@
 #   error "Cell's "abstracts/convertor.hpp" was not found!"
 #endif
 
-CELL_NAMESPACE_BEGIN(Cell::Convertor::Units)
+CELL_NAMESPACE_BEGIN(Cell::Convertors::Units)
 
 struct UnitItems final
 {

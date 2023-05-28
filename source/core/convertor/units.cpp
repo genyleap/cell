@@ -16,7 +16,7 @@ CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::eLogger;
 CELL_USING_NAMESPACE Cell::JSon;
 
-CELL_NAMESPACE_BEGIN(Cell::Convertor::Units)
+CELL_NAMESPACE_BEGIN(Cell::Convertors::Units)
 
 Length::Length()
 {
