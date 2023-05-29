@@ -381,7 +381,7 @@ void HttpRequest::performAsyncThread(PromiseStringObject&& promise, const std::s
         std::string result = performRequest(method);
         // The result is moved into the promise object using set_value() function.
         promise.set_value(std::move(result));
-    } catch (const std::exception& e) {
+    } catch (const Exception& e) {
         if(DeveloperMode::IsEnable)
         {
             Log(std::string("HttpRequest::performAsyncThread failed: ") + e.what(), LoggerType::Critical);

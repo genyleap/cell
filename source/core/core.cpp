@@ -18,6 +18,7 @@ CELL_USING_NAMESPACE Cell::Abstracts;
 CELL_NAMESPACE_BEGIN(Cell::System)
 
 Exception::Exception(const Reason& reason, const std::string& message)
+    : m_exceptionData(nullptr), m_message(message), m_runtimeError(message)
 {
     m_exceptionData = new ExceptionData();
     std::string eMessage{};
@@ -54,6 +55,11 @@ Exception::~Exception()
 const char* Exception::what() const throw()
 {
     return m_exceptionData->message.c_str();
+}
+
+const std::runtime_error& Exception::getRuntimeError() const
+{
+    return m_runtimeError;
 }
 
 void Termination::terminate(TerminateType terminateType)

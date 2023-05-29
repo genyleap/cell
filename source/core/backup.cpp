@@ -135,7 +135,7 @@ bool FileBackup::backupSync() __cell_noexcept
 
         success = true;
     }
-    catch (const std::exception& e)
+    catch (const Exception& e)
     {
         if(DeveloperMode::IsEnable)
         {
@@ -249,7 +249,7 @@ bool DataRestore::restoreSync() __cell_noexcept
 
         success = true;
     }
-    catch (const std::exception& e)
+    catch (const Exception& e)
     {
         // Ensure that the file streams are closed in case of an exception
         inFile.reset();

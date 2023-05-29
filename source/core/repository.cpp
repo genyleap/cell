@@ -50,7 +50,7 @@ double Repository::measureSpeed(const std::string& mirrorUrl) {
         double speed = static_cast<double>(duration.count()) / 1000.0;
         repositoryData.mirrorSpeedCache[mirrorUrl] = speed;
         return speed;
-    } catch (const std::exception& e) {
+    } catch (const Exception& e) {
         // Handle any exceptions that occur while pinging the mirror
         if(DeveloperMode::IsEnable)
         {

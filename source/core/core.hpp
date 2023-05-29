@@ -372,38 +372,72 @@ struct Termination
 /*!
  * @brief The ExceptionMode enum
  */
-enum class ExceptionMode :Types::u8 { Default, StlException, CellException };
-
-/*!
- * @brief The ExceptionData class
- */
-struct ExceptionData
-{
-    std::string message {}; //default message
-    std::string file    {};
-    uint line           {};
-    std::string func    {};
-    std::string info    {};
+enum class ExceptionMode : Types::u8 {
+    Default,        //!< Default exception mode
+    StlException,   //!< STL exception mode
+    CellException   //!< Cell exception mode
 };
 
-class __cell_export Exception : public std::exception
-{
+/*!
+ * @brief The ExceptionData struct
+ */
+struct ExceptionData {
+    std::string message {}; //!< Default message
+    std::string file {};    //!< File name associated with the exception
+    uint line {};           //!< Line number in the file where the exception occurred
+    std::string func {};    //!< Function name where the exception occurred
+    std::string info {};    //!< Additional information about the exception
+};
+
+/*!
+ * @brief The Exception class
+ */
+class __cell_export Exception : public std::exception {
 public:
-    enum Reason :Types::u8
-    {
-        Core,
-        Framework,
-        IO,
-        User,
-        System,
-        Other
+    /*!
+     * @brief The Reason enum
+     */
+    enum Reason : Types::u8 {
+        Core,       //!< Core reason for the exception
+        Framework,  //!< Framework-related reason for the exception
+        IO,         //!< Input/Output-related reason for the exception
+        User,       //!< User-defined reason for the exception
+        System,     //!< System-related reason for the exception
+        Other       //!< Other reason for the exception
     };
 
+    /*!
+     * @brief Constructor for the Exception class.
+     * @param reason The reason for the exception (Reason enum value).
+     * @param message The exception message.
+     */
     Exception(const Reason& reason, const std::string& message);
+
+    /*!
+     * @brief Destructor for the Exception class
+     */
     virtual ~Exception();
+
+    /*!
+     * @brief Get the exception message.
+     * @return A C-style string representing the exception message.
+     */
     virtual const char* what() const throw();
+
+    /*!
+     * @brief Get the associated std::runtime_error object.
+     *
+     * This function returns a reference to the const std::runtime_error object associated with the exception.
+     * It allows access to additional information or operations provided by the std::runtime_error class.
+     *
+     * @return A reference to the const std::runtime_error object.
+     */
+    virtual const std::runtime_error& getRuntimeError() const;
+
 private:
-    ExceptionData* m_exceptionData;
+    ExceptionData* m_exceptionData;     //!< Pointer to the exception data
+    std::runtime_error  m_runtimeError; //!< Runtime/exception
+    std::string m_message;
 };
 
 struct Ping {
