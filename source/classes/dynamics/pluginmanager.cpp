@@ -18,7 +18,7 @@
 #endif
 
 CELL_USING_NAMESPACE Cell;
-CELL_USING_NAMESPACE Cell::Logger;
+CELL_USING_NAMESPACE Cell::Utility;
 
 CELL_NAMESPACE_BEGIN(Cell::Dynamics)
 

@@ -30,7 +30,7 @@
 CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::FileSystem;
-CELL_USING_NAMESPACE Cell::Logger;
+CELL_USING_NAMESPACE Cell::Utility;
 
 CELL_NAMESPACE_BEGIN(Cell::JSon)
 
@@ -222,7 +222,7 @@ bool JsonManager::contains(const std::string& key) __cell_noexcept
     } else {
         if(DeveloperMode::IsEnable)
         {
-            Logger::Log("Parse error: " + FROM_CELL_STRING("Root is not an object."), Logger::LoggerType::Critical);
+            Logger::Log("Parse error: " + FROM_CELL_STRING("Root is not an object."), LoggerType::Critical);
         }
         return false;
     }
@@ -243,14 +243,14 @@ JSonValue JsonManager::getData() __cell_noexcept
 //        } else {
 //            if(DeveloperMode::IsEnable)
 //            {
-//                Logger::Log("Parse error: " + FROM_CELL_STRING("Key not found."), Logger::LoggerType::Critical);
+//                Logger::Log("Parse error: " + FROM_CELL_STRING("Key not found."), LoggerType::Critical);
 //            }
 //            return {};
 //        }
     } else {
         if(DeveloperMode::IsEnable)
         {
-            Logger::Log("Parse error: " + FROM_CELL_STRING("Root is not an object."), Logger::LoggerType::Critical);
+            Logger::Log("Parse error: " + FROM_CELL_STRING("Root is not an object."), LoggerType::Critical);
         }
         return {};
     }
@@ -262,7 +262,7 @@ JSonValue JsonManager::getData() __cell_noexcept
 //    } else {
 //        if(DeveloperMode::IsEnable)
 //        {
-//            Logger::Log("Parse error: " + FROM_CELL_STRING("Key not found."), Logger::LoggerType::Critical);
+//            Logger::Log("Parse error: " + FROM_CELL_STRING("Key not found."), LoggerType::Critical);
 //        }
 //        return {};
 //    }
@@ -279,14 +279,14 @@ JSonValue JsonManager::get(const std::string& key) __cell_noexcept
         } else {
             if(DeveloperMode::IsEnable)
             {
-                Logger::Log("Parse error: " + FROM_CELL_STRING("Key not found."), Logger::LoggerType::Critical);
+                Logger::Log("Parse error: " + FROM_CELL_STRING("Key not found."), LoggerType::Critical);
             }
             return {};
         }
     } else {
         if(DeveloperMode::IsEnable)
         {
-            Logger::Log("Parse error: " + FROM_CELL_STRING("Root is not an object."), Logger::LoggerType::Critical);
+            Logger::Log("Parse error: " + FROM_CELL_STRING("Root is not an object."), LoggerType::Critical);
         }
         return {};
     }
@@ -296,7 +296,7 @@ JSonValue JsonManager::get(const std::string& key) __cell_noexcept
     } else {
         if(DeveloperMode::IsEnable)
         {
-            Logger::Log("Parse error: " + FROM_CELL_STRING("Key not found."), Logger::LoggerType::Critical);
+            Logger::Log("Parse error: " + FROM_CELL_STRING("Key not found."), LoggerType::Critical);
         }
         return {};
     }

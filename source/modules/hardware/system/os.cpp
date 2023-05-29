@@ -18,7 +18,7 @@
 
 
 CELL_USING_NAMESPACE Cell::System;
-CELL_USING_NAMESPACE Cell::Logger;
+CELL_USING_NAMESPACE Cell::Utility;
 CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
