@@ -16,7 +16,7 @@
 #   error "Cell's "logger.hpp" was not found!"
 #endif
 
-CELL_USING_NAMESPACE Cell::eLogger;
+CELL_USING_NAMESPACE Cell::Logger;
 
 CELL_NAMESPACE_BEGIN(Cell::System::Serialization)
 

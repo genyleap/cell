@@ -1,17 +1,13 @@
-#ifdef __has_include
-# if __has_include("html.hpp")
+#if __has_include("html.hpp")
 #   include "html.hpp"
 #else
 #   error "Cell's "html.hpp" was not found!"
-# endif
 #endif
 
-#ifdef __has_include
-# if __has_include("core.hpp")
+#if __has_include("core.hpp")
 #   include "core.hpp"
 #else
 #   error "Cell's "core.hpp" was not found!"
-# endif
 #endif
 
 #include "filesystem.hpp"
@@ -27,8 +23,9 @@ Html::~Html()
 
 std::vector<std::string> Html::getTags(const std::string_view content)
 {
-    auto engine = Engine();
-    if (engine.isFilePath(content.data()))
+    auto engine = safeEngine();
+
+    if (engine->isFilePath(content.data()))
     {
         FileSystem::FileManager fm;
         std::string html = fm.read(content.data());

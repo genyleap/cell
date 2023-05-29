@@ -11,7 +11,7 @@
 #include "terminal.hpp"
 #include "translator/language.hpp"
 
-CELL_USING_NAMESPACE Cell::eLogger;
+CELL_USING_NAMESPACE Cell::Logger;
 CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::Abstracts;
 

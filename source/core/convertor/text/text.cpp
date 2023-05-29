@@ -12,7 +12,7 @@
 
 CELL_USING_NAMESPACE Cell;
 CELL_USING_NAMESPACE Cell::System;
-CELL_USING_NAMESPACE Cell::eLogger;
+CELL_USING_NAMESPACE Cell::Logger;
 CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::JSon;
 
@@ -481,6 +481,16 @@ Types::OptionalString TextConverter::extractDigits(const std::string& text)
             result += c;
         }
     }
+    return Types::OptionalString(result);
+}
+
+Types::OptionalString TextConverter::stripHtmlTags(const std::string& text)
+{
+    // Define a regex pattern to match HTML tags
+    std::regex tagRegex("<[^>]+>");
+
+    // Use std::regex_replace to remove the HTML tags from the text
+    std::string result = std::regex_replace(text, tagRegex, "");
     return Types::OptionalString(result);
 }
 

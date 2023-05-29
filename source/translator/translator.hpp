@@ -55,13 +55,16 @@ using LanguageTemp = Types::Map<std::string, LanguageTemplate>;
 
 struct TRANSLATOR_CONSTANTS final
 {
-    __cell_static_const_constexpr std::string_view CODE           {"data"};
+    __cell_static_const_constexpr std::string_view CODE           {"code"};
     __cell_static_const_constexpr std::string_view DATA_VIEW      {"data"};
     __cell_static_const_constexpr std::string_view DEFAULT_VALUE  {"default_value"};
     __cell_static_const_constexpr std::string_view COSTUM_VALUE   {"custom_value"};
     __cell_static_const_constexpr std::string_view WORD_KEY       {"word_key"};
     __cell_static_const_constexpr std::string_view TYPE           {"type"};
     __cell_static_const_constexpr std::string_view MODULE         {"module"};
+
+    //! FILE SUFFIX
+    __cell_static_const_constexpr std::string_view FILE_SUFFIX    {".json"};
 };
 
 /*!
@@ -307,7 +310,6 @@ public:
      * \return data from language-spec.
      */
     __cell_no_discard JSonValue getLanguageSpec(const std::string& code) __cell_noexcept;
-
 
 protected:
     JSon::JsonManager jsonParser            {};                 //!< JsonManager class.

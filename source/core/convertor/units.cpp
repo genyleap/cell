@@ -13,7 +13,7 @@
 CELL_USING_NAMESPACE Cell;
 CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::System;
-CELL_USING_NAMESPACE Cell::eLogger;
+CELL_USING_NAMESPACE Cell::Logger;
 CELL_USING_NAMESPACE Cell::JSon;
 
 CELL_NAMESPACE_BEGIN(Cell::Convertors::Units)
@@ -738,6 +738,59 @@ std::string Volume::toString(VolumeUnit unit)
 {
     if (unit >= VolumeUnit::CubicMeter && unit <= VolumeUnit::ImperialTeaspoon) {
         return m_volumeData[static_cast<Types::size>(unit)];
+    } else {
+        return "unknown";
+    }
+}
+
+Frequency::Frequency()
+{
+    auto meta           =   safeEngine()->meta();
+    auto currentLang    =   createLanguageObject()->getLanguageCode();
+    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    try {
+        auto object = JsonFind(unitItems.items, UNITS);
+        for (const auto& [key, value] : object.getAsObject())
+        {
+            if(key == FREQUENCY)
+            {
+                const auto& objectArray = object.getAsArray(value);
+                for (Types::size i = 0; i < objectArray.size() && i < m_frequencyData.size(); ++i)
+                {
+                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
+                    m_frequencyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                }
+            }
+        }
+    } catch (const Exception& e)
+    {
+        Log(e.what(), LoggerType::Critical);
+    }
+}
+
+Frequency::~Frequency()
+{
+    safeEngine()->meta()->clearContainer(m_frequencyData);
+}
+
+double Frequency::convert(double value, FrequencyUnit fromUnit, FrequencyUnit toUnit)
+{
+    static const std::unordered_map<FrequencyUnit, double> conversionFactors = {
+        { FrequencyUnit::Hertz, 1.0 },
+        { FrequencyUnit::Kilohertz, 1e3 },
+        { FrequencyUnit::Megahertz, 1e6 },
+        { FrequencyUnit::Gigahertz, 1e9 },
+        { FrequencyUnit::Terahertz, 1e12 }
+    };
+
+    double hertz = value * conversionFactors.at(fromUnit);
+    return hertz / conversionFactors.at(toUnit);
+}
+
+std::string Frequency::toString(FrequencyUnit unit)
+{
+    if (unit >= FrequencyUnit::Hertz && unit <= FrequencyUnit::Terahertz) {
+        return m_frequencyData[static_cast<Types::size>(unit)];
     } else {
         return "unknown";
     }

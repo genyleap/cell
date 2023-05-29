@@ -26,7 +26,7 @@ CELL_USING_NAMESPACE Cell;
 CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::Modules::BuiltIn;
-CELL_USING_NAMESPACE Cell::eLogger;
+CELL_USING_NAMESPACE Cell::Logger;
 CELL_USING_NAMESPACE Cell::Abstracts;
 
 CELL_NAMESPACE_BEGIN(Cell)
@@ -55,8 +55,8 @@ Configuration::Configuration(const ConfigType& configType)
         catch (const Exception& e)
         {
             if(DeveloperMode::IsEnable) {
-                eLogger::Log("Cannot open the file [" + m_dataConfig->configFile + "]", eLogger::LoggerType::Critical);
-                eLogger::Log("Error details: " + FROM_CELL_STRING(e.what()), eLogger::LoggerType::Info);
+                Logger::Log("Cannot open the file [" + m_dataConfig->configFile + "]", Logger::LoggerType::Critical);
+                Logger::Log("Error details: " + FROM_CELL_STRING(e.what()), Logger::LoggerType::Info);
             }
         }
         break;
@@ -67,7 +67,7 @@ Configuration::Configuration(const ConfigType& configType)
         catch (const Exception& e)
         {
             if(DeveloperMode::IsEnable) {
-                eLogger::Log("Configuration Error: " + FROM_CELL_STRING(e.what()), eLogger::LoggerType::Critical);
+                Logger::Log("Configuration Error: " + FROM_CELL_STRING(e.what()), Logger::LoggerType::Critical);
             }
         }
         break;
@@ -194,7 +194,7 @@ std::string Configuration::jsonFile() __cell_noexcept
     {
         file = m_dataConfig->configFile;
     } else {
-        eLogger::Log("Please specify a config file and try again! ", eLogger::LoggerType::Critical);
+        Logger::Log("Please specify a config file and try again! ", Logger::LoggerType::Critical);
     }
     return file;
 }

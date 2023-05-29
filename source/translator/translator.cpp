@@ -28,6 +28,12 @@
 #   error "Cell's "core/filesystem.hpp" was not found!"
 #endif
 
+#if __has_include("core/json.hpp")
+#   include "core/json.hpp"
+#else
+#   error "Cell's "core/json.hpp" was not found!"
+#endif
+
 #include <stdio.h>
 #ifdef PLATFORM_WINDOWS
 #include <direct.h>
@@ -41,7 +47,8 @@ CELL_USING_NAMESPACE Cell;
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::JSon;
 CELL_USING_NAMESPACE Cell::Types;
-CELL_USING_NAMESPACE Cell::eLogger;
+CELL_USING_NAMESPACE Cell::Logger;
+CELL_USING_NAMESPACE Cell::JSon;
 
 CELL_NAMESPACE_BEGIN(Cell::Translation)
 
@@ -76,17 +83,18 @@ bool Translator::initExternal(const std::vector<std::string>& file) __cell_noexc
 bool Translator::init() __cell_noexcept
 {
     bool res = false;
+    auto meta = safeEngine()->meta();
     auto fp = fileManager.getExecutablePath();
     for(const auto& f : getFile())
     {
         std::string file{};
         try {
-            file = { std::string(fp) + translations + "/" + std::string(f) + ".json"};
+            file = { std::string(fp) + translations + "/" + std::string(f) + meta->returnView(TRANSLATOR_CONSTANTS::FILE_SUFFIX)};
             if(std::filesystem::exists(file))
             {
                 //!Read from json files. [Multi based on language types].
                 jsonParser.parse(file, InputType::File);
-                jsonParser.setVectorJsonPtr(std::move(jsonParser.getData()));
+                jsonParser.setVectorJsonPtr(CELL_MOVE(jsonParser.getData()));
                 m_hasError = false;
                 res = true;
             } else {
@@ -334,12 +342,12 @@ void Translator::wordProcess() __cell_noexcept
             auto obj = safeEngine()->meta()->getJsonObject<JSonValue>(root, meta->returnView(TRANSLATOR_CONSTANTS::DATA_VIEW));
             for (const auto& o : safeEngine()->meta()->extractJsonKeyValues(obj)) {
                 //! key values are: exceptions, global, languages, ...
-                const std::string& key = o.first;;
+                const std::string& key = o.first;
                 LanguageTemp temp;
                 try {
                     for (const auto& i : o.second.value) {
                         LanguageTemplate words = {
-                                                  safeEngine()->meta()->getJsonObject<std::string>(i,meta->returnView(TRANSLATOR_CONSTANTS::WORD_KEY)),
+                            safeEngine()->meta()->getJsonObject<std::string>(i,meta->returnView(TRANSLATOR_CONSTANTS::WORD_KEY)),
                             safeEngine()->meta()->getJsonObject<std::string>(i,meta->returnView(TRANSLATOR_CONSTANTS::MODULE)),
                             safeEngine()->meta()->getJsonObject<std::string>(i,meta->returnView(TRANSLATOR_CONSTANTS::TYPE)),
                             safeEngine()->meta()->getJsonObject<std::string>(i,meta->returnView(TRANSLATOR_CONSTANTS::DEFAULT_VALUE)),
@@ -350,7 +358,7 @@ void Translator::wordProcess() __cell_noexcept
                 } catch (const Exception& e) {
                     Log("Error on word process!:" + FROM_CELL_STRING(e.what()), LoggerType::Failed);
                 }
-                langSheet[key] = std::move(temp);
+                langSheet[key] = CELL_MOVE(temp);
             }
             wordMap[safeEngine()->meta()->getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC, meta->returnView(TRANSLATOR_CONSTANTS::CODE))] = langSheet;
         }
@@ -473,7 +481,7 @@ DictonaryType Translator::data(const std::string& sheet, const std::string& byKe
     auto items = jsonParser.getVectorJsonPtr();
     for(const auto& root : items)
     {
-        auto obj = meta->getJsonObject<JSonValue>(root, "data");
+        auto obj = meta->getJsonObject<JSonValue>(root, meta->returnView(TRANSLATOR_CONSTANTS::DATA_VIEW));
         for (const auto& o : meta->extractJsonKeyValues(obj))
         {
             if(o.first == sheet)
@@ -513,18 +521,17 @@ JSonValue Translator::getLanguageSpec(const std::string& code) __cell_noexcept
         JSonValue object = root.at(CELL_LANGUAGE_SPEC);
         if(object.at(meta->returnView(TRANSLATOR_CONSTANTS::CODE)).as_string() == code)
         {
-            d = std::move(object);
+            d = CELL_MOVE(object);
         }
 #else
         JSonValue object = root[CELL_LANGUAGE_SPEC];
         if(object[meta->returnView(TRANSLATOR_CONSTANTS::CODE)] == code) {
-            d = std::move(object);
+            d = CELL_MOVE(object);
         }
 #endif
     }
     return d;
 }
-
 
 // Definition of the createTranslatorObject function
 Scope<Translator> createTranslatorObject()

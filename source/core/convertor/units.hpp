@@ -586,6 +586,55 @@ private:
     static const constexpr std::string_view VOLUME {"volume"};
 };
 
+enum class FrequencyUnit {
+    Hertz,         //!< Hertz unit
+    Kilohertz,     //!< Kilohertz unit
+    Megahertz,     //!< Megahertz unit
+    Gigahertz,     //!< Gigahertz unit
+    Terahertz      //!< Terahertz unit
+};
+
+/**
+ * @class Frequency
+ * @brief Class for frequency conversion.
+ *
+ * This class provides functionality to convert values between different frequency units.
+ */
+class Frequency : public Abstracts::Convertor::UnitConverter<VolumeUnit>
+{
+public:
+    /**
+     * @brief Default constructor.
+     */
+    Frequency();
+
+    /**
+     * @brief Destructor.
+     */
+    ~Frequency();
+
+    /**
+     * @brief Converts a value from one frequency unit to another.
+     * @param value The value to be converted.
+     * @param fromUnit The source frequency unit.
+     * @param toUnit The target frequency unit.
+     * @return The converted value.
+     */
+    double convert(double value, FrequencyUnit fromUnit, FrequencyUnit toUnit);
+
+    /**
+     * @brief Converts a frequency unit to its string representation.
+     * @param unit The frequency unit.
+     * @return The string representation of the unit.
+     */
+    std::string toString(FrequencyUnit unit);
+
+private:
+    UnitItems unitItems {};                            //!< Unit items
+    std::array<std::string, 6> m_frequencyData;        //!< Frequency data
+    static const constexpr std::string_view FREQUENCY {"frequency"};  //!< Frequency string
+};
+
 CELL_NAMESPACE_END
 
 #endif  // CELL_UNIT_CONVERTOR_HPP

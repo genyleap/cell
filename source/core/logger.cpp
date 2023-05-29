@@ -18,7 +18,7 @@
 
 CELL_USING_NAMESPACE Cell::Terminal;
 
-CELL_NAMESPACE_BEGIN(Cell::eLogger)
+CELL_NAMESPACE_BEGIN(Cell::Logger)
 
 void Logger::set(const ConfigStruct& config)
 {

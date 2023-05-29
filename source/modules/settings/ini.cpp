@@ -25,7 +25,7 @@
 CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::FileSystem;
-CELL_USING_NAMESPACE Cell::eLogger;
+CELL_USING_NAMESPACE Cell::Logger;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Settings)
 

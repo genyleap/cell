@@ -36,7 +36,7 @@
       "uri": "ar-sa",
       "d": "ar",
       "l": "ar_SA.utf-8",
-      "status": false
+      "status": true
     },
     {
       "code": "armenian",
@@ -117,7 +117,7 @@
       "uri": "zh-cn",
       "d": "zh",
       "l": "zh_CN.utf-8",
-      "status": false
+      "status": true
     },
     {
       "code": "croatian",
@@ -342,7 +342,7 @@
       "uri": "ja-jp",
       "d": "ja",
       "l": "ja_JP.utf-8",
-      "status": false
+      "status": true
     },
     {
       "code": "kannada",
@@ -381,13 +381,22 @@
       "status": false
     },
     {
-      "code": "kurdish",
-      "direction": "rtl",
-      "name": "كوردی",
-      "uri": "ku-tr",
-      "d": "ku",
-      "l": "ku_TR.utf-8",
-      "status": false
+    "code": "kurdish",
+    "direction": "rtl",
+    "name": "کوردی (سۆرانی)",
+    "uri": "ku-ckb",
+    "d": "ku",
+    "l": "ku_CKB.utf-8",
+    "status": false
+    },
+    {
+    "code": "kurdish",
+    "direction": "ltr",
+    "name": "Kurdish (Kurmancî)",
+    "uri": "ku-tr",
+    "d": "ku",
+    "l": "ku_KU.utf-8",
+    "status": false
     },
     {
       "code": "kyrgyz",
@@ -605,7 +614,7 @@
       "uri": "ru-ru",
       "d": "ru",
       "l": "ru_RU.utf-8",
-      "status": false
+      "status": true
     },
     {
       "code": "samoan",

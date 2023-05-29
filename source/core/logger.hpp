@@ -31,7 +31,7 @@
 #   error "Cell's "core/filesystem.hpp" was not found!"
 #endif
 
-CELL_NAMESPACE_BEGIN(Cell::eLogger)
+CELL_NAMESPACE_BEGIN(Cell::Logger)
 
 /*!
  * \brief The LoggerType enum
