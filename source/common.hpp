@@ -403,6 +403,11 @@ struct NonMovableOrCopyable : private NonCopyable, NonMovable
     CELL_DISABLE_MOVE(Class)
 }
 
-#include "prestructure.hpp"
+//! Cell's Prestructure.
+#if __has_include("prestructure.hpp")
+#   include "prestructure.hpp"
+#else
+#   error "Cell's prestructure was not found!"
+#endif
 
 #endif // CELL_COMMON_HPP
