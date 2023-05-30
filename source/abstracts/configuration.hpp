@@ -13,12 +13,10 @@
 #ifndef CELL_CONFIGURATION_ABSTRACT_HPP
 #define CELL_CONFIGURATION_ABSTRACT_HPP
 
-#ifdef __has_include
-# if __has_include("common.hpp")
+#if __has_include("common.hpp")
 #   include "common.hpp"
 #else
 #   error "Cell's "common.hpp" was not found!"
-# endif
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
@@ -43,11 +41,12 @@ __cell_enum_class ConfigType : Types::u8
 
 __cell_enum_class SectionType : Types::u8
 {
-    SystemCore, //!<Configuration for system core.
-    Database,   //!<Configuration for database.
-    Framework,  //!<Configuration for framework.
-    Interface,  //!<Configuration for User Interface.
-    Custom      //!<Configuration for our custom sections.
+    SystemCore,     //!<Configuration for system core.
+    Database,       //!<Configuration for database.
+    Translations,   //!<Configuration for translations.
+    Framework,      //!<Configuration for framework.
+    Interface,      //!<Configuration for User Interface.
+    Custom          //!<Configuration for our custom sections.
 };
 
 
