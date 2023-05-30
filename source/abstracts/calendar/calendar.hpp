@@ -21,14 +21,32 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 
+/**
+ * @enum CalendarSystem
+ * Enumeration representing various calendar systems used throughout history and across different cultures.
+ */
 enum class CalendarSystem : Types::u8
 {
-    Gregorian,      //!< The default calendar, used internationally.
-    Julian,         //!< An ancient Roman calendar.
-    Lunar,          //!< A calendar based on the cycles of the moon.
-    Islamic,        //!< The Islamic (Hijri) calendar.
-    Hebrew,         //!< The Hebrew calendar.
-    Chinese         //!< The Chinese calendar.
+    Gregorian       = 0x0,       //!< The default calendar, used internationally.
+    Julian          = 0x1,       //!< An ancient Roman calendar.
+    Lunar           = 0x2,       //!< A calendar based on the cycles of the moon.
+    Islamic         = 0x3,       //!< The Islamic (Hijri) calendar.
+    Hebrew          = 0x4,       //!< The Hebrew calendar.
+    Chinese         = 0x5,       //!< The Chinese calendar.
+    Hindu           = 0x6,       //!< Hindu calendar.
+    Mayan           = 0x7,       //!< Mayan calendar.
+    Egyptian        = 0x8,       //!< Egyptian calendar.
+    Persian         = 0x9,       //!< Persian (Islamic/Hijri-Solar) calendar.
+    Ethiopian       = 0xA,       //!< Ethiopian calendar.
+    Aztec           = 0xB,       //!< Aztec calendar.
+    Inca            = 0xC,       //!< Inca calendar.
+    Japanese        = 0xD,       //!< Japanese calendar.
+    Korean          = 0xE,       //!< Korean calendar.
+    Thai            = 0xF,       //!< Thai calendar.
+    Zoroastrian     = 0x10,      //!< Zoroastrian calendar.
+    AncientGreek    = 0x11,      //!< Ancient Greek calendar.
+    Roman           = 0x12,      //!< Roman calendar.
+    Babylonian      = 0x13       //!< Babylonian calendar.
 };
 
 /**
@@ -238,6 +256,20 @@ public:
      */
     __cell_virtual Types::OptionalString weekDayName(int day) const = 0;
 
+
+    /**
+     * @brief Check if a date and time values are valid in the selected calendar.
+     *
+     * @param year The year value.
+     * @param month The month value (1-12).
+     * @param day The day value (1-31).
+     * @param hour The hour value (0-23).
+     * @param minute The minute value (0-59).
+     * @param second The second value (0-59).
+     *
+     * @return True if the date and time values are valid, false otherwise.
+     */
+    __cell_virtual bool isDateTimeValid(int year, int month, int day, int hour, int minute, int second) const = 0;
 
     /**
      * @brief Returns the current timezone.
