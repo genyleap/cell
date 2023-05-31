@@ -392,6 +392,25 @@ public:
     }
 
     /**
+     * @brief Get the size of a JSON value.
+     *
+     * This template function is used to retrieve the size of a JSON value.
+     *
+     * @tparam Args Variadic template parameter pack.
+     * @param jvalue The JSON value object.
+     * @return The size of the JSON value.
+     */
+    template <typename... Args>
+    static auto returnJsonSize(const JSonValue& jvalue) {
+        const auto* result = &jvalue;
+#ifdef USE_BOOST
+        return result->as_array().size();
+#else
+        return result->size();
+#endif
+    }
+
+    /**
      * @brief Structure representing a JSON value with various data types.
      */
     struct RetJsonStruct final {
