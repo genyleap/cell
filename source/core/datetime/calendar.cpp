@@ -40,7 +40,7 @@ Types::OptionalString GregorianCalendar::dateFromParts(int year, int month, int 
                    << std::setw(2) << std::setfill('0') << day;
         return dateStream.str();
     }
-    return std::nullopt;
+    return __cell_null_optional;
 }
 
 Types::OptionalString GregorianCalendar::dateTimeToString(const std::string& format) const
@@ -239,7 +239,7 @@ Types::OptionalString GregorianCalendar::monthName(int month) const
 
     auto object = JsonFind(languageSpec, meta->returnView(GREGORIAN_CONSTANTS::CALENDARS));
 
-    if(!IsSet(object.hasKey())) //! Todo...
+    if(!IsSet(object.hasKey()))
     {
         Log(safeTranslate(language, "translation", "key_not_found"), LoggerType::Critical);
     }
@@ -251,7 +251,7 @@ Types::OptionalString GregorianCalendar::monthName(int month) const
             {
                 result = meta->returnJsonAt(value, monthIndex).asString();
             } else {
-                return std::nullopt;
+                return __cell_null_optional;
             }
         }
     }
@@ -286,7 +286,7 @@ Types::OptionalString GregorianCalendar::standaloneMonthName(int month) const
 {
     // Check if the month is within the valid range
     if (month < 1 || month > 12) {
-        return std::nullopt;  // Invalid month, return an empty optional
+        return __cell_null_optional;  // Invalid month, return an empty optional
     }
 
     // Define an array of standalone month names
@@ -303,7 +303,7 @@ Types::OptionalString GregorianCalendar::standaloneWeekDayName(int day) const
 {
     // Check if the day is within the valid range
     if (day < 1 || day > 7) {
-        return std::nullopt;  // Invalid day, return an empty optional
+        return __cell_null_optional;  // Invalid day, return an empty optional
     }
 
     // Define an array of standalone day names
@@ -320,7 +320,7 @@ Types::OptionalString GregorianCalendar::weekDayName(int day) const
 {
     // Check if the day is within the valid range
     if (day < 1 || day > 7) {
-        return std::nullopt;  // Invalid day, return an empty optional
+        return __cell_null_optional;  // Invalid day, return an empty optional
     }
 
     // Define an array of day names
@@ -391,7 +391,7 @@ Types::OptionalString GregorianCalendar::convertToTimezone(const std::string& da
         iss >> std::get_time(&tm, "%Y-%m-%d %H:%M:%S");
 
         if (iss.fail()) {
-            return std::nullopt;
+            return __cell_null_optional;
         }
 
         std::time_t time = std::mktime(&tm);
@@ -407,7 +407,7 @@ Types::OptionalString GregorianCalendar::convertToTimezone(const std::string& da
 
         return oss.str();
     } catch (...) {
-        return std::nullopt;
+        return __cell_null_optional;
     }
 }
 
@@ -452,7 +452,7 @@ Types::OptionalString GregorianCalendar::getLocalizedDate(const std::string& dat
     }
 
     // Return empty optional for unsupported language or invalid date format
-    return std::nullopt;
+    return __cell_null_optional;
 }
 
 bool GregorianCalendar::isHoliday(const std::string& date) const
@@ -496,7 +496,7 @@ Types::OptionalString GregorianCalendar::addDays(const std::string& date, int da
     ss >> std::get_time(&time, "%Y-%m-%d");
 
     if (ss.fail()) {
-        return std::nullopt; // Return empty optional if parsing fails
+        return __cell_null_optional; // Return empty optional if parsing fails
     }
 
     std::time_t t = std::mktime(&time);
@@ -516,7 +516,7 @@ Types::OptionalString GregorianCalendar::addMonths(const std::string& date, int 
     ss >> std::get_time(&time, "%Y-%m-%d");
 
     if (ss.fail()) {
-        return std::nullopt; // Return empty optional if parsing fails
+        return __cell_null_optional; // Return empty optional if parsing fails
     }
 
     // Adjust the month value
@@ -541,7 +541,7 @@ Types::OptionalString GregorianCalendar::addYears(const std::string& date, int y
     ss >> std::get_time(&time, "%Y-%m-%d");
 
     if (ss.fail()) {
-        return std::nullopt; // Return empty optional if parsing fails
+        return __cell_null_optional; // Return empty optional if parsing fails
     }
 
     // Adjust the year value
