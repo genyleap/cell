@@ -84,6 +84,9 @@ struct GREGORIAN_CONSTANTS final
 {
     __cell_static_const_constexpr Types::uint MIN_VALID_YEAR  {1583};
     __cell_static_const_constexpr Types::uint MAX_VALID_YEAR  {9999};
+
+    __cell_static_const_constexpr std::string_view CALENDARS        {"calendars"};
+    __cell_static_const_constexpr std::string_view CALENDAR_NAME    {"gregorian"};
 };
 
 /**
@@ -92,7 +95,6 @@ struct GREGORIAN_CONSTANTS final
 class GregorianCalendar : public Abstracts::AbstractCalendar {
 public:
     GregorianCalendar();
-    GregorianCalendar(const CalendarData& cd);
     ~GregorianCalendar();
 
     /**

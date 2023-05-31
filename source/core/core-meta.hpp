@@ -398,7 +398,8 @@ public:
         std::string                                     asString;   //!< String value
         bool                                            asBool;     //!< Boolean value
         double                                          asDouble;   //!< Double value
-        int                                             asInt64;    //!< Int64 value
+        int                                             asInt;      //!< Integer value
+        Types::u64                                      asInt64;    //!< Int64 value
         std::vector<RetJsonStruct>                      asArray;    //!< Array value
         std::unordered_map<std::string, RetJsonStruct>  asObject;   //!< Object value
     };

@@ -4,17 +4,22 @@
 #   error "Cell's calendar was not found!"
 #endif
 
+#if __has_include("core/core.hpp")
+#   include "core/core.hpp"
+#else
+#   error "Cell's "core/core.hpp" was not found!"
+#endif
+
 CELL_USING_NAMESPACE Cell;
+CELL_USING_NAMESPACE Cell::System;
+CELL_USING_NAMESPACE Cell::JSon;
+CELL_USING_NAMESPACE Cell::Utility;
 
 CELL_NAMESPACE_BEGIN(Cell::Calendars)
 
 GregorianCalendar::GregorianCalendar()
 {
-}
-
-GregorianCalendar::GregorianCalendar(const CalendarData& cd)
-{
-    m_calendarData = cd;
+    m_calendarData.name = "Gregorian";
 }
 
 GregorianCalendar::~GregorianCalendar()
@@ -228,34 +233,29 @@ int GregorianCalendar::minimumDaysInMonth() const
 
 std::optional<std::string> GregorianCalendar::monthName(int month) const
 {
-    switch (month) {
-    case 1:
-        return "January";
-    case 2:
-        return "February";
-    case 3:
-        return "March";
-    case 4:
-        return "April";
-    case 5:
-        return "May";
-    case 6:
-        return "June";
-    case 7:
-        return "July";
-    case 8:
-        return "August";
-    case 9:
-        return "September";
-    case 10:
-        return "October";
-    case 11:
-        return "November";
-    case 12:
-        return "December";
-    default:
-        return std::nullopt; // Return std::nullopt for invalid month numbers
+    auto meta           = safeEngine()->meta();
+    auto currentLang    = createLanguageObject()->getLanguageCode();
+    JSonValue items     = safeEngine()->get()->translator().getLanguageSpec(currentLang);
+
+    auto object = JsonFind(items, GREGORIAN_CONSTANTS::CALENDARS);
+
+    if(!IsSet(object.hasKey())) //! Todo...
+    {
+        Log("Error" + std::string("Translation key for calendars not found!"), LoggerType::Critical);
     }
+
+    std::string result {};
+    for (const auto& ks : object.getAsObject()) {
+        if (ks.key == GREGORIAN_CONSTANTS::CALENDAR_NAME) {
+            int monthIndex = month - 1; // Adjusting month to 0-based index
+            if (monthIndex >= 0 && monthIndex < meta->returnJsonAt(ks.value).asInt) {
+                result = meta->returnJsonAt(ks.value, monthIndex).asString;
+            } else {
+                return std::nullopt; // Return std::nullopt for invalid month numbers
+            }
+        }
+    }
+    return result;
 }
 
 int GregorianCalendar::monthsInYear() const
