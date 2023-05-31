@@ -248,8 +248,8 @@ Types::OptionalString GregorianCalendar::monthName(int month) const
     for (const auto& ks : object.getAsObject()) {
         if (ks.key == GREGORIAN_CONSTANTS::CALENDAR_NAME) {
             int monthIndex = month - 1; // Adjusting month to 0-based index
-            if (monthIndex >= 0 && monthIndex < meta->returnJsonAt(ks.value).asInt) {
-                result = meta->returnJsonAt(ks.value, monthIndex).asString;
+            if (monthIndex >= 0 && monthIndex < meta->returnJsonAt(ks.value).asInt()) {
+                result = meta->returnJsonAt(ks.value, monthIndex).asString();
             } else {
                 return std::nullopt; // Return std::nullopt for invalid month numbers
             }

@@ -48,9 +48,9 @@ Language::Language(const Language& rhs) : m_languageStruct(rhs.m_languageStruct)
     {
         for(const auto& c : v)
         {
-            lstatus = safeEngine()->get()->meta()->returnJsonAt(c,"status").asBool;
+            lstatus = safeEngine()->get()->meta()->returnJsonAt(c,"status").asBool();
             if(lstatus == true) {
-                lstr = safeEngine()->get()->meta()->returnJsonAt(c, std::string("l")).asString;
+                lstr = safeEngine()->get()->meta()->returnJsonAt(c, std::string("l")).asString();
                 lcodes.push_back(lstr.substr(0, 5));
             }
         }
@@ -77,9 +77,9 @@ Language::Language()
     {
         for(const auto& c : v)
         {
-            lstatus = safeEngine()->get()->meta()->returnJsonAt(c,"status").asBool;
+            lstatus = safeEngine()->get()->meta()->returnJsonAt(c,"status").asBool();
             if(lstatus == true) {
-                lstr = safeEngine()->get()->meta()->returnJsonAt(c, std::string("l")).asString;
+                lstr = safeEngine()->get()->meta()->returnJsonAt(c, std::string("l")).asString();
                 lcodes.push_back(lstr.substr(0, 5));
             }
         }
@@ -103,7 +103,7 @@ Language::Language(const std::string& uri)
     {
         for(const auto& c : v)
         {
-            viewStr = safeEngine()->get()->meta()->returnJsonAt(c, "l").asString;
+            viewStr = safeEngine()->get()->meta()->returnJsonAt(c, "l").asString();
             lcodes.push_back(viewStr.substr(0, 5).data());
         }
     }
@@ -150,16 +150,16 @@ std::string Language::getLanguageCode() __cell_const_noexcept
     std::string_view default_lang;
     if(config->Setting().getValue(CELL_DEFAULT_LANG, jvalue))
     {
-        default_lang = safeEngine()->get()->meta()->returnJsonAt(jvalue).asString;
+        default_lang = safeEngine()->get()->meta()->returnJsonAt(jvalue).asString();
     }
     if(config->Setting().getValueMulti(CELL_LANGS, v))
     {
         for(const auto& c : v)
         {
-            viewUri     =   safeEngine()->get()->meta()->returnJsonAt(c, "uri").asString;
-            viewName    =   safeEngine()->get()->meta()->returnJsonAt(c, "code").asString;
-            viewCode    =   safeEngine()->get()->meta()->returnJsonAt(c, "l").asString;
-            viewStatus  =   safeEngine()->get()->meta()->returnJsonAt(c, "status").asBool; //! Status of language.
+            viewUri     =   safeEngine()->get()->meta()->returnJsonAt(c, "uri").asString();
+            viewName    =   safeEngine()->get()->meta()->returnJsonAt(c, "code").asString();
+            viewCode    =   safeEngine()->get()->meta()->returnJsonAt(c, "l").asString();
+            viewStatus  =   safeEngine()->get()->meta()->returnJsonAt(c, "status").asBool(); //! Status of language.
 
             if(viewStatus) // Return only enabled languages.
             {
@@ -187,15 +187,15 @@ std::string Language::getLanguage() __cell_const_noexcept
     std::string_view default_lang;
     if(config->Setting().getValue(CELL_DEFAULT_LANG, jvalue))
     {
-        default_lang = safeEngine()->get()->meta()->returnJsonAt(jvalue).asString;
+        default_lang = safeEngine()->get()->meta()->returnJsonAt(jvalue).asString();
     }
     if(config->Setting().getValueMulti(CELL_LANGS, v))
     {
         for(const auto& c : v)
         {
-            viewUri  = safeEngine()->get()->meta()->returnJsonAt(c, "uri").asString;
-            viewName = safeEngine()->get()->meta()->returnJsonAt(c, "code").asString;
-            viewCode = safeEngine()->get()->meta()->returnJsonAt(c, "l").asString;
+            viewUri  = safeEngine()->get()->meta()->returnJsonAt(c, "uri").asString();
+            viewName = safeEngine()->get()->meta()->returnJsonAt(c, "code").asString();
+            viewCode = safeEngine()->get()->meta()->returnJsonAt(c, "l").asString();
 
             if(viewUri == path.substr(1, 5)) {
                 lcode = viewUri.substr(0,5);

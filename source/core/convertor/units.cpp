@@ -33,7 +33,7 @@ Length::Length()
                 for (Types::size i = 0; i < objectArray.size() && i < m_lengthData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_lengthData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_lengthData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -92,7 +92,7 @@ Temperature::Temperature()
                 for (Types::size i = 0; i < objectArray.size() && i < m_temperatureData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_temperatureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_temperatureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -168,7 +168,7 @@ Area::Area()
                 for (Types::size i = 0; i < objectArray.size() && i < m_areaData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_areaData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_areaData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -231,7 +231,7 @@ Weight::Weight()
                 for (Types::size i = 0; i < objectArray.size() && i < m_weightData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_weightData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_weightData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -294,7 +294,7 @@ Time::Time()
                 for (Types::size i = 0; i < objectArray.size() && i < m_timeData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_timeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_timeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -354,7 +354,7 @@ Speed::Speed()
                 for (Types::size i = 0; i < objectArray.size() && i < m_speedData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_speedData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_speedData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -407,7 +407,7 @@ Energy::Energy()
                 for (Types::size i = 0; i < objectArray.size() && i < m_energyData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_energyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_energyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -463,7 +463,7 @@ Power::Power()
                 for (Types::size i = 0; i < objectArray.size() && i < m_powerData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_powerData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_powerData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -517,7 +517,7 @@ Pressure::Pressure()
                 for (Types::size i = 0; i < objectArray.size() && i < m_pressureData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_pressureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_pressureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -573,7 +573,7 @@ Angle::Angle()
                 for (Types::size i = 0; i < objectArray.size() && i < m_angleData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_angleData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_angleData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -627,7 +627,7 @@ Currency::Currency()
                 for (Types::size i = 0; i < objectArray.size() && i < m_currencyData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_currencyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_currencyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -695,7 +695,7 @@ Volume::Volume()
                 for (Types::size i = 0; i < objectArray.size() && i < m_volumeData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_volumeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_volumeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -758,7 +758,7 @@ Frequency::Frequency()
                 for (Types::size i = 0; i < objectArray.size() && i < m_frequencyData.size(); ++i)
                 {
                     const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_frequencyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString;
+                    m_frequencyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }

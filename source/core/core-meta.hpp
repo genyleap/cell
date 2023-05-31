@@ -395,13 +395,23 @@ public:
      * @brief Structure representing a JSON value with various data types.
      */
     struct RetJsonStruct final {
-        std::string                                     asString;   //!< String value
-        bool                                            asBool;     //!< Boolean value
-        double                                          asDouble;   //!< Double value
-        int                                             asInt;      //!< Integer value
-        Types::u64                                      asInt64;    //!< Int64 value
-        std::vector<RetJsonStruct>                      asArray;    //!< Array value
-        std::unordered_map<std::string, RetJsonStruct>  asObject;   //!< Object value
+        std::string                                     toString;   //!< String value
+        bool                                            toBool;     //!< Boolean value
+        double                                          toDouble;   //!< Double value
+        int                                             toInt;      //!< Integer value
+        Types::u64                                      toInt64;    //!< Int64 value
+        std::vector<RetJsonStruct>                      toArray;    //!< Array value
+        std::unordered_map<std::string, RetJsonStruct>  toObject;   //!< Object value
+
+
+        std::string                                     asString    ()  {   return toString;  }
+        bool                                            asBool      ()  {   return toBool;    }
+        double                                          asDouble    ()  {   return toDouble;  }
+        int                                             asInt       ()  {   return toInt;     }
+        Types::u64                                      asInt64     ()  {   return toInt64;   }
+        std::vector<RetJsonStruct>                      asArray     ()  {   return toArray;   }
+        std::unordered_map<std::string, RetJsonStruct>  asObject    ()  {   return toObject;  }
+
     };
 
     /**
@@ -422,20 +432,20 @@ public:
 #ifdef USE_BOOST
         ((result = &(result->at(args))), ...);
         if (result->is_string()) {
-            retStruct.asString = result->as_string();
+            retStruct.toString = result->as_string();
         } else if (result->is_bool()) {
-            retStruct.asBool = result->as_bool();
+            retStruct.toBool = result->as_bool();
         } else if (result->is_int64()) {
-            retStruct.asInt64 = result->as_int64();
+            retStruct.toInt64 = result->as_int64();
         } else if (result->is_double()) {
-            retStruct.asDouble = result->as_double();
+            retStruct.toDouble = result->as_double();
         } else if (result->is_array()) {
             for (const auto& value : result->as_array()) {
-                retStruct.asArray.push_back(returnJsonAt(value));
+                retStruct.toArray.push_back(returnJsonAt(value));
             }
         } else if (result->is_object()) {
             for (const auto& keyValue : result->as_object()) {
-                retStruct.asObject[keyValue.key()] = returnJsonAt(keyValue.value());
+                retStruct.toObject[keyValue.key()] = returnJsonAt(keyValue.value());
             }
         }
 #else
