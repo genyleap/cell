@@ -21,22 +21,6 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Concepts)
 
-/**
- * @brief Concept to check if a calendar object can set the timezone.
- *
- * @tparam Calendar The calendar type to check.
- */
-template<typename Calendar>
-concept SetTimezone = requires(Calendar calendar, const std::string& timezone) {
-    /**
-     * @brief Set the timezone of the calendar.
-     *
-     * @param timezone The timezone to set.
-     * @return std::optional<std::string> Returns an optional string representing the previous timezone, if applicable.
-     */
-    { calendar.setTimezone(timezone) } -> std::same_as<std::optional<std::string>>;
-};
-
 template<typename T>
 concept CalendarConcept = requires(T calendar)
 {
