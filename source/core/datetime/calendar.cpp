@@ -31,7 +31,7 @@ std::vector<std::string> GregorianCalendar::availableCalendars() const
     return m_calendarData.availableCalendars;
 }
 
-std::optional<std::string> GregorianCalendar::dateFromParts(int year, int month, int day) const
+Types::OptionalString GregorianCalendar::dateFromParts(int year, int month, int day) const
 {
     if (isDateValid(year, month, day)) {
         std::stringstream dateStream;
@@ -43,7 +43,7 @@ std::optional<std::string> GregorianCalendar::dateFromParts(int year, int month,
     return std::nullopt;
 }
 
-std::optional<std::string> GregorianCalendar::dateTimeToString(const std::string& format) const
+Types::OptionalString GregorianCalendar::dateTimeToString(const std::string& format) const
 {
     // Get the current date and time components
     std::time_t currentTime = std::time(nullptr);
@@ -231,7 +231,7 @@ int GregorianCalendar::minimumDaysInMonth() const
     return 28;
 }
 
-std::optional<std::string> GregorianCalendar::monthName(int month) const
+Types::OptionalString GregorianCalendar::monthName(int month) const
 {
     auto meta           = safeEngine()->meta();
     auto currentLang    = createLanguageObject()->getLanguageCode();
@@ -263,9 +263,9 @@ int GregorianCalendar::monthsInYear() const
     return 12; // In the Gregorian calendar, there are always 12 months in a year
 }
 
-std::optional<std::string> GregorianCalendar::name() const
+Types::OptionalString GregorianCalendar::name() const
 {
-    return std::optional<std::string>(m_calendarData.name);
+    return Types::OptionalString(m_calendarData.name);
 }
 
 std::vector<int> GregorianCalendar::partsFromDate(const std::string& date) const
@@ -282,7 +282,7 @@ std::vector<int> GregorianCalendar::partsFromDate(const std::string& date) const
     return parts;
 }
 
-std::optional<std::string> GregorianCalendar::standaloneMonthName(int month) const
+Types::OptionalString GregorianCalendar::standaloneMonthName(int month) const
 {
     // Check if the month is within the valid range
     if (month < 1 || month > 12) {
@@ -299,7 +299,7 @@ std::optional<std::string> GregorianCalendar::standaloneMonthName(int month) con
     return standaloneMonthNames[month - 1];
 }
 
-std::optional<std::string> GregorianCalendar::standaloneWeekDayName(int day) const
+Types::OptionalString GregorianCalendar::standaloneWeekDayName(int day) const
 {
     // Check if the day is within the valid range
     if (day < 1 || day > 7) {
@@ -316,7 +316,7 @@ std::optional<std::string> GregorianCalendar::standaloneWeekDayName(int day) con
 
 }
 
-std::optional<std::string> GregorianCalendar::weekDayName(int day) const
+Types::OptionalString GregorianCalendar::weekDayName(int day) const
 {
     // Check if the day is within the valid range
     if (day < 1 || day > 7) {
@@ -368,7 +368,7 @@ bool GregorianCalendar::isDateTimeValid(int year, int month, int day, int hour, 
     return true;
 }
 
-std::optional<std::string> GregorianCalendar::getTimezone() const
+Types::OptionalString GregorianCalendar::getTimezone() const
 {
     std::string timezone = "GMT+0";  // Replace with your actual implementation
 
@@ -383,7 +383,7 @@ void GregorianCalendar::setTimezone(const std::string& timezone)
     current_timezone = timezone;
 }
 
-std::optional<std::string> GregorianCalendar::convertToTimezone(const std::string& datetime, const std::string& timezone)  const
+Types::OptionalString GregorianCalendar::convertToTimezone(const std::string& datetime, const std::string& timezone)  const
 {
     try {
         std::istringstream iss(datetime);
@@ -411,21 +411,21 @@ std::optional<std::string> GregorianCalendar::convertToTimezone(const std::strin
     }
 }
 
-std::optional<std::string> GregorianCalendar::getLocalizedMonthName(int month, const std::string& language) const
+Types::OptionalString GregorianCalendar::getLocalizedMonthName(int month, const std::string& language) const
 {
     std::string localized_month_name = "";  // Replace with your actual implementation
 
     return localized_month_name;
 }
 
-std::optional<std::string> GregorianCalendar::getLocalizedWeekDayName(int day, const std::string& language) const
+Types::OptionalString GregorianCalendar::getLocalizedWeekDayName(int day, const std::string& language) const
 {
     std::string localized_weekday_name = "";  // Replace with your actual implementation
 
     return localized_weekday_name;
 }
 
-std::optional<std::string> GregorianCalendar::getLocalizedDate(const std::string& date, const std::string& language) const
+Types::OptionalString GregorianCalendar::getLocalizedDate(const std::string& date, const std::string& language) const
 {
     // Check if the specified language is "en_US"
     if (language == "en_US") {
@@ -489,7 +489,7 @@ std::vector<std::string> GregorianCalendar::getSpecialDates(int year) const
     return special_dates;
 }
 
-std::optional<std::string> GregorianCalendar::addDays(const std::string& date, int days) const
+Types::OptionalString GregorianCalendar::addDays(const std::string& date, int days) const
 {
     std::tm time = {};
     std::istringstream ss(date);
@@ -509,7 +509,7 @@ std::optional<std::string> GregorianCalendar::addDays(const std::string& date, i
     return result_date;
 }
 
-std::optional<std::string> GregorianCalendar::addMonths(const std::string& date, int months) const
+Types::OptionalString GregorianCalendar::addMonths(const std::string& date, int months) const
 {
     std::tm time = {};
     std::istringstream ss(date);
@@ -535,7 +535,7 @@ std::optional<std::string> GregorianCalendar::addMonths(const std::string& date,
     return result_date;
 }
 
-std::optional<std::string> GregorianCalendar::addYears(const std::string& date, int years) const {
+Types::OptionalString GregorianCalendar::addYears(const std::string& date, int years) const {
     std::tm time = {};
     std::istringstream ss(date);
     ss >> std::get_time(&time, "%Y-%m-%d");
