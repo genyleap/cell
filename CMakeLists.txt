@@ -137,15 +137,19 @@ set(SUFFIX_EXTRA *.in)
 set(SUFFIX_HPPHEADER *.hpp)
 set(SUFFIX_SOURCE *.cpp)
 set(SUFFIX_CONFIG *.json)
+set(SUFFIX_TRANSLATIONS *.json)
 
 if(PROJECT_MAIN_TYPE STREQUAL "qtwidget")
      set(SUFFIX_WIDGET *.ui)
+     set(SUFFIX_TRANSLATIONS *.json)
 elseif(PROJECT_MAIN_TYPE STREQUAL "qtquick")
      set(SUFFIX_QML *.qml)
      set(SUFFIX_QRC *.qrc)
+     set(SUFFIX_TRANSLATIONS *.json)
+else()
+    set(SUFFIX_TRANSLATIONS *.json)
 endif()
 
-file(GLOB PRECOMPILED precompiled/pch.hpp)
 file(GLOB HEADERS source/${SUFFIX_HPPHEADER})
 file(GLOB SOURCES source/${SUFFIX_SOURCE})
 
@@ -156,6 +160,11 @@ file(
     GLOB HEADERS
     source/${SUFFIX_HPPHEADER}
     source/core/${SUFFIX_HPPHEADER}
+    source/core/datetime/${SUFFIX_HPPHEADER}
+    source/core/convertor/${SUFFIX_HPPHEADER}
+    source/core/convertor/currencies/${SUFFIX_HPPHEADER}
+    source/core/convertor/text/${SUFFIX_HPPHEADER}
+    source/core/convertor/color/${SUFFIX_HPPHEADER}
     source/classes/${SUFFIX_HPPHEADER}
     source/modules/network/${SUFFIX_HPPHEADER}
     source/modules/hardware/system/${SUFFIX_HPPHEADER}
@@ -165,6 +174,7 @@ file(
     source/abstracts/${SUFFIX_HPPHEADER}
     source/abstracts/apis/${SUFFIX_HPPHEADER}
     source/abstracts/account/${SUFFIX_HPPHEADER}
+    source/abstracts/calendar/${SUFFIX_HPPHEADER}
     source/abstracts/database/${SUFFIX_HPPHEADER}
     source/abstracts/database/mysql/${SUFFIX_HPPHEADER}
     source/abstracts/database/psql/${SUFFIX_HPPHEADER}
@@ -180,6 +190,11 @@ file(
     GLOB SOURCES
     source/${SUFFIX_SOURCE}
     source/core/${SUFFIX_SOURCE}
+    source/core/datetime/${SUFFIX_SOURCE}
+    source/core/convertor/${SUFFIX_SOURCE}
+    source/core/convertor/currencies/${SUFFIX_SOURCE}
+    source/core/convertor/text/${SUFFIX_SOURCE}
+    source/core/convertor/color/${SUFFIX_SOURCE}
     source/classes/${SUFFIX_SOURCE}
     source/modules/network/${SUFFIX_SOURCE}
     source/modules/hardware/system/${SUFFIX_SOURCE}
@@ -189,6 +204,7 @@ file(
     source/abstracts/${SUFFIX_SOURCE}
     source/abstracts/apis/${SUFFIX_SOURCE}
     source/abstracts/account/${SUFFIX_SOURCE}
+    source/abstracts/calendar/${SUFFIX_SOURCE}
     source/abstracts/database/${SUFFIX_SOURCE}
     source/abstracts/database/mysql/${SUFFIX_SOURCE}
     source/abstracts/database/psql/${SUFFIX_SOURCE}
@@ -202,6 +218,13 @@ file(
 
 )
 
+file(GLOB PRECOMPILED
+    precompiled/pch.hpp
+    precompiled/unix/pch.hpp
+    precompiled/linux/pch.hpp
+    precompiled/win32/pch.hpp
+)
+
 file(GLOB EXAMPLES
      source/examples/${SUFFIX_HPPHEADER}
      source/examples/${SUFFIX_SOURCE}
@@ -209,6 +232,10 @@ file(GLOB EXAMPLES
 file(GLOB UTILS
      utilities/${SUFFIX_HPPHEADER}
      utilities/${SUFFIX_SOURCE}
+)
+
+file(GLOB TRANSLATIONS
+    translations/${SUFFIX_TRANSLATIONS}
 )
 
 if(${PROJECT_MAIN_TYPE} STREQUAL "stl")
@@ -262,6 +289,7 @@ file(GLOB SOURCESFILE
     ${UI_QML_SOURCE}
     ${UTILS}
     ${CONFIGFILE}
+    ${TRANSLATIONS}
     ${PRECOMPILED}
     ${EXAMPLES}
     )
@@ -305,6 +333,7 @@ source_group("Entry Point (Main)"   FILES ${MAIN_ENTRY_POINT})
 source_group("Base"   FILES ${HEADERS} ${SOURCES})
 source_group("UI"     FILES ${UI_SOURCE})
 source_group("UI/QML"     FILES ${UI_QML_SOURCE})
+source_group("Translations"     FILES ${TRANSLATIONS})
 source_group("Config" FILES ${CONFIGFILE})
 source_group("Examples"  FILES ${EXAMPLES})
 
@@ -440,7 +469,16 @@ if(GUI_APPLICATION AND PROJECT_MAIN_TYPE STREQUAL "qt" OR PROJECT_MAIN_TYPE STRE
         endif()
     endif()
 
-    #Extra Modules
+    # C++ STL Library Features Libs.
+    find_package(${LIB_STL_MODULES} REQUIRED COMPONENTS ${LIB_STL_MODULES_LINKER})
+
+    target_link_libraries(${PROJECT_NAME} PRIVATE
+            ${LIB_STL_MODULES_LINKER}
+            ${LIB_MODULES}
+            ${QT_MODULES_LINK}
+            ${OS_LIBS}
+        )
+
     target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/source PRIVATE source ${LIB_TARGET_INCLUDE_DIRECTORIES})
     target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/source ${LIB_TARGET_LINK_DIRECTORIES})
 
@@ -487,8 +525,15 @@ else()
         endif()
     endif()
 
+    # C++ STL Library Features Libs.
+    find_package(${LIB_STL_MODULES} REQUIRED COMPONENTS ${LIB_STL_MODULES_LINKER})
+
     #Extra Modules
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${LIB_MODULES} ${OS_LIBS})
+    target_link_libraries(${PROJECT_NAME} PRIVATE
+            ${LIB_STL_MODULES_LINKER}
+            ${LIB_MODULES}
+            ${OS_LIBS}
+        )
     target_include_directories(${PROJECT_NAME}
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/source PRIVATE source
@@ -529,6 +574,14 @@ file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/final/server-log)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR}/final)
 install(DIRECTORY DESTINATION ${CMAKE_BINARY_DIR}/final/server-log)
 
+#file(COPY "${PROJECT_SOURCE_DIR}/build/${PLATFORM_FOLDER}/lib" DESTINATION  "${PROJECT_SOURCE_DIR}/build/final")
+
+#add_custom_command(
+#        TARGET ${PROJECT_NAME}  POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy_directory
+#                "${PROJECT_SOURCE_DIR}/build/${PLATFORM_FOLDER}/lib"
+#                 "${PROJECT_SOURCE_DIR}/build/final"
+#             )
 
 #Ignore unused files.
 list(APPEND CPACK_SOURCE_IGNORE_FILES /.git/ /build/ .gitignore .DS_Store)
