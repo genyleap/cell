@@ -51,6 +51,9 @@ The construction and development of software products often involve various meth
 ## Language Standard Support [C++2a or C++2b]
 - It depends on your compiler!
 
+## If you want donate, Bitcoin address is here! <3
+<img width="368" alt="Screenshot 2022-11-12 at 9 25 49 AM" src="https://user-images.githubusercontent.com/4066299/201459675-f3c0d09e-f308-4fa6-9be2-60a4bd81212e.png">
+
 ## TOOD
 - Bug fixing.
 - Add new features.
