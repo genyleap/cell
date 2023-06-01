@@ -55,22 +55,22 @@ enum class ModuleState : Types::u8
 
 
 /*!
- * \brief The PermissionType enum
- */
-enum class PermissionType : Types::u8
-{
-    ReadOnly,
-    EditableOnly,
-    Restricted,
-    FullAccess,
-    ByService
-};
-
-/*!
  * \brief The ModuleInfo class
  */
 struct __cell_export ModuleInfo __cell_final
 {
+    /*!
+     * \brief The PermissionType enum
+     */
+    enum PermissionType : Types::u8
+    {
+        ReadOnly,
+        EditableOnly,
+        Restricted,
+        FullAccess,
+        ByService
+    };
+
     //!<  Types of usage.
     ModuleType                         moduleType      {}; //!< The type of module.
     GroupListAccess                    groupAccess     {}; //!< The group of users that can be access to the module.

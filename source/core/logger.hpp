@@ -24,7 +24,6 @@
 #   error "Cell's "core/core.hpp" was not found!"
 #endif
 
-
 #if __has_include("core/filesystem.hpp")
 #   include "core/filesystem.hpp"
 #else

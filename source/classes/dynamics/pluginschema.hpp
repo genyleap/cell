@@ -56,22 +56,22 @@ enum class PluginState : Types::u8
 
 
 /*!
- * \brief The PermissionType enum
- */
-enum class PermissionType : Types::u8
-{
-    ReadOnly,
-    EditableOnly,
-    Restricted,
-    FullAccess,
-    ByService
-};
-
-/*!
  * \brief The PluginInfo class
  */
 struct PluginInfo __cell_final
 {
+    /*!
+     * \brief The PermissionType enum
+     */
+    enum PermissionType : Types::u8
+    {
+        ReadOnly,
+        EditableOnly,
+        Restricted,
+        FullAccess,
+        ByService
+    };
+
     //!<  Types of usage.
     PluginType                         pluginType      {}; //!< The type of plugin.
     GroupListAccess                    groupAccess     {}; //!< The group of users that can be access to the module.

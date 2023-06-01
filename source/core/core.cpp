@@ -10,6 +10,7 @@
 #include "console.hpp"
 #include "terminal.hpp"
 #include "translator/language.hpp"
+#include "build/config.hpp"
 
 CELL_USING_NAMESPACE Cell::Utility;
 CELL_USING_NAMESPACE Cell::Types;
@@ -342,10 +343,22 @@ Engine& Engine::self()
 
 Engine::Engine()
 {
-    Log("The engine has started!", LoggerType::Success);
     //!< New instances.
+    //!
+    Console::print << __cell_newline;
+    Console::print << "\033[1;33m" << PROJECT_REAL_NAME << " Engine - compiled on " << __DATE__ << "\033[0m" << __cell_newline;
+    Console::print << "--------------------= ENGINE =--------------------" << __cell_newline;
+    Console::print << "\033[0;37m" << "Engine               :   "    << PROJECT_REAL_NAME           << "\033[0m"       << __cell_newline;
+    Console::print << "\033[0;37m" << "Description          :   "    << PROJECT_DESCRIPTION         << "\033[0m"       << __cell_newline;
+    Console::print << "\033[0;37m" << "Engine Version       :   "    << PROJECT_VERSION_STRING      << "\033[0m"       << __cell_newline;
+    Console::print << "\033[0;37m" << "Organization         :   "    << PROJECT_ORGANIZATION        << "\033[0m"       << __cell_newline;
+    Console::print << "\033[0;37m" << "Official Address     :   "    << "\033[4;37m" << PROJECT_HOMEPAGE_URL  << "\033[0m"   << "\033[0m"   << __cell_newline;
+    Console::print << "\033[0;37m" << "License              :   "    << PROJECT_LICENSE_TYPE        << "\033[0m"       << __cell_newline;
+    Console::print << "--------------------= ENGINE =--------------------" << __cell_newline;
+    Console::print << __cell_newline;
     Scope<Configuration> config(new Configuration(ConfigType::File));
     config->init(SectionType::SystemCore);
+    Log("The engine has started!", LoggerType::Success);
 }
 
 Engine::~Engine()

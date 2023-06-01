@@ -1,0 +1,7 @@
+#include "classes/dynamics/module.hpp"
+#include "classes/dynamics/moduleinterface.hpp"
+#include "classes/dynamics/modulemanager.hpp"
+
+#include "classes/dynamics/plugin.hpp"
+#include "classes/dynamics/plugininterface.hpp"
+#include "classes/dynamics/pluginmanager.hpp"

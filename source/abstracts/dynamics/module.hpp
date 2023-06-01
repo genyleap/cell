@@ -36,18 +36,6 @@ __cell_enum_class ModuleType : Types::u8
 };
 
 /*!
- * \brief The PermissionType enum
- */
-__cell_enum_class PermissionType
-{
-    ReadOnly,
-    EditableOnly,
-    Restricted,
-    FullAccess,
-    ByService
-};
-
-/*!
  * \brief The ModuleInfo class
  */
 struct ModuleInfo __cell_final

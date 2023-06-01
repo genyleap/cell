@@ -38,18 +38,6 @@ __cell_enum_class PluginType : Types::u8
 };
 
 /*!
- * \brief The PermissionType enum
- */
-__cell_enum_class PermissionType
-{
-    ReadOnly,
-    EditableOnly,
-    Restricted,
-    FullAccess,
-    ByService
-};
-
-/*!
  * \brief The PluginInfo class
  */
 struct PluginInfo __cell_final

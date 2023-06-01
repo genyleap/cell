@@ -510,7 +510,7 @@ JSonValue Translator::getLanguageSpec(const std::string& code) __cell_noexcept
         }
 #else
         JSonValue object = root[CELL_LANGUAGE_SPEC];
-        if(object[meta->returnView(TRANSLATOR_CONSTANTS::CODE)] == code) {
+        if(object[Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)] == code) {
             d = CELL_MOVE(object);
         }
 #endif

@@ -90,7 +90,7 @@ public:
      * @brief getPermission function will returns module permission.
      * @return an optional type of permision.
      */
-    __cell_no_discard_virtual Types::Optional<PermissionType> getPermission()  __cell_const_noexcept = __cell_zero;
+    __cell_no_discard_virtual Types::Optional<ModuleInfo::PermissionType> getPermission()  __cell_const_noexcept = __cell_zero;
 
     /**
      * @brief getState function will returns module status.
@@ -119,6 +119,48 @@ public:
      */
     __cell_virtual ModuleType type() __cell_const_noexcept = __cell_zero;
 };
+
+struct MODULES_CONSTANTS final
+{
+    __cell_static_const_constexpr std::string_view MODULES_ROOT  { CONFIG::SYSTEM_MODULES_FOLDER };
+};
+
+/**
+ * @brief Class for managing a container of module items.
+ */
+class ModuleContainer
+{
+public:
+    /**
+     * @brief Default constructor for ModuleContainer.
+     */
+    ModuleContainer() = default;
+
+    /**
+     * @brief Registers a module item to the container.
+     *
+     * @param name The name of the module to register.
+     */
+    void registerItem(const std::string& name)
+    {
+        auto bySuffix { name + CONFIG::MODULE_FILE_SUFFIX.data() };
+        m_list.push_back(bySuffix);
+    }
+
+    /**
+     * @brief Gets the list of registered plugin items.
+     *
+     * @return A vector of strings containing the registered module items.
+     */
+    std::vector<std::string> getList()
+    {
+        return m_list;
+    }
+
+private:
+    std::vector<std::string> m_list; //!< The list of registered module items.
+};
+
 
 CELL_NAMESPACE_END
 

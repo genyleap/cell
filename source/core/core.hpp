@@ -49,6 +49,11 @@
 #   error "Cell's "logger.hpp" was not found!"
 #endif
 
+#if __has_include("core/console.hpp")
+#   include "core/console.hpp"
+#else
+#   error "Cell's "core/console.hpp" was not found!"
+#endif
 
 #if __has_include("format.hpp")
 #   include "format.hpp"

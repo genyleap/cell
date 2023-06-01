@@ -61,8 +61,8 @@ struct CONFIG final {
   static constexpr std::string_view SYSTEM_CUSTOM_FILE = "config/custom-setting.json";
   static constexpr std::string_view SYSTEM_DATABASE_FILE = "config/system-database.json";
   static constexpr std::string_view SYSTEM_INTERFACE_FILE = "config/system-interface.json";
-  static constexpr std::string_view SYSTEM_MODULES_FOLDER = "modules";
-  static constexpr std::string_view SYSTEM_PLUGINS_FOLDER = "plugins";
+  static constexpr std::string_view SYSTEM_MODULES_FOLDER = "modules/";
+  static constexpr std::string_view SYSTEM_PLUGINS_FOLDER = "plugins/";
   static constexpr std::string_view SYSTEM_TABLES_PREFIX = "teg_";
   static constexpr std::string_view SYSTEM_TABLES_VALUE_STRUCT = "_l";
   static constexpr std::string_view SYSTEM_TABLES_TABLE_UNICODE = "utf-8";

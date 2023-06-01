@@ -90,7 +90,7 @@ public:
      * @brief getPermission function will returns plugin permission.
      * @return an optional type of permision.
      */
-    __cell_no_discard_virtual Types::Optional<PermissionType> getPermission()  __cell_const_noexcept = __cell_zero;
+    __cell_no_discard_virtual Types::Optional<PluginInfo::PermissionType> getPermission()  __cell_const_noexcept = __cell_zero;
 
     /**
      * @brief getState function will returns plugin status.
@@ -122,6 +122,48 @@ public:
     __cell_virtual PluginInfo getData()  __cell_const_noexcept = __cell_zero;
 
 };
+
+struct PLUGINS_CONSTANTS final
+{
+    __cell_static_const_constexpr std::string_view PLUGINS_ROOT  { CONFIG::SYSTEM_PLUGINS_FOLDER };
+};
+
+/**
+ * @brief Class for managing a container of plugin items.
+ */
+class PluginContainer
+{
+public:
+    /**
+     * @brief Default constructor for PluginContainer.
+     */
+    PluginContainer() = default;
+
+    /**
+     * @brief Registers a plugin item to the container.
+     *
+     * @param name The name of the plugin to register.
+     */
+    void registerItem(const std::string& name)
+    {
+        auto bySuffix { name + CONFIG::PLUGIN_FILE_SUFFIX.data() };
+        m_list.push_back(bySuffix);
+    }
+
+    /**
+     * @brief Gets the list of registered plugin items.
+     *
+     * @return A vector of strings containing the registered plugin items.
+     */
+    std::vector<std::string> getList()
+    {
+        return m_list;
+    }
+
+private:
+    std::vector<std::string> m_list; //!< The list of registered plugin items.
+};
+
 
 CELL_NAMESPACE_END
 
