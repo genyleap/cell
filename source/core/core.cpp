@@ -95,7 +95,7 @@ MachineInterface::~MachineInterface()
 
 void Machine::turnOn()
 {
-    //Todo... need to physical api!
+  //Todo... need to physical api!
 }
 
 void Machine::turnOff()
@@ -106,26 +106,6 @@ void Machine::turnOff()
 void Machine::reboot()
 {
     system("shutdown /r /t 0");
-}
-
-
-Engine::Engine()
-{
-    //!< New instances.
-    Scope<Configuration> config(new Configuration(ConfigType::File));
-    config->init(SectionType::SystemCore);
-    if(autoStart) {
-        if(start())
-        {
-            Log("Engine ha set for auto start mode!", LoggerType::Default);
-        }
-    }
-}
-
-CreateSingletonSelf(Engine)
-
-    Engine::~Engine()
-{
 }
 
 Machine::Machine()
@@ -347,16 +327,43 @@ Translation::Translator& Engine::translator()
 
 OptionalBool Engine::isInitialized = false;
 
+Engine* Engine::instance = nullptr;
+
+void Engine::destroyInstance() {
+    delete Engine::instance;
+    Engine::instance = nullptr;
+}
+
+Engine& Engine::self()
+{
+    static Engine instance;
+    return instance;
+}
+
+Engine::Engine()
+{
+    Log("The engine has started!", LoggerType::Success);
+    //!< New instances.
+    Scope<Configuration> config(new Configuration(ConfigType::File));
+    config->init(SectionType::SystemCore);
+}
+
+Engine::~Engine()
+{
+    Log("The engine has shut down!", LoggerType::Critical);
+}
+
+
 bool Engine::start()
 {
     bool res { false };
 
-    // Check if engine has initialized!
-    //    if((isInitialized.has_value()) && isInitialized.value())
-    //    {
-    //        return false;
-    //    }
-
+           //Check if engine has initialized!
+    if((IsSet(isInitialized.has_value())) && IsSet(isInitialized.value()))
+    {
+        Log("You are trying to restart the engine! No need to do this :)", LoggerType::Warning);
+        return false;
+    }
 
     std::thread t([&]() {
         auto language = Cell::Multilangual::Language();
@@ -368,33 +375,33 @@ bool Engine::start()
     t.join();
 
 
-    auto config = Configuration(ConfigType::File);
-    config.init(SectionType::SystemCore);
+           //    auto config = Configuration(ConfigType::File);
+           //    config.init(SectionType::SystemCore);
     //! Database Connection
-    //    Scope<Database::Connection>con(new Database::Connection());
-    ApplicationData appData;
-    {
-        appData.path    = "";
-        appData.module  = "starter";
-    }
-    //    auto lang = Multilangual::Language(appData.path.value());
-    //    {
-    //        Application::get(appData)->engine->setLanguage(lang.getLanguage());
-    //        Application::get(appData)->translator->setFile(lang.languageSupport());
-    //    }
-    //    //!< Parsing
-    //    if(Application::get(appData)->translator->parse()) {
-    //        res = true;
-    //        if(System::DeveloperMode::IsEnable)
-    //            Log("Language data has been parsed!", LoggerType::Done); //!< Parsing Done!
-    //    } else {
-    //        res = false;
-    //        if(System::DeveloperMode::IsEnable)
-    //            Log("No parsing...!", LoggerType::Failed);  //!< Parsing Failed!
-    //    }
+           //    Scope<Database::Connection>con(new Database::Connection());
+           //    ApplicationData appData;
+           //    {
+           //        appData.path    = "";
+           //        appData.module  = "starter";
+           //    }
+           //        auto lang = Multilangual::Language(appData.path.value());
+           //        {
+           //            Application::get(appData)->engine->setLanguage(lang.getLanguage());
+           //            Application::get(appData)->translator->setFile(lang.languageSupport());
+           //        }
+           //        //!< Parsing
+           //        if(Application::get(appData)->translator->parse()) {
+           //            res = true;
+           //            if(System::DeveloperMode::IsEnable)
+           //                Log("Language data has been parsed!", LoggerType::Done); //!< Parsing Done!
+           //        } else {
+           //            res = false;
+           //            if(System::DeveloperMode::IsEnable)
+           //                Log("No parsing...!", LoggerType::Failed);  //!< Parsing Failed!
+           //        }
     isInitialized = true;
 
-    Log("Engine has initialized!", LoggerType::Success);
+    Log("Engine has initialized!", LoggerType::Info);
 
     return res;
 }
@@ -429,7 +436,7 @@ std::string Engine::copyright() __cell_noexcept
 #if defined(CELL_COPYRIGHT)
     return CELL_COPYRIGHT;
 #else
-    // TODO... add output for html template.
+  // TODO... add output for html template.
     Termination t;
     t.terminate(TerminateType::Violation);
 #endif
@@ -676,7 +683,7 @@ VectorString Engine::tableFilter(const std::vector<std::string>& tables, TableTy
     //        break;
     //    }
 
-    //    return res;
+           //    return res;
     return VectorString();
 }
 
@@ -1056,7 +1063,7 @@ void Engine::elementErase(std::string& input, const std::string& chars) __cell_n
     auto chars_set = chars | std::views::transform([](char c) {
                          return std::ranges::single_view(c);}) | std::views::join| std::views::common;
 
-    // Use std::erase_if with the chars_set to remove the specified characters from the string
+           // Use std::erase_if with the chars_set to remove the specified characters from the string
     std::erase_if(input, [&chars_set](char c) {
         return std::ranges::find(chars_set, c) != end(chars_set);
     });
@@ -1070,16 +1077,16 @@ std::string Engine::whiteSpaceReduce(std::string_view input) __cell_noexcept
         return std::isspace(c);
     };
 
-    // Create a range that filters out whitespace
+           // Create a range that filters out whitespace
     auto range = input | std::views::filter([is_space](char c) { return !is_space(c); });
 
-    // Use the filtered range to create a new string without whitespace
+           // Use the filtered range to create a new string without whitespace
     std::string output{};
 
-    // Append the contents of "range" to "output"
+           // Append the contents of "range" to "output"
     std::ranges::copy(range, std::back_inserter(output));
 
-    // Return the new string
+           // Return the new string
     return output;
 }
 
@@ -1090,15 +1097,15 @@ std::string Engine::whiteSpaceLeading(std::string_view input) __cell_noexcept
         return !std::isspace(c);
     };
 
-    // Find the first character in the string that is not a white space character.
+           // Find the first character in the string that is not a white space character.
     auto begin = std::ranges::find_if(input, not_space);
 
-    // Create a new string that begins with the first non-white space character
+           // Create a new string that begins with the first non-white space character
     std::string output {
         input.substr(std::distance(input.begin(), begin))
     };
 
-    // Return the new string
+           // Return the new string
     return output;
 }
 
@@ -1124,7 +1131,7 @@ void Engine::delayIfNeeded(std::chrono::time_point<std::chrono::high_resolution_
         std::this_thread::sleep_for(std::chrono::duration<unsigned int>(rateLimit - timeSinceLastRequest));
     }
 
-    // Update the last request time to the current time.
+           // Update the last request time to the current time.
     lastRequestTime = std::chrono::high_resolution_clock::now();
 }
 
@@ -1151,13 +1158,14 @@ void Engine::setPath(const std::string &p)
     currentPath = p;
 }
 
-// Definition of the createEngineObject function
-Scope<System::Engine> createEngineObject()
+EngineController::EngineController()
 {
-    // Allocate memory for a Engine object using 'new'
-    Engine* cellEnginePtr = new Engine;
-    // Wrap the raw pointer in a unique_ptr and return it
-    return std::unique_ptr<Engine>(cellEnginePtr);
+    enginePtr.reset(&Engine::self(), [](Engine*) {});
+}
+
+Engine& EngineController::getEngine() const
+{
+    return *enginePtr;
 }
 
 Types::Optional<Meta::MetaEngine> safeMetaObject() __cell_noexcept
@@ -1183,187 +1191,9 @@ Scope<Multilangual::Language> createLanguageObject()
     return std::unique_ptr<Multilangual::Language>(cellLanguagePtr);
 }
 
-
-Types::Optional<Engine> safeEngine() __cell_noexcept
-{
-    return std::make_optional(Engine());
-}
-
 Types::Optional<Format> safeFormat() __cell_noexcept
 {
     return std::make_optional(Format());
-}
-
-Application::Application(const ApplicationData& appData)
-{
-    //    __cell_safe_instance_rhs(language, Multilangual::Language, appData.path.value_or(__cell_unknown));
-    //    __cell_safe_instance(translator, Translation::Translator);
-    //    __cell_safe_instance(appDataPtr, ApplicationData);
-    ///!Smart Scopes
-    {
-        __cell_smart_instance(engine, Engine);
-        __cell_smart_instance(version, Version);
-        __cell_smart_instance(systemInfo, SystemInfo);
-    }
-    ///!Inits
-    {
-        version->setVersion(appData.semanticVersion, appData.releaseType);
-        appDataPtr->path = appData.path.value_or(__cell_unknown);
-        {
-            systemInfo->name = appData.systemInfo.name;
-            systemInfo->codeName = appData.systemInfo.codeName;
-            systemInfo->compiledDate = appData.systemInfo.compiledDate;
-            systemInfo->license = appData.systemInfo.license;
-            systemInfo->type = appData.systemInfo.type;
-            systemInfo->version = appData.systemInfo.version;
-        }
-    }
-}
-
-Application::~Application()
-{
-    //    __cell_safe_delete(translator);
-    //    __cell_safe_delete(appDataPtr);
-    //    __cell_safe_delete(language);
-}
-
-Application* Application::appPtr;
-
-ApplicationData* Application::appDataPtr;
-
-Application* Application::get(const ApplicationData& appData)
-{
-    if (!appPtr)
-    {
-        __cell_safe_instance_rhs(appPtr, Application, appData);
-        {
-            appPtr->path() = appData.path.value_or(__cell_unknown);
-            appDataPtr->path = appData.path.value_or(__cell_unknown);
-            appDataPtr->semanticVersion = appData.semanticVersion;
-            appDataPtr->releaseType = appData.releaseType;
-        }
-    }
-    return appPtr;
-}
-
-void Application::start()
-{
-    if(System::DeveloperMode::IsEnable)
-        Log("Engine started!", LoggerType::Info); //!< Engine Start...
-    {
-        Console::print << "Starting..." << newline;
-        Console::print << "=================[Cell System Info]=================\n";
-        Console::print << newline;
-        Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
-                       << __cell_space << systemInfo->name.value() << ""
-                       << " - compiled date on : "
-                       << systemInfo->compiledDate.value() + " ]" << newline;
-        Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
-                       << " code name : "
-                       << systemInfo->codeName.value() + " ]"<< " ⇙" << newline;
-                              Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
-                       << " version : "
-                       << version->getAsString() + " ]"
-                       << " ⇙" << newline;
-                              Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
-                       << " license type : "
-                       << this->license().value() + " ]"
-                       << " ⇙" << newline;
-                              Console::print << Terminal::NativeTerminal::Primary << " ⇨ ["
-                       << " system type : "
-                       << this->type().value() + " ]"
-                       << " ⇙" << newline;
-                              Console::print << newline;
-        Console::print << Terminal::NativeTerminal::Default;
-        Console::print << "=================[--------------]=================\n";
-        Console::print << newline;
-    }
-}
-
-OptionalString Application::path() __cell_const_noexcept
-{
-    if(appDataPtr->path == __cell_unknown) {
-        if(DeveloperMode::IsEnable)
-            Log("No valid uri![Application::path()]", LoggerType::Critical);
-        Log("[Application::path() == 'unknown' as ApplicationData]", LoggerType::Critical);
-    }
-    return appDataPtr->path.value_or(__cell_unknown);
-}
-
-OptionalString Application::name() __cell_const_noexcept
-{
-    return appDataPtr->systemInfo.name.value_or(__cell_unknown);
-}
-
-OptionalString Application::codeName() __cell_const_noexcept
-{
-    return appDataPtr->systemInfo.codeName.value_or(__cell_unknown);
-}
-
-OptionalString Application::type() __cell_const_noexcept
-{
-    std::string res{};
-    switch (systemInfo->type.value()) {
-    case SystemType::Private:
-        res = "Private";
-        break;
-    case SystemType::General:
-        res = "General";
-        break;
-    case SystemType::Professional:
-        res = "Professional";
-        break;
-    case SystemType::Premium:
-        res = "Premium";
-        break;
-    case SystemType::Default:
-        res = "Default";
-        break;
-    default:
-        res = "Default";
-        break;
-    }
-    return res;
-}
-
-OptionalString Application::license() __cell_const_noexcept
-{
-    std::string res{};
-    switch (systemInfo->license.value()) {
-    case SystemLicense::Commercial:
-        res = "Commercial";
-        break;
-    case SystemLicense::Free:
-        res = "Free";
-        break;
-    default:
-        res = "Free";
-        break;
-    }
-    return res;
-}
-
-OptionalString Application::model() __cell_const_noexcept
-{
-    return appDataPtr->systemInfo.codeName.value_or(__cell_unknown);
-}
-
-OptionalString Application::module() __cell_const_noexcept
-{
-    return appDataPtr->module.value_or(__cell_unknown);
-}
-
-OptionalString Application::templateErrorId() __cell_const_noexcept
-{
-    return appDataPtr->templateErrorId.value_or(__cell_unknown);
-}
-
-OptionalString Application::templateId() __cell_const_noexcept
-{
-    return appDataPtr->templateId.value_or(__cell_unknown);
-
-
-
 }
 
 CELL_NAMESPACE_END

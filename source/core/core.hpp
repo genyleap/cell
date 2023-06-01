@@ -684,22 +684,18 @@ private:
  */
 class __cell_export Engine final
 {
-public:
+private:
+    //! Disable engine for new instance.
+    //! We need to one instance only.
+    CELL_DISABLE_COPY(Engine)
+    CELL_DISABLE_MOVE(Engine)
     Engine();
+
+public:
     ~Engine();
-
-    /* This is singleton object for engine */
-    DeclareSingletonSelf(Engine)
-
-    /**
-     * @brief get function will return Engine class as optional method.
-     * @return as static optional class.
-     */
-    static Types::Optional<Engine>& get()
-    {
-        static Types::Optional<Engine> optionalEngine = std::make_optional<Engine>();
-        return optionalEngine;
-    }
+    static Engine* instance;
+    static void destroyInstance();
+    static Engine& self();
 
     /**
      * @brief get function will return MetaEngine class as optional method.
@@ -1062,8 +1058,6 @@ public:
 
     bool m_multilang {};
 
-    inline static bool autoStart = false;
-
     std::string m_languageStr {__cell_null_str};
 
     void setPath(const std::string& p);
@@ -1076,11 +1070,24 @@ protected:
     Translation::Translator m_translator;
 };
 
-__cell_no_discard_message("Pay attention! This version of the engine is safe and has a return value!")
-    Types::Optional<Engine> safeEngine() __cell_noexcept;
+/**
+ * @brief The EngineController class manages an instance of the Engine class.
+ */
+class EngineController {
+private:
+    std::shared_ptr<Engine> enginePtr; //!< Pointer to the Engine instance.
+public:
+    /**
+     * @brief Constructs an EngineController object.
+     */
+    EngineController();
+    /**
+     * @brief Retrieves a reference to the Engine instance.
+     * @return Reference to the Engine instance.
+     */
+    Engine& getEngine() const;
+};
 
-//! Function that creates and returns a unique_ptr to Engine.
-Scope<Engine> createEngineObject();
 
 Scope<Multilangual::Language> createLanguageObject();
 
@@ -1102,84 +1109,7 @@ __cell_no_discard_message("Pay attention! This version of the formatter is safe 
 static const auto& safeTranslate = [](const std::string& language,
                                       const std::string& section,
                                       const std::string& key) {
-    return safeEngine()->get()->translator().translate(language, section, key).defaultValue();
-};
-
-
-/*!
- * \brief The ApplicationData class
- */
-struct ApplicationData final
-{
-    SystemInfo              systemInfo      {};
-    Types::OptionalString   path            {__cell_unknown};
-    Types::OptionalString   templateId      {__cell_unknown};
-    Types::OptionalString   templateErrorId {__cell_unknown};
-    Types::OptionalString   module          {__cell_unknown};
-    SemanticVersion         semanticVersion {};
-    Version::ReleaseType    releaseType     {};
-    ///ToDo... We need to add user info and extra data...
-};
-
-
-/*!
- * \brief The Application class
- */
-class __cell_export Application
-{
-public:
-    Application() = default;
-    Application(const ApplicationData& appData);
-    ~Application();
-
-    static Application* get(const ApplicationData& appData);
-
-    /*!
-     * \brief start
-     */
-    void start();
-
-    Types::OptionalString name() __cell_const_noexcept;
-
-    Types::OptionalString codeName() __cell_const_noexcept;
-
-    Types::OptionalString type() __cell_const_noexcept;
-
-    Types::OptionalString license() __cell_const_noexcept;
-
-    Types::OptionalString model() __cell_const_noexcept;
-
-    /*!
-     * \brief path as string.
-     * \returns string.
-     */
-    Types::OptionalString path() __cell_const_noexcept;
-
-    /*!
-     * \brief module as module name.
-     * \returns string.
-     */
-    Types::OptionalString module() __cell_const_noexcept;
-
-    /*!
-     * \brief templateId will gets error template id.
-     * \returns string.
-     */
-    Types::OptionalString templateErrorId() __cell_const_noexcept;
-
-    /*!
-     * \brief templateId will gets template id.
-     * \returns string.
-     */
-    Types::OptionalString templateId() __cell_const_noexcept;
-
-    Scope<Engine>   engine  {};
-    Scope<Version>  version {};
-    Scope<SystemInfo>  systemInfo {};
-
-private:
-    static Application* appPtr;
-    static ApplicationData* appDataPtr;
+    return Engine::self().translator().translate(language, section, key).defaultValue();
 };
 
 CELL_NAMESPACE_END

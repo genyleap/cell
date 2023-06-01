@@ -233,11 +233,10 @@ int GregorianCalendar::minimumDaysInMonth() const
 
 Types::OptionalString GregorianCalendar::monthName(int month) const
 {
-    auto meta            =  safeEngine()->meta();
     auto language        =  createLanguageObject()->getLanguageCode();
-    auto languageSpec    =  safeEngine()->get()->translator().getLanguageSpec(language);
+    auto languageSpec    =  Engine::self().translator().getLanguageSpec(language);
 
-    auto object = JsonFind(languageSpec, meta->returnView(GREGORIAN_CONSTANTS::CALENDARS));
+    auto object = JsonFind(languageSpec, Engine::self().meta()->returnView(GREGORIAN_CONSTANTS::CALENDARS));
 
     if(!IsSet(object.hasKey()))
     {
@@ -245,11 +244,11 @@ Types::OptionalString GregorianCalendar::monthName(int month) const
     }
     std::string result {};
     for (const auto& [key, value] : object.getAsObject()) {
-        if (key == meta->returnView(GREGORIAN_CONSTANTS::CALENDAR_NAME)) {
+        if (key == Engine::self().meta()->returnView(GREGORIAN_CONSTANTS::CALENDAR_NAME)) {
             int monthIndex = month - 1; // Adjusting month to 0-based index
-            if (monthIndex >= 0 && monthIndex < meta->returnJsonSize(value))
+            if (monthIndex >= 0 && monthIndex < Engine::self().meta()->returnJsonSize(value))
             {
-                result = meta->returnJsonAt(value, monthIndex).asString();
+                result = Engine::self().meta()->returnJsonAt(value, monthIndex).asString();
             } else {
                 return __cell_null_optional;
             }

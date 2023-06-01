@@ -23,9 +23,7 @@ Html::~Html()
 
 std::vector<std::string> Html::getTags(const std::string_view content)
 {
-    auto engine = safeEngine();
-
-    if (engine->isFilePath(content.data()))
+    if (Engine::self().isFilePath(content.data()))
     {
         FileSystem::FileManager fm;
         std::string html = fm.read(content.data());

@@ -20,9 +20,8 @@ CELL_NAMESPACE_BEGIN(Cell::Convertors::Units)
 
 Length::Length()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -32,8 +31,8 @@ Length::Length()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_lengthData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_lengthData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_lengthData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -45,7 +44,7 @@ Length::Length()
 
 Length::~Length()
 {
-    safeEngine()->meta()->clearContainer(m_lengthData);
+    Engine::self().meta()->clearContainer(m_lengthData);
 }
 
 double Length::convert(double value, LengthUnit fromUnit, LengthUnit toUnit)
@@ -79,9 +78,8 @@ std::string Length::toString(LengthUnit unit)
 
 Temperature::Temperature()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -91,8 +89,8 @@ Temperature::Temperature()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_temperatureData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_temperatureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_temperatureData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -104,7 +102,7 @@ Temperature::Temperature()
 
 Temperature::~Temperature()
 {
-    safeEngine()->meta()->clearContainer(m_temperatureData);
+    Engine::self().meta()->clearContainer(m_temperatureData);
 }
 
 double Temperature::convert(double value, TemperatureUnit fromUnit, TemperatureUnit toUnit)
@@ -155,9 +153,8 @@ std::string Temperature::toString(TemperatureUnit unit)
 
 Area::Area()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -167,8 +164,8 @@ Area::Area()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_areaData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_areaData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_areaData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -180,7 +177,7 @@ Area::Area()
 
 Area::~Area()
 {
-    safeEngine()->meta()->clearContainer(m_areaData);
+    Engine::self().meta()->clearContainer(m_areaData);
 }
 
 double Area::convert(double value, AreaUnit fromUnit, AreaUnit toUnit)
@@ -218,9 +215,8 @@ std::string Area::toString(AreaUnit unit)
 
 Weight::Weight()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -230,8 +226,8 @@ Weight::Weight()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_weightData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_weightData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_weightData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -243,7 +239,7 @@ Weight::Weight()
 
 Weight::~Weight()
 {
-    safeEngine()->meta()->clearContainer(m_weightData);
+    Engine::self().meta()->clearContainer(m_weightData);
 }
 
 double Weight::convert(double value, WeightUnit fromUnit, WeightUnit toUnit)
@@ -281,9 +277,8 @@ std::string Weight::toString(WeightUnit unit)
 
 Time::Time()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -293,8 +288,8 @@ Time::Time()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_timeData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_timeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_timeData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -306,7 +301,7 @@ Time::Time()
 
 Time::~Time()
 {
-    safeEngine()->meta()->clearContainer(m_timeData);
+    Engine::self().meta()->clearContainer(m_timeData);
 }
 
 double Time::convert(double value, TimeUnit fromUnit, TimeUnit toUnit)
@@ -341,9 +336,8 @@ std::string Time::toString(TimeUnit unit)
 
 Speed::Speed()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -353,8 +347,8 @@ Speed::Speed()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_speedData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_speedData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_speedData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -366,7 +360,7 @@ Speed::Speed()
 
 Speed::~Speed()
 {
-    safeEngine()->meta()->clearContainer(m_speedData);
+    Engine::self().meta()->clearContainer(m_speedData);
 }
 
 double Speed::convert(double value, SpeedUnit fromUnit, SpeedUnit toUnit)
@@ -394,9 +388,8 @@ std::string Speed::toString(SpeedUnit unit)
 
 Energy::Energy()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -406,8 +399,8 @@ Energy::Energy()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_energyData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_energyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_energyData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -419,7 +412,7 @@ Energy::Energy()
 
 Energy::~Energy()
 {
-    safeEngine()->meta()->clearContainer(m_energyData);
+    Engine::self().meta()->clearContainer(m_energyData);
 }
 
 double Energy::convert(double value, EnergyUnit fromUnit, EnergyUnit toUnit)
@@ -450,9 +443,8 @@ std::string Energy::toString(EnergyUnit unit)
 
 Power::Power()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -462,8 +454,8 @@ Power::Power()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_powerData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_powerData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_powerData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -475,7 +467,7 @@ Power::Power()
 
 Power::~Power()
 {
-    safeEngine()->meta()->clearContainer(m_powerData);
+    Engine::self().meta()->clearContainer(m_powerData);
 }
 
 double Power::convert(double value, PowerUnit fromUnit, PowerUnit toUnit)
@@ -504,9 +496,8 @@ std::string Power::toString(PowerUnit unit)
 
 Pressure::Pressure()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -516,8 +507,8 @@ Pressure::Pressure()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_pressureData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_pressureData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_pressureData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -529,7 +520,7 @@ Pressure::Pressure()
 
 Pressure::~Pressure()
 {
-    safeEngine()->meta()->clearContainer(m_pressureData);
+    Engine::self().meta()->clearContainer(m_pressureData);
 }
 
 double Pressure::convert(double value, PressureUnit fromUnit, PressureUnit toUnit)
@@ -560,9 +551,8 @@ std::string Pressure::toString(PressureUnit unit)
 
 Angle::Angle()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -572,8 +562,8 @@ Angle::Angle()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_angleData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_angleData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_angleData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -585,7 +575,7 @@ Angle::Angle()
 
 Angle::~Angle()
 {
-    safeEngine()->meta()->clearContainer(m_angleData);
+    Engine::self().meta()->clearContainer(m_angleData);
 }
 
 double Angle::convert(double value, AngleUnit fromUnit, AngleUnit toUnit)
@@ -614,9 +604,8 @@ std::string Angle::toString(AngleUnit unit)
 
 Currency::Currency()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -626,8 +615,8 @@ Currency::Currency()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_currencyData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_currencyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_currencyData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -639,7 +628,7 @@ Currency::Currency()
 
 Currency::~Currency()
 {
-    safeEngine()->meta()->clearContainer(m_currencyData);
+    Engine::self().meta()->clearContainer(m_currencyData);
 }
 
 double Currency::convert(double value, CurrencyUnit fromUnit, CurrencyUnit toUnit)
@@ -682,9 +671,8 @@ std::string Currency::toString(CurrencyUnit unit)
 
 Volume::Volume()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -694,8 +682,8 @@ Volume::Volume()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_volumeData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_volumeData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_volumeData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -707,7 +695,7 @@ Volume::Volume()
 
 Volume::~Volume()
 {
-    safeEngine()->meta()->clearContainer(m_volumeData);
+    Engine::self().meta()->clearContainer(m_volumeData);
 }
 
 double Volume::convert(double value, VolumeUnit fromUnit, VolumeUnit toUnit)
@@ -745,9 +733,8 @@ std::string Volume::toString(VolumeUnit unit)
 
 Frequency::Frequency()
 {
-    auto meta           =   safeEngine()->meta();
     auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   safeEngine()->get()->translator().getLanguageSpec(currentLang);
+    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
     try {
         auto object = JsonFind(unitItems.items, UNITS);
         for (const auto& [key, value] : object.getAsObject())
@@ -757,8 +744,8 @@ Frequency::Frequency()
                 const auto& objectArray = object.getAsArray(value);
                 for (Types::size i = 0; i < objectArray.size() && i < m_frequencyData.size(); ++i)
                 {
-                    const JSonValue& o = meta->getJsonObjectByIndex(value, i);
-                    m_frequencyData[i] = meta->returnJsonAt(o, meta->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
+                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
+                    m_frequencyData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
                 }
             }
         }
@@ -770,7 +757,7 @@ Frequency::Frequency()
 
 Frequency::~Frequency()
 {
-    safeEngine()->meta()->clearContainer(m_frequencyData);
+    Engine::self().meta()->clearContainer(m_frequencyData);
 }
 
 double Frequency::convert(double value, FrequencyUnit fromUnit, FrequencyUnit toUnit)

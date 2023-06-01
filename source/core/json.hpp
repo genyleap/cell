@@ -106,34 +106,40 @@ public:
 
 // Iterate through the JSON value to find the specified object
 #ifdef USE_BOOST
-        for(const auto& j : jv.as_object())
-        {
-            if(j.key() == obj)
+        try {
+            for(const auto& j : jv.as_object())
             {
-                // Set the keys and their corresponding values
-                for(const auto& k : j.value().as_object())
+                if(j.key() == obj)
                 {
-                    jkv.key = k.key();
-                    jkv.value = k.value();
-                    m_jKeyValue.push_back(jkv);
+                    // Set the keys and their corresponding values
+                    for(const auto& k : j.value().as_object())
+                    {
+                        jkv.key = k.key();
+                        jkv.value = k.value();
+                        m_jKeyValue.push_back(jkv);
+                    }
                 }
             }
+        } catch (...) {
         }
 #else
-        for (JSonValue::const_iterator it = jv.begin(); it != jv.end(); ++it)
-        {
-            const std::string baseKey = it.key().asString();
-            const Json::Value baseValue = *it;
-            if(baseKey == obj) {
-                std::vector<std::string> keys = baseValue.getMemberNames();
-                // Set the keys and their corresponding values
-                for (const std::string& key : keys) {
-                    const Json::Value& value = baseValue[key];
-                    jkv.key = key;
-                    jkv.value = value;
-                    m_jKeyValue.push_back(jkv);
+        try {
+            for (JSonValue::const_iterator it = jv.begin(); it != jv.end(); ++it)
+            {
+                const std::string baseKey = it.key().asString();
+                const Json::Value baseValue = *it;
+                if(baseKey == obj) {
+                    std::vector<std::string> keys = baseValue.getMemberNames();
+                    // Set the keys and their corresponding values
+                    for (const std::string& key : keys) {
+                        const Json::Value& value = baseValue[key];
+                        jkv.key = key;
+                        jkv.value = value;
+                        m_jKeyValue.push_back(jkv);
+                    }
                 }
             }
+        } catch (...) {
         }
 #endif
     }
