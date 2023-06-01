@@ -53,18 +53,6 @@ HttpRequest::HttpRequest()
 
 HttpRequest::HttpRequest(const std::string& url)
 {
-    /**
-     * RAII (Resource Acquisition Is Initialization) technique to acquire a new resource and automatically manage it using the std::unique_ptr smart pointer.
-     * The std::unique_ptr class automatically destroys the previously owned object, if any, and takes ownership of the newly created System::Engine object when the new object is acquired.
-     * When the std::unique_ptr object goes out of scope, it automatically destroys the owned object. This way, the resource is automatically managed without the need for explicit memory allocation and deallocation or the use of explicit destructors.
-     */
-
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-    if(engineSmartPtr->start())
-    {
-        //ToDo..!
-    }
-
     // Initialize cURL
     curl_global_init(CURL_GLOBAL_ALL);
     requestStruct.curlHandlePtr.reset(curl_easy_init());
@@ -110,7 +98,6 @@ void HttpRequest::setData(const std::string& data)
 
 void HttpRequest::setQuery(const HttpQueryString& params)
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
     std::string queryStr;
     bool firstParam = true;
     for (const auto& [param, value] : requestStruct.queries = std::move(params))
@@ -122,7 +109,7 @@ void HttpRequest::setQuery(const HttpQueryString& params)
         else {
             queryStr += "&";
         }
-        queryStr += engineSmartPtr->urlEncode(param) + "=" + engineSmartPtr->urlEncode(value);
+        queryStr += Engine::self().urlEncode(param) + "=" + Engine::self().urlEncode(value);
     }
     if(!requestStruct.url.has_value())
     {
@@ -137,20 +124,16 @@ void HttpRequest::setTimeout(long timeout)
 
 std::string HttpRequest::performGet()
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     // Enforce a rate limit on the HTTP requests being made.
-    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+    (isEnableRateLimit()) ? Engine::self().delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
 
     return performRequest(CELL_GET);
 }
 
 FutureStringObject HttpRequest::performGetAsync()
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     // Enforce a rate limit on the HTTP requests being made.
-    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+    (isEnableRateLimit()) ? Engine::self().delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
 
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
@@ -161,20 +144,16 @@ FutureStringObject HttpRequest::performGetAsync()
 
 std::string HttpRequest::performPost()
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     // Enforce a rate limit on the HTTP requests being made.
-    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+    (isEnableRateLimit()) ? Engine::self().delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
 
     return HttpRequest::performRequest(CELL_POST);
 }
 
 FutureStringObject HttpRequest::performPostAsync()
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     // Enforce a rate limit on the HTTP requests being made.
-    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+    (isEnableRateLimit()) ? Engine::self().delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
 
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
@@ -185,20 +164,16 @@ FutureStringObject HttpRequest::performPostAsync()
 
 std::string HttpRequest::performPut()
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     // Enforce a rate limit on the HTTP requests being made.
-    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+    (isEnableRateLimit()) ? Engine::self().delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
 
     return HttpRequest::performRequest(CELL_PUT);
 }
 
 FutureStringObject HttpRequest::performPutAsync()
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     // Enforce a rate limit on the HTTP requests being made.
-    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+    (isEnableRateLimit()) ? Engine::self().delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
 
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
@@ -214,10 +189,8 @@ std::string HttpRequest::performDelete()
 
 FutureStringObject HttpRequest::performDeleteAsync()
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     // Enforce a rate limit on the HTTP requests being made.
-    (isEnableRateLimit()) ? engineSmartPtr->delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
+    (isEnableRateLimit()) ? Engine::self().delayIfNeeded(requestStruct.lastRequestTime, rateLimit()) : DO_NOTHING;
 
     PromiseStringObject promise;
     FutureStringObject future = promise.get_future();
@@ -265,8 +238,6 @@ void HttpRequest::performRequestWithGuard(const FunctionCurl& func)
 
 std::string HttpRequest::performRequest(const std::string& method)
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     LockGuard lock(requestStruct.curlHandleMutex);
 
     // Set the method

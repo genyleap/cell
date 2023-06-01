@@ -454,6 +454,8 @@ public:
             retStruct.toString = result->as_string();
         } else if (result->is_bool()) {
             retStruct.toBool = result->as_bool();
+        } else if (result->is_number()) {
+            retStruct.toInt = result->as_int64();
         } else if (result->is_int64()) {
             retStruct.toInt64 = result->as_int64();
         } else if (result->is_double()) {
@@ -471,20 +473,22 @@ public:
         ((result = &(result->operator[](args))), ...);
 
         if (result->isString()) {
-            retStruct.asString = result->asString();
+            retStruct.toString = result->asString();
         } else if (result->isBool()) {
-            retStruct.asBool = result->asBool();
+            retStruct.toBool = result->asBool();
         } else if (result->isInt64()) {
-            retStruct.asInt64 = result->asInt64();
+            retStruct.toInt64 = result->asInt64();
+        } else if (result->isInt()) {
+            retStruct.toInt = result->asInt();
         } else if (result->isDouble()) {
-            retStruct.asDouble = result->asDouble();
+            retStruct.toDouble = result->asDouble();
         } else if (result->isArray()) {
             for (const auto& value : *result) {
-                retStruct.asArray.push_back(returnJsonAt(value));
+                retStruct.toArray.push_back(returnJsonAt(value));
             }
         } else if (result->isObject()) {
             for (const auto& keyValue : result->getMemberNames()) {
-                retStruct.asObject[keyValue] = returnJsonAt((*result)[keyValue]);
+                retStruct.toObject[keyValue] = returnJsonAt((*result)[keyValue]);
             }
         }
 #endif

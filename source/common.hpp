@@ -49,8 +49,6 @@ namespace Cell {
 #define CELL_LANGS "langs"
 #define CELL_DEFAULT_LANG "default_lang"
 
-namespace System {
-
 struct LANGUAGE_SHEET final {
   static constexpr auto GLOBAL      = "global";
   static constexpr auto EXCEPTION   = "exceptions";
@@ -220,6 +218,8 @@ object = nullptr;                   \
 #define __cell_null_optional std::nullopt
 
 #define __cell_abort abort();
+
+#define __cell_atexit(x) atexit(x); // C Style.
 
 #define __cell_assert(x) assert(x);
 
@@ -401,7 +401,6 @@ struct NonMovableOrCopyable : private NonCopyable, NonMovable
 #define CELL_DISABLE_COPY_MOVE(Class) \
     CELL_DISABLE_COPY(Class) \
     CELL_DISABLE_MOVE(Class)
-}
 
 //! Cell's Prestructure.
 #if __has_include("prestructure.hpp")

@@ -4,7 +4,7 @@
 #   error "Cell's "terminal.hpp" was not found!"
 #endif
 
-CELL_USING_NAMESPACE Cell::System;
+CELL_USING_NAMESPACE Cell;
 
 CELL_NAMESPACE_BEGIN(Cell::Terminal)
 

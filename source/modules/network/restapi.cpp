@@ -42,49 +42,39 @@ void RestfulApi::addHeader(const std::string& header)
 
 std::string RestfulApi::get(const Parameter& params)
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     httpRequest.setTimeout(CELL_DEFAULT_HTTP_TIMEOUT);
     httpRequest.setQuery(params);
-    std::string response = engineSmartPtr->unescapeJson(httpRequest.performGet());
+    std::string response = Engine::self().unescapeJson(httpRequest.performGet());
     m_lastRequestTime = std::chrono::high_resolution_clock::now();
     return response;
 }
 
 std::string RestfulApi::post(const Parameter& params)
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     httpRequest.setTimeout(CELL_DEFAULT_HTTP_TIMEOUT);
     httpRequest.setQuery(params);
-    return engineSmartPtr->unescapeJson(httpRequest.performPost());
+    return Engine::self().unescapeJson(httpRequest.performPost());
 }
 
 std::string RestfulApi::put(const Parameter &params)
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     httpRequest.setTimeout(CELL_DEFAULT_HTTP_TIMEOUT);
     httpRequest.setQuery(params);
-    return engineSmartPtr->unescapeJson(httpRequest.performPut());
+    return Engine::self().unescapeJson(httpRequest.performPut());
 }
 
 std::string RestfulApi::del(const Parameter &params)
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     httpRequest.setTimeout(CELL_DEFAULT_HTTP_TIMEOUT);
     httpRequest.setQuery(params);
-    return engineSmartPtr->unescapeJson(httpRequest.performDelete());
+    return Engine::self().unescapeJson(httpRequest.performDelete());
 }
 
 std::string RestfulApi::patch(const Parameter &params)
 {
-    std::unique_ptr<System::Engine> engineSmartPtr = createEngineObject();
-
     httpRequest.setTimeout(CELL_DEFAULT_HTTP_TIMEOUT);
     httpRequest.setQuery(params);
-    return engineSmartPtr->unescapeJson(httpRequest.performPost());
+    return Engine::self().unescapeJson(httpRequest.performPost());
 }
 
 CELL_NAMESPACE_END

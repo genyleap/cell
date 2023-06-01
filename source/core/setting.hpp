@@ -138,7 +138,6 @@ private:
 
 struct SettingData final
 {
-    Scope<System::Engine>   engine   {};
     Types::VectorString     option   {};
     Types::SettingType      type     {};
     std::string             language {};
