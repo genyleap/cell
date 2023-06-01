@@ -37,7 +37,6 @@ endif()
 
 # C++ STL Library Features.
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    list(APPEND LIB_STL_MODULES TBB)
     list(APPEND LIB_STL_MODULES_LINKER tbb)
 endif()
 
