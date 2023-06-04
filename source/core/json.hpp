@@ -81,21 +81,25 @@ private:
     Cell::FileSystem::FileManager fileManager{};
 };
 
+
 class JsonDocument {
 public:
+    /**
+     * Constructor that initializes the JsonDocument with a boost::json::value object.
+     * @param value The boost::json::value object to initialize the JsonDocument.
+     */
     JsonDocument() = default;
 
-
-#ifdef USE_BOOST
-    JsonDocument(const boost::json::value& value);
-#else
-    JsonDocument(const Json::Value& value);
-#endif
+/**
+     * Constructor that initializes the JsonDocument with a Json::Value object.
+     * @param value The Json::Value object to initialize the JsonDocument.
+     */
+    JsonDocument(const JSonValue& value);
 
     /**
      * Parse a JSON data from a given input and populate root node of the JSON object.
      * @param data Input data in JSonType format.
-     * @param inputType as InputType for select type of input data [file or raw string].
+     * @param inputType The InputType for selecting the type of input data (file or raw string).
      * @return true if parsing is successful, false otherwise.
      */
     bool parse(const Types::JSonType& data, const InputType inputType) __cell_noexcept;
@@ -107,23 +111,69 @@ public:
      */
     bool parse(const Types::JSonType& data) __cell_noexcept;
 
-
+    /**
+     * Convert the JSON object to a string representation.
+     * @return The JSON object as a string.
+     */
     std::string toString() const;
 
+    /**
+     * Check if a key exists in the JSON object.
+     * @param key The key to check.
+     * @return true if the key exists, false otherwise.
+     */
     bool hasKey(const std::string& key) const;
 
+    /**
+     * Get the integer value associated with the specified key.
+     * @param key The key to retrieve the integer value.
+     * @return The integer value.
+     */
     int getInt(const std::string& key) const;
 
+    /**
+     * Get the JSON value associated with the specified key.
+     * @return The JSON value.
+     */
     Types::JSonValue getJson() const;
 
+    /**
+     * Get the string value associated with the specified key.
+     * @param key The key to retrieve the string value.
+     * @return The string value.
+     */
     std::string getString(const std::string& key) const;
 
+    /**
+     * Check if the specified key represents an array in the JSON object.
+     * @param key The key to check.
+     * @return true if the key represents an array, false otherwise.
+     */
     bool hasArray(const std::string& key) const;
 
-    size_t getArraySize(const std::string& key) const ;
+    /**
+     * Get the size of the array associated with the specified key.
+     * @param key The key to retrieve the array size.
+     * @return The size of the array.
+     */
+    size_t getArraySize(const std::string& key) const;
 
+    /**
+     * Get a nested JSON object associated with the specified key.
+     * @param key The key to retrieve the nested JSON object.
+     * @return The nested JSON object as a JsonDocument.
+     */
     JsonDocument getObject(const std::string& key) const;
 
+    /**
+     * Get a specific type of object from the given JSON value.
+     * @tparam T The type of the object to retrieve.
+     * @tparam Args The types of arguments used to access the nested value.
+     * @param jsonValue The JSON value to retrieve the object from.
+     * @param args The arguments used to access the nested value.
+     * @return The retrieved object of type T.
+     * @throws std::runtime_error if the type conversion is unsupported.
+     */
     template <typename T, typename... Args>
     T getJsonObject(const JSonValue& jsonValue, Args&&... args)
     {
@@ -188,6 +238,13 @@ public:
 #endif
     }
 
+    /**
+     * Get an array of values associated with the specified key.
+     * @tparam T The type of the values in the array.
+     * @param key The key to retrieve the array.
+     * @return The array of values.
+     * @throws std::runtime_error if the key does not exist or is not an array.
+     */
     template<typename T>
     std::vector<T> getArray(const std::string& key) const {
         std::vector<T> result;
@@ -231,21 +288,34 @@ public:
         throw std::runtime_error("Key '" + key + "' does not exist or is not an array.");
     }
 
+    /**
+     * Get all the keys in the JSON object.
+     * @return A vector of keys.
+     */
     std::vector<std::string> getKeys() const;
 
-    bool isArray() const {
-#ifdef USE_BOOST
-        return m_root.is_array();
-#else
-        return m_root.isArray();
-#endif
-    }
+    /**
+     * Check if the JSON object represents an array.
+     * @return true if the JSON object is an array, false otherwise.
+     */
+    bool isArray() const;
 
-
+    /**
+     * Get the JSON values as a vector of pointers.
+     * @return A vector of JSON value pointers.
+     */
     std::vector<Types::JSonValue> getVectorJsonPtr();
 
+    /**
+     * Get the JSON object as a JsonDocument.
+     * @return The JSON object as a JsonDocument.
+     */
     JsonDocument getObject() const;
 
+    /**
+     * Set the JSON values as a vector of pointers.
+     * @param data The JSON value to set.
+     */
     void setVectorJsonPtr(const JSonValue& data);
 
 private:

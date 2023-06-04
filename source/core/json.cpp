@@ -303,6 +303,15 @@ JSonValue JsonManager::get(const std::string& key) __cell_noexcept
 #endif
 }
 
+bool JsonDocument::isArray() const
+{
+#ifdef USE_BOOST
+    return m_root.is_array();
+#else
+    return m_root.isArray();
+#endif
+}
+
 std::vector<Types::JSonValue> JsonManager::getVectorJsonPtr()
 {
     return vectorJsonPtr;
@@ -669,6 +678,5 @@ JsonDocument JsonDocument::getObject() const {
 #endif
     throw std::runtime_error("Does not exist or is not an object.");
 }
-
 
 CELL_NAMESPACE_END
