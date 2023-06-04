@@ -21,33 +21,21 @@ CELL_NAMESPACE_BEGIN(Cell::Convertors::Currencies)
 Currency::Currency()
 {
     try {
+        auto& engine = engineController.getEngine();
         auto currentLang = createLanguageObject()->getLanguageCode();
-        JSonValue items = Engine::self().translator().getLanguageSpec(currentLang);
-        auto object = JsonFind(items, DIGITS);
-        for (const auto& ks : object.getAsObject())
+        JsonDocument json(engine.translator().getLanguageSpec(currentLang));
+        auto object = json.getObject(engine.meta()->returnView(DIGITS));
+
+        auto setToArr = [](const JsonDocument& object, const std::string& key, std::vector<std::string>& array)
         {
-            if(ks.key == UNIT_WORDS)
-            {
-                for(const auto& o : object.getAsArray(ks.value))
-                {
-                    units.push_back(object.getAsString(o));
-                }
+            for (const auto& value : object.getArray<std::string>(key)) {
+                array.push_back(value);
             }
-            if(ks.key == TENS_WORDS)
-            {
-                for(const auto& o : object.getAsArray(ks.value))
-                {
-                    tens.push_back(object.getAsString(o));
-                }
-            }
-            if(ks.key == DIGIT_WORDS)
-            {
-                for(const auto& o : object.getAsArray(ks.value))
-                {
-                    digitWords.push_back(object.getAsString(o));
-                }
-            }
-        }
+        };
+
+        setToArr(object, engine.meta()->returnView(UNIT_WORDS), units);
+        setToArr(object, engine.meta()->returnView(TENS_WORDS), tens);
+        setToArr(object, engine.meta()->returnView(DIGIT_WORDS), digitWords);
 
     } catch (const Exception& e)
     {
@@ -61,6 +49,7 @@ Currency::~Currency()
 
 std::string Currency::numberToText(Types::ullongInt number)
 {
+    auto& engine = engineController.getEngine();
     auto currentLang = createLanguageObject()->getLanguageCode();
     if (number < 20) {
         return units[number];
@@ -69,9 +58,9 @@ std::string Currency::numberToText(Types::ullongInt number)
         int unitsDigit = number % 10;
         std::string text = tens[tensDigit];
         if (unitsDigit > 0) {
-            auto items = Engine::self().translator().getLanguageSpec(currentLang);
-            auto it = Engine::self().meta()->getJsonObject<JSonValue>(items, Engine::self().meta()->returnView(CURRENCIES));
-            std::string mixedForm { Engine::self().meta()->getJsonObject<std::string>(it, Engine::self().meta()->returnView(VIEW_FORMAT), "currency_mixed_form") };
+            auto items = engine.translator().getLanguageSpec(currentLang);
+            auto it = engine.meta()->getJsonObject<JSonValue>(items, engine.meta()->returnView(CURRENCIES));
+            std::string mixedForm { engine.meta()->getJsonObject<std::string>(it, engine.meta()->returnView(VIEW_FORMAT), "currency_mixed_form") };
             text += mixedForm + units[unitsDigit];
         }
         return text;
@@ -140,16 +129,17 @@ std::string Currency::numberToText(Types::ullongInt number)
 
 Types::OptionalString Currency::toWord(double amount)
 {
+    auto& engine = engineController.getEngine();
     llong baseUnit = static_cast<llong>(amount);
     const int subUnit = static_cast<int>((amount - baseUnit) * 100 + 0.5);
 
     auto currentLang        = createLanguageObject()->getLanguageCode();
-    auto items              = Engine::self().translator().getLanguageSpec(currentLang);
-    auto it                 = Engine::self().meta()->getJsonObject<JSonValue>(items, Engine::self().meta()->returnView(CURRENCIES));
+    auto items              = engine.translator().getLanguageSpec(currentLang);
+    auto it                 = engine.meta()->getJsonObject<JSonValue>(items, engine.meta()->returnView(CURRENCIES));
 
-    std::string baseUnitStr     { Engine::self().meta()->getJsonObject<std::string>(it, Engine::self().meta()->returnView(VIEW_FORMAT), Engine::self().meta()->returnView(MIN_CURRENCY_UNIT))          };
-    std::string andUnitStr      { Engine::self().meta()->getJsonObject<std::string>(it, Engine::self().meta()->returnView(VIEW_FORMAT), Engine::self().meta()->returnView(CURRENCY_MIXED_FORM))        };
-    std::string fractionalUnit  { Engine::self().meta()->getJsonObject<std::string>(it, Engine::self().meta()->returnView(VIEW_FORMAT), Engine::self().meta()->returnView(FRACTIONAL_MONETARY_UNIT))   };
+    std::string baseUnitStr     { engine.meta()->getJsonObject<std::string>(it, engine.meta()->returnView(VIEW_FORMAT), engine.meta()->returnView(MIN_CURRENCY_UNIT))          };
+    std::string andUnitStr      { engine.meta()->getJsonObject<std::string>(it, engine.meta()->returnView(VIEW_FORMAT), engine.meta()->returnView(CURRENCY_MIXED_FORM))        };
+    std::string fractionalUnit  { engine.meta()->getJsonObject<std::string>(it, engine.meta()->returnView(VIEW_FORMAT), engine.meta()->returnView(FRACTIONAL_MONETARY_UNIT))   };
 
     std::string p = safeTranslate(currentLang,"core", "currency_plural_form");
     std::string pluralWord = p.c_str() ? __cell_space : __cell_null_str;

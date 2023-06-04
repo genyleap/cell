@@ -20,22 +20,17 @@ CELL_NAMESPACE_BEGIN(Cell::Convertors::Units)
 
 Length::Length()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == LENGTH)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_lengthData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_lengthData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(LENGTH));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_lengthData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
+
     } catch (const Exception& e)
     {
         Log(e.what(), LoggerType::Critical);
@@ -78,22 +73,17 @@ std::string Length::toString(LengthUnit unit)
 
 Temperature::Temperature()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == TEMPERATURE)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_temperatureData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_temperatureData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(TEMPERATURE));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_temperatureData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
+
     } catch (const Exception& e)
     {
         Log(e.what(), LoggerType::Critical);
@@ -153,22 +143,17 @@ std::string Temperature::toString(TemperatureUnit unit)
 
 Area::Area()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == AREA)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_areaData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_areaData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(AREA));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_areaData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
+
     } catch (const Exception& e)
     {
         Log(e.what(), LoggerType::Critical);
@@ -215,22 +200,17 @@ std::string Area::toString(AreaUnit unit)
 
 Weight::Weight()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == WEIGHT)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_weightData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_weightData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(WEIGHT));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_weightData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
+
     } catch (const Exception& e)
     {
         Log(e.what(), LoggerType::Critical);
@@ -277,22 +257,17 @@ std::string Weight::toString(WeightUnit unit)
 
 Time::Time()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == TIME)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_timeData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_timeData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(TIME));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_timeData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
+
     } catch (const Exception& e)
     {
         Log(e.what(), LoggerType::Critical);
@@ -336,21 +311,15 @@ std::string Time::toString(TimeUnit unit)
 
 Speed::Speed()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == SPEED)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_speedData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_speedData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(SPEED));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_speedData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
     } catch (const Exception& e)
     {
@@ -388,21 +357,15 @@ std::string Speed::toString(SpeedUnit unit)
 
 Energy::Energy()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == ENERGY)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_energyData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_energyData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(ENERGY));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_energyData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
     } catch (const Exception& e)
     {
@@ -443,21 +406,15 @@ std::string Energy::toString(EnergyUnit unit)
 
 Power::Power()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == POWER)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_powerData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_powerData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(POWER));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_powerData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
     } catch (const Exception& e)
     {
@@ -496,21 +453,15 @@ std::string Power::toString(PowerUnit unit)
 
 Pressure::Pressure()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == PRESSURE)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_pressureData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_pressureData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(PRESSURE));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_pressureData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
     } catch (const Exception& e)
     {
@@ -551,21 +502,15 @@ std::string Pressure::toString(PressureUnit unit)
 
 Angle::Angle()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == ANGLE)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_angleData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_angleData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(ANGLE));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_angleData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
     } catch (const Exception& e)
     {
@@ -604,21 +549,15 @@ std::string Angle::toString(AngleUnit unit)
 
 Currency::Currency()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == CURRENCY)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_currencyData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_currencyData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(CURRENCY));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_currencyData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
     } catch (const Exception& e)
     {
@@ -671,21 +610,15 @@ std::string Currency::toString(CurrencyUnit unit)
 
 Volume::Volume()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == VOLUME)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_volumeData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_volumeData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(VOLUME));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_volumeData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
     } catch (const Exception& e)
     {
@@ -733,21 +666,15 @@ std::string Volume::toString(VolumeUnit unit)
 
 Frequency::Frequency()
 {
-    auto currentLang    =   createLanguageObject()->getLanguageCode();
-    unitItems.items     =   Engine::self().translator().getLanguageSpec(currentLang);
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    JsonDocument json(engine.translator().getLanguageSpec(language));
     try {
-        auto object = JsonFind(unitItems.items, UNITS);
-        for (const auto& [key, value] : object.getAsObject())
-        {
-            if(key == FREQUENCY)
-            {
-                const auto& objectArray = object.getAsArray(value);
-                for (Types::size i = 0; i < objectArray.size() && i < m_frequencyData.size(); ++i)
-                {
-                    const JSonValue& o = Engine::self().meta()->getJsonObjectByIndex(value, i);
-                    m_frequencyData[i] = Engine::self().meta()->returnJsonAt(o, Engine::self().meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE)).asString();
-                }
-            }
+        auto units = json.getObject(engine.meta()->returnView(UNITS)).getArray<JsonDocument>(engine.meta()->returnView(FREQUENCY));
+        unsigned int index = 0;
+        for (const auto& u : units) {
+            m_frequencyData[index] = u.getString(engine.meta()->returnView(Translation::TRANSLATOR_CONSTANTS::DEFAULT_VALUE));
+            index++;
         }
     } catch (const Exception& e)
     {

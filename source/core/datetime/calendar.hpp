@@ -25,6 +25,11 @@
 #   error "Cell's "abstracts/calendar/calendar.hpp" was not found!"
 #endif
 
+#if __has_include("core/core.hpp")
+#   include "core/core.hpp"
+#else
+#   error "Cell's "core/core.hpp" was not found!"
+#endif
 
 CELL_NAMESPACE_BEGIN(Cell::Calendars)
 
@@ -595,6 +600,7 @@ public:
 
 private:
     CalendarData m_calendarData;
+    System::EngineController engineController;
 };
 
 

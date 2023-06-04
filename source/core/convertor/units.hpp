@@ -25,6 +25,12 @@
 #   error "Cell's "abstracts/convertor.hpp" was not found!"
 #endif
 
+#if __has_include("core/core.hpp")
+#   include "core/core.hpp"
+#else
+#   error "Cell's "core/core.hpp" was not found!"
+#endif
+
 CELL_NAMESPACE_BEGIN(Cell::Convertors::Units)
 
 struct UnitItems final
@@ -78,9 +84,9 @@ public:
     std::string toString(LengthUnit unit);
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 11> m_lengthData;
     static const constexpr std::string_view LENGTH {"length"};
+    System::EngineController engineController;
 };
 
 /**
@@ -119,9 +125,9 @@ public:
     std::string toString(TemperatureUnit unit);
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 4> m_temperatureData;
     static const constexpr std::string_view TEMPERATURE {"temperature"};
+    System::EngineController engineController;
 };
 
 /**
@@ -168,9 +174,9 @@ public:
     std::string toString(AreaUnit unit);
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 11> m_areaData;
     static const constexpr std::string_view AREA {"area"};
+    System::EngineController engineController;
 };
 
 /**
@@ -218,9 +224,9 @@ public:
     std::string toString(WeightUnit unit);
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 11> m_weightData;
     static const constexpr std::string_view WEIGHT {"weight"};
+    System::EngineController engineController;
 };
 
 /**
@@ -267,9 +273,9 @@ public:
     std::string toString(TimeUnit unit);
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 11> m_timeData;
     static const constexpr std::string_view TIME {"time"};
+    System::EngineController engineController;
 };
 
 /**
@@ -309,9 +315,9 @@ public:
     std::string toString(SpeedUnit unit);
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 5> m_speedData;
     static const constexpr std::string_view SPEED {"speed"};
+    System::EngineController engineController;
 };
 
 /**
@@ -354,9 +360,9 @@ public:
     std::string toString(EnergyUnit unit);
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 8> m_energyData;
     static const constexpr std::string_view ENERGY {"energy"};
+    System::EngineController engineController;
 };
 
 
@@ -397,9 +403,9 @@ public:
     std::string toString(PowerUnit unit);
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 6> m_powerData;
     static const constexpr std::string_view POWER {"power"};
+    System::EngineController engineController;
 };
 
 /**
@@ -441,9 +447,9 @@ public:
     std::string toString(PressureUnit unit);
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 8> m_pressureData;
     static const constexpr std::string_view PRESSURE {"pressure"};
+    System::EngineController engineController;
 };
 
 /**
@@ -483,9 +489,9 @@ public:
     std::string toString(AngleUnit unit);
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 6> m_angleData;
     static const constexpr std::string_view ANGLE {"angle"};
+    System::EngineController engineController;
 };
 
 /**
@@ -534,9 +540,9 @@ public:
     std::string toString(CurrencyUnit unit);
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 13> m_currencyData;
     static const constexpr std::string_view CURRENCY {"currency"};
+    System::EngineController engineController;
 };
 
 enum class VolumeUnit
@@ -581,9 +587,9 @@ public:
     std::string toString(VolumeUnit unit) __cell_override;
 
 private:
-    UnitItems unitItems {};
     std::array<std::string, 15> m_volumeData;
     static const constexpr std::string_view VOLUME {"volume"};
+    System::EngineController engineController;
 };
 
 enum class FrequencyUnit {
@@ -630,9 +636,9 @@ public:
     std::string toString(FrequencyUnit unit);
 
 private:
-    UnitItems unitItems {};                            //!< Unit items
     std::array<std::string, 6> m_frequencyData;        //!< Frequency data
     static const constexpr std::string_view FREQUENCY {"frequency"};  //!< Frequency string
+    System::EngineController engineController;
 };
 
 CELL_NAMESPACE_END

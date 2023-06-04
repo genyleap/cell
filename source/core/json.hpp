@@ -81,202 +81,179 @@ private:
     Cell::FileSystem::FileManager fileManager{};
 };
 
-/**
- * @brief A class for finding and manipulating JSON values.
- * @tparam T The type of the JSON value.
- */
-template <typename T>
-class __cell_export JsonFind
-{
+class JsonDocument {
 public:
-    /**
-     * @brief Default constructor (deleted).
-     */
-    JsonFind() = delete;
+    JsonDocument() = default;
 
-    /**
-     * @brief Constructs a JsonFind object with the specified JSON value and search object.
-     *
-     * @param jv The JSON value to search within.
-     * @param obj The object to search for within the JSON value.
-     */
-    JsonFind(const JSonValue& jv, const T& obj)
-    {
-        JasonKeyValue jkv;
 
-// Iterate through the JSON value to find the specified object
 #ifdef USE_BOOST
-        try {
-            for(const auto& j : jv.as_object())
-            {
-                if(j.key() == obj)
-                {
-                    // Set the keys and their corresponding values
-                    for(const auto& k : j.value().as_object())
-                    {
-                        jkv.key = k.key();
-                        jkv.value = k.value();
-                        m_jKeyValue.push_back(jkv);
-                    }
-                }
-            }
-        } catch (...) {
-        }
+    JsonDocument(const boost::json::value& value);
 #else
-        try {
-            for (JSonValue::const_iterator it = jv.begin(); it != jv.end(); ++it)
-            {
-                const std::string baseKey = it.key().asString();
-                const Json::Value baseValue = *it;
-                if(baseKey == obj) {
-                    std::vector<std::string> keys = baseValue.getMemberNames();
-                    // Set the keys and their corresponding values
-                    for (const std::string& key : keys) {
-                        const Json::Value& value = baseValue[key];
-                        jkv.key = key;
-                        jkv.value = value;
-                        m_jKeyValue.push_back(jkv);
-                    }
-                }
-            }
-        } catch (...) {
-        }
+    JsonDocument(const Json::Value& value);
 #endif
-    }
 
     /**
-     * @struct JasonKeyValue
-     * @brief Structure representing a JSON key-value pair.
+     * Parse a JSON data from a given input and populate root node of the JSON object.
+     * @param data Input data in JSonType format.
+     * @param inputType as InputType for select type of input data [file or raw string].
+     * @return true if parsing is successful, false otherwise.
      */
-    struct JasonKeyValue __cell_final
+    bool parse(const Types::JSonType& data, const InputType inputType) __cell_noexcept;
+
+    /**
+     * Parse a JSON data from a given input and populate root node of the JSON object.
+     * @param data Input data in JSonType format.
+     * @return true if parsing is successful, false otherwise.
+     */
+    bool parse(const Types::JSonType& data) __cell_noexcept;
+
+
+    std::string toString() const;
+
+    bool hasKey(const std::string& key) const;
+
+    int getInt(const std::string& key) const;
+
+    Types::JSonValue getJson() const;
+
+    std::string getString(const std::string& key) const;
+
+    bool hasArray(const std::string& key) const;
+
+    size_t getArraySize(const std::string& key) const ;
+
+    JsonDocument getObject(const std::string& key) const;
+
+    template <typename T, typename... Args>
+    T getJsonObject(const JSonValue& jsonValue, Args&&... args)
     {
-        std::string key;     /**< The key of the JSON pair. */
-        JSonValue value;     /**< The value of the JSON pair. */
-    };
-
-    /**
-     * @brief Returns a JsonFind object representing the specified object within the JSON value.
-     *
-     * @param obj The object to search for within the JSON value.
-     * @return A JsonFind object representing the specified object.
-     */
-    JsonFind getAsObject(const auto& obj) {
+        JSonValue object = jsonValue;
 #ifdef USE_BOOST
-        return JsonFind(m_jvalue.at(obj).as_object());
-#else
-        return JsonFind(m_jvalue[obj]);
-#endif
-    }
-
-    /**
-     * @brief Returns the JSON key-value pairs as an object.
-     *
-     * @return The JSON key-value pairs as an object.
-     */
-    std::vector<JasonKeyValue> getAsObject() {
-#ifdef USE_BOOST
-        return m_jKeyValue;
-#else
-        return m_jKeyValue;
-#endif
-    }
-
-    /**
-     * @brief Returns the specified JSON value as a string.
-     *
-     * @param jvalue The JSON value to convert.
-     * @return The JSON value as a string.
-     */
-    auto getAsString(const JSonValue& jvalue)
-    {
-#ifdef USE_BOOST
-        return jvalue.as_string().c_str();
-#else
-        return jvalue.asString();
-#endif
-    }
-
-    /**
-     * @brief Returns the stored JSON value.
-     *
-     * @return The stored JSON value.
-     */
-    auto getValue()
-    {
-#ifdef USE_BOOST
-        return m_jvalue;
-#else
-        return m_jvalue;
-#endif
-    }
-
-    /**
-     * @brief Returns the specified JSON value as a map of key-value pairs.
-     *
-     * @param obj The JSON value to convert.
-     * @return The JSON value as a map of key-value pairs.
-     */
-    std::map<std::string, JSonValue> getValue(const JSonValue& obj)
-    {
-        std::map<std::string, JSonValue> v;
-#ifdef USE_BOOST
-        for (const auto& [key, value] : obj.as_object()) {
-            m_key = key;
-            m_value = value;
-            v.insert(std::make_pair(m_key.value(), m_value));
-        }
-#else
-        for (JSonValue::const_iterator it = obj.begin(); it != obj.end(); ++it)
+        ((object = object.at(args)), ...);
+        if constexpr (std::is_same_v<T, std::string>)
         {
-            m_key = it.key().asString();
-            m_value = *it;
-            v.insert(std::make_pair(m_key.value(), m_value));
+            return object.as_string().c_str();
+        }
+        else if constexpr (std::is_same_v<T, bool>)
+        {
+            return object.as_bool();
+        }
+        else if constexpr (std::is_same_v<T, int>)
+        {
+            return object.as_int64();
+        }
+        else if constexpr (std::is_same_v<T, double>)
+        {
+            return object.as_double();
+        }
+        else if constexpr (std::is_same_v<T, decltype(object)>)
+        {
+            return object.as_object();
+        }
+        // Add more conditions for other specific type conversions as needed
+        else
+        {
+            // Handle unsupported type conversion
+            throw std::runtime_error("Unsupported type conversion");
+            return T();
+        }
+#else
+        ((object = object[args]), ...);
+        if constexpr (std::is_same_v<T, std::string>)
+        {
+            return object.asString();
+        }
+        else if constexpr (std::is_same_v<T, bool>)
+        {
+            return object.asBool();
+        }
+        else if constexpr (std::is_same_v<T, int>)
+        {
+            return object.asInt();
+        }
+        else if constexpr (std::is_same_v<T, double>)
+        {
+            return object.asDouble();
+        }
+        else if constexpr (std::is_same_v<T, decltype(object)>)
+        {
+            return object;
+        }
+        else
+        {
+            // Handle unsupported type conversion
+            throw std::runtime_error("Unsupported type conversion");
+            return T();
         }
 #endif
-        return v;
     }
 
-    /**
-     * @brief Returns the stored JSON value as an array.
-     *
-     * @return The stored JSON value as an array.
-     */
-    auto getAsArray() {
+    template<typename T>
+    std::vector<T> getArray(const std::string& key) const {
+        std::vector<T> result;
 #ifdef USE_BOOST
-        return m_jvalue.as_array();
+        if (m_root.is_object()) {
+            auto obj = m_root.as_object();
+            if (obj.contains(key)) {
+                auto jsonValue = obj.at(key);
+                if (jsonValue.is_array()) {
+                    auto jsonArray = jsonValue.get_array();
+                    for (const auto& element : jsonArray) {
+                        T value;
+                        if constexpr (std::is_same<T, JsonDocument>::value) {
+                            JsonDocument nestedWrapper(element);
+                            value = nestedWrapper;
+                        } else {
+                            value = boost::json::value_to<T>(element);
+                        }
+                        result.push_back(value);
+                    }
+                    return result;
+                }
+            }
+        }
 #else
-        return m_jvalue;
+        if (m_root.isObject() && m_root.isMember(key) && m_root[key].isArray()) {
+            const Json::Value& jsonArray = m_root[key];
+            for (unsigned int i = 0; i < jsonArray.size(); ++i) {
+                T value;
+                if constexpr (std::is_same<T, JsonDocument>::value) {
+                    JsonDocument nestedWrapper(jsonArray[i]);
+                    value = nestedWrapper;
+                } else {
+                    value = jsonArray[i].as<T>();
+                }
+                result.push_back(value);
+            }
+            return result;
+        }
+#endif
+        throw std::runtime_error("Key '" + key + "' does not exist or is not an array.");
+    }
+
+    std::vector<std::string> getKeys() const;
+
+    bool isArray() const {
+#ifdef USE_BOOST
+        return m_root.is_array();
+#else
+        return m_root.isArray();
 #endif
     }
 
-    /**
-     * @brief Returns the specified JSON value as an array.
-     *
-     * @param obj The JSON value to convert.
-     * @return The JSON value as an array.
-     */
-    auto getAsArray(const JSonValue& obj) {
-#ifdef USE_BOOST
-        return obj.as_array();
-#else
-        return obj;
-#endif
-    }
 
-    bool hasKey()
-    {
-        if(!m_jKeyValue.empty())
-            return true;
-        else
-            return false;
-    }
+    std::vector<Types::JSonValue> getVectorJsonPtr();
+
+    JsonDocument getObject() const;
+
+    void setVectorJsonPtr(const JSonValue& data);
 
 private:
-    Types::JSonValue            m_jvalue    {};   //!< The JSON value.
-    Types::OptionalString       m_key       {};   //!< The JSON key.
-    Types::JSonValue            m_value     {};   //!< The JSON value.
-    std::vector<JasonKeyValue>  m_jKeyValue {};   //!< The JSON key-value pairs.
+    Types::JSonValue m_root{}; //!< Root node of the JSON object
+    std::vector<Types::JSonValue> vectorJsonPtr;
+    Cell::FileSystem::FileManager fileManager{};
 };
+
 
 CELL_NAMESPACE_END
 

@@ -25,6 +25,12 @@
 #   error "Cell's "meta-currency.hpp" was not found!"
 #endif
 
+#if __has_include("core/core.hpp")
+#   include "core/core.hpp"
+#else
+#   error "Cell's "core/core.hpp" was not found!"
+#endif
+
 CELL_NAMESPACE_BEGIN(Cell::Convertors::Currencies)
 
 /**
@@ -76,6 +82,9 @@ private:
      * @return The text representation of the number.
      */
     std::string numberToText(Types::ullongInt number);
+
+    System::EngineController engineController;
+
 };
 
 
