@@ -90,7 +90,7 @@ public:
      */
     JsonDocument() = default;
 
-/**
+    /**
      * Constructor that initializes the JsonDocument with a Json::Value object.
      * @param value The Json::Value object to initialize the JsonDocument.
      */
@@ -286,6 +286,80 @@ public:
         }
 #endif
         throw std::runtime_error("Key '" + key + "' does not exist or is not an array.");
+    }
+
+    /**
+     * Retrieves multiple values of type T from nested JSON arrays based on the provided keys.
+     *
+     * @tparam T The type of values to retrieve.
+     * @tparam Keys The keys used to navigate through the JSON structure.
+     * @param key The first key to access the nested JSON array.
+     * @param keys The remaining keys to access further nested JSON arrays (optional).
+     * @return A vector containing the retrieved values.
+     * @throws std::runtime_error if the keys do not exist or the value is not an array.
+     */
+    template<typename T, typename... Keys>
+    std::vector<T> getMultipleArray(const std::string& key, const Keys&... keys) const
+    {
+        std::vector<T> result;
+#ifdef USE_BOOST
+        if (m_root.is_object()) {
+            auto obj = m_root.as_object();
+            if (obj.contains(key)) {
+                auto jsonValue = obj.at(key);
+                // Recursive call to getMultipleArray for further nested arrays.
+                if constexpr (sizeof...(Keys) > 0) {
+                    JsonDocument nestedWrapper(jsonValue);
+                    return nestedWrapper.getMultipleArray<T>(keys...);
+                } else {
+                    if (jsonValue.is_array()) {
+                        auto jsonArray = jsonValue.get_array();
+                        for (const auto& element : jsonArray) {
+                            T value;
+                            if constexpr (std::is_same<T, JsonDocument>::value)
+                            {
+                                // Handle nested JsonDocument objects
+                                JsonDocument nestedWrapper(element);
+                                value = nestedWrapper;
+                            } else {
+                                value = boost::json::value_to<T>(element);
+                            }
+                            result.push_back(value);
+                        }
+                        return result;
+                    }
+                }
+            }
+        }
+#else
+        if (m_root.isObject() && m_root.isMember(key)) {
+            const Json::Value& jsonValue = m_root[key];
+            if constexpr (sizeof...(Keys) > 0) {
+                JsonDocument nestedWrapper(jsonValue);
+                // Recursive call to getMultipleArray for further nested arrays.
+                return nestedWrapper.getMultipleArray<T>(keys...);
+            } else {
+                if (jsonValue.isArray()) {
+                    const Json::Value& jsonArray = jsonValue;
+                    for (unsigned int i = 0; i < jsonArray.size(); ++i)
+                    {
+                        T value;
+                        if constexpr (std::is_same<T, JsonDocument>::value)
+                        {
+                            // Handle nested JsonDocument objects
+                            JsonDocument nestedWrapper(jsonArray[i]);
+                            value = nestedWrapper;
+                        } else {
+                            value = jsonArray[i].as<T>();
+                        }
+                        result.push_back(value);
+                    }
+                    return result;
+                }
+            }
+        }
+#endif
+        throw std::runtime_error("Keys do not exist or the value is not an array.");
     }
 
     /**

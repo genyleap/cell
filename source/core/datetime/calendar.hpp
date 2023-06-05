@@ -92,6 +92,8 @@ struct GREGORIAN_CONSTANTS final
 
     __cell_static_const_constexpr std::string_view CALENDARS        {"calendars"};
     __cell_static_const_constexpr std::string_view CALENDAR_NAME    {"gregorian"};
+    __cell_static_const_constexpr std::string_view CALENDAR_MONTHS  {"months"};
+    __cell_static_const_constexpr std::string_view CALENDAR_DAYS    {"daysname"};
 };
 
 /**
@@ -101,6 +103,7 @@ class GregorianCalendar : public Abstracts::AbstractCalendar {
 public:
     GregorianCalendar();
     ~GregorianCalendar();
+
 
     /**
      * @brief Returns a vector of available calendars.
@@ -603,6 +606,69 @@ private:
     System::EngineController engineController;
 };
 
+/**
+ * @brief The CalendarContainer class allows you to register and retrieve different types of calendars. Here's an overview of what the class does:
+ *
+ * - The class maintains an `std::unordered_map` named `calendars`, which stores unique pointers to instances of calendar objects. The keys in the map are string names associated with each calendar.
+ * - The `registerCalendar` function template allows you to register a calendar with a given name. The template parameter `CalendarType` represents the type of calendar you want to register. It must be derived from the `Cell::Abstracts::AbstractCalendar` base class. The function creates a new instance of the specified calendar type using `std::make_unique` and associates it with the provided name in the `calendars` map.
+ * - The `getCalendar` function template retrieves a calendar by its name. It takes the template parameter `CalendarType`, representing the type of calendar you want to retrieve, and the name of the calendar. It returns an `std::optional` containing a pointer to the requested calendar if it exists in the map. The function performs a dynamic cast to ensure that the retrieved calendar object is of the specified type.
+ * - The `getAllCalendars` function returns a vector of pointers to all registered calendar instances. It iterates over the `calendars` map and collects the pointers to the calendar objects, which are stored in the `allCalendars` vector.
+ *
+ * In summary, the `CalendarContainer` class provides a convenient way to register and retrieve different types of calendars by name.
+ * It allows for flexible management of calendar objects within the container.
+ *
+ */
+class CalendarContainer {
+private:
+    std::unordered_map<std::string, std::unique_ptr<Cell::Abstracts::AbstractCalendar>> calendars;
+
+public:
+    /*!
+     * \brief Register a calendar with a given name.
+     * \tparam CalendarType The type of the calendar to register.
+     * \param name The name of the calendar.
+     * \throws std::runtime_error if the CalendarType is not default constructible.
+     * \note The CalendarType must be derived from Cell::Abstracts::AbstractCalendar.
+     */
+    template <typename CalendarType>
+        requires std::derived_from<CalendarType, Cell::Abstracts::AbstractCalendar>
+    void registerCalendar(const std::string& name) {
+        static_assert(std::is_default_constructible_v<CalendarType>,
+                      "CalendarType must be default constructible");
+        calendars[name] = std::make_unique<CalendarType>();
+    }
+
+    /*!
+     * \brief Get a calendar by name.
+     * \tparam CalendarType The type of the calendar to retrieve.
+     * \param name The name of the calendar.
+     * \return A pointer to the requested calendar, or std::nullopt if the calendar was not found.
+     * \note The CalendarType must be derived from Cell::Abstracts::AbstractCalendar.
+     */
+    template <typename CalendarType>
+        requires std::derived_from<CalendarType, Cell::Abstracts::AbstractCalendar>
+    std::optional<CalendarType*> getCalendar(const std::string& name)
+    {
+        auto it = calendars.find(name);
+        if (it != calendars.end()) {
+            Cell::Abstracts::AbstractCalendar* calendarPtr = it->second.get();
+            return dynamic_cast<CalendarType*>(calendarPtr);
+        }
+        return std::nullopt;
+    }
+
+    /*!
+     * \brief Get all registered calendar classes.
+     * \return A vector of pointers to all registered calendar instances.
+     */
+    std::vector<Cell::Abstracts::AbstractCalendar*> getAllCalendars() const {
+        std::vector<Cell::Abstracts::AbstractCalendar*> allCalendars;
+        for (const auto& pair : calendars) {
+            allCalendars.push_back(pair.second.get());
+        }
+        return allCalendars;
+    }
+};
 
 CELL_NAMESPACE_END
 

@@ -233,24 +233,31 @@ int GregorianCalendar::minimumDaysInMonth() const
 
 Types::OptionalString GregorianCalendar::monthName(int month) const
 {
-    auto& engine = engineController.getEngine();
+    // Create a secure instance of the engine to access all features.
+    auto& engine  = engineController.getEngine();
+
+    // Getting the standard code of the user's current language
     auto language = createLanguageObject()->getLanguageCode();
+
+    // Parse and retrieve the language-spec section.
     JsonDocument json(engine.translator().getLanguageSpec(language));
-    auto object = json.getObject(engine.meta()->returnView(GREGORIAN_CONSTANTS::CALENDARS));
-    std::string result {};
-    for (const auto& [key, value] : engine.meta()->extractJsonKeyValues(object.getObject().getJson()))
+
+    // Retrieve the array of month names.
+    const auto& array = json.getMultipleArray<std::string>(
+        engine.meta()->returnView(GREGORIAN_CONSTANTS::CALENDARS),
+        engine.meta()->returnView(GREGORIAN_CONSTANTS::CALENDAR_NAME),
+        engine.meta()->returnView(GREGORIAN_CONSTANTS::CALENDAR_MONTHS)
+        );
+
+    // Check if the month index is within the valid range.
+    if (month >= 0 && month < array.size())
     {
-        if (key == engine.meta()->returnView(GREGORIAN_CONSTANTS::CALENDAR_NAME)) {
-            int monthIndex = month - 1; // Adjusting month to 0-based index
-            if (monthIndex >= 0 && monthIndex < engine.meta()->returnJsonSize(value.value))
-            {
-                result = engine.meta()->returnJsonAt(value.value, monthIndex).asString();
-            } else {
-                return __cell_null_optional;
-            }
-        }
+        // Return the month name at the specified index.
+        return array[month];
     }
-    return result;
+
+    // Return std::nullopt if the month index is out of range.
+    return std::nullopt;
 }
 
 int GregorianCalendar::monthsInYear() const
