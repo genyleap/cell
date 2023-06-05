@@ -103,228 +103,237 @@ public:
     Translator();
     ~Translator();
 
-    /*!
-     * \brief init
-     * \return
+    /**
+     * @brief Initializes the Translator.
+     * @return true if initialization is successful, false otherwise.
      */
     __cell_no_discard bool init() __cell_noexcept;
 
-    /*!
-     * \brief initExternal
-     * \param file
-     * \return
+    /**
+     * @brief Initializes the Translator with external files.
+     * @param files A vector of file paths.
+     * @return true if initialization is successful, false otherwise.
      */
-    __cell_no_discard bool initExternal(const std::vector<std::string>& file) __cell_noexcept;
+    __cell_no_discard bool initExternal(const std::vector<std::string>& files) __cell_noexcept;
 
-    /*!
-     * \brief translations
+    /**
+     * @brief Constant variable for translations key.
      */
     __cell_static_constexpr auto translations = "translations";
 
-    /** @var string System Language */
+    /** @var file
+     *  @brief System Language.
+     */
     __cell_inline_static_constexpr std::string_view file = "en_US.json";
 
+    /**
+     * @brief Basic language.
+     */
     __cell_inline_static std::string_view basic_lang = {"en_US"};
 
-    /*!
-     * \brief existFile checks file.
-     * \param file
-     * \returns true if file exists.
+    /**
+     * @brief Checks if a file exists.
+     * @param file The file to check.
+     * @returns true if the file exists, false otherwise.
      */
     __cell_no_discard bool existFile(const std::string& file) __cell_const_noexcept;
 
-    /*!
-     * \brief isMultiLanguage
-     * \returns true if system supports multi language.
+    /**
+     * @brief Checks if the system supports multi-language.
+     * @returns true if the system supports multi-language, false otherwise.
      */
     __cell_no_discard bool isMultiLanguage() __cell_const_noexcept;
-    /*!
-     * \brief isValid checks json file!
-     * \returns true if json format is valid.
+
+    /**
+     * @brief Checks if the JSON format is valid.
+     * @returns true if the JSON format is valid, false otherwise.
      */
     __cell_no_discard bool isValid() __cell_noexcept;
 
-    /*!
-     * \brief hasError checks any error from json structure.
-     * \returns true if error exists.
+    /**
+     * @brief Checks if there is any error from the JSON structure.
+     * @returns true if there is an error, false otherwise.
      */
     __cell_no_discard bool hasError() __cell_const_noexcept;
 
-    /*!
-     * \brief defaultLanguage
-     * \return
+    /**
+     * @brief Gets the default language.
+     * @return The default language.
      */
     std::string defaultLanguage() __cell_const_noexcept;
 
-    /*!
-     * \brief errorMessage
-     * \return
+    /**
+     * @brief Gets the error message.
+     * @return The error message.
      */
     __cell_no_discard std::string errorMessage() __cell_const_noexcept;
 
-    /*!
-     * \brief Language::hasString checks for the existence of [shee][lang][key].
-     * \param sheet name of your selected sheet.
-     * \param lang code of the language structure. e.g: en_US, or fa_IR.
-     * \param key word_key of the `myword` structure. e.g: error, warning.
-     * \returns true value if correct.
+    /**
+     * @brief Checks if a language string exists in the specified sheet and key.
+     * @param lang The language code.
+     * @param sheet The sheet name.
+     * @param key The key in the sheet.
+     * @returns true if the string exists, false otherwise.
      */
     __cell_no_discard bool hasString(const std::string& lang,
                                      const std::string& sheet,
                                      const std::string& key) __cell_const_noexcept;
-    /*!
-     * \brief list gets all language name.
-     * \returns list of language by name.
+
+    /**
+     * @brief Gets a list of all language names.
+     * @return A list of language names.
      */
     __cell_no_discard LanguageList list() __cell_noexcept;
 
-    /*!
-     * \brief listByCode
-     * \return
+    /**
+     * @brief Gets a list of all language names by their language code.
+     * @return A list of language names.
      */
     __cell_no_discard LanguageList listByCode() __cell_noexcept;
 
-    /*!
-     * \brief isRtl
-     * \return
+    /**
+     * @brief Checks if a language is written right-to-left.
+     * @param code The language code.
+     * @return true if the language is right-to-left, false otherwise.
      */
     __cell_no_discard bool isRtl(const std::string& code) __cell_noexcept;
 
-    /*!
-     * \brief symbol
-     * \param code
-     * \return
+    /**
+     * @brief Gets the symbol for the specified code.
+     * @param code The code.
+     * @return The symbol.
      */
     __cell_no_discard std::string symbol(const std::string& code) __cell_noexcept;
 
-    /*!
-     * \brief currency
-     * \param code
-     * \return
+    /**
+     * @brief Gets the currency for the specified code.
+     * @param code The code.
+     * @return The currency.
      */
     __cell_no_discard std::string currency(const std::string& code) __cell_noexcept;
 
-    /*!
-     * \brief callingCode
-     * \param code
-     * \return
+    /**
+     * @brief Gets the calling code for the specified code.
+     * @param code The code.
+     * @return The calling code.
      */
     __cell_no_discard std::string callingCode(const std::string& code) __cell_noexcept;
 
-    /*!
-     * \brief callingCodeByUri
-     * \param code
-     * \return
+    /**
+     * @brief Gets the calling code for the specified code by URI.
+     * @param code The code.
+     * @return The calling code.
      */
     __cell_no_discard std::string callingCodeByUri(const std::string& code) __cell_noexcept;
 
-    /*!
-     * \brief drivingSide
-     * \param code
-     * \return
+    /**
+     * @brief Gets the driving side for the specified code.
+     * @param code The code.
+     * @return The driving side.
      */
     __cell_no_discard std::string drivingSide(const std::string& code) __cell_noexcept;
 
-    /*!
-     * \brief iso3166Code
-     * \param code
-     * \return
+    /**
+     * @brief Gets the ISO 3166 code for the specified code.
+     * @param code The code.
+     * @return The ISO 3166 code.
      */
     __cell_no_discard std::string iso3166Code(const std::string& code) __cell_noexcept;
 
-    /*!
-     * \brief internetTld
-     * \param code
-     * \return
+    /**
+     * @brief Gets the internet TLD (Top Level Domain) for the specified code.
+     * @param code The code.
+     * @return The internet TLD.
      */
     __cell_no_discard std::string internetTld(const std::string& code) __cell_noexcept;
 
-    /*!
-     * \brief listByTitle gets all language by native name.
-     * \returns title by native name as string.
+    /**
+     * @brief Gets a list of all language names by their native name.
+     * @return A list of language names.
      */
     __cell_no_discard LanguageList listByTitle() __cell_noexcept;
 
-    /*!
-     * \brief getFile function contains the filename and path.
-     * \returns string for filename.
+    /**
+     * @brief Gets the file information containing the filename and path.
+     * @return The file information.
      */
     __cell_no_discard LanguageFile getFile() __cell_const_noexcept;
 
-    /*!
-     * \brief setFile function sets file to parsing.
-     * \param file as string path and name.
+    /**
+     * @brief Sets the file to be parsed.
+     * @param file The file information.
      */
     void setFile(const LanguageFile& file) __cell_noexcept;
 
-    /*!
-     * \brief wordProcess function process the parsing of words inside json file
-     * structure.
+    /**
+     * @brief Processes the parsing of words inside the JSON file structure.
      */
     void wordProcess() noexcept;
 
-    /*!
-     * \brief parse function will parse the JSON file.
+    /**
+     * @brief Parses the JSON file.
+     * @return true if parsing is successful, false otherwise.
      */
     __cell_no_discard bool parse();
 
-    /*!
-     * \brief parseExternal function is suitable for external device structure such as mobile android and ios storage.
-     * \param data gets data list.
-     * \return as bool.
+    /**
+     * @brief Parses the JSON file from external data.
+     * @param data A vector of data strings.
+     * @return true if parsing is successful, false otherwise.
      */
     __cell_no_discard bool parseExternal(const std::vector<std::string>& data) __cell_noexcept;
 
-    /*!
-     * \brief parseMessage function prints message of parsing status.
+    /**
+     * @brief Prints the message of the parsing status.
      */
     void parseMessage() noexcept;
 
-    /*!
-     * \brief translate function will translate data based on selected sheet, key and language.
-     * \param lang is data based on language file.
-     * \param sheet is sheet name.
-     * \param key is sheet key.
-     * \return as translated data.
+    /**
+     * @brief Translates data based on the selected sheet, key, and language.
+     * @param lang The language code.
+     * @param sheet The sheet name.
+     * @param key The key in the sheet.
+     * @return The translated data.
      */
     __cell_no_discard LanguageTemplate translate(const std::string& lang, const std::string& sheet, const std::string& key);
 
-    /*!
-     * \brief data function will gets all language data from one sheet.
-     * \param sheet is sheet name.
-     * \param valueType is type of exist value.
-     * \return collection of one sheet.
+    /**
+     * @brief Gets all language data from one sheet.
+     * @param sheet The sheet name.
+     * @param valueType The type of existing value.
+     * @return The collection of data from the sheet.
      */
     __cell_no_discard DictonaryType data(const std::string& sheet, const ValueType valueType = ValueType::Default) __cell_noexcept;
 
-    /*!
-     * \brief data function will gets all language data from one sheet.
-     * \param sheet is sheet name.
-     * \param byKey is key type of variable.
-     * \param valueType is type of exist value.
-     * \return collection of one sheet.
+    /**
+     * @brief Gets all language data from one sheet by key.
+     * @param sheet The sheet name.
+     * @param byKey The key type of variable.
+     * @param valueType The type of existing value.
+     * @return The collection of data from the sheet.
      */
     __cell_no_discard DictonaryType data(const std::string& sheet, const std::string& byKey, const ValueType valueType = ValueType::Default) __cell_noexcept;
 
-    /*!
-     * \brief data function will gets all language spec data from one language file.
-     * \return data from language-spec.
+    /**
+     * @brief Gets the language specification data from the language file.
+     * @param code The language code.
+     * @return The language specification data.
      */
     __cell_no_discard JSonValue getLanguageSpec(const std::string& code) __cell_noexcept;
 
 protected:
-    JSon::JsonDocument jsonParser           {};                 //!< JsonManager class.
-    LanguageMap       wordMap               {};                 //!< Language map.
+    JSon::JsonDocument jsonParser                   {};                  //!< JsonManager class.
+    LanguageMap wordMap                             {};                  //!< Language map.
 
-    LanguageList      m_list                {};                 //!< List of languages.
-    LanguageList      m_list_title          {};                 //!< List of languages by their title.
-    bool              m_multi_language =    {true};             //!< Multi language state.
-    bool              m_hasError            {};                 //!< Error state.
-    std::string       m_errorMessage =      {__cell_null_str};  //!< Error Message.
-    DicType           m_data                {};                 //!< All data from language.
-    LanguageTemplate  m_template            {};                 //!< Language template.
-    std::string       m_default_language    {};                 //!< Default language.
-    std::string       m_current_language    {};                 //!< Current language.
+    LanguageList m_list                             {};                  //!< List of languages.
+    LanguageList m_list_title                       {};                  //!< List of languages by their title.
+    bool m_multi_language =                         {true};              //!< Multi-language state.
+    bool m_hasError                                 {};                  //!< Error state.
+    std::string m_errorMessage =                    {__cell_null_str};   //!< Error message.
+    DicType m_data                                  {};                  //!< All data from language.
+    LanguageTemplate m_template                     {};                  //!< Language template.
+    std::string m_default_language                  {};                  //!< Default language.
+    std::string m_current_language                  {};                  //!< Current language.
 
 private:
     TranslatorData m_translatorData {};

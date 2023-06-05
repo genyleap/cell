@@ -206,7 +206,8 @@ bool Translator::isRtl(const std::string& code) __cell_noexcept
     auto items = jsonParser.getVectorJsonPtr();
     for(const auto& root : items) {
 
-        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC, Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code) {
+        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC, Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code)
+        {
             m_translatorData.isRtl = jsonParser.getJsonObject<bool>(root, CELL_LANGUAGE_SPEC, "rtl");
         }
     }
@@ -217,7 +218,8 @@ std::string Translator::symbol(const std::string& code) __cell_noexcept
 {
     auto items = jsonParser.getVectorJsonPtr();
     for(const auto& root : items) {
-        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code) {
+        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code)
+        {
             m_translatorData.symbol = jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE));
         }
     }
@@ -228,7 +230,8 @@ std::string Translator::currency(const std::string& code) __cell_noexcept
 {
     auto items = jsonParser.getVectorJsonPtr();
     for(const auto& root : items) {
-        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code) {
+        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code)
+        {
             m_translatorData.currency = jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC, "currency");
         }
     }
@@ -239,7 +242,8 @@ std::string Translator::callingCode(const std::string& code) __cell_noexcept
 {
     auto items = jsonParser.getVectorJsonPtr();
     for(const auto& root : items) {
-        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code) {
+        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code)
+        {
             m_translatorData.callingCode = jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC, "calling_code");
         }
     }
@@ -261,7 +265,8 @@ std::string Translator::drivingSide(const std::string& code) __cell_noexcept
 {
     auto items = jsonParser.getVectorJsonPtr();
     for(const auto& root : items) {
-        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code) {
+        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code)
+        {
             m_translatorData.drivingSide = jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC, "driving_side");
         }
     }
@@ -272,7 +277,8 @@ std::string Translator::iso3166Code(const std::string& code) __cell_noexcept
 {
     auto items = jsonParser.getVectorJsonPtr();
     for(const auto& root : items) {
-        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code) {
+        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code)
+        {
             m_translatorData.iso3166Code = jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC, "iso_3166_code");
         }
     }
@@ -284,7 +290,8 @@ std::string Translator::internetTld(const std::string& code) __cell_noexcept
 {
     auto items = jsonParser.getVectorJsonPtr();
     for(const auto& root : items) {
-        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code) {
+        if(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC,Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)) == code)
+        {
             m_translatorData.internetTld = jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC, "internet_tld");
         }
     }
@@ -294,7 +301,6 @@ std::string Translator::internetTld(const std::string& code) __cell_noexcept
 LanguageList Translator::listByCode() noexcept
 {
     auto items = jsonParser.getVectorJsonPtr();
-    std::clog << items.size() << std::endl;
     for(const auto& root : items) {
         m_translatorData.language.push_back(jsonParser.getJsonObject<std::string>(root, CELL_LANGUAGE_SPEC, Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::CODE)));
     }
@@ -320,16 +326,18 @@ void Translator::setFile(const LanguageFile& file) __cell_noexcept
     m_translatorData.file = file;
 }
 
-std::vector<JsonDocument> getArray(const JsonDocument& json, const std::string& key) {
+std::vector<JsonDocument> getArray(const JsonDocument& json, const std::string& key)
+{
     std::vector<JsonDocument> result;
     if (json.hasArray(key)) {
         size_t size = json.getArraySize(key);
         for (size_t i = 0; i < size; ++i) {
-            result.push_back(json.getObject(key + "[" + std::to_string(i) + "]"));
+            result.push_back(json.getObject(key + "[" + TO_CELL_STRING(i) + "]"));
         }
     }
     return result;
 }
+
 
 
 void Translator::wordProcess() __cell_noexcept
