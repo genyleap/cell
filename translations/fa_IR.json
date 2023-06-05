@@ -4,230 +4,1163 @@
     "code": "fa_IR",
     "uri": "fa-ir",
     "short_name": "fa",
-    "native_name": "فارسی",
+    "countryname": {
+      "national": {
+        "short": "ایران",
+        "full": "جمهوری اسلامی ایران"
+      },
+      "international": {
+        "short": "Iran",
+        "full": "Islamic Republic of Iran"
+      }
+    },
+    "language": {
+      "official_language": "Farsi (فارسی)",
+      "secondary": [
+        {
+          "code": "az",
+          "title": "Azerbaijani (ترکی آذربایجانی)"
+        },
+        {
+          "code": "ku",
+          "title": "Kurdish (کوردی)"
+        },
+        {
+          "code": "ar",
+          "title": "Arabic (عربی)"
+        },
+        {
+          "code": "glk",
+          "title": "Gilaki (گیلکی)"
+        },
+        {
+          "code": "mzn",
+          "title": "Mazandarani (مازندرانی)"
+        },
+        {
+          "code": "lrc",
+          "title": "Luri (لری)"
+        },
+        {
+          "code": "bal",
+          "title": "Balochi (بلوچی)"
+        },
+        {
+          "code": "tk",
+          "title": "Turkmen (ترکمنی)"
+        },
+        {
+          "code": "hy",
+          "title": "Armenian (ارمنی)"
+        },
+        {
+          "code": "aii",
+          "title": "Assyrian Neo-Aramaic (آشوری)"
+        }
+      ],
+      "endonym": {
+        "title": "Farsi (فارسی)",
+        "pronunciation": "[fɒːɾˈsiː]"
+      },
+      "exonym": {
+        "title": "Persian (Persia)",
+        "pronunciation": "/ˈpɜːrʒən, -ʃən/"
+      }
+    },
     "calling_code": "+98",
-    "currency": "IRR(ریال)",
-    "driving_side": "left",
+    "base_currency": "IRR",
+    "secondary_currency": "USD",
+    "crypto_currency": "BTC",
+    "currencies": {
+      "title": "IRR(ریال)",
+      "code": "IRR",
+      "view_format": {
+        "decimal_separator": ".",
+        "thousands_separator": "،",
+        "main_currency_unit": "تومان",
+        "fractional_monetary_unit": "ریال",
+        "main_currency_symbol": "تومان",
+        "fractional_monetary_symbol": "ریال",
+        "negative_number_indicator": "-",
+        "currency_plural_form": "",
+        "currency_mixed_form": "و"
+      },
+      "status": true,
+      "secondary": [
+        {
+          "title": "دلار",
+          "code": "USD",
+          "status": false
+        },
+        {
+          "title": "یورو",
+          "code": "EUR",
+          "status": false
+        },
+        {
+          "title": "لیر",
+          "code": "TRY",
+          "status": false
+        }
+      ],
+      "crypto": [
+        {
+          "title": "بیت‌کوین",
+          "code": "BTC",
+          "status": false
+        },
+        {
+          "title": "اتریوم",
+          "code": "ETH",
+          "status": false
+        },
+        {
+          "title": "تتر",
+          "code": "USDT",
+          "status": false
+        }
+      ]
+    },
+    "capital": "Tehran",
+    "continent": "AS",
+    "date_format": "yyyy/mm/dd",
+    "calendar": "SH",
+    "timezone": "UTC+03:30 (IRST)",
+    "driving_side": "right",
     "iso_3166_code": "IR",
-    "internet_tld": ".ir",
-    "alphabet": "الف ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ی ءآاًهٔ ة",
-    "rtl": true
+    "internet_tld": {
+      "tld": "ایران."
+    },
+    "alphabet": "ا ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ی ءآاًهٔ ة",
+    "digits": {
+      "unit_words": [
+        "یک",
+        "دو",
+        "سه",
+        "چهار",
+        "پنج",
+        "شش",
+        "هفت",
+        "هشت",
+        "نه",
+        "ده",
+        "یازده",
+        "دوازده",
+        "سیزده",
+        "چهارده",
+        "پانزده",
+        "شانزده",
+        "هفده",
+        "هجده",
+        "نوزده"
+      ],
+      "tens_words": [
+        "بیست",
+        "سی",
+        "چهل",
+        "پنجاه",
+        "شصت",
+        "هفتاد",
+        "هشتاد",
+        "نود"
+      ],
+      "digit_words": [
+        "صد",
+        "هزار",
+        "میلیون",
+        "میلیارد",
+        "تریلیون",
+        "کادریلیون",
+        "کوئینتیلیون",
+        "سکستیلیون",
+        "سپتیلیون",
+        "اکتیلیون",
+        "نونیلیون",
+        "دسیلیون"
+      ]
+    },
+    "calendars": {
+      "gregorian": {
+        "months": [
+          "ژانویه",
+          "فوریه",
+          "مارس",
+          "آوریل",
+          "مه",
+          "ژوئن",
+          "ژوئیه",
+          "اوت",
+          "سپتامبر",
+          "اکتبر",
+          "نوامبر",
+          "دسامبر"
+        ],
+        "daysname": [
+          "یک‌شنبه",
+          "دوشنبه",
+          "سه‌شنبه",
+          "چهارشنبه",
+          "پنج‌شنبه",
+          "جمعه",
+          "شنبه"
+        ]
+      },
+      "lunar": {
+        "months": [
+          "ماه ماهی",
+          "ماه زرد",
+          "ماه برگر",
+          "ماه گون",
+          "ماه سفید",
+          "ماه ماهی 2",
+          "ماه تاج",
+          "ماه آبان",
+          "ماه خاکستری",
+          "ماه خرداد",
+          "ماه خرم",
+          "ماه تیر"
+        ],
+        "daysname": [
+          "روز ماهی",
+          "روز زرد",
+          "روز برگر",
+          "روز گون",
+          "روز سفید",
+          "روز ماهی 2",
+          "روز تاج"
+        ]
+      },
+      "islamic": {
+        "months": [
+          "محرم",
+          "صفر",
+          "ربیع الاول",
+          "ربیع الثانی",
+          "جمادی الاول",
+          "جمادی الثانی",
+          "رجب",
+          "شعبان",
+          "رمضان",
+          "شوال",
+          "ذو القعدة",
+          "ذو الحجة"
+        ],
+        "daysname": [
+          "یوم الاحد",
+          "یوم الاثنین",
+          "یوم الثلاثاء",
+          "یوم الاربعاء",
+          "یوم الخمیس",
+          "یوم الجمعة",
+          "یوم السبت"
+        ]
+      },
+      "persian": {
+        "months": [
+          "فروردین",
+          "اردیبهشت",
+          "خرداد",
+          "تیر",
+          "مرداد",
+          "شهریور",
+          "مهر",
+          "آبان",
+          "آذر",
+          "دی",
+          "بهمن",
+          "اسفند"
+        ],
+        "daysname": [
+          "شنبه",
+          "یک‌شنبه",
+          "دوشنبه",
+          "سه‌شنبه",
+          "چهارشنبه",
+          "پنج‌شنبه",
+          "جمعه"
+        ]
+      }
+    },
+    "rtl": true,
+    "units": {
+      "length": [
+        {
+          "word_key": "meter",
+          "module": "system",
+          "default_value": "متر",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilometer",
+          "module": "system",
+          "default_value": "کیلومتر",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "centimeter",
+          "module": "system",
+          "default_value": "سانتی‌متر",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "millimeter",
+          "module": "system",
+          "default_value": "میلی‌متر",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "micrometer",
+          "module": "system",
+          "default_value": "میکرومتر",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "nanometer",
+          "module": "system",
+          "default_value": "نانومتر",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "mile",
+          "module": "system",
+          "default_value": "مایل",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "yard",
+          "module": "system",
+          "default_value": "یارد",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "foot",
+          "module": "system",
+          "default_value": "فوت",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "inch",
+          "module": "system",
+          "default_value": "اینچ",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "lightyear",
+          "module": "system",
+          "default_value": "سال نوری",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "temperature": [
+        {
+          "word_key": "celsius",
+          "module": "system",
+          "default_value": "سلسیوس",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "fahrenheit",
+          "module": "system",
+          "default_value": "فارنهایت",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kelvin",
+          "module": "system",
+          "default_value": "کلوین",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "area": [
+        {
+          "word_key": "square_meter",
+          "module": "system",
+          "default_value": "متر مربع",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_kilometer",
+          "module": "system",
+          "default_value": "کیلومتر مربع",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_centimeter",
+          "module": "system",
+          "default_value": "سانتیمتر مربع",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_millimeter",
+          "module": "system",
+          "default_value": "میلی‌متر مربع",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_micrometer",
+          "module": "system",
+          "default_value": "میکرومتر مربع",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "hectare",
+          "module": "system",
+          "default_value": "هکتار",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_mile",
+          "module": "system",
+          "default_value": "مایل مربع",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_yard",
+          "module": "system",
+          "default_value": "یارد مربع",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_foot",
+          "module": "system",
+          "default_value": "فوت مربع",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_inch",
+          "module": "system",
+          "default_value": "اینچ مربع",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "acre",
+          "module": "system",
+          "default_value": "ایکر",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "weight": [
+        {
+          "word_key": "kilogram",
+          "module": "system",
+          "default_value": "کیلوگرم",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "gram",
+          "module": "system",
+          "default_value": "گرم",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "milligram",
+          "module": "system",
+          "default_value": "میلی‌گرم",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "microgram",
+          "module": "system",
+          "default_value": "میکروگرم",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "metric_ton",
+          "module": "system",
+          "default_value": "تن متریک",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "long_ton",
+          "module": "system",
+          "default_value": "تن طولانی",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "short_ton",
+          "module": "system",
+          "default_value": "تن کوتاه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "pound",
+          "module": "system",
+          "default_value": "پوند",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ounce",
+          "module": "system",
+          "default_value": "اونس",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "carat",
+          "module": "system",
+          "default_value": "قیراط",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "atomic_mass_unit",
+          "module": "system",
+          "default_value": "واحد جرم اتمی",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "time": [
+        {
+          "word_key": "second",
+          "module": "system",
+          "default_value": "ثانیه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "millisecond",
+          "module": "system",
+          "default_value": "میلی‌ثانیه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "microsecond",
+          "module": "system",
+          "default_value": "میکروثانیه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "nanosecond",
+          "module": "system",
+          "default_value": "نانوثانیه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "picosecond",
+          "module": "system",
+          "default_value": "پیکوثانیه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "minute",
+          "module": "system",
+          "default_value": "دقیقه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "hour",
+          "module": "system",
+          "default_value": "ساعت",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "day",
+          "module": "system",
+          "default_value": "روز",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "week",
+          "module": "system",
+          "default_value": "هفته",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "month",
+          "module": "system",
+          "default_value": "ماه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "year",
+          "module": "system",
+          "default_value": "سال",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "speed": [
+        {
+          "word_key": "meter_per_second",
+          "module": "system",
+          "default_value": "متر بر ثانیه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilometer_per_hour",
+          "module": "system",
+          "default_value": "کیلومتر بر ساعت",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "mile_per_hour",
+          "module": "system",
+          "default_value": "مایل بر ساعت",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "foot_per_second",
+          "module": "system",
+          "default_value": "فوت بر ثانیه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "knot",
+          "module": "system",
+          "default_value": "گره",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "energy": [
+        {
+          "word_key": "joule",
+          "module": "system",
+          "default_value": "ژول",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilojoule",
+          "module": "system",
+          "default_value": "کیلوژول",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "calorie",
+          "module": "system",
+          "default_value": "کالری",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilocalorie",
+          "module": "system",
+          "default_value": "کیلوکالری",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "electron_volt",
+          "module": "system",
+          "default_value": "الکترون ولت",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "british_thermal_unit",
+          "module": "system",
+          "default_value": "واحد حرارتی بریتانیایی",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "foot_pound",
+          "module": "system",
+          "default_value": "فوت-پوند",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "erg",
+          "module": "system",
+          "default_value": "ارگ",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "power": [
+        {
+          "word_key": "watt",
+          "module": "system",
+          "default_value": "وات",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilowatt",
+          "module": "system",
+          "default_value": "کیلووات",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "megawatt",
+          "module": "system",
+          "default_value": "مگاوات",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "gigawatt",
+          "module": "system",
+          "default_value": "گیگاوات",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "horsepower",
+          "module": "system",
+          "default_value": "اسب بخار",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "foot_pound_per_minute",
+          "module": "system",
+          "default_value": "فوت-پوند در دقیقه",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "pressure": [
+        {
+          "word_key": "pascal",
+          "module": "system",
+          "default_value": "پاسکال",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilopascal",
+          "module": "system",
+          "default_value": "کیلوپاسکال",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "megapascal",
+          "module": "system",
+          "default_value": "مگاپاسکال",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "bar",
+          "module": "system",
+          "default_value": "بار",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "millibar",
+          "module": "system",
+          "default_value": "میلیبار",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "pound_per_square_inch",
+          "module": "system",
+          "default_value": "پوند بر اینچ مربع",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "atmosphere",
+          "module": "system",
+          "default_value": "اتمسفر",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "torr",
+          "module": "system",
+          "default_value": "تور",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "angle": [
+        {
+          "word_key": "degree",
+          "module": "system",
+          "default_value": "درجه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "radian",
+          "module": "system",
+          "default_value": "رادیان",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "grad",
+          "module": "system",
+          "default_value": "گراد",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "minute",
+          "module": "system",
+          "default_value": "دقیقه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "second",
+          "module": "system",
+          "default_value": "ثانیه",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "revolution",
+          "module": "system",
+          "default_value": "چرخش",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "currency": [
+        {
+          "word_key": "USD",
+          "module": "system",
+          "default_value": "دلار آمریکا",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "EUR",
+          "module": "system",
+          "default_value": "یورو",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "GBP",
+          "module": "system",
+          "default_value": "پوند بریتانیا",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "JPY",
+          "module": "system",
+          "default_value": "ین ژاپن",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CAD",
+          "module": "system",
+          "default_value": "دلار کانادا",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "AUD",
+          "module": "system",
+          "default_value": "دلار استرالیا",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CHF",
+          "module": "system",
+          "default_value": "فرانک سوئیس",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CNY",
+          "module": "system",
+          "default_value": "یوان چین",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "SEK",
+          "module": "system",
+          "default_value": "کرون سوئد",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "NZD",
+          "module": "system",
+          "default_value": "دلار زلاند نو",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "INR",
+          "module": "system",
+          "default_value": "روپیه هند",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "MXN",
+          "module": "system",
+          "default_value": "پزوی مکزیک",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "IRR",
+          "module": "system",
+          "default_value": "ریال ایران",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "volume": [
+        {
+          "word_key": "CubicMeter",
+          "module": "system",
+          "default_value": "متر مکعب",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CubicKilometer",
+          "module": "system",
+          "default_value": "کیلومتر مکعب",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CubicCentimeter",
+          "module": "system",
+          "default_value": "سانتیمتر مکعب",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CubicMillimeter",
+          "module": "system",
+          "default_value": "میلیمتر مکعب",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "Liter",
+          "module": "system",
+          "default_value": "لیتر",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "Milliliter",
+          "module": "system",
+          "default_value": "میلی‌لیتر",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "USGallon",
+          "module": "system",
+          "default_value": "گالن آمریکایی",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "USDryGallon",
+          "module": "system",
+          "default_value": "گالن خشک آمریکایی",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialGallon",
+          "module": "system",
+          "default_value": "گالن امپریال",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialQuart",
+          "module": "system",
+          "default_value": "کوارت امپریال",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialPint",
+          "module": "system",
+          "default_value": "پینت امپریال",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialCup",
+          "module": "system",
+          "default_value": "کاپ امپریال",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialFluidOunce",
+          "module": "system",
+          "default_value": "اونس مایع امپریال",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialTablespoon",
+          "module": "system",
+          "default_value": "قاشق غذاخوری امپریال",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialTeaspoon",
+          "module": "system",
+          "default_value": "قاشق چایخوری امپریال",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "frequency": [
+        {
+          "word_key": "hertz",
+          "module": "system",
+          "default_value": "هرتز",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilohertz",
+          "module": "system",
+          "default_value": "کیلوهرتز",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "megahertz",
+          "module": "system",
+          "default_value": "مگاهرتز",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "gigahertz",
+          "module": "system",
+          "default_value": "گیگاهرتز",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "terahertz",
+          "module": "system",
+          "default_value": "تراهرتز",
+          "custom_value": "",
+          "type": "text"
+        }
+      ]
+    }
   },
   "data": {
     "modules": [
       {
         "word_key": "no_initialized",
         "module": "system",
-        "default_value": "ماژول {name} هنوز مقدار‌دهی اولیه نشده است!",
+        "default_value": "ماژول  {}  هنوز مقدار‌دهی اولیه نشده است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "initialized",
         "module": "system",
-        "default_value": "ماژول {name} مقدار‌دهی اولیه شده است!",
+        "default_value": "ماژول  {} مقدار‌دهی اولیه شده است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "initializing",
         "module": "system",
-        "default_value": "ماژول {name} در حال مقدار‌دهی شدن است...",
+        "default_value": "ماژول  {} در حال مقدار‌دهی شدن است...",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "circular_dependency",
         "module": "system",
-        "default_value": "در ماژول {name} وابستگی حلقه‌ای وجود دارد.",
+        "default_value": "در ماژول  {} وابستگی حلقه‌ای وجود دارد.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "plugins": [
       {
         "word_key": "no_initialized",
         "module": "system",
-        "default_value": "افزونه {name} هنوز مقدار‌دهی اولیه نشده است!",
+        "default_value": "افزونه  {} هنوز مقدار‌دهی اولیه نشده است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "initialized",
         "module": "system",
-        "default_value": "افزونه {name} مقدار‌دهی اولیه شده است!",
+        "default_value": "افزونه {} مقدار‌دهی اولیه شده است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "initializing",
         "module": "system",
-        "default_value": "افزونه {name} در حال مقدار‌دهی شدن است...",
+        "default_value": "افزونه {} در حال مقدار‌دهی شدن است...",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "circular_dependency",
         "module": "system",
-        "default_value": "در افزونه {name} وابستگی حلقه‌ای وجود دارد.",
+        "default_value": "در افزونه {} وابستگی حلقه‌ای وجود دارد.",
         "custom_value": "",
-        "status": true
-      }
-    ],
-    "customization": [
-      {
-        "word_key": "customize",
-        "module": "system",
-        "default_value": "سفارشی‌سازی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "make_your_own_dashboard",
-        "module": "system",
-        "default_value": "داشبورد مورد علاقهٔ خودتان را بسازید",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "make_your_own_dashboard_desc",
-        "module": "system",
-        "default_value": "گزینه‌های برگزیده را تنظیم کنید که برای نمایش پیش نمایش زنده شما اعمال خواهند شد.",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "color_scheme",
-        "module": "system",
-        "default_value": "طرح رنگی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "style_desc",
-        "module": "system",
-        "default_value": "ارائه کلی روشن یا تاریک.",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "light_mode",
-        "module": "system",
-        "default_value": "حالت روشن",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "dark_mode",
-        "module": "system",
-        "default_value": "حالت تاریک",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "navigation_position",
-        "module": "system",
-        "default_value": "موقعیت ناوبری",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "navigation_position_desc",
-        "module": "system",
-        "default_value": "نمونهٔ ناوبری اولیه را برای برنامه خود انتخاب کنید.",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "sidenav",
-        "module": "system",
-        "default_value": "جانبی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "topnav",
-        "module": "system",
-        "default_value": "بالا",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "combonav",
-        "module": "system",
-        "default_value": "ترکیبی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "sidenav_sizing",
-        "module": "system",
-        "default_value": "اندازه‌نگاری ناوبری",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "sidenav_sizing_desc",
-        "module": "system",
-        "default_value": "اندازه ناوبری استاندارد یا نمادهای کوچک شده با کشویی.",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "full_size",
-        "module": "system",
-        "default_value": "اندازهٔ کامل",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "icons",
-        "module": "system",
-        "default_value": "آیکون‌دار",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "navigation_color",
-        "module": "system",
-        "default_value": "رنگ ناوبری",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "navigation_color_desc",
-        "module": "system",
-        "default_value": "معمولاً توسط طرح رنگ اعمال می‌شود، اما می‌توان آن را نادیده گرفت.",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "default",
-        "module": "system",
-        "default_value": "پیش‌فرض",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "inverted",
-        "module": "system",
-        "default_value": "معکوس",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "viberant",
-        "module": "system",
-        "default_value": "سرزنده",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "preview",
-        "module": "system",
-        "default_value": "پیش‌نمایش",
-        "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "core": [
@@ -236,63 +1169,84 @@
         "module": "system",
         "default_value": "در آینده",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "plural_word",
         "module": "system",
-        "default_value": "",
+        "default_value": " ",
         "custom_value": "",
-        "status": true
+        "type": "text"
+      },
+      {
+        "word_key": "currency_plural_form",
+        "module": "system",
+        "default_value": " ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "and_word",
+        "module": "system",
+        "default_value": "و",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "or_word",
+        "module": "system",
+        "default_value": "یا",
+        "custom_value": "",
+        "type": "text"
       },
       {
         "word_key": "afew_seconds_ago",
         "module": "system",
         "default_value": "چند ثانیه پیش {}",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "minute",
         "module": "system",
         "default_value": "دقیقه پیش {}",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hour",
         "module": "system",
         "default_value": "ساعت پیش {}",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "day",
         "module": "system",
         "default_value": "روز پیش {}",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "week",
         "module": "system",
         "default_value": "هفته پیش {}",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "month",
         "module": "system",
         "default_value": "ماه پیش {}",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "year",
         "module": "system",
         "default_value": "سال پیش {}",
         "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "global": [
@@ -301,84 +1255,84 @@
         "module": "system",
         "default_value": "موتور سِل",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "greeting",
         "module": "system",
         "default_value": "سلام، من {} هستم!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "slogan",
         "module": "system",
         "default_value": "نسل جدید سیستم‌های آنلاین چند‌منظوره",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "slogan_desc",
         "module": "system",
         "default_value": "سِل یک سیستم متن باز با کارایی فوق‌العاده بالا، کاربر پسند، چند زبانه و چند منظورهٔ مدرن مبتنی بر C++20 است که به شما امکان می‌دهد وب‌سایت‌ها و برنامه‌های آنلاین قدرتمند بسازید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "version",
         "module": "system",
         "default_value": "نسخه",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "light_style",
         "module": "system",
         "default_value": "روشن",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "dark_style",
         "module": "system",
         "default_value": "تاریک",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "loading",
         "module": "system",
         "default_value": "در حال بارگزاری...",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "business",
         "module": "system",
         "default_value": "تجاری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "user",
         "module": "system",
         "default_value": "کاربری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "goback",
         "module": "system",
         "default_value": "برگشت",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "top_search",
         "module": "system",
         "default_value": "جستجوی برتر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "pages": [
@@ -387,675 +1341,44 @@
         "module": "system",
         "default_value": "صفحه‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "page",
         "module": "system",
         "default_value": "صفحه",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "list",
         "module": "system",
         "default_value": "فهرست",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "create",
         "module": "system",
         "default_value": "ساخت",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "preferences",
         "module": "system",
         "default_value": "تنظیمات",
         "custom_value": "",
-        "status": true
-      }
-    ],
-    "menu": [
-      {
-        "word_key": "user_dashboard",
-        "module": "system",
-        "default_value": "داشبورد",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "user_dashboard_desc",
-        "module": "system",
-        "default_value": "در اینجا، آنچه که امروز در <strong>سِل</strong> شما اتفاق می‌افتد را مشاهده می‌کنید.",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "admin_dashboard",
-        "module": "system",
-        "default_value": "داشبورد",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "admin_dashboard_desc",
-        "module": "system",
-        "default_value": "در اینجا، آنچه که امروز در <strong>کسب‌و‌کار</strong> شما اتفاق می‌افتد را مشاهده می‌کنید.",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "recent_discoveries",
-        "module": "system",
-        "default_value": "یافت شده‌های اخیر",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "account",
-        "module": "system",
-        "default_value": "حساب کاربری سِل",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "home",
-        "module": "system",
-        "default_value": "خانه",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "about",
-        "module": "system",
-        "default_value": "دربارهٔ سیستم",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "faq",
-        "module": "system",
-        "default_value": "سوألات متداول",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "source",
-        "module": "system",
-        "default_value": "در گیت‌هاب",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "pricing",
-        "module": "system",
-        "default_value": "قیمت‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "features",
-        "module": "system",
-        "default_value": "ویژگی‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "privacy",
-        "module": "system",
-        "default_value": "حریم خصوصی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "watchers",
-        "module": "system",
-        "default_value": "مشاهده‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "wallet",
-        "module": "system",
-        "default_value": "کیف پول",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "favorites",
-        "module": "system",
-        "default_value": "علاقه‌مندی‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "reports_and_statistics",
-        "module": "system",
-        "default_value": "آمار و گزارشات",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "comments_and_ratings",
-        "module": "system",
-        "default_value": "امتیاز و دیدگاه‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "statics",
-        "module": "system",
-        "default_value": "آمار",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "faq",
-        "module": "system",
-        "default_value": "پرسش‌های متداول",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "privacy",
-        "module": "system",
-        "default_value": "حریم خصوصی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "terms",
-        "module": "system",
-        "default_value": "شرایط استفاده",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "contactus",
-        "module": "system",
-        "default_value": "تماس با ما",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "payments",
-        "module": "system",
-        "default_value": "پرداخت‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "report_bug",
-        "module": "system",
-        "default_value": "گزارش خطا",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "app_vote",
-        "module": "system",
-        "default_value": "امتیاز به سِل",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "send_ux_feedback",
-        "module": "system",
-        "default_value": "ارسال اطلاعات برای بهبود تجربه کاربری",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "send_ux_feedback_desc",
-        "module": "system",
-        "default_value": "با ارسال کردن اطلاعات حسابم به شکل ناشناس، به بهبود تجربه در سِل کمک می‌کنم.",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "send_bug_automatically",
-        "module": "system",
-        "default_value": "ارسال خطا به صورت خودکار",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "logout_account",
-        "module": "system",
-        "default_value": "خروج از حساب کاربری",
-        "custom_value": "",
-        "status": true
-      }
-    ],
-    "sideblock": [
-      {
-        "word_key": "customization",
-        "module": "system",
-        "default_value": "سفارشی‌سازی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "copyright",
-        "module": "system",
-        "default_value": "© تمامی حقوق چاپ برای سیستم سِل محفوظ است. <br>قدرت گرفته شده از <a class=\"nav-link d-inline-block p-0\" href=\"https://genyleap.com\" rel=\"noopener\" target=\"_blank\">جنی‌لیپ ™</a>",
-        "custom_value": "",
-        "status": true
-      }
-    ],
-    "statics": [
-      {
-        "word_key": "title",
-        "module": "system",
-        "default_value": "آمار و گزارشات",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "my_courses",
-        "module": "system",
-        "default_value": "دوره‌های من",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_active_courses",
-        "module": "system",
-        "default_value": "دوره‌های منتشر شده",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "my_learning",
-        "module": "system",
-        "default_value": "یادگیری من",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "wish_list",
-        "module": "system",
-        "default_value": "Wish List",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_users",
-        "module": "system",
-        "default_value": "مجموع کاربران",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_masters",
-        "module": "system",
-        "default_value": "مجموع اساتید",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_customers",
-        "module": "system",
-        "default_value": "مجموع مشتریان",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_packages",
-        "module": "system",
-        "default_value": "مجموع بسته‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "user_package_desc",
-        "module": "system",
-        "default_value": "بسته‌هایی که دارید",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_views",
-        "module": "system",
-        "default_value": "مشاهده‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "user_view_desc",
-        "module": "system",
-        "default_value": "آنچه که دیده‌اید",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_comments",
-        "module": "system",
-        "default_value": "نقد و نظرات",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "app_settings",
-        "module": "system",
-        "default_value": "تنظیمات",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "user_comments_desc",
-        "module": "system",
-        "default_value": "دیدگاه‌هایی که داشته‌اید",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_likes",
-        "module": "system",
-        "default_value": "پسند شده‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "my_booths",
-        "module": "system",
-        "default_value": "سِل‌های من",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "my_products",
-        "module": "system",
-        "default_value": "محصولات",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "my_payments",
-        "module": "system",
-        "default_value": "پرداخت‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "my_account_info",
-        "module": "system",
-        "default_value": "اطلاعات حساب کاربری",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "user_likes_desc",
-        "module": "system",
-        "default_value": "مواردی که پسندیده‌اید",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "content_interactions",
-        "module": "system",
-        "default_value": "تعاملات محتوا",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "accounts_reached",
-        "module": "system",
-        "default_value": "کاربران ملحق شده",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_following",
-        "module": "system",
-        "default_value": "کل دنبال کنندگان",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_followers",
-        "module": "system",
-        "default_value": "کل دنبال شده‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_sales",
-        "module": "system",
-        "default_value": "مجموع فروش",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "total_supports",
-        "module": "system",
-        "default_value": "مجموع پشتیبانی‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "this_year",
-        "module": "system",
-        "default_value": "امسال",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "this_month",
-        "module": "system",
-        "default_value": "این ماه",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "this_week",
-        "module": "system",
-        "default_value": "این هفته",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "this_day",
-        "module": "system",
-        "default_value": "امروز",
-        "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "slogan": [
       {
         "word_key": "startup_message",
         "module": "system",
-        "default_value": "از دیروز خودت سبقت بگیر!",
+        "default_value": ".انقلاب جهش نرم افزاری",
         "custom_value": "",
-        "status": true
-      }
-    ],
-    "products": [
-      {
-        "word_key": "recommended_you",
-        "module": "system",
-        "default_value": "پیشنهاد شده برای شما",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "based_on_search",
-        "module": "system",
-        "default_value": "بر اساس جستجو",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "special",
-        "module": "system",
-        "default_value": "ویژه",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "most_popular",
-        "module": "system",
-        "default_value": "محبوب‌ ترین‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "trending",
-        "module": "system",
-        "default_value": "پر طرفدار‌ترین‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "popular",
-        "module": "system",
-        "default_value": "محبوب‌",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "we_recommend",
-        "module": "system",
-        "default_value": "پیشنهاد‌های ما",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "suggestions",
-        "module": "system",
-        "default_value": "پیشنهاد‌های شگفت‌انگیز",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "special_brands",
-        "module": "system",
-        "default_value": "برند‌های ویژه",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "your_recent_visits",
-        "module": "system",
-        "default_value": "بازدید‌های اخیر شما",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "recent_bestsellers",
-        "module": "system",
-        "default_value": "فروشنده‌های برتر اخیر",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "recent_bestsellers",
-        "module": "system",
-        "default_value": "پرفروش‌های اخیر",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "top_categories",
-        "module": "system",
-        "default_value": "شاخه‌های برتر",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "recently_added",
-        "module": "system",
-        "default_value": "افزوده‌ شده‌های اخیر",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "our_products",
-        "module": "system",
-        "default_value": "محصولات ما",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "new_collection",
-        "module": "system",
-        "default_value": "مجموعه جدید",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "new_arrival",
-        "module": "system",
-        "default_value": "افزوده شده‌های جدید",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "found_number_result",
-        "module": "system",
-        "default_value": "به تعداد {} مورد یافت شد",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "detail",
-        "module": "system",
-        "default_value": "جزئیات",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "introduction",
-        "module": "system",
-        "default_value": "معرفی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "description",
-        "module": "system",
-        "default_value": "توضیحات",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "gallery",
-        "module": "system",
-        "default_value": "گالری",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "created_date",
-        "module": "system",
-        "default_value": "تاریخ ایجاد شده",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "no_booth_found",
-        "module": "system",
-        "default_value": "سِل‌ای یافت نشد!",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "no_products_found",
-        "module": "system",
-        "default_value": "محصولی یافت نشد!",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "no_products_added_yet",
-        "module": "system",
-        "default_value": "هنوز محصولی اضافه نشده است!",
-        "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "account": [
@@ -1064,448 +1387,448 @@
         "module": "system",
         "default_value": "حساب کاربری شما {}٪ تکمیل شده است.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hi",
         "module": "system",
         "default_value": "سلام، ",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "or",
         "module": "system",
         "default_value": "یا",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "recent_activity",
         "module": "system",
         "default_value": "گزارشات زیر مربوط به فعالیت‌های امروز شماست، یک لحظه وقت بگذارید تا به این موضوع نگاه کنید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "user",
         "module": "system",
         "default_value": "کاربر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "guest",
         "module": "system",
         "default_value": "مهمان",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "firstname",
         "module": "system",
         "default_value": "نام",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "lastname",
         "module": "system",
         "default_value": "نام خانوادگی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "example_email",
         "module": "system",
         "default_value": "مثال : no-reply@{}.com",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "example_phone",
         "module": "system",
         "default_value": "مثال : ۰۹۱۲۰۰۰۰۰۰۰",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "moderator",
         "module": "system",
         "default_value": "میانجی‌گر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "administrator",
         "module": "system",
         "default_value": "مدیریت",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "verification_code",
         "module": "system",
         "default_value": "کد تأیید",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "verification_code_note",
         "module": "system",
         "default_value": "کد تأیید به تلفن همراه و آدرس پست‌الکترونیکی شما ارسال شده است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "verification_code_timer",
         "module": "system",
         "default_value": "شما این کد را حداکثر تا {} ثانیه دیگر دریافت خواهید کرد.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "verify_submitted_code",
         "module": "system",
         "default_value": "تأیید کد ارسال شده",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "ive_not_recived_code",
         "module": "system",
         "default_value": "من کد را دریافت نکرده‌ام!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "resend",
         "module": "system",
         "default_value": "ارسال مجدد",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "send_subscription",
         "module": "system",
         "default_value": "خبرنامهٔ <strong>{}</strong> را برای من ارسال کن.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "please_enter_to_account",
         "module": "system",
         "default_value": "لطفاً وارد حساب کاربری خود شوید!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "enter_to_account",
         "module": "system",
         "default_value": "ورود",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "enter_to_account_note",
         "module": "system",
         "default_value": "ورود به حساب",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "create_new_account",
         "module": "system",
         "default_value": "ثبت‌نام",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "create_new_account_note",
         "module": "system",
         "default_value": "ایجاد حساب کاربری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "forget_password_title",
         "module": "system",
         "default_value": "بازیابی رمزعبور",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "forget_password",
         "module": "system",
         "default_value": "شناسهٔ کاربری را فراموش کرده‌اید؟",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "email_address",
         "module": "system",
         "default_value": "آدرس پست‌الکترونیکی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "username",
         "module": "system",
         "default_value": "نام‌کاربری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "username_note",
         "module": "system",
         "default_value": "برای آغاز نام‌کاربری سِل را وارد کنید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "username_or_email",
         "module": "system",
         "default_value": "نام کاربری یا پست‌الکترونیکی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "custom_password",
         "module": "system",
         "default_value": "رمزعبور سفارشی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "password",
         "module": "system",
         "default_value": "رمز‌عبور",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "remember_me",
         "module": "system",
         "default_value": "مرا به خاطر بسپار",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "remember_me_note",
         "module": "system",
         "default_value": "گزینهٔ \"<strong>مرا به خاطر بسپار</strong>\" امکان ورود‌های مکرر را برای شما را فراهم می‌کند.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "send_pw_via_sms",
         "module": "system",
         "default_value": "ارسال رمز‌عبور از طریق پیام کوتاه؟",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "make_custom_pw",
         "module": "system",
         "default_value": "آیا می‌خواهید رمزعبور سفارشی بسازید؟",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "request_change_pw",
         "module": "system",
         "default_value": "درخواست برای تغییر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "package_title",
         "module": "system",
         "default_value": "عنوان بسته",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "package_code",
         "module": "system",
         "default_value": "کد بسته",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "invite_friends_code",
         "module": "system",
         "default_value": "کد دعوت",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "no_fullname",
         "module": "system",
         "default_value": "نام‌کامل نامشخص است",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "no_username",
         "module": "system",
         "default_value": "نام‌کاربری نامشخص است",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "total_points",
         "module": "system",
         "default_value": "مجموع امتیازات",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "profile_view",
         "module": "system",
         "default_value": "نمایهٔ کاربری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "profile_view_note",
         "module": "system",
         "default_value": "توضیحات نمایهٔ کاربری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "profile_recently",
         "module": "system",
         "default_value": "فعالیت‌های اخیر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "profile_recently_note",
         "module": "system",
         "default_value": "توضیحات فعالیت‌های اخیر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "about_me",
         "module": "system",
         "default_value": "دربارهٔ من",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "no_bio",
         "module": "system",
         "default_value": "معرفی وجود ندارد...",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "mobile_no",
         "module": "system",
         "default_value": "شماره تلفن همراه",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "website_address",
         "module": "system",
         "default_value": "آدرس وب‌سایت",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "no_website",
         "module": "system",
         "default_value": "وب‌سایتی وجود ندارد!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "my_social_id",
         "module": "system",
         "default_value": "شناسهٔ شبکهٔ اجتماعی من",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "liked",
         "module": "system",
         "default_value": "پسند‌شده‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "transactions",
         "module": "system",
         "default_value": "تراکنش‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "archives",
         "module": "system",
         "default_value": "آرشیو‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "followings",
         "module": "system",
         "default_value": "دنبال شده‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "followers",
         "module": "system",
         "default_value": "دنبال کننده‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "package_filter",
         "module": "system",
         "default_value": "فیلتر بسته",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "payment_id",
         "module": "system",
         "default_value": "شناسهٔ پرداخت",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "payment_date_time",
         "module": "system",
         "default_value": "تاریخ و زمان پرداخت",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "payment_cost",
         "module": "system",
         "default_value": "مبلغ پرداختی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "followers_filter",
         "module": "system",
         "default_value": "فیلتر دنبال کننده‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "followings_filter",
         "module": "system",
         "default_value": "فیلتر دنبال شده‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "themes": [
@@ -1514,63 +1837,63 @@
         "module": "system",
         "default_value": "ظاهر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "preferences",
         "module": "system",
         "default_value": "تنظیمات ظاهر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "desc",
         "module": "system",
         "default_value": "نحوهٔ نمایش ظاهر <strong>سِلــ</strong> خود را انتخاب کنید. یک قالب را انتخاب کنید یا آن را با سیستم خود همگام‌سازی کنید و به صورت خودکار بین روز و شب جابجا شوید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "theme",
         "module": "system",
         "default_value": "حالت قالب",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "style",
         "module": "system",
         "default_value": "پوسته",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "dark_mode",
         "module": "system",
         "default_value": "حالت شب",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "light_mode",
         "module": "system",
         "default_value": "حالت روز",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "select",
         "module": "system",
         "default_value": "انتخاب قالب",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "auto",
         "module": "system",
         "default_value": "خودکار",
         "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "translation": [
@@ -1579,14 +1902,21 @@
         "module": "system",
         "default_value": "ترجمه",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "change",
         "module": "system",
         "default_value": "تغییر زبان",
         "custom_value": "",
-        "status": true
+        "type": "text"
+      },
+      {
+        "word_key": "key_not_found",
+        "module": "core",
+        "default_value": "کلید یافت نشد!",
+        "custom_value": "",
+        "type": "text"
       }
     ],
     "exceptions": [
@@ -1595,147 +1925,147 @@
         "module": "core",
         "default_value": "یک خطا رخ داده است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "empty",
         "module": "core",
         "default_value": "مقدار خالی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "feild_not_found",
         "module": "core",
         "default_value": "فیلد '{}' یافت نشد!  ",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "you_are_banned",
         "module": "core",
         "default_value": "شما مسدود شده‌اید!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "ban_lock",
         "module": "core",
         "default_value": "تاریخ پایان ممنوعیت: {date}.<br />دلیل: {reason}.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "error_404",
         "module": "core",
         "default_value": "خطای ۴۰۴",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "error_500",
         "module": "core",
         "default_value": "خطای ۵۰۰",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "page_not_found",
         "module": "core",
         "default_value": "صفحهٔ مورد نظر یافت نشد!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "page_not_found_desc",
         "module": "core",
         "default_value": "صفحه‌ای که به دنبال آن هستید منتقل شده، حذف شده یا ممکن است هرگز وجود نداشته باشد.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "url_error",
         "module": "core",
         "default_value": "خطای لینک!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "page_not_found_detail",
         "module": "core",
         "default_value": "شاید شما پیوند منسوخ شده‌ای را از صفحه دیگری دنبال کرده باشید یا به طور تصادفی اشتباه کرده‌اید و آدرس را به صورت دستی وارد کرده‌اید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "internal_server_error",
         "module": "core",
         "default_value": "خطای داخلی سرور!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "internal_server_error_desc",
         "module": "core",
         "default_value": "سرور با خطای داخلی یا پیکربندی غلط روبرو شد و نتوانست درخواست شما را تکمیل کند.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "db_connection_error",
         "module": "core",
         "default_value": "خطای داخلی بانک اطلاعاتی از سرور!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "db_connection_error_desc",
         "module": "core",
         "default_value": "در زمان اتصال خطایی رخ داده است، لطفاً تنظیمات را بررسی کنید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "config_error",
         "module": "core",
         "default_value": "خطای پیکربندی!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "config_error_desc",
         "module": "core",
         "default_value": "شما باید سیستم پیکربندی داخل را بررسی کنید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "already_installed",
         "module": "system",
         "default_value": "در حال حاضر سیستم نصب و قابل اجراء است.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "already_installed_desc",
         "module": "system",
         "default_value": "قبل از نصب باید آماده‌سازی‌های مراحل نصب تغییر یابند.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "block_error",
         "module": "system",
         "default_value": "قادر به بارگزاری بلوک نیست!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "block_not_found",
         "module": "system",
         "default_value": "قادر به یافتن بلوک نیست!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "database": [
@@ -1744,258 +2074,716 @@
         "module": "core",
         "default_value": "بانک اطلاعاتی متصل است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "disconnected",
         "module": "core",
         "default_value": "پایگاه داده متصل نشده است!",
         "custom_value": "",
-        "status": true
-      }
-    ],
-    "header": [
-      {
-        "word_key": "home",
-        "module": "system",
-        "default_value": "خانه",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "home_desc",
-        "module": "system",
-        "default_value": "یافت شده‌ها در سِل",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "categories",
-        "module": "system",
-        "default_value": "شاخه‌بندی‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "category",
-        "module": "system",
-        "default_value": "در شاخهٔ",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "categories_desc",
-        "module": "system",
-        "default_value": "جستجو بر اساس شاخه‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "create",
-        "module": "system",
-        "default_value": "ایجاد",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "create_desc",
-        "module": "system",
-        "default_value": "ایجاد سِلٔ جدید",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "create_product_desc",
-        "module": "system",
-        "default_value": "ایجاد محصول جدید",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "connection",
-        "module": "system",
-        "default_value": "ارتباطات",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "connection_desc",
-        "module": "system",
-        "default_value": "ارتباطات شما با دیگران",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "profile",
-        "module": "system",
-        "default_value": "حساب کاربری",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "profile_desc",
-        "module": "system",
-        "default_value": "حساب‌کاربری شما در سِل",
-        "custom_value": "",
-        "status": true
-      }
-    ],
-    "footer": [
-      {
-        "word_key": "home",
-        "module": "system",
-        "default_value": "خانه",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "categories",
-        "module": "system",
-        "default_value": "شاخه‌بندی‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "create",
-        "module": "system",
-        "default_value": "ایجاد",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "connection",
-        "module": "system",
-        "default_value": "ارتباطات",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "profile",
-        "module": "system",
-        "default_value": "حساب‌کاربری",
-        "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "forms": [
       {
-        "word_key": "form",
-        "module": "system",
-        "default_value": "Form",
-        "custom_value": "",
-        "status": true
+        "word_key": "accept",
+        "module": "ui",
+        "type": "button",
+        "default_value": "قبول",
+        "custom_value": ""
       },
       {
-        "word_key": "example",
-        "module": "system",
-        "default_value": "مثال:",
-        "custom_value": "",
-        "status": true
+        "word_key": "add",
+        "module": "ui",
+        "type": "button",
+        "default_value": "افزودن",
+        "custom_value": ""
       },
       {
-        "word_key": "search_input",
-        "module": "system",
-        "default_value": "جستجو...",
-        "custom_value": "",
-        "status": true
+        "word_key": "follow",
+        "module": "ui",
+        "type": "button",
+        "default_value": "دنبال کردن",
+        "custom_value": ""
       },
       {
-        "word_key": "unknown",
-        "module": "system",
-        "default_value": "نامشخص",
-        "custom_value": "",
-        "status": true
+        "word_key": "unfollow",
+        "module": "ui",
+        "type": "button",
+        "default_value": "لغو دنبال کردن",
+        "custom_value": ""
       },
       {
-        "word_key": "title_and_description",
-        "module": "system",
-        "default_value": "عنوان و توضیحات",
-        "custom_value": "",
-        "status": true
+        "word_key": "add_to_cart",
+        "module": "ui",
+        "type": "button",
+        "default_value": "افزودن به سبد خرید",
+        "custom_value": ""
       },
       {
-        "word_key": "title",
-        "module": "system",
-        "default_value": "عنوان",
-        "custom_value": "",
-        "status": true
+        "word_key": "profile",
+        "module": "ui",
+        "type": "button",
+        "default_value": "پروفایل",
+        "custom_value": ""
       },
       {
-        "word_key": "description",
-        "module": "system",
-        "default_value": "توضیحات",
-        "custom_value": "",
-        "status": true
+        "word_key": "edit_profile",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ویرایش پروفایل",
+        "custom_value": ""
       },
       {
-        "word_key": "booth_username",
-        "module": "system",
-        "default_value": "شناسهٔ سِل",
-        "custom_value": "",
-        "status": true
+        "word_key": "add_to_wishlist",
+        "module": "ui",
+        "type": "button",
+        "default_value": "افزودن به لیست علاقه‌مندی‌ها",
+        "custom_value": ""
       },
       {
-        "word_key": "phone",
-        "module": "system",
-        "default_value": "تلفن",
-        "custom_value": "",
-        "status": true
+        "word_key": "apply",
+        "module": "ui",
+        "type": "button",
+        "default_value": "اعمال",
+        "custom_value": ""
       },
       {
-        "word_key": "email",
-        "module": "system",
-        "default_value": "پست الکترونیکی",
-        "custom_value": "",
-        "status": true
+        "word_key": "send",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ارسال",
+        "custom_value": ""
       },
       {
-        "word_key": "special",
-        "module": "system",
-        "default_value": "سِلٔ من را از نوع ویژه در نظر بگیر",
-        "custom_value": "",
-        "status": true
+        "word_key": "request",
+        "module": "ui",
+        "type": "button",
+        "default_value": "درخواست",
+        "custom_value": ""
       },
       {
-        "word_key": "special_note",
-        "module": "system",
-        "default_value": "سِل‌هایی که ویژه هستند در معرض دید بیشتر و مشارکت‌های ویژه قرار می‌گیرند.",
-        "custom_value": "",
-        "status": true
+        "word_key": "back",
+        "module": "ui",
+        "type": "button",
+        "default_value": "بازگشت",
+        "custom_value": ""
       },
       {
-        "word_key": "apply_and_create",
+        "word_key": "goback",
         "module": "system",
-        "default_value": "تأیید و ایجاد",
+        "default_value": "بازگشت",
         "custom_value": "",
-        "status": true
+        "type": "text"
+      },
+      {
+        "word_key": "done",
+        "module": "system",
+        "default_value": "انجام شد",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "like",
+        "module": "ui",
+        "type": "button",
+        "default_value": "پسندیدن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "dislike",
+        "module": "ui",
+        "type": "button",
+        "default_value": "نپسندیدن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "write",
+        "module": "ui",
+        "type": "button",
+        "default_value": "نوشتن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "clean",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تمیز کردن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "clear",
+        "module": "ui",
+        "type": "button",
+        "default_value": "پاک کردن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "buy",
+        "module": "ui",
+        "type": "button",
+        "default_value": "خرید",
+        "custom_value": ""
+      },
+      {
+        "word_key": "scan",
+        "module": "ui",
+        "type": "button",
+        "default_value": "اسکن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "deposit",
+        "module": "ui",
+        "type": "button",
+        "default_value": "سپرده گذاری",
+        "custom_value": ""
+      },
+      {
+        "word_key": "withdrawal",
+        "module": "ui",
+        "type": "button",
+        "default_value": "برداشت",
+        "custom_value": ""
+      },
+      {
+        "word_key": "buy_now",
+        "module": "ui",
+        "type": "button",
+        "default_value": "خرید فوری",
+        "custom_value": ""
       },
       {
         "word_key": "cancel",
-        "module": "system",
-        "default_value": "انصراف",
-        "custom_value": "",
-        "status": true
+        "module": "ui",
+        "type": "button",
+        "default_value": "لغو",
+        "custom_value": ""
       },
       {
-        "word_key": "booth_detail",
-        "module": "system",
-        "default_value": "جزئیات سِل",
-        "custom_value": "",
-        "status": true
+        "word_key": "ok",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تأیید",
+        "custom_value": ""
       },
       {
-        "word_key": "add_new_booth",
-        "module": "system",
-        "default_value": "ایجاد سِلٔ جدید",
-        "custom_value": "",
-        "status": true
+        "word_key": "discard",
+        "module": "ui",
+        "type": "button",
+        "default_value": "رد کردن",
+        "custom_value": ""
       },
       {
-        "word_key": "add_new_product",
-        "module": "system",
-        "default_value": "ایجاد محصول جدید",
-        "custom_value": "",
-        "status": true
+        "word_key": "now",
+        "module": "ui",
+        "type": "button",
+        "default_value": "همین الان",
+        "custom_value": ""
+      },
+      {
+        "word_key": "update",
+        "module": "ui",
+        "type": "button",
+        "default_value": "به روزرسانی",
+        "custom_value": ""
+      },
+      {
+        "word_key": "upgrade",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ارتقا",
+        "custom_value": ""
+      },
+      {
+        "word_key": "downgrade",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تنزل",
+        "custom_value": ""
+      },
+      {
+        "word_key": "move",
+        "module": "ui",
+        "type": "button",
+        "default_value": "انتقال",
+        "custom_value": ""
+      },
+      {
+        "word_key": "left",
+        "module": "ui",
+        "type": "button",
+        "default_value": "چپ",
+        "custom_value": ""
+      },
+      {
+        "word_key": "right",
+        "module": "ui",
+        "type": "button",
+        "default_value": "راست",
+        "custom_value": ""
+      },
+      {
+        "word_key": "up",
+        "module": "ui",
+        "type": "button",
+        "default_value": "بالا",
+        "custom_value": ""
+      },
+      {
+        "word_key": "down",
+        "module": "ui",
+        "type": "button",
+        "default_value": "پایین",
+        "custom_value": ""
+      },
+      {
+        "word_key": "check_out",
+        "module": "ui",
+        "type": "button",
+        "default_value": "پرداخت",
+        "custom_value": ""
+      },
+      {
+        "word_key": "close",
+        "module": "ui",
+        "type": "button",
+        "default_value": "بستن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "complete_order",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تکمیل سفارش",
+        "custom_value": ""
+      },
+      {
+        "word_key": "confirm",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تأیید",
+        "custom_value": ""
+      },
+      {
+        "word_key": "confirm_changes",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تأیید تغییرات",
+        "custom_value": ""
+      },
+      {
+        "word_key": "continue",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ادامه",
+        "custom_value": ""
+      },
+      {
+        "word_key": "go",
+        "module": "ui",
+        "type": "button",
+        "default_value": "برو",
+        "custom_value": ""
+      },
+      {
+        "word_key": "set_default",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تنظیم به عنوان پیش‌فرض",
+        "custom_value": ""
+      },
+      {
+        "word_key": "continue_shopping",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ادامه خرید",
+        "custom_value": ""
+      },
+      {
+        "word_key": "copy",
+        "module": "ui",
+        "type": "button",
+        "default_value": "کپی",
+        "custom_value": ""
+      },
+      {
+        "word_key": "clone",
+        "module": "ui",
+        "type": "button",
+        "default_value": "کلون",
+        "custom_value": ""
+      },
+      {
+        "word_key": "duplicate",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تکثیر",
+        "custom_value": ""
+      },
+      {
+        "word_key": "create",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ایجاد",
+        "custom_value": ""
+      },
+      {
+        "word_key": "decline",
+        "module": "ui",
+        "type": "button",
+        "default_value": "رد کردن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "delete",
+        "module": "ui",
+        "type": "button",
+        "default_value": "حذف",
+        "custom_value": ""
+      },
+      {
+        "word_key": "edit",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ویرایش",
+        "custom_value": ""
+      },
+      {
+        "word_key": "export",
+        "module": "ui",
+        "type": "button",
+        "default_value": "صادر کردن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "import",
+        "module": "ui",
+        "type": "button",
+        "default_value": "وارد کردن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "start",
+        "module": "ui",
+        "type": "button",
+        "default_value": "شروع",
+        "custom_value": ""
+      },
+      {
+        "word_key": "finish",
+        "module": "ui",
+        "type": "button",
+        "default_value": "پایان",
+        "custom_value": ""
+      },
+      {
+        "word_key": "generate",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تولید کردن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "log_in",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ورود",
+        "custom_value": ""
+      },
+      {
+        "word_key": "log_out",
+        "module": "ui",
+        "type": "button",
+        "default_value": "خروج",
+        "custom_value": ""
+      },
+      {
+        "word_key": "next",
+        "module": "ui",
+        "type": "button",
+        "default_value": "بعدی",
+        "custom_value": ""
+      },
+      {
+        "word_key": "previous",
+        "module": "ui",
+        "type": "button",
+        "default_value": "قبلی",
+        "custom_value": ""
+      },
+      {
+        "word_key": "forward",
+        "module": "ui",
+        "type": "button",
+        "default_value": "جلو",
+        "custom_value": ""
+      },
+      {
+        "word_key": "backward",
+        "module": "ui",
+        "type": "button",
+        "default_value": "عقب",
+        "custom_value": ""
+      },
+      {
+        "word_key": "select",
+        "module": "ui",
+        "type": "button",
+        "default_value": "انتخاب...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "manage",
+        "module": "ui",
+        "type": "button",
+        "default_value": "مدیریت...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "translate",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ترجمه",
+        "custom_value": ""
+      },
+      {
+        "word_key": "pin",
+        "module": "ui",
+        "type": "button",
+        "default_value": "سنجاق کردن",
+        "custom_value": ""
+      },
+      {
+        "word_key": "reply",
+        "module": "ui",
+        "type": "button",
+        "default_value": "پاسخ",
+        "custom_value": ""
+      },
+      {
+        "word_key": "proceed_to_payment",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ادامه به پرداخت",
+        "custom_value": ""
+      },
+      {
+        "word_key": "refresh",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تازه‌سازی",
+        "custom_value": ""
+      },
+      {
+        "word_key": "register",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ثبت نام",
+        "custom_value": ""
+      },
+      {
+        "word_key": "remove",
+        "module": "ui",
+        "type": "button",
+        "default_value": "حذف",
+        "custom_value": ""
+      },
+      {
+        "word_key": "reset",
+        "module": "ui",
+        "type": "button",
+        "default_value": "بازنشانی",
+        "custom_value": ""
+      },
+      {
+        "word_key": "retry",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تلاش مجدد",
+        "custom_value": ""
+      },
+      {
+        "word_key": "save",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ذخیره",
+        "custom_value": ""
+      },
+      {
+        "word_key": "search",
+        "module": "ui",
+        "type": "button",
+        "default_value": "جستجو",
+        "custom_value": ""
+      },
+      {
+        "word_key": "send",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ارسال",
+        "custom_value": ""
+      },
+      {
+        "word_key": "settings",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تنظیمات",
+        "custom_value": ""
+      },
+      {
+        "word_key": "your_activity",
+        "module": "ui",
+        "type": "button",
+        "default_value": "فعالیت شما",
+        "custom_value": ""
+      },
+      {
+        "word_key": "your_activity",
+        "module": "ui",
+        "type": "button",
+        "default_value": "فعالیت شما",
+        "custom_value": ""
+      },
+      {
+        "word_key": "report_problem",
+        "module": "ui",
+        "type": "button",
+        "default_value": "گزارش مشکل",
+        "custom_value": ""
+      },
+      {
+        "word_key": "preferences",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ترجیحات",
+        "custom_value": ""
+      },
+      {
+        "word_key": "choose",
+        "module": "ui",
+        "type": "button",
+        "default_value": "انتخاب...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "details",
+        "module": "ui",
+        "type": "button",
+        "default_value": "جزئیات...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "moreinfo",
+        "module": "ui",
+        "type": "button",
+        "default_value": "اطلاعات بیشتر...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "other",
+        "module": "ui",
+        "type": "button",
+        "default_value": "دیگر...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "advanced",
+        "module": "ui",
+        "type": "button",
+        "default_value": "پیشرفته...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "change",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تغییر...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "connect",
+        "module": "ui",
+        "type": "button",
+        "default_value": "اتصال",
+        "custom_value": ""
+      },
+      {
+        "word_key": "disconnect",
+        "module": "ui",
+        "type": "button",
+        "default_value": "قطع اتصال",
+        "custom_value": ""
+      },
+      {
+        "word_key": "setup",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تنظیمات...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "install",
+        "module": "ui",
+        "type": "button",
+        "default_value": "نصب...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "uninstall",
+        "module": "ui",
+        "type": "button",
+        "default_value": "حذف نصب...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "sign_up",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ثبت نام",
+        "custom_value": ""
+      },
+      {
+        "word_key": "sign_in",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ورود",
+        "custom_value": ""
+      },
+      {
+        "word_key": "transfer",
+        "module": "ui",
+        "type": "button",
+        "default_value": "انتقال",
+        "custom_value": ""
+      },
+      {
+        "word_key": "transfer",
+        "module": "ui",
+        "type": "button",
+        "default_value": "انتقال",
+        "custom_value": ""
+      },
+      {
+        "word_key": "receive",
+        "module": "ui",
+        "type": "button",
+        "default_value": "دریافت",
+        "custom_value": ""
+      },
+      {
+        "word_key": "swap",
+        "module": "ui",
+        "type": "button",
+        "default_value": "تعویض",
+        "custom_value": ""
+      },
+      {
+        "word_key": "submit",
+        "module": "ui",
+        "type": "button",
+        "default_value": "ارسال",
+        "custom_value": ""
       }
     ],
     "messages": [
@@ -2004,196 +2792,275 @@
         "module": "system",
         "default_value": "پیام",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "empty_full_name",
         "module": "system",
         "default_value": "نام کامل خالی است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "username_limited_char",
         "module": "system",
         "default_value": "نام کاربری شما حداقل باید شامل ۵ کاراکتر باشد!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "empty_email",
         "module": "system",
         "default_value": "آدرس پست‌الکترونیکی خالی است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "empty_mobile",
         "module": "system",
         "default_value": "شماره تلفن همراه خالی است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "system",
         "module": "system",
         "default_value": "پیام سیستمی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "control_inputs",
         "module": "system",
         "default_value": "ورودی‌های خود را کنترل کنید!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "enter_full_data",
         "module": "system",
         "default_value": "اطلاعات را کامل وارد کنید!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "invalid_invite_code",
         "module": "system",
         "default_value": "کد دعوت نامعتبر است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "data_error",
         "module": "system",
         "default_value": "خطای داده‌ای!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "user",
         "module": "system",
         "default_value": "پیام کاربر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "earn_point",
         "module": "system",
         "default_value": "امتیاز کسب‌شده",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "invalid_username",
         "module": "system",
         "default_value": "نام‌کاربری نامعتبر است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "invalid_email",
         "module": "system",
         "default_value": "آدرس پست‌الکترونیکی نامعتبر است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "invalid_mobile",
         "module": "system",
         "default_value": "شماره تلفن همراه نامعتبر است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "user_pass_message",
         "module": "system",
         "default_value": "پیام کاربری و رمز‌عبور",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "interested_note",
         "module": "system",
         "default_value": "یادداشت‌های مورد علاقه!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "students_note",
         "module": "system",
         "default_value": "یادداشت‌های هنرجو!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "master_note",
         "module": "system",
         "default_value": "یادداشت‌های استاد!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "user_type_not_specified",
         "module": "system",
         "default_value": "مشخص نشده!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "create_exist_booth",
         "module": "system",
         "default_value": "سِل مورد نظر با نام کاربری <strong>{}</strong> وجود دارد!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "create_success",
         "module": "system",
         "default_value": "سِل شما با نام کاربری <strong>{}</strong> با موفقیت ثبت شد!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "create_success_product",
         "module": "system",
         "default_value": "محصول شما <strong>{}</strong> با موفقیت ایجاد شد!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "delete_success",
         "module": "system",
         "default_value": "فایل {} با موفقیت حذف شد!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "delete_error",
         "module": "system",
         "default_value": "مشکلی در حذف فایل {} وجود دارد!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "upload_success",
         "module": "system",
         "default_value": "فایل {} با موفقیت بارگذاری شد!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "upload_error",
         "module": "system",
         "default_value": "مشکلی در بارگذاری فایل {} وجود دارد!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "max_image_upload",
         "module": "system",
         "default_value": "حداکثر تعداد مجاز برای بارگذاری، {} تصویر می‌باشد.",
         "custom_value": "",
-        "status": true
+        "type": "text"
+      }
+    ],
+    "greeting": [
+      {
+        "word_key": "hello",
+        "module": "system",
+        "default_value": "سلام!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hi",
+        "module": "system",
+        "default_value": "سلام!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hey",
+        "module": "system",
+        "default_value": "سلام!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "greetings",
+        "module": "system",
+        "default_value": "سلام!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "im_cell",
+        "module": "system",
+        "default_value": "من سل هستم!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "good_morning",
+        "module": "system",
+        "default_value": "صبح بخیر!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "good_afternoon",
+        "module": "system",
+        "default_value": "عصر بخیر!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "good_evening",
+        "module": "system",
+        "default_value": "شب بخیر!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "how_are_you",
+        "module": "system",
+        "default_value": "حال شما چطور است؟",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "how_can_i_help_you",
+        "module": "system",
+        "default_value": "چگونه می‌توانم به شما کمک کنم؟",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "whats_going_on",
+        "module": "system",
+        "default_value": "چه خبر؟",
+        "custom_value": "",
+        "type": "text"
       }
     ],
     "authorization": [
@@ -2202,21 +3069,21 @@
         "module": "system",
         "default_value": "خطای احراز هویت!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "incorrect_user_profile",
         "module": "system",
         "default_value": "حساب کاربری مورد نظر نامعتبر است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "incorrect_user_pass",
         "module": "system",
         "default_value": "نام‌کاربری یا رمزعبور اشتباه است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "setup": [
@@ -2225,854 +3092,854 @@
         "module": "system",
         "default_value": "نصب",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_initialization",
         "module": "system",
         "default_value": "مقدار‌دهی اولیه",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "wizard_message",
         "module": "system",
         "default_value": "راهنما شما را در مراحل نصب راهنمایی می‌کند.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "installer_quide_message",
         "module": "system",
         "default_value": "اگر برای استفاده از نصب کننده به کمک نیاز دارید، راهنمای نصب ما را بررسی کنید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "installer_resource_message",
         "module": "system",
         "default_value": "بر اساس منابع و نیازهای نصب سیستم، سیستم به طور خودکار بهترین حالت ممکن را برای کنترل منابع و بهینه‌سازی عملکرد انتخاب می‌کند.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_installed",
         "module": "system",
         "default_value": "آماده برای پیکربندی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_license",
         "module": "system",
         "default_value": "مجوز‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_applications",
         "module": "system",
         "default_value": "برنامه‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "license_accept",
         "module": "system",
         "default_value": "من با شرایط مجوز موافقم",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "licence_content",
         "module": "system",
         "default_value": "من با شرایط مجوز موافقم",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_compatibility",
         "module": "system",
         "default_value": "سازگاری‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_customization",
         "module": "system",
         "default_value": "سفارشی‌ سازی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_finalizing",
         "module": "system",
         "default_value": "نهایی سازی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_ready",
         "module": "system",
         "default_value": "آماده برای استفاده",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_progress_title",
         "module": "system",
         "default_value": "وضعیت مراحل نصب",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_title_first",
         "module": "system",
         "default_value": "سفارشی سازی ظاهر و موقعیت محلی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_desc_first",
         "module": "system",
         "default_value": "تغییر و تنظیمات پوسته و موقعیت محلی نرم‌افزار.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_title_second",
         "module": "system",
         "default_value": "وضعیت سیستم",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_desc_second",
         "module": "system",
         "default_value": "وضعیت سیستم برای ادامهٔ نصب بر روی کامپیوتر.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_title_third",
         "module": "system",
         "default_value": "مجوز استفاده",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_desc_third",
         "module": "system",
         "default_value": "لطفاً مجوز و شرایط استفاده را با دقت مطالعه کنید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_title_fourth",
         "module": "system",
         "default_value": "سازگاری‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_desc_fourth",
         "module": "system",
         "default_value": "بررسی سازگاری محصول با سیستم شما",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_title_fivth",
         "module": "system",
         "default_value": "نهایی‌سازی سیستم",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_desc_fivth",
         "module": "system",
         "default_value": "نهایی‌سازی تنظیمات سیستمی شما",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_title_sixth",
         "module": "system",
         "default_value": "آمادگی سیستم",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_desc_sixth",
         "module": "system",
         "default_value": "سیستم آمادهٔ استفاده است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "system_requirements",
         "module": "system",
         "default_value": "نیازمندی‌های سیستم",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "step_server_info",
         "module": "system",
         "default_value": "اطلاعات سرور",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "requirements_features",
         "module": "system",
         "default_value": "نیازمندی‌ها و ویژگی‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "engine",
         "module": "system",
         "default_value": "موتور سیستم",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "engine_version",
         "module": "system",
         "default_value": "نسخهٔ موتور",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "cpp_iso",
         "module": "system",
         "default_value": "استاندارد سی‌پلاس‌پلاس",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "web_server",
         "module": "system",
         "default_value": "وب‌سرور",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "database_driver",
         "module": "system",
         "default_value": "راه‌انداز بانک اطلاعاتی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "server_name",
         "module": "system",
         "default_value": "نام سرور",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "multilanguage",
         "module": "system",
         "default_value": "پشتیبانی از چند‌زبانه",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "server_name_desc",
         "module": "system",
         "default_value": "نام میزبانی کامپیوتر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "optimization_features",
         "module": "system",
         "default_value": "ویژگی‌های بهینه‌سازی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "installed_memory",
         "module": "system",
         "default_value": "حافظهٔ نصب شده",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "installed_memory_desc",
         "module": "system",
         "default_value": "حافظهٔ قابل استفاده برای سیستم",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "setup_slogan",
         "module": "system",
         "default_value": "نهایت قدرت را تجربه کنید",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "setup_slogan_desc",
         "module": "system",
         "default_value": "سیستم سِل، یک سیستم متن باز با ویژگی چند-زبانه و چند-منظوره برای ساخت وب‌سایت‌های خارق‌العاده با کارآیی فوق‌العاده بالا.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "database_message",
         "module": "system",
         "default_value": "لطفاً اطلاعات بانک اطلاعاتی را وارد کنید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "database_details",
         "module": "system",
         "default_value": "جزئیات بانک اطلاعاتی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "database_host",
         "module": "system",
         "default_value": "میزبانی بانک اطلاعاتی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "database_name",
         "module": "system",
         "default_value": "نام بانک اطلاعاتی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "database_username",
         "module": "system",
         "default_value": "نام کاربری بانک اطلاعاتی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "database_password",
         "module": "system",
         "default_value": "رمزعبور بانک اطلاعاتی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "database_table_prefix",
         "module": "system",
         "default_value": "پیشوند جدول",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "database_charset",
         "module": "system",
         "default_value": "کاراکتر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "database_driver_type",
         "module": "system",
         "default_value": "نوع راه‌انداز",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "database_port",
         "module": "system",
         "default_value": "پورت",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "finalize_message",
         "module": "system",
         "default_value": "نصب سیستم به پایان رسیده است، لطفا مشخصات مدیریت خود را وارد کنید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "finalize_title",
         "module": "system",
         "default_value": "جزئیات مدیریت",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "username",
         "module": "system",
         "default_value": "نام کاربری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "password",
         "module": "system",
         "default_value": "رمزعبور",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "firstname",
         "module": "system",
         "default_value": "نام",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "lastname",
         "module": "system",
         "default_value": "نام خانوادگی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "confirm_password",
         "module": "system",
         "default_value": "تأیید رمزعبور",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "email_address",
         "module": "system",
         "default_value": "آدرس پست الکترونیکی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "language",
         "module": "system",
         "default_value": "زبان",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "cdn",
         "module": "system",
         "default_value": "نوع سی‌دی‌ان",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "site_details",
         "module": "system",
         "default_value": "جزئیات سایت",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "website_title",
         "module": "system",
         "default_value": "عنوان سایت شما",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "website_description",
         "module": "system",
         "default_value": "توضیحات سایت شما",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "complete_title",
         "module": "system",
         "default_value": "مراحل نصب به پایان رسید!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "complete_message",
         "module": "system",
         "default_value": "حساب مدیریتی شما ساخته شده است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "goto_dashboard",
         "module": "system",
         "default_value": "برو به بخش مدیریت",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "go_website",
         "module": "system",
         "default_value": "View Website",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "website_ready",
         "module": "system",
         "default_value": "وب‌سایت آماده است!",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "go_website_desc",
         "module": "system",
         "default_value": "وب سایت شما برای نمایش محتوا آماده است. در قسمت سفارشی سازی می توانید قالب و محتوا را تغییر دهید.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "go_development",
         "module": "system",
         "default_value": "برو به وب‌سایت رسمی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "go_development_desc",
         "module": "system",
         "default_value": "ما مطمئن خواهیم شد که هر گونه مشکلی که در سیستم مشاهده می‌کنید در به‌روز رسانی های بعدی با گزارش آنها به تیم توسعه برطرف شود.",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "system_support",
         "module": "system",
         "default_value": "پشتیبانی سیستم",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "cache_storage_technology",
         "module": "system",
         "default_value": "فناوری ذخیرهٔ نهان",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "tab_hardware_title",
         "module": "system",
         "default_value": "سخت‌افزار",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "tab_hardware_desc",
         "module": "system",
         "default_value": "منابع یافت شده",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "tab_software_title",
         "module": "system",
         "default_value": "نرم‌افزار",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "tab_software_desc",
         "module": "system",
         "default_value": "نیازمندی‌های نرم‌افزاری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "check",
         "module": "system",
         "default_value": "بررسی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "render_mode",
         "module": "system",
         "default_value": "نوع سازنده",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "style",
         "module": "system",
         "default_value": "پوسته (قالب)",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "language",
         "module": "system",
         "default_value": "زبان",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "product_name",
         "module": "system",
         "default_value": "نام محصول",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "product_version",
         "module": "system",
         "default_value": "نسخهٔ محصول",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "operation_system",
         "module": "system",
         "default_value": "سیستم‌عامل",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "package_name",
         "module": "system",
         "default_value": "نام بسته",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "architecture",
         "module": "system",
         "default_value": "معماری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "class_type",
         "module": "system",
         "default_value": "سری کلاس",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "language_support",
         "module": "system",
         "default_value": "زبان‌های قابل پشتیبانی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_serial",
         "module": "system",
         "default_value": "شماره سریال",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_machine",
         "module": "system",
         "default_value": "ماشین",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_cpu",
         "module": "system",
         "default_value": "پردازندهٔ مرکزی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_ram",
         "module": "system",
         "default_value": "حافظهٔ اصلی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_gpu",
         "module": "system",
         "default_value": "پردازندهٔ گرافیکی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_disk",
         "module": "system",
         "default_value": "دیسک ذخیره‌سازی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_network",
         "module": "system",
         "default_value": "شبکه",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_mac",
         "module": "system",
         "default_value": "آدرس مک",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_ipv4",
         "module": "system",
         "default_value": "شناسهٔ آی‌پی نسخهٔ ۴",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_ipv6",
         "module": "system",
         "default_value": "شناسهٔ آی‌پی نسخهٔ ۶",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_uid",
         "module": "system",
         "default_value": "شناسهٔ انحصاری سیستم",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_engine",
         "module": "system",
         "default_value": "موتور",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_openssl",
         "module": "system",
         "default_value": "کتابخانهٔ OpenSSL",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_driver",
         "module": "system",
         "default_value": "راه‌انداز‌ها",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_compiler",
         "module": "system",
         "default_value": "کامپایلر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_stl",
         "module": "system",
         "default_value": "کتابخانهٔ STL",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_framework",
         "module": "system",
         "default_value": "فریمورک دراگون",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_iso",
         "module": "system",
         "default_value": "گواهی ایزو",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_debug",
         "module": "system",
         "default_value": "حالت خطایابی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_optimized",
         "module": "system",
         "default_value": "بهینه شده",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_compress",
         "module": "system",
         "default_value": "فشرده ساز",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_sync",
         "module": "Sync",
         "default_value": "ادغام سازی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_log",
         "module": "system",
         "default_value": "ثبت کنندهٔ وقایع",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "decoders",
         "module": "system",
         "default_value": "الگوریتم‌های رمز‌نگاری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "software_type",
         "module": "system",
         "default_value": "حالت نرم‌افزاری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "hardware_type",
         "module": "system",
         "default_value": "حالت سخت‌افزاری",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "automatic",
         "module": "system",
         "default_value": "خودکار",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "light_style",
         "module": "system",
         "default_value": "پوستهٔ روشن",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "dark_style",
         "module": "system",
         "default_value": "پوستهٔ تاریک",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "timezone",
         "module": "system",
         "default_value": "موضعیت محلی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "automatic_update",
         "module": "system",
         "default_value": "به‌روز رسانی خودکار",
         "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ],
     "dialog": [
@@ -3081,657 +3948,133 @@
         "module": "system",
         "default_value": "برگشت به عقب",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "next",
         "module": "system",
         "default_value": "بعدی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "apply",
         "module": "system",
         "default_value": "اعمال",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "goback",
         "module": "system",
         "default_value": "برگشت به عقب",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "check_next",
         "module": "system",
         "default_value": "بررسی و بعدی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "gohome",
         "module": "system",
         "default_value": "برو به صفحهٔ خانه",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "install",
         "module": "system",
         "default_value": "نصب",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "lets_start",
         "module": "system",
         "default_value": "شروع کن",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "finalizing",
         "module": "system",
         "default_value": "نهایی‌سازی",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "finish",
         "module": "system",
         "default_value": "اتمام",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "runapp",
         "module": "system",
         "default_value": "اجرای نرم‌افزار",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "ok",
         "module": "system",
         "default_value": "بسیار خب",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "cancel",
         "module": "system",
         "default_value": "لغو",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "close",
         "module": "system",
         "default_value": "بستن",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "remove",
         "module": "system",
         "default_value": "حذف",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "add",
         "module": "system",
         "default_value": "افزودن",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "add_vote",
         "module": "system",
         "default_value": "ثبت نظر",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "your_vote_title",
         "module": "system",
         "default_value": "نظر شما برای ما مهم است",
         "custom_value": "",
-        "status": true
+        "type": "text"
       },
       {
         "word_key": "your_vote_title_desc",
         "module": "system",
         "default_value": "لطفاً نظر خود را در مورد تجربهٔ خود با سِل ثبت کنید.",
         "custom_value": "",
-        "status": true
-      }
-    ],
-    "multimedia": [
-      {
-        "word_key": "booth_image",
-        "module": "system",
-        "default_value": "عکس سِل",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "logo",
-        "module": "system",
-        "default_value": "لوگو",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "product_image",
-        "module": "system",
-        "default_value": "تصویر محصول",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "company_logo",
-        "module": "system",
-        "default_value": "نشان تجاری شرکت",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "product_logo",
-        "module": "system",
-        "default_value": "لوگوی محصول",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "add_image",
-        "module": "system",
-        "default_value": "افزودن تصویر",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "camera",
-        "module": "system",
-        "default_value": "دوربین",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "index_image",
-        "module": "system",
-        "default_value": "انتخاب تصویر شاخص",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "image_note",
-        "module": "system",
-        "default_value": "افزودنِ تصویر، بازدید سِل و محصولات شما را افزایش می‌دهد.",
-        "custom_value": "",
-        "status": true
-      }
-    ],
-    "extra": [
-      {
-        "word_key": "support",
-        "module": "system",
-        "default_value": "پشتیبانی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "socials",
-        "module": "system",
-        "default_value": "شبکه‌های اجتماعی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "contactus",
-        "module": "system",
-        "default_value": "تماس با ما",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "top",
-        "module": "system",
-        "default_value": "بالا",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "share",
-        "module": "system",
-        "default_value": "به اشتراک گذاری",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "now",
-        "module": "system",
-        "default_value": "هم‌اکنون",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "home",
-        "module": "system",
-        "default_value": "خانه",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "page",
-        "module": "system",
-        "default_value": "صفحه",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "dashboard",
-        "module": "system",
-        "default_value": "داشبورد",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "retaled_tags",
-        "module": "system",
-        "default_value": "برچسب‌های مرتبط:",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "share_this_post",
-        "module": "system",
-        "default_value": "به اشتراک گذاری این پست",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "time_to_read",
-        "module": "system",
-        "default_value": "{} دقیقه برای خواندن",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "time_now",
-        "module": "system",
-        "default_value": "هم‌اکنون",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "time_seconds_ago",
-        "module": "system",
-        "default_value": "{} ثانیه پیش",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "time_minutes_ago",
-        "module": "system",
-        "default_value": "{} دقیقه پیش",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "time_hours_ago",
-        "module": "system",
-        "default_value": "{} ساعت پیش",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "time_days_ago",
-        "module": "system",
-        "default_value": "{} روز پیش",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "time_weeks_ago",
-        "module": "system",
-        "default_value": "{} هفته پیش",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "time_months_ago",
-        "module": "system",
-        "default_value": "{} ماه پیش",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "time_years_ago",
-        "module": "system",
-        "default_value": "{} سال پیش",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "time_yesterday",
-        "module": "system",
-        "default_value": "دیروز",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "like_it",
-        "module": "system",
-        "default_value": "پسندیدن",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "call",
-        "module": "system",
-        "default_value": "تماس",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "message",
-        "module": "system",
-        "default_value": "پیام",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "related_articles",
-        "module": "system",
-        "default_value": "مقالات مرتبط",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "see_also",
-        "module": "system",
-        "default_value": "همچنین ببینید",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "email",
-        "module": "system",
-        "default_value": "پست الکترونیکی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "via_link",
-        "module": "system",
-        "default_value": "از طریق پیوند",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "invite",
-        "module": "system",
-        "default_value": "دعوت",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "copy_link",
-        "module": "system",
-        "default_value": "کپی پیوند",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "tags",
-        "module": "system",
-        "default_value": "برچسب‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "about_us",
-        "module": "system",
-        "default_value": "دربارهٔ ما",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "products",
-        "module": "system",
-        "default_value": "محصولات",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "comments",
-        "module": "system",
-        "default_value": "نظرات",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "visits",
-        "module": "system",
-        "default_value": "بازدید‌ها",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "overview",
-        "module": "system",
-        "default_value": "بررسی اجمالی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "review",
-        "module": "system",
-        "default_value": "مرور",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "address",
-        "module": "system",
-        "default_value": "آدرس",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "telegram",
-        "module": "system",
-        "default_value": "تلگرام",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "reddit",
-        "module": "system",
-        "default_value": "ردیت",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "wechat",
-        "module": "system",
-        "default_value": "وی‌چت",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "discord",
-        "module": "system",
-        "default_value": "دیسکورد",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "twitter",
-        "module": "system",
-        "default_value": "توئیتر",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "facebook",
-        "module": "system",
-        "default_value": "فیسبوک",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "whatsapp",
-        "module": "system",
-        "default_value": "واتس‌اپ",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "instagram",
-        "module": "system",
-        "default_value": "اینستاگرام",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "page_link_copy",
-        "module": "system",
-        "default_value": "لینک صفحه کپی شد!",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "follow",
-        "module": "system",
-        "default_value": "دنبال کردن",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "following",
-        "module": "system",
-        "default_value": "دنبال شده",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "unfollow",
-        "module": "system",
-        "default_value": "لغو دنبال کردن",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "mute",
-        "module": "system",
-        "default_value": "بی‌صدا",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "restrict",
-        "module": "system",
-        "default_value": "محدود کردن",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "location",
-        "module": "system",
-        "default_value": "موقعیت جغرافیایی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "location_note",
-        "module": "system",
-        "default_value": "با انتخاب محدوده، سِلٔ شما به همراه نقشهٔ نمایان می‌شود.",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "country",
-        "module": "system",
-        "default_value": "کشور",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "province",
-        "module": "system",
-        "default_value": "استان",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "city",
-        "module": "system",
-        "default_value": "شهر",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "address",
-        "module": "system",
-        "default_value": "آدرس",
-        "custom_value": "",
-        "status": true
-      }
-    ],
-    "development": [
-      {
-        "word_key": "page_under_development",
-        "module": "system",
-        "default_value": "این صفحه در حال توسعه است!",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "rc",
-        "module": "system",
-        "default_value": "نامزد انتشار",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "beta",
-        "module": "system",
-        "default_value": "بتا",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "alpha",
-        "module": "system",
-        "default_value": "Alpha",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "final",
-        "module": "system",
-        "default_value": "نهایی",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "release",
-        "module": "system",
-        "default_value": "انتشار",
-        "custom_value": "",
-        "status": true
-      },
-      {
-        "word_key": "debug",
-        "module": "system",
-        "default_value": "اشکال‌زدائی",
-        "custom_value": "",
-        "status": true
+        "type": "text"
       }
     ]
   }
