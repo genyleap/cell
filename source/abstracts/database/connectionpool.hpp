@@ -49,16 +49,16 @@ public:
     /**
      * @brief Get a connection from the pool.
      *
-     * @return void* Pointer to a connection object.
+     * @return SqlConnection Pointer to a connection object.
      */
-    __cell_virtual void* getConnection() = __cell_zero;
+    __cell_virtual Types::SqlConnection getConnection() = __cell_zero;
 
     /**
      * @brief Release a connection back to the pool.
      *
      * @param connection Pointer to the connection object to release.
      */
-    __cell_virtual void releaseConnection(void* connection) = __cell_zero;
+    __cell_virtual void releaseConnection(Types::SqlConnection connection) = __cell_zero;
 
     /**
      * @brief Enable encryption for the connections in the pool.

@@ -40,6 +40,8 @@ CELL_NAMESPACE_BEGIN(Cell::Abstracts)
  */
 class DatabaseTransaction {
 public:
+    CELL_DEFAULT_INTERFACE_OCTORS(DatabaseTransaction)
+
     /**
      * @brief Begin a database transaction.
      *

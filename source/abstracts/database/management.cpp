@@ -9,16 +9,16 @@ CELL_USING_NAMESPACE Cell;
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 
 /*!
- * \brief Constructs an abstract QueryExecutor.
+ * \brief Constructs an abstract DatabaseManagement.
  */
-QueryExecutor::QueryExecutor()
+DatabaseManagement::DatabaseManagement()
 {
 }
 
 /*!
- * \brief Destroys the QueryExecutor.
+ * \brief Destroys the DatabaseManagement.
  */
-QueryExecutor::~QueryExecutor()
+DatabaseManagement::~DatabaseManagement()
 {
 }
 
