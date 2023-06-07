@@ -275,6 +275,10 @@ using IfStreamer            = std::ifstream;
 using StringStream          = std::stringstream;
 using RuntimeError          = std::runtime_error;
 
+using DbConnectionQueue     = std::deque<Types::SqlConnection>;
+using ConditionVariable     = std::condition_variable;
+using QueryCache            = std::unordered_map<std::string, std::vector<std::vector<std::string>>>;
+
 #define DO_NOTHING  void();
 
 }
