@@ -32,6 +32,28 @@
 CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 
 /**
+ * @brief Represents the data required for configuring a connection pool.
+ */
+struct PoolData final
+{
+    Types::OptionalString host      {}; //!< Optional host name or IP address of the database server.
+    Types::uint           port      {}; //!< Port number on which the database server is running.
+    Types::OptionalString user      {}; //!< Optional username for authenticating the database connection.
+    Types::OptionalString password  {}; //!< Optional password for the database user.
+    Types::OptionalString database  {}; //!< Optional name of the database to connect to.
+    Types::uint           poolSize  {}; //!< Maximum number of connections in the pool.
+
+    Types::DbConnectionQueue connections    {}; //!< Queue of available database connections.
+    Types::ConditionVariable condition      {}; //!< Condition variable for managing connection availability.
+
+    Types::OptionalString keyPath   {}; //!< Optional file path to the private key for SSL/TLS connection.
+    Types::OptionalString certPath  {}; //!< Optional file path to the certificate for SSL/TLS connection.
+    Types::OptionalString caPath    {}; //!< Optional file path to the CA certificate for SSL/TLS connection.
+
+    Types::Mutex mutex              {}; //!< Mutex for ensuring thread-safe access to the connection pool.
+};
+
+/**
  * @brief The abstract base class for a connection pool.
  */
 class ConnectionPool {
@@ -45,6 +67,9 @@ public:
      * @brief Initialize the connection pool.
      */
     __cell_virtual void initialize() = __cell_zero;
+
+
+    __cell_virtual bool isInitialized() const = __cell_zero;
 
     /**
      * @brief Get a connection from the pool.
