@@ -1376,7 +1376,14 @@
       {
         "word_key": "startup_message",
         "module": "system",
-        "default_value": ".انقلاب جهش نرم افزاری",
+        "default_value": "انقلابی در جهش نرم‌افزاری.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "lets_create",
+        "module": "system",
+        "default_value": "بیایید چیزی ایجاد کنیم که همه چیز را تغییر دهد.",
         "custom_value": "",
         "type": "text"
       }
@@ -1923,7 +1930,7 @@
       {
         "word_key": "happened",
         "module": "core",
-        "default_value": "یک خطا رخ داده است!",
+        "default_value": "خطا رخ داد!",
         "custom_value": "",
         "type": "text"
       },
@@ -1937,91 +1944,378 @@
       {
         "word_key": "feild_not_found",
         "module": "core",
-        "default_value": "فیلد '{}' یافت نشد!  ",
+        "default_value": "فیلد '{}' پیدا نشد!",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "you_are_banned",
         "module": "core",
-        "default_value": "شما مسدود شده‌اید!",
+        "default_value": "شما محروم شده‌اید!",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "ban_lock",
         "module": "core",
-        "default_value": "تاریخ پایان ممنوعیت: {date}.<br />دلیل: {reason}.",
+        "default_value": "تاریخ پایان محرومیت: {date}.<br />دلیل: {reason}.",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "error_404",
         "module": "core",
-        "default_value": "خطای ۴۰۴",
+        "default_value": "خطا ۴۰۴",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "error_500",
         "module": "core",
-        "default_value": "خطای ۵۰۰",
+        "default_value": "خطا ۵۰۰",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "page_not_found",
         "module": "core",
-        "default_value": "صفحهٔ مورد نظر یافت نشد!",
+        "default_value": "صفحه یافت نشد!",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "page_not_found_desc",
         "module": "core",
-        "default_value": "صفحه‌ای که به دنبال آن هستید منتقل شده، حذف شده یا ممکن است هرگز وجود نداشته باشد.",
+        "default_value": "صفحه‌ای که به دنبال آن بودید منتقل شده است، حذف شده است یا ممکن است هرگز وجود نداشته باشد.",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "url_error",
         "module": "core",
-        "default_value": "خطای لینک!",
+        "default_value": "خطای آدرس وب!",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "page_not_found_detail",
         "module": "core",
-        "default_value": "شاید شما پیوند منسوخ شده‌ای را از صفحه دیگری دنبال کرده باشید یا به طور تصادفی اشتباه کرده‌اید و آدرس را به صورت دستی وارد کرده‌اید.",
+        "default_value": "شاید شما از یک پیوند قدیمی از صفحه دیگر پیروی کرده باشید یا به طور اتفاقی خطای تایپ کردن آدرس ایجاد کرده‌اید.",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "internal_server_error",
         "module": "core",
-        "default_value": "خطای داخلی سرور!",
+        "default_value": "خطای سرور داخلی!",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "internal_server_error_desc",
         "module": "core",
-        "default_value": "سرور با خطای داخلی یا پیکربندی غلط روبرو شد و نتوانست درخواست شما را تکمیل کند.",
+        "default_value": "خطای سرور داخلی رخ داده است یا تنظیمات آن اشتباه است و سرور قادر به تکمیل درخواست شما نبود.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "driver_not_found",
+        "module": "database",
+        "default_value": "درایور '{}' یافت نشد!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_create_connection",
+        "module": "database",
+        "default_value": "امکان ایجاد یا برقراری ارتباط با اتصال '{}' وجود نداشت.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_initialize_connection",
+        "module": "database",
+        "default_value": "امکان مقداردهی اولیه اتصال '{}' وجود نداشت.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "ssl_tls_configuration_error_occurred",
+        "module": "database",
+        "default_value": "خطای پیکربندی SSL/TLS رخ داده است.",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "db_connection_error",
-        "module": "core",
-        "default_value": "خطای داخلی بانک اطلاعاتی از سرور!",
+        "module": "database",
+        "default_value": "خطای داخلی سرور پایگاه داده!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_connection_error",
+        "module": "database",
+        "default_value": "نوع اتصال نامعتبر است",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "not_connected_to_server",
+        "module": "database",
+        "default_value": "به سرور {} متصل نیست.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_server_status",
+        "module": "database",
+        "default_value": "دریافت وضعیت سرور با شکست مواجه شد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_connection_pool",
+        "module": "database",
+        "default_value": "اتصال نامعتبر از استخر.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_initialize_prepared_statement",
+        "module": "database",
+        "default_value": "مقداردهی اولیه پیش‌آماده‌سازی عبارت ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_prepared_statement",
+        "module": "database",
+        "default_value": "خطای پیش‌آماده‌سازی عبارت رخ داد: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "incorrect_number_of_parameters",
+        "module": "database",
+        "default_value": "تعداد نامناسبی از پارامترها برای عبارت آماده‌سازی وجود دارد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_bind_parameters",
+        "module": "database",
+        "default_value": "مقداردهی پارامترها برای عبارت آماده‌سازی ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_execute_prepared_statement",
+        "module": "database",
+        "default_value": "اجرای عبارت آماده‌سازی ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_bind_parameters",
+        "module": "database",
+        "default_value": "استخر اتصال مقداردهی اولیه نشده است.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "db_connection_error",
+        "module": "database",
+        "default_value": "نوع اتصال نامعتبر است",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_start_transaction",
+        "module": "database",
+        "default_value": "شروع تراکنش ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_execute_sql_statement",
+        "module": "database",
+        "default_value": "اجرای عبارت SQL ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_commit_transaction",
+        "module": "database",
+        "default_value": "تایید تراکنش ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_execute_sql_query",
+        "module": "database",
+        "default_value": "اجرای پرس و جوی SQL ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_retrieve_query_result",
+        "module": "database",
+        "default_value": "بازیابی نتیجه پرس و جو ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_add_column",
+        "module": "database",
+        "default_value": "افزودن ستون ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_modify_column",
+        "module": "database",
+        "default_value": "تغییر ستون ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_rename_column",
+        "module": "database",
+        "default_value": "تغییر نام ستون ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_delete_column",
+        "module": "database",
+        "default_value": "حذف ستون ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_retrieve_table_names",
+        "module": "database",
+        "default_value": "بازیابی نام‌های جداول ناموفق بود.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_optimize_indexes_table",
+        "module": "database",
+        "default_value": "بهینه‌سازی فهرست‌ها برای جدول ناموفق بود",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "index_already_exist_table",
+        "module": "database",
+        "default_value": "فهرست با نام '{}' در جدول '{}' قبلاً وجود دارد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_create_index",
+        "module": "database",
+        "default_value": "ایجاد فهرست ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "index_does_not_exist_table",
+        "module": "database",
+        "default_value": "فهرست با نام '{}' برای جدول '{}' وجود ندارد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_drop_index",
+        "module": "database",
+        "default_value": "حذف فهرست ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_data_provided_for_bulk_insert",
+        "module": "database",
+        "default_value": "اطلاعاتی برای وارد کردن گروهی در دسترس نیست.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_perform_bulk_insert",
+        "module": "database",
+        "default_value": "انجام عملیات وارد کردن گروهی ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_data_provided_bulk_update",
+        "module": "database",
+        "default_value": "اطلاعاتی برای به‌روز رسانی گروهی در دسترس نیست.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_data_format_bulk_update",
+        "module": "database",
+        "default_value": "فرمت داده نامعتبر برای به‌روز رسانی گروهی است.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_perform_bulk_update",
+        "module": "database",
+        "default_value": "انجام عملیات به‌روز رسانی گروهی ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_perform_bulk_delete",
+        "module": "database",
+        "default_value": "انجام عملیات حذف گروهی ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_migrate_data",
+        "module": "database",
+        "default_value": "انتقال داده ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_open_script_file",
+        "module": "database",
+        "default_value": "باز کردن فایل اسکریپت ناموفق بود: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_sql_query_harmful",
+        "module": "database",
+        "default_value": "پرس و جوی SQL نامعتبر است. شامل دستورات ممکن است خطرناک باشد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "query_parameters_are_empty",
+        "module": "database",
+        "default_value": "پارامترهای پرس و جو خالی هستند.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "empty_query_parameter_detected.",
+        "module": "database",
+        "default_value": "پارامتر خالی پرس و جو تشخیص داده شد.",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "db_connection_error_desc",
-        "module": "core",
-        "default_value": "در زمان اتصال خطایی رخ داده است، لطفاً تنظیمات را بررسی کنید.",
+        "module": "database",
+        "default_value": "در ارتباط با پایگاه داده مشکلی وجود دارد، لطفاً تنظیمات خود را بررسی کنید!",
         "custom_value": "",
         "type": "text"
       },
@@ -2035,35 +2329,35 @@
       {
         "word_key": "config_error_desc",
         "module": "core",
-        "default_value": "شما باید سیستم پیکربندی داخل را بررسی کنید.",
+        "default_value": "باید سیستم پیکربندی را بررسی کنید.",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "already_installed",
         "module": "system",
-        "default_value": "در حال حاضر سیستم نصب و قابل اجراء است.",
+        "default_value": "سیستم در حال حاضر نصب شده است.",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "already_installed_desc",
         "module": "system",
-        "default_value": "قبل از نصب باید آماده‌سازی‌های مراحل نصب تغییر یابند.",
+        "default_value": "قبل از نصب مجدد، باید آمادگی‌های نصب تغییر کند.",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "block_error",
         "module": "system",
-        "default_value": "قادر به بارگزاری بلوک نیست!",
+        "default_value": "امکان بارگذاری بلوک وجود ندارد.",
         "custom_value": "",
         "type": "text"
       },
       {
         "word_key": "block_not_found",
         "module": "system",
-        "default_value": "قادر به یافتن بلوک نیست!",
+        "default_value": "بلوک یافت نشد.",
         "custom_value": "",
         "type": "text"
       }

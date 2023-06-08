@@ -1322,6 +1322,13 @@
         "default_value": "Revolution of the software leap.",
         "custom_value": "",
         "type": "text"
+      },
+      {
+        "word_key": "lets_create",
+        "module": "system",
+        "default_value": "Let's create something that changes everything.",
+        "custom_value": "",
+        "type": "text"
       }
     ],
     "account": [
@@ -1962,9 +1969,296 @@
         "type": "text"
       },
       {
+        "word_key": "driver_not_found",
+        "module": "database",
+        "default_value": "Driver '{}' not found!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_create_connection",
+        "module": "database",
+        "default_value": "Failed to create or connect to a '{}' connection.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_initialize_connection",
+        "module": "database",
+        "default_value": "Failed to initialize '{}' connection.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "ssl_tls_configuration_error_occurred",
+        "module": "database",
+        "default_value": "SSL/TLS configuration error occurred.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
         "word_key": "db_connection_error",
-        "module": "core",
+        "module": "database",
         "default_value": "Internal Server Database Error!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_connection_error",
+        "module": "database",
+        "default_value": "Invalid connection type",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "not_connected_to_server",
+        "module": "database",
+        "default_value": "Not connected to the {} server.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_server_status",
+        "module": "database",
+        "default_value": "Failed to retrieve server status.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_connection_pool",
+        "module": "database",
+        "default_value": "Invalid connection from the pool.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_initialize_prepared_statement",
+        "module": "database",
+        "default_value": "Failed to initialize prepared statement: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_prepared_statement",
+        "module": "database",
+        "default_value": "Failed to prepare statement: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "incorrect_number_of_parameters",
+        "module": "database",
+        "default_value": "Incorrect number of parameters for the prepared statement.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_bind_parameters",
+        "module": "database",
+        "default_value": "Failed to bind parameters for the prepared statement: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_execute_prepared_statement",
+        "module": "database",
+        "default_value": "Failed to execute prepared statement: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_bind_parameters",
+        "module": "database",
+        "default_value": "Connection pool is not initialized.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "db_connection_error",
+        "module": "database",
+        "default_value": "Invalid connection type",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_start_transaction",
+        "module": "database",
+        "default_value": "Failed to start transaction: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_execute_sql_statement",
+        "module": "database",
+        "default_value": "Failed to execute SQL statement: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_commit_transaction",
+        "module": "database",
+        "default_value": "Failed to commit transaction: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_execute_sql_query",
+        "module": "database",
+        "default_value": "Failed to execute SQL query: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_retrieve_query_result",
+        "module": "database",
+        "default_value": "Failed to retrieve query result: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_add_column",
+        "module": "database",
+        "default_value": "Failed to add column: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_modify_column",
+        "module": "database",
+        "default_value": "Failed to modify column: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_rename_column",
+        "module": "database",
+        "default_value": "Failed to rename column: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_delete_column",
+        "module": "database",
+        "default_value": "Failed to delete column: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_retrieve_table_names",
+        "module": "database",
+        "default_value": "Failed to retrieve table names.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_optimize_indexes_table",
+        "module": "database",
+        "default_value": "Failed to optimize indexes for table",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "index_already_exist_table",
+        "module": "database",
+        "default_value": "Index with the name '{}' already exists for table '{}'.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_create_index",
+        "module": "database",
+        "default_value": "Failed to create index: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "index_does_not_exist_table",
+        "module": "database",
+        "default_value": "Index with the name '{}' does not exist for table '{}'.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_drop_index",
+        "module": "database",
+        "default_value": "Failed to drop index: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_data_provided_for_bulk_insert",
+        "module": "database",
+        "default_value": "No data provided for bulk insert.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_perform_bulk_insert",
+        "module": "database",
+        "default_value": "Failed to perform bulk insert: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_data_provided_bulk_update",
+        "module": "database",
+        "default_value": "No data provided for bulk update.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_data_format_bulk_update",
+        "module": "database",
+        "default_value": "Invalid data format for bulk update.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_perform_bulk_update",
+        "module": "database",
+        "default_value": "Failed to perform bulk update: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_perform_bulk_delete",
+        "module": "database",
+        "default_value": "Failed to perform bulk delete: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_migrate_data",
+        "module": "database",
+        "default_value": "Failed to migrate data: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_open_script_file",
+        "module": "database",
+        "default_value": "Failed to open the script file: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_sql_query_harmful",
+        "module": "database",
+        "default_value": "Invalid SQL query. It contains potentially harmful statements.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "query_parameters_are_empty",
+        "module": "database",
+        "default_value": "Query parameters are empty.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "empty_query_parameter_detected.",
+        "module": "database",
+        "default_value": "Empty query parameter detected.",
         "custom_value": "",
         "type": "text"
       },
