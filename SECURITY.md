@@ -32,10 +32,6 @@ We will aim to provide regular updates on the progress of vulnerability resoluti
 
 ## Acknowledgments
 
-We would like to thank the following individuals for their contributions in identifying and reporting security vulnerabilities:
-
-- [Contributor Name](https://github.com/contributor)
-
 We greatly appreciate your help in improving the security of this project.
 
 ## Responsible Disclosure
