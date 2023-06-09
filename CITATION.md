@@ -7,4 +7,5 @@ authors:
 title: "Cell Engine"
 version: 1.0
 date-released: 2023-04-29
-url: "https://github.com/github-linguist/linguist"
+url: "https://kambizasadzadeh.com"
+repository-code: "https://github.com/genyleap/cell"
