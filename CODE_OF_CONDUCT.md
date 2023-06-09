@@ -50,7 +50,3 @@ Project maintainers will follow these Community Impact Guidelines in determining
 ## Attribution
 
 This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org), version 2.1, available at [https://www.contributor-covenant.org/version/2/1/code_of_conduct.html](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html).
-
----
-
-Feel free to modify the content as per your specific project's requirements and guidelines. Remember to provide an appropriate contact email address where people can report incidents or violations of the code.
