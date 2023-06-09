@@ -144,7 +144,7 @@ public:
      * @param sql The SQL statement to execute.
      * @return The boolean result indicating the success of the execution.
      */
-    __cell_virtual bool execute(const std::string& sql)  = __cell_zero;
+    __cell_virtual bool executeSync(const std::string& sql)  = __cell_zero;
 
     /**
      * @brief Execute a SQL statement that does not return a result.
@@ -164,7 +164,7 @@ public:
      * @param params The vector of parameters to be used in the prepared statement.
      * @return The boolean result indicating the success of the execution.
      */
-    __cell_virtual bool executePreparedStatement(const std::string& sql, const std::vector<std::string>& params) = __cell_zero;
+    __cell_virtual bool executePreparedStatementSync(const std::string& sql, const std::vector<std::string>& params) = __cell_zero;
 
     /**
      * @brief Execute a batch of SQL statements.
@@ -174,7 +174,7 @@ public:
      * @param sqlBatch The vector of SQL statements to execute as a batch.
      * @return The boolean result indicating the success of the execution.
      */
-    __cell_virtual bool executeBatch(const std::vector<std::string>& sqlBatch)  = __cell_zero;
+    __cell_virtual bool executeBatchSync(const std::vector<std::string>& sqlBatch)  = __cell_zero;
 
     /**
      * @brief Execute a stored procedure.
@@ -184,7 +184,7 @@ public:
      * @param procedure The name of the stored procedure to execute.
      * @return The boolean result indicating the success of the execution.
      */
-    __cell_virtual bool executeProcedure(const std::string& procedure)  = __cell_zero;
+    __cell_virtual bool executeProcedureSync(const std::string& procedure)  = __cell_zero;
 
     /**
      * @brief Execute a SQL query and retrieve the result.
@@ -194,7 +194,7 @@ public:
      * @param sql The SQL query to execute.
      * @return The vector of rows representing the result of the query.
      */
-    __cell_virtual std::vector<std::vector<std::string>> query(const std::string& sql)  = __cell_zero;
+    __cell_virtual std::vector<std::vector<std::string>> querySync(const std::string& sql)  = __cell_zero;
 
     /**
      * @brief Execute a SQL query with parameters and retrieve the result.
@@ -205,7 +205,7 @@ public:
      * @param params The vector of parameters to be used in the query.
      * @return The vector of rows representing the result of the query.
      */
-    __cell_virtual std::vector<std::vector<std::string>> queryWithParams(const std::string& sql, const std::vector<std::string>& params)  = __cell_zero;
+    __cell_virtual std::vector<std::vector<std::string>> queryWithParamsSync(const std::string& sql, const std::vector<std::string>& params)  = __cell_zero;
 
     /**
      * @brief Execute a SQL statement with parameters.
@@ -216,7 +216,7 @@ public:
      * @param params The vector of parameters to be used in the statement.
      * @return The boolean result indicating the success of the execution.
      */
-    __cell_virtual bool executeWithParams(const std::string& sql, const std::vector<std::string>& params)  = __cell_zero;
+    __cell_virtual bool executeWithParamsSync(const std::string& sql, const std::vector<std::string>& params)  = __cell_zero;
 
     /**
      * @brief Execute a batch of SQL statements with parameters.
@@ -227,7 +227,7 @@ public:
      * @param paramsBatch The vector of parameter batches, where each batch is a vector of parameters.
      * @return The boolean result indicating the success of the execution.
      */
-    __cell_virtual bool executeBatchWithParams(const std::string& sql, const std::vector<std::vector<std::string>>& paramsBatch)  = __cell_zero;
+    __cell_virtual bool executeBatchWithParamsSync(const std::string& sql, const std::vector<std::vector<std::string>>& paramsBatch)  = __cell_zero;
 
     /**
      * @brief Execute a stored procedure with parameters.
@@ -238,7 +238,7 @@ public:
      * @param params The vector of parameters to be used in the stored procedure.
      * @return The boolean result indicating the success of the execution.
      */
-    __cell_virtual bool executeProcedureWithParams(const std::string& procedure, const std::vector<std::string>& params)  = __cell_zero;
+    __cell_virtual bool executeProcedureWithParamsSync(const std::string& procedure, const std::vector<std::string>& params)  = __cell_zero;
 };
 
 CELL_NAMESPACE_END
