@@ -10,8 +10,8 @@
  *
  */
 
-#ifndef CELL_VIRTUAL_HOST_CONFIG_HPP
-#define CELL_VIRTUAL_HOST_CONFIG_HPP
+#ifndef CELL_VIRTUAL_HOST_CONFIG_ABSTRACT_HPP
+#define CELL_VIRTUAL_HOST_CONFIG_ABSTRACT_HPP
 
 #ifdef __has_include
 # if __has_include("common.hpp")
@@ -416,4 +416,4 @@ public:
 
 CELL_NAMESPACE_END
 
-#endif  // CELL_VIRTUAL_HOST_CONFIG_HPP
+#endif  // CELL_VIRTUAL_HOST_CONFIG_ABSTRACT_HPP
