@@ -210,6 +210,168 @@ public:
     }
 
     /**
+     * @brief Generates a random GUID (Globally Unique Identifier).
+     *
+     * @tparam T The type of GUID to generate. Can be std::string, std::wstring, or std::array<std::byte, 16>.
+     * @return The generated GUID.
+     *
+     * This function generates a random GUID as either a std::string in the format "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+     * a std::wstring with the same format, or a std::array<std::byte, 16> representing the raw byte values of the GUID.
+     * The chosen representation depends on the template argument T.
+     *
+     * @note The default template argument is std::string.
+     * @note T must be default constructible.
+     */
+    template <typename T = std::string>
+        requires std::same_as<T, std::string> || std::same_as<T, std::wstring> || std::same_as<T, std::array<std::byte, 16>>
+    T guid()
+    {
+        static_assert(std::is_default_constructible_v<T>, "T must be default constructible");
+
+        if constexpr (std::same_as<T, std::string> || std::same_as<T, std::wstring>)
+        {
+            constexpr std::size_t GuidStringLength = 36;
+            constexpr std::string_view Characters = "0123456789ABCDEF";
+            constexpr std::array<int, 4> HyphenIndices = {8, 13, 18, 23};
+
+            std::random_device rd;
+            std::mt19937 generator(rd());
+            std::uniform_int_distribution<std::size_t> distribution(0, Characters.size() - 1);
+
+            T guid;
+            guid.reserve(GuidStringLength);
+
+            for (std::size_t i = 0; i < GuidStringLength; ++i)
+            {
+                if (std::ranges::find(HyphenIndices, i) != HyphenIndices.end())
+                {
+                    if constexpr (std::same_as<T, std::wstring>)
+                        guid.push_back('-');
+                    else
+                        guid.push_back('-');
+                }
+                else
+                {
+                    auto randomIndex = distribution(generator);
+                    if constexpr (std::same_as<T, std::wstring>)
+                        guid.push_back(static_cast<wchar_t>(Characters[randomIndex]));
+                    else
+                        guid.push_back(Characters[randomIndex]);
+                }
+            }
+
+            return guid;
+        }
+        else if constexpr (std::same_as<T, std::array<std::byte, 16>>)
+        {
+            std::random_device rd;
+            std::mt19937_64 generator(rd());
+            std::uniform_int_distribution<std::uint8_t> distribution(0, 255);
+
+            T guid;
+
+            for (std::byte& byte : guid)
+            {
+                byte = static_cast<std::byte>(distribution(generator));
+            }
+
+            return guid;
+        }
+    }
+
+    /**
+     * @brief Generates a random UID (Unique Identifier) of the specified length.
+     *
+     * @tparam CharT The character type of the UID. Must be an integral type and same as the character type of std::string.
+     * @param length The length of the UID to generate.
+     * @return An optional std::basic_string<CharT> containing the generated UID, or std::nullopt if the length is invalid.
+     *
+     * This function generates a random UID of the specified length using the characters "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".
+     * The UID is returned as an optional std::basic_string<CharT> to handle the case where the length is invalid (less than or equal to 0).
+     * The character type of the UID is specified by the template parameter CharT, which must be an integral type and the same as the character type of std::string.
+     *
+     * @note The function requires the character type CharT to be the same as std::string's character type.
+     * @note The function requires the length parameter to be greater than 0.
+     */
+    template <std::integral CharT>
+        requires std::same_as<CharT, typename std::string::value_type>
+    std::optional<std::basic_string<CharT>> generateUid(int length)
+    {
+        static const std::basic_string<CharT> characters =
+            "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        static std::random_device rd;
+        static std::mt19937 generator(rd());
+        static std::uniform_int_distribution<> distribution(0, characters.size() - 1);
+
+        if (length <= 0)
+            return std::nullopt;
+
+        std::basic_string<CharT> randomString;
+        randomString.reserve(length);
+
+        for (int i = 0; i < length; ++i) {
+            randomString.push_back(characters[distribution(generator)]);
+        }
+
+        return randomString;
+    }
+
+    /**
+     * Enum representing the character sets available for UID generation.
+     */
+    enum class CharacterSet {
+        Numeric,        //!< Numeric characters (0-9)
+        Alphabetic,     //!< Alphabetic characters (uppercase and lowercase)
+        Alphanumeric,   //!< Alphanumeric characters (0-9, uppercase and lowercase)
+        Symbols,        //!< Symbols: !@#$%^&*()-_+=
+        Mixed           //!< Mixed characters (alphanumeric and symbols)
+    };
+
+    /**
+     * Mapping of CharacterSet options to their corresponding strings.
+     */
+    const std::unordered_map<CharacterSet, std::string> characterSetMap = {
+        {CharacterSet::Numeric, "0123456789"},
+        {CharacterSet::Alphabetic, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"},
+        {CharacterSet::Alphanumeric, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"},
+        {CharacterSet::Symbols, "!@#$%^&*()-_+="},
+        {CharacterSet::Mixed, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()-_+="}
+    };
+
+    /**
+     * Generate a unique identifier (UID) using the specified character set and length.
+     *
+     * @tparam CharT The character type of the UID string.
+     * @param length The length of the UID to generate.
+     * @param charSet The character set to use for UID generation.
+     * @return An optional containing the generated UID, or std::nullopt if an invalid character set is specified.
+     */
+    template <typename CharT>
+    std::optional<std::basic_string<CharT>> generateUid(int length, CharacterSet charSet)
+    {
+        auto it = characterSetMap.find(charSet);
+        if (it == characterSetMap.end()) {
+            std::cout << "Invalid character set specified for UID generation." << std::endl;
+            return std::nullopt;
+        }
+
+        const std::basic_string<CharT>& characters = it->second;
+
+        std::random_device rd;
+        std::mt19937 generator(rd());
+        std::uniform_int_distribution<> distribution(0, characters.size() - 1);
+
+        std::basic_string<CharT> randomString;
+        randomString.reserve(length);
+
+        for (int i = 0; i < length; ++i) {
+            randomString.push_back(characters[distribution(generator)]);
+        }
+
+        return randomString;
+    }
+
+    /**
      * @brief Returns a nested JSON object within a given JSON value based on a sequence of keys.
      *
      * This function traverses the nested JSON structure using the provided keys and returns the
