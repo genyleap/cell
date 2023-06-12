@@ -94,28 +94,28 @@ public:
      * @param path The URL path to handle.
      * @param handler A function that takes a Request object and returns a Response object.
      */
-    __cell_virtual void addRoute(const std::string& path, const std::function<Response(const Request&)>& handler) =  __cell_zero;
+//    __cell_virtual void addRoute(const std::string& path, const std::function<Response(const Request&)>& handler) =  __cell_zero;
 
     /**
      * @brief Adds a middleware function to be applied to all incoming requests.
      *
      * @param middleware A function that takes a Request object and a handler function, and returns a Response object.
      */
-    __cell_virtual void addMiddleWare(const std::function<Response(const Request&, const std::function<Response(const Request&)>&)>& middleware) =  __cell_zero;
+//    __cell_virtual void addMiddleWare(const std::function<Response(const Request&, const std::function<Response(const Request&)>&)>& middleware) =  __cell_zero;
 
     /**
      * @brief Sets the authentication handler function for handling HTTP Basic Authentication.
      *
      * @param authenticationHandler A function that takes a Request object and returns true if authentication is successful, false otherwise.
      */
-    __cell_virtual void setAuthenticationHandler(const std::function<bool(const Request&)>& authenticationHandler) =  __cell_zero;
+//    __cell_virtual void setAuthenticationHandler(const std::function<bool(const Request&)>& authenticationHandler) =  __cell_zero;
 
     /**
      * @brief Sets the authorization handler function for handling access control.
      *
      * @param authorizationHandler A function that takes a Request object and returns true if the request is authorized, false otherwise.
      */
-    __cell_virtual void setAuthorizationHandler(const std::function<bool(const Request&)>& authorizationHandler) =  __cell_zero;
+//    __cell_virtual void setAuthorizationHandler(const std::function<bool(const Request&)>& authorizationHandler) =  __cell_zero;
 
     /**
      * @brief Sets the caching handler function for caching static files.
@@ -150,7 +150,7 @@ public:
      *
      * @param type The type of event loop.
      */
-    __cell_virtual void setEventLoopType(EventLoopType type) =  __cell_zero;
+//    __cell_virtual void setEventLoopType(EventLoopType type) =  __cell_zero;
 
     /**
      * Set the SSL certificate file for the server.
@@ -281,6 +281,12 @@ public:
     __cell_virtual void setProxyPass(const std::string& proxyPass) = __cell_zero;
 
     /**
+     * @brief Set the proxy buffer for buffering.
+     * @param proxyPass The proxy buffer to set
+     */
+    __cell_virtual void setProxyBuffering(bool buffering) = __cell_zero;
+
+    /**
      * @brief Set the proxy cache for reverse proxy functionality
      * @param proxyCache The proxy cache to set
      */
@@ -299,7 +305,7 @@ public:
      * @param hostname The hostname of the virtual host to add.
      * @param config The configuration for the virtual host to add.
      */
-    __cell_virtual void addVirtualHost(const std::string& hostname, const VirtualHostConfig& config) = __cell_zero;
+//    __cell_virtual void addVirtualHost(const std::string& hostname, const VirtualHostConfig& config) = __cell_zero;
 
     /**
      * @brief Sets the connection timeout in seconds.
@@ -337,7 +343,7 @@ public:
      *
      * @param handler The function to handle errors.
      */
-    __cell_virtual void setErrorHandler(const std::function<Response(const Request&, const std::exception&)>& handler) = __cell_zero;
+//    __cell_virtual void setErrorHandler(const std::function<Response(const Request&, const std::exception&)>& handler) = __cell_zero;
 
     /**
      * @brief Sets the server header with the given name.
@@ -386,19 +392,24 @@ public:
      *
      * @param name The name to use for the session cookie.
      */
-    __cell_virtual void setSessionCookie_name(const std::string& name) = __cell_zero;
+    __cell_virtual void setSessionCookieName(const std::string& name) = __cell_zero;
 
     /**
      * @brief Sets the lifetime of the session cookie in seconds.
      *
      * @param lifetimeSeconds The number of seconds for the session cookie lifetime.
      */
-    __cell_virtual void setSessionCookie_lifetime(int lifetimeSeconds) = __cell_zero;
+    __cell_virtual void setSessionCookieLifetime(int lifetimeSeconds) = __cell_zero;
 
     /**
      * @brief Enables sessions.
      */
     __cell_virtual void enableSessions() = __cell_zero;
+
+    /**
+     * @brief disables sessions.
+     */
+    __cell_virtual void disableSessions() = __cell_zero;
 
 };
 

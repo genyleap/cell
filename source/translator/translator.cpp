@@ -329,10 +329,11 @@ void Translator::setFile(const LanguageFile& file) __cell_noexcept
 std::vector<JsonDocument> getArray(const JsonDocument& json, const std::string& key)
 {
     std::vector<JsonDocument> result;
+    result.reserve(result.size() + 1);
     if (json.hasArray(key)) {
         size_t size = json.getArraySize(key);
         for (size_t i = 0; i < size; ++i) {
-            result.push_back(json.getObject(key + "[" + TO_CELL_STRING(i) + "]"));
+            result.push_back(std::move(json.getObject(key + "[" + TO_CELL_STRING(i) + "]")));
         }
     }
     return result;

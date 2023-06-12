@@ -32,6 +32,8 @@ struct ResponseStructure final
     int                     statusCode  {}; //!< The HTTP status code.
     Types::OptionalString   content     {}; //!< The response body content.
     Types::OptionalString   contentType {}; //!< The MIME type of the response body.
+    Types::Headers          headers     {}; //!< The headers of the response.
+
 };
 
 /**
@@ -42,22 +44,6 @@ struct ResponseStructure final
  */
 class __cell_export Response {
 public:
-    /**
-     * @brief Constructor for creating an HTTP response.
-     *
-     * @param status_code The HTTP status code to set in the response.
-     * @param content An optional string representing the response body content.
-     * @param contentType An optional string representing the MIME type of the response body.
-     */
-    Response(int status_code,
-             const Types::OptionalString& content,
-             const Types::OptionalString& contentType);
-
-    /**
-     * @brief destructor for the Response.
-     */
-    ~Response();
-
     /**
      * @brief Returns the HTTP status code of the response.
      *
@@ -78,6 +64,55 @@ public:
      * @return An optional string representing the MIME type of the response body.
      */
     const Types::OptionalString& contentType() const;
+
+    /**
+     * @brief Set the status code of the response.
+     * @param status_code The status code to set.
+     */
+    void setStatusCode(int status_code);
+
+    /**
+     * @brief Set the content type of the response.
+     * @param content_type The content type to set.
+     */
+    void setContentType(const std::string& content_type);
+
+    /**
+     * @brief Set the content of the response.
+     * @param content The content to set.
+     */
+    void setContent(const std::string& content);
+
+    /**
+     * @brief Set a header in the response.
+     * @param key The key of the header.
+     * @param value The value of the header.
+     */
+    void setHeader(const std::string& key, const std::string& value);
+
+    /**
+     * @brief Set a cookie in the response.
+     * @param name The name of the cookie.
+     * @param value The value of the cookie.
+     * @param maxAge The maximum age of the cookie in seconds.
+     * @param path The path for which the cookie is valid.
+     */
+    void setCookie(const std::string& name, const std::string& value, int maxAge = -1, const std::string& path = "/");
+
+    /**
+     * @brief Set a session ID cookie in the response.
+     * @param sessionId The session ID to set as a cookie value.
+     * @param maxAge The maximum age of the cookie in seconds.
+     * @param path The path for which the cookie is valid.
+     */
+    void setSessionIdCookie(const std::string& sessionId, int maxAge = -1, const std::string& path = "/");
+
+    /**
+     * @brief Get the headers of the response.
+     * @return The headers of the response as an unordered map.
+     */
+    std::unordered_map<std::string, std::string> headers() const;
+
 
 private:
     ResponseStructure responseStructure {}; //!< The internal representation of the HTTP response.

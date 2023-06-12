@@ -71,7 +71,7 @@ Logger::Logger()
 
 Logger::~Logger()
 {
-    std::ostream& streamInStyle  = std::cout;
+    std::ostream& streamInStyle  = std::clog;
     streamInStyle << NativeTerminal::Reset << __cell_newline;
 }
 
@@ -93,7 +93,7 @@ void Logger::echo(const unsigned int    counter,
 
     std::mutex           mutex_l;
     std::string          typeStr         = __cell_null_str;
-    std::ostream&        streamInStyle   = std::cout;
+    std::ostream&        streamInStyle   = std::clog;
     std::string          beginStyle      = __cell_null_str;
     std::string          endStyle        = __cell_null_str;
 

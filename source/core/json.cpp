@@ -593,7 +593,9 @@ std::vector<Types::JSonValue> JsonDocument::getVectorJsonPtr()
 
 void JsonDocument::setVectorJsonPtr(const JSonValue& data)
 {
+    vectorJsonPtr.reserve(vectorJsonPtr.size() + 1);
     vectorJsonPtr.push_back(std::move(data));
+
 }
 
 size_t JsonDocument::getArraySize(const std::string& key) const {

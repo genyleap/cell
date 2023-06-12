@@ -13,6 +13,7 @@
 #ifndef CELL_REQUEST_ABSTRACT_HPP
 #define CELL_REQUEST_ABSTRACT_HPP
 
+#include "classes/cookies.hpp"
 #if __has_include("common.hpp")
 #   include "common.hpp"
 #else
@@ -39,26 +40,6 @@ struct RequestStructure final
 class __cell_export Request {
 public:
     /**
-     * @brief Constructor for a HTTP request
-     *
-     * @param method The HTTP method of the request
-     * @param uri The URI of the request
-     * @param httpVersion The HTTP version of the request
-     * @param headers The headers of the request
-     * @param body The body of the request
-     */
-    Request(const Types::OptionalString& method,
-            const Types::OptionalString& uri,
-            const Types::OptionalString& httpVersion,
-            Types::Headers& headers,
-            const Types::OptionalString& body);
-
-    /**
-     * @brief destructor for the Request.
-     */
-    ~Request();
-
-    /**
      * @brief Returns the HTTP method of the request
      *
      * @return The HTTP method of the request
@@ -66,11 +47,11 @@ public:
     const Types::OptionalString& method() const;
 
     /**
-     * @brief Returns the URI of the request
+     * @brief Returns the Path of the request
      *
-     * @return The URI of the request
+     * @return The Path of the request
      */
-    const Types::OptionalString& uri() const;
+    const Types::OptionalString& path() const;
 
     /**
      * @brief Returns the HTTP version of the request
@@ -84,7 +65,7 @@ public:
      *
      * @return The headers of the request as an unordered map with string keys and values
      */
-    const std::unordered_map<Types::OptionalString, Types::OptionalString>& headers() const;
+    const std::unordered_map<std::string, std::string> headers()  const;
 
     /**
      * @brief Returns the body of the request
@@ -92,6 +73,43 @@ public:
      * @return The body of the request
      */
     const Types::OptionalString& body() const;
+
+    /**
+     * @brief Set the HTTP method of the request.
+     * @param method The HTTP method to set.
+     */
+    void setMethod(const std::string& method);
+
+    /**
+     * @brief Set the path of the request.
+     * @param path The path to set.
+     */
+    void setPath(const std::string& path);
+
+    /**
+     * @brief Set a header in the request.
+     * @param key The key of the header.
+     * @param value The value of the header.
+     */
+    void setHeader(const std::string& key, const std::string& value);
+
+    /**
+     * @brief Set the body of the request.
+     * @param body The body to set.
+     */
+    void setBody(const std::string& body);
+
+    /**
+     * @brief Set the session ID of the request.
+     * @param sessionId The session ID to set.
+     */
+    void setSessionId(const std::string& sessionId);
+
+    /**
+     * @brief Get the cookies received in the request.
+     * @return The cookies received in the request.
+     */
+    const Cell::Globals::Storage::Cookies& cookies() const;
 
 private:
     RequestStructure requestStructure {}; //!< The structure that holds the parts of the request.

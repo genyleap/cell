@@ -22,7 +22,7 @@ OptionalString Cookies::getCookie(const std::string& name) const
     if (it != m_cookies.end()) {
         return it->second;
     }
-    return __cell_null_optional;
+    return __cell_null_str;
 }
 
 OptionalString Cookies::getSessionIdCookie() const

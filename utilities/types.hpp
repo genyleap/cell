@@ -41,6 +41,8 @@ using JSonArray = boost::json::array;
 #   include <openssl/evp.h>
 #   include <openssl/rsa.h>
 #   include <openssl/pem.h>
+#   include <openssl/ssl.h>
+#   include <openssl/err.h>
 #define ENABLE_OPENSSL 1
 #endif
 
@@ -107,6 +109,15 @@ using OraclePtr = oracle::occi::Connection*;
 //#include <libpq-fe.h>
 //using SqlConnectPtr = PGconn*;
 //#endif
+
+#ifdef _WIN32
+#include <winsock2.h>
+#pragma comment(lib, "ws2_32.lib")
+#else
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#endif
 
 
 namespace Cell::Types {
@@ -197,6 +208,7 @@ using OptionalWString   = std::optional<std::wstring>;
 
 using HttpQueryString   = std::unordered_map<std::string, std::string>;
 using Headers           = std::unordered_map<std::string, std::string>;
+using MimeTypes         = std::unordered_map<std::string, std::string>;
 
 using OptionalNumeric   = std::optional<int>;
 using OptionalBool      = std::optional<bool>;
@@ -259,6 +271,12 @@ using CELL_CURL = CURL;
 using CELL_CURLPTR = CURL*;
 using SmartCurlPtr = std::unique_ptr<Types::CURL, decltype(&Types::curl_easy_cleanup)>;
 using FunctionCurl = std::function<void(Types::CURL*)>;
+#endif
+
+#ifdef _WIN32
+typedef SOCKET SocketType;
+#else
+typedef int SocketType;
 #endif
 
 using Function              = std::function<void(void)>;
