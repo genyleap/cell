@@ -46,7 +46,7 @@
 #endif
 
 
-CELL_NAMESPACE_BEGIN(Cell::Abstracts)
+CELL_NAMESPACE_BEGIN(Cell::Abstracts::Modules::WebServer)
 
 /**
  * @brief The abstract base class for a web server.

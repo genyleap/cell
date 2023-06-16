@@ -27,6 +27,42 @@
 CELL_NAMESPACE_BEGIN(Cell::Globals)
 
 /**
+ * @brief An extended list of commonly used content types formatted for C++ usage:
+ */
+struct ContentTypes final
+{
+    // Text content types
+    __cell_static_const_constexpr std::string_view PlainText        {"text/plain"};
+    __cell_static_const_constexpr std::string_view HTML             {"text/html"};
+    __cell_static_const_constexpr std::string_view CSS              {"text/css"};
+
+    // Application content types
+    __cell_static_const_constexpr std::string_view JSON             {"application/json"};
+    __cell_static_const_constexpr std::string_view XML              {"application/xml"};
+    __cell_static_const_constexpr std::string_view PDF              {"application/pdf"};
+    __cell_static_const_constexpr std::string_view ZIP              {"application/zip"};
+
+    // Image content types
+    __cell_static_const_constexpr std::string_view JPEG             {"image/jpeg"};
+    __cell_static_const_constexpr std::string_view PNG              {"image/png"};
+    __cell_static_const_constexpr std::string_view GIF              {"image/gif"};
+
+    // Audio content types
+    __cell_static_const_constexpr std::string_view MP3              {"audio/mpeg"};
+    __cell_static_const_constexpr std::string_view WAV              {"audio/wav"};
+
+    // Video content types
+    __cell_static_const_constexpr std::string_view MP4              {"video/mp4"};
+    __cell_static_const_constexpr std::string_view MPEG             {"video/mpeg"};
+
+    // Other content types
+    __cell_static_const_constexpr std::string_view OctetStream      {"application/octet-stream"};
+    __cell_static_const_constexpr std::string_view JavaScript       {"application/javascript"};
+    __cell_static_const_constexpr std::string_view FormUrlEncoded   {"application/x-www-form-urlencoded"};
+    __cell_static_const_constexpr std::string_view FormData         {"multipart/form-data"};
+};
+
+/**
  * @class MediaTypes
  * @brief Class for handling media types and mime type mappings.
  */

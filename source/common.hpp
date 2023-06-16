@@ -121,6 +121,7 @@ struct STATICS final {
 #define __cell_exit 0
 #define __cell_one 1
 #define __cell_newline "\n"
+#define __cell_null_character '\0'
 #define __cell_compiler_counter __COUNTER__
 #define __cell_compiler_line __LINE__
 #define __cell_compiler_file __FILE__
@@ -401,6 +402,10 @@ struct NonMovableOrCopyable : private NonCopyable, NonMovable
 #define CELL_DISABLE_COPY_MOVE(Class) \
     CELL_DISABLE_COPY(Class) \
     CELL_DISABLE_MOVE(Class)
+
+//!Macro version of make friend for class.
+#define CELL_MAKE_FRIEND(Class) \
+    friend class Class;
 
 //! Cell's Prestructure.
 #if __has_include("prestructure.hpp")

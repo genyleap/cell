@@ -6,7 +6,6 @@
 
 #include "logger.hpp"
 #include "config.hpp"
-#include "database.hpp"
 #include "console.hpp"
 #include "terminal.hpp"
 #include "translator/language.hpp"
@@ -342,23 +341,22 @@ Engine& Engine::self()
 }
 
 Engine::Engine()
-{
-    //!< New instances.
+{    //!< New instances.
     //!
-    Console::print << __cell_newline;
-    Console::print << "\033[1;33m" << PROJECT_REAL_NAME << " Engine - compiled on " << __DATE__ << "\033[0m" << __cell_newline;
-    Console::print << "--------------------= ENGINE =--------------------" << __cell_newline;
-    Console::print << "\033[0;37m" << "Engine               :   "    << PROJECT_REAL_NAME           << "\033[0m"       << __cell_newline;
-    Console::print << "\033[0;37m" << "Description          :   "    << PROJECT_DESCRIPTION         << "\033[0m"       << __cell_newline;
-    Console::print << "\033[0;37m" << "Engine Version       :   "    << PROJECT_VERSION_STRING      << "\033[0m"       << __cell_newline;
-    Console::print << "\033[0;37m" << "Organization         :   "    << PROJECT_ORGANIZATION        << "\033[0m"       << __cell_newline;
-    Console::print << "\033[0;37m" << "Official Address     :   "    << "\033[4;37m" << PROJECT_HOMEPAGE_URL  << "\033[0m"   << "\033[0m"   << __cell_newline;
-    Console::print << "\033[0;37m" << "License              :   "    << PROJECT_LICENSE_TYPE        << "\033[0m"       << __cell_newline;
-    Console::print << "--------------------= ENGINE =--------------------" << __cell_newline;
-    Console::print << __cell_newline;
+    Console::log << __cell_newline;
+    Console::log << "\033[1;33m" << PROJECT_REAL_NAME << " Engine - compiled on " << __DATE__ << "\033[0m" << __cell_newline;
+    Console::log << "--------------------= ENGINE =--------------------" << __cell_newline;
+    Console::log << "\033[0;37m" << "Engine               :   "    << PROJECT_REAL_NAME           << "\033[0m"       << __cell_newline;
+    Console::log << "\033[0;37m" << "Description          :   "    << PROJECT_DESCRIPTION         << "\033[0m"       << __cell_newline;
+    Console::log << "\033[0;37m" << "Engine Version       :   "    << PROJECT_VERSION_STRING      << "\033[0m"       << __cell_newline;
+    Console::log << "\033[0;37m" << "Organization         :   "    << PROJECT_ORGANIZATION        << "\033[0m"       << __cell_newline;
+    Console::log << "\033[0;37m" << "Official Address     :   "    << "\033[4;37m" << PROJECT_HOMEPAGE_URL  << "\033[0m"   << "\033[0m"   << __cell_newline;
+    Console::log << "\033[0;37m" << "License              :   "    << PROJECT_LICENSE_TYPE        << "\033[0m"       << __cell_newline;
+    Console::log << "--------------------= ENGINE =--------------------" << __cell_newline;
+    Console::log << __cell_newline;
     Scope<Configuration> config(new Configuration(ConfigType::File));
     config->init(SectionType::SystemCore);
-    Log("The engine has started!", LoggerType::Success);
+    Log("Engine has initialized!", LoggerType::Info);
 }
 
 Engine::~Engine()
@@ -371,7 +369,7 @@ bool Engine::start()
 {
     bool res { false };
 
-           //Check if engine has initialized!
+    //Check if engine has initialized!
     if((IsSet(isInitialized.has_value())) && IsSet(isInitialized.value()))
     {
         Log("You are trying to restart the engine! No need to do this :)", LoggerType::Warning);
@@ -414,7 +412,7 @@ bool Engine::start()
            //        }
     isInitialized = true;
 
-    Log("Engine has initialized!", LoggerType::Info);
+    Log("The engine has started!", LoggerType::Success);
 
     return res;
 }

@@ -20,7 +20,7 @@
 #   error "Cell's "common.hpp" was not found!"
 #endif
 
-CELL_NAMESPACE_BEGIN(Cell::Abstracts)
+CELL_NAMESPACE_BEGIN(Cell::Abstracts::Modules::WebServer)
 
 /**
  * @brief Structure that represents the parts of a HTTP request

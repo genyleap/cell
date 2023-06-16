@@ -6,7 +6,7 @@
 
 CELL_USING_NAMESPACE Cell;
 
-CELL_NAMESPACE_BEGIN(Cell::Abstracts)
+CELL_NAMESPACE_BEGIN(Cell::Abstracts::Modules::WebServer)
 
 /*!
  * \brief Constructs a VirtualHostConfig.

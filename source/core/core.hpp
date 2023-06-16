@@ -404,6 +404,7 @@ public:
      */
     enum Reason : Types::u8 {
         Core,       //!< Core reason for the exception
+        Database,   //!< Database reason for the exception
         Framework,  //!< Framework-related reason for the exception
         IO,         //!< Input/Output-related reason for the exception
         User,       //!< User-defined reason for the exception

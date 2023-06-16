@@ -37,6 +37,8 @@
 # endif
 #endif
 
+CELL_NAMESPACE_BEGIN(Cell::Abstracts::Modules::WebServer)
+
 /**
  * @brief The event loop type.
  *
@@ -60,8 +62,6 @@ enum class EventLoopType
     POLL,   //!< Uses the poll() system call for event loop.
     EPOLL   //!< Uses the epoll() system call for event loop.
 };
-
-CELL_NAMESPACE_BEGIN(Cell::Abstracts)
 
 class __cell_export VirtualHostConfig
 {
@@ -107,28 +107,28 @@ public:
      * @param path The URL path to handle.
      * @param handler A function that takes a Request object and returns a Response object.
      */
-    __cell_virtual void addRoute(const std::string& path, const std::function<Cell::Abstracts::Response(const Cell::Abstracts::Request&)>& handler) =  __cell_zero;
+    __cell_virtual void addRoute(const std::string& path, const std::function<Cell::Abstracts::Modules::WebServer::Response(const Cell::Abstracts::Modules::WebServer::Request&)>& handler) =  __cell_zero;
 
     /**
      * @brief Adds a middleware function to be applied to all incoming requests.
      *
      * @param middleware A function that takes a Request object and a handler function, and returns a Response object.
      */
-    __cell_virtual void addMiddleWare(const std::function<Cell::Abstracts::Response(const Cell::Abstracts::Request&, const std::function<Cell::Abstracts::Response(const Cell::Abstracts::Request&)>&)>& middleware) =  __cell_zero;
+    __cell_virtual void addMiddleWare(const std::function<Cell::Abstracts::Modules::WebServer::Response(const Cell::Abstracts::Modules::WebServer::Request&, const std::function<Cell::Abstracts::Modules::WebServer::Response(const Cell::Abstracts::Modules::WebServer::Request&)>&)>& middleware) =  __cell_zero;
 
     /**
      * @brief Sets the authentication handler function for handling HTTP Basic Authentication.
      *
      * @param authenticationHandler A function that takes a Request object and returns true if authentication is successful, false otherwise.
      */
-    __cell_virtual void setAuthenticationHandler(const std::function<bool(const Cell::Abstracts::Request&)>& authenticationHandler) =  __cell_zero;
+    __cell_virtual void setAuthenticationHandler(const std::function<bool(const Cell::Abstracts::Modules::WebServer::Request&)>& authenticationHandler) =  __cell_zero;
 
     /**
      * @brief Sets the authorization handler function for handling access control.
      *
      * @param authorizationHandler A function that takes a Request object and returns true if the request is authorized, false otherwise.
      */
-    __cell_virtual void setAuthorizationHandler(const std::function<bool(const Cell::Abstracts::Request&)>& authorizationHandler) =  __cell_zero;
+    __cell_virtual void setAuthorizationHandler(const std::function<bool(const Cell::Abstracts::Modules::WebServer::Request&)>& authorizationHandler) =  __cell_zero;
 
     /**
      * @brief Sets the caching handler function for caching static files.
@@ -350,7 +350,7 @@ public:
      *
      * @param handler The function to handle errors.
      */
-    __cell_virtual void setErrorHandler(const std::function<Cell::Abstracts::Response(const Cell::Abstracts::Request&, const std::exception&)>& handler) = __cell_zero;
+    __cell_virtual void setErrorHandler(const std::function<Cell::Abstracts::Modules::WebServer::Response(const Cell::Abstracts::Modules::WebServer::Request&, const std::exception&)>& handler) = __cell_zero;
 
     /**
      * @brief Sets the server header with the given name.
