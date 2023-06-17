@@ -128,7 +128,7 @@ std::vector<Library> LibraryManager::getInstalledLibrariesMacOS()
     // Check the location of Homebrew
     std::string brewPath = System::execute("/bin/sh -c 'which brew'");
     if (brewPath.empty()) {
-        std::cout << "Homebrew is not installed or cannot be found." << std::endl;
+        Log("Homebrew is not installed or cannot be found.", LoggerType::Warning);
         return libraries;
     }
     std::string command = brewPath + __cell_space + "list --versions";
@@ -265,7 +265,7 @@ std::vector<std::pair<std::string, std::string>> ApplicationRetriever::getInstal
                 }
             } catch (const std::filesystem::filesystem_error& ex) {
                 // Handle the permission error gracefully (e.g., print a message, log, or ignore)
-                std::cout << "Skipping directory: " << entry.path().string() << " - Permission denied" << std::endl;
+                Log("Skipping directory: " + entry.path().string() + " - Permission denied", LoggerType::Warning);
             }
         }
     };
