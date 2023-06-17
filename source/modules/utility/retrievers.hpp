@@ -1,5 +1,5 @@
 /*!
- * @file        utility.hpp
+ * @file        retrievers.hpp
  * @brief       Utilities for the Cell Engine.
  * @details     This file defines the Database interface, which provides methods for interacting with a database.
  * @author      Kambiz Asadzadeh
@@ -13,8 +13,8 @@
  */
 
 
-#ifndef CELL_UTILITY_OS_APPLICATION_HPP
-#define CELL_UTILITY_OS_APPLICATION_HPP
+#ifndef CELL_UTILITY_RETRIEVERS_HPP
+#define CELL_UTILITY_RETRIEVERS_HPP
 
 #if __has_include("common.hpp")
 #   include "common.hpp"
@@ -23,6 +23,31 @@
 #endif
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Utility)
+
+class Library {
+public:
+    std::string name;
+    std::string version;
+};
+
+class LibraryManager {
+public:
+    std::vector<Library> getInstalledLibraries();
+    bool isLibraryAvailable(const std::string& libraryName);
+
+private:
+#ifdef _WIN32
+    std::vector<Library> getInstalledLibrariesWindows();
+    std::string getWindowsVersionString(const std::string& filePath);
+#elif __linux__
+    std::vector<Library> getInstalledLibrariesLinux();
+    std::string getLinuxLibraryVersion(const std::string& libraryPath);
+#elif __APPLE__
+    std::vector<Library> getInstalledLibrariesMacOS();
+    std::string executeCommand(const std::string& command);
+#endif
+};
+
 
 /**
  * @brief The ApplicationRetriever class provides functionality to retrieve and manipulate installed applications.
@@ -98,4 +123,4 @@ private:
 
 CELL_NAMESPACE_END
 
-#endif // CELL_UTILITY_OS_APPLICATION_HPP
+#endif // CELL_UTILITY_RETRIEVERS_HPP

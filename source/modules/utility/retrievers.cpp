@@ -1,7 +1,7 @@
-#if __has_include("os-application.hpp")
-#   include "os-application.hpp"
+#if __has_include("retrievers.hpp")
+#   include "retrievers.hpp"
 #else
-#   error "Cell's "os-application.hpp" was not found!"
+#   error "Cell's "retrievers.hpp" was not found!"
 #endif
 
 #if __has_include("core/core.hpp")
@@ -21,6 +21,137 @@ CELL_USING_NAMESPACE Cell::Utility;
 CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Utility)
+
+#ifdef CELL_PLATFORM_WINDOWS
+#include <Windows.h>
+#include <VersionHelpers.h>
+#pragma comment(lib, "Version.lib")
+#endif
+
+std::vector<Library> LibraryManager::getInstalledLibraries()
+{
+    std::vector<Library> libraries;
+
+#ifdef CELL_PLATFORM_WINDOWS
+    libraries = getInstalledLibrariesWindows();
+#elif defined(CELL_PLATFORM_LINUX)
+    libraries = getInstalledLibrariesLinux();
+#elif defined(CELL_PLATFORM_MAC)
+    libraries = getInstalledLibrariesMacOS();
+#endif
+
+    return libraries;
+}
+
+bool LibraryManager::isLibraryAvailable(const std::string& libraryName)
+{
+    std::vector<Library> libraries = getInstalledLibraries();
+    for (const auto& library : libraries) {
+        if (library.name == libraryName)
+            return true;
+    }
+    return false;
+}
+
+#ifdef CELL_PLATFORM_WINDOWS
+std::vector<Library> LibraryManager::getInstalledLibrariesWindows()
+{
+    std::vector<Library> libraries;
+    char sysDir[MAX_PATH];
+    GetSystemDirectoryA(sysDir, MAX_PATH);
+
+    DWORD len = GetFileVersionInfoSizeA(sysDir, nullptr);
+    if (len != 0) {
+        std::vector<BYTE> versionInfo(len);
+        if (GetFileVersionInfoA(sysDir, 0, len, versionInfo.data())) {
+            VS_FIXEDFILEINFO* fileInfo = nullptr;
+            UINT fileInfoLen = 0;
+            if (VerQueryValueA(versionInfo.data(), "\\", reinterpret_cast<LPVOID*>(&fileInfo), &fileInfoLen) && fileInfo)
+            {
+                libraries.push_back({ "Windows System Directory", getWindowsVersionString(sysDir) });
+            }
+        }
+    }
+
+    return libraries;
+}
+
+std::string LibraryManager::getWindowsVersionString(const std::string& filePath)
+{
+    DWORD versionHandle;
+    DWORD versionSize = GetFileVersionInfoSizeA(filePath.c_str(), &versionHandle);
+    if (versionSize != 0) {
+        std::vector<char> versionBuffer(versionSize);
+        if (GetFileVersionInfoA(filePath.c_str(), versionHandle, versionSize, versionBuffer.data())) {
+            LPVOID versionInfo = nullptr;
+            UINT versionInfoSize = 0;
+            if (VerQueryValueA(versionBuffer.data(), "\\", &versionInfo, &versionInfoSize) && versionInfo) {
+                VS_FIXEDFILEINFO* fileInfo = reinterpret_cast<VS_FIXEDFILEINFO*>(versionInfo);
+                std::ostringstream oss;
+                oss << (fileInfo->dwFileVersionMS >> 16) << "." << (fileInfo->dwFileVersionMS & 0xFFFF) << "."
+                    << (fileInfo->dwFileVersionLS >> 16) << "." << (fileInfo->dwFileVersionLS & 0xFFFF);
+                return oss.str();
+            }
+        }
+    }
+
+    return "Unknown";
+}
+
+#elif defined(CELL_PLATFORM_LINUX)
+std::vector<Library> LibraryManager::getInstalledLibrariesLinux()
+{
+    std::vector<Library> libraries;
+    std::ifstream maps_file("/proc/self/maps");
+    std::string line;
+    while (std::getline(maps_file, line)) {
+        if (line.find(".so") != std::string::npos) {
+            std::string libraryPath = line.substr(0, line.find_first_of(' '));
+            libraries.push_back({ libraryPath, getLinuxLibraryVersion(libraryPath) });
+        }
+    }
+    return libraries;
+}
+
+std::string LibraryManager::getLinuxLibraryVersion(const std::string& libraryPath)
+{
+    std::ifstream file(libraryPath);
+    std::string line;
+    while (std::getline(file, line)) {
+        size_t pos = line.find("Version:");
+        if (pos != std::string::npos) {
+            return line.substr(pos + 8);
+        }
+    }
+    return "Unknown";
+}
+
+#elif defined(CELL_PLATFORM_MAC)
+
+std::vector<Library> LibraryManager::getInstalledLibrariesMacOS()
+{
+    std::vector<Library> libraries;
+    // Check the location of Homebrew
+    std::string brewPath = System::execute("/bin/sh -c 'which brew'");
+    if (brewPath.empty()) {
+        std::cout << "Homebrew is not installed or cannot be found." << std::endl;
+        return libraries;
+    }
+    std::string command = brewPath + __cell_space + "list --versions";
+    std::string libraryInfo = System::execute(command.c_str());
+    std::istringstream iss(libraryInfo);
+    std::string line;
+    while (std::getline(iss, line)) {
+        size_t delimiterPos = line.find(' ');
+        if (delimiterPos != std::string::npos) {
+            std::string name = line.substr(0, delimiterPos);
+            std::string version = line.substr(delimiterPos + 1);
+            libraries.push_back({ name, version });
+        }
+    }
+    return libraries;
+}
+#endif
 
 ApplicationRetriever::ApplicationRetriever()
 {
