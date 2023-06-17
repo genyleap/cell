@@ -306,13 +306,13 @@
 #endif
 #endif
 
-#if defined(PLATFORM_MAC)
+#if defined(CELL_PLATFORM_MAC)
 #   include "unix/pch.hpp"
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
 #   include "linux/pch.hpp"
-#elif defined(PLATFORM_FREEBSD)
+#elif defined(CELL_PLATFORM_FREEBSD)
 #   include "unix/pch.hpp"
-#elif defined(PLATFORM_WINDOWS)
+#elif defined(CELL_PLATFORM_WINDOWS)
 #   include "win32/pch.hpp"
 #endif
 

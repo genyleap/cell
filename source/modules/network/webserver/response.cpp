@@ -23,8 +23,8 @@ int Response::statusCode() const
 }
 
 OptionalString Response::contentType() const
-{ return
-        m_responseStructure.contentType.value();
+{
+    return m_responseStructure.contentType.value();
 }
 
 OptionalString Response::content() const

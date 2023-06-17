@@ -7,12 +7,13 @@
 
 #ifndef LINUX_PCH_HPP
 #define LINUX_PCH_HPP
+
 #if __has_include(<utilities/preprocessor.hpp>)
 #   include <utilities/preprocessor.hpp>
 #else
 #   include <utilities/preprocessor.hpp>
 
-#if defined(PLATFORM_LINUX)
+#if defined(CELL_PLATFORM_LINUX)
 //! Linux Apis.
 #include <sys/types.h>
 #include <sys/stat.h>

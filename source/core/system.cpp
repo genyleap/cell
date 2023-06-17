@@ -24,11 +24,11 @@ SystemInformation::~SystemInformation()
 
 std::string SystemInformation::getHostUserName()
 {
-#if defined(PLATFORM_MAC) || defined(PLATFORM_APPLE)
+#if defined(CELL_PLATFORM_MAC) || defined(CELL_PLATFORM_APPLE)
     return getenv("USER");
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
     return getenv("USERNAME");
-#elif defined(PLATFORM_WINDOWS)
+#elif defined(CELL_PLATFORM_WINDOWS)
     char username[UNLEN+1];
     DWORD username_len = UNLEN+1;
     GetUserName(username, &username_len);
@@ -39,21 +39,21 @@ std::string SystemInformation::getHostUserName()
 std::string SystemInformation::getHostName()
 {
     std::string result{};
-#ifdef PLATFORM_DESKTOP
-#if defined(PLATFORM_MAC) || defined(PLATFORM_APPLE)
+#ifdef CELL_PLATFORM_DESKTOP
+#if defined(CELL_PLATFORM_MAC) || defined(CELL_PLATFORM_APPLE)
     result = command("scutil --get LocalHostName");
     return result;
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
     result = command("hostnamectl");
     return result;
-#elif defined(PLATFORM_WINDOWS)
+#elif defined(CELL_PLATFORM_WINDOWS)
     result = command("hostnamectl");
     return result;
 #endif
-#elif defined(PLATFORM_MOBILE)
-#if defined(PLATFORM_IOS) || defined(PLATFORM_IOS_SIMULATOR)
+#elif defined(CELL_PLATFORM_MOBILE)
+#if defined(CELL_PLATFORM_IOS) || defined(CELL_PLATFORM_IOS_SIMULATOR)
     result = "Unknown";
-#elif defined(PLATFORM_ANDROID)
+#elif defined(CELL_PLATFORM_ANDROID)
     result = "Unknown";
 #endif
 #else
@@ -64,7 +64,7 @@ std::string SystemInformation::getHostName()
 
 std::string SystemInformation::getOsName()
 {
-    const std::string os{PLATFORM_OS};
+    const std::string os{CELL_PLATFORM_OS};
     return os;
 }
 
@@ -78,14 +78,14 @@ std::string SystemInformation::macAddressAsByteArray(unsigned char MACData[])
 std::string SystemInformation::getMacAddress()
 {
     std::string result{};
-#ifdef PLATFORM_DESKTOP
-#if defined(PLATFORM_MAC) || defined(PLATFORM_APPLE)
+#ifdef CELL_PLATFORM_DESKTOP
+#if defined(CELL_PLATFORM_MAC) || defined(CELL_PLATFORM_APPLE)
     result = command("/sbin/ifconfig en0 | /usr/bin/grep 'ether' | /usr/bin/cut -d' ' -f 2");
     return result;
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
     result = command("/sbin/ifconfig en0 | /usr/bin/grep 'ether' | /usr/bin/cut -d' ' -f 2");
     return result;
-#elif defined(PLATFORM_WINDOWS)
+#elif defined(CELL_PLATFORM_WINDOWS)
     IP_ADAPTER_INFO AdapterInfo[16];			// Allocate information for up to 16 NICs
     DWORD dwBufLen = sizeof(AdapterInfo);		// Save the memory size of buffer
     [[maybe_unused]] DWORD dwStatus = GetAdaptersInfo( AdapterInfo,	&dwBufLen); // [in] size of receive data buffer
@@ -95,10 +95,10 @@ std::string SystemInformation::getMacAddress()
     auto indexOfAddress = std::next(m_macAddressList.begin(), index);
     return *indexOfAddress;
 #endif
-#elif defined(PLATFORM_MOBILE)
-#if defined(PLATFORM_IOS) || defined(PLATFORM_IOS_SIMULATOR)
+#elif defined(CELL_PLATFORM_MOBILE)
+#if defined(CELL_PLATFORM_IOS) || defined(CELL_PLATFORM_IOS_SIMULATOR)
     result = "Unknown";
-#elif defined(PLATFORM_ANDROID)
+#elif defined(CELL_PLATFORM_ANDROID)
     result = "Unknown";
 #endif
 #else
@@ -111,22 +111,22 @@ std::string SystemInformation::getMacAddress()
 std::string SystemInformation::getIpV4Address()
 {
     std::string result = "Unknown";
-#ifdef PLATFORM_DESKTOP
-#if defined (PLATFORM_LINUX)
+#ifdef CELL_PLATFORM_DESKTOP
+#if defined (CELL_PLATFORM_LINUX)
     return result;
-#elif defined (PLATFORM_MAC) || defined(PLATFORM_APPLE)
+#elif defined (CELL_PLATFORM_MAC) || defined(CELL_PLATFORM_APPLE)
     result = command("ipconfig getifaddr en0");
     if(result.empty()) {
         result = command("ipconfig getifaddr en1");
     }
     return result;
-#elif defined (PLATFORM_WINDOWS)
+#elif defined (CELL_PLATFORM_WINDOWS)
     return result;
 #endif
-#elif defined(PLATFORM_MOBILE)
-#if defined(PLATFORM_IOS)
+#elif defined(CELL_PLATFORM_MOBILE)
+#if defined(CELL_PLATFORM_IOS)
     return result;
-#elif defined(PLATFORM_ANDROID)
+#elif defined(CELL_PLATFORM_ANDROID)
     return result;
 #endif
 #else
@@ -137,19 +137,19 @@ std::string SystemInformation::getIpV4Address()
 std::string SystemInformation::getIpV6Address()
 {
     std::string result = "Unknown";
-#ifdef PLATFORM_DESKTOP
-#if defined (PLATFORM_LINUX)
+#ifdef CELL_PLATFORM_DESKTOP
+#if defined (CELL_PLATFORM_LINUX)
     return result;
-#elif defined (PLATFORM_MAC) || defined(PLATFORM_APPLE)
+#elif defined (CELL_PLATFORM_MAC) || defined(CELL_PLATFORM_APPLE)
     result = command("system_profiler SPNetworkDataType | grep -e \"IPv4 Addresses\" | awk -F' *' '{print ""$4}'");
     return result;
-#elif defined (PLATFORM_WINDOWS)
+#elif defined (CELL_PLATFORM_WINDOWS)
     return ls;
 #endif
-#elif defined(PLATFORM_MOBILE)
-#if defined(PLATFORM_IOS)
+#elif defined(CELL_PLATFORM_MOBILE)
+#if defined(CELL_PLATFORM_IOS)
     return result;
-#elif defined(PLATFORM_ANDROID)
+#elif defined(CELL_PLATFORM_ANDROID)
     return result;
 #endif
 #else
@@ -159,8 +159,8 @@ std::string SystemInformation::getIpV6Address()
 
 std::string SystemInformation::getMachineUniqueId()
 {
-#ifdef PLATFORM_DESKTOP
-#if defined(PLATFORM_MAC)
+#ifdef CELL_PLATFORM_DESKTOP
+#if defined(CELL_PLATFORM_MAC)
     char buf[512] = "";
     io_registry_entry_t ioRegistryRoot = IORegistryEntryFromPath(kIOMainPortDefault, "IOService:/");
     CFStringRef uuidCf = (CFStringRef) IORegistryEntryCreateCFProperty( ioRegistryRoot, CFSTR(kIOPlatformUUIDKey), kCFAllocatorDefault, 0);
@@ -168,18 +168,18 @@ std::string SystemInformation::getMachineUniqueId()
     CFStringGetCString(uuidCf, buf, sizeof(buf), kCFStringEncodingMacRoman);
     CFRelease(uuidCf);
     return buf;
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
     return "Unknown";
-#elif defined(PLATFORM_WINDOWS)
+#elif defined(CELL_PLATFORM_WINDOWS)
     return "Unknown";
 #endif
-#elif defined(PLATFORM_FREEBSD)
+#elif defined(CELL_PLATFORM_FREEBSD)
     return "Unknown";
-#elif defined(PLATFORM_MOBILE)
-#if defined(PLATFORM_IOS)
+#elif defined(CELL_PLATFORM_MOBILE)
+#if defined(CELL_PLATFORM_IOS)
     std::string result = "Unknown";
     return result;
-#elif defined(PLATFORM_ANDROID)
+#elif defined(CELL_PLATFORM_ANDROID)
     std::string result = "Unknown";
     return result;
 #endif
@@ -192,19 +192,19 @@ std::string SystemInformation::getMachineUniqueId()
 std::string SystemInformation::getStorageDiskModel()
 {
     std::string result = "Unknown";
-#ifdef PLATFORM_DESKTOP
-#if defined (PLATFORM_LINUX)
+#ifdef CELL_PLATFORM_DESKTOP
+#if defined (CELL_PLATFORM_LINUX)
     return result;
-#elif defined (PLATFORM_MAC)
+#elif defined (CELL_PLATFORM_MAC)
     result = command("system_profiler SPSerialATADataType | grep -e \"Model\" | awk -F' *' '{print ""$3, ""$4, ""$5}'");
     return result;
-#elif defined (PLATFORM_WINDOWS)
+#elif defined (CELL_PLATFORM_WINDOWS)
     return result;
 #endif
-#elif defined(PLATFORM_MOBILE)
-#if defined(PLATFORM_IOS)
+#elif defined(CELL_PLATFORM_MOBILE)
+#if defined(CELL_PLATFORM_IOS)
     return result;
-#elif defined(PLATFORM_ANDROID)
+#elif defined(CELL_PLATFORM_ANDROID)
     return result;
 #endif
 #else
@@ -215,19 +215,19 @@ std::string SystemInformation::getStorageDiskModel()
 std::string SystemInformation::getStorageDiskSerialNumber()
 {
     std::string result = "Unknown";
-#ifdef PLATFORM_DESKTOP
-#if defined (PLATFORM_LINUX)
+#ifdef CELL_PLATFORM_DESKTOP
+#if defined (CELL_PLATFORM_LINUX)
     return ls;
-#elif defined (PLATFORM_MAC)
+#elif defined (CELL_PLATFORM_MAC)
     result = command("system_profiler SPSerialATADataType | grep -e \"Serial Number\" | awk -F' *' '{print ""$4}'");
     return result;
-#elif defined (PLATFORM_WINDOWS)
+#elif defined (CELL_PLATFORM_WINDOWS)
     return result;
 #endif
-#elif defined(PLATFORM_MOBILE)
-#if defined(PLATFORM_IOS)
+#elif defined(CELL_PLATFORM_MOBILE)
+#if defined(CELL_PLATFORM_IOS)
     return result;
-#elif defined(PLATFORM_ANDROID)
+#elif defined(CELL_PLATFORM_ANDROID)
     return result;
 #endif
 #else
@@ -238,18 +238,18 @@ std::string SystemInformation::getStorageDiskSerialNumber()
 std::string SystemInformation::getGpuModel()
 {
     std::string result = "Unknown";
-#ifdef PLATFORM_DESKTOP
-#if defined (PLATFORM_LINUX)
+#ifdef CELL_PLATFORM_DESKTOP
+#if defined (CELL_PLATFORM_LINUX)
     return result;
-#elif defined (PLATFORM_MAC)
+#elif defined (CELL_PLATFORM_MAC)
     return result;
-#elif defined (PLATFORM_WINDOWS)
+#elif defined (CELL_PLATFORM_WINDOWS)
     return result;
 #endif
-#elif defined(PLATFORM_MOBILE)
-#if defined(PLATFORM_IOS)
+#elif defined(CELL_PLATFORM_MOBILE)
+#if defined(CELL_PLATFORM_IOS)
     return result;
-#elif defined(PLATFORM_ANDROID)
+#elif defined(CELL_PLATFORM_ANDROID)
     return result;
 #endif
 #else
@@ -260,10 +260,10 @@ std::string SystemInformation::getGpuModel()
 std::string SystemInformation::getSerialNumber()
 {
     std::string result{"unknown"};
-#ifdef PLATFORM_DESKTOP
-#if defined (PLATFORM_LINUX)
+#ifdef CELL_PLATFORM_DESKTOP
+#if defined (CELL_PLATFORM_LINUX)
 ///
-#elif defined (PLATFORM_MAC)
+#elif defined (CELL_PLATFORM_MAC)
     CFStringRef serial;
     char buffer[32] = {0};
     io_service_t platformExpert = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching("IOPlatformExpertDevice"));
@@ -280,13 +280,13 @@ std::string SystemInformation::getSerialNumber()
     }
     //command("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}' | sed 's/^.{7}//g'");
     return result;
-#elif defined (PLATFORM_WINDOWS)
+#elif defined (CELL_PLATFORM_WINDOWS)
 
 #endif
-#elif defined(PLATFORM_MOBILE)
-#if defined(PLATFORM_IOS)
+#elif defined(CELL_PLATFORM_MOBILE)
+#if defined(CELL_PLATFORM_IOS)
     return result;
-#elif defined(PLATFORM_ANDROID)
+#elif defined(CELL_PLATFORM_ANDROID)
     return result;
 #endif
 #else

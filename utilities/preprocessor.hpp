@@ -9,100 +9,100 @@
 
 /*!
  * namespace Preprocessor
- * This preprocessor helps you to detect compiler, platform, and architecture.
+ * This preprocessor helps you to detect CELL_COMPILER, platform, and CELL_ARCHITECTURE.
  */
 
 namespace Preprocessor {
 
-//! COMPILERS
+//! CELL_COMPILERS
 #if defined(__clang__)
 /* Clang/LLVM. ---------------------------------------------- */
-#undef COMPILER
-#define COMPILER "Clang/LLVM"
-#undef COMPILER_CLANG_LLVM
-#define COMPILER_CLANG_LLVM "Clang/LLVM"
-#undef COMPILER_VER
-#define COMPILER_VER __clang_version__
+#undef CELL_COMPILER
+#define CELL_COMPILER "Clang/LLVM"
+#undef CELL_COMPILER_CLANG_LLVM
+#define CELL_COMPILER_CLANG_LLVM "Clang/LLVM"
+#undef CELL_COMPILER_VER
+#define CELL_COMPILER_VER __clang_version__
 #elif (defined(__clang__) && !defined(__llvm__)) && !defined(__GNUC__)
 #elif defined(__ICC) || defined(__INTEL_COMPILER)
 /* Intel ICC/ICPC. ------------------------------------------ */
-#undef COMPILER
-#define COMPILER "Intel ICC/ICPC"
-#undef COMPILER_INTEL
-#define COMPILER_INTEL "Intel ICC/ICPC"
-#define COMPILER_VER __INTEL_COMPILER_BUILD_DATE
+#undef CELL_COMPILER
+#define CELL_COMPILER "Intel ICC/ICPC"
+#undef CELL_COMPILER_INTEL
+#define CELL_COMPILER_INTEL "Intel ICC/ICPC"
+#define CELL_COMPILER_VER __INTEL_COMPILER_BUILD_DATE
 #elif defined(__MINGW32__) && !defined(__amd64__) && !defined(__amd64) &&      \
     !defined(__ia64__)
 /* __MINGW32__. ------------------------------------------------- */
-#undef COMPILER
-#define COMPILER "MinGW-w86 (x86) 32 Bit"
-#undef COMPILER_MINGW
-#define COMPILER_MINGW "MinGW-w86 (x86) 32 Bit"
-#undef COMPILER_VER
-#define COMPILER_VER __MINGW32_MAJOR_VERSION << "." << __MINGW32_MINOR_VERSION
+#undef CELL_COMPILER
+#define CELL_COMPILER "MinGW-w86 (x86) 32 Bit"
+#undef CELL_COMPILER_MINGW
+#define CELL_COMPILER_MINGW "MinGW-w86 (x86) 32 Bit"
+#undef CELL_COMPILER_VER
+#define CELL_COMPILER_VER __MINGW32_MAJOR_VERSION << "." << __MINGW32_MINOR_VERSION
 #elif defined(__MINGW32__)
 /* __MINGW64_32__. ------------------------------------------------- */
-#undef COMPILER
-#define COMPILER "MinGW-w64 (x86_64) 32-64 Bit"
-#undef COMPILER_MINGW64_32
-#define COMPILER_MINGW64_32 "MinGW-w64 (x86_64) 32-64 Bit"
-#undef COMPILER_VER
-#define COMPILER_VER __MINGW32_MAJOR_VERSION << "." << __MINGW32_MINOR_VERSION
+#undef CELL_COMPILER
+#define CELL_COMPILER "MinGW-w64 (x86_64) 32-64 Bit"
+#undef CELL_COMPILER_MINGW64_32
+#define CELL_COMPILER_MINGW64_32 "MinGW-w64 (x86_64) 32-64 Bit"
+#undef CELL_COMPILER_VER
+#define CELL_COMPILER_VER __MINGW32_MAJOR_VERSION << "." << __MINGW32_MINOR_VERSION
 #elif defined(__MINGW64__)
 /* __MINGW64__. ------------------------------------------------- */
-#undef COMPILER
-#define COMPILER "MinGW-w64 (x64) 64 Bit"
-#undef COMPILER_MINGW_64
-#define COMPILER_MINGW_64 "MinGW-w64 (x64) 64 Bit"
-#undef COMPILER_VER
-#define COMPILER_VER __MINGW64_MAJOR_VERSION << "." << __MINGW64_MINOR_VERSION
+#undef CELL_COMPILER
+#define CELL_COMPILER "MinGW-w64 (x64) 64 Bit"
+#undef CELL_COMPILER_MINGW_64
+#define CELL_COMPILER_MINGW_64 "MinGW-w64 (x64) 64 Bit"
+#undef CELL_COMPILER_VER
+#define CELL_COMPILER_VER __MINGW64_MAJOR_VERSION << "." << __MINGW64_MINOR_VERSION
 #elif defined(__GNUC__) || defined(__GNUG__) && !defined(__clang__)
 #define GCC_VERSION __GNUC__ << "." <<  __GNUC_MINOR__ << "." << __GNUC_PATCHLEVEL__
 /* GNU GCC/G++. --------------------------------------------- */
-#undef COMPILER
-#define COMPILER "GNU GCC/G++"
-#undef COMPILER_GNU
-#define COMPILER_GNU "GNU GCC/G++"
-#undef COMPILER_GCC
-#define COMPILER_GCC "GNU GCC/G++"
-#undef COMPILER_VER
-#define COMPILER_VER GCC_VERSION
+#undef CELL_COMPILER
+#define CELL_COMPILER "GNU GCC/G++"
+#undef CELL_COMPILER_GNU
+#define CELL_COMPILER_GNU "GNU GCC/G++"
+#undef CELL_COMPILER_GCC
+#define CELL_COMPILER_GCC "GNU GCC/G++"
+#undef CELL_COMPILER_VER
+#define CELL_COMPILER_VER GCC_VERSION
 #elif defined(__HP_cc) || defined(__HP_aCC)
 /* Hewlett-Packard C/aC++. ---------------------------------- */
-#undef COMPILER
-#define COMPILER "Hewlett-Packard C/aC++"
-#undef COMPILERHEWLETT
-#define COMPILERHEWLETT "Hewlett-Packard C/aC++"
-#define COMPILER_VER __HP_aCC
+#undef CELL_COMPILER
+#define CELL_COMPILER "Hewlett-Packard C/aC++"
+#undef CELL_COMPILERHEWLETT
+#define CELL_COMPILERHEWLETT "Hewlett-Packard C/aC++"
+#define CELL_COMPILER_VER __HP_aCC
 #elif defined(__IBMC__) || defined(__IBMCPP__)
 /* IBM XL C/C++. -------------------------------------------- */
-#undef COMPILER
-#define COMPILER "IBM XL C/C++"
-#undef COMPILER_IBM
-#define COMPILER_IBM "IBM XL C/C++"
-#define COMPILER_VER __xlC_ver__
+#undef CELL_COMPILER
+#define CELL_COMPILER "IBM XL C/C++"
+#undef CELL_COMPILER_IBM
+#define CELL_COMPILER_IBM "IBM XL C/C++"
+#define CELL_COMPILER_VER __xlC_ver__
 #elif defined(_MSC_VER)
 /* Microsoft Visual Studio. --------------------------------- */
-#undef COMPILER
-#define COMPILER "MSVC++ "
-#undef COMPILER_MSVC
-#define COMPILER_MSVC "MSVC++ "
-#undef COMPILER_VER
-#define COMPILER_VER _MSC_VER
+#undef CELL_COMPILER
+#define CELL_COMPILER "MSVC++ "
+#undef CELL_COMPILER_MSVC
+#define CELL_COMPILER_MSVC "MSVC++ "
+#undef CELL_COMPILER_VER
+#define CELL_COMPILER_VER _MSC_VER
 #elif defined(__PGI)
 /* Portland Group PGCC/PGCPP. ------------------------------- */
-#undef COMPILER "PGCC/PGCPP"
-#define COMPILER "PGCC/PGCPP"
-#undef COMPILER_PGCC "PGCC/PGCPP"
-#define COMPILER_PGCC "PGCC/PGCPP"
-#define COMPILER_VER __VERSION__
+#undef CELL_COMPILER "PGCC/PGCPP"
+#define CELL_COMPILER "PGCC/PGCPP"
+#undef CELL_COMPILER_PGCC "PGCC/PGCPP"
+#define CELL_COMPILER_PGCC "PGCC/PGCPP"
+#define CELL_COMPILER_VER __VERSION__
 #elif defined(__SUNPRO_C) || defined(__SUNPRO_CC)
 /* Oracle Solaris Studio. ----------------------------------- */
-#undef COMPILER "Oracle Solaris"
-#define COMPILER "Oracle Solaris"
-#undef COMPILER_ORACLE "Oracle Solaris"
-#define COMPILER_ORACLE "Oracle Solaris"
-#define COMPILER_VER __SUNPRO_CC
+#undef CELL_COMPILER "Oracle Solaris"
+#define CELL_COMPILER "Oracle Solaris"
+#undef CELL_COMPILER_ORACLE "Oracle Solaris"
+#define CELL_COMPILER_ORACLE "Oracle Solaris"
+#define CELL_COMPILER_VER __SUNPRO_CC
 #endif
 
 #if defined(_MSC_VER) && _MSC_VER == 1400
@@ -294,16 +294,16 @@ required. For example, an array dimension.
 #define PROJECT_INLINE inline
 #endif
 
-//! ARCHITECTURE
+//! CELL_ARCHITECTURE
 
 /*
  * Classic Standard
  * 32-bit and 64-Bit systems
  * Developer:	Intel & AMD Holdings
- * Processors:	Intel & AMD Machine
+ * CELL_PROCESSORs:	Intel & AMD Machine
  * (64-bit):	EM64T, IA-32e, Intel64, x64, x86-64
  * (32-bit):	IA-32, i386, x86, x86-32
- * Processors:	Athlon, Atom, Core, Core 2, Core i3/i5/i7, Opteron, Pentium,
+ * CELL_PROCESSORs:	Athlon, Atom, Core, Core 2, Core i3/i5/i7, Opteron, Pentium,
  * Phenom, Sempron, Turion, etc.
  */
 
@@ -313,23 +313,23 @@ required. For example, an array dimension.
 //! x86 based systems (32-bit)
 #undef X86_64BIT
 #define X86_64BIT
-#undef PROCESSOR
-#define PROCESSOR "Intel"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Intel"
 #undef INTEL
 #define INTEL
-#undef ARCHITECTURE
-#define ARCHITECTURE "x86 (32-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "x86 (32-Bit)"
 #elif defined(__x86_64) || defined(__x86_64__) || defined(__amd64) ||          \
     defined(_M_AMD64) || defined(_M_X64) && !defined(X86_32bit)
 //! x64 based systems (64-bit)
 #undef X64_64BIT
 #define X64_64BIT
-#undef PROCESSOR
-#define PROCESSOR "Intel"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Intel"
 #undef INTEL
 #define INTEL
-#undef ARCHITECTURE
-#define ARCHITECTURE "x86_64 (64-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "x86_64 (64-Bit)"
 #endif
 
 /*
@@ -337,7 +337,7 @@ required. For example, an array dimension.
  * (64-bit):	EM64T, IA-32e, Intel64, x64, x86-64
  * (32-bit):	IA-32, i386, x86, x86-32
  * Developers:	Intel only
- * Processors:	Athlon
+ * CELL_PROCESSORs:	Athlon
  *
  */
 
@@ -345,22 +345,22 @@ required. For example, an array dimension.
 /* x86 32-bit ----------------------------------------------- */
 #undef INTEL_32BIT
 #define INTEL_32BIT
-#undef PROCESSOR
-#define PROCESSOR "Intel"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Intel"
 #undef INTEL
 #define INTEL
-#undef ARCHITECTURE_INTEL
-#define ARCHITECTURE_INTEL "x86 (32-Bit)"
+#undef CELL_ARCHITECTURE_INTEL
+#define CELL_ARCHITECTURE_INTEL "x86 (32-Bit)"
 #elif defined(__x86_64__) && !defined(_M_AMD64)
 /* x64 64-bit ----------------------------------------------- */
 #undef INTEL_64BIT
 #define INTEL_64BIT
-#undef PROCESSOR
-#define PROCESSOR "Intel"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Intel"
 #undef INTEL
 #define INTEL
-#undef ARCHITECTURE_INTEL
-#define ARCHITECTURE_INTEL "x86_64 (64-Bit)"
+#undef CELL_ARCHITECTURE_INTEL
+#define CELL_ARCHITECTURE_INTEL "x86_64 (64-Bit)"
 #endif
 
 /*
@@ -368,7 +368,7 @@ required. For example, an array dimension.
  * (32-bit):    i386, x86, x86-32
  * (64-bit):	AMD64, x64
  * Developers:	AMD only
- * Processors:	Athlon
+ * CELL_PROCESSORs:	Athlon
  *
  */
 
@@ -376,24 +376,24 @@ required. For example, an array dimension.
 /* x86 32-bit ----------------------------------------------- */
 #undef AMD_32BIT
 #define AMD_32BIT
-#undef PROCESSOR
-#define PROCESSOR "AMD"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "AMD"
 #undef AMD
 #define AMD
-#undef ARCHITECTURE
-#undef ARCHITECTURE_AMD
-#define ARCHITECTURE_AMD "x86 (32-Bit)"
+#undef CELL_ARCHITECTURE
+#undef CELL_ARCHITECTURE_AMD
+#define CELL_ARCHITECTURE_AMD "x86 (32-Bit)"
 #elif (defined(__amd64__) || defined(__amd64) || defined(_M_AMD64)) &&         \
     !defined(__x86_64__)
 /* x64 64-bit ----------------------------------------------- */
 #undef AMD_64BIT
 #define AMD_64BIT
-#undef PROCESSOR
-#define PROCESSOR "AMD"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "AMD"
 #undef AMD
 #define AMD
-#undef ARCHITECTURE_AMD
-#define ARCHITECTURE_AMD "x86_64 (64-Bit)"
+#undef CELL_ARCHITECTURE_AMD
+#define CELL_ARCHITECTURE_AMD "x86_64 (64-Bit)"
 #endif
 
 /*
@@ -401,7 +401,7 @@ required. For example, an array dimension.
  * (64-bit):	x64
  * (32-bit):	x86
  * Developers:	Digital Equipment Corporation
- * Processors:	Alpha
+ * CELL_PROCESSORs:	Alpha
  *
  */
 
@@ -409,19 +409,19 @@ required. For example, an array dimension.
 /* Alpha ----------------------------------------------- */
 #undef ALPHA_32BIT
 #define ALPHA_32BIT
-#undef PROCESSOR
-#define PROCESSOR "Alpha"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Alpha"
 #undef ALPHA
 #define ALPHA
-#undef ARCHITECTURE
-#define ARCHITECTURE "Alpha (32-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "Alpha (32-Bit)"
 #endif
 
 /*
  * ARM
  * 32-bit
  * Developer:	ARM Holdings
- * Processors:	Acorn RISC Machine
+ * CELL_PROCESSORs:	Acorn RISC Machine
  */
 
 #if defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) ||    \
@@ -430,154 +430,154 @@ required. For example, an array dimension.
 /* ARM-x86 -------------------------------------------------- */
 #undef ARM_32BIT
 #define ARM_32BIT
-#undef PROCESSOR
-#define PROCESSOR "Arm"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Arm"
 #undef ARM
 #define ARM
-#undef ARCHITECTURE
-#define ARCHITECTURE "Arm (32-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "Arm (32-Bit)"
 #endif
 
 /*
  * ARM
  * 64-bit
  * Developer:	ARM Holdings
- * Processors:	Acorn RISC Machine
+ * CELL_PROCESSORs:	Acorn RISC Machine
  */
 
 #if defined(__aarch64__)
 /* ARM-x64 -------------------------------------------------- */
 #undef ARM_64BIT
 #define ARM_64BIT
-#undef PROCESSOR
-#define PROCESSOR "Arm64"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Arm64"
 #undef ARM
 #define ARM
-#undef ARCHITECTURE
-#define ARCHITECTURE "ARM64/AArch64 (64-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "ARM64/AArch64 (64-Bit)"
 #endif
 
 /*
  * PA-RISC
  * 32-bit
  * Developer:	Convex Computer Corporation
- * Processors:	PA-RISC
+ * CELL_PROCESSORs:	PA-RISC
  */
 
 #if defined(__convex__)
 /* Blackfin -------------------------------------------------- */
 #undef PA_RISC_32BIT
 #define PA_RISC_32BIT
-#undef PROCESSOR
-#define PROCESSOR "Convex PA-RISC"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Convex PA-RISC"
 #undef PA_RISC
 #define PA_RISC
-#undef ARCHITECTURE
-#define ARCHITECTURE "RISC (32-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "RISC (32-Bit)"
 #endif
 
 /*
  * Epiphany
  * 32-bit & 64-bit
  * Developer:	Adapteva
- * Processors:	Epiphany
+ * CELL_PROCESSORs:	Epiphany
  */
 
 #if defined(__epiphany__)
 /* Convex -------------------------------------------------- */
 #undef EP_32BIT
 #define EP_32BIT
-#undef PROCESSOR
-#define PROCESSOR "Adapteva Epiphany"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Adapteva Epiphany"
 #undef EPIPHANY
 #define EPIPHANY
-#undef ARCHITECTURE
-#define ARCHITECTURE "Epiphany (32-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "Epiphany (32-Bit)"
 #endif
 
 /*
  * Motorola 68000
  * 32-bit
  * Developer:	Motorola
- * Processors:	Motorola 68000
+ * CELL_PROCESSORs:	Motorola 68000
  */
 
 #if defined(__m68k__) || defined(M68000) || defined(__MC68K__)
 /* Convex -------------------------------------------------- */
 #undef MOTOROLA_32BIT
 #define MOTOROLA_32BIT
-#undef PROCESSOR
-#define PROCESSOR "Motorola 68000"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Motorola 68000"
 #undef MOTOROLA
 #define MOTOROLA
-#undef ARCHITECTURE
-#define ARCHITECTURE "Motorola (32-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "Motorola (32-Bit)"
 #endif
 /*
  * Notes:
- * "IA64" is the old name for the processor ARCHITECTURE. Intel now prefers
- * "Itanium". There is no single Itanium processor macro defined by all
- * compilers on all OSes. An #if/#endif that checks multiple macros is required.
+ * "IA64" is the old name for the CELL_PROCESSOR CELL_ARCHITECTURE. Intel now prefers
+ * "Itanium". There is no single Itanium CELL_PROCESSOR macro defined by all
+ * CELL_COMPILERs on all OSes. An #if/#endif that checks multiple macros is required.
  * Microsoft's support for Itanium ended after Visual Studio 2010 and Windows
- * Server 2008. Clang/LLVM currently does not support Itanium processors.
+ * Server 2008. Clang/LLVM currently does not support Itanium CELL_PROCESSORs.
  */
 
 /*
  * POWER
  * PowerPC
  * Developer:	IBM, Freescale
- * Processors:	PowerPC, POWER 1/2/3/4/5/6/7, G1, G2, G3, G4, G5, etc.
+ * CELL_PROCESSORs:	PowerPC, POWER 1/2/3/4/5/6/7, G1, G2, G3, G4, G5, etc.
  */
 
-/// Indicates that the target architecture is PowerPC®.
+/// Indicates that the target CELL_ARCHITECTURE is PowerPC®.
 #if defined(__powerpc) || defined(__powerpc__) || defined(__POWERPC__) ||  defined(__ppc__) || defined(_M_PPC) || defined(__PPC) || defined(__PPC__)
 /* POWER ---------------------------------------------------- */
 #undef POWER_PC_32BIT
 #define POWER_PC_32BIT
-#undef PROCESSOR
-#define PROCESSOR "Power PC"
-#undef ARCHITECTURE
-#define ARCHITECTURE "PowerPC (32-Bit)"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Power PC"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "PowerPC (32-Bit)"
 #undef POWER_PC
 #define POWER_PC
-/// Indicates that the target architecture is PowerPC and that 64-bit
+/// Indicates that the target CELL_ARCHITECTURE is PowerPC and that 64-bit
 /// compilation mode is enabled.
 #elif defined(__powerpc64__)
 /* POWER 64-bit --------------------------------------------- */
 #undef POWER_PC_64bit__
 #define POWER_PC_64bit__
-#undef PROCESSOR
-#define PROCESSOR "Power PC"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Power PC"
 #undef POWER_PC
 #define POWER_PC
-#undef ARCHITECTURE
-#define ARCHITECTURE "PowerPC (64-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "PowerPC (64-Bit)"
 #endif
 
 /*
  * Notes:
- * There is no single POWER processor macro defined by all compilers on all
+ * There is no single POWER CELL_PROCESSOR macro defined by all CELL_COMPILERs on all
  * OSes. An #if/#endif that checks multiple macros is required. GCC for AIX,
  * NetBSD, and OpenBSD defines the same macros for 32-bit and 64-bit POWER
- * processors. For AIX, __64BIT__ is defined for 64-bit POWER. For OpenBSD,
+ * CELL_PROCESSORs. For AIX, __64BIT__ is defined for 64-bit POWER. For OpenBSD,
  * _LP64 and __LP64__ are defined for 64-bit POWER. For NetBSD, GCC doesn't
  * provide a macro to check for 64-bit use. Apple's OSX support for POWER
- * processors ended after OSX 10.5 Leopard in 2007. The open source Darwin
- * distribution, on which OSX is based, is still available for POWER processors.
+ * CELL_PROCESSORs ended after OSX 10.5 Leopard in 2007. The open source Darwin
+ * distribution, on which OSX is based, is still available for POWER CELL_PROCESSORs.
  */
 
 /*
  * SPARC
  * Developer:	Oracle, Fujitsu, Sun
- * Processors:	UltraSPARC I/II/III/IV/T1/T2, SPARC T3/T4, etc.
+ * CELL_PROCESSORs:	UltraSPARC I/II/III/IV/T1/T2, SPARC T3/T4, etc.
  */
 
 /*
  *  Notes:
- *  GCC defines processor name macros depending upon the value of the -march
+ *  GCC defines CELL_PROCESSOR name macros depending upon the value of the -march
  * command-line option. These include__sparclite__, __sparclet__, __sparc_v8__,
  * __sparc_v9__, __supersparc__, __hypersparc__, and so forth. However, other
- * compilers don't provide this level of detail and writing code that depends
+ * CELL_COMPILERs don't provide this level of detail and writing code that depends
  * upon these macros is probably a bad idea.
  */
 
@@ -586,29 +586,29 @@ required. For example, an array dimension.
 /* x86 32-bit ----------------------------------------------- */
 #undef SPARC_32BIT
 #define SPARC_32BIT
-#undef PROCESSOR
-#define PROCESSOR "Sparc"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Sparc"
 #undef SPARC
 #define SPARC
-#undef ARCHITECTURE
-#define ARCHITECTURE "Sparc (32-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "Sparc (32-Bit)"
 #elif defined(__sparc64__)
 /* x64 64-bit ----------------------------------------------- */
 #undef SPARC_64bit__
 #define SPARC_64bit__
-#undef PROCESSOR
-#define PROCESSOR "Sparc"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Sparc"
 #undef SPARC
 #define SPARC
-#undef ARCHITECTURE
-#define ARCHITECTURE "Sparc (64-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "Sparc (64-Bit)"
 #endif
 
 /*
  * ARM
  * 32-bit
  * Developer:	ARM Holdings
- * Processors:	Acorn RISC Machine
+ * CELL_PROCESSORs:	Acorn RISC Machine
  */
 
 #if defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) ||    \
@@ -617,22 +617,22 @@ required. For example, an array dimension.
 /* ARM-x86 -------------------------------------------------- */
 #undef ARM_32BIT
 #define ARM_32BIT
-#undef PROCESSOR
-#define PROCESSOR "Arm"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Arm"
 #undef ARM
 #define ARM
-#undef ARCHITECTURE
-#define ARCHITECTURE "Arm (32-Bit)"
+#undef CELL_ARCHITECTURE
+#define CELL_ARCHITECTURE "Arm (32-Bit)"
 #endif
 
-// Embedded Architecture
+// Embedded CELL_ARCHITECTURE
 #if defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) ||    \
     defined(__TARGET_ARCH_THUMB) || defined(_ARM) || defined(_M_ARM) ||        \
     defined(_M_ARMT) || defined(__arm)
 #undef EMBEDDED
 #define EMBEDDED
-#undef PROCESSOR
-#define PROCESSOR "Ebedded Unknown!"
+#undef CELL_PROCESSOR
+#define CELL_PROCESSOR "Ebedded Unknown!"
 #undef IS_EMBEDDED
 #define IS_EMBEDDED 1
 #endif
@@ -660,7 +660,7 @@ required. For example, an array dimension.
      *      - Generic fallback
      *      - Playstation
      *      - Xbox
-     *  Supported architectures:
+     *  Supported CELL_ARCHITECTUREs:
      *      - x86
      *      - x64
      *      - ARM 32-bit
@@ -676,14 +676,14 @@ required. For example, an array dimension.
      *      - Emscripten
      *      - Generic
      *
-     *  Supported compilers:
+     *  Supported CELL_COMPILERs:
      *      - Clang
      *      - GCC
      *      - MSVC
      *      - Emscripten
      *      - TinyC
      *      - VBCC
-     *      - Bruce's C compiler
+     *      - Bruce's C CELL_COMPILER
      *      - Generic
      *
      */
@@ -692,52 +692,52 @@ required. For example, an array dimension.
  * AIX
  * Developer:	IBM
  * Distributions:	AIX
- * Processors:	POWER
+ * CELL_PROCESSORs:	POWER
  */
 
 #if defined(X86_32bit) && defined(_AIX) || defined(__TOS_AIX__) ||             \
     defined(__xlC__)
 /* IBM AIX. ------------------------------------------------- */
-#define PLATFORM_OS "AIX"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_AIX "AIX"
-#define PLATFORM_TYPE "UNIX AIX"
+#define CELL_PLATFORM_OS "AIX"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_AIX "AIX"
+#define CELL_PLATFORM_TYPE "UNIX AIX"
 #undef AIX
 #define AIX
 #elif defined(X64_64bit) && defined(_AIX) || defined(__TOS_AIX__) ||           \
     defined(__xlC__)
 /* IBM AIX. ------------------------------------------------- */
-#define PLATFORM_OS "AIX"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_AIX "AIX"
+#define CELL_PLATFORM_OS "AIX"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_AIX "AIX"
 #undef AIX
 #define AIX
-#define PLATFORM_TYPE "UNIX AIX"
+#define CELL_PLATFORM_TYPE "UNIX AIX"
 #endif
 
 /*
  * HP-UX
  * Developer:	Hewlett-Packard
  * Distributions:	HP-UX
- * Processors:	Itanium
+ * CELL_PROCESSORs:	Itanium
  */
 
 #if defined(X86_32bit) && defined(hpux) || defined(__hpux) ||                  \
     defined(__hpux) || defined(__hpux)
 /* Hewlett-Packard HP-UX. ----------------------------------- */
-#define PLATFORM_OS "HP"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_HP "HP"
-#define PLATFORM_TYPE "UNIX HP-UX"
+#define CELL_PLATFORM_OS "HP"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_HP "HP"
+#define CELL_PLATFORM_TYPE "UNIX HP-UX"
 #undef HPUX
 #define HPUX
 #elif defined(X64_64bit) && defined(X86_32bit) && defined(hpux) ||             \
     defined(__hpux) || defined(__hpux) || defined(__hpux)
 /* Hewlett-Packard HP-UX. ----------------------------------- */
-#define PLATFORM_OS "HP"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_HP "HP"
-#define PLATFORM_TYPE "UNIX HP-UX"
+#define CELL_PLATFORM_OS "HP"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_HP "HP"
+#define CELL_PLATFORM_TYPE "UNIX HP-UX"
 #undef HPUX
 #define HPUX
 #endif
@@ -746,108 +746,108 @@ required. For example, an array dimension.
  * Linux
  * Developer:	Open source
  * Distributions:	Centos, Debian, Fedora, OpenSUSE, RedHat, Ubuntu
- * Processors:	x86, x86-64, arm64, POWER, etc.
+ * CELL_PROCESSORs:	x86, x86-64, arm64, POWER, etc.
  */
 
 #if defined(__linux__) && defined(linux) && !defined(ARM64_BIT) && !defined(X64_64bit)
 /* Linux. --------------------------------------------------- */
-#define PLATFORM_OS "Linux"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_LINUX "Linux"
-#define PLATFORM_DEVICE "Desktop"
-#define PLATFORM_TYPE "Unix (Linux)"
-#undef PLATFORM_IS_LINUX
-#define PLATFORM_IS_LINUX
+#define CELL_PLATFORM_OS "Linux"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_LINUX "Linux"
+#define CELL_PLATFORM_DEVICE "Desktop"
+#define CELL_PLATFORM_TYPE "Unix (Linux)"
+#undef CELL_PLATFORM_IS_LINUX
+#define CELL_PLATFORM_IS_LINUX
 #elif defined(X64_64bit) && defined(__linux) && defined(__linux__) && defined(linux)
 /* Linux. --------------------------------------------------- */
-#define PLATFORM_OS "Linux"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_LINUX "Linux"
-#define PLATFORM_DEVICE "Desktop"
-#define PLATFORM_TYPE "Unix (Linux)"
-#undef PLATFORM_IS_LINUX
-#define PLATFORM_IS_LINUX
+#define CELL_PLATFORM_OS "Linux"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_LINUX "Linux"
+#define CELL_PLATFORM_DEVICE "Desktop"
+#define CELL_PLATFORM_TYPE "Unix (Linux)"
+#undef CELL_PLATFORM_IS_LINUX
+#define CELL_PLATFORM_IS_LINUX
 /* Linux. --------------------------------------------------- */
 #elif defined(ARM64_BIT) && defined(__linux) && defined(__linux__) && !defined(ANDROID)
-#define PLATFORM_OS "Linux"
-#define PLATFORM_ARCH "arm64 (aarch64)"
-#define PLATFORM_LINUX "Linux"
-#define PLATFORM_DEVICE "Desktop"
-#define PLATFORM_TYPE "Unix (Linux)"
-#undef PLATFORM_IS_LINUX
-#define PLATFORM_IS_LINUX
+#define CELL_PLATFORM_OS "Linux"
+#define CELL_PLATFORM_ARCH "arm64 (aarch64)"
+#define CELL_PLATFORM_LINUX "Linux"
+#define CELL_PLATFORM_DEVICE "Desktop"
+#define CELL_PLATFORM_TYPE "Unix (Linux)"
+#undef CELL_PLATFORM_IS_LINUX
+#define CELL_PLATFORM_IS_LINUX
 #endif
 
 /*
  * OSX, iOS, and Darwin
  * Developer:	Apple and open source
  * Distributions:	OSX, iOS, Darwin
- * Processors:	x86, x86-64, ARM
+ * CELL_PROCESSORs:	x86, x86-64, ARM
  */
 
 #if defined(__APPLE__) && defined(__MACH__)
-#define PLATFORM_DEVELOPER "Apple \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Apple \u00AE"
 // Detect for x86
 /* Apple OSX and iOS (Darwin). ------------------------------ */
 #include <TargetConditionals.h>
 #if TARGET_OS_SIMULATOR == 1
 /* iOS in Xcode simulator */
-#define PLATFORM_OS "Apple iOS"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_MOBILE
-#define PLATFORM_IOS_SIMULATOR "iOS Simulator"
-#define PLATFORM_TYPE "iOS-Emulator"
-#undef PLATFORM_IS_IOS_EMULATOR
-#define PLATFORM_IS_IOS_EMULATOR
+#define CELL_PLATFORM_OS "Apple iOS"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_MOBILE
+#define CELL_PLATFORM_IOS_SIMULATOR "iOS Simulator"
+#define CELL_PLATFORM_TYPE "iOS-Emulator"
+#undef CELL_PLATFORM_IS_IOS_EMULATOR
+#define CELL_PLATFORM_IS_IOS_EMULATOR
 #elif TARGET_OS_WATCH == 1
 /* iOS on iWatch. */
-#define PLATFORM_OS "Apple iOS"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_MOBILE
-#define PLATFORM_IWATCH "iOS (iWatch)"
-#define PLATFORM_TYPE "iWatch"
-#undef PLATFORM_IS_IWATCH
-#define PLATFORM_IS_IWATCH
+#define CELL_PLATFORM_OS "Apple iOS"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_MOBILE
+#define CELL_PLATFORM_IWATCH "iOS (iWatch)"
+#define CELL_PLATFORM_TYPE "iWatch"
+#undef CELL_PLATFORM_IS_IWATCH
+#define CELL_PLATFORM_IS_IWATCH
 #elif TARGET_OS_TV == 1
 /* Apple TV. */
-#define PLATFORM_OS "Apple iOS"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_MOBILE
-#define PLATFORM_APPLE_TV "Apple (TV)"
-#define PLATFORM_TYPE "Apple TV"
-#undef PLATFORM_IS_IOS_APPLE_TV
-#define PLATFORM_IS_IOS_APPLE_TV
+#define CELL_PLATFORM_OS "Apple iOS"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_MOBILE
+#define CELL_PLATFORM_APPLE_TV "Apple (TV)"
+#define CELL_PLATFORM_TYPE "Apple TV"
+#undef CELL_PLATFORM_IS_IOS_APPLE_TV
+#define CELL_PLATFORM_IS_IOS_APPLE_TV
 #elif TARGET_OS_IPHONE == 1
 /* iOS on iPhone, iPad, etc. */
 #if defined(__arm__) && !defined(__arm64__)
-#define PLATFORM_OS "Apple iOS"
-#define PLATFORM_ARCH "arm (32-Bit)"
-#define PLATFORM_MOBILE
-#define PLATFORM_IOS "iOS"
-#define PLATFORM_DEVICE "Mobile"
-#define PLATFORM_TYPE "iPhone, iPad"
-#undef PLATFORM_IS_IOS
-#define PLATFORM_IS_IOS
+#define CELL_PLATFORM_OS "Apple iOS"
+#define CELL_PLATFORM_ARCH "arm (32-Bit)"
+#define CELL_PLATFORM_MOBILE
+#define CELL_PLATFORM_IOS "iOS"
+#define CELL_PLATFORM_DEVICE "Mobile"
+#define CELL_PLATFORM_TYPE "iPhone, iPad"
+#undef CELL_PLATFORM_IS_IOS
+#define CELL_PLATFORM_IS_IOS
 #elif !defined(__arm__) && defined(__arm64__)
-#define PLATFORM_OS "Apple iOS"
-#define PLATFORM_ARCH "arm64 (64-Bit)"
-#define PLATFORM_MOBILE
-#define PLATFORM_IOS "iOS"
-#define PLATFORM_DEVICE "Mobile"
-#define PLATFORM_TYPE "iPhone, iPad"
-#undef PLATFORM_IS_IOS
-#define PLATFORM_IS_IOS
+#define CELL_PLATFORM_OS "Apple iOS"
+#define CELL_PLATFORM_ARCH "arm64 (64-Bit)"
+#define CELL_PLATFORM_MOBILE
+#define CELL_PLATFORM_IOS "iOS"
+#define CELL_PLATFORM_DEVICE "Mobile"
+#define CELL_PLATFORM_TYPE "iPhone, iPad"
+#undef CELL_PLATFORM_IS_IOS
+#define CELL_PLATFORM_IS_IOS
 #endif
 #elif TARGET_OS_MAC == 1
 /* macOS */
-#define PLATFORM_OS "macOS"
-#define PLATFORM_ARCH ARCHITECTURE
-#define PLATFORM_DESKTOP
-#define PLATFORM_MAC "Unix(Darwin)-macOS (X11)"
-#define PLATFORM_DEVICE "Unix(Darwin)-macOS (X11)"
-#define PLATFORM_TYPE "Macintosh"
-#undef PLATFORM_IS_MAC
-#define PLATFORM_IS_MAC
+#define CELL_PLATFORM_OS "macOS"
+#define CELL_PLATFORM_ARCH CELL_ARCHITECTURE
+#define CELL_PLATFORM_DESKTOP
+#define CELL_PLATFORM_MAC "Unix(Darwin)-macOS (X11)"
+#define CELL_PLATFORM_DEVICE "Unix(Darwin)-macOS (X11)"
+#define CELL_PLATFORM_TYPE "Macintosh"
+#undef CELL_PLATFORM_IS_MAC
+#define CELL_PLATFORM_IS_MAC
 #endif
 #endif
 #if defined(_APPLE) && defined(_LINUX) ||                                      \
@@ -859,405 +859,405 @@ required. For example, an array dimension.
  * Solaris
  * Developer:	Oracle and open source
  * Distributions:	Oracle Solaris, Open Indiana
- * Processors:	x86, x86-64, SPARC
+ * CELL_PROCESSORs:	x86, x86-64, SPARC
  */
 
 #if defined(X86_32bit) && defined(__sun) && defined(__SVR4)
-#define PLATFORM_DEVELOPER "Oracle Solaris \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Oracle Solaris \u00AE"
 /* Solaris. ------------------------------------------------- */
-#define PLATFORM_OS "Solaris"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_SOLARIS "Solaris"
-#define PLATFORM_TYPE "SUN (Solaris)"
+#define CELL_PLATFORM_OS "Solaris"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_SOLARIS "Solaris"
+#define CELL_PLATFORM_TYPE "SUN (Solaris)"
 #elif defined(X64_64bit) && defined(__sun) && defined(__SVR4)
-#define PLATFORM_DEVELOPER "Oracle Solaris \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Oracle Solaris \u00AE"
 /* Solaris. ------------------------------------------------- */
-#define PLATFORM_OS "Solaris"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_SOLARIS "Solaris"
-#define PLATFORM_TYPE "SUN (Solaris)"
+#define CELL_PLATFORM_OS "Solaris"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_SOLARIS "Solaris"
+#define CELL_PLATFORM_TYPE "SUN (Solaris)"
 #endif
 
 /*
  * Android
  * Developer:	Google
  * Distributions:	Android
- * Processors:	x86, x86-64, ARM
+ * CELL_PROCESSORs:	x86, x86-64, ARM
  */
 
 #if !defined(__aarch64__) && defined(__ANDROID__) && defined(__ARM_ARCH) || defined(__ARM_ARCH_7A__)
-#define PLATFORM_DEVELOPER "Google \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Google \u00AE"
 /* Android. ------------------------------------------------- */
-#define PLATFORM_OS "Linux"
-#define PLATFORM_ANDROID "Linux (Android)"
-#undef PLATFORM_DEVICE
-#define PLATFORM_DEVICE "Mobile"
-#undef PLATFORM_MOBILE
-#define PLATFORM_MOBILE
-#undef PLATFORM_ARCH
-#define PLATFORM_ARCH "armv7a (32-Bit)"
-#undef PLATFORM_TYPE
-#define PLATFORM_TYPE "Android"
-#undef PLATFORM_IS_ANDROID
-#define PLATFORM_IS_ANDROID
+#define CELL_PLATFORM_OS "Linux"
+#define CELL_PLATFORM_ANDROID "Linux (Android)"
+#undef CELL_PLATFORM_DEVICE
+#define CELL_PLATFORM_DEVICE "Mobile"
+#undef CELL_PLATFORM_MOBILE
+#define CELL_PLATFORM_MOBILE
+#undef CELL_PLATFORM_ARCH
+#define CELL_PLATFORM_ARCH "armv7a (32-Bit)"
+#undef CELL_PLATFORM_TYPE
+#define CELL_PLATFORM_TYPE "Android"
+#undef CELL_PLATFORM_IS_ANDROID
+#define CELL_PLATFORM_IS_ANDROID
 #elif defined(__aarch64__) && defined(__ANDROID__)
 /* Android. ------------------------------------------------- */
-#define PLATFORM_DEVELOPER "Google \u00AE"
-#define PLATFORM_OS "Linux"
-#define PLATFORM_ANDROID "Linux (Android)"
-#undef PLATFORM_DEVICE
-#define PLATFORM_DEVICE "Mobile"
-#undef PLATFORM_MOBILE
-#define PLATFORM_MOBILE
-#undef PLATFORM_ARCH
-#define PLATFORM_ARCH "arm64-v8a (64-Bit)"
-#undef PLATFORM_TYPE
-#define PLATFORM_TYPE "Android"
-#undef PLATFORM_IS_ANDROID
-#define PLATFORM_IS_ANDROID
+#define CELL_PLATFORM_DEVELOPER "Google \u00AE"
+#define CELL_PLATFORM_OS "Linux"
+#define CELL_PLATFORM_ANDROID "Linux (Android)"
+#undef CELL_PLATFORM_DEVICE
+#define CELL_PLATFORM_DEVICE "Mobile"
+#undef CELL_PLATFORM_MOBILE
+#define CELL_PLATFORM_MOBILE
+#undef CELL_PLATFORM_ARCH
+#define CELL_PLATFORM_ARCH "arm64-v8a (64-Bit)"
+#undef CELL_PLATFORM_TYPE
+#define CELL_PLATFORM_TYPE "Android"
+#undef CELL_PLATFORM_IS_ANDROID
+#define CELL_PLATFORM_IS_ANDROID
 #elif defined(X86_64BIT) && !defined(__aarch64__) && !defined(__ARM_ARCH) && defined(__ANDROID__)
-#define PLATFORM_DEVELOPER "Google \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Google \u00AE"
 /* Android. ------------------------------------------------- */
-#define PLATFORM_OS "Linux"
-#define PLATFORM_ANDROID "Linux (Android)"
-#undef PLATFORM_DEVICE
-#define PLATFORM_DEVICE "Mobile"
-#undef PLATFORM_MOBILE
-#define PLATFORM_MOBILE
-#undef PLATFORM_ARCH
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#undef PLATFORM_TYPE
-#define PLATFORM_TYPE "Android"
-#undef PLATFORM_IS_ANDROID
-#define PLATFORM_IS_ANDROID
+#define CELL_PLATFORM_OS "Linux"
+#define CELL_PLATFORM_ANDROID "Linux (Android)"
+#undef CELL_PLATFORM_DEVICE
+#define CELL_PLATFORM_DEVICE "Mobile"
+#undef CELL_PLATFORM_MOBILE
+#define CELL_PLATFORM_MOBILE
+#undef CELL_PLATFORM_ARCH
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#undef CELL_PLATFORM_TYPE
+#define CELL_PLATFORM_TYPE "Android"
+#undef CELL_PLATFORM_IS_ANDROID
+#define CELL_PLATFORM_IS_ANDROID
 #elif defined(X64_64BIT) && !defined(__aarch64__) && !defined(__ARM_ARCH) && defined(__ANDROID__)
-#define PLATFORM_DEVELOPER "Google \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Google \u00AE"
 /* Android. ------------------------------------------------- */
-#define PLATFORM_OS "Linux"
-#define PLATFORM_ANDROID "Linux (Android)"
-#undef PLATFORM_DEVICE
-#define PLATFORM_DEVICE "Mobile"
-#undef PLATFORM_MOBILE
-#define PLATFORM_MOBILE
-#undef PLATFORM_ARCH
-#define PLATFORM_ARCH "x86_64 (64-Bit)"
-#undef PLATFORM_TYPE
-#define PLATFORM_TYPE "Android"
-#undef PLATFORM_IS_ANDROID
-#define PLATFORM_IS_ANDROID
+#define CELL_PLATFORM_OS "Linux"
+#define CELL_PLATFORM_ANDROID "Linux (Android)"
+#undef CELL_PLATFORM_DEVICE
+#define CELL_PLATFORM_DEVICE "Mobile"
+#undef CELL_PLATFORM_MOBILE
+#define CELL_PLATFORM_MOBILE
+#undef CELL_PLATFORM_ARCH
+#define CELL_PLATFORM_ARCH "x86_64 (64-Bit)"
+#undef CELL_PLATFORM_TYPE
+#define CELL_PLATFORM_TYPE "Android"
+#undef CELL_PLATFORM_IS_ANDROID
+#define CELL_PLATFORM_IS_ANDROID
 #endif
 
 /*
  * Windows with Cygwin (POSIX)
  * Developer:	Open source
  * Distributions:	Cygwin
- * Processors:	x86
+ * CELL_PROCESSORs:	x86
  */
 
 #if defined(X86_32bit) && defined(__CYGWIN__) && !defined(_WIN32)
-#define PLATFORM_DEVELOPER "Microsoft \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Cygwin POSIX under Microsoft Windows. -------------------- */
-#define PLATFORM_OS "Microsoft Windows"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_POSIX_WINDOWS "POSIX under Microsoft Windows"
-#define PLATFORM_TYPE "POSIX under Microsoft Windows"
+#define CELL_PLATFORM_OS "Microsoft Windows"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_POSIX_WINDOWS "POSIX under Microsoft Windows"
+#define CELL_PLATFORM_TYPE "POSIX under Microsoft Windows"
 #elif defined(X64_64bit) && defined(__CYGWIN__) && !defined(_WIN32)
-#define PLATFORM_DEVELOPER "Microsoft \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Cygwin POSIX under Microsoft Windows. -------------------- */
-#define PLATFORM_OS "Microsoft Windows"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_POSIX_WINDOWS "POSIX under Microsoft Windows"
-#define PLATFORM_TYPE "POSIX under Microsoft Windows"
-#undef PLATFORM_IS_WINDOWS
-#define PLATFORM_IS_WINDOWS
+#define CELL_PLATFORM_OS "Microsoft Windows"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_POSIX_WINDOWS "POSIX under Microsoft Windows"
+#define CELL_PLATFORM_TYPE "POSIX under Microsoft Windows"
+#undef CELL_PLATFORM_IS_WINDOWS
+#define CELL_PLATFORM_IS_WINDOWS
 #endif
 
 /* FreeBSD */
 #if defined(X86_32bit) && defined(__FreeBSD__) || defined(__FreeBSD)
-#define PLATFORM_DEVELOPER "The FreeBSD Project \u00AE"
+#define CELL_PLATFORM_DEVELOPER "The FreeBSD Project \u00AE"
 #define CELL_P_FREEBSD
-#define PLATFORM_OS "FreeBSD"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_FREEBSD "Linux (FreeBSD)"
-#define PLATFORM_TYPE "FreeBSD"
+#define CELL_PLATFORM_OS "FreeBSD"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_FREEBSD "Linux (FreeBSD)"
+#define CELL_PLATFORM_TYPE "FreeBSD"
 #elif defined(X64_64bit) && defined(__FreeBSD__) || defined(__FreeBSD)
-#define PLATFORM_DEVELOPER "The FreeBSD Project \u00AE"
+#define CELL_PLATFORM_DEVELOPER "The FreeBSD Project \u00AE"
 #define CELL_P_FREEBSD
-#define PLATFORM_OS "FreeBSD"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_FREEBSD "Linux (FreeBSD)"
-#undef PLATFORM_IS_FREEBSD
-#define PLATFORM_IS_FREEBSD
+#define CELL_PLATFORM_OS "FreeBSD"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_FREEBSD "Linux (FreeBSD)"
+#undef CELL_PLATFORM_IS_FREEBSD
+#define CELL_PLATFORM_IS_FREEBSD
 #endif
 
 /*
  * FreeBSD, ORBIS
  * Developer:	Sony
  * Distributions:	Orbis OS based on FreeBSD
- * Processors:	x86, x86-64
+ * CELL_PROCESSORs:	x86, x86-64
  */
 
 /* Orbis (PS4) variant */
 #if defined(X86_32bit) && defined(CELL_P_FREEBSD) && defined(__ORBIS__)
-#define PLATFORM_DEVELOPER "Sony \u00AE"
-#define PLATFORM_OS "Orbis"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_ORBIS "Linux (Orbis)"
-#define PLATFORM_PLAYSTATION "Playstation"
-#define PLATFORM_TYPE "Playstation"
+#define CELL_PLATFORM_DEVELOPER "Sony \u00AE"
+#define CELL_PLATFORM_OS "Orbis"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_ORBIS "Linux (Orbis)"
+#define CELL_PLATFORM_PLAYSTATION "Playstation"
+#define CELL_PLATFORM_TYPE "Playstation"
 #elif defined(X64_64bit) && defined(CELL_P_FREEBSD) && defined(__ORBIS__)
-#define PLATFORM_DEVELOPER "Sony \u00AE"
-#define PLATFORM_OS "Orbis"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_ORBIS "Linux (Orbis)"
-#define PLATFORM_TYPE "Playstation"
-#undef PLATFORM_IS_PLAYSTATION
-#define PLATFORM_IS_PLAYSTATION
+#define CELL_PLATFORM_DEVELOPER "Sony \u00AE"
+#define CELL_PLATFORM_OS "Orbis"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_ORBIS "Linux (Orbis)"
+#define CELL_PLATFORM_TYPE "Playstation"
+#undef CELL_PLATFORM_IS_PLAYSTATION
+#define CELL_PLATFORM_IS_PLAYSTATION
 #endif
 
 /* OpenBSD */
 #if defined(X86_32bit) && defined(__OpenBSD__) || defined(__OpenBSD)
-#define PLATFORM_DEVELOPER "Theo de Raadt \u00AE"
-#define PLATFORM_OS "Unix-like (BSD)"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_OPENBSD "OpenBSD"
-#define PLATFORM_TYPE "OpenBSD"
+#define CELL_PLATFORM_DEVELOPER "Theo de Raadt \u00AE"
+#define CELL_PLATFORM_OS "Unix-like (BSD)"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_OPENBSD "OpenBSD"
+#define CELL_PLATFORM_TYPE "OpenBSD"
 #elif defined(X64_64bit) && defined(__OpenBSD__) || defined(__OpenBSD)
-#define PLATFORM_DEVELOPER "Theo de Raadt \u00AE"
-#define PLATFORM_OS "Unix-like (BSD)"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_OPENBSD "OpenBSD"
-#define PLATFORM_TYPE "OpenBSD"
-#undef PLATFORM_IS_OPENBSD
-#define PLATFORM_IS_OPENBSD
+#define CELL_PLATFORM_DEVELOPER "Theo de Raadt \u00AE"
+#define CELL_PLATFORM_OS "Unix-like (BSD)"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_OPENBSD "OpenBSD"
+#define CELL_PLATFORM_TYPE "OpenBSD"
+#undef CELL_PLATFORM_IS_OPENBSD
+#define CELL_PLATFORM_IS_OPENBSD
 #endif
 
 #if defined(_XBOX_ONE) && defined(_TITLE)
-#define PLATFORM_DEVELOPER "Microsoft \u00AE"
-#define PLATFORM_OS "Windows 10.x"
-#define PLATFORM_ARCH "AMD64 (x86-64)"
-#define PLATFORM_XBOX "Windows 10 (Xbox)"
-#define PLATFORM_TYPE "Xbox"
-#undef PLATFORM_IS_XBOX
-#define PLATFORM_IS_XBOX
+#define CELL_PLATFORM_DEVELOPER "Microsoft \u00AE"
+#define CELL_PLATFORM_OS "Windows 10.x"
+#define CELL_PLATFORM_ARCH "AMD64 (x86-64)"
+#define CELL_PLATFORM_XBOX "Windows 10 (Xbox)"
+#define CELL_PLATFORM_TYPE "Xbox"
+#undef CELL_PLATFORM_IS_XBOX
+#define CELL_PLATFORM_IS_XBOX
 #endif
 
 /* NetBSD */
 #if defined(X86_32bit) && defined(__NetBSD__) || defined(__NetBSD)
-#define PLATFORM_DEVELOPER "The NetBSD Foundation \u00AE"
-#define PLATFORM_OS "Unix (NetBSD)"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_BLACKBERRY "NetBSD"
-#define PLATFORM_TYPE "NetBSD"
+#define CELL_PLATFORM_DEVELOPER "The NetBSD Foundation \u00AE"
+#define CELL_PLATFORM_OS "Unix (NetBSD)"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_BLACKBERRY "NetBSD"
+#define CELL_PLATFORM_TYPE "NetBSD"
 #elif defined(X64_64bit) && defined(__NetBSD__) || defined(__NetBSD)
-#define PLATFORM_DEVELOPER "The NetBSD Foundation \u00AE"
-#define PLATFORM_OS "Unix (NetBSD)"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_BLACKBERRY "NetBSD"
-#define PLATFORM_TYPE "NetBSD"
-#undef PLATFORM_IS_NETBSD
-#define PLATFORM_IS_NETBSD
+#define CELL_PLATFORM_DEVELOPER "The NetBSD Foundation \u00AE"
+#define CELL_PLATFORM_OS "Unix (NetBSD)"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_BLACKBERRY "NetBSD"
+#define CELL_PLATFORM_TYPE "NetBSD"
+#undef CELL_PLATFORM_IS_NETBSD
+#define CELL_PLATFORM_IS_NETBSD
 #endif
 
 /* QNX (Blackberry) variant */
 #if defined(X86_32bit) && defined(__QNXNTO__) || defined(__QNX__)
-#define PLATFORM_DEVELOPER "QNX Software System \u00AE"
-#define PLATFORM_OS "Unix (RTOS)"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_BLACKBERRY "QNX"
-#define PLATFORM_TYPE "Blackberry"
+#define CELL_PLATFORM_DEVELOPER "QNX Software System \u00AE"
+#define CELL_PLATFORM_OS "Unix (RTOS)"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_BLACKBERRY "QNX"
+#define CELL_PLATFORM_TYPE "Blackberry"
 #elif defined(X64_64bit) && defined(__QNXNTO__) || defined(__QNX__)
-#define PLATFORM_DEVELOPER "QNX Software System \u00AE"
-#define PLATFORM_OS "Unix (RTOS)"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_BLACKBERRY "QNX"
-#define PLATFORM_TYPE "Blackberry"
-#undef PLATFORM_IS_BLACKBERRY
-#define PLATFORM_IS_BLACKBERRY
+#define CELL_PLATFORM_DEVELOPER "QNX Software System \u00AE"
+#define CELL_PLATFORM_OS "Unix (RTOS)"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_BLACKBERRY "QNX"
+#define CELL_PLATFORM_TYPE "Blackberry"
+#undef CELL_PLATFORM_IS_BLACKBERRY
+#define CELL_PLATFORM_IS_BLACKBERRY
 #endif
 
 /* VMS */
 #if defined(X86_32bit) && defined(VMS) || defined(__VMS)
-#define PLATFORM_DEVELOPER "OpenVMS \u00AE"
-#define PLATFORM_OS "OpenVMS"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_VMS "DEC (OpenVMS)"
-#define PLATFORM_TYPE "DEC"
+#define CELL_PLATFORM_DEVELOPER "OpenVMS \u00AE"
+#define CELL_PLATFORM_OS "OpenVMS"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_VMS "DEC (OpenVMS)"
+#define CELL_PLATFORM_TYPE "DEC"
 #elif defined(X64_64bit) && defined(VMS) || defined(__VMS)
-#define PLATFORM_DEVELOPER "OpenVMS \u00AE"
-#define PLATFORM_OS "OpenVMS"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_VMS "DEC (OpenVMS)"
-#define PLATFORM_TYPE "DEC"
-#undef PLATFORM_IS_OPENVMS
-#define PLATFORM_IS_OPENVMS
+#define CELL_PLATFORM_DEVELOPER "OpenVMS \u00AE"
+#define CELL_PLATFORM_OS "OpenVMS"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_VMS "DEC (OpenVMS)"
+#define CELL_PLATFORM_TYPE "DEC"
+#undef CELL_PLATFORM_IS_OPENVMS
+#define CELL_PLATFORM_IS_OPENVMS
 #endif
 
 /* VXWORKS variant */
 #if defined(X86_32bit) && defined(VXWORKS)
-#define PLATFORM_DEVELOPER "Wind River Systems, Siemens EDA \u00AE"
-#define PLATFORM_OS "RTOS"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_VXWORKS "Monolithic"
-#define PLATFORM_TYPE "VXWORKS"
+#define CELL_PLATFORM_DEVELOPER "Wind River Systems, Siemens EDA \u00AE"
+#define CELL_PLATFORM_OS "RTOS"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_VXWORKS "Monolithic"
+#define CELL_PLATFORM_TYPE "VXWORKS"
 #elif defined(X64_64bit) && defined(VXWORKS)
-#define PLATFORM_DEVELOPER "Wind River Systems, Siemens EDA \u00AE"
-#define PLATFORM_OS "RTOS"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_VXWORKS "Monolithic"
-#define PLATFORM_TYPE "VXWORKS"
-#undef PLATFORM_IS_VXWORKS
-#define PLATFORM_IS_VXWORKS
+#define CELL_PLATFORM_DEVELOPER "Wind River Systems, Siemens EDA \u00AE"
+#define CELL_PLATFORM_OS "RTOS"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_VXWORKS "Monolithic"
+#define CELL_PLATFORM_TYPE "VXWORKS"
+#undef CELL_PLATFORM_IS_VXWORKS
+#define CELL_PLATFORM_IS_VXWORKS
 #endif
 
 /* Motorola 68K.  Not defined by VBCC, so user must define one of these
  * manually when using VBCC.
  */
 #if defined(X86_32bit) && defined(__m68k__) || defined(M68000) || defined(__MC68K__)
-#define PLATFORM_OS "68K"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_MOTOROLA "Motorola (68K)"
-#define PLATFORM_TYPE "Motorola 68K"
+#define CELL_PLATFORM_OS "68K"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_MOTOROLA "Motorola (68K)"
+#define CELL_PLATFORM_TYPE "Motorola 68K"
 #elif defined(X64_64bit) && defined(__m68k__) || defined(M68000) || defined(__MC68K__)
-#define PLATFORM_OS "68K"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_MOTOROLA "Motorola (68K)"
-#define PLATFORM_TYPE "Motorola 68K"
+#define CELL_PLATFORM_OS "68K"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_MOTOROLA "Motorola (68K)"
+#define CELL_PLATFORM_TYPE "Motorola 68K"
 #endif
 
 /* Ultrix */
 #if defined(X86_32bit) && defined(ultrix) || defined(__ultrix) ||  defined(__ultrix__)
-#define PLATFORM_OS "Ultrix Os"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_ULTRIX "Ultrix"
-#define PLATFORM_TYPE "Ultrix"
+#define CELL_PLATFORM_OS "Ultrix Os"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_ULTRIX "Ultrix"
+#define CELL_PLATFORM_TYPE "Ultrix"
 #elif defined(X86_32bit) && defined(unix) && defined(vax)
-#define PLATFORM_OS "Ultrix Os"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_ULTRIX "Ultrix"
-#define PLATFORM_TYPE "Ultrix"
+#define CELL_PLATFORM_OS "Ultrix Os"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_ULTRIX "Ultrix"
+#define CELL_PLATFORM_TYPE "Ultrix"
 #elif defined(X64_64bit) && defined(ultrix) || defined(__ultrix) || defined(__ultrix__)
-#define PLATFORM_OS "Ultrix Os"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_ULTRIX "Ultrix"
-#define PLATFORM_TYPE "Ultrix"
+#define CELL_PLATFORM_OS "Ultrix Os"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_ULTRIX "Ultrix"
+#define CELL_PLATFORM_TYPE "Ultrix"
 #elif defined(X64_64bit) && defined(unix) && defined(vax)
-#define PLATFORM_OS "Ultrix Os"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_ULTRIX "Ultrix"
-#define PLATFORM_TYPE "Ultrix"
-#undef PLATFORM_IS_ULTRIX
-#define PLATFORM_IS_ULTRIX
+#define CELL_PLATFORM_OS "Ultrix Os"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_ULTRIX "Ultrix"
+#define CELL_PLATFORM_TYPE "Ultrix"
+#undef CELL_PLATFORM_IS_ULTRIX
+#define CELL_PLATFORM_IS_ULTRIX
 #endif
 
 /* Embedded */
 #if defined(IS_EMBEDDED)
-#define PLATFORM_EMBEDDED "Embedded"
-#define PLATFORM_RPI "Embedded"
+#define CELL_PLATFORM_EMBEDDED "Embedded"
+#define CELL_PLATFORM_RPI "Embedded"
 #endif
 
 /* Microsoft DOS */
 #if defined(MSDOS) || defined(__MSDOS__) || defined(_MSDOS) || defined(__DOS__)
-#define PLATFORM_DEVELOPER "Microsoft \u00AE"
-#define PLATFORM_OS "Dos"
-#define PLATFORM_DOS "Microsoft-DOS"
-#define PLATFORM_ARCH "16-Bit"
-#define PLATFORM_TYPE "MS-Dos"
-#undef PLATFORM_IS_MSDOS
-#define PLATFORM_IS_MSDOS
+#define CELL_PLATFORM_DEVELOPER "Microsoft \u00AE"
+#define CELL_PLATFORM_OS "Dos"
+#define CELL_PLATFORM_DOS "Microsoft-DOS"
+#define CELL_PLATFORM_ARCH "16-Bit"
+#define CELL_PLATFORM_TYPE "MS-Dos"
+#undef CELL_PLATFORM_IS_MSDOS
+#define CELL_PLATFORM_IS_MSDOS
 #endif
 
 /*
  * Windows, Cygwin (non-POSIX), and MinGW
  * Developer:	Microsoft
  * Distributions:	Windows XP, Vista, 7, 8
- * Processors:	x86, x86-64
+ * CELL_PROCESSORs:	x86, x86-64
  */
 
 
 #if defined(_WIN32) && !defined(_WIN64) && !defined (WINAPI_FAMILY_PHONE_APP) && (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
-#define PLATFORM_DEVELOPER "Microsoft \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows (32-bit). ------------------------------ */
-#define PLATFORM_OS "Windows"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_WINDOWS_X86 "Microsoft Windows (32-Bit)"
-#define PLATFORM_WINDOWS "Microsoft Windows (32-Bit)"
-#define PLATFORM_DEVICE "Desktop"
-#define PLATFORM_DESKTOP
-#define PLATFORM_TYPE "PC"
-#undef PLATFORM_IS_PC
-#define PLATFORM_IS_PC
+#define CELL_PLATFORM_OS "Windows"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_WINDOWS_X86 "Microsoft Windows (32-Bit)"
+#define CELL_PLATFORM_WINDOWS "Microsoft Windows (32-Bit)"
+#define CELL_PLATFORM_DEVICE "Desktop"
+#define CELL_PLATFORM_DESKTOP
+#define CELL_PLATFORM_TYPE "PC"
+#undef CELL_PLATFORM_IS_PC
+#define CELL_PLATFORM_IS_PC
 #elif defined(_WIN64) && defined(_WIN32) && !defined(_M_ARM64) && !defined (WINAPI_FAMILY_PHONE_APP) && (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
-#define PLATFORM_DEVELOPER "Microsoft \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows (64-bit). ------------------------------ */
-#define PLATFORM_OS "Windows"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_WINDOWS_X64 "Microsoft Windows (64-Bit)"
-#define PLATFORM_WINDOWS "Microsoft Windows (64-Bit)"
-#define PLATFORM_DEVICE "Desktop"
-#define PLATFORM_DESKTOP
-#define PLATFORM_TYPE "PC"
-#undef PLATFORM_IS_PC
-#define PLATFORM_IS_PC
+#define CELL_PLATFORM_OS "Windows"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_WINDOWS_X64 "Microsoft Windows (64-Bit)"
+#define CELL_PLATFORM_WINDOWS "Microsoft Windows (64-Bit)"
+#define CELL_PLATFORM_DEVICE "Desktop"
+#define CELL_PLATFORM_DESKTOP
+#define CELL_PLATFORM_TYPE "PC"
+#undef CELL_PLATFORM_IS_PC
+#define CELL_PLATFORM_IS_PC
 #elif defined(_M_ARM64) && defined(_WIN32) && !defined (WINAPI_FAMILY_PHONE_APP) && (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
-#define PLATFORM_DEVELOPER "Microsoft \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows (64-bit). ------------------------------ */
-#define PLATFORM_OS "Windows"
-#define PLATFORM_ARCH "Arm64 (64-Bit)"
-#define PLATFORM_WINDOWS_ARM64 "Microsoft Windows (64-Bit)"
-#define PLATFORM_WINDOWS "Microsoft Windows (64-Bit)"
-#define PLATFORM_DEVICE "Desktop"
-#define PLATFORM_DESKTOP
-#define PLATFORM_TYPE "PC"
-#undef PLATFORM_IS_PC
-#define PLATFORM_IS_PC
+#define CELL_PLATFORM_OS "Windows"
+#define CELL_PLATFORM_ARCH "Arm64 (64-Bit)"
+#define CELL_PLATFORM_WINDOWS_ARM64 "Microsoft Windows (64-Bit)"
+#define CELL_PLATFORM_WINDOWS "Microsoft Windows (64-Bit)"
+#define CELL_PLATFORM_DEVICE "Desktop"
+#define CELL_PLATFORM_DESKTOP
+#define CELL_PLATFORM_TYPE "PC"
+#undef CELL_PLATFORM_IS_PC
+#define CELL_PLATFORM_IS_PC
 /* Microsoft Phone ------------------------------ */
 #elif defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_APP)
-#define PLATFORM_DEVELOPER "Microsoft \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows Store or Universal Windows Platform - (32-bit).
  * ------------------------------ */
-#define PLATFORM_OS "Windows"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_WINDOWS_X86 "Microsoft Windows (32-Bit)"
-#define PLATFORM_WINDOWS_UWP "Microsoft Windows UWP (32-Bit)"
-#define PLATFORM_DEVICE "Desktop"
-#define PLATFORM_DESKTOP
-#define PLATFORM_TYPE "PC"
-#undef PLATFORM_IS_PC
-#define PLATFORM_IS_PC
+#define CELL_PLATFORM_OS "Windows"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_WINDOWS_X86 "Microsoft Windows (32-Bit)"
+#define CELL_PLATFORM_WINDOWS_UWP "Microsoft Windows UWP (32-Bit)"
+#define CELL_PLATFORM_DEVICE "Desktop"
+#define CELL_PLATFORM_DESKTOP
+#define CELL_PLATFORM_TYPE "PC"
+#undef CELL_PLATFORM_IS_PC
+#define CELL_PLATFORM_IS_PC
 #elif defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_APP) &&        \
     defined(_WIN64) && !defined(_WIN32) && !defined(_WIN32_WINNT)
 /* Microsoft Windows (64-bit). ------------------------------ */
-#define PLATFORM_OS "Windows "
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_WINDOWS_X64 "Microsoft Windows x64"
-#define PLATFORM_WINDOWS_UWP "Microsoft Windows UWP"
-#define PLATFORM_DEVICE "Desktop"
-#define PLATFORM_DESKTOP
-#define PLATFORM_WINDOWS "Microsoft Windows"
-#define PLATFORM_TYPE "PC"
-#undef PLATFORM_IS_PC
-#define PLATFORM_IS_PC
+#define CELL_PLATFORM_OS "Windows "
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_WINDOWS_X64 "Microsoft Windows x64"
+#define CELL_PLATFORM_WINDOWS_UWP "Microsoft Windows UWP"
+#define CELL_PLATFORM_DEVICE "Desktop"
+#define CELL_PLATFORM_DESKTOP
+#define CELL_PLATFORM_WINDOWS "Microsoft Windows"
+#define CELL_PLATFORM_TYPE "PC"
+#undef CELL_PLATFORM_IS_PC
+#define CELL_PLATFORM_IS_PC
 /* Microsoft Phone ------------------------------ */
 #elif defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP)
-#define PLATFORM_DEVELOPER "Microsoft \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows (Phone). ------------------------------ */
-#define PLATFORM_OS "WindowsRT"
-#define PLATFORM_ARCH "x86 (32-Bit)"
-#define PLATFORM_WINDOWS_PHONE "Windows Phone"
-#define PLATFORM_DEVICE "Mobile"
-#define PLATFORM_MOBILE
-#define PLATFORM_TYPE "Mobile (Windows Phone)"
+#define CELL_PLATFORM_OS "WindowsRT"
+#define CELL_PLATFORM_ARCH "x86 (32-Bit)"
+#define CELL_PLATFORM_WINDOWS_PHONE "Windows Phone"
+#define CELL_PLATFORM_DEVICE "Mobile"
+#define CELL_PLATFORM_MOBILE
+#define CELL_PLATFORM_TYPE "Mobile (Windows Phone)"
 #elif defined(_WIN64) && defined(WINAPI_FAMILY_PHONE_APP)
-#define PLATFORM_DEVELOPER "Microsoft \u00AE"
+#define CELL_PLATFORM_DEVELOPER "Microsoft \u00AE"
 /* Microsoft Windows (Phone). ------------------------------ */
-#define PLATFORM_OS "WindowsRT"
-#define PLATFORM_ARCH "x64 (64-Bit)"
-#define PLATFORM_DEVICE "Mobile"
-#define PLATFORM_WINDOWS_PHONE "Windows Phone"
-#define PLATFORM_TYPE "Mobile (Windows Phone)"
-#undef PLATFORM_IS_WINDOWS_PHONE
-#define PLATFORM_IS_WINDOWS_PHPNE
+#define CELL_PLATFORM_OS "WindowsRT"
+#define CELL_PLATFORM_ARCH "x64 (64-Bit)"
+#define CELL_PLATFORM_DEVICE "Mobile"
+#define CELL_PLATFORM_WINDOWS_PHONE "Windows Phone"
+#define CELL_PLATFORM_TYPE "Mobile (Windows Phone)"
+#undef CELL_PLATFORM_IS_WINDOWS_PHONE
+#define CELL_PLATFORM_IS_WINDOWS_PHPNE
 #endif
 
 //! Language Standard Macro

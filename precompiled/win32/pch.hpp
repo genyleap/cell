@@ -7,13 +7,14 @@
 
 #ifndef WIN32_PCH_HPP
 #define WIN32_PCH_HPP
+
 #if __has_include(<utilities/preprocessor.hpp>)
 #   include <utilities/preprocessor.hpp>
 #else
 #   include <utilities/preprocessor.hpp>
 #endif
 
-#if defined(PLATFORM_WINDOWS) && !defined(PLATFORM_MOBILE)
+#if defined(CELL_PLATFORM_WINDOWS) && !defined(CELL_PLATFORM_MOBILE)
 //! Windows Apis.
 #include <Windows.h>
 #include <Iphlpapi.h>

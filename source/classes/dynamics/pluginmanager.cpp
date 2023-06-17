@@ -11,7 +11,7 @@
 #endif
 
 
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
 #   include <windows.h>
 #else
 #   include <dlfcn.h>
@@ -52,23 +52,23 @@ Plugin* PluginManager::load(const std::string& name)
         if (iter == implementationPtr->plugins.end())
         {
 // Try to load the plugin library
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
             void *hModule;
             hModule = LoadLibraryW(name.c_str());
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
             void *hModule;
             hModule = dlopen(name.c_str(), RTLD_LAZY);
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
             void *hModule;
             hModule = dlopen(name.c_str(), RTLD_LAZY);
 #endif
             if (hModule != nullptr)
             {
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
                 fnCreatePlugin CreatePlugin = (fnCreatePlugin)GetProcAddress(hModule, "CreatePlugin");
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
                 fnCreatePlugin CreatePlugin = (fnCreatePlugin)dlsym(hModule, "CreatePlugin");
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
                 fnCreatePlugin CreatePlugin = (fnCreatePlugin)dlsym(hModule, "CreatePlugin");
 #endif
                 if (CreatePlugin != nullptr)
@@ -86,11 +86,11 @@ Plugin* PluginManager::load(const std::string& name)
                     {
                         Log("Could not load plugin from " + FROM_CELL_STRING(name.c_str()) , LoggerType::Critical);
 // Unload the library.
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
                         FreeLibrary(hModule);
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
                         dlclose(hModule);
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
                         dlclose(hModule);
 #endif
                     }
@@ -98,11 +98,11 @@ Plugin* PluginManager::load(const std::string& name)
                 else
                 {
                     Log("Could not find symbol \"CreatePlugin\" in " + FROM_CELL_STRING(name.c_str()) , LoggerType::Critical);
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
                     FreeLibrary(hModule);
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
                     dlclose(hModule);
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
                     dlclose(hModule);
 #endif
                 }
@@ -134,11 +134,11 @@ void PluginManager::unload(Plugin *&plugin)
             // Remove the plugin from our plugin map.
             implementationPtr->plugins.erase(plugin->getName().value());
             void* hModule = iter->second;
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
             fnDestroyPlugin DestroyPlugin = (fnDestroyPlugin)GetProcAddress(hModule, "DestroyPlugin");
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
             fnDestroyPlugin DestroyPlugin = (fnDestroyPlugin)dlsym(hModule, "DestroyPlugin");
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
             fnDestroyPlugin DestroyPlugin = (fnDestroyPlugin)dlsym(hModule, "DestroyPlugin");
 #endif
             if (DestroyPlugin != nullptr)
@@ -150,11 +150,11 @@ void PluginManager::unload(Plugin *&plugin)
                 Log("Unable to find symbol \"DestroyPlugin\" in library \"" + FROM_CELL_STRING(plugin->getName().value().c_str()) , LoggerType::Critical);
             }
 // Unload the library and remove the library from the map.
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
             FreeLibrary(hModule);
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
             dlclose(hModule);
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
             dlclose(hModule);
 #endif
             implementationPtr->libs.erase(iter);

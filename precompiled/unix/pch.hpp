@@ -7,6 +7,7 @@
 
 #ifndef UNIX_PCH_HPP
 #define UNIX_PCH_HPP
+
 #if __has_include(<utilities/preprocessor.hpp>)
 #   include <utilities/preprocessor.hpp>
 #else
@@ -15,7 +16,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Welaborated-enum-base"
-#if defined(PLATFORM_MAC) && !defined(PLATFORM_MOBILE)
+#if defined(CELL_PLATFORM_MAC) && !defined(CELL_PLATFORM_MOBILE)
 //!Apple macOS Apis.
 #include <sys/stat.h>
 #include <unistd.h>
@@ -29,7 +30,7 @@
 #include <IOKit/IOKitLib.h>
 #include <ApplicationServices/ApplicationServices.h>
 #include <ImageIO/ImageIO.h>
-#elif defined(PLATFORM_MAC) && defined(PLATFORM_MOBILE)
+#elif defined(CELL_PLATFORM_MAC) && defined(CELL_PLATFORM_MOBILE)
 //! Apple iOS Apis.
 #include <sys/socket.h>
 #include <sys/sysctl.h>
@@ -39,13 +40,13 @@
 #include <IOKit/IOKitLib.h>
 #include <ApplicationServices/ApplicationServices.h>
 #include <ImageIO/ImageIO.h>
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <libgen.h>         // dirname
 #include <unistd.h>         // readlink
 #include <linux/limits.h>   // PATH_MAX
-#elif defined(PLATFORM_FREEBSD)
+#elif defined(CELL_PLATFORM_FREEBSD)
 //! FreeBSD Apis.
 #include <sys/socket.h>
 #include <sys/sysctl.h>

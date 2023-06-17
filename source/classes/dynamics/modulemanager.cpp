@@ -11,7 +11,7 @@
 #endif
 
 
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
 #   include <windows.h>
 #else
 #   include <dlfcn.h>
@@ -52,23 +52,23 @@ Module* ModuleManager::load(const std::string& name)
         if (iter == implementationPtr->modules.end())
         {
 // Try to load the module library
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
             void *hModule;
             hModule = LoadLibraryW(name.c_str());
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
             void *hModule;
             hModule = dlopen(name.c_str(), RTLD_LAZY);
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
             void *hModule;
             hModule = dlopen(name.c_str(), RTLD_LAZY);
 #endif
             if (hModule != nullptr)
             {
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
                 fnCreateModule CreateModule = (fnCreateModule)GetProcAddress(hModule, "CreateModule");
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
                 fnCreateModule CreateModule = (fnCreateModule)dlsym(hModule, "CreateModule");
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
                 fnCreateModule CreateModule = (fnCreateModule)dlsym(hModule, "CreateModule");
 #endif
                 if (CreateModule != nullptr)
@@ -86,11 +86,11 @@ Module* ModuleManager::load(const std::string& name)
                     {
                         Log("Could not load module from " + FROM_CELL_STRING(name.c_str()) , LoggerType::Critical);
 // Unload the library.
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
                         FreeLibrary(hModule);
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
                         dlclose(hModule);
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
                         dlclose(hModule);
 #endif
                     }
@@ -98,11 +98,11 @@ Module* ModuleManager::load(const std::string& name)
                 else
                 {
                     Log("Could not find symbol \"CreateModule\" in " + FROM_CELL_STRING(name.c_str()) , LoggerType::Critical);
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
                     FreeLibrary(hModule);
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
                     dlclose(hModule);
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
                     dlclose(hModule);
 #endif
                 }
@@ -134,11 +134,11 @@ void ModuleManager::unload(Module *&module)
             // Remove the module from our module map.
             implementationPtr->modules.erase(module->getName().value());
             void* hModule = iter->second;
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
             fnDestroyModule DestroyModule = (fnDestroyModule)GetProcAddress(hModule, "DestroyModule");
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
             fnDestroyModule DestroyModule = (fnDestroyModule)dlsym(hModule, "DestroyModule");
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
             fnDestroyModule DestroyModule = (fnDestroyModule)dlsym(hModule, "DestroyModule");
 #endif
             if (DestroyModule != nullptr)
@@ -150,11 +150,11 @@ void ModuleManager::unload(Module *&module)
                 Log("Unable to find symbol \"DestroyModule\" in library \"" + FROM_CELL_STRING(module->getName().value().c_str()) , LoggerType::Critical);
             }
 // Unload the library and remove the library from the map.
-#if defined(PLATFORM_WINDOWS)
+#if defined(CELL_PLATFORM_WINDOWS)
             FreeLibrary(hModule);
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
             dlclose(hModule);
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
             dlclose(hModule);
 #endif
             implementationPtr->libs.erase(iter);

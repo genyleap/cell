@@ -32,7 +32,7 @@ OsInfo::~OsInfo()
 }
 
 //!Dedicated for Win32 WMI System.
-#ifdef PLATFORM_WINDOWS
+#ifdef CELL_PLATFORM_WINDOWS
 std::string getFromWmi(const std::string_view query, const std::string_view key)
 {
     std::string resutl;
@@ -147,9 +147,9 @@ std::string getFromWmi(const std::string_view query, const std::string_view key)
 
 OptionalString OsInfo::getName()
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef CELL_PLATFORM_WINDOWS
     m_productData.name = getFromWmi("Win32_OperatingSystem", "Caption");
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
     size_t len = 0;
     const char* cmd = "sw_vers -productName";
     std::string osName = execute(cmd);
@@ -180,9 +180,9 @@ OptionalString OsInfo::getName()
 
 OptionalString OsInfo::getVersion()
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef CELL_PLATFORM_WINDOWS
     m_productData.version = getFromWmi("Win32_OperatingSystem", "Version");
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
     std::ostringstream command;
     command << "sw_vers -productVersion";
     m_productData.version = System::execute(command.str().c_str());
@@ -196,9 +196,9 @@ OptionalString OsInfo::getVersion()
 
 OptionalString OsInfo::getBuildNumber()
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef CELL_PLATFORM_WINDOWS
     m_productData.build = getFromWmi("Win32_OperatingSystem", "BuildNumber");
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
     size_t len = 0;
     std::string buildVersion;
     sysctlbyname("kern.osversion", NULL, &len, NULL, 0);
@@ -219,7 +219,7 @@ OptionalString OsInfo::getBuildNumber()
 
 OptionalString OsInfo::getHostName()
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef CELL_PLATFORM_WINDOWS
     WSADATA wsa_data;
     int error = WSAStartup(MAKEWORD(2, 2), &wsa_data);
     if (error != 0) {
@@ -249,7 +249,7 @@ OptionalString OsInfo::getHostName()
 
 OptionalString OsInfo::getKernelName()
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef CELL_PLATFORM_WINDOWS
     OSVERSIONINFOEX info;
     info.dwOSVersionInfoSize = sizeof(info);
     if (GetVersionEx(reinterpret_cast<OSVERSIONINFO*>(&info))) {
@@ -258,7 +258,7 @@ OptionalString OsInfo::getKernelName()
         (DeveloperMode::IsEnable) ? Log("Failed to get kernel name", LoggerType::Critical) : DO_NOTHING;
         m_productData.kernel = "Unknown";
     }
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
     int name[] = {CTL_KERN, KERN_OSTYPE};
     char kernel_name[128];
     size_t length = sizeof(kernel_name);
@@ -282,7 +282,7 @@ OptionalString OsInfo::getKernelName()
 
 OptionalString OsInfo::getKernelVersion()
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef CELL_PLATFORM_WINDOWS
     OSVERSIONINFOEX info;
     info.dwOSVersionInfoSize = sizeof(info);
     if (GetVersionEx(reinterpret_cast<OSVERSIONINFO*>(&info))) {
@@ -294,7 +294,7 @@ OptionalString OsInfo::getKernelVersion()
         (DeveloperMode::IsEnable) ? Log("Failed to get kernel version", LoggerType::Critical) : DO_NOTHING;
         m_productData.kernelVer = "Unknown";
     }
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
     int name[] = {CTL_KERN, KERN_OSRELEASE};
     char version[128];
     size_t length = sizeof(version);
@@ -320,7 +320,7 @@ OptionalString OsInfo::getKernelVersion()
 
 OptionalString OsInfo::getUserName()
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef CELL_PLATFORM_WINDOWS
     char username[UNLEN + 1];
     DWORD username_len = UNLEN + 1;
     if (GetUserNameA(username, &username_len)) {
@@ -344,7 +344,7 @@ OptionalString OsInfo::getUserName()
 
 OptionalString OsInfo::getDeveloper()
 {
-    std::string registeredSymbol = PLATFORM_DEVELOPER;
+    std::string registeredSymbol = CELL_PLATFORM_DEVELOPER;
     if (!registeredSymbol.empty()) {
         return std::make_optional(registeredSymbol);
     }
@@ -359,7 +359,7 @@ OptionalString OsInfo::getReleaseDate()
 
 OptionalString OsInfo::getArchitecture()
 {
-    std::string arch { ARCHITECTURE };
+    std::string arch { CELL_ARCHITECTURE };
     if(!arch.empty()) {
         return arch;
     }
