@@ -307,49 +307,46 @@ std::vector<std::pair<std::string, std::string>> ApplicationRetriever::filterByC
 {
     std::vector<std::pair<std::string, std::string>> filteredApps;
 
-    for (const auto& app : appNames)
-    {
-        if (isAppInCategory(app.first, category))
-        {
-            filteredApps.push_back(app);
-        }
-    }
+    // Copy the elements from appNames vector to filteredApps vector based on the specified condition
+    std::copy_if(appNames.begin(), appNames.end(), std::back_inserter(filteredApps), [&](const std::pair<std::string, std::string>& app) {
+        // The lambda function defines the condition for filtering
+        // Check if the current app's name is in the specified category
+        return isAppInCategory(app.first, category);
+    });
 
+    // Return the filtered list of applications
     return filteredApps;
 }
+
 
 void ApplicationRetriever::sortApplications(std::vector<std::pair<std::string, std::string>>& appNames, bool ascending)
 {
     if (ascending)
     {
+        // Sort the appNames vector in ascending order based on the first element of each pair (app name)
         std::sort(appNames.begin(), appNames.end(), [](const auto& a, const auto& b) {
             return a.first < b.first;
         });
     }
     else
     {
+        // Sort the appNames vector in descending order based on the first element of each pair (app name)
         std::sort(appNames.begin(), appNames.end(), [](const auto& a, const auto& b) {
             return a.first > b.first;
         });
     }
 }
 
+
 bool ApplicationRetriever::isAppInCategory(const std::string& appName, const std::string& category)
 {
-    // You can customize this method based on your specific requirements.
-    // Here's an example implementation that checks if the category matches the last character of the app name.
-    // For example, if the category is "Games", the app name must end with "G" to be considered in the category.
-
     if (appName.empty() || category.empty())
     {
         // If either the app name or category is empty, return false.
         return false;
     }
 
-    char lastCharacter = appName.back();
-    char categoryCharacter = category.back();
-
-    return (lastCharacter == categoryCharacter);
+    return (appName.back() == category.back());
 }
 
 CELL_NAMESPACE_END
