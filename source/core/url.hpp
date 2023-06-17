@@ -128,6 +128,20 @@ public:
      */
     Types::OptionalString getLanguageUri() __cell_const_noexcept;
 
+    /**
+     * Opens the specified URL in the default browser.
+     *
+     * @param url The URL to open.
+     */
+    void openURL(const std::string& url);
+
+    /**
+     * Checks if the default browser is available on the current platform.
+     *
+     * @return True if the default browser is available, false otherwise.
+     */
+    bool isBrowserAvailable();
+
 protected:
     LanguageUrl* m_languageUrl{};
 

@@ -181,4 +181,36 @@ OptionalString Url::getLanguageUri() __cell_const_noexcept
     }
 }
 
+void Url::openURL(const std::string& url)
+{
+#ifdef PLATFORM_WINDOWS
+    ShellExecuteA(NULL, "open", url.c_str(), NULL, NULL, SW_SHOWNORMAL);
+#elif defined(PLATFORM_MAC)
+    std::string openCommand = "open " + url;
+    System::command(openCommand.c_str());
+#elif defined(PLATFORM_LINUX)
+    std::string openCommand = "xdg-open " + url;
+    System::command(openCommand.c_str());
+#else
+    // Code for other platforms or error handling
+#endif
+}
+
+bool Url::isBrowserAvailable()
+{
+#ifdef PLATFORM_WINDOWS
+    HKEY hKey;
+    LONG result = RegOpenKeyExA(HKEY_CLASSES_ROOT, "http\\shell\\open\\command", 0, KEY_QUERY_VALUE, &hKey);
+    RegCloseKey(hKey);
+    return (result == ERROR_SUCCESS);
+#elif defined(PLATFORM_MAC)
+    return System::command("which open");
+#elif defined(PLATFORM_LINUX)
+    return System::command("which xdg-open");
+#else \
+    // Code for other platforms or error handling
+    return false;
+#endif
+}
+
 CELL_NAMESPACE_END
