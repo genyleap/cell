@@ -22,12 +22,6 @@ CELL_USING_NAMESPACE Cell::Types;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Utility)
 
-#ifdef CELL_PLATFORM_WINDOWS
-#include <Windows.h>
-#include <VersionHelpers.h>
-#pragma comment(lib, "Version.lib")
-#endif
-
 std::vector<Library> LibraryManager::getInstalledLibraries()
 {
     std::vector<Library> libraries;
