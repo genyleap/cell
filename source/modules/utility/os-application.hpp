@@ -69,25 +69,25 @@ private:
      */
     bool isAppInCategory(const std::string& appName, const std::string& category);
 
-#ifdef __APPLE__
+#ifdef CELL_PLATFORM_MAC
     /**
      * @brief Retrieves the names and versions of all installed applications on macOS.
      * @return A vector of pairs where each pair contains the application name and version.
      */
     std::vector<std::pair<std::string, std::string>> getInstalledApplicationsMac();
-#elif defined(__ANDROID__)
+#elif defined(CELL_PLATFORM_ANDROID)
     /**
      * @brief Retrieves the names and versions of all installed applications on Android.
      * @return A vector of pairs where each pair contains the application name and version.
      */
     std::vector<std::pair<std::string, std::string>> getInstalledApplicationsAndroid();
-#elif defined(__IOS__)
+#elif defined(CELL_PLATFORM_IOS)
     /**
      * @brief Retrieves the names and versions of all installed applications on iOS.
      * @return A vector of pairs where each pair contains the application name and version.
      */
     std::vector<std::pair<std::string, std::string>> getInstalledApplicationsiOS();
-#elif defined(__linux__)
+#elif defined(CELL_PLATFORM_LINUX)
     /**
      * @brief Retrieves the names and versions of all installed applications on Linux.
      * @return A vector of pairs where each pair contains the application name and version.
