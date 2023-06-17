@@ -390,7 +390,7 @@ std::vector<std::pair<std::string, std::string>> ApplicationRetriever::getInstal
 }
 #endif
 
-#ifdef __linux__
+#ifdef CELL_PLATFORM_LINUX
 std::vector<std::pair<std::string, std::string>> ApplicationRetriever::getInstalledApplicationsLinux()
 {
     std::vector<std::pair<std::string, std::string>> appNames;

@@ -30,23 +30,60 @@ public:
     std::string version;
 };
 
-class LibraryManager {
+/**
+ * @brief The LibraryManager class provides functionality to manage libraries.
+ */
+class __cell_export LibraryManager {
 public:
+    /**
+     * @brief Retrieves a vector of installed libraries.
+     * @return A vector of Library objects representing the installed libraries.
+     */
     std::vector<Library> getInstalledLibraries();
+
+    /**
+     * @brief Checks if a library is available.
+     * @param libraryName The name of the library to check.
+     * @return true if the library is available, false otherwise.
+     */
     bool isLibraryAvailable(const std::string& libraryName);
 
 private:
-#ifdef _WIN32
+#ifdef CELL_PLATFORM_WINDOWS
+    /**
+     * @brief Retrieves a vector of installed libraries on Windows.
+     * @return A vector of Library objects representing the installed libraries.
+     */
     std::vector<Library> getInstalledLibrariesWindows();
+
+    /**
+     * @brief Retrieves the version string of a library file on Windows.
+     * @param filePath The path to the library file.
+     * @return The version string of the library.
+     */
     std::string getWindowsVersionString(const std::string& filePath);
-#elif __linux__
+#elif defined(CELL_PLATFORM_LINUX)
+    /**
+     * @brief Retrieves a vector of installed libraries on Linux.
+     * @return A vector of Library objects representing the installed libraries.
+     */
     std::vector<Library> getInstalledLibrariesLinux();
+
+    /**
+     * @brief Retrieves the version of a Linux library.
+     * @param libraryPath The path to the library.
+     * @return The version of the library.
+     */
     std::string getLinuxLibraryVersion(const std::string& libraryPath);
-#elif __APPLE__
+#elif defined(CELL_PLATFORM_MAC)
+    /**
+     * @brief Retrieves a vector of installed libraries on macOS.
+     * @return A vector of Library objects representing the installed libraries.
+     */
     std::vector<Library> getInstalledLibrariesMacOS();
-    std::string executeCommand(const std::string& command);
 #endif
 };
+
 
 
 /**
