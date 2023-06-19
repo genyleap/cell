@@ -12,6 +12,7 @@
 
 #ifndef CELL_CONVERTOR_UNIT_ABSTRACT_HPP
 #define CELL_CONVERTOR_UNIT_ABSTRACT_HPP
+
 #if __has_include("common.hpp")
 #   include "common.hpp"
 #else

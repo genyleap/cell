@@ -225,7 +225,8 @@ std::vector<std::pair<std::string, std::string>> ApplicationRetriever::getInstal
     std::function<void(const std::string&)> traverseDirectory = [&](const std::string& directory) {
         for (const auto& entry : std::filesystem::directory_iterator(directory)) {
             try {
-                if (entry.is_directory()) {
+                if (entry.is_directory())
+                {
                     std::string path = entry.path();
                     std::string appName = path.substr(path.find_last_of("/\\") + 1);  // Extract the application name
 
