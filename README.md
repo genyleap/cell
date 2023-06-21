@@ -26,7 +26,7 @@ Cell Engine (CE) is an advanced computer software engine developed by Genyleap (
 - Globalization & multi-language translation.
 - Efficient use of resources.
 - Built to care about green energy.
-- Full Dynamic module and plugins.
+- Module and plugin mechanism support for custom development.
 - Integrated core structure for desktop, mobile, IoT and wasm technology.
 - Advanced dependency management solution.
 - Development based on the edge of technology.
