@@ -115,12 +115,19 @@ using OraclePtr = oracle::occi::Connection*;
 #ifdef _WIN32
 #include <Windows.h>
 #include <VersionHelpers.h>
+#include <winsock2.h>
 #pragma comment(lib, "Version.lib")
 #include <winsock2.h>
 #pragma comment(lib, "ws2_32.lib")
 #else
+#include <sys/event.h>
+#include <poll.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <unistd.h>
+#include <sys/select.h>
+#include <sys/time.h>
+#include <sys/types.h>
 #include <unistd.h>
 #endif
 
