@@ -55,6 +55,9 @@ bool CronJob::match(const std::tm& timeInfo)
 
 void CronJob::parseCronJob(const std::string& CronJob)
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     std::istringstream iss(CronJob);
     std::string field;
     std::vector<std::string> fields;
@@ -66,8 +69,9 @@ void CronJob::parseCronJob(const std::string& CronJob)
 
     if (fields.size() != 5)
     {
-        Log("Invalid cron expression", LoggerType::Warning);
-        throw std::invalid_argument("Invalid cron expression");
+        auto exceptionMessage = safeTranslate(language, "exceptions", "invalid_cron_expression");
+        Log(exceptionMessage, LoggerType::Warning);
+        throw std::invalid_argument(exceptionMessage);
     }
 
     parseField(fields[0], cronStruct.minutes);
@@ -79,8 +83,13 @@ void CronJob::parseCronJob(const std::string& CronJob)
 
 void CronJob::parseField(const std::string& field, std::vector<int>& output)
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     std::istringstream iss(field);
     std::string token;
+
+    auto exceptionMessage = safeTranslate(language, "exceptions", "error_parsing_token");
 
     while (std::getline(iss, token, ','))
     {
@@ -114,7 +123,7 @@ void CronJob::parseField(const std::string& field, std::vector<int>& output)
             }
             catch (const Exception& e)
             {
-                std::string r = "Error parsing token: " + FROM_CELL_STRING(token + ", " + e.what());
+                std::string r = exceptionMessage + FROM_CELL_STRING(token + ", " + e.what());
                 Log(r, LoggerType::Critical);
                 throw r;
             }
@@ -127,6 +136,9 @@ void CronJob::parseField(const std::string& field, std::vector<int>& output)
 
 void CronJob::parseStepField(const std::string& field, int& start, int& step)
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     std::string startToken = field.substr(0, field.find('/'));
     std::string stepToken = field.substr(field.find('/') + 1);
 
@@ -135,13 +147,18 @@ void CronJob::parseStepField(const std::string& field, int& start, int& step)
 
     if (start >= getMaxValue(cronStruct.minutes) || step <= 0)
     {
-        Log("Invalid cron expression", LoggerType::Warning);
-        throw std::invalid_argument("Invalid cron expression");
+        auto exceptionMessage = safeTranslate(language, "exceptions", "invalid_cron_expression");
+
+        Log(exceptionMessage, LoggerType::Warning);
+        throw std::invalid_argument(exceptionMessage);
     }
 }
 
 void CronJob::parseRangeField(const std::string& field, int& start, int& end)
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     std::string startToken = field.substr(0, field.find('-'));
     std::string endToken = field.substr(field.find('-') + 1);
 
@@ -150,13 +167,17 @@ void CronJob::parseRangeField(const std::string& field, int& start, int& end)
 
     if (start >= getMaxValue(cronStruct.minutes) || end >= getMaxValue(cronStruct.minutes) || start > end)
     {
-        Log("Invalid cron expression", LoggerType::Warning);
-        throw std::invalid_argument("Invalid cron expression");
+        auto exceptionMessage = safeTranslate(language, "exceptions", "invalid_cron_expression");
+        Log(exceptionMessage, LoggerType::Warning);
+        throw std::invalid_argument(exceptionMessage);
     }
 }
 
 int CronJob::parseValue(const std::string& token)
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     try
     {
         if (token == "*")
@@ -168,7 +189,8 @@ int CronJob::parseValue(const std::string& token)
     }
     catch (const Exception& e)
     {
-        Log("Error parsing value: " + FROM_CELL_STRING(e.what()), LoggerType::Critical);
+        auto exceptionMessage = safeTranslate(language, "exceptions", "error_parsing_value");
+        Log(exceptionMessage + FROM_CELL_STRING(e.what()), LoggerType::Critical);
         throw e.what();
     }
 }

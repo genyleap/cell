@@ -23,6 +23,12 @@
 # endif
 #endif
 
+//! Cell's Core (Basic Requirements).
+#if __has_include(<requirements>)
+#   include <requirements>
+#else
+#   error "Cell's requirements was not found!"
+#endif
 
 #ifdef __has_include
 # if __has_include("timezone.hpp")
@@ -146,6 +152,7 @@ private:
     CronStruct cronStruct;
     int executionDelay;             //!< The delay between executions (in seconds).
     int executionDuration;          //!< The duration of the program's execution (in seconds).
+    System::EngineController engineController;
 };
 
 CELL_NAMESPACE_END

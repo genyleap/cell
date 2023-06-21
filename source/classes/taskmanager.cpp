@@ -39,17 +39,22 @@ void TaskManager::addTask(const std::string& id,
                           const TimePoint& reminderTime)
 {
 
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     if (id.empty() || name.empty() || description.empty() || priority < 1)
     {
-        (DeveloperMode::IsEnable) ? Log("Invalid task parameters." , LoggerType::Critical) : DO_NOTHING;
-        throw std::invalid_argument("Invalid task parameters.");
+        auto exceptionMessage = safeTranslate(language, "exceptions", "invalid_task_parameters");
+        (DeveloperMode::IsEnable) ? Log(exceptionMessage , LoggerType::Critical) : DO_NOTHING;
+        throw std::invalid_argument(exceptionMessage);
     }
 
     // Check for duplicate task name
     for (const Task& task : tasks) {
         if (task.taskInfo.id == id || task.taskInfo.name.value() == name) {
-            (DeveloperMode::IsEnable) ? Log("A task with the same ID already exists." , LoggerType::Warning) : DO_NOTHING;
-            throw std::runtime_error("A task with the same ID already exists.");
+            auto exceptionMessage = safeTranslate(language, "exceptions", "task_already_exists");
+            (DeveloperMode::IsEnable) ? Log(exceptionMessage , LoggerType::Warning) : DO_NOTHING;
+            throw std::runtime_error(exceptionMessage);
         }
     }
 
@@ -62,16 +67,21 @@ void TaskManager::addTask(const std::string& id,
 
 void TaskManager::addTask(const std::string& id, const std::string& name, const std::string& description, int priority, ActionHandler action)
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     if (id.empty() || name.empty() || description.empty() || priority < 1) {
-        (DeveloperMode::IsEnable) ? Log("Invalid task parameters." , LoggerType::Critical) : DO_NOTHING;
-        throw std::invalid_argument("Invalid task parameters.");
+        auto exceptionMessage = safeTranslate(language, "exceptions", "invalid_task_parameters");
+        (DeveloperMode::IsEnable) ? Log(exceptionMessage , LoggerType::Critical) : DO_NOTHING;
+        throw std::invalid_argument(exceptionMessage);
     }
 
     // Check for duplicate task name
     for (const Task& task : tasks) {
+        auto exceptionMessage = safeTranslate(language, "exceptions", "task_already_exists");
         if (task.taskInfo.id == id || task.taskInfo.name.value() == name) {
-            (DeveloperMode::IsEnable) ? Log("A task with the same ID already exists." , LoggerType::Warning) : DO_NOTHING;
-            throw std::runtime_error("A task with the same ID already exists.");
+            (DeveloperMode::IsEnable) ? Log(exceptionMessage , LoggerType::Warning) : DO_NOTHING;
+            throw std::runtime_error(exceptionMessage);
         }
     }
 
@@ -84,8 +94,12 @@ void TaskManager::addTask(const std::string& id, const std::string& name, const 
 
 void TaskManager::echoTasks()
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+    auto exceptionMessage = safeTranslate(language, "exceptions", "no_tasks_found");
+
     if (tasks.empty()) {
-        (DeveloperMode::IsEnable) ? Log("No tasks found." , LoggerType::Warning) : DO_NOTHING;
+        (DeveloperMode::IsEnable) ? Log(exceptionMessage , LoggerType::Warning) : DO_NOTHING;
         return;
     }
 
@@ -107,10 +121,14 @@ void TaskManager::editTask(const std::string& id,
                            const TimePoint& newScheduledTime,
                            const TimePoint& newReminderTime)
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     if (newName.empty() || newDescription.empty() || newPriority < 1)
     {
-        (DeveloperMode::IsEnable) ? Log("Invalid task parameters." , LoggerType::Critical) : DO_NOTHING;
-        throw std::invalid_argument("Invalid task parameters.");
+        auto exceptionMessage = safeTranslate(language, "exceptions", "invalid_task_parameters");
+        (DeveloperMode::IsEnable) ? Log(exceptionMessage , LoggerType::Critical) : DO_NOTHING;
+        throw std::invalid_argument(exceptionMessage);
     }
 
     auto it = std::find_if(tasks.begin(), tasks.end(), [&](const Task& task) { return task.taskInfo.id.value() == id; });
@@ -132,9 +150,12 @@ void TaskManager::editTask(const std::string& id,
                            const std::string& newDescription,
                            int newPriority, ActionHandler newAction)
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     if (newName.empty() || newDescription.empty() || newPriority < 1) {
-        (DeveloperMode::IsEnable) ? Log("Invalid task parameters." , LoggerType::Critical) : DO_NOTHING;
-        throw std::invalid_argument("Invalid task parameters.");
+        auto exceptionMessage = safeTranslate(language, "exceptions", "invalid_task_parameters");
+        (DeveloperMode::IsEnable) ? Log(exceptionMessage , LoggerType::Critical) : DO_NOTHING;
     }
 
     editTask(id, newName, newDescription, newPriority, newAction, std::chrono::system_clock::now(), TimePoint());
@@ -153,6 +174,9 @@ void TaskManager::removeTask(const std::string& id)
 
 void TaskManager::searchTask(const std::string& id)
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     auto it = std::find_if(tasks.begin(), tasks.end(), [&](const Task& task) { return task.taskInfo.id.value() == id; });
     if (it != tasks.end()) {
         Cell::Console::print << "Task found:"   << __cell_newline;
@@ -162,42 +186,56 @@ void TaskManager::searchTask(const std::string& id)
         Cell::Console::print << "Priority: "    << it->priority << __cell_newline;
     }
     else {
-        (DeveloperMode::IsEnable) ? Log("Task not found." , LoggerType::Warning) : DO_NOTHING;
+        auto exceptionMessage = safeTranslate(language, "exceptions", "no_tasks_found");
+        (DeveloperMode::IsEnable) ? Log(exceptionMessage , LoggerType::Warning) : DO_NOTHING;
     }
 }
 
 void TaskManager::runTask(const std::string& id)
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     try {
         auto it = std::find_if(tasks.begin(), tasks.end(), [&](const Task& task) { return task.taskInfo.id.value() == id; });
         if (it != tasks.end()) {
-            (DeveloperMode::IsEnable) ? Log("Running task:" + it->taskInfo.name.value() , LoggerType::Info) : DO_NOTHING;
+            auto exceptionMessage = safeTranslate(language, "exceptions", "running_task");
+            (DeveloperMode::IsEnable) ? Log(exceptionMessage + it->taskInfo.name.value() , LoggerType::Info) : DO_NOTHING;
             try {
                 it->action();
-                (DeveloperMode::IsEnable) ? Log("Task executed successfully.", LoggerType::Success) : DO_NOTHING;
-            } catch (const std::exception& e) {
-                (DeveloperMode::IsEnable) ? Log("An exception occurred during task execution:" + FROM_CELL_STRING(e.what()), LoggerType::Critical) : DO_NOTHING;
+                auto exceptionMessage = safeTranslate(language, "exceptions", "task_executed_successfully");
+                (DeveloperMode::IsEnable) ? Log(exceptionMessage, LoggerType::Success) : DO_NOTHING;
+            } catch (const Exception& e) {
+                auto exceptionMessage = safeTranslate(language, "exceptions", "exception_occurred_during_task");
+                (DeveloperMode::IsEnable) ? Log(exceptionMessage + FROM_CELL_STRING(e.what()), LoggerType::Critical) : DO_NOTHING;
             } catch (...) {
-                (DeveloperMode::IsEnable) ? Log("An unknown exception occurred during task execution.", LoggerType::Critical) : DO_NOTHING;
+                auto exceptionMessage = safeTranslate(language, "exceptions", "unknown_exception_occurred_during_task");
+                (DeveloperMode::IsEnable) ? Log(exceptionMessage, LoggerType::Critical) : DO_NOTHING;
             }
         }
         else {
-            (DeveloperMode::IsEnable) ? Log("Task not found.", LoggerType::Warning) : DO_NOTHING;
-            throw std::runtime_error("Task not found.");
+            auto exceptionMessage = safeTranslate(language, "exceptions", "no_tasks_found");
+            (DeveloperMode::IsEnable) ? Log(exceptionMessage, LoggerType::Warning) : DO_NOTHING;
+            throw std::runtime_error(exceptionMessage);
         }
     }
-    catch (const std::exception& ex) {
-        (DeveloperMode::IsEnable) ? Log("Error:" + FROM_CELL_STRING(ex.what()), LoggerType::Critical) : DO_NOTHING;
+    catch (const Exception& ex) {
+        auto exceptionMessage = safeTranslate(language, "exceptions", "error");
+        (DeveloperMode::IsEnable) ? Log(exceptionMessage + FROM_CELL_STRING(ex.what()), LoggerType::Critical) : DO_NOTHING;
     }
 }
 
 void TaskManager::saveTasksToFile()
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     try {
         std::ofstream outputFile(dataFile);
         if (!outputFile.is_open()) {
-            (DeveloperMode::IsEnable) ? Log("Failed to open the data file for writing.", LoggerType::Critical) : DO_NOTHING;
-            throw std::runtime_error("Failed to open the data file for writing.");
+            auto exceptionMessage = safeTranslate(language, "exceptions", "failed_open_data_file_writing");
+            (DeveloperMode::IsEnable) ? Log(exceptionMessage, LoggerType::Critical) : DO_NOTHING;
+            throw std::runtime_error(exceptionMessage);
         }
 
         for (const auto& task : tasks) {
@@ -207,17 +245,22 @@ void TaskManager::saveTasksToFile()
         outputFile.close();
     }
     catch (const Exception& ex) {
-        (DeveloperMode::IsEnable) ? Log("Error:" + FROM_CELL_STRING(ex.what()), LoggerType::Critical) : DO_NOTHING;
+        auto exceptionMessage = safeTranslate(language, "exceptions", "error");
+        (DeveloperMode::IsEnable) ? Log(exceptionMessage + FROM_CELL_STRING(ex.what()), LoggerType::Critical) : DO_NOTHING;
     }
 }
 
 void TaskManager::loadTasksFromFile()
 {
+    auto& engine = engineController.getEngine();
+    auto language = createLanguageObject()->getLanguageCode();
+
     try {
         std::ifstream inputFile(dataFile);
         if (!inputFile.is_open()) {
-            (DeveloperMode::IsEnable) ? Log("Failed to open the data file for reading.", LoggerType::Critical) : DO_NOTHING;
-            throw std::runtime_error("Failed to open the data file for reading.");
+            auto exceptionMessage = safeTranslate(language, "exceptions", "failed_open_data_file_reading");
+            (DeveloperMode::IsEnable) ? Log(exceptionMessage, LoggerType::Critical) : DO_NOTHING;
+            throw std::runtime_error(exceptionMessage);
         }
 
         tasks.clear();
@@ -231,7 +274,8 @@ void TaskManager::loadTasksFromFile()
         inputFile.close();
     }
     catch (const Exception& ex) {
-        (DeveloperMode::IsEnable) ? Log("Error:" + FROM_CELL_STRING(ex.what()), LoggerType::Critical) : DO_NOTHING;
+        auto exceptionMessage = safeTranslate(language, "exceptions", "error");
+        (DeveloperMode::IsEnable) ? Log(exceptionMessage + FROM_CELL_STRING(ex.what()), LoggerType::Critical) : DO_NOTHING;
     }
 }
 

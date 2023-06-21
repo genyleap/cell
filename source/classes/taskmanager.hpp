@@ -215,6 +215,7 @@ private:
     TaskList tasks;         //!< List of tasks managed by the TaskManager.
     bool useFileStorage;    //!< Flag indicating whether to use file storage.
     std::string dataFile;   //!< The file path for storing tasks.
+    System::EngineController engineController;
 };
 
 CELL_NAMESPACE_END
