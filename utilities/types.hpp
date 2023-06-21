@@ -21,9 +21,11 @@
 #   include <json/json.h>
 using JSonValue = Json::Value;
 using JSonArray = JSonValue;
+using JSonObject = JSonValue;
 #   elif defined(USE_BOOST)
 #   include <boost/json.hpp>
 using JSonValue = boost::json::value;
+using JSonObject = boost::json::object;
 using JSonArray = boost::json::array;
 #   elif !defined(USE_JSON) && !defined(USE_BOOST)
 #if __cpp_lib_json
@@ -111,6 +113,9 @@ using OraclePtr = oracle::occi::Connection*;
 //#endif
 
 #ifdef _WIN32
+#include <Windows.h>
+#include <VersionHelpers.h>
+#pragma comment(lib, "Version.lib")
 #include <winsock2.h>
 #pragma comment(lib, "ws2_32.lib")
 #else
@@ -118,7 +123,6 @@ using OraclePtr = oracle::occi::Connection*;
 #include <arpa/inet.h>
 #include <unistd.h>
 #endif
-
 
 namespace Cell::Types {
 
@@ -209,6 +213,7 @@ using OptionalWString   = std::optional<std::wstring>;
 using HttpQueryString   = std::unordered_map<std::string, std::string>;
 using Headers           = std::unordered_map<std::string, std::string>;
 using MimeTypes         = std::unordered_map<std::string, std::string>;
+using StaticFiles       = std::unordered_map<std::string, std::string>;
 
 using OptionalNumeric   = std::optional<int>;
 using OptionalBool      = std::optional<bool>;

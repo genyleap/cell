@@ -2082,6 +2082,13 @@
         "type": "text"
       },
       {
+        "word_key": "sql_query_empty",
+        "module": "database",
+        "default_value": "عبارت SQL خالی است!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
         "word_key": "failed_initialize_prepared_statement",
         "module": "database",
         "default_value": "مقداردهی اولیه پیش‌آماده‌سازی عبارت ناموفق بود: ",
@@ -2358,6 +2365,97 @@
         "word_key": "block_not_found",
         "module": "system",
         "default_value": "بلوک یافت نشد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_task_parameters",
+        "module": "system",
+        "default_value": "پارامترهای وظیفه نامعتبر است.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "task_already_exists",
+        "module": "system",
+        "default_value": "یک وظیفه با همان شناسه قبلاً وجود دارد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_tasks_found",
+        "module": "system",
+        "default_value": "هیچ وظیفه‌ای یافت نشد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "running_task",
+        "module": "system",
+        "default_value": "در حال اجرای وظیفه:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "task_executed_successfully",
+        "module": "system",
+        "default_value": "وظیفه با موفقیت اجرا شد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "exception_occurred_during_task",
+        "module": "system",
+        "default_value": "خطایی در هنگام اجرای وظیفه رخ داد:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "unknown_exception_occurred_during_task",
+        "module": "system",
+        "default_value": "خطای ناشناخته‌ای در هنگام اجرای وظیفه رخ داد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_open_data_file_writing",
+        "module": "system",
+        "default_value": "امکان باز کردن فایل داده برای نوشتن وجود ندارد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_open_data_file_reading",
+        "module": "system",
+        "default_value": "امکان باز کردن فایل داده برای خواندن وجود ندارد.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_cron_expression",
+        "module": "system",
+        "default_value": "عبارت cron نامعتبر است.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "error_parsing_token",
+        "module": "system",
+        "default_value": "خطا در تجزیه توکن:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "error_parsing_value",
+        "module": "system",
+        "default_value": "خطا در تجزیه مقدار:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "error",
+        "module": "system",
+        "default_value": "خطا:",
         "custom_value": "",
         "type": "text"
       }

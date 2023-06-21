@@ -2032,6 +2032,13 @@
         "type": "text"
       },
       {
+        "word_key": "sql_query_empty",
+        "module": "database",
+        "default_value": "SQL query is empty.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
         "word_key": "failed_initialize_prepared_statement",
         "module": "database",
         "default_value": "Failed to initialize prepared statement: ",
@@ -2308,6 +2315,97 @@
         "word_key": "block_not_found",
         "module": "system",
         "default_value": "Unable to found block.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_task_parameters",
+        "module": "system",
+        "default_value": "Invalid task parameters.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "task_already_exists",
+        "module": "system",
+        "default_value": "A task with the same ID already exists.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_tasks_found",
+        "module": "system",
+        "default_value": "No tasks found.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "running_task",
+        "module": "system",
+        "default_value": "Running task:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "task_executed_successfully",
+        "module": "system",
+        "default_value": "Task executed successfully.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "exception_occurred_during_task",
+        "module": "system",
+        "default_value": "An exception occurred during task execution:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "unknown_exception_occurred_during_task",
+        "module": "system",
+        "default_value": "An unknown exception occurred during task execution.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_open_data_file_writing",
+        "module": "system",
+        "default_value": "Failed to open the data file for writing.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_open_data_file_reading",
+        "module": "system",
+        "default_value": "Failed to open the data file for reading.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_cron_expression",
+        "module": "system",
+        "default_value": "Invalid cron expression",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "error_parsing_token",
+        "module": "system",
+        "default_value": "Error parsing token:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "error_parsing_value",
+        "module": "system",
+        "default_value": "Error parsing value:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "error",
+        "module": "system",
+        "default_value": "Error:",
         "custom_value": "",
         "type": "text"
       }
@@ -4321,5 +4419,5 @@
         "type": "text"
       }
     ]
-    }
+  }
 }
