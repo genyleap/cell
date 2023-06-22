@@ -1,29 +1,28 @@
-#if __has_include("compressor.hpp")
-#   include "compressor.hpp"
+#if __has_include("gzip.hpp")
+#   include "gzip.hpp"
 #else
-#   error "Cell's compressor was not found!"
+#   error "Cell's "gzip.hpp" was not found!"
 #endif
 
 #if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
-#   error "Cell's core was not found!"
+#   error "Cell's "core/core.hpp" was not found!"
 #endif
 
-#if __has_include("core/filesystem.hpp")
-#   include "core/filesystem.hpp"
+#if __has_include("core/logger.hpp")
+#   include "core/logger.hpp"
 #else
-#   error "Cell's filesystem was not found!"
+#   error "Cell's "core/logger.hpp" was not found!"
 #endif
 
-
-CELL_USING_NAMESPACE Cell;
-CELL_USING_NAMESPACE Cell::Types;
 CELL_USING_NAMESPACE Cell::System;
+CELL_USING_NAMESPACE Cell::Utility;
+CELL_USING_NAMESPACE Cell::Types;
 
-CELL_NAMESPACE_BEGIN(Cell::Globals)
+CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Compression)
 
-void Compressor::compressFile(const std::string& filePath,
+void Gzip::compressFile(const std::string& filePath,
                               bool removeOriginal,
                               CompressionLevel compressionLevel,
                               ProgressCallBack progressCallback)
@@ -59,7 +58,7 @@ void Compressor::compressFile(const std::string& filePath,
 
     gzsetparams(outputFile, gzCompressionLevel, Z_DEFAULT_STRATEGY);
 
-    const int bufferSize = CompressorConstants::GZIP_BUFFER_SIZE;
+    const int bufferSize = GZIP_CONSTANTS::GZIP_BUFFER_SIZE;
     char buffer[bufferSize];
 
     std::streamoff fileSize = std::filesystem::file_size(filePath);
@@ -89,7 +88,7 @@ void Compressor::compressFile(const std::string& filePath,
     }
 }
 
-void Compressor::decompressFile(const std::string& filePath,
+void Gzip::decompressFile(const std::string& filePath,
                                 bool removeOriginal,
                                 ProgressCallBack progressCallback)
 {
@@ -105,7 +104,7 @@ void Compressor::decompressFile(const std::string& filePath,
         throw std::runtime_error("Failed to open the destination file");
     }
 
-    const int bufferSize = CompressorConstants::GZIP_BUFFER_SIZE;
+    const int bufferSize = GZIP_CONSTANTS::GZIP_BUFFER_SIZE;
     char buffer[bufferSize];
     int bytesRead = 0;
 
@@ -130,7 +129,7 @@ void Compressor::decompressFile(const std::string& filePath,
 
 }
 
-void Compressor::compressDirectory(const std::string& directoryPath,
+void Gzip::compressDirectory(const std::string& directoryPath,
                                    bool recursive,
                                    bool removeOriginal,
                                    CompressionLevel compressionLevel,
@@ -147,7 +146,7 @@ void Compressor::compressDirectory(const std::string& directoryPath,
     }
 }
 
-void Compressor::decompressDirectory(const std::string& directoryPath,
+void Gzip::decompressDirectory(const std::string& directoryPath,
                                      bool recursive, bool removeOriginal,
                                      ProgressCallBack progressCallback)
 {
@@ -162,37 +161,38 @@ void Compressor::decompressDirectory(const std::string& directoryPath,
     }
 }
 
-std::string Compressor::getCompressedFilePath(const std::string& filePath)
+std::string Gzip::getCompressedFilePath(const std::string& filePath)
 {
     std::filesystem::path path(filePath);
-    return (path.parent_path() / (path.stem().string() + CompressorConstants::GZIP_SUFFIX.data())).string();
+    return (path.parent_path() / (path.stem().string() + GZIP_CONSTANTS::GZIP_SUFFIX.data())).string();
 }
 
-std::string Compressor::getDecompressedFilePath(const std::string& filePath)
+std::string Gzip::getDecompressedFilePath(const std::string& filePath)
 {
     std::filesystem::path path(filePath);
     return (path.parent_path() / path.stem().string()).string();
 }
 
-void Compressor::removeFile(const std::string& filePath)
+void Gzip::removeFile(const std::string& filePath)
 {
     if (std::filesystem::exists(filePath)) {
         std::filesystem::remove(filePath);
     }
 }
 
-bool Compressor::isDirectory(const std::string& path)
+bool Gzip::isDirectory(const std::string& path)
 {
     std::error_code error;
     return std::filesystem::is_directory(path, error);
 }
 
-void Compressor::calculateProgress(std::streamoff current, std::streamoff total, ProgressCallBack progressCallback)
+void Gzip::calculateProgress(std::streamoff current, std::streamoff total, ProgressCallBack progressCallback)
 {
     if (progressCallback) {
         float progress = static_cast<float>(current) / total * 100.0f;
         progressCallback(progress);
     }
 }
+
 
 CELL_NAMESPACE_END

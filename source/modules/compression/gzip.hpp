@@ -1,59 +1,56 @@
 /*!
- * @file        compressor.hpp
- * @brief       Compressor manager for the Cell Engine.
- * @details     This file defines the Database interface, which provides methods for interacting with a database.
- * @author      Kambiz Asadzadeh
- * @since       07 Jun 2023
- * @version     1.0
- * @note        This is part of the Cell Engine, developed by Kambiz Asadzadeh.
+ * @file        gzip.hpp
+ * @brief       This file is part of the Cell Engine.
+ * @details     Compression gzip manager.
+ * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
+ * @package     The Genyleap
+ * @since       29 Aug 2022
+ * @copyright   Copyright (c) 2022 The Genyleap. All rights reserved.
+ * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
  *
- * @license     This file is licensed under the terms of the Genyleap License. See the LICENSE.md file for more information.
- * @copyright   Copyright (c) 2023 The Genyleap | Kambiz Asadzadeh. All rights reserved.
- * @see         https://github.com/genyleap/cell
  */
 
-#ifndef CELL_COMPRESSOR_HPP
-#define CELL_COMPRESSOR_HPP
+#ifndef CELL_COMPRESSION_GZIP_HPP
+#define CELL_COMPRESSION_GZIP_HPP
 
-#ifdef __has_include
-# if __has_include("common.hpp")
+#if __has_include("common.hpp")
 #   include "common.hpp"
 #else
 #   error "Cell's "common.hpp" was not found!"
-# endif
 #endif
 
-CELL_NAMESPACE_BEGIN(Cell::Globals)
-
-/**
- * @brief Compression levels for the Compressor class.
- */
-enum class CompressionLevel : Types::s8
-{
-    None = Z_NO_COMPRESSION,            //!< No compression.
-    Fastest = Z_BEST_SPEED,             //!< Fastest compression.
-    Default = Z_DEFAULT_COMPRESSION,    //!< Default compression.
-    Best = Z_BEST_COMPRESSION           //!< Best compression.
-};
-
-/** Type definition for the progress callback function. */
-using ProgressCallBack = std::function<void(float)>;
-
-/**
- * @brief Constants related to the Compressor class.
- */
-struct CompressorConstants final
-{
-    static constexpr std::string_view GZIP_SUFFIX { ".gz" };        //!< GZIP file suffix.
-    static constexpr std::size_t GZIP_BUFFER_SIZE { 1024 * 64 };    //!< GZIP buffer size.
-};
+CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Compression)
 
 /**
  * @brief Compressor class for file and directory compression/decompression.
  */
-class Compressor
+class __cell_export Gzip
 {
 public:
+
+    /**
+     * @brief Compression levels for the Compressor class.
+     */
+    enum class CompressionLevel : Types::s8
+    {
+        None = Z_NO_COMPRESSION,            //!< No compression.
+        Fastest = Z_BEST_SPEED,             //!< Fastest compression.
+        Default = Z_DEFAULT_COMPRESSION,    //!< Default compression.
+        Best = Z_BEST_COMPRESSION           //!< Best compression.
+    };
+
+    /** Type definition for the progress callback function. */
+    using ProgressCallBack = std::function<void(float)>;
+
+    /**
+     * @brief Constants related to the Compressor class.
+     */
+    struct GZIP_CONSTANTS final
+    {
+        static constexpr std::string_view GZIP_SUFFIX { ".gz" };        //!< GZIP file suffix.
+        static constexpr std::size_t GZIP_BUFFER_SIZE { 1024 * 64 };    //!< GZIP buffer size.
+    };
+
     /**
      * @brief Compresses a file.
      *
@@ -144,8 +141,6 @@ private:
     void calculateProgress(std::streamoff current, std::streamoff total, ProgressCallBack progressCallback);
 };
 
-
 CELL_NAMESPACE_END
 
-#endif  // CELL_COMPRESSOR_HPP
-
+#endif // CELL_COMPRESSION_GZIP_HPP

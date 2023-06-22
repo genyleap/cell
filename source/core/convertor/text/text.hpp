@@ -304,7 +304,6 @@ public:
      * @return An optional string with HTML tags stripped, or an empty optional if the input is empty.
      */
     Types::OptionalString stripHtmlTags(const std::string& text);
-
 };
 
 CELL_NAMESPACE_END

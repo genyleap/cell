@@ -179,6 +179,7 @@ file(
     source/modules/web/${SUFFIX_HPPHEADER}
     source/modules/gui/${SUFFIX_HPPHEADER}
     source/modules/multimedia/${SUFFIX_HPPHEADER}
+    source/modules/compression/${SUFFIX_HPPHEADER}
     source/modules/iot/${SUFFIX_HPPHEADER}
     source/translator/${SUFFIX_HPPHEADER}
     source/abstracts/${SUFFIX_HPPHEADER}
@@ -213,6 +214,7 @@ file(
     source/modules/web/${SUFFIX_SOURCE}
     source/modules/gui/${SUFFIX_SOURCE}
     source/modules/multimedia/${SUFFIX_SOURCE}
+    source/modules/compression/${SUFFIX_SOURCE}
     source/modules/iot/${SUFFIX_SOURCE}
     source/modules/cryptography/${SUFFIX_SOURCE}
     source/translator/${SUFFIX_SOURCE}
