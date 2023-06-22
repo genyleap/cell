@@ -48,7 +48,9 @@ std::string Aes::decrypt(const std::string &ciphertext, const std::string &key)
 
 bool Aes::validateKey(const std::string &key)
 {
-    return (key.size() == 16 || key.size() == 24 || key.size() == 32);
+    return (key.size() == static_cast<size_t>(KeySize::AES_128) ||
+            key.size() == static_cast<size_t>(KeySize::AES_192) ||
+            key.size() == static_cast<size_t>(KeySize::AES_256));
 }
 
 bool Aes::match(const std::string &plaintext, const std::string &ciphertext, const std::string &key)
