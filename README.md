@@ -2,8 +2,6 @@
 Welcome to the Cell development repository!
 ![slider](https://github.com/genyleap/cell/assets/4066299/345d88c7-45bd-41c3-b742-ce2d95ae2790)
 
-![slider](https://github.com/genyleap/cell/assets/4066299/345d88c7-45bd-41c3-b742-ce2d95ae2790)
-
 G E N Y L E A P ™ Cell is an incredibly innovative and revolutionary cross-platform software engine written in C++20 which enables you to build super high-end products.
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
