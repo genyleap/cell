@@ -33,6 +33,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Cryptography)
 
 /**
  * @brief The SHA class provides functionality for hashing using various SHA algorithms.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export Sha {
 public:

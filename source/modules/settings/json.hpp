@@ -25,6 +25,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Settings)
  * @brief A class for reading and writing settings in JSON format.
  * The JsonSetting class provides methods for reading and writing settings stored in JSON format.
  * It can read settings from a file and save settings to a file.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class JsonSetting {
 public:

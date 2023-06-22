@@ -36,6 +36,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Cryptography)
 /**
  * @class BlowFish
  * @brief Provides encryption and decryption using the Blowfish cipher.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export BlowFish {
 public:

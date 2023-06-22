@@ -37,8 +37,11 @@ struct RateLimitCounter
 
 /**
  * An HTTP client class for performing RESTful API requests with authentication and custom headers.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
-class RestfulApi : public HttpRequest {
+class __cell_export RestfulApi : public HttpRequest {
 public:
     RestfulApi();
     /**

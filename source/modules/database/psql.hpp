@@ -41,6 +41,20 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Database)
 
+/**
+ * @class PostgreSqlDatabaseConnection
+ * @brief Represents a connection to a PSQL database.
+ *
+ * This class inherits from multiple abstract classes/interfaces including
+ * Abstracts::DatabaseConnection, Abstracts::DatabaseMaintenance,
+ * Abstracts::DatabaseTransaction, Abstracts::DataManipulator,
+ * Abstracts::QueryBuilder, Abstracts::QueryExecutor,
+ * Abstracts::TableDataAnalyzer, Abstracts::TableManager, and
+ * Abstracts::DatabaseManagement.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
+ */
 class __cell_export PostgreSqlDatabaseConnection : public
                                               Abstracts::DatabaseConnection,
                                               Abstracts::DatabaseMaintenance,

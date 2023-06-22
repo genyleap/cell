@@ -23,6 +23,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
 
 /**
  * @brief The CpuInfo struct contains information about the CPU.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export CpuInfo
 {

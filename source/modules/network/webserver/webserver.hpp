@@ -65,8 +65,11 @@ struct WEBSERVER_CONSTANTS final {
  * appropriate handlers, managing server configurations, and providing various functionalities
  * related to web server operations. It inherits from the AbstractWebServer class and provides
  * overrides for its pure virtual functions.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
-class WebServer : public Abstracts::Modules::WebServer::AbstractWebServer
+class __cell_export WebServer : public Abstracts::Modules::WebServer::AbstractWebServer
 {
 public:
     /**

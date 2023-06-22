@@ -263,8 +263,11 @@ struct RequestStruct final
 /**
  * @brief The HttpRequest class
  * An HTTP client class for performing GET, POST, PUT, and DELETE requests with authentication and custom headers.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
-class HttpRequest {
+class __cell_export HttpRequest {
 public:
 
     HttpRequest();

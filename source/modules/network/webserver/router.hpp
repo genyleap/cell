@@ -46,6 +46,9 @@ using ExceptionErrorHandler = std::function<Response(const Request&, const std::
 using Middleware = std::function<void(Request&, Response&, const Handler&)>;
 /**
  * Router class for handling HTTP route mapping and request routing.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export Router {
 public:

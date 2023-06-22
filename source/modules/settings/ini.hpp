@@ -33,6 +33,9 @@ struct IniStructure final
 
 /**
  * @brief A class for reading and writing INI files.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export IniSetting {
 public:

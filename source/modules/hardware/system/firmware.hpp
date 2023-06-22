@@ -25,6 +25,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
  * @class FirmwareInfo
  * @brief The FirmwareInfo class represents firmware information for a computer system.
  * It provides access to the firmware details such as brand, version, serial number, and date.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export FirmwareInfo final
 {

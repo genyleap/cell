@@ -28,6 +28,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Network::WebServer)
 /**
  * @class RateLimiter
  * @brief Class for rate limiting requests based on a maximum number of requests per minute.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export RateLimiter {
 public:

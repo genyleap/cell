@@ -23,6 +23,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Compression)
 
 /**
  * @brief Compressor class for file and directory compression/decompression.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export Gzip
 {

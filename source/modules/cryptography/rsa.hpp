@@ -34,6 +34,16 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Cryptography)
 
+/**
+ * @brief Class representing an RSA encryption algorithm.
+ *
+ * This class provides functionality for RSA encryption and decryption.
+ * It can generate RSA key pairs and perform encryption and decryption operations
+ * using the generated keys.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
+ */
 class __cell_export Rsa {
 public:
     /**

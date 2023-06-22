@@ -33,6 +33,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Database)
  * @brief A connection pool implementation for PostgreSql database connections.
  *
  * The PostgreSqlConnectionPool class provides a pool of PostgreSql connections for efficient database operations.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export PostgreSqlConnectionPool : public Abstracts::ConnectionPool
 {

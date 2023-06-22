@@ -38,6 +38,9 @@ constexpr const std::string_view settingEnd    = { "</settings>"};
  * @brief A class for reading and writing settings in Xml format.
  * The XmlSetting class provides methods for reading and writing settings stored in Xml format.
  * It can read settings from a file and save settings to a file.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export XmlSetting {
 public:

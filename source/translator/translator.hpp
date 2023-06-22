@@ -96,6 +96,9 @@ enum class ValueType : Types::u8
 
 /*!
  * \brief The Translator class
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export Translator
 {

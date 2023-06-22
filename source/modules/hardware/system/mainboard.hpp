@@ -25,6 +25,9 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Hardware)
  * @class MainboardInfo
  * @brief The MainboardInfo class represents information about the mainboard (motherboard) of a computer system.
  * t provides details about the chipset, LPCIO (Low Pin Count I/O) controller, graphic interface, and general board information.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export MainboardInfo
 {

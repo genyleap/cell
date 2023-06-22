@@ -50,6 +50,9 @@ struct ResponseStructure final
  *
  * This class contains information about an HTTP response, including the status code, content,
  * and content type. It also provides accessor methods to retrieve this information.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 
 class __cell_export Response {
