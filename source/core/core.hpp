@@ -146,7 +146,7 @@ T retrieveOptionalValue(const std::optional<T>& opt)
 }
 
 template<typename ... Args>
-std::string stringFormat(const std::string& format, Args ... args)
+inline std::string stringFormat(const std::string& format, Args ... args)
 {
     Types::s8 size = snprintf(nullptr, 0, format.c_str(), args ...) + 1; // Extra space for '\0'
     if (size <= 0)
@@ -163,7 +163,7 @@ std::string stringFormat(const std::string& format, Args ... args)
  * @param cmd holds the commands for function.
  * @return data from terminal.
  */
-int command(const std::string& cm);
+__cell_no_discard int command(const std::string& cm);
 
 /**
  * @brief This function executes a command specified as a string, captures the output of the command and returns it as a string.
@@ -707,7 +707,7 @@ public:
      * @brief get function will return MetaEngine class as optional method.
      * @return as static optional class.
      */
-    static Types::Optional<Meta::MetaEngine>& meta()
+    inline static Types::Optional<Meta::MetaEngine>& meta()
     {
         static Types::Optional<Meta::MetaEngine> metaEngine = std::make_optional<Meta::MetaEngine>();
         return metaEngine;
@@ -718,7 +718,7 @@ public:
      * @return true if the engine starts successfully.
      */
     __cell_no_discard_message("Pay attention! Note that the engine can only be started once.")
-        bool start();
+    bool start();
 
     /**
      * @brief stop the engine.
@@ -756,7 +756,7 @@ public:
      * @param The input string.
      * @return output as string.
      */
-    static std::string htmlEntityDecode(const std::string& content);
+    inline static std::string htmlEntityDecode(const std::string& content);
 
     /*!
      * @brief String find is used to find the first occurrence of sub-string in the specified string being called upon.
@@ -764,7 +764,7 @@ public:
      * @param search is for searching as key.
      * @return true if the desired content is found and replaced.
      */
-    bool findSubString(const std::vector<std::string>& list, const std::string& search);
+    inline bool findSubString(const std::vector<std::string>& list, const std::string& search);
 
     /*!
      * @brief Replace all occurrences of a sub string with new string of data.
@@ -772,7 +772,7 @@ public:
      * @param toSearch is target.
      * @param replaceStr is string for replace with toSearch.
      */
-    void findAndReplaceContent(std::string& data, std::string toSearch, std::string replaceStr);
+    inline void findAndReplaceContent(std::string& data, std::string toSearch, std::string replaceStr);
 
     /*!
      * @brief Replace all links of a sub string with new link.
@@ -780,7 +780,7 @@ public:
      * @param toSearch is target.
      * @param replaceUrl is string for replace with toSearch.
      */
-    void findAndReplaceLink(std::string& data, std::string toSearch, std::string replaceUrl);
+    inline void findAndReplaceLink(std::string& data, std::string toSearch, std::string replaceUrl);
 
     /*!
      * @brief There are some differences in the fields of queries for some drivers that we can filter them with this function.
@@ -837,7 +837,7 @@ public:
      * @param bytes
      * @return
      */
-    Types::OptionalString convertMemorySize(Types::ullong bytes);
+    inline Types::OptionalString convertMemorySize(Types::ullong bytes);
 
     /*!
      * @brief The SepratorStyle enum
@@ -851,72 +851,72 @@ public:
      * @param sepStyle is style of seprator.
      * @return as string of result.
      */
-    __cell_no_discard std::string join(const Types::VectorString& strings, const SepratorType& sep, const SepratorStyle& sepStyle) __cell_noexcept;
+    __cell_no_discard inline std::string join(const Types::VectorString& strings, const SepratorType& sep, const SepratorStyle& sepStyle) __cell_noexcept;
 
     /*!
      * \brief elementErase function removes certain characters from a string.
      * \param content is the main input of string.
      * \param chars containing the characters to remove.
      */
-    void elementErase(std::string& input, const std::string& chars) __cell_noexcept;
+    inline void elementErase(std::string& input, const std::string& chars) __cell_noexcept;
 
     /*!
      * \brief whiteSpaceLeading function will reduce multiple whitespaces to a single white space.
      * \param input as string_view.
      * \return final content output after reducing single white space.
      */
-    __cell_no_discard std::string whiteSpaceReduce(std::string_view input) __cell_noexcept;
+    __cell_no_discard inline std::string whiteSpaceReduce(std::string_view input) __cell_noexcept;
 
     /*!
      * \brief whiteSpaceLeading function will removes leading whitespace from content.
      * \param input as string.
      * \return final content output after leading white spaces.
      */
-    __cell_no_discard std::string whiteSpaceLeading(std::string_view input) __cell_noexcept;
+    __cell_no_discard inline std::string whiteSpaceLeading(std::string_view input) __cell_noexcept;
 
     /*!
      * @brief  It may help to distinguish between tables and views depending on what your naming convention is.
      * @return string name of prefix.
      */
-    static std::string tablePrefix();
+    inline static std::string tablePrefix();
 
     /**
      * Table unicode base.
      * @brief   It may help to distinguish between tables and views depending on what your naming convention is.
      * @return  string unicode of unicode.
      */
-    static std::string tableUnicode();
+    inline static std::string tableUnicode();
 
     /**
      * @brief   It may help to mixing table prefixes for more details.
      * @return  string final table name after mixed.
      */
-    static std::string mixedTablePrefix(const std::string& p, const std::string& t);
+    inline static std::string mixedTablePrefix(const std::string& p, const std::string& t);
 
     /**
      * @brief   It may help to mixing table prefixes for more details.
      * @return  string final table name after mixed.
      */
-    static std::string table(std::string_view tableName, TableType tableType);
+    inline static std::string table(std::string_view tableName, TableType tableType);
 
     /**
      * @brief It may help to filter tables.
      * @return as tables.
      */
-    Types::VectorString tableFilter(const Types::VectorString& tables, TableType tableType);
+    inline Types::VectorString tableFilter(const Types::VectorString& tables, TableType tableType);
 
     /*!
      * @brief Sometimes we need to remove dashes from the uri or content based data.
      * @param src is a content source.
      * @return string of final output.
      */
-    __cell_no_discard std::string removeDashes(const std::string& src) __cell_const_noexcept;
+    __cell_no_discard inline std::string removeDashes(const std::string& src) __cell_const_noexcept;
 
     /*!
      * @brief We need to get current language based on your selected translator value on page.
      * @return string for name of language that is used.
      */
-    static std::string defaultLanguage();
+    inline static std::string defaultLanguage();
 
     /*!
      * @brief Before displaying the contents of the pages, we need to replace some characters.
@@ -924,7 +924,7 @@ public:
      * @param map as data for replacing.
      * @return content as string.
      */
-    std::string fullReplacer(const std::string& content, const Types::MapString& map);
+    std::string inline fullReplacer(const std::string& content, const Types::MapString& map);
 
     /**
      * @brief The trim function takes a string s as input, removes any leading and trailing whitespace characters from it, and returns the resulting string.
@@ -952,7 +952,7 @@ public:
      * @brief getLanguage function will returns language name as string.
      * @return string.
      */
-    std::string getLanguage();
+    inline std::string getLanguage();
 
     /**
      * @brief encodes a string so that it can be safely used as a part of a URL by converting certain characters to their hexadecimal representation.
@@ -1010,7 +1010,7 @@ public:
      * @brief Path reducing function.
      * @return string of reduced path.
      */
-    std::string reducePath(const std::string& path);
+    inline std::string reducePath(const std::string& path);
 
     /*!
      * @brief Services name.
@@ -1033,7 +1033,7 @@ public:
      * \brief isMultilanguage function will returns true if the page url is based on multi-language method such as [en-us, fa-ir].
      * \return bool [true if it's true.]
      */
-    __cell_no_discard bool isMultilanguage() __cell_const_noexcept;
+    __cell_no_discard inline bool isMultilanguage() __cell_const_noexcept;
 
     /**
      * @brief isFilePath function uses the C++ filesystem library to check if the given parameter is a file or directory path.
@@ -1054,7 +1054,7 @@ public:
      * @param line
      * @return
      */
-    std::string extractValue(const std::string& line, const std::string& section = ":");
+    inline std::string extractValue(const std::string& line, const std::string& section = ":");
 
     /*!
      * \brief Lanuage translator engine.
@@ -1112,7 +1112,7 @@ __cell_no_discard_message("Pay attention! This version of the formatter is safe 
  * @param key The translation key.
  * @return The translated default value.
  */
-static const auto& safeTranslate = [](const std::string& language,
+inline static const auto& safeTranslate = [](const std::string& language,
                                       const std::string& section,
                                       const std::string& key) {
     return Engine::self().translator().translate(language, section, key).defaultValue();

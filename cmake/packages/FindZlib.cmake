@@ -3,7 +3,7 @@ set(ZLIB_NAME "Zlib")
 set(ZLIB_DESCRIPTION "A massively spiffy yet delicately unobtrusive compression library.")
 
 # Pakcage option.
-option(USE_ZLIB ${ZLIB_DESCRIPTION} FALSE)
+option(USE_ZLIB ${ZLIB_DESCRIPTION} TRUE)
 if (USE_ZLIB)
     add_definitions(-DUSE_ZLIB)
     # Define the repository URL and tag for the Zlib libraries

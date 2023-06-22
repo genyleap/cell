@@ -453,7 +453,7 @@ std::string Engine::copyright() __cell_noexcept
 #endif
 }
 
-int command(const std::string& cmd)
+__cell_no_discard int command(const std::string& cmd)
 {
 #ifdef PLATFORM_WINDOWS
     PROCESS_INFORMATION pi;

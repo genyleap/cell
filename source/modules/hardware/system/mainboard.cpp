@@ -34,7 +34,7 @@ MainboardInfo::~MainboardInfo()
 
 MainboardInfo::BoardInfo MainboardInfo::get() __cell_const_noexcept
 {
-
+    return MainboardInfo::BoardInfo();
 }
 
 CELL_NAMESPACE_END

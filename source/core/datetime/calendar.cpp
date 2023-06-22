@@ -629,29 +629,29 @@ int GregorianCalendar::diffInYears(const std::string& dateOne, const std::string
     return diffYears;
 }
 
-double GregorianCalendar::getSunrise(const std::string& date, double latitude, double longitude) const {}
+double GregorianCalendar::getSunrise(const std::string& date, double latitude, double longitude) const { return 0.0; }
 
-double GregorianCalendar::getSunset(const std::string& date, double latitude, double longitude) const {}
+double GregorianCalendar::getSunset(const std::string& date, double latitude, double longitude) const { return 0.0; }
 
-double GregorianCalendar::getMoonPhase(const std::string& date) const {}
+double GregorianCalendar::getMoonPhase(const std::string& date) const { return 0.0; }
 
-bool GregorianCalendar::isHistoricalDate(const std::string& date) const {}
+bool GregorianCalendar::isHistoricalDate(const std::string& date) const { return 0.0; }
 
-Types::OptionalString GregorianCalendar::getHistoricalEvent(const std::string& date) const {}
+Types::OptionalString GregorianCalendar::getHistoricalEvent(const std::string& date) const { return __cell_null_str; }
 
-Types::OptionalString GregorianCalendar::getLocale() const {}
+Types::OptionalString GregorianCalendar::getLocale() const { return __cell_null_str; }
 
 void GregorianCalendar::setLocale(const std::string& locale) {}
 
-Types::OptionalString GregorianCalendar::getDateFormat() const {}
+Types::OptionalString GregorianCalendar::getDateFormat() const { return __cell_null_str;}
 
 void GregorianCalendar::setDateFormat(const std::string& dateFormat) {}
 
-Types::OptionalString GregorianCalendar::getTimeFormat() const {}
+Types::OptionalString GregorianCalendar::getTimeFormat() const { return __cell_null_str; }
 
 void GregorianCalendar::setTimeFormat(const std::string& timeFormat) {}
 
-Types::OptionalString GregorianCalendar::getDateTimeFormat() const {}
+Types::OptionalString GregorianCalendar::getDateTimeFormat() const { return __cell_null_str; }
 
 void GregorianCalendar::setDateTimeFormat(const std::string& dateTimeFormat) {}
 
@@ -659,7 +659,7 @@ void GregorianCalendar::addRecurringEvent(const std::string& eventName, const st
 
 void GregorianCalendar::removeRecurringEvent(const std::string& eventName) {}
 
-std::vector<std::string> GregorianCalendar::getRecurringEvents(const std::string& startDate, const std::string& endDate) const {}
+std::vector<std::string> GregorianCalendar::getRecurringEvents(const std::string& startDate, const std::string& endDate) const { return std::vector<std::string>(); }
 
 void GregorianCalendar::setReminder(const std::string& eventName, const std::string& reminderDate, const std::string& reminderTime) {}
 
@@ -667,8 +667,7 @@ void GregorianCalendar::removeReminder(const std::string& eventName) {}
 
 std::vector<std::string> GregorianCalendar::getReminders(const std::string& startDate, const std::string& endDate) const
 {
-
+    return std::vector<std::string>();
 }
-
 
 CELL_NAMESPACE_END

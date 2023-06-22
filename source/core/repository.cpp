@@ -41,15 +41,18 @@ double Repository::measureSpeed(const std::string& mirrorUrl) {
         // Ping the mirror and measure the response time
         std::string ping_command = CELL_PING_COMMAND + mirrorUrl;
         auto start_time = std::chrono::high_resolution_clock::now();
-        System::command(ping_command.c_str());
-        auto end_time = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
-        // Wait for a short time to avoid overloading the network with too many requests
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        // Store the result in the cache and return it
-        double speed = static_cast<double>(duration.count()) / 1000.0;
-        repositoryData.mirrorSpeedCache[mirrorUrl] = speed;
-        return speed;
+        if(System::command(ping_command.c_str())) {
+            auto end_time = std::chrono::high_resolution_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+            // Wait for a short time to avoid overloading the network with too many requests
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            // Store the result in the cache and return it
+            double speed = static_cast<double>(duration.count()) / 1000.0;
+            repositoryData.mirrorSpeedCache[mirrorUrl] = speed;
+            return speed;
+        } else {
+            return 0.0;
+        }
     } catch (const Exception& e) {
         // Handle any exceptions that occur while pinging the mirror
         if(DeveloperMode::IsEnable)
@@ -100,7 +103,7 @@ std::string Repository::getFastestMirror()
 
 double Repository::getMirrorSpeed(const std::string& repoUrl)
 {
-     return measureSpeed(repoUrl);
+    return measureSpeed(repoUrl);
 }
 
 CELL_NAMESPACE_END

@@ -59,6 +59,18 @@ using JSonArray = boost::json::array;
 #define USE_STL_FORMAT
 #endif
 
+#ifdef USE_ZLIB
+#ifdef __has_include
+# if __has_include("zlib.h")
+#   include "zlib.h"
+#else
+#   error "Cell's "zlib.h" was not found!"
+# endif
+#endif
+#else
+#error There is no any zlib library!
+#endif
+
 #define USE_MYSQL_MARIADB 1
 #define USE_POSTGRESQL 1
 #define USE_SQLITE 1

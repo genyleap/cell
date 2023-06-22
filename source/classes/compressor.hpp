@@ -23,14 +23,6 @@
 # endif
 #endif
 
-#ifdef __has_include
-# if __has_include("zlib.h")
-#   include "zlib.h"
-#else
-#   error "Cell's "zlib.h" was not found!"
-# endif
-#endif
-
 CELL_NAMESPACE_BEGIN(Cell::Globals)
 
 /**
