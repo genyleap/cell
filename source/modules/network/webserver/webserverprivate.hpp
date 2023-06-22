@@ -53,6 +53,22 @@
 # endif
 #endif
 
+#ifdef __has_include
+# if __has_include("virtualhost.hpp")
+#   include "virtualhost.hpp"
+#else
+#   error "Cell's "virtualhost.hpp" was not found!"
+# endif
+#endif
+
+#ifdef __has_include
+# if __has_include("classes/sessions.hpp")
+#   include "classes/sessions.hpp"
+#else
+#   error "Cell's "classes/sessions.hpp" was not found!"
+# endif
+#endif
+
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Network::WebServer)
 
 enum class HttpMethod

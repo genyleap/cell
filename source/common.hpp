@@ -387,23 +387,56 @@ struct NonMovableOrCopyable : private NonCopyable, NonMovable
     NonMovableOrCopyable() = default;
 };
 
-//!Macro version of non-copyable.
+/// \def CELL_DISABLE_COPY(Class)
+///
+/// \brief Macro to disable copy construction and assignment for a class.
+///
+/// This macro is used to prevent the generation of copy constructor and assignment operator
+/// for the specified class, making it non-copyable. It is typically used when you want to
+/// prohibit copying of a class instance.
+///
+/// \param Class The name of the class for which copy construction and assignment are disabled.
 #define CELL_DISABLE_COPY(Class) \
     Class(const Class &) = delete;\
     Class &operator=(const Class &) = delete;
 
-//!Macro version of non-movable.
-
+/// \def CELL_DISABLE_MOVE(Class)
+///
+/// \brief Macro to disable move operations for a class.
+///
+/// This macro is used to prevent the generation of move constructor and move assignment operator
+/// for the specified class, making it non-movable. It is typically used when you want to enforce
+/// immutability or prevent the transfer of ownership for a class instance.
+///
+/// \param Class The name of the class for which move operations are disabled.
 #define CELL_DISABLE_MOVE(Class) \
     Class(Class &&) = delete; \
     Class &operator=(Class &&) = delete;
 
-//!Macro version of non-copyable and non-movable.
+/// \def CELL_DISABLE_COPY_MOVE(Class)
+///
+/// \brief Macro to disable copy and move operations for a class.
+///
+/// This macro is used to prevent the generation of copy constructor, copy assignment operator,
+/// move constructor, and move assignment operator for the specified class, making it non-copyable
+/// and non-movable. It is typically used when you want to enforce immutability or specific ownership
+/// semantics for a class instance.
+///
+/// \param Class The name of the class for which copy and move operations are disabled.
+
 #define CELL_DISABLE_COPY_MOVE(Class) \
     CELL_DISABLE_COPY(Class) \
     CELL_DISABLE_MOVE(Class)
 
-//!Macro version of make friend for class.
+/// \def CELL_MAKE_FRIEND(Class)
+///
+/// \brief Macro to declare a class as a friend.
+///
+/// This macro is used to declare another class as a friend of the specified class. It grants
+/// the declared class access to the private and protected members of the specified class.
+/// It is typically used when you want to allow privileged access between classes.
+///
+/// \param Class The name of the class to be declared as a friend.
 #define CELL_MAKE_FRIEND(Class) \
     friend class Class;
 

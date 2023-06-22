@@ -1,6 +1,6 @@
 # -------------------- PROJECT TEMPLATE INFO ---------------------------------------------
 #   Title   :                       Cell Engine
-#   Version :                       0.8.323
+#   Version :                       0.8.550
 #   Author  :                       Kambiz Asadzadeh
 #   Url     :                       https://github.com/genyleap/cell
 #   Organization  :                 The Genyleap
@@ -25,7 +25,7 @@ set(PROJECT_REAL_NAME "Cell" CACHE STRING "Project Real Name.")
 
 set(PROJECT_VERSION_MAJOR 0)
 set(PROJECT_VERSION_MINOR 8)
-set(PROJECT_VERSION_PATCH 323)
+set(PROJECT_VERSION_PATCH 550)
 
 # ---- Project settings ----
 set_property(GLOBAL APPEND PROPERTY USE_FOLDERS ON)
@@ -167,21 +167,26 @@ file(
     source/core/convertor/text/${SUFFIX_HPPHEADER}
     source/core/convertor/color/${SUFFIX_HPPHEADER}
     source/classes/${SUFFIX_HPPHEADER}
-    source/modules/network/${SUFFIX_HPPHEADER}
+    source/modules/network/http/${SUFFIX_HPPHEADER}
+    source/modules/network/webserver/${SUFFIX_HPPHEADER}
+    source/modules/database/psql/${SUFFIX_HPPHEADER}
     source/modules/hardware/system/${SUFFIX_HPPHEADER}
     source/modules/cryptography/${SUFFIX_HPPHEADER}
     source/modules/settings/${SUFFIX_HPPHEADER}
+    source/modules/utility/${SUFFIX_HPPHEADER}
+    source/modules/ai/${SUFFIX_HPPHEADER}
+    source/modules/blockchain/${SUFFIX_HPPHEADER}
+    source/modules/web/${SUFFIX_HPPHEADER}
+    source/modules/gui/${SUFFIX_HPPHEADER}
+    source/modules/multimedia/${SUFFIX_HPPHEADER}
+    source/modules/iot/${SUFFIX_HPPHEADER}
     source/translator/${SUFFIX_HPPHEADER}
     source/abstracts/${SUFFIX_HPPHEADER}
     source/abstracts/apis/${SUFFIX_HPPHEADER}
     source/abstracts/account/${SUFFIX_HPPHEADER}
     source/abstracts/calendar/${SUFFIX_HPPHEADER}
     source/abstracts/database/${SUFFIX_HPPHEADER}
-    source/abstracts/database/mysql/${SUFFIX_HPPHEADER}
-    source/abstracts/database/psql/${SUFFIX_HPPHEADER}
-    source/abstracts/database/mssql/${SUFFIX_HPPHEADER}
-    source/abstracts/database/sqlite/${SUFFIX_HPPHEADER}
-    source/abstracts/database/oracle/${SUFFIX_HPPHEADER}
+    source/modules/database/${SUFFIX_HPPHEADER}
     source/abstracts/account/${SUFFIX_HPPHEADER}
     source/abstracts/dynamics/${SUFFIX_HPPHEADER}
     source/abstracts/modules/webserver/${SUFFIX_HPPHEADER}
@@ -197,9 +202,18 @@ file(
     source/core/convertor/text/${SUFFIX_SOURCE}
     source/core/convertor/color/${SUFFIX_SOURCE}
     source/classes/${SUFFIX_SOURCE}
-    source/modules/network/${SUFFIX_SOURCE}
+    source/modules/network/http/${SUFFIX_SOURCE}
+    source/modules/network/webserver/${SUFFIX_SOURCE}
+    source/modules/database/psql/${SUFFIX_SOURCE}
     source/modules/hardware/system/${SUFFIX_SOURCE}
     source/modules/settings/${SUFFIX_SOURCE}
+    source/modules/utility/${SUFFIX_SOURCE}
+    source/modules/ai/${SUFFIX_SOURCE}
+    source/modules/blockchain/${SUFFIX_SOURCE}
+    source/modules/web/${SUFFIX_SOURCE}
+    source/modules/gui/${SUFFIX_SOURCE}
+    source/modules/multimedia/${SUFFIX_SOURCE}
+    source/modules/iot/${SUFFIX_SOURCE}
     source/modules/cryptography/${SUFFIX_SOURCE}
     source/translator/${SUFFIX_SOURCE}
     source/abstracts/${SUFFIX_SOURCE}
@@ -207,11 +221,7 @@ file(
     source/abstracts/account/${SUFFIX_SOURCE}
     source/abstracts/calendar/${SUFFIX_SOURCE}
     source/abstracts/database/${SUFFIX_SOURCE}
-    source/abstracts/database/mysql/${SUFFIX_SOURCE}
-    source/abstracts/database/psql/${SUFFIX_SOURCE}
-    source/abstracts/database/mssql/${SUFFIX_SOURCE}
-    source/abstracts/database/sqlite/${SUFFIX_SOURCE}
-    source/abstracts/database/oracle/${SUFFIX_SOURCE}
+    source/modules/database/${SUFFIX_SOURCE}
     source/abstracts/account/${SUFFIX_SOURCE}
     source/abstracts/dynamics/${SUFFIX_SOURCE}
     source/abstracts/modules/webserver/${SUFFIX_SOURCE}
@@ -555,6 +565,13 @@ else()
 
 endif()
 
+#Ignore the warning/isable the warning
+target_compile_options(${PROJECT_NAME} PRIVATE
+    -Wno-deprecated-declarations
+    -Wdeprecated-non-prototype
+    -Wstrict-prototypes
+)
+
 target_compile_definitions(${PROJECT_NAME} PUBLIC ${LIB_TARGET_COMPILER_DEFINATION})
 
 #This command generates installation rules for a project.
@@ -581,7 +598,3 @@ install(DIRECTORY DESTINATION ${CMAKE_BINARY_DIR}/final/server-log)
 
 #Ignore unused files.
 list(APPEND CPACK_SOURCE_IGNORE_FILES /.git/ /build/ .gitignore .DS_Store)
-
-
-
-
