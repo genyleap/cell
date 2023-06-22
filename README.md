@@ -1,5 +1,6 @@
 # Cell Engine
 Welcome to the Cell development repository!
+![slider](https://github.com/genyleap/cell/assets/4066299/345d88c7-45bd-41c3-b742-ce2d95ae2790)
 
 ![slider](https://github.com/genyleap/cell/assets/4066299/345d88c7-45bd-41c3-b742-ce2d95ae2790)
 
