@@ -304,6 +304,34 @@ public:
      * @return An optional string with HTML tags stripped, or an empty optional if the input is empty.
      */
     Types::OptionalString stripHtmlTags(const std::string& text);
+
+    /**
+     * @brief Checks if a character is a valid Base64 character.
+     *
+     * @param c The character to check.
+     * @return True if the character is a valid Base64 character, false otherwise.
+     */
+    bool isBase64(unsigned char c);
+
+    /**
+     * @brief Converts a text string to Base64 encoding.
+     *
+     * @param content The input text string to encode.
+     * @return The Base64 encoded string as an optional value. An empty optional is returned if the encoding fails.
+     */
+    Types::OptionalString textToBase64(const std::string& content);
+
+    /**
+     * @brief Converts a Base64 encoded string to its original text representation.
+     *
+     * @param content The Base64 encoded string to decode.
+     * @return The decoded text string as an optional value. An empty optional is returned if the decoding fails.
+     */
+    Types::OptionalString base64ToText(const std::string& content);
+
+private:
+    static const std::string base64Chars;
+
 };
 
 CELL_NAMESPACE_END

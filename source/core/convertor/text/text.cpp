@@ -494,5 +494,111 @@ Types::OptionalString TextConverter::stripHtmlTags(const std::string& text)
     return Types::OptionalString(result);
 }
 
+const std::string TextConverter::base64Chars {
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "abcdefghijklmnopqrstuvwxyz"
+    "0123456789+/"
+};
+
+Types::OptionalString TextConverter::textToBase64(const std::string &content)
+{
+    std::string encodedString;
+    size_t inputLength = content.length();
+    const unsigned char* inputData = reinterpret_cast<const unsigned char*>(content.c_str());
+
+    int i = 0;
+    int j = 0;
+    unsigned char charArray3[3];
+    unsigned char charArray4[4];
+
+    while (inputLength--) {
+        charArray3[i++] = *(inputData++);
+        if (i == 3) {
+            charArray4[0] = (charArray3[0] & 0xfc) >> 2;
+            charArray4[1] = ((charArray3[0] & 0x03) << 4) + ((charArray3[1] & 0xf0) >> 4);
+            charArray4[2] = ((charArray3[1] & 0x0f) << 2) + ((charArray3[2] & 0xc0) >> 6);
+            charArray4[3] = charArray3[2] & 0x3f;
+
+            for (i = 0; i < 4; i++) {
+                encodedString += base64Chars[charArray4[i]];
+            }
+            i = 0;
+        }
+    }
+
+    if (i) {
+        for (j = i; j < 3; j++) {
+            charArray3[j] = '\0';
+        }
+
+        charArray4[0] = (charArray3[0] & 0xfc) >> 2;
+        charArray4[1] = ((charArray3[0] & 0x03) << 4) + ((charArray3[1] & 0xf0) >> 4);
+        charArray4[2] = ((charArray3[1] & 0x0f) << 2) + ((charArray3[2] & 0xc0) >> 6);
+
+        for (j = 0; j < i + 1; j++) {
+            encodedString += base64Chars[charArray4[j]];
+        }
+
+        while (i++ < 3) {
+            encodedString += '=';
+        }
+    }
+
+    return encodedString;
+}
+
+bool TextConverter::isBase64(unsigned char c)
+{
+    return (isalnum(c) || (c == '+') || (c == '/'));
+}
+
+Types::OptionalString TextConverter::base64ToText(const std::string &content)
+{
+    int in_len = content.length();
+    int i = 0;
+    int j = 0;
+    int in_ = 0;
+    unsigned char charArray4[4], charArray3[3];
+    std::string decodedString;
+
+    while (in_len-- && (content[in_] != '=') && isBase64(content[in_])) {
+        charArray4[i++] = content[in_];
+        in_++;
+        if (i == 4) {
+            for (i = 0; i < 4; i++) {
+                charArray4[i] = base64Chars.find(charArray4[i]);
+            }
+
+            charArray3[0] = (charArray4[0] << 2) + ((charArray4[1] & 0x30) >> 4);
+            charArray3[1] = ((charArray4[1] & 0xf) << 4) + ((charArray4[2] & 0x3c) >> 2);
+            charArray3[2] = ((charArray4[2] & 0x3) << 6) + charArray4[3];
+
+            for (i = 0; i < 3; i++) {
+                decodedString += charArray3[i];
+            }
+            i = 0;
+        }
+    }
+
+    if (i) {
+        for (j = i; j < 4; j++) {
+            charArray4[j] = 0;
+        }
+
+        for (j = 0; j < 4; j++) {
+            charArray4[j] = base64Chars.find(charArray4[j]);
+        }
+
+        charArray3[0] = (charArray4[0] << 2) + ((charArray4[1] & 0x30) >> 4);
+        charArray3[1] = ((charArray4[1] & 0xf) << 4) + ((charArray4[2] & 0x3c) >> 2);
+
+        for (j = 0; j < i - 1; j++) {
+            decodedString += charArray3[j];
+        }
+    }
+
+    return decodedString;
+}
+
 CELL_NAMESPACE_END
 
