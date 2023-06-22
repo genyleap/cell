@@ -31,11 +31,31 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Cryptography)
 
-class __cell_export Md5
-{
+/**
+ * @brief The Md5 class provides methods for computing and validating MD5 hashes.
+ */
+class __cell_export Md5 {
 public:
+    /**
+     * @brief Computes the MD5 hash of the given input string.
+     * @param input The input string to compute the MD5 hash for.
+     * @return The MD5 hash as a hexadecimal string.
+     */
     static std::string hash(const std::string& input);
+
+    /**
+     * @brief Validates the given hash string.
+     * @param hashval The hash string to validate.
+     * @return True if the hash is valid, False otherwise.
+     */
     static bool validateHash(const std::string& hashval);
+
+    /**
+     * @brief Matches the given input string with the provided hash.
+     * @param input The input string to match.
+     * @param hashval The hash string to match against.
+     * @return True if the input matches the hash, False otherwise.
+     */
     static bool matchHash(const std::string& input, const std::string& hashval);
 };
 
