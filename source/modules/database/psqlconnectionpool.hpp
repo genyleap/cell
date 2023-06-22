@@ -1,5 +1,5 @@
 /*!
- * @file        PostgreSqlconnectionpool.hpp
+ * @file        psqlconnectionpool.hpp
  * @brief       Database PostgreSql manager for the Cell Engine.
  * @details     This file defines the Database interface, which provides methods for interacting with a database.
  * @author      Kambiz Asadzadeh
