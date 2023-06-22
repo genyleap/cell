@@ -10,6 +10,9 @@ G E N Y L E A P ™ Cell is an incredibly innovative and revolutionary cross-pla
 ***WARNING:*** Cell's code is not ready for final use at the moment, but you can see development stages in dev repository.
 ***WARNING:*** Errors may occur frequently during the build process.
 
+## What is this engine?
+Cell Engine (CE) is an advanced computer software engine developed by Genyleap (Kambiz Asadzadeh) and its test versions in the alpha draft mode were first shown in product development in 2023. It is an advanced software engine written in C++20, designed to enable developers to build multi-purpose high-end products with exceptional speed and efficiency. With support for multiple-languages, a modern architecture, and cross-platform functionality, Cell engine is the perfect tool for developing versatile software products that can run seamlessly across different platforms.
+
 ## Abstraction
 In this white paper, we introduce a dynamic and innovative core that serves as the beating heart of high-interaction software products, enabling seamless integration between hardware and different architectures. With a special focus on green energy, optimal consumption, high efficiency, and technological advancement, we present a unified and cohesive core that addresses all requirements while ensuring quality throughout the development process. Developing high-quality software products typically comes with numerous challenges. In this article, we present an innovative solution to overcome these challenges in the development and management of software infrastructures across various domains, leading to remarkable improvements in runtime performance and mitigating many obstacles encountered during construction and development.
 
@@ -17,9 +20,6 @@ In the programming world, acquiring technical knowledge and experience in the re
 
 ## The Core Engine:
 A Dynamic Center for Software Development The Core Engine serves as a highly interactive component, providing extensive support for all platforms. By centralizing development requirements within this engine, developers can easily customize their products for specific target platforms, enabling swift development and straightforward execution in a high-level code style. The core engine prioritizes energy efficiency, conservation, high performance, quick accessibility, and a practical development structure. It leverages the modern C++ programming language to offer reliable models, structures, and tools for logical code, user interfaces, and libraries. This comprehensive approach covers various development needs, including maintenance, updates, scalability, and technological advancement in the product's domain.
-
-## What is this engine?
-Cell Engine (CE) is an advanced computer software engine developed by Genyleap (Kambiz Asadzadeh) and its test versions in the alpha draft mode were first shown in product development in 2023. It is an advanced software engine written in C++20, designed to enable developers to build multi-purpose high-end products with exceptional speed and efficiency. With support for multiple-languages, a modern architecture, and cross-platform functionality, Cell engine is the perfect tool for developing versatile software products that can run seamlessly across different platforms.
 
 ## Technical Features
 - Written by modern C++.
