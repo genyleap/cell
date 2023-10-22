@@ -27,6 +27,12 @@
 
 CELL_NAMESPACE_BEGIN(Cell::Dynamics)
 
+/**
+ * @brief The Plugin class
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
+ */
 class __cell_export Plugin
 {
 public:

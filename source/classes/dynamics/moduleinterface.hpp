@@ -48,6 +48,9 @@ class ModuleInterfaceImpl;
 
 /*!
  * \brief The ModuleInterface class is exported from the mail library.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export ModuleInterface {
 public:

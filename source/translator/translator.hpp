@@ -53,6 +53,13 @@ using LanguagePair = Types::Pair<std::string, LanguageTemplate>;
 
 using LanguageTemp = Types::Map<std::string, LanguageTemplate>;
 
+enum class ReadType
+{
+    FileOnDisk,
+    Database,
+    Memory
+};
+
 struct TRANSLATOR_CONSTANTS final
 {
     __cell_static_const_constexpr std::string_view LANGUAGE_SPEC  {"language-spec"};
@@ -110,7 +117,7 @@ public:
      * @brief Initializes the Translator.
      * @return true if initialization is successful, false otherwise.
      */
-    __cell_no_discard bool init() __cell_noexcept;
+    __cell_no_discard bool init(ReadType readType) __cell_noexcept;
 
     /**
      * @brief Initializes the Translator with external files.

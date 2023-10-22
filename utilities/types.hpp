@@ -71,58 +71,39 @@ using JSonArray = boost::json::array;
 #error There is no any zlib library!
 #endif
 
-#define USE_MYSQL_MARIADB 1
-#define USE_POSTGRESQL 1
-#define USE_SQLITE 1
-#define USE_MSSQL 1
-#define USE_ORACLE 1
-
 #include <variant>
 
 #ifdef USE_MYSQL_MARIADB
 #include "mariadb/mysql.h"
 using MySqlConnectPtr = MYSQL*;
+using MySqlPtr = MYSQL*;
 #endif
 
 #ifdef USE_POSTGRESQL
 #include <libpq-fe.h>
 using PsqlConnectPtr = PGconn*;
+using PostgreSqlPtr = PGconn*;
 #endif
 
 #ifdef USE_SQLITE
 #include <sqlite3.h>
 using SqliteConnectPtr = sqlite3*;
+using SqlitePtr = sqlite3*;
 #endif
 
 #ifdef USE_MSSQL
 #include <sql.h>
 #include <sqlext.h>
 using MssqlConnectPtr = SQLHANDLE;
+using SqlServerPtr = SQLHANDLE;
 #endif
 
 #ifdef USE_ORACLE
 #include <occi.h>
+using OraclePtr = oracle::occi::Connection*;
 using OracleConnectPtr = oracle::occi::Connection*;
 #endif
 
-
-using MySqlPtr = MYSQL*;
-using PostgreSqlPtr = PGconn*;
-using SqlServerPtr = SQLHANDLE;
-using SqlitePtr = sqlite3*;
-using OraclePtr = oracle::occi::Connection*;
-
-
-////!DBS
-//#ifdef USE_MYSQL_MARIADB
-//#include "mariadb/mysql.h"
-//using SqlConnectPtr = MYSQL*;
-//#endif
-////Todo...
-//#ifdef USE_POSTGRESQL
-//#include <libpq-fe.h>
-//using SqlConnectPtr = PGconn*;
-//#endif
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -248,7 +229,7 @@ using JSonParser           = Json::Reader;
 using OptionalJsonVal      = std::optional<Json::Value>;
 using JSonException        = Json::Exception;
 #   elif defined(USE_BOOST)
-namespace JsonSpace         = boost::json;
+namespace JsonSpace        = boost::json;
 using JSonValue            = boost::json::value;
 using JSonParser           = boost::json::stream_parser;
 using OptionalJsonVal      = std::optional<boost::json::value>;
@@ -267,7 +248,11 @@ namespace JsonSpace      = std::json;
  *
  * The connection pointer returned by each database type should be of type `std::shared_ptr<DatabaseConnection>`.
  */
-using SqlConnection = std::variant<MySqlPtr, PostgreSqlPtr, SqlServerPtr, OraclePtr, SqlitePtr>;
+
+#if defined(USE_MYSQL_MARIADB) && defined(USE_POSTGRESQL) && defined(USE_SQLITE) && defined(USE_MSSQL) && defined(USE_ORACLE)
+using SqlConnection         = std::variant<MySqlPtr, PostgreSqlPtr, SqlServerPtr, OraclePtr, SqlitePtr>;
+using DbConnectionQueue     = std::deque<Types::SqlConnection>;
+#endif
 
 using BigNumberVariant = std::variant<uint, u64, u128>;
 
@@ -317,7 +302,6 @@ using IfStreamer            = std::ifstream;
 using StringStream          = std::stringstream;
 using RuntimeError          = std::runtime_error;
 
-using DbConnectionQueue     = std::deque<Types::SqlConnection>;
 using ConditionVariable     = std::condition_variable;
 using QueryCache            = std::unordered_map<std::string, std::vector<std::vector<std::string>>>;
 

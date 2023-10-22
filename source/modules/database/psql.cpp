@@ -10,6 +10,8 @@
 #   error "Cell's "core/core.hpp" was not found!"
 #endif
 
+#if defined(USE_POSTGRESQL)
+
 CELL_USING_NAMESPACE Cell;
 CELL_USING_NAMESPACE Cell::System;
 CELL_USING_NAMESPACE Cell::Utility;
@@ -2033,5 +2035,6 @@ bool PostgreSqlDatabaseConnection::validateParams(const std::vector<std::string>
     return true;
 }
 
-
 CELL_NAMESPACE_END
+
+#endif

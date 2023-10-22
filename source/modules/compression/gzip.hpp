@@ -1,13 +1,15 @@
 /*!
  * @file        gzip.hpp
- * @brief       This file is part of the Cell Engine.
- * @details     Compression gzip manager.
- * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
- * @package     The Genyleap
- * @since       29 Aug 2022
- * @copyright   Copyright (c) 2022 The Genyleap. All rights reserved.
- * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
+ * @brief       Compressor for the Cell Engine.
+ * @details     This file defines the Database interface, which provides methods for interacting with a database.
+ * @author      Kambiz Asadzadeh
+ * @since       07 Jun 2023
+ * @version     1.0
+ * @note        This is part of the Cell Engine, developed by Kambiz Asadzadeh.
  *
+ * @license     This file is licensed under the terms of the Genyleap License. See the LICENSE.md file for more information.
+ * @copyright   Copyright (c) 2023 The Genyleap | Kambiz Asadzadeh. All rights reserved.
+ * @see         https://github.com/genyleap/cell
  */
 
 #ifndef CELL_COMPRESSION_GZIP_HPP

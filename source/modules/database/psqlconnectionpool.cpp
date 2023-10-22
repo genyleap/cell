@@ -4,6 +4,8 @@
 #   error "Cell's "psqlconnectionpool.hpp" was not found!"
 #endif
 
+#if defined(USE_POSTGRESQL)
+
 #if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
@@ -113,3 +115,5 @@ void PostgreSqlConnectionPool::enableEncryption(const std::string& keyPath, cons
 }
 
 CELL_NAMESPACE_END
+
+#endif

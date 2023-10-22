@@ -239,7 +239,7 @@ struct RequestStruct final
     // Pointer to Types::CURL
     Types::SmartCurlPtr     curlHandlePtr   { Types::curl_easy_init(), &Types::curl_easy_cleanup};
 
-           // The query parameters to be sent with the HTTP request.
+    // The query parameters to be sent with the HTTP request.
     Types::HttpQueryString  queries         {   };
 
     Types::OptionalString   url             { __cell_null_str  };  //!< Url address.

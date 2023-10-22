@@ -15,6 +15,8 @@
 #ifndef CELL_PSQL_CONNECTION_POOL_HPP
 #define CELL_PSQL_CONNECTION_POOL_HPP
 
+#if defined(USE_POSTGRESQL)
+
 #if __has_include("common.hpp")
 #   include "common.hpp"
 #else
@@ -113,5 +115,7 @@ private:
     Abstracts::PoolData m_poolData{}; //!< The pool data used to manage PostgreSql connections.
 };
 CELL_NAMESPACE_END
+
+#endif
 
 #endif // CELL_PSQL_CONNECTION_POOL_HPP

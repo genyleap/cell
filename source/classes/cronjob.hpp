@@ -57,6 +57,9 @@ struct CronStruct final
 /**
  * @class CronJob
  * @brief Represents a cron job that executes a task based on a cron schedule.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export CronJob
 {

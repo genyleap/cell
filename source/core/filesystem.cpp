@@ -294,11 +294,11 @@ void FileManager::setState(bool open, bool close)
 
 std::string FileManager::getExecutablePath() {
     std::string expath{};
-#if defined(PLATFORM_MOBILE) && defined(PLATFORM_ANDROID)
+#if defined(CELL_PLATFORM_MOBILE) && defined(PLATFORM_ANDROID)
     expath = "assets:/";
-#elif defined(PLATFORM_MOBILE) && defined(PLATFORM_IOS)
+#elif defined(CELL_PLATFORM_MOBILE) && defined(PLATFORM_IOS)
     std::string res = {"/"};
-#elif defined(PLATFORM_MAC)
+#elif defined(CELL_PLATFORM_MAC)
     expath = "/";
     char path[1024];
     uint32_t size = sizeof(path);
@@ -306,23 +306,23 @@ std::string FileManager::getExecutablePath() {
         std::string v = path;
         expath = v.substr(0, v.find_last_of("\\/")) + "/";
     }
-#elif defined(PLATFORM_LINUX)
+#elif defined(CELL_PLATFORM_LINUX)
     char buff[PATH_MAX];
     ssize_t len = ::readlink(expath.c_str(), buff, sizeof(buff)-1);
     if (len != -1) {
         buff[len] = '\0';
         return std::string(buff);
     }
-#elif defined(PLATFORM_WINDOWS)
+#elif defined(CELL_PLATFORM_WINDOWS)
     expath = "/";
     char buffer[MAX_PATH];
     GetModuleFileNameA(NULL, buffer, MAX_PATH);
     std::string::size_type pos = std::string(buffer).find_last_of("\\/");
     expath = std::string(buffer).substr(0, pos);
-#elif defined(PLATFORM_FREEBSD)
+#elif defined(CELL_PLATFORM_FREEBSD)
     expath = "/";
     res = "FreeBSD does not support yet!"
-#elif defined(PLATFORM_SOLARIS)
+#elif defined(CELL_PLATFORM_SOLARIS)
     expath = "/";
     res = "Solaris does not support yet!"
 #endif
@@ -397,6 +397,9 @@ FileTypeDetector::~FileTypeDetector()
 std::string FileTypeDetector::detectFileType(const FilePath& filePath)
 {
     std::string extension = filePath.extension().string();
+    //! fileTypes
+    //! fileTypes can extend from external data!?
+    //!
     std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) { return std::tolower(c); });
     auto iter = fileTypes.find(extension);
     if (iter != fileTypes.end()) {

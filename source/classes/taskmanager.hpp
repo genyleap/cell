@@ -67,6 +67,9 @@ using TaskList = std::vector<Task>;
 
 /**
  * @brief Manages tasks and provides operations for task management.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export TaskManager {
 public:

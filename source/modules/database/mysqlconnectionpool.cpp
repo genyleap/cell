@@ -4,6 +4,8 @@
 #   error "Cell's "mysqlconnectionpool.hpp" was not found!"
 #endif
 
+#if defined(USE_MYSQL_MARIADB)
+
 #if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
@@ -119,3 +121,5 @@ void MySqlConnectionPool::enableEncryption(const std::string& keyPath, const std
 }
 
 CELL_NAMESPACE_END
+
+#endif

@@ -33,6 +33,9 @@ class ModuleManagerPimpl;
 
 /*!
  * \brief The ModuleManager class
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export ModuleManager
 {

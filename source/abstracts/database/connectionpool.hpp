@@ -15,6 +15,8 @@
 #ifndef CELL_DATABASE_CONNECTION_POOL_ABSTRACT_HPP
 #define CELL_DATABASE_CONNECTION_POOL_ABSTRACT_HPP
 
+#if defined(USE_MYSQL_MARIADB) && defined(USE_POSTGRESQL) && defined(USE_SQLITE) && defined(USE_MSSQL) && defined(USE_ORACLE)
+
 //! Cell's Common.
 #if __has_include(<common>)
 #   include <common>
@@ -97,5 +99,7 @@ public:
 
 
 CELL_NAMESPACE_END
+
+#endif
 
 #endif  // CELL_DATABASE_ABSTRACT_HPP

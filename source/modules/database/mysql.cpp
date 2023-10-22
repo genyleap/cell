@@ -4,6 +4,8 @@
 #   error "Cell's "mysql.hpp" was not found!"
 #endif
 
+#if defined(USE_MYSQL_MARIADB)
+
 #if __has_include("core/core.hpp")
 #   include "core/core.hpp"
 #else
@@ -2213,5 +2215,6 @@ bool MySQLDatabaseConnection::validateParams(const std::vector<std::string>& par
     return true;
 }
 
-
 CELL_NAMESPACE_END
+
+#endif

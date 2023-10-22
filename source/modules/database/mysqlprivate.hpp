@@ -15,6 +15,8 @@
 #ifndef CELL_MYSQL_PRIVATE_HPP
 #define CELL_MYSQL_PRIVATE_HPP
 
+#if defined(USE_MYSQL_MARIADB)
+
 #if __has_include("common.hpp")
 #   include "common.hpp"
 #else
@@ -91,4 +93,7 @@ struct MySQLData final
 
 CELL_NAMESPACE_END
 
+#endif
+
 #endif // CELL_MYSQL_PRIVATE_HPP
+

@@ -56,6 +56,9 @@ enum class ModuleState : Types::u8
 
 /*!
  * \brief The ModuleInfo class
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 struct __cell_export ModuleInfo __cell_final
 {

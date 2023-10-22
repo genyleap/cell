@@ -588,7 +588,7 @@ bool JsonDocument::hasArray(const std::string& key) const {
 
 std::vector<Types::JSonValue> JsonDocument::getVectorJsonPtr()
 {
-    return vectorJsonPtr;
+    return std::move(vectorJsonPtr);
 }
 
 void JsonDocument::setVectorJsonPtr(const JSonValue& data)

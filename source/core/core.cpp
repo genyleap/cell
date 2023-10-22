@@ -116,80 +116,80 @@ Machine::Machine()
         if(!m_bootParameter.fastBoot) { m_bootParameter.fastBoot = true; }
     }
 
-    //! System Type
-    //! ToDo...
+           //! System Type
+           //! ToDo...
     {
         if(!m_bootParameter.systemType) { m_bootParameter.systemType = SystemType::Default; }
     }
 
-    //! Page Init Time
-    //! ToDo...
+           //! Page Init Time
+           //! ToDo...
     {
         if(!m_bootParameter.pageInitTime) { m_bootParameter.pageInitTime = 1316615272; }
     }
 
-    //! Page Size
-    //! ToDo...
+           //! Page Size
+           //! ToDo...
     {
         if(!m_bootParameter.pageSize) { m_bootParameter.pageSize = __cell_zero; }
     }
 
-    //! Page Speed
-    //! ToDo...
+           //! Page Speed
+           //! ToDo...
     {
         if(!m_bootParameter.pageSpeed) { m_bootParameter.pageSpeed = __cell_zero; }
     }
 
-    //! Init Time
-    //! ToDo...
+           //! Init Time
+           //! ToDo...
     {
         if(!m_bootParameter.initTime) { m_bootParameter.initTime = 1316615272; }
     }
 
-    //! User Mode
-    //! ToDo...
+           //! User Mode
+           //! ToDo...
     {
         if(!m_bootParameter.userMode) { m_bootParameter.userMode = UserMode::Guest; }
     }
 
-    //! System License
-    //! ToDo...
+           //! System License
+           //! ToDo...
     {
         if(!m_bootParameter.systemLicense) { m_bootParameter.systemLicense = SystemLicense::Free; }
     }
 
-    //! System Status
-    //! ToDo...
+           //! System Status
+           //! ToDo...
     {
         if(!m_bootParameter.systemStatus) { m_bootParameter.systemStatus = SystemStatus::Unknown; }
     }
 
 
-    //! Sync Device
-    //! ToDo...
+           //! Sync Device
+           //! ToDo...
     {
         if(!m_bootParameter.syncDevice) { m_bootParameter.syncDevice = SyncDevice::WebOnly; }
     }
 
-    //! Storage Type
-    //! ToDo...
+           //! Storage Type
+           //! ToDo...
     {
         if(!m_bootParameter.storageType) { m_bootParameter.storageType = StorageType::Empty; }
     }
 
-    //! State Index
-    //! ToDo...
+           //! State Index
+           //! ToDo...
     {
         if(!m_bootParameter.stateIndex) { m_bootParameter.stateIndex = 0x1; }
     }
 
-    //! Save State
-    //! ToDo...
+           //! Save State
+           //! ToDo...
     {
         if(!m_bootParameter.saveState) { m_bootParameter.saveState = "0x9ax0000000"; }
     }
 
-    //! Host Type
+           //! Host Type
     {
 #ifdef PLATFORM_WINDOWS
         m_bootParameter.hostType = HostType::Windows;
@@ -369,7 +369,7 @@ bool Engine::start()
 {
     bool res { false };
 
-    //Check if engine has initialized!
+           //Check if engine has initialized!
     if((IsSet(isInitialized.has_value())) && IsSet(isInitialized.value()))
     {
         Log("You are trying to restart the engine! No need to do this :)", LoggerType::Warning);
@@ -389,27 +389,27 @@ bool Engine::start()
            //    auto config = Configuration(ConfigType::File);
            //    config.init(SectionType::SystemCore);
     //! Database Connection
-           //    Scope<Database::Connection>con(new Database::Connection());
-           //    ApplicationData appData;
-           //    {
-           //        appData.path    = "";
-           //        appData.module  = "starter";
-           //    }
-           //        auto lang = Multilangual::Language(appData.path.value());
-           //        {
-           //            Application::get(appData)->engine->setLanguage(lang.getLanguage());
-           //            Application::get(appData)->translator->setFile(lang.languageSupport());
-           //        }
-           //        //!< Parsing
-           //        if(Application::get(appData)->translator->parse()) {
-           //            res = true;
-           //            if(System::DeveloperMode::IsEnable)
-           //                Log("Language data has been parsed!", LoggerType::Done); //!< Parsing Done!
-           //        } else {
-           //            res = false;
-           //            if(System::DeveloperMode::IsEnable)
-           //                Log("No parsing...!", LoggerType::Failed);  //!< Parsing Failed!
-           //        }
+    //    Scope<Database::Connection>con(new Database::Connection());
+    //    ApplicationData appData;
+    //    {
+    //        appData.path    = "";
+    //        appData.module  = "starter";
+    //    }
+    //        auto lang = Multilangual::Language(appData.path.value());
+    //        {
+    //            Application::get(appData)->engine->setLanguage(lang.getLanguage());
+    //            Application::get(appData)->translator->setFile(lang.languageSupport());
+    //        }
+    //        //!< Parsing
+    //        if(Application::get(appData)->translator->parse()) {
+    //            res = true;
+    //            if(System::DeveloperMode::IsEnable)
+    //                Log("Language data has been parsed!", LoggerType::Done); //!< Parsing Done!
+    //        } else {
+    //            res = false;
+    //            if(System::DeveloperMode::IsEnable)
+    //                Log("No parsing...!", LoggerType::Failed);  //!< Parsing Failed!
+    //        }
     isInitialized = true;
 
     Log("The engine has started!", LoggerType::Success);
@@ -1070,13 +1070,19 @@ std::string Engine::join(const std::vector<std::string>& strings,  const Seprato
 
 void Engine::elementErase(std::string& input, const std::string& chars) __cell_noexcept
 {
-    // Create a view of chars_to_remove as a ranges::set_view
-    auto chars_set = chars | std::views::transform([](char c) {
-                         return std::ranges::single_view(c);}) | std::views::join| std::views::common;
+    // Create a set-like view of characters to be removed
+    auto charsSet = chars | std::views::transform([](char c) {
+                         return std::views::single(c);
+                     }) | std::views::common;
 
-           // Use std::erase_if with the chars_set to remove the specified characters from the string
-    std::erase_if(input, [&chars_set](char c) {
-        return std::ranges::find(chars_set, c) != end(chars_set);
+    // Use std::erase_if with the chars_set to remove specified characters from the string
+    std::erase_if(input, [&charsSet](char c) {
+        // Check if the character 'c' is in the chars_set view
+        for (auto charView : charsSet) {
+            if (c == *charView.begin())
+                return true;
+        }
+        return false;
     });
 }
 

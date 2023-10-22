@@ -15,6 +15,8 @@
 #ifndef CELL_MYSQL_CONNECTION_POOL_HPP
 #define CELL_MYSQL_CONNECTION_POOL_HPP
 
+#if defined(USE_MYSQL_MARIADB)
+
 #if __has_include("common.hpp")
 #   include "common.hpp"
 #else
@@ -115,4 +117,7 @@ private:
 
 CELL_NAMESPACE_END
 
+#endif
+
 #endif // CELL_MYSQL_CONNECTION_POOL_HPP
+

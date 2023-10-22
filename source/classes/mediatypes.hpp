@@ -65,6 +65,9 @@ struct ContentTypes final
 /**
  * @class MediaTypes
  * @brief Class for handling media types and mime type mappings.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export MediaTypes {
 public:

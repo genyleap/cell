@@ -80,31 +80,43 @@ bool Translator::initExternal(const std::vector<std::string>& file) __cell_noexc
     return res;
 }
 
-bool Translator::init() __cell_noexcept
+bool Translator::init(ReadType readType) __cell_noexcept
 {
     bool res = false;
     auto fp = fileManager.getExecutablePath();
-    for(const auto& f : getFile())
-    {
-        std::string file{};
-        try {
-            file = { std::string(fp) + translations + "/" + std::string(f) + Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::FILE_SUFFIX)};
-            if(std::filesystem::exists(file))
-            {
-                //!Read from json files. [Multi based on language types].
-                jsonParser.parse(file, InputType::File);
-                jsonParser.setVectorJsonPtr(CELL_MOVE(jsonParser.getJson()));
-                m_hasError = false;
-                res = true;
-            } else {
-                DeveloperMode::IsEnable ? Log("The file [" + file + "] does not exist!", LoggerType::Critical) : DO_NOTHING;
+    switch (readType) {
+    case ReadType::FileOnDisk:
+        for(const auto& f : getFile())
+        {
+            std::string file{};
+            try {
+                file = { std::string(fp) + translations + "/" + std::string(f) + Engine::self().meta()->returnView(TRANSLATOR_CONSTANTS::FILE_SUFFIX)};
+                if(std::filesystem::exists(file))
+                {
+                    //!Read from json files. [Multi based on language types].
+                    jsonParser.parse(file, InputType::File);
+                    jsonParser.setVectorJsonPtr(CELL_MOVE(jsonParser.getJson()));
+                    m_hasError = false;
+                    res = true;
+                } else {
+                    DeveloperMode::IsEnable ? Log("The file [" + file + "] does not exist!", LoggerType::Critical) : DO_NOTHING;
+                }
+            } catch (const Exception& e) {
+                Log("Error Message " + std::string(e.what()), LoggerType::Critical);
+                m_hasError = true;
+                m_errorMessage = std::string(e.what());
+                res = false;
             }
-        } catch (const Exception& e) {
-            Log("Error Message " + std::string(e.what()), LoggerType::Critical);
-            m_hasError = true;
-            m_errorMessage = std::string(e.what());
-            res = false;
         }
+        break;
+    case ReadType::Database:
+        //Todo for database.
+        break;
+    case ReadType::Memory:
+        //Todo for memory
+        break;
+    default:
+        break;
     }
     return res;
 }
@@ -388,7 +400,14 @@ void Translator::wordProcess() __cell_noexcept
 bool Translator::parse()
 {
     bool res = {false};
-    if (init()) {
+    //! ReadType should be set from config
+    //! ReadType::FileOnDisk
+    //! ReadType::Database
+    //! ReadType::Memory
+    //!
+    //! Todo...
+    //!
+    if (init(ReadType::FileOnDisk)) {
         wordProcess();
         res = true;
         m_translatorData.parseMessage = "Parsing initialized!";

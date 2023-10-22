@@ -15,6 +15,8 @@
 #ifndef CELL_PSQL_HPP
 #define CELL_PSQL_HPP
 
+#if defined(USE_POSTGRESQL)
+
 #if __has_include("common.hpp")
 #   include "common.hpp"
 #else
@@ -781,5 +783,7 @@ private:
 };
 
 CELL_NAMESPACE_END
+
+#endif
 
 #endif // CELL_PSQL_HPP

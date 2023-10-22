@@ -27,6 +27,9 @@ CELL_NAMESPACE_BEGIN(Cell)
 
 /**
  * @brief The TimeZone class represents a time zone and provides utility functions for working with time.
+ *
+ * @note This class is marked with the "__cell_export" attribute, indicating
+ *       it is part of the "cell" module for exporting purposes.
  */
 class __cell_export TimeZone
 {
