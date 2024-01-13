@@ -37,9 +37,9 @@ void Response::setStatusCode(int statusCode)
     m_responseStructure.statusCode = statusCode;
 }
 
-void Response::setContentType(const std::string& contentType)
+void Response::setContentType(std::string_view contentType)
 {
-    m_responseStructure.contentType = contentType;
+    m_responseStructure.contentType = contentType.data();
 }
 
 void Response::setContent(const std::string& content)

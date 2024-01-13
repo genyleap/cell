@@ -264,9 +264,14 @@ public:
     __cell_virtual void setLogFile(const std::string& filePath) =  __cell_zero;
 
     /**
-     * @brief Enable or disable monitoring functionality
+     * @brief Enable monitoring functionality
      */
     __cell_virtual void enableMonitoring() = __cell_zero;
+
+
+    /**
+     * @brief Disable monitoring functionality
+     */
     __cell_virtual void disableMonitoring() = __cell_zero;
 
     /**

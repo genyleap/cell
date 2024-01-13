@@ -85,7 +85,7 @@ public:
      * @brief Set the content type of the response.
      * @param content_type The content type to set.
      */
-    void setContentType(const std::string& content_type);
+    void setContentType(std::string_view contentType);
 
     /**
      * @brief Set the content of the response.

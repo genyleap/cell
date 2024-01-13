@@ -25,8 +25,6 @@
 #   error "Cell's "core-concepts.hpp" was not found!"
 #endif
 
-CELL_USING_NAMESPACE Cell::Concepts;
-
 CELL_NAMESPACE_BEGIN(Cell::Meta)
 
 /**
@@ -181,16 +179,16 @@ public:
     template <typename T>
     std::string applyFixedPrecision(T value, int precision = 0)
     {
-        if constexpr (FloatingPoint<T>) {
+        if constexpr (Concepts::FloatingPoint<T>) {
             std::ostringstream oss;
             oss << std::fixed << std::setprecision(precision) << value;
             return oss.str();
-        } else if constexpr (ConvertibleToString<T>) {
+        } else if constexpr (Concepts::ConvertibleToString<T>) {
             std::ostringstream oss;
             oss << value;
             return oss.str();
         } else {
-            static_assert(FloatingPoint<T> || ConvertibleToString<T>, "Unsupported type");
+            static_assert(Concepts::FloatingPoint<T> || Concepts::ConvertibleToString<T>, "Unsupported type");
         }
     }
 
@@ -203,7 +201,7 @@ public:
      * @param str The string-like object.
      * @return const char* Pointer to the underlying character data of the string.
      */
-    template <ConvertibleToStringView T>
+    template <Concepts::ConvertibleToStringView T>
     const char* returnView(const T& str)
     {
         return str.data();

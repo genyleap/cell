@@ -15,13 +15,13 @@
 #ifndef CELL_ROUTER_HPP
 #define CELL_ROUTER_HPP
 
-//! Cell's Core (Basic Requirements).
-#if __has_include(<requirements>)
-#   include <requirements>
+#ifdef __has_include
+# if __has_include("core/core.hpp")
+#   include "core/core.hpp"
 #else
-#   error "Cell's requirements was not found!"
+#   error "Cell's "core/core.hpp" was not found!"
+# endif
 #endif
-
 
 #ifdef __has_include
 # if __has_include("request.hpp")
@@ -60,6 +60,8 @@ public:
      * @param method The HTTP method for the route (default: "GET").
      */
     void addRoute(const std::string& path, const Handler& handler, const std::string& method = "GET");
+
+    void addRoute(const std::vector<std::string>& paths, const Handler& handler, const std::string& method = "GET");
 
     /**
      * Add a middleware to the router.

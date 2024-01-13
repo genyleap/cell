@@ -20,8 +20,8 @@ LinkParser::~LinkParser()
 void LinkParser::parse(std::string& url)
 {
     std::size_t pos   = std::string::npos;
-    std::string http  = "http://";
-    std::string https = "https://";
+    std::string http  = CELL_PROTOCOL_HTTP;
+    std::string https = CELL_PROTOCOL_HTTPS;
     // Search for the substring in string in a loop untill nothing is found
     while((pos = url.find(http))!= std::string::npos || (pos = url.find(https))!= std::string::npos)
     {

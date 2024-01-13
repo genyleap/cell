@@ -152,7 +152,7 @@ enum class HTTP_METHOD {
  * 205 Reset Content	The request has been successfully processed, but is not returning any content, and requires that the requester reset the document view
  * 206 Partial Content	The server is delivering only part of the resource due to a range header sent by the client
  */
-enum class HTTP_MESSAGE_SUCCESS
+enum HTTP_MESSAGE_SUCCESS : Types::u8
 {
     Ok                  = 200,  //!< OK
     Created             = 201,  //!< Created
@@ -177,7 +177,7 @@ enum class HTTP_MESSAGE_SUCCESS
  * 307 Temporary Redirect	The requested page has moved temporarily to a new URL
  * 308 Resume Incomplete	Used in the resumable requests proposal to resume aborted PUT or POST requests
  */
-enum class HTTP_MESSAGE_REDIRECTION
+enum HTTP_MESSAGE_REDIRECTION
 {
     MultipleChoices     = 300,
     MovedPermanently    = 301,

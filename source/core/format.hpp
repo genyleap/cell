@@ -29,7 +29,6 @@ class Format {
 public:
     template <typename... Args>
     static std::string print(const std::string& formatString, const Args&... args) {
-
 #ifdef USE_BOOST_FORMAT
         boost::format formatter(convertPlaceholders(formatString));
         try {

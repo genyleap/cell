@@ -23,6 +23,16 @@ void Router::addRoute(const std::string& path, const Handler& handler, const std
     m_routes[methodKey][normalizedPath] = handler;
 }
 
+void Router::addRoute(const std::vector<std::string>& paths, const Handler& handler, const std::string& method)
+{
+    std::string methodKey = normalizeMethod(method).value();
+
+    for (const std::string& path : paths) {
+        std::string normalizedPath = normalizePath(path).value();
+        m_routes[methodKey][normalizedPath] = handler;
+    }
+}
+
 void Router::addMiddleware(const Middleware& middleware)
 {
     m_middleWares.push_back(middleware);
