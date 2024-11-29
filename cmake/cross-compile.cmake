@@ -2,6 +2,22 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/platforms-toolchain/")
 
 # ------ CROSS-COMPILE CONFIG ------
+if (EXISTS "${CMAKE_CXX_COMPILER}")
+     execute_process(COMMAND ${CMAKE_CXX_COMPILER} --version
+                     OUTPUT_VARIABLE EMCC_VERSION
+                     ERROR_VARIABLE EMCC_VERSION)
+     if (EMCC_VERSION MATCHES "Emscripten")
+              message(STATUS "Ready for Wasm...")
+              set(WASM TRUE)
+              set(PLATFORM_OS "Web")
+              set(OS_ARCHITECTURES ${CMAKE_SYSTEM_PROCESSOR})
+            include(wasm-toolchain)
+            if(wasm-toolchain)
+               return()
+            endif()
+            set(wasm-toolchain ON)
+     endif()
+endif()
 
 #LINUX
 if(LINUX AND NOT ANDROID AND NOT APPLE)
@@ -60,7 +76,7 @@ if(UNIX AND NOT ANDROID AND NOT LINUX AND APPLE)
 endif()
 
 #FREEBSD
-if(UNIX AND NOT ANDROID AND NOT LINUX AND NOT APPLE)
+if(UNIX AND NOT ANDROID AND NOT LINUX AND NOT APPLE AND NOT WASM)
     message(STATUS "Ready for Unix, BSDs...")
     set(UNIX TRUE)
     set(PLATFORM_OS "Unix")

@@ -14,6 +14,8 @@
 #include "examples/languagetest.hpp"
 #include "examples/configtest.hpp"
 
+// #include <openssl/asn1.h>
+
 //!JSon [Non-STL] Features
 #if defined(USE_JSON) && !defined(USE_BOOST)
 #include <json/json.h>
@@ -97,52 +99,29 @@ TEST_CASE( "Factorials are computed", "[factorial]" ) {
 
 #include <config.hpp> //Project Config
 
+#include <iostream>
+#include <memory>
+
 using namespace std;
 
-#include <iostream>
+int main() {
+    std::unique_ptr<int[]> arr = std::make_unique<int[]>(5);  // Allocate an array of integers on the heap
 
-int main()
-{
-    cout << "Hello World!" << endl;
+           // Access elements of the array
+    for (int i = 0; i < 5; ++i) {
+        arr[i] = i;
+    }
 
-    //!Config Test
-    ConfigTest config;
-    config.readConfig();
+           // Memory is automatically freed when arr goes out of scope
+           // No need for explicit delete[]
 
-           //!Compiler Test
-    CompilerTest compiler;
-    compiler.getCompilerInfo();
-
-           //!Platform Test
-    PlatformTest platform;
-    platform.getPlatformInfo();
-
-    //!Library Test
-    LibraryTest library;
-
-#ifdef USE_OPENSSL
-        library.testOpenSSL(); // OpenSSL
-#endif
-
-#ifdef USE_BOOST
-        library.testBoost(); // Boost
-#endif
-
-#ifdef USE_OPENCV
-        library.testOpenCV(); // OpenCV
-#endif
-
-
-    //!Language Features
-    LanguageTest language;
-    language.checkFeatures();
-
-    //!ThirdParty Library
-    ThirdPartyTest thirdPartyTest;
-    thirdPartyTest.testFmt();
-    thirdPartyTest.testCtre();
-
-
+           // Try to access the freed memory
+    std::cout << "Array elements after deletion: ";
+    for (int i = 0; i < 5; ++i) {
+        // The following line is safe, as memory is managed by unique_ptr
+        std::cout << arr[i] << " ";
+    }
 
     return 0;
 }
+

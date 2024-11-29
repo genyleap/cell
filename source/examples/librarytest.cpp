@@ -1,6 +1,5 @@
 #include "librarytest.hpp"
 #include "common.hpp"
-#include <iostream>
 
 #ifdef USE_BOOST
 #   include <boost/chrono.hpp>

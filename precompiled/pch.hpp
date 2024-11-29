@@ -1,12 +1,19 @@
 /*!
  * Gen3 License
  *
- * Copyright (c) 2021 Kambiz Asadzadeh
- * Copyright (c) 2023 Genyleap
+ * Copyright (c) 2024 Kambiz Asadzadeh
+ * Copyright (c) 2024 Genyleap
  */
 
 #ifndef PCH_HPP
 #define PCH_HPP
+
+#if __cpp_modules
+import std; // Import core language support.
+#ifdef ENABLE_C_FACILITIES
+import std.compat; //Import C++ headers for C library facilities
+#endif
+#else
 
 /*!
  * Creating and using precompiled headers can do two major things for you:
@@ -318,6 +325,7 @@
 
 #ifdef _MSC_VER
 #include <intrin.h>
+#endif
 #endif
 
 #if __cpp_lib_json

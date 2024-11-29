@@ -1,23 +1,14 @@
 # -------------------- PROJECT TEMPLATE INFO ---------------------------------------------
 #   Title   :                       Project Template
-#   Version :                       1.1.430
-#   Author  :                       Kambiz Asadzadeh
+#   Version :                       1.2.20
+#   Author  :                       Kambiz Asadzadeh (compez.eth)
 #   License :                       MIT
 #   Url     :                       https://github.com/genyleap/Project-Template
 #   Organization  :                 Genyleap
 # ----------------------------------------------------------------------------------------
 
-cmake_minimum_required(VERSION 3.28)
-
-if(${CMAKE_VERSION} VERSION_LESS 3.28)
-    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else()
-    cmake_policy(VERSION 3.28)
-endif()
-
+cmake_minimum_required(VERSION 3.23)
 cmake_policy(SET CMP0048 NEW)
-cmake_policy(SET CMP0152 NEW)
-cmake_policy(SET CMP0155 NEW)
 
 # Add include path for cmake modules
 # ------ PROJECT EXTRA CMAKE ------
@@ -28,11 +19,14 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/config/")
 include(ExternalProject)
 include(FetchContent)
 
-include(project)
-if(project)
-  return()
-endif()
-set(project ON)
+# ------ PROJECT INFO ------
+# Options
+set(PROJECT_NAME "PT" CACHE STRING "Project Name.") #You can change "ProjectTemplate" with your project name.
+set(PROJECT_TARGET ${PROJECT_NAME} CACHE STRING "Project Target Name.")
+
+set(PROJECT_VERSION_MAJOR 1)
+set(PROJECT_VERSION_MINOR 0)
+set(PROJECT_VERSION_PATCH 6)
 
 # ---- Project settings ----
 set_property(GLOBAL APPEND PROPERTY USE_FOLDERS ON)
@@ -42,8 +36,12 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 if(NOT DEFINED CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_STANDARD 23)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
-    set(CMAKE_CXX_EXTENSIONS OFF)
+    set(CMAKE_CXX_EXTENSIONS ON)
 endif()
+
+set(PROJECT_CREATOR "Kambiz Asadzadeh" CACHE STRING "Creator of your project.") #Your project creator.
+
+set(PROJECT_LICENSE_TYPE "MIT" CACHE STRING "Project License Type.") #Your project license type.
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
   execute_process(
@@ -52,18 +50,33 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
     OUTPUT_VARIABLE PROJECT_VERSION_TAG
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
-endif()
 
+endif()
 if(NOT PROJECT_VERSION_TAG)
   set(PROJECT_VERSION_TAG 00000000)
 endif()
 set(PROJECT_VERSION_TAG_HEX 0x${PROJECT_VERSION_TAG})
+set(PROJECT_VERSION_TYPE "final" CACHE STRING "Version type.")
 set(PROJECT_VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
 set(PROJECT_VERSION_STRING ${PROJECT_VERSION}-${PROJECT_VERSION_TYPE})
 
 # Supported languages include C, CXX (i.e. C++), CUDA, OBJC (i.e. Objective-C), OBJCXX, Fortran, HIP, ISPC, and ASM. By default C and CXX are enabled if no language options are given.
 # Specify language NONE, or use the LANGUAGES keyword and list no languages, to skip enabling any languages.
 set(PROJECT_LANGUAGES CXX)
+
+#Use these keys [application, library]
+set(PROJECT_USAGE_TYPE "application" CACHE STRING "Usage Type.")
+
+#Use these keys [stl, qt, qtwidget, qtquick]
+set(PROJECT_MAIN_TYPE "qtquick" CACHE STRING "Library System.")
+
+set(DEVELOPER_BUNDLE_IDENTIFIER com.kambizasadzadeh.app.${PROJECT_NAME} CACHE STRING "Developer Bundle Identifier.")
+
+#You can replace your project description with this string.
+set(PROJECT_DESCRIPTION "A concept mobile app UI/UX prototype based on Qt Quick technology." CACHE STRING "Project Description")
+
+#Your project website address.
+set(PROJECT_HOMEPAGE_URL "https://kambizasadzadeh.com" CACHE STRING "Project URL.")
 
 #Project pre-configuration system.
 configure_file(
@@ -142,10 +155,11 @@ file(GLOB HEADERS
 )
 file(GLOB SOURCES source/${SUFFIX_SOURCE})
 
-file(GLOB EXAMPLES
-     source/examples/${SUFFIX_HPPHEADER}
-     source/examples/${SUFFIX_SOURCE}
-)
+#file(GLOB EXAMPLES
+#     source/examples/${SUFFIX_HPPHEADER}
+#     source/examples/${SUFFIX_SOURCE}
+#)
+
 file(GLOB UTILS
      utilities/${SUFFIX_HPPHEADER}
      utilities/${SUFFIX_SOURCE}
@@ -295,18 +309,21 @@ if(GUI_APPLICATION AND PROJECT_MAIN_TYPE STREQUAL "qt" OR PROJECT_MAIN_TYPE STRE
                 Qt${QT_VERSION_MAJOR}::Core
                 Qt${QT_VERSION_MAJOR}::Widgets
                 )
-            find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets)
-            find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets)
+            find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+            find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
         elseif(${PROJECT_MAIN_TYPE} STREQUAL "qtquick")
             list(APPEND QT_MODULES Core${SPACE_ARG})
             list(APPEND QT_MODULES Quick${SPACE_ARG})
             list(APPEND QT_MODULES_LINK
-                Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick
+                Qt${QT_VERSION_MAJOR}::Quick
                 )
-            find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick)
-            find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick)
+            find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Quick)
+            find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Quick)
         endif()
     endif()
+
+    qt_standard_project_setup(REQUIRES 6.5)
+
     if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         if(PROJECT_USAGE_TYPE STREQUAL "library")
             qt_add_library(${PROJECT_NAME}
@@ -442,3 +459,9 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config/system-config.json DESTINATION ${CM
 
 #Ignore unused files.
 list(APPEND CPACK_SOURCE_IGNORE_FILES /.git/ /build/ .gitignore .DS_Store)
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_GENERATOR "TGZ;ZIP")
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A brief description of your project")
+include(CPack)

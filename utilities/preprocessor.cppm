@@ -4,6 +4,8 @@
  * Copyright (c) 2024 Genyleap
  */
 
+export module preprocessor;
+
 //! COMPILERS
 #if defined(__clang__)
 /* Clang/LLVM. ---------------------------------------------- */

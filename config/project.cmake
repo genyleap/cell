@@ -24,7 +24,7 @@ set(PROJECT_VERSION_TYPE "final" CACHE STRING "Version type.")
 set(PROJECT_USAGE_TYPE "application" CACHE STRING "Usage Type.")
 
 #Use these keys [stl, qt, qtwidget, qtquick]
-set(PROJECT_MAIN_TYPE "stl" CACHE STRING "Library System.")
+set(PROJECT_MAIN_TYPE "qtquick" CACHE STRING "Library System.")
 
 set(DEVELOPER_BUNDLE_IDENTIFIER com.genyleap.api.${PROJECT_NAME} CACHE STRING "Developer Bundle Identifier.")
 

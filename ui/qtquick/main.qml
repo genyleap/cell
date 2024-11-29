@@ -1,7 +1,7 @@
-import QtQuick 2.15
-import QtQuick.Window 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Layouts
 
 ApplicationWindow {
     width: 640
@@ -9,10 +9,19 @@ ApplicationWindow {
     visible: true
     title: qsTr("Hello World")
 
-    Label {
+    ColumnLayout {
         anchors.centerIn: parent
-        text: qsTr("Hello from Qt Quick!")
+        spacing: 10
+        Button {
+            text: qsTr("Check State")
+            onClicked: {
+                result.text = "My Name is Kambiz!";
+                console.log("Hello, Kambiz!")
+            }
+        }
+        Text {
+            id: result
+        }
     }
-
 
 }
