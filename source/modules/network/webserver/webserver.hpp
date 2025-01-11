@@ -648,6 +648,15 @@ public:
     std::string getMimeType(const std::string& filePath);
 
     /**
+     * Sanitizes the provided file path to ensure it is safe and valid.
+     * This function may remove or escape dangerous characters, resolve relative paths,
+     * or enforce security constraints to prevent directory traversal attacks.
+     * @param requestedPath The input file path to sanitize.
+     * @return A sanitized version of the input path as a std::string.
+     */
+    std::string sanitizePath(const std::string& requestedPath);
+
+    /**
      * @brief Adds a static file mapping.
      *
      * This function adds a mapping between a URL path and a corresponding static file. When a request matches the specified URL path, the server will serve the corresponding file.
@@ -655,6 +664,19 @@ public:
      * @param filePath The path to the static file on the server's filesystem.
      */
     void addStaticFile(const std::string& urlPath, const std::string& filePath);
+
+    /**
+     * Sends an HTTP response over an SSL connection.
+     * @param ssl The SSL connection to use for sending the response.
+     * @param response The response data to send.
+     */
+    void sendResponseSSL(SSL* ssl, const Response& response);
+
+    /**
+     * Retrieves the document root directory.
+     * @return The document root path as a std::string.
+     */
+    std::string getDocumentRoot() const;
 
 private:
     ServerStructure m_serverStructure;  //!< The server structure object.
@@ -666,4 +688,3 @@ private:
 CELL_NAMESPACE_END
 
 #endif  // CELL_WEBSERVER_HPP
-

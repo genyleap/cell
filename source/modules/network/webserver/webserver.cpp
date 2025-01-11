@@ -45,10 +45,8 @@ void WebServer::start(int port)
     EngineController ec;
     auto& engine = ec.getEngine();
 
-    // Set the custom error 404 page handler
     m_serverStructure.router.setNotFoundHandler(m_serverStructure.notFoundHandler);
 
-    // Set the custom other error page handler
     m_serverStructure.router.setExceptionHandler(m_serverStructure.exceptionErrorHandler);
 
     if (m_serverStructure.enableSsl) {
@@ -62,11 +60,15 @@ void WebServer::start(int port)
         try {
 
             // Create an SSL context
+            // SSL_CTX* sslContext = SSL_CTX_new(TLS_server_method());
+            // if (!sslContext) {
+            //     Log("Failed to create SSL context.", LoggerType::Critical);
+            //     throw std::runtime_error("Failed to create SSL context.");
+            // }
+
             SSL_CTX* sslContext = SSL_CTX_new(TLS_server_method());
-            if (!sslContext) {
-                Log("Failed to create SSL context.", LoggerType::Critical);
-                throw std::runtime_error("Failed to create SSL context.");
-            }
+            SSL_CTX_set_options(sslContext, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1 | SSL_OP_NO_TLSv1_1);
+            SSL_CTX_set_cipher_list(sslContext, "HIGH:!aNULL:!MD5:!RC4");
 
             if (SSL_CTX_use_certificate_file(sslContext, m_serverStructure.sslCertFile.c_str(), SSL_FILETYPE_PEM) <= 0 ||
                 SSL_CTX_use_PrivateKey_file(sslContext, m_serverStructure.sslKeyFile.c_str(), SSL_FILETYPE_PEM) <= 0)
@@ -126,7 +128,7 @@ void WebServer::start(int port)
 
                 if (SSL_accept(ssl) <= 0) {
                     Log("SSL handshake failed.", LoggerType::Warning);
-                    ERR_print_errors_fp(stderr);
+                    ERR_print_errors_fp(stderr); // Print detailed SSL errors
                     SSL_free(ssl);
                     close(clientSocket);
                     continue;
@@ -226,7 +228,7 @@ void WebServer::start(int port)
                 }
             }
 
-            // Close the server socket
+                   // Close the server socket
             close(m_serverStructure.serverSocket);
 
 // Cleanup the socket library (Windows only)
@@ -248,7 +250,6 @@ void WebServer::stop() {
 
     m_serverStructure.isRunning = false;
 
-    // Close the server socket
     close(m_serverStructure.serverSocket);
 
     Log("Web server stopped.", LoggerType::Critical);
@@ -265,7 +266,7 @@ void WebServer::registerRouter(const Router& router) {
 void WebServer::parseRequest(const std::string& requestString, Request& request) {
     std::istringstream iss(requestString);
 
-    // Parse the first line of the request
+           // Parse the first line of the request
     std::string method, path, version;
     if (!(iss >> method >> path >> version)) {
         Log("Invalid request line", LoggerType::Critical);
@@ -435,7 +436,7 @@ void WebServer::handleClientRequestNoSSL(SocketType clientSocket)
         return;
     }
 
-    // Check if the requested URL corresponds to a static file
+           // Check if the requested URL corresponds to a static file
     std::string requestedPath = request.path().value();
     if (requestedPath.substr(0, m_serverStructure.documentRoot.length() + 1) == "/" + m_serverStructure.documentRoot) {
         std::string filePath = m_serverStructure.documentRoot + requestedPath.substr(m_serverStructure.documentRoot.length() + 1);
@@ -550,208 +551,179 @@ void WebServer::handleClientRequestNoSSL(SocketType clientSocket)
         Log("Error sending response to client.", LoggerType::Critical);
     }
 
-    // Close the client socket
     close(clientSocket);
 }
+
+void WebServer::sendResponseSSL(SSL* ssl, const Response& response)
+{
+    std::ostringstream responseStream;
+    responseStream << "HTTP/1.1 " << response.statusCode() << " OK\r\n";
+    responseStream << "Content-Type: " << response.contentType().value() << "\r\n";
+    for (const auto& header : response.headers()) {
+        responseStream << header.first << ": " << header.second << "\r\n";
+    }
+    responseStream << "\r\n";
+    if (response.content().has_value()) {
+        responseStream << response.content().value();
+    }
+
+    std::string responseString = responseStream.str();
+    const char* responseData = responseString.c_str();
+    size_t responseLength = responseString.length();
+
+    ssize_t bytesSent = 0;
+    while (bytesSent < responseLength) {
+        ssize_t sent = SSL_write(ssl, responseData + bytesSent, responseLength - bytesSent);
+        if (sent < 0) {
+            if (errno == EINTR) {
+                continue;
+            }
+            Log("Error sending response. Errno: " + std::to_string(errno), LoggerType::Critical);
+            break;
+        } else if (sent == 0) {
+            break; // Client closed the connection
+        }
+        bytesSent += sent;
+    }
+}
+
+std::string WebServer::getDocumentRoot() const {
+    return m_serverStructure.documentRoot;
+}
+
+std::string WebServer::sanitizePath(const std::string& requestedPath)
+{
+    // Ensure the path starts with a '/'
+    std::string sanitized = requestedPath;
+    if (!sanitized.empty() && sanitized[0] != '/') {
+        sanitized = "/" + sanitized;
+    }
+
+    // Remove any ".." or attempts at directory traversal
+    std::vector<std::string> pathParts;
+    std::istringstream pathStream(sanitized);
+    std::string segment;
+
+    while (std::getline(pathStream, segment, '/')) {
+        if (segment == "..") {
+            if (!pathParts.empty()) {
+                // Remove the last valid directory if ".." is encountered
+                pathParts.pop_back();
+            }
+        } else if (!segment.empty() && segment != ".") {
+            pathParts.push_back(segment); // Add valid segments
+        }
+    }
+
+    // Reconstruct the sanitized path
+    std::ostringstream cleanPathStream;
+    for (const auto& part : pathParts) {
+        cleanPathStream << "/" << part;
+    }
+
+    std::string cleanPath = cleanPathStream.str();
+
+    // If the path resolves to the root, return "/"
+    return cleanPath.empty() ? "/" : cleanPath;
+}
+
 
 void WebServer::handleClientRequestSSL(SocketType clientSocket, SSL* ssl)
 {
     try {
-
-        // Receive the client request over SSL
         constexpr const int bufferSize = 4096;
-        std::vector<char> buffer(bufferSize);  // Use a resizable buffer
+        std::vector<char> buffer(bufferSize);
+
+               // Receive client request over SSL
         ssize_t bytesRead = SSL_read(ssl, buffer.data(), buffer.size() - 1);
         if (bytesRead <= 0) {
-            Log("Error reading client request.", LoggerType::Critical);
-            throw std::runtime_error("Error reading client request.");
+            int sslError = SSL_get_error(ssl, bytesRead);
+            Log("SSL_read error: " + std::to_string(sslError), LoggerType::Critical);
+            throw std::runtime_error("Error reading client request. SSL Error: " + std::to_string(sslError));
         }
+
 
         std::string_view requestString(buffer.data(), bytesRead);
         Request request;
         parseRequest(std::string(requestString), request);
 
-        // Get the client IP address
+        // Rate limiting
         std::string clientIP = getClientIP(clientSocket);
-
-        // Check if rate limiting is enabled and apply rate limit
         if (m_serverStructure.rateLimiter && !m_serverStructure.rateLimiter->allowRequest(clientIP)) {
-            // Return a response indicating rate limit exceeded
-            Response response;
-            response.setStatusCode(429); // Too Many Requests
-            response.setContentType("text/plain");
-            response.setContent("Rate limit exceeded. Please try again later.");
-
-            // Send the response to the client over SSL
-            std::stringstream responseStream;
-            responseStream << "HTTP/1.1 " << response.statusCode() << " OK\r\n";
-            responseStream << "Content-Type: " << response.contentType().value() << "\r\n";
-            for (const auto& header : response.headers()) {
-                responseStream << header.first << ": " << header.second << "\r\n";
-            }
-            responseStream << "\r\n";
-            responseStream << response.content().value();
-
-            std::string responseString = responseStream.str();
-            ssize_t bytesSent = SSL_write(ssl, responseString.c_str(), responseString.length());
-            if (bytesSent < 0) {
-                Log("Error sending response to client.", LoggerType::Critical);
-                throw std::runtime_error("Error sending response to client.");
-            }
-            Log("Rate limit exceeded.", LoggerType::Critical);
-            throw std::runtime_error("Rate limit exceeded.");
+            Response rateLimitResponse;
+            rateLimitResponse.setStatusCode(429); // Too Many Requests
+            rateLimitResponse.setContentType("text/plain");
+            rateLimitResponse.setContent("Rate limit exceeded. Please try again later.");
+            sendResponseSSL(ssl, rateLimitResponse);
+            return;
         }
-        // Check if the requested URL corresponds to a static file
+
+        // Static file handling
         std::string requestedPath = request.path().value();
+        std::string sanitizedPath = sanitizePath(requestedPath); // Helper to sanitize input paths
+        std::string filePath = m_serverStructure.documentRoot + sanitizedPath;
 
-        if (requestedPath.substr(0, m_serverStructure.documentRoot.length() + 1) == "/" + m_serverStructure.documentRoot)
-        {
-            std::string filePath = m_serverStructure.documentRoot + requestedPath.substr(m_serverStructure.documentRoot.length() + 1);
-            std::ifstream file(filePath, std::ios::binary);
-            if (file) {
-                // Read the file content
-                std::ostringstream fileContentStream;
-                fileContentStream << file.rdbuf();
-                std::string fileContent = fileContentStream.str();
+        std::ifstream file(filePath, std::ios::binary);
+        if (file) {
+            // Read file content
+            std::ostringstream fileContentStream;
+            fileContentStream << file.rdbuf();
+            std::string fileContent = fileContentStream.str();
 
-                MediaTypes mt;
-                std::string extension = filePath.substr(filePath.find_last_of(".") + 1);
+            // Determine MIME type
+            MediaTypes mt;
+            std::string extension = sanitizedPath.substr(sanitizedPath.find_last_of('.') + 1);
+            std::string mimeType = mt.getMimeType(extension.empty() ? "bin" : extension);
 
-                // Determine the MIME type based on the file extension
-                std::string mimeType = mt.getMimeType(extension);
+            // Build and send response
+            Response fileResponse;
+            fileResponse.setStatusCode(200);
+            fileResponse.setContentType(mimeType);
+            fileResponse.setContent(fileContent);
+            sendResponseSSL(ssl, fileResponse);
 
-                // Create a response with the file content and MIME type
-                Response response;
-                response.setStatusCode(200);
-                response.setContentType(mimeType);
-                response.setContent(fileContent);
-
-                // Check if the socket has any errors or closed connection
-                struct pollfd pfd;
-                pfd.fd = clientSocket;
-                pfd.events = POLLRDNORM | POLLERR;
-                int pollResult = poll(&pfd, 1, 0);
-                if (pollResult < 0 || (pfd.revents & POLLERR) != 0) {
-                    Log("Socket error or closed connection detected.", LoggerType::Critical);
-                    close(clientSocket);
-                    return;
-                }
-
-                // Send the response to the client
-                std::string responseString = responseToString(response);
-                const char* responseData = responseString.c_str();
-                size_t responseLength = responseString.length();
-                ssize_t bytesSent = 0;
-                while (bytesSent < responseLength) {
-                    ssize_t sent = SSL_write(ssl, responseString.c_str(), responseString.length());
-                    if (sent < 0) {
-                        if (errno == EINTR) {
-                            // The send operation was interrupted, try again
-                            continue;
-                        } else if (errno == EPIPE || errno == ECONNRESET) {
-                            // Client closed the connection, but we can continue processing requests
-                            break;
-                        } else {
-                            Log("Error sending response to client. Error code" + TO_CELL_STRING(errno), LoggerType::Critical);
-                            close(clientSocket);
-                            return;
-                        }
-                    } else if (sent == 0) {
-                        // Client closed the connection, but we can continue processing requests
-                        break;
-                    }
-                    bytesSent += sent;
-                }
-
-                // Check if the entire response was sent successfully
-                if (bytesSent == responseLength) {
-                    // Response sent successfully, connection remains open
-                    // Continue processing requests or wait for next request
-                } else {
-                    // Error occurred while sending response or client closed the connection
-                    close(clientSocket);
-                }
-
-
-                file.close();
-            } else {
-                Log("Failed to open file: " + FROM_CELL_STRING(filePath), LoggerType::Critical);
-            }
+            return;
+        } else {
+            Log("Static file not found: " + filePath, LoggerType::Warning);
         }
 
-        // Route the request and get the response
-        Response response = m_serverStructure.router.routeRequest(request);
+        // Route the request if it's not a static file
+        Response routedResponse = m_serverStructure.router.routeRequest(request);
 
-        // Check if sessions are enabled
+        // Session management
         if (m_serverStructure.sessionsEnabled) {
-            // Check if the request has a session ID cookie
             std::string sessionId = request.cookies().getSessionIdCookie().value();
             if (sessionId.empty()) {
-                // If no session ID cookie is found, create a new session
-                Sessions session = Sessions::startSession();
-                sessionId = session.getSessionId().value();
-                response.setCookie("sessionId", sessionId);
+                Sessions newSession = Sessions::startSession();
+                sessionId = newSession.getSessionId().value();
+                routedResponse.setCookie("sessionId", sessionId);
             } else {
-                // If a session ID cookie is found, retrieve the session data
                 Sessions session = Sessions::retrieveSessionData(sessionId);
                 if (session.isExpired()) {
-                    // If the session is expired, destroy the session and create a new one
                     session.destroySession();
                     session = Sessions::startSession();
                     sessionId = session.getSessionId().value();
-                    response.setCookie("sessionId", sessionId);
+                    routedResponse.setCookie("sessionId", sessionId);
                 } else {
-                    // If the session is valid, update the session expiration time
                     session.setExpirationTime(Sessions::getDefaultExpirationTime());
                     session.storeSessionData();
                 }
             }
-
-            // Update the session ID in the request
-            request.setSessionId(sessionId);
         }
 
-        // Prepare the response string
-        std::stringstream responseStream;
-        responseStream << "HTTP/1.1 " << response.statusCode() << " OK\r\n";
-        responseStream << "Content-Type: " << response.contentType().value() << "\r\n";
-        for (const auto& header : response.headers()) {
-            responseStream << header.first << ": " << header.second << "\r\n";
-        }
-        responseStream << "\r\n";
-        responseStream << response.content().value();
-
-        // Send the response to the client over SSL
-        std::string responseString = responseToString(response);
-        const char* responseData = responseString.c_str();
-        size_t responseLength = responseString.length();
-        ssize_t bytesSent = 0;
-        while (bytesSent < responseLength) {
-            ssize_t sent = SSL_write(ssl, responseData + bytesSent, responseLength - bytesSent);
-            if (sent < 0) {
-                if (errno == EINTR) {
-                    // The send operation was interrupted, try again
-                    continue;
-                } else if (errno == EPIPE || errno == ECONNRESET) {
-                    // Client closed the connection, but we can continue processing requests
-                    break;
-                } else {
-                    Log("Error sending response to client. Error code: " + TO_CELL_STRING(errno), LoggerType::Critical);
-                    close(clientSocket);
-                    return;
-                }
-            } else if (sent == 0) {
-                // Client closed the connection, but we can continue processing requests
-                break;
-            }
-            bytesSent += sent;
-        }
-
-
-    } catch (const Exception& e) {
-        Log("SSL Error: " + FROM_CELL_STRING(e.what()), LoggerType::Critical);
+        // Send the routed response
+        sendResponseSSL(ssl, routedResponse);
     }
+    catch (const std::exception& e) {
+        Log("Error in handleClientRequestSSL: " + std::string(e.what()), LoggerType::Critical);
 
+        // Internal Server Error response
+        Response errorResponse;
+        errorResponse.setStatusCode(500);
+        errorResponse.setContentType("text/plain");
+        errorResponse.setContent("Internal server error.");
+        sendResponseSSL(ssl, errorResponse);
+    }
 }
 
 void WebServer::addStaticFile(const std::string& urlPath, const std::string& filePath)
@@ -773,7 +745,6 @@ void WebServer::addRoute(const std::string& path, const Handler& handler)
 {
     m_serverStructure.routes[path] = handler;
 }
-
 
 void WebServer::addMiddleWare(const std::function<Response(const Request&, const std::function<Response(const Request&)>&)>& middleware)
 {
