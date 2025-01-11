@@ -2,7 +2,7 @@
 Welcome to the Cell development repository!
 ![slider](https://github.com/genyleap/cell/assets/4066299/345d88c7-45bd-41c3-b742-ce2d95ae2790)
 
-G E N Y L E A P ™ Cell is an incredibly innovative and revolutionary cross-platform software engine written in C++20 which enables you to build super high-end products.
+G E N Y L E A P ™ Cell is an incredibly innovative and revolutionary cross-platform software engine written in modern C++ which enables you to build super high-end products.
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
 
@@ -10,7 +10,7 @@ G E N Y L E A P ™ Cell is an incredibly innovative and revolutionary cross-pla
 ***WARNING:*** Errors may occur frequently during the build process.
 
 ## What is this engine?
-Cell Engine (CE) is an advanced computer software engine developed by Genyleap (Kambiz Asadzadeh) and its test versions in the alpha draft mode were first shown in product development in 2023. It is an advanced software engine written in C++20, designed to enable developers to build multi-purpose high-end products with exceptional speed and efficiency. With support for multiple-languages, a modern architecture, and cross-platform functionality, Cell engine is the perfect tool for developing versatile software products that can run seamlessly across different platforms.
+Cell Engine (CE) is an advanced computer software engine developed by Genyleap (Kambiz Asadzadeh) and its test versions in the alpha draft mode were first shown in product development in 2023. It is an advanced software engine written in modern C++, designed to enable developers to build multi-purpose high-end products with exceptional speed and efficiency. With support for multiple-languages, a modern architecture, and cross-platform functionality, Cell engine is the perfect tool for developing versatile software products that can run seamlessly across different platforms.
 
 ## Abstraction
 In this white paper, we introduce a dynamic and innovative core that serves as the beating heart of high-interaction software products, enabling seamless integration between hardware and different architectures. With a special focus on green energy, optimal consumption, high efficiency, and technological advancement, we present a unified and cohesive core that addresses all requirements while ensuring quality throughout the development process. Developing high-quality software products typically comes with numerous challenges. In this article, we present an innovative solution to overcome these challenges in the development and management of software infrastructures across various domains, leading to remarkable improvements in runtime performance and mitigating many obstacles encountered during construction and development.
