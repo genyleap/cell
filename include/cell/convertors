@@ -1,0 +1,5 @@
+#include "core/convertor/units.hpp"
+#include "core/convertor/color/color.hpp"
+#include "core/convertor/currencies/currency.hpp"
+#include "core/convertor/currencies/meta-currency.hpp"
+#include "core/convertor/text/text.hpp"

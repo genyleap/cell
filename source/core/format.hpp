@@ -2,8 +2,8 @@
  * @file        format.hpp
  * @brief       This file is part of the Cell Engine.
  * @details     String formatting class.
- * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
- * @package     The Genyleap
+ * @author      <a href='https://github.com/thecompez'>Kambiz Asadzadeh</a>
+ * @package     Genyleap
  * @since       29 Apr 2023
  * @copyright   Copyright (c) 2023 The Genyleap. All rights reserved.
  * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
@@ -49,7 +49,7 @@ public:
 #endif
 #ifdef USE_STL_FORMAT
         try {
-            auto formatter = std::format(formatString), args...;
+            auto formatter = std::vformat(formatString, std::make_format_args(args...));
             return formatter;
         } catch (const std::format_error& e) {
             return e.what();

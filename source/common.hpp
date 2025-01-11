@@ -3,9 +3,9 @@
  *
  * @file        common.hpp
  * @brief       This file is part of the Cell engine.
- * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
+ * @author      <a href='https://github.com/thecompez'>Kambiz Asadzadeh</a>
  * @package     libCell
- * @copyright   Copyright (c) 2022 The Genyleap. All rights reserved.
+ * @copyright   Copyright (c) 2025 The Genyleap. All rights reserved.
  * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
  */
 
@@ -143,6 +143,12 @@ constexpr Scope<T> CreateScope()
   return std::make_unique<T>();
 }
 
+//! CreateScope can accept an argument.
+template <typename T, typename... Args>
+constexpr Scope<T> CreateScope(Args&&... args) {
+    return std::make_unique<T>(std::forward<Args>(args)...);
+}
+
 template<typename T, typename ... Args>
 constexpr Scope<T> CreateForwardScope(Args&& ... args)
 {
@@ -267,8 +273,24 @@ object = nullptr;                   \
 #define __cell_no_discard [[nodiscard]]
 #define __cell_no_discard_virtual [[nodiscard]] virtual
 #define __cell_no_discard_message(x) [[nodiscard(x)]]
-
 #define __cell_maybe_unused [[maybe_unused]]
+
+#if defined(__clang__)
+#define ASSUME(expr) __builtin_assume(expr)
+#elif defined(__GNUC__) && !defined(__ICC)
+#define ASSUME(expr) if (expr) {} else { __builtin_unreachable(); }
+#elif defined(_MSC_VER) || defined(__ICC)
+#define ASSUME(expr) __assume(expr)
+#endif
+
+#ifdef __has_cpp_attribute
+#  if __has_cpp_attribute(assume)
+#define __cell_assume(expression) [[assume(expression)]]
+#  endif
+#endif
+#ifndef __cell_assume
+#define __cell_assume(expression) ASSUME(expression)
+#endif
 
 #define __cell_virtual virtual
 

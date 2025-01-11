@@ -57,8 +57,6 @@ std::vector<GpuInfo> GraphicInformation::get()
 //! Todo...
 #endif
     return std::vector<GpuInfo>();
-
-
 }
 
 CELL_NAMESPACE_END

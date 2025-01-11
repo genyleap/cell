@@ -1,0 +1,4423 @@
+{
+  "language-spec": {
+    "name": "hindi",
+    "code": "hi_IN",
+    "uri": "hi-in",
+    "short_name": "hi",
+    "countryname": {
+      "national": {
+        "short": "भारत",
+        "full": "भारत गणराज्य"
+      },
+      "international": {
+        "short": "Hindi",
+        "full": "Hindi"
+      }
+    },
+    "language": {
+      "official_language": "हिन्दी",
+      "secondary": [],
+      "endonym": {
+        "title": "हिन्दी",
+        "pronunciation": "[ɦin̪d̪iː]"
+      },
+      "exonym": {
+        "title": "Hindi",
+        "pronunciation": "/ˈhɪndi/"
+      }
+    },
+    "calling_code": "+91",
+    "base_currency": "INR",
+    "secondary_currency": "",
+    "crypto_currency": "BTC",
+    "currencies": {
+      "title": "INR (भारतीय रुपया)",
+      "code": "INR",
+      "view_format": {
+        "decimal_separator": ".",
+        "thousands_separator": ",",
+        "main_currency_unit": "रुपया",
+        "fractional_monetary_unit": "पैसे",
+        "main_currency_symbol": "₹",
+        "fractional_monetary_symbol": "",
+        "negative_number_indicator": "-",
+        "currency_plural_form": "",
+        "currency_mixed_form": "-"
+      },
+      "status": true,
+      "secondary": [],
+      "crypto": [
+        {
+          "title": "Bitcoin",
+          "code": "BTC",
+          "status": false
+        },
+        {
+          "title": "Ethereum",
+          "code": "ETH",
+          "status": false
+        },
+        {
+          "title": "Tether",
+          "code": "USDT",
+          "status": false
+        }
+      ]
+    },
+    "capital": "New Delhi",
+    "continent": "asia",
+    "date_format": "dd/mm/yyyy",
+    "calendar": "hindu",
+    "timezone": "UTC+05:30",
+    "driving_side": "left",
+    "iso_3166_code": "IN",
+    "internet_tld": {
+      "tld": ".in"
+    },
+    "alphabet": "ए बी सी डी ई एफ जी एच आई जे के एल एम एन ओ पी क्यू आर एस टी यू वी डब्ल्यू एक्स वाई जेड",
+    "digits": {
+      "unit_words": [
+        "एक",
+        "दो",
+        "तीन",
+        "चार",
+        "पांच",
+        "छह",
+        "सात",
+        "आठ",
+        "नौ",
+        "दस",
+        "ग्यारह",
+        "बारह",
+        "तेरह",
+        "चौदह",
+        "पंद्रह",
+        "सोलह",
+        "सत्रह",
+        "अठारह",
+        "उन्नीस"
+      ],
+      "tens_words": [
+        "बीस",
+        "तीस",
+        "चालीस",
+        "पचास",
+        "साठ",
+        "सत्तर",
+        "अस्सी",
+        "नब्बे"
+      ],
+      "digit_words": [
+        "सौ",
+        "हज़ार",
+        "लाख",
+        "करोड़",
+        "अरब",
+        "ख़रब",
+        "नील",
+        "पद्म",
+        "शंख",
+        "महाशंख",
+        "पद्मावति",
+        "महापद्मावति"
+      ]
+    },
+    "calendars": {
+      "gregorian": {
+        "months": [
+          "जनवरी",
+          "फरवरी",
+          "मार्च",
+          "अप्रैल",
+          "मई",
+          "जून",
+          "जुलाई",
+          "अगस्त",
+          "सितंबर",
+          "अक्टूबर",
+          "नवंबर",
+          "दिसंबर"
+        ],
+        "daysname": [
+          "रविवार",
+          "सोमवार",
+          "मंगलवार",
+          "बुधवार",
+          "गुरुवार",
+          "शुक्रवार",
+          "शनिवार"
+        ]
+      },
+      "lunar": {
+        "months": [
+          "चंद्रमास 1",
+          "चंद्रमास 2",
+          "चंद्रमास 3",
+          "चंद्रमास 4",
+          "चंद्रमास 5",
+          "चंद्रमास 6",
+          "चंद्रमास 7",
+          "चंद्रमास 8",
+          "चंद्रमास 9",
+          "चंद्रमास 10",
+          "चंद्रमास 11",
+          "चंद्रमास 12"
+        ],
+        "daysname": [
+          "चंद्रमास रविवार",
+          "चंद्रमास सोमवार",
+          "चंद्रमास मंगलवार",
+          "चंद्रमास बुधवार",
+          "चंद्रमास गुरुवार",
+          "चंद्रमास शुक्रवार",
+          "चंद्रमास शनिवार"
+        ]
+      },
+      "islamic": {
+        "months": [
+          "मुहर्रम",
+          "सफर",
+          "रबी' अल-अव्वल",
+          "रबी' अल-थानी",
+          "जुमादा अल-अव्वल",
+          "जुमादा अल-थानी",
+          "रजब",
+          "शाबान",
+          "रमजान",
+          "शव्वाल",
+          "धु अल-क़िदाह",
+          "धु अल-हिज्जाह"
+        ],
+        "daysname": [
+          "अल-अहद",
+          "अल-इथनायन",
+          "अथ-थलाथा'",
+          "अल-अरबा'",
+          "अल-ख़मीस",
+          "अल-जुमु'अह",
+          "अस-सब्त"
+        ]
+      },
+      "persian": {
+        "months": [
+          "फरवर्दीन",
+          "अरदीबेहेस्त",
+          "ख़ोरदाद",
+          "तीर",
+          "मोरदाद",
+          "शहरीवर",
+          "मेहर",
+          "आबान",
+          "आज़र",
+          "दे",
+          "बहमन",
+          "एस्फंद"
+        ],
+        "daysname": [
+          "शनबे",
+          "येकशनबे",
+          "दोशनबे",
+          "सेशनबे",
+          "चहरशनबे",
+          "पंजशनबे",
+          "जुमे"
+        ]
+      }
+    },
+    "rtl": false,
+    "units": {
+      "length": [
+        {
+          "word_key": "meter",
+          "module": "system",
+          "default_value": "Meter",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilometer",
+          "module": "system",
+          "default_value": "Kilometer",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "centimeter",
+          "module": "system",
+          "default_value": "Centimeter",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "millimeter",
+          "module": "system",
+          "default_value": "Millimeter",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "micrometer",
+          "module": "system",
+          "default_value": "Micrometer",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "nanometer",
+          "module": "system",
+          "default_value": "Nanometer",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "mile",
+          "module": "system",
+          "default_value": "Mile",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "yard",
+          "module": "system",
+          "default_value": "Yard",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "foot",
+          "module": "system",
+          "default_value": "Foot",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "inch",
+          "module": "system",
+          "default_value": "Inch",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "lightyear",
+          "module": "system",
+          "default_value": "Lightyear",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "temperature": [
+        {
+          "word_key": "celsius",
+          "module": "system",
+          "default_value": "Celsius",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "fahrenheit",
+          "module": "system",
+          "default_value": "Fahrenheit",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kelvin",
+          "module": "system",
+          "default_value": "Kelvin",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "area": [
+        {
+          "word_key": "square_meter",
+          "module": "system",
+          "default_value": "Square Meter",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_kilometer",
+          "module": "system",
+          "default_value": "Square Kilometer",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_centimeter",
+          "module": "system",
+          "default_value": "Square Centimeter",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_millimeter",
+          "module": "system",
+          "default_value": "Square Millimeter",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_micrometer",
+          "module": "system",
+          "default_value": "Square Micrometer",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "hectare",
+          "module": "system",
+          "default_value": "Hectare",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_mile",
+          "module": "system",
+          "default_value": "Square Mile",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_yard",
+          "module": "system",
+          "default_value": "Square Yard",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_foot",
+          "module": "system",
+          "default_value": "Square Foot",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "square_inch",
+          "module": "system",
+          "default_value": "Square Inch",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "acre",
+          "module": "system",
+          "default_value": "Acre",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "weight": [
+        {
+          "word_key": "kilogram",
+          "module": "system",
+          "default_value": "Kilogram",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "gram",
+          "module": "system",
+          "default_value": "Gram",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "milligram",
+          "module": "system",
+          "default_value": "Milligram",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "microgram",
+          "module": "system",
+          "default_value": "Microgram",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "metric_ton",
+          "module": "system",
+          "default_value": "Metric Ton",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "long_ton",
+          "module": "system",
+          "default_value": "Long Ton",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "short_ton",
+          "module": "system",
+          "default_value": "Short Ton",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "pound",
+          "module": "system",
+          "default_value": "Pound",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ounce",
+          "module": "system",
+          "default_value": "Ounce",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "carat",
+          "module": "system",
+          "default_value": "Carat",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "atomic_mass_unit",
+          "module": "system",
+          "default_value": "Atomic Mass Unit",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "time": [
+        {
+          "word_key": "second",
+          "module": "system",
+          "default_value": "Second",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "millisecond",
+          "module": "system",
+          "default_value": "Millisecond",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "microsecond",
+          "module": "system",
+          "default_value": "Microsecond",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "nanosecond",
+          "module": "system",
+          "default_value": "Nanosecond",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "picosecond",
+          "module": "system",
+          "default_value": "Picosecond",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "minute",
+          "module": "system",
+          "default_value": "Minute",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "hour",
+          "module": "system",
+          "default_value": "Hour",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "day",
+          "module": "system",
+          "default_value": "Day",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "week",
+          "module": "system",
+          "default_value": "Week",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "month",
+          "module": "system",
+          "default_value": "Month",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "year",
+          "module": "system",
+          "default_value": "Year",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "speed": [
+        {
+          "word_key": "meter_per_second",
+          "module": "system",
+          "default_value": "Meter per Second",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilometer_per_hour",
+          "module": "system",
+          "default_value": "Kilometer per Hour",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "mile_per_hour",
+          "module": "system",
+          "default_value": "Mile per Hour",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "foot_per_second",
+          "module": "system",
+          "default_value": "Foot per Second",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "knot",
+          "module": "system",
+          "default_value": "Knot",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "energy": [
+        {
+          "word_key": "joule",
+          "module": "system",
+          "default_value": "Joule",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilojoule",
+          "module": "system",
+          "default_value": "Kilojoule",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "calorie",
+          "module": "system",
+          "default_value": "Calorie",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilocalorie",
+          "module": "system",
+          "default_value": "Kilocalorie",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "electron_volt",
+          "module": "system",
+          "default_value": "Electron Volt",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "british_thermal_unit",
+          "module": "system",
+          "default_value": "British Thermal Unit",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "foot_pound",
+          "module": "system",
+          "default_value": "Foot Pound",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "erg",
+          "module": "system",
+          "default_value": "Erg",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "power": [
+        {
+          "word_key": "watt",
+          "module": "system",
+          "default_value": "Watt",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilowatt",
+          "module": "system",
+          "default_value": "Kilowatt",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "megawatt",
+          "module": "system",
+          "default_value": "Megawatt",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "gigawatt",
+          "module": "system",
+          "default_value": "Gigawatt",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "horsepower",
+          "module": "system",
+          "default_value": "Horsepower",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "foot_pound_per_minute",
+          "module": "system",
+          "default_value": "Foot Pound per Minute",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "pressure": [
+        {
+          "word_key": "pascal",
+          "module": "system",
+          "default_value": "Pascal",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilopascal",
+          "module": "system",
+          "default_value": "Kilopascal",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "megapascal",
+          "module": "system",
+          "default_value": "Megapascal",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "bar",
+          "module": "system",
+          "default_value": "Bar",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "millibar",
+          "module": "system",
+          "default_value": "Millibar",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "pound_per_square_inch",
+          "module": "system",
+          "default_value": "Pound per Square Inch",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "atmosphere",
+          "module": "system",
+          "default_value": "Atmosphere",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "torr",
+          "module": "system",
+          "default_value": "Torr",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "angle": [
+        {
+          "word_key": "degree",
+          "module": "system",
+          "default_value": "Degree",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "radian",
+          "module": "system",
+          "default_value": "Radian",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "grad",
+          "module": "system",
+          "default_value": "Grad",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "minute",
+          "module": "system",
+          "default_value": "Minute",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "second",
+          "module": "system",
+          "default_value": "Second",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "revolution",
+          "module": "system",
+          "default_value": "Revolution",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "currency": [
+        {
+          "word_key": "USD",
+          "module": "system",
+          "default_value": "USD",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "EUR",
+          "module": "system",
+          "default_value": "EUR",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "GBP",
+          "module": "system",
+          "default_value": "GBP",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "JPY",
+          "module": "system",
+          "default_value": "JPY",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CAD",
+          "module": "system",
+          "default_value": "CAD",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "AUD",
+          "module": "system",
+          "default_value": "AUD",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CHF",
+          "module": "system",
+          "default_value": "CHF",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CNY",
+          "module": "system",
+          "default_value": "CNY",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "SEK",
+          "module": "system",
+          "default_value": "SEK",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "NZD",
+          "module": "system",
+          "default_value": "NZD",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "INR",
+          "module": "system",
+          "default_value": "INR",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "MXN",
+          "module": "system",
+          "default_value": "MXN",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "IRR",
+          "module": "system",
+          "default_value": "IRR",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "volume": [
+        {
+          "word_key": "CubicMeter",
+          "module": "system",
+          "default_value": "CubicMeter",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CubicKilometer",
+          "module": "system",
+          "default_value": "CubicKilometer",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CubicCentimeter",
+          "module": "system",
+          "default_value": "CubicCentimeter",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "CubicMillimeter",
+          "module": "system",
+          "default_value": "CubicMillimeter",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "Liter",
+          "module": "system",
+          "default_value": "Liter",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "Milliliter",
+          "module": "system",
+          "default_value": "Milliliter",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "USGallon",
+          "module": "system",
+          "default_value": "USGallon",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "USDryGallon",
+          "module": "system",
+          "default_value": "USDryGallon",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialGallon",
+          "module": "system",
+          "default_value": "ImperialGallon",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialQuart",
+          "module": "system",
+          "default_value": "ImperialQuart",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialPint",
+          "module": "system",
+          "default_value": "ImperialPint",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialCup",
+          "module": "system",
+          "default_value": "ImperialCup",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialFluidOunce",
+          "module": "system",
+          "default_value": "ImperialFluidOunce",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialTablespoon",
+          "module": "system",
+          "default_value": "ImperialTablespoon",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "ImperialTeaspoon",
+          "module": "system",
+          "default_value": "ImperialTeaspoon",
+          "custom_value": "",
+          "type": "text"
+        }
+      ],
+      "frequency": [
+        {
+          "word_key": "hertz",
+          "module": "system",
+          "default_value": "Hertz",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "kilohertz",
+          "module": "system",
+          "default_value": "Kilohertz",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "megahertz",
+          "module": "system",
+          "default_value": "Megahertz",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "gigahertz",
+          "module": "system",
+          "default_value": "Gigahertz",
+          "custom_value": "",
+          "type": "text"
+        },
+        {
+          "word_key": "terahertz",
+          "module": "system",
+          "default_value": "Terahertz",
+          "custom_value": "",
+          "type": "text"
+        }
+      ]
+    }
+  },
+  "data": {
+    "modules": [
+      {
+        "word_key": "no_initialized",
+        "module": "system",
+        "default_value": "Module {name} is not initialized yet!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "initialized",
+        "module": "system",
+        "default_value": "Module {name} is initialized!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "initializing",
+        "module": "system",
+        "default_value": "Module {name} is initializing...",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "circular_dependency",
+        "module": "system",
+        "default_value": "There is a circular dependency within {name} module.",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "plugins": [
+      {
+        "word_key": "no_initialized",
+        "module": "system",
+        "default_value": "Plugin {name} is not initialized yet!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "initialized",
+        "module": "system",
+        "default_value": "Plugin {name} is initialized!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "initializing",
+        "module": "system",
+        "default_value": "Plugin {name} is initializing...",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "circular_dependency",
+        "module": "system",
+        "default_value": "There is a circular dependency within {name} plugin.",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "core": [
+      {
+        "word_key": "in_the_future",
+        "module": "system",
+        "default_value": "In the future",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "plural_word",
+        "module": "system",
+        "default_value": "s",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "currency_plural_form",
+        "module": "system",
+        "default_value": "s",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "and_word",
+        "module": "system",
+        "default_value": "and",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "or_word",
+        "module": "system",
+        "default_value": "or",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "afew_seconds_ago",
+        "module": "system",
+        "default_value": "A few seconds ago",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "minute",
+        "module": "system",
+        "default_value": "{} minute{} ago",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hour",
+        "module": "system",
+        "default_value": "{} hour{} ago",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "day",
+        "module": "system",
+        "default_value": "{} day{} ago",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "week",
+        "module": "system",
+        "default_value": "{} week{} ago",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "month",
+        "module": "system",
+        "default_value": "{} month{} ago",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "year",
+        "module": "system",
+        "default_value": "{} year{} ago",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "global": [
+      {
+        "word_key": "name",
+        "module": "system",
+        "default_value": "Cell Engine",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "greeting",
+        "module": "system",
+        "default_value": "Hello, I am {}!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "slogan",
+        "module": "system",
+        "default_value": "New Generation of application engine",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "slogan_desc",
+        "module": "system",
+        "default_value": "G E N Y L E A P ™ Cell is an exclusive cross-platform software engine which enables you to build super high-end products.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "version",
+        "module": "system",
+        "default_value": "Version",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "light_style",
+        "module": "system",
+        "default_value": "Light",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "dark_style",
+        "module": "system",
+        "default_value": "Dark",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "loading",
+        "module": "system",
+        "default_value": "Loading...",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "business",
+        "module": "system",
+        "default_value": "Business",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "user",
+        "module": "system",
+        "default_value": "User",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "goback",
+        "module": "system",
+        "default_value": "Go back",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "top_search",
+        "module": "system",
+        "default_value": "Top search",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "pages": [
+      {
+        "word_key": "pages",
+        "module": "system",
+        "default_value": "Pages",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "page",
+        "module": "system",
+        "default_value": "Page",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "list",
+        "module": "system",
+        "default_value": "List",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "create",
+        "module": "system",
+        "default_value": "Create",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "preferences",
+        "module": "system",
+        "default_value": "Preferences",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "slogan": [
+      {
+        "word_key": "startup_message",
+        "module": "system",
+        "default_value": "Revolution of the software leap.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "lets_create",
+        "module": "system",
+        "default_value": "Let's create something that changes everything.",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "account": [
+      {
+        "word_key": "account_status",
+        "module": "system",
+        "default_value": "Your account status is {}% completed.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hi",
+        "module": "system",
+        "default_value": "Hi, ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "or",
+        "module": "system",
+        "default_value": "Or",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "recent_activity",
+        "module": "system",
+        "default_value": "Here's your activity today, take a moment to have look at this.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "user",
+        "module": "system",
+        "default_value": "User",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "guest",
+        "module": "system",
+        "default_value": "Guest",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "firstname",
+        "module": "system",
+        "default_value": "Firstname",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "lastname",
+        "module": "system",
+        "default_value": "Lastname",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "example_email",
+        "module": "system",
+        "default_value": "Example : no-reply@{}.com",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "example_phone",
+        "module": "system",
+        "default_value": "Example : 09120000000",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "moderator",
+        "module": "system",
+        "default_value": "Moderator",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "administrator",
+        "module": "system",
+        "default_value": "Administrator",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "verification_code",
+        "module": "system",
+        "default_value": "Verification Code",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "verification_code_note",
+        "module": "system",
+        "default_value": "The verification code was sent to your phone number and email!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "verification_code_timer",
+        "module": "system",
+        "default_value": "You will receive this code until {} seconds!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "verify_submitted_code",
+        "module": "system",
+        "default_value": "Verify the submitted code",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "ive_not_recived_code",
+        "module": "system",
+        "default_value": "I have not received the code!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "resend",
+        "module": "system",
+        "default_value": "Resend",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "send_subscription",
+        "module": "system",
+        "default_value": "Send me the <strong>{}</strong> subscription.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "please_enter_to_account",
+        "module": "system",
+        "default_value": "Please enter to your account!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "enter_to_account",
+        "module": "system",
+        "default_value": "Sign In",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "enter_to_account_note",
+        "module": "system",
+        "default_value": "Enter To Account",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "create_new_account",
+        "module": "system",
+        "default_value": "Sign Up",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "create_new_account_note",
+        "module": "system",
+        "default_value": "Create New Account",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "forget_password_title",
+        "module": "system",
+        "default_value": "Forget Password",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "forget_password",
+        "module": "system",
+        "default_value": "Forget password?",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "email_address",
+        "module": "system",
+        "default_value": "Email Address",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "username",
+        "module": "system",
+        "default_value": "Username",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "username_note",
+        "module": "system",
+        "default_value": "Enter your Cell ID to get started.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "username_or_email",
+        "module": "system",
+        "default_value": "Username or Email",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "custom_password",
+        "module": "system",
+        "default_value": "Custom Password",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "password",
+        "module": "system",
+        "default_value": "Password",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "remember_me",
+        "module": "system",
+        "default_value": "Remembed me",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "remember_me_note",
+        "module": "system",
+        "default_value": "The \"<strong>Remember Me</strong>\" selection allows you to stay logged in across multiple entry.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "send_pw_via_sms",
+        "module": "system",
+        "default_value": "Password via SMS?",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "make_custom_pw",
+        "module": "system",
+        "default_value": "Make custom password?",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "request_change_pw",
+        "module": "system",
+        "default_value": "Request change password",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "package_title",
+        "module": "system",
+        "default_value": "Package Title",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "package_code",
+        "module": "system",
+        "default_value": "Package Code",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invite_friends_code",
+        "module": "system",
+        "default_value": "Invite Code",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_fullname",
+        "module": "system",
+        "default_value": "Unknown Full Name",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_username",
+        "module": "system",
+        "default_value": "Unknown User Name",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "total_points",
+        "module": "system",
+        "default_value": "Total Points",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "profile_view",
+        "module": "system",
+        "default_value": "Profile View",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "profile_view_note",
+        "module": "system",
+        "default_value": "Profile View Note",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "profile_recently",
+        "module": "system",
+        "default_value": "Profile Recently",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "profile_recently_note",
+        "module": "system",
+        "default_value": "Profile Recently Note",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "about_me",
+        "module": "system",
+        "default_value": "About Me",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_bio",
+        "module": "system",
+        "default_value": "No Bio...",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "mobile_no",
+        "module": "system",
+        "default_value": "Mobile Number",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "website_address",
+        "module": "system",
+        "default_value": "Website Address",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_website",
+        "module": "system",
+        "default_value": "There is no website!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "my_social_id",
+        "module": "system",
+        "default_value": "My Social ID",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "liked",
+        "module": "system",
+        "default_value": "Liked",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "transactions",
+        "module": "system",
+        "default_value": "Transactions",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "archives",
+        "module": "system",
+        "default_value": "Archives",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "followings",
+        "module": "system",
+        "default_value": "Followings",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "followers",
+        "module": "system",
+        "default_value": "Followers",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "package_filter",
+        "module": "system",
+        "default_value": "Package Filter",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "package_title",
+        "module": "system",
+        "default_value": "Package Title",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "payment_id",
+        "module": "system",
+        "default_value": "Payment ID",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "payment_date_time",
+        "module": "system",
+        "default_value": "Payment DateTime",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "payment_cost",
+        "module": "system",
+        "default_value": "Payment Cost",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "followers_filter",
+        "module": "system",
+        "default_value": "Followers Filter",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "followings_filter",
+        "module": "system",
+        "default_value": "Followings Filter",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "themes": [
+      {
+        "word_key": "appearance",
+        "module": "system",
+        "default_value": "Appearance",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "preferences",
+        "module": "system",
+        "default_value": "Theme preferences",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "desc",
+        "module": "system",
+        "default_value": "Choose how <strong>Cell</strong> looks to you. Select a single theme, or sync with your system and automatically switch between day and night themes.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "theme",
+        "module": "system",
+        "default_value": "Theme mode",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "style",
+        "module": "system",
+        "default_value": "Style",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "dark_mode",
+        "module": "system",
+        "default_value": "Night mode",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "light_mode",
+        "module": "system",
+        "default_value": "Day mode",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "select",
+        "module": "system",
+        "default_value": "Select theme",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "auto",
+        "module": "system",
+        "default_value": "Auto",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "translation": [
+      {
+        "word_key": "translation",
+        "module": "system",
+        "default_value": "Translation",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "change",
+        "module": "system",
+        "default_value": "Change language",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "key_not_found",
+        "module": "core",
+        "default_value": "Translation key not found!",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "exceptions": [
+      {
+        "word_key": "happened",
+        "module": "core",
+        "default_value": "An error occurred!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "empty",
+        "module": "core",
+        "default_value": "Empty Value",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "feild_not_found",
+        "module": "core",
+        "default_value": "'{}' feild not found!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "you_are_banned",
+        "module": "core",
+        "default_value": "You are banned!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "ban_lock",
+        "module": "core",
+        "default_value": "Date of end of ban: {date}.<br />Reason: {reason}.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "error_404",
+        "module": "core",
+        "default_value": "Error 404",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "error_500",
+        "module": "core",
+        "default_value": "Error 500",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "page_not_found",
+        "module": "core",
+        "default_value": "Page not found!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "page_not_found_desc",
+        "module": "core",
+        "default_value": "The page you are looking for was moved, removed or might never existed.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "url_error",
+        "module": "core",
+        "default_value": "Url Error!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "page_not_found_detail",
+        "module": "core",
+        "default_value": "Perhaps you followed an outdated link from another page or accidentally made a mistake typing the address manually.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "internal_server_error",
+        "module": "core",
+        "default_value": "Internal Server Error!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "internal_server_error_desc",
+        "module": "core",
+        "default_value": "The server encountered an internal error or misconfiguration and was unable to complete your request.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "driver_not_found",
+        "module": "database",
+        "default_value": "Driver '{}' not found!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_create_connection",
+        "module": "database",
+        "default_value": "Failed to create or connect to a '{}' connection.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_initialize_connection",
+        "module": "database",
+        "default_value": "Failed to initialize '{}' connection.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "ssl_tls_configuration_error_occurred",
+        "module": "database",
+        "default_value": "SSL/TLS configuration error occurred.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "db_connection_error",
+        "module": "database",
+        "default_value": "Internal Server Database Error!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_connection_error",
+        "module": "database",
+        "default_value": "Invalid connection type",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "not_connected_to_server",
+        "module": "database",
+        "default_value": "Not connected to the {} server.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_server_status",
+        "module": "database",
+        "default_value": "Failed to retrieve server status.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_connection_pool",
+        "module": "database",
+        "default_value": "Invalid connection from the pool.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "sql_query_empty",
+        "module": "database",
+        "default_value": "SQL query is empty.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_initialize_prepared_statement",
+        "module": "database",
+        "default_value": "Failed to initialize prepared statement: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_prepared_statement",
+        "module": "database",
+        "default_value": "Failed to prepare statement: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "incorrect_number_of_parameters",
+        "module": "database",
+        "default_value": "Incorrect number of parameters for the prepared statement.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_bind_parameters",
+        "module": "database",
+        "default_value": "Failed to bind parameters for the prepared statement: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_execute_prepared_statement",
+        "module": "database",
+        "default_value": "Failed to execute prepared statement: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_bind_parameters",
+        "module": "database",
+        "default_value": "Connection pool is not initialized.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "db_connection_error",
+        "module": "database",
+        "default_value": "Invalid connection type",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_start_transaction",
+        "module": "database",
+        "default_value": "Failed to start transaction: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_execute_sql_statement",
+        "module": "database",
+        "default_value": "Failed to execute SQL statement: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_commit_transaction",
+        "module": "database",
+        "default_value": "Failed to commit transaction: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_execute_sql_query",
+        "module": "database",
+        "default_value": "Failed to execute SQL query: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_retrieve_query_result",
+        "module": "database",
+        "default_value": "Failed to retrieve query result: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_add_column",
+        "module": "database",
+        "default_value": "Failed to add column: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_modify_column",
+        "module": "database",
+        "default_value": "Failed to modify column: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_rename_column",
+        "module": "database",
+        "default_value": "Failed to rename column: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_delete_column",
+        "module": "database",
+        "default_value": "Failed to delete column: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_retrieve_table_names",
+        "module": "database",
+        "default_value": "Failed to retrieve table names.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_optimize_indexes_table",
+        "module": "database",
+        "default_value": "Failed to optimize indexes for table",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "index_already_exist_table",
+        "module": "database",
+        "default_value": "Index with the name '{}' already exists for table '{}'.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_create_index",
+        "module": "database",
+        "default_value": "Failed to create index: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "index_does_not_exist_table",
+        "module": "database",
+        "default_value": "Index with the name '{}' does not exist for table '{}'.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_drop_index",
+        "module": "database",
+        "default_value": "Failed to drop index: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_data_provided_for_bulk_insert",
+        "module": "database",
+        "default_value": "No data provided for bulk insert.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_perform_bulk_insert",
+        "module": "database",
+        "default_value": "Failed to perform bulk insert: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_data_provided_bulk_update",
+        "module": "database",
+        "default_value": "No data provided for bulk update.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_data_format_bulk_update",
+        "module": "database",
+        "default_value": "Invalid data format for bulk update.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_perform_bulk_update",
+        "module": "database",
+        "default_value": "Failed to perform bulk update: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_perform_bulk_delete",
+        "module": "database",
+        "default_value": "Failed to perform bulk delete: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_migrate_data",
+        "module": "database",
+        "default_value": "Failed to migrate data: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_to_open_script_file",
+        "module": "database",
+        "default_value": "Failed to open the script file: ",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_sql_query_harmful",
+        "module": "database",
+        "default_value": "Invalid SQL query. It contains potentially harmful statements.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "query_parameters_are_empty",
+        "module": "database",
+        "default_value": "Query parameters are empty.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "empty_query_parameter_detected.",
+        "module": "database",
+        "default_value": "Empty query parameter detected.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "db_connection_error_desc",
+        "module": "core",
+        "default_value": "There is a problem connecting to the database, please check your settings!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "config_error",
+        "module": "core",
+        "default_value": "Configuration Error!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "config_error_desc",
+        "module": "core",
+        "default_value": "You should check the configuration system.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "already_installed",
+        "module": "system",
+        "default_value": "The system is already installed.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "already_installed_desc",
+        "module": "system",
+        "default_value": "Installation preparations need to be changed first before reinstallation.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "block_error",
+        "module": "system",
+        "default_value": "Unable to load block.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "block_not_found",
+        "module": "system",
+        "default_value": "Unable to found block.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_task_parameters",
+        "module": "system",
+        "default_value": "अमान्य कार्य पैरामीटर।",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "task_already_exists",
+        "module": "system",
+        "default_value": "एक समान आईडी वाला कार्य पहले से मौजूद है।",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "no_tasks_found",
+        "module": "system",
+        "default_value": "कोई कार्य नहीं मिला।",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "running_task",
+        "module": "system",
+        "default_value": "चल रहा कार्य:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "task_executed_successfully",
+        "module": "system",
+        "default_value": "कार्य सफलतापूर्वक पूरा हुआ।",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "exception_occurred_during_task",
+        "module": "system",
+        "default_value": "कार्य के दौरान एक अप्रत्याशित संधि आई:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "unknown_exception_occurred_during_task",
+        "module": "system",
+        "default_value": "कार्य के दौरान एक अज्ञात संधि आई:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_open_data_file_writing",
+        "module": "system",
+        "default_value": "डेटा फ़ाइल लिखने में विफल रहा।",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "failed_open_data_file_reading",
+        "module": "system",
+        "default_value": "डेटा फ़ाइल पढ़ने में विफल रहा।",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_cron_expression",
+        "module": "system",
+        "default_value": "अमान्य cron अभिव्यक्ति।",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "error_parsing_token",
+        "module": "system",
+        "default_value": "टोकन का विश्लेषण करने में त्रुटि हुई:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "error_parsing_value",
+        "module": "system",
+        "default_value": "मान का विश्लेषण करने में त्रुटि हुई:",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "error",
+        "module": "system",
+        "default_value": "त्रुटि:",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "database": [
+      {
+        "word_key": "connected",
+        "module": "core",
+        "default_value": "Database is connected!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "disconnected",
+        "module": "core",
+        "default_value": "Database has not connected!",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "forms": [
+      {
+        "word_key": "accept",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Accept",
+        "custom_value": ""
+      },
+      {
+        "word_key": "add",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Add",
+        "custom_value": ""
+      },
+      {
+        "word_key": "follow",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Follow",
+        "custom_value": ""
+      },
+      {
+        "word_key": "unfollow",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Unfollow",
+        "custom_value": ""
+      },
+      {
+        "word_key": "add_to_cart",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Add to Cart",
+        "custom_value": ""
+      },
+      {
+        "word_key": "profile",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Profile",
+        "custom_value": ""
+      },
+      {
+        "word_key": "edit_profile",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Edit Profile",
+        "custom_value": ""
+      },
+      {
+        "word_key": "add_to_wishlist",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Add to Wishlist",
+        "custom_value": ""
+      },
+      {
+        "word_key": "apply",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Apply",
+        "custom_value": ""
+      },
+      {
+        "word_key": "send",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Send",
+        "custom_value": ""
+      },
+      {
+        "word_key": "request",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Request",
+        "custom_value": ""
+      },
+      {
+        "word_key": "back",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Back",
+        "custom_value": ""
+      },
+      {
+        "word_key": "goback",
+        "module": "system",
+        "default_value": "Go back",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "done",
+        "module": "system",
+        "default_value": "Done",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "like",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Like",
+        "custom_value": ""
+      },
+      {
+        "word_key": "dislike",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Dislike",
+        "custom_value": ""
+      },
+      {
+        "word_key": "write",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Write",
+        "custom_value": ""
+      },
+      {
+        "word_key": "clean",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Clean",
+        "custom_value": ""
+      },
+      {
+        "word_key": "clear",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Clear",
+        "custom_value": ""
+      },
+      {
+        "word_key": "buy",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Buy",
+        "custom_value": ""
+      },
+      {
+        "word_key": "scan",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Scan",
+        "custom_value": ""
+      },
+      {
+        "word_key": "deposit",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Deposit",
+        "custom_value": ""
+      },
+      {
+        "word_key": "withdrawal",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Withdrawal",
+        "custom_value": ""
+      },
+      {
+        "word_key": "buy_now",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Buy Now",
+        "custom_value": ""
+      },
+      {
+        "word_key": "cancel",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Cancel",
+        "custom_value": ""
+      },
+      {
+        "word_key": "ok",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Ok",
+        "custom_value": ""
+      },
+      {
+        "word_key": "discard",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Discard",
+        "custom_value": ""
+      },
+      {
+        "word_key": "now",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Discard",
+        "custom_value": ""
+      },
+      {
+        "word_key": "update",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Update",
+        "custom_value": ""
+      },
+      {
+        "word_key": "upgrade",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Upgrade",
+        "custom_value": ""
+      },
+      {
+        "word_key": "downgrade",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Downgrade",
+        "custom_value": ""
+      },
+      {
+        "word_key": "move",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Move",
+        "custom_value": ""
+      },
+      {
+        "word_key": "left",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Left",
+        "custom_value": ""
+      },
+      {
+        "word_key": "right",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Right",
+        "custom_value": ""
+      },
+      {
+        "word_key": "up",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Up",
+        "custom_value": ""
+      },
+      {
+        "word_key": "down",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Down",
+        "custom_value": ""
+      },
+      {
+        "word_key": "check_out",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Check Out",
+        "custom_value": ""
+      },
+      {
+        "word_key": "close",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Close",
+        "custom_value": ""
+      },
+      {
+        "word_key": "complete_order",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Complete Order",
+        "custom_value": ""
+      },
+      {
+        "word_key": "confirm",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Confirm",
+        "custom_value": ""
+      },
+      {
+        "word_key": "confirm_changes",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Confirm Changes",
+        "custom_value": ""
+      },
+      {
+        "word_key": "continue",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Continue",
+        "custom_value": ""
+      },
+      {
+        "word_key": "go",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Go",
+        "custom_value": ""
+      },
+      {
+        "word_key": "set_default",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Set Default",
+        "custom_value": ""
+      },
+      {
+        "word_key": "continue_shopping",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Continue Shopping",
+        "custom_value": ""
+      },
+      {
+        "word_key": "copy",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Copy",
+        "custom_value": ""
+      },
+      {
+        "word_key": "clone",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Clone",
+        "custom_value": ""
+      },
+      {
+        "word_key": "duplicate",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Duplicate",
+        "custom_value": ""
+      },
+      {
+        "word_key": "create",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Create",
+        "custom_value": ""
+      },
+      {
+        "word_key": "decline",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Decline",
+        "custom_value": ""
+      },
+      {
+        "word_key": "delete",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Delete",
+        "custom_value": ""
+      },
+      {
+        "word_key": "edit",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Edit",
+        "custom_value": ""
+      },
+      {
+        "word_key": "export",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Export",
+        "custom_value": ""
+      },
+      {
+        "word_key": "import",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Import",
+        "custom_value": ""
+      },
+      {
+        "word_key": "start",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Start",
+        "custom_value": ""
+      },
+      {
+        "word_key": "finish",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Finish",
+        "custom_value": ""
+      },
+      {
+        "word_key": "generate",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Generate",
+        "custom_value": ""
+      },
+      {
+        "word_key": "log_in",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Log In",
+        "custom_value": ""
+      },
+      {
+        "word_key": "log_out",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Log Out",
+        "custom_value": ""
+      },
+      {
+        "word_key": "next",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Next",
+        "custom_value": ""
+      },
+      {
+        "word_key": "previous",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Previous",
+        "custom_value": ""
+      },
+      {
+        "word_key": "forward",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Forward",
+        "custom_value": ""
+      },
+      {
+        "word_key": "backward",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Backward",
+        "custom_value": ""
+      },
+      {
+        "word_key": "select",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Select...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "manage",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Manage...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "translate",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Translate",
+        "custom_value": ""
+      },
+      {
+        "word_key": "pin",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Pin",
+        "custom_value": ""
+      },
+      {
+        "word_key": "reply",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Reply",
+        "custom_value": ""
+      },
+      {
+        "word_key": "proceed_to_payment",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Proceed to Payment",
+        "custom_value": ""
+      },
+      {
+        "word_key": "refresh",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Refresh",
+        "custom_value": ""
+      },
+      {
+        "word_key": "register",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Register",
+        "custom_value": ""
+      },
+      {
+        "word_key": "remove",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Remove",
+        "custom_value": ""
+      },
+      {
+        "word_key": "reset",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Reset",
+        "custom_value": ""
+      },
+      {
+        "word_key": "retry",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Retry",
+        "custom_value": ""
+      },
+      {
+        "word_key": "save",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Save",
+        "custom_value": ""
+      },
+      {
+        "word_key": "search",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Search",
+        "custom_value": ""
+      },
+      {
+        "word_key": "send",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Send",
+        "custom_value": ""
+      },
+      {
+        "word_key": "settings",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Settings",
+        "custom_value": ""
+      },
+      {
+        "word_key": "your_activity",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Your Activity",
+        "custom_value": ""
+      },
+      {
+        "word_key": "your_activity",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Your activity",
+        "custom_value": ""
+      },
+      {
+        "word_key": "report_problem",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Report a problem",
+        "custom_value": ""
+      },
+      {
+        "word_key": "preferences",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Preferences",
+        "custom_value": ""
+      },
+      {
+        "word_key": "choose",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Choose...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "details",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Details...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "moreinfo",
+        "module": "ui",
+        "type": "button",
+        "default_value": "More Info...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "other",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Other...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "advanced",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Advanced...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "change",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Change...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "connect",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Connect",
+        "custom_value": ""
+      },
+      {
+        "word_key": "disconnect",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Disconnect",
+        "custom_value": ""
+      },
+      {
+        "word_key": "setup",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Setup...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "install",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Install...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "uninstall",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Uninstall...",
+        "custom_value": ""
+      },
+      {
+        "word_key": "sign_up",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Sign Up",
+        "custom_value": ""
+      },
+      {
+        "word_key": "sign_in",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Sign In",
+        "custom_value": ""
+      },
+      {
+        "word_key": "transfer",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Transfer",
+        "custom_value": ""
+      },
+      {
+        "word_key": "transfer",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Transfer",
+        "custom_value": ""
+      },
+      {
+        "word_key": "receive",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Receive",
+        "custom_value": ""
+      },
+      {
+        "word_key": "swap",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Swap",
+        "custom_value": ""
+      },
+      {
+        "word_key": "submit",
+        "module": "ui",
+        "type": "button",
+        "default_value": "Submit",
+        "custom_value": ""
+      }
+    ],
+    "messages": [
+      {
+        "word_key": "message",
+        "module": "system",
+        "default_value": "Message",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "empty_full_name",
+        "module": "system",
+        "default_value": "Full name is empty!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "empty_email",
+        "module": "system",
+        "default_value": "Email address is empty!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "empty_mobile",
+        "module": "system",
+        "default_value": "Mobile number is empty!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "system",
+        "module": "system",
+        "default_value": "System Message",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "control_inputs",
+        "module": "system",
+        "default_value": "Control your inputs!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "enter_full_data",
+        "module": "system",
+        "default_value": "Enter full information!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "username_limited_char",
+        "module": "system",
+        "default_value": "Your username must contain at least <strong>{}</strong> characters!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_invite_code",
+        "module": "system",
+        "default_value": "Invite code is invalid!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "data_error",
+        "module": "system",
+        "default_value": "Data Error!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "user",
+        "module": "system",
+        "default_value": "User Message",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "earn_point",
+        "module": "system",
+        "default_value": "Earn Point",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_username",
+        "module": "system",
+        "default_value": "Username is invalid!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_email",
+        "module": "system",
+        "default_value": "Email address is invalid!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "invalid_mobile",
+        "module": "system",
+        "default_value": "Mobile number is invalid!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "user_pass_message",
+        "module": "system",
+        "default_value": "Username & Password Message",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "interested_note",
+        "module": "system",
+        "default_value": "Interested Note!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "students_note",
+        "module": "system",
+        "default_value": "Student Note!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "master_note",
+        "module": "system",
+        "default_value": "Master Note!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "user_type_not_specified",
+        "module": "system",
+        "default_value": "Not Specified!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "create_exist_booth",
+        "module": "system",
+        "default_value": "The booth with this <strong>{}</strong> username is already taken!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "create_success",
+        "module": "system",
+        "default_value": "The booth with this <strong>{}</strong> username was successfully registered!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "create_success_product",
+        "module": "system",
+        "default_value": "The product with this <strong>{}</strong> title was successfully created!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "delete_success",
+        "module": "system",
+        "default_value": "The {} file has been deleted successfully!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "delete_error",
+        "module": "system",
+        "default_value": "There was a problem in deleting {} file!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "upload_success",
+        "module": "system",
+        "default_value": "The {} file has been uploaded successfully!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "upload_error",
+        "module": "system",
+        "default_value": "There was a problem in uploading {} file!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "max_image_upload",
+        "module": "system",
+        "default_value": "The maximum number allowed to upload is {} images.",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "greeting": [
+      {
+        "word_key": "hello",
+        "module": "system",
+        "default_value": "Hello!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hi",
+        "module": "system",
+        "default_value": "Hi!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hey",
+        "module": "system",
+        "default_value": "Hey!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "greetings",
+        "module": "system",
+        "default_value": "Greetings!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "im_cell",
+        "module": "system",
+        "default_value": "I'm Cell!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "good_morning",
+        "module": "system",
+        "default_value": "Good morning!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "good_afternoon",
+        "module": "system",
+        "default_value": "Good afternoon!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "good_evening",
+        "module": "system",
+        "default_value": "Good evening!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "how_are_you",
+        "module": "system",
+        "default_value": "How are you doing today?",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "how_can_i_help_you",
+        "module": "system",
+        "default_value": "How can I help you?",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "whats_going_on",
+        "module": "system",
+        "default_value": "What's going on?",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "authorization": [
+      {
+        "word_key": "error",
+        "module": "system",
+        "default_value": "Authorization error!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "incorrect_user_profile",
+        "module": "system",
+        "default_value": "User profile is incorrect!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "incorrect_user_pass",
+        "module": "system",
+        "default_value": "Username or password is not correct!",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "setup": [
+      {
+        "word_key": "setup",
+        "module": "system",
+        "default_value": "Setup",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_initialization",
+        "module": "system",
+        "default_value": "Initialization",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "wizard_message",
+        "module": "system",
+        "default_value": "The wizard will guide you through the installation process.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "installer_quide_message",
+        "module": "system",
+        "default_value": "Check out our installation guide if you need help using the installer.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "installer_resource_message",
+        "module": "system",
+        "default_value": "Based on the system's resources and installation requirements, the system automatically chooses the best possible mode for resource control and performance optimization.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_installed",
+        "module": "system",
+        "default_value": "Ready for install",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_license",
+        "module": "system",
+        "default_value": "License",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_applications",
+        "module": "system",
+        "default_value": "Applications",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "licence_content",
+        "module": "system",
+        "default_value": "",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "license_accept",
+        "module": "system",
+        "default_value": "I agree to the license agreement",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_compatibility",
+        "module": "system",
+        "default_value": "Compatibility",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_customization",
+        "module": "system",
+        "default_value": "Customization",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_finalizing",
+        "module": "system",
+        "default_value": "Finalizing",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_ready",
+        "module": "system",
+        "default_value": "Ready",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_progress_title",
+        "module": "system",
+        "default_value": "Configuration process",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_title_first",
+        "module": "system",
+        "default_value": "Globalization and Style",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_desc_first",
+        "module": "system",
+        "default_value": "Change and customization software style and globalization.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_title_second",
+        "module": "system",
+        "default_value": "System status",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_desc_second",
+        "module": "system",
+        "default_value": "System status to running on the computer.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_title_third",
+        "module": "system",
+        "default_value": "License Agreement",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_desc_third",
+        "module": "system",
+        "default_value": "PLEASE READ THIS END USER LICENCE AGREEMENT CAREFULLY.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_title_fourth",
+        "module": "system",
+        "default_value": "Compatibility",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_desc_fourth",
+        "module": "system",
+        "default_value": "Check the compatibility of the software with your system.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_title_fivth",
+        "module": "system",
+        "default_value": "Finalizing System",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_desc_fivth",
+        "module": "system",
+        "default_value": "Finalizing your config system.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_title_sixth",
+        "module": "system",
+        "default_value": "System Ready",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_desc_sixth",
+        "module": "system",
+        "default_value": "The system is ready to use!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "system_requirements",
+        "module": "system",
+        "default_value": "System requirements",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "step_server_info",
+        "module": "system",
+        "default_value": "Server Information",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "requirements_features",
+        "module": "system",
+        "default_value": "Requirements and features",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "engine",
+        "module": "system",
+        "default_value": "System Engine",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "engine_version",
+        "module": "system",
+        "default_value": "Engine Version",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "cpp_iso",
+        "module": "system",
+        "default_value": "C++ ISO",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "web_server",
+        "module": "system",
+        "default_value": "Web Server",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "database_driver",
+        "module": "system",
+        "default_value": "Database Driver",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "server_name",
+        "module": "system",
+        "default_value": "Server Name",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "multilanguage",
+        "module": "system",
+        "default_value": "Multi-Language Support",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "server_name_desc",
+        "module": "system",
+        "default_value": "Name of host computer",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "optimization_features",
+        "module": "system",
+        "default_value": "Optimization features",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "installed_memory",
+        "module": "system",
+        "default_value": "Installed Memory",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "installed_memory_desc",
+        "module": "system",
+        "default_value": "Usable memory for System",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "setup_slogan",
+        "module": "system",
+        "default_value": "Power of perfection",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "setup_slogan_desc",
+        "module": "system",
+        "default_value": "Cell Content Management System, an open source system with multi-lingual and multi-purpose features for building extremely super high-end performance websites.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "database_message",
+        "module": "system",
+        "default_value": "Please enter database info",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "database_details",
+        "module": "system",
+        "default_value": "Database Details",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "database_host",
+        "module": "system",
+        "default_value": "Database Host",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "database_name",
+        "module": "system",
+        "default_value": "Database Name",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "database_username",
+        "module": "system",
+        "default_value": "Database Username",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "database_password",
+        "module": "system",
+        "default_value": "Database Password",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "database_table_prefix",
+        "module": "system",
+        "default_value": "Table Prefix",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "database_charset",
+        "module": "system",
+        "default_value": "Charset",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "database_driver_type",
+        "module": "system",
+        "default_value": "Driver Type",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "database_port",
+        "module": "system",
+        "default_value": "Port",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "finalize_message",
+        "module": "system",
+        "default_value": "Installation of the system is complete, please enter your administration details.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "finalize_title",
+        "module": "system",
+        "default_value": "Administration Details",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "username",
+        "module": "system",
+        "default_value": "Username",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "password",
+        "module": "system",
+        "default_value": "Password",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "firstname",
+        "module": "system",
+        "default_value": "First Name",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "lastname",
+        "module": "system",
+        "default_value": "Last Name",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "confirm_password",
+        "module": "system",
+        "default_value": "Confirm Password",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "email_address",
+        "module": "system",
+        "default_value": "Email Address",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "language",
+        "module": "system",
+        "default_value": "Language",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "cdn",
+        "module": "system",
+        "default_value": "CDN Type",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "site_details",
+        "module": "system",
+        "default_value": "Site Details",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "website_title",
+        "module": "system",
+        "default_value": "Your Website Title",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "website_description",
+        "module": "system",
+        "default_value": "Your Website Description",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "complete_title",
+        "module": "system",
+        "default_value": "Installation Completed!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "complete_message",
+        "module": "system",
+        "default_value": "Your administration account has been created!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "goto_dashboard",
+        "module": "system",
+        "default_value": "Go Dashboard",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "go_website",
+        "module": "system",
+        "default_value": "View Website",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "website_ready",
+        "module": "system",
+        "default_value": "Website is ready!",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "go_website_desc",
+        "module": "system",
+        "default_value": "Your website is ready to display content. In the customization section, you can change the format and content.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "go_development",
+        "module": "system",
+        "default_value": "Go Official Website",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "go_development_desc",
+        "module": "system",
+        "default_value": "We will make sure that any problems you notice in the system are resolved in future updates by reporting them to the development team.",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "system_support",
+        "module": "system",
+        "default_value": "System Support",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "cache_storage_technology",
+        "module": "system",
+        "default_value": "Cache Storage Technology",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "tab_hardware_title",
+        "module": "system",
+        "default_value": "Hardware",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "tab_hardware_desc",
+        "module": "system",
+        "default_value": "Detected Hardware",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "tab_software_title",
+        "module": "system",
+        "default_value": "Software",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "tab_software_desc",
+        "module": "system",
+        "default_value": "Software Requirement",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "check",
+        "module": "system",
+        "default_value": "Check",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "render_mode",
+        "module": "system",
+        "default_value": "Render mode",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "style",
+        "module": "system",
+        "default_value": "Style (Theme)",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "language",
+        "module": "system",
+        "default_value": "Language",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "product_name",
+        "module": "system",
+        "default_value": "Product Name",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "product_version",
+        "module": "system",
+        "default_value": "Product Version",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "operation_system",
+        "module": "system",
+        "default_value": "Operation System",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "package_name",
+        "module": "system",
+        "default_value": "Package Name",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "architecture",
+        "module": "system",
+        "default_value": "Architecture",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "class_type",
+        "module": "system",
+        "default_value": "Class Type",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "language_support",
+        "module": "system",
+        "default_value": "Language Support",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_machine",
+        "module": "system",
+        "default_value": "Machine",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_serial",
+        "module": "system",
+        "default_value": "Serial Number",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_cpu",
+        "module": "system",
+        "default_value": "Processor",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_ram",
+        "module": "system",
+        "default_value": "Ram",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_gpu",
+        "module": "system",
+        "default_value": "Graphic Card",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_disk",
+        "module": "system",
+        "default_value": "Storage Disk",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_network",
+        "module": "system",
+        "default_value": "Network",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_mac",
+        "module": "system",
+        "default_value": "Mac Address",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_ipv4",
+        "module": "system",
+        "default_value": "IPv4 Address",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_ipv6",
+        "module": "system",
+        "default_value": "IPv6 Address",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_uid",
+        "module": "system",
+        "default_value": "UID",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_engine",
+        "module": "system",
+        "default_value": "Engine",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_openssl",
+        "module": "system",
+        "default_value": "OpenSSL",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_driver",
+        "module": "system",
+        "default_value": "Drivers",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_compiler",
+        "module": "system",
+        "default_value": "Compiler",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_stl",
+        "module": "system",
+        "default_value": "STL",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_framework",
+        "module": "system",
+        "default_value": "Drogon Framework",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_iso",
+        "module": "system",
+        "default_value": "ISO",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_debug",
+        "module": "system",
+        "default_value": "Debug",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_optimized",
+        "module": "system",
+        "default_value": "Optimized",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_compress",
+        "module": "system",
+        "default_value": "Compress",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_sync",
+        "module": "Sync",
+        "default_value": "Sync",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_log",
+        "module": "system",
+        "default_value": "Logger",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "decoders",
+        "module": "system",
+        "default_value": "Decoders",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "software_type",
+        "module": "system",
+        "default_value": "Software type",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "hardware_type",
+        "module": "system",
+        "default_value": "Hardware type",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "automatic",
+        "module": "system",
+        "default_value": "Automatic",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "light_style",
+        "module": "system",
+        "default_value": "Light Style",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "dark_style",
+        "module": "system",
+        "default_value": "Dark Style",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "timezone",
+        "module": "system",
+        "default_value": "Time Zone",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "automatic_update",
+        "module": "system",
+        "default_value": "Automatic Updates",
+        "custom_value": "",
+        "type": "text"
+      }
+    ],
+    "dialog": [
+      {
+        "word_key": "previous",
+        "module": "system",
+        "default_value": "Previous",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "next",
+        "module": "system",
+        "default_value": "Next",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "apply",
+        "module": "system",
+        "default_value": "Apply",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "goback",
+        "module": "system",
+        "default_value": "Go back",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "check_next",
+        "module": "system",
+        "default_value": "Check and Next",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "gohome",
+        "module": "system",
+        "default_value": "Go Home Page",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "install",
+        "module": "system",
+        "default_value": "Install",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "lets_start",
+        "module": "system",
+        "default_value": "Let's Start",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "finalizing",
+        "module": "system",
+        "default_value": "Finalizing",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "finish",
+        "module": "system",
+        "default_value": "Finish",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "runapp",
+        "module": "system",
+        "default_value": "Run Application",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "ok",
+        "module": "system",
+        "default_value": "OK",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "cancel",
+        "module": "system",
+        "default_value": "Cancel",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "close",
+        "module": "system",
+        "default_value": "Close",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "remove",
+        "module": "system",
+        "default_value": "Remove",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "add",
+        "module": "system",
+        "default_value": "Add",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "add_vote",
+        "module": "system",
+        "default_value": "Add vote",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "your_vote_title",
+        "module": "system",
+        "default_value": "Your opinion is important to us",
+        "custom_value": "",
+        "type": "text"
+      },
+      {
+        "word_key": "your_vote_title_desc",
+        "module": "system",
+        "default_value": "Let us know what you think about the Cell.",
+        "custom_value": "",
+        "type": "text"
+      }
+    ]
+  }
+}

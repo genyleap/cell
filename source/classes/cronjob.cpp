@@ -1,4 +1,3 @@
-//! Cell's Cron Jobs.
 #if __has_include("cronjob.hpp")
 #   include "cronjob.hpp"
 #else

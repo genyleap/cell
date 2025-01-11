@@ -1,8 +1,8 @@
 /*!
  * Gen3 License
  *
- * Copyright (c) 2021 Kambiz Asadzadeh
- * Copyright (c) 2023 Genyleap
+ * Copyright (c) 2024 Kambiz Asadzadeh (compez.eth)
+ * Copyright (c) 2024 Genyleap
  */
 
 #ifndef PCH_HPP
@@ -270,6 +270,7 @@
 #include <random>
 #include <ratio>
 #include <valarray>
+#include <ranges>
 
 //!Memory management
 #if __has_include(<allocators>)

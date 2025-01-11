@@ -2,10 +2,10 @@
  * @file        activities.hpp
  * @brief       This file is part of the Cell System.
  * @details     User activities interface for system.
- * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
- * @package     The Genyleap
+ * @author      <a href='https://github.com/thecompez'>Kambiz Asadzadeh</a>
+ * @package     Genyleap
  * @since       29 Aug 2022
- * @copyright   Copyright (c) 2022 The Genyleap. All rights reserved.
+ * @copyright   Copyright (c) 2025 The Genyleap. All rights reserved.
  * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
  *
  */
@@ -39,7 +39,8 @@ enum class ActivityAction : Types::u8
     Forward,
     Reply,
     View,
-    Move
+    Move,
+    Custom
 };
 
 struct ActivityData final

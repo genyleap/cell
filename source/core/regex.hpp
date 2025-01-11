@@ -3,9 +3,9 @@
  *
  * @file        regex.hpp
  * @brief       This file is part of the Cell engine.
- * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
+ * @author      <a href='https://github.com/thecompez'>Kambiz Asadzadeh</a>
  * @package     libCell
- * @copyright   Copyright (c) 2022 The Genyleap. All rights reserved.
+ * @copyright   Copyright (c) 2025 The Genyleap. All rights reserved.
  * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
  */
 

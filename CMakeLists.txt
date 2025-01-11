@@ -1,13 +1,15 @@
 # -------------------- PROJECT TEMPLATE INFO ---------------------------------------------
 #   Title   :                       Cell Engine
-#   Version :                       0.8.550
-#   Author  :                       Kambiz Asadzadeh
+#   Version :                       0.9.550
+#   Author  :                       Kambiz Asadzadeh (compez.eth)
 #   Url     :                       https://github.com/genyleap/cell
 #   Organization  :                 The Genyleap
 # ----------------------------------------------------------------------------------------
 
-cmake_minimum_required(VERSION 3.18)
-cmake_policy(SET CMP0048 NEW)
+cmake_minimum_required(VERSION 3.27)
+# Set CMP0042 policy to NEW
+# cmake_policy(SET CMP0042 NEW)
+# cmake_policy(SET CMP0048 NEW)
 
 # Add include path for cmake modules
 # ------ PROJECT EXTRA CMAKE ------
@@ -23,6 +25,7 @@ set(PROJECT_NAME "CoreInterface" CACHE STRING "Project Name.") #You can change "
 set(PROJECT_TARGET ${PROJECT_NAME} CACHE STRING "Project Target Name.")
 set(PROJECT_REAL_NAME "Cell" CACHE STRING "Project Real Name.")
 
+set(PROJECT_VERSION 0.8.550)
 set(PROJECT_VERSION_MAJOR 0)
 set(PROJECT_VERSION_MINOR 8)
 set(PROJECT_VERSION_PATCH 550)
@@ -33,7 +36,7 @@ set_property(GLOBAL APPEND PROPERTY USE_FOLDERS ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 if(NOT DEFINED CMAKE_CXX_STANDARD)
-    set(CMAKE_CXX_STANDARD 20)
+    set(CMAKE_CXX_STANDARD 23)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
     set(CMAKE_CXX_EXTENSIONS ON)
 endif()
@@ -66,7 +69,7 @@ set(PROJECT_VERSION_STRING ${PROJECT_VERSION}-${PROJECT_VERSION_TYPE})
 set(PROJECT_LANGUAGES CXX)
 
 #Use these keys [application, library]
-set(PROJECT_USAGE_TYPE "library" CACHE STRING "Usage Type.")
+set(PROJECT_USAGE_TYPE "application" CACHE STRING "Usage Type.")
 
 #Use these keys [stl, qt, qtwidget, qtquick]
 set(PROJECT_MAIN_TYPE "stl" CACHE STRING "Library System.")
@@ -136,6 +139,8 @@ endif()
 
 set(SUFFIX_EXTRA *.in)
 set(SUFFIX_HPPHEADER *.hpp)
+set(SUFFIX_IPPHEADER *.ipp)
+set(SUFFIX_INLHEADER *.inl)
 set(SUFFIX_SOURCE *.cpp)
 set(SUFFIX_CONFIG *.json)
 set(SUFFIX_TRANSLATIONS *.json)
@@ -185,6 +190,7 @@ file(
     source/abstracts/${SUFFIX_HPPHEADER}
     source/abstracts/apis/${SUFFIX_HPPHEADER}
     source/abstracts/account/${SUFFIX_HPPHEADER}
+    source/abstracts/blockchain/${SUFFIX_HPPHEADER}
     source/abstracts/calendar/${SUFFIX_HPPHEADER}
     source/abstracts/database/${SUFFIX_HPPHEADER}
     source/modules/database/${SUFFIX_HPPHEADER}
@@ -192,6 +198,7 @@ file(
     source/abstracts/dynamics/${SUFFIX_HPPHEADER}
     source/abstracts/modules/webserver/${SUFFIX_HPPHEADER}
     source/classes/dynamics/${SUFFIX_HPPHEADER}
+    source/metagen/core/${SUFFIX_HPPHEADER}
 )
 file(
     GLOB SOURCES
@@ -221,6 +228,7 @@ file(
     source/abstracts/${SUFFIX_SOURCE}
     source/abstracts/apis/${SUFFIX_SOURCE}
     source/abstracts/account/${SUFFIX_SOURCE}
+    source/abstracts/blockchain/${SUFFIX_SOURCE}
     source/abstracts/calendar/${SUFFIX_SOURCE}
     source/abstracts/database/${SUFFIX_SOURCE}
     source/modules/database/${SUFFIX_SOURCE}
@@ -238,10 +246,11 @@ file(GLOB PRECOMPILED
     precompiled/win32/pch.hpp
 )
 
-file(GLOB EXAMPLES
-     source/examples/${SUFFIX_HPPHEADER}
-     source/examples/${SUFFIX_SOURCE}
-)
+# file(GLOB EXAMPLES
+#      source/examples/${SUFFIX_HPPHEADER}
+#      source/examples/${SUFFIX_SOURCE}
+# )
+
 file(GLOB UTILS
      utilities/${SUFFIX_HPPHEADER}
      utilities/${SUFFIX_SOURCE}
@@ -324,31 +333,25 @@ SET(CMAKE_CACHEFILE_DIR ${dir})
 message("CMAKE_BUILD_FILES_DIRECTORY: " ${CMAKE_BUILD_FILES_DIRECTORY})
 
 # ------ OUTPUTS CONFIG ------
-
 if(PLATFORM_OS STREQUAL "macOS")
     if(OS_ARCHITECTURES STREQUAL "")
       set(OS_ARCHITECTURES ${CMAKE_OSX_ARCHITECTURES})
-      else()
-      set(OS_ARCHITECTURES "x86_64")
     endif()
 else()
     if(PROCESSOR_ARCHITECTURE STREQUAL "")
       set(OS_ARCHITECTURES ${PROCESSOR_ARCHITECTURE})
-      else()
-      set(OS_ARCHITECTURES "x86_64")
     endif()
-    set(OS_ARCHITECTURES ${PROCESSOR_ARCHITECTURE})
 endif()
 
-source_group("PrecompiledHeaders"  FILES ${PRECOMPILED})
-source_group("Utilities"  FILES ${UTILS})
-source_group("Entry Point (Main)"   FILES ${MAIN_ENTRY_POINT})
-source_group("Base"   FILES ${HEADERS} ${SOURCES})
-source_group("UI"     FILES ${UI_SOURCE})
-source_group("UI/QML"     FILES ${UI_QML_SOURCE})
-source_group("Translations"     FILES ${TRANSLATIONS})
-source_group("Config" FILES ${CONFIGFILE})
-source_group("Examples"  FILES ${EXAMPLES})
+# source_group("PrecompiledHeaders"  FILES ${PRECOMPILED})
+# source_group("Utilities"  FILES ${UTILS})
+# source_group("Entry Point (Main)"   FILES ${MAIN_ENTRY_POINT})
+# source_group("Base"   FILES ${HEADERS} ${SOURCES})
+# source_group("UI"     FILES ${UI_SOURCE})
+# source_group("UI/QML"     FILES ${UI_QML_SOURCE})
+# source_group("Translations"     FILES ${TRANSLATIONS})
+# source_group("Config" FILES ${CONFIGFILE})
+# source_group("Examples"  FILES ${EXAMPLES})
 
 # ------ OUTPUTS CONFIG ------
 message(STATUS "${BoldRed}------ ${PROJECT_TARGET} Tools Configuration ------${ColourReset}")
@@ -356,8 +359,8 @@ message(STATUS "${Bold}Language Standard${ColourReset}	    : C++[${CMAKE_CXX_STA
 message(STATUS "${Bold}Compiler${ColourReset}		    : ${CMAKE_CXX_COMPILER_ID}")
 message(STATUS "${Bold}Compiler Version${ColourReset}	    : ${CMAKE_CXX_COMPILER_VERSION}")
 message(STATUS "${Bold}OS Target${ColourReset}		    : ${CMAKE_HOST_SYSTEM}")
-message(STATUS "${Bold}OS Version${ColourReset}		    : ${CMAKE_HOST_SYSTEM_VERSION}")
-message(STATUS "${Bold}System Architecture${ColourReset}      : ${OS_ARCHITECTURES}")
+message(STATUS "${Bold}OS Version${ColourReset}             : ${CMAKE_HOST_SYSTEM_VERSION}")
+message(STATUS "${Bold}System Architecture${ColourReset}    : ${OS_ARCHITECTURES}")
 message(STATUS "${Bold}Project License${ColourReset}	    : ${PROJECT_LICENSE_TYPE}")
 message(STATUS "${BoldBlue}------ ${PROJECT_TARGET} Framework Info ------${ColourReset}")
 message(STATUS "${Bold}Name${ColourReset}			    : ${CMAKE_PROJECT_NAME}")

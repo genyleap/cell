@@ -1,7 +1,7 @@
 /*!
  *
- * Copyright (c) 2021 Kambiz Asadzadeh
- * Copyright (c) 2023 Genyleap
+ * Copyright (c) 2024 Kambiz Asadzadeh (compez.eth)
+ * Copyright (c) 2024 Genyleap
  */
 
 #ifndef PROJECT_TYPES_HPP
@@ -48,15 +48,18 @@ using JSonArray = boost::json::array;
 #define ENABLE_OPENSSL 1
 #endif
 
+
+#ifdef __cpp_lib_format
+#   include <format>
+#define USE_STL_FORMAT
+#else
 #ifdef USE_FMT
 #   include <fmt/format.h>
 #define USE_FMT_FORMAT
 #elif defined(USE_BOOST) && !defined(USE_FMT)
 #   include <boost/format.hpp>
 #define USE_BOOST_FORMAT
-#elif !defined(USE_BOOST) || !defined(USE_FMT)
-#   include <format>
-#define USE_STL_FORMAT
+#endif
 #endif
 
 #ifdef USE_ZLIB

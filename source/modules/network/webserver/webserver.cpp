@@ -133,7 +133,7 @@ void WebServer::start(int port)
                 }
 
                 // Add a task to the event loop to handle the client request
-                m_eventLoop.addTask([=]() {
+                m_eventLoop.addTask([=, this]() {
                     handleClientRequestSSL(clientSocket, ssl);
                     int shutdownResult = SSL_shutdown(ssl);
                     if (shutdownResult == 0) {
@@ -215,7 +215,7 @@ void WebServer::start(int port)
                     }
 
                     // Add a task to the event loop to handle the client request
-                    m_eventLoop.addTask([=]() {
+                    m_eventLoop.addTask([=, this]() {
                         handleClientRequestNoSSL(clientSocket);
                         close(clientSocket);
                     });

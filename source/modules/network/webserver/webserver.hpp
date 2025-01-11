@@ -2,10 +2,10 @@
  * @file        webserver.hpp
  * @brief       This file is part of the Cell Engine.
  * @details     Webserver interface for system.
- * @author      <a href='https://www.kambizasadzadeh.com'>Kambiz Asadzadeh</a>
- * @package     The Genyleap
+ * @author      <a href='https://github.com/thecompez'>Kambiz Asadzadeh</a>
+ * @package     Genyleap
  * @since       29 Apr 2023
- * @copyright   Copyright (c) 2022 The Genyleap. All rights reserved.
+ * @copyright   Copyright (c) 2025 The Genyleap. All rights reserved.
  * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
  *
  */

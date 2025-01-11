@@ -16,11 +16,18 @@
 #define CELL_EVENT_LOOP_HPP
 
 //! Cell's Core (Basic Requirements).
-#if __has_include(<requirements>)
-#   include <requirements>
+#if __has_include(<common.hpp>)
+#   include <common.hpp>
 #else
-#   error "Cell's requirements was not found!"
+#   error "Cell's common was not found!"
 #endif
+
+#if __has_include(<core/core.hpp>)
+#   include <core/core.hpp>
+#else
+#   error "Cell's core was not found!"
+#endif
+
 
 CELL_NAMESPACE_BEGIN(Cell)
 

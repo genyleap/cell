@@ -1072,16 +1072,17 @@ void Engine::elementErase(std::string& input, const std::string& chars) __cell_n
 {
     // Create a set-like view of characters to be removed
     auto charsSet = chars | std::views::transform([](char c) {
-                         return std::views::single(c);
+                        return std::views::single(c);
                      }) | std::views::common;
 
     // Use std::erase_if with the chars_set to remove specified characters from the string
     std::erase_if(input, [&charsSet](char c) {
-        // Check if the character 'c' is in the chars_set view
-        for (auto charView : charsSet) {
+
+    // Check if the character 'c' is in the chars_set view
+    for (auto charView : charsSet) {
             if (c == *charView.begin())
                 return true;
-        }
+    }
         return false;
     });
 }
@@ -1094,16 +1095,16 @@ std::string Engine::whiteSpaceReduce(std::string_view input) __cell_noexcept
         return std::isspace(c);
     };
 
-           // Create a range that filters out whitespace
+    // Create a range that filters out whitespace
     auto range = input | std::views::filter([is_space](char c) { return !is_space(c); });
 
-           // Use the filtered range to create a new string without whitespace
+    // Use the filtered range to create a new string without whitespace
     std::string output{};
 
-           // Append the contents of "range" to "output"
+    // Append the contents of "range" to "output"
     std::ranges::copy(range, std::back_inserter(output));
 
-           // Return the new string
+    // Return the new string
     return output;
 }
 

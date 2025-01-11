@@ -1,0 +1,7 @@
+#include "modules/hardware/system/cpu.hpp"
+#include "modules/hardware/system/gpu.hpp"
+#include "modules/hardware/system/firmware.hpp"
+#include "modules/hardware/system/mainboard.hpp"
+#include "modules/hardware/system/os.hpp"
+#include "modules/hardware/system/product.hpp"
+#include "modules/hardware/system/sysinfo.hpp"
