@@ -5,7 +5,7 @@
  * @author      <a href='https://github.com/thecompez'>Kambiz Asadzadeh</a>
  * @package     Genyleap
  * @since       29 Apr 2023
- * @copyright   Copyright (c) 2023 The Genyleap. All rights reserved.
+ * @copyright   Copyright (c) 2025 The Genyleap. All rights reserved.
  * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
  *
  */
