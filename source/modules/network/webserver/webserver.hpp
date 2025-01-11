@@ -666,6 +666,16 @@ public:
     void addStaticFile(const std::string& urlPath, const std::string& filePath);
 
     /**
+     * @brief Handles requests for non-existent resources by returning a 404 Not Found response.
+     *      * This function generates an HTTP response with a status code of 404 (Not Found) and
+     * an HTML body indicating that the requested resource was not found. It is typically
+     * used as the default handler for routes that do not match any defined routes or static files.
+     *      * @param request The HTTP request object containing details about the client's request.
+     * @return Response An HTTP response object with a 404 status code and an HTML error page.
+     */
+    Response error404Handler(const Request& request);
+
+    /**
      * Sends an HTTP response over an SSL connection.
      * @param ssl The SSL connection to use for sending the response.
      * @param response The response data to send.
