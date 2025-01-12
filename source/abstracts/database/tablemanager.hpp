@@ -8,7 +8,7 @@
  * @note        This is part of the Cell Engine, developed by Kambiz Asadzadeh.
  *
  * @license     This file is licensed under the terms of the Genyleap License. See the LICENSE.md file for more information.
- * @copyright   Copyright (c) 2023 The Genyleap | Kambiz Asadzadeh. All rights reserved.
+ * @copyright   Copyright (c) 2025 The Genyleap | Kambiz Asadzadeh. All rights reserved.
  * @see         https://github.com/genyleap/cell
  */
 

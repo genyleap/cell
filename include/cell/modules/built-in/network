@@ -1,8 +1,11 @@
-#include "modules/network/http/httprequest.hpp"
-#include "modules/network/http/restapi.hpp"
 #include "modules/network/webserver/webserver.hpp"
 #include "modules/network/webserver/virtualhost.hpp"
 #include "modules/network/webserver/router.hpp"
 #include "modules/network/webserver/response.hpp"
 #include "modules/network/webserver/request.hpp"
 #include "modules/network/webserver/ratelimiter.hpp"
+
+#include "modules/network/http/httprequest.hpp"
+#include "modules/network/http/restapi.hpp"
+
+#include "modules/network/http/network.hpp"

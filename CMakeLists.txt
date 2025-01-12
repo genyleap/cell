@@ -186,6 +186,8 @@ file(
     source/modules/multimedia/${SUFFIX_HPPHEADER}
     source/modules/compression/${SUFFIX_HPPHEADER}
     source/modules/iot/${SUFFIX_HPPHEADER}
+    source/modules/protocol/${SUFFIX_HPPHEADER}
+    source/modules/protocol/farcaster/${SUFFIX_HPPHEADER}
     source/translator/${SUFFIX_HPPHEADER}
     source/abstracts/${SUFFIX_HPPHEADER}
     source/abstracts/apis/${SUFFIX_HPPHEADER}
@@ -224,6 +226,8 @@ file(
     source/modules/compression/${SUFFIX_SOURCE}
     source/modules/iot/${SUFFIX_SOURCE}
     source/modules/cryptography/${SUFFIX_SOURCE}
+    source/modules/protocol/${SUFFIX_SOURCE}
+    source/modules/protocol/farcaster/${SUFFIX_SOURCE}
     source/translator/${SUFFIX_SOURCE}
     source/abstracts/${SUFFIX_SOURCE}
     source/abstracts/apis/${SUFFIX_SOURCE}

@@ -189,6 +189,33 @@ public:
         std::string_view    message,
         const int           type);
 
+    /**
+     * @brief Logs a formatted message with the specified type.
+     * @tparam Args Variadic template parameter pack for format arguments.
+     * @param type The type of log message (e.g., LoggerType::Info).
+     * @param format The format string (must be a compile-time constant).
+     * @param args The arguments to format.
+     */
+    template<typename... Args>
+    __cell_maybe_unused static void formatted(
+        const int type,
+        std::format_string<Args...> format,  // Ensures compile-time format string
+        Args&&... args)
+    {
+        // Format the message using std::format
+        std::string message = std::format(format, std::forward<Args>(args)...);
+
+        // Call the existing echo method to log the formatted message
+        echo(
+            __cell_compiler_counter,
+            std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()),
+            __cell_compiler_line,
+            __cell_compiler_function,
+            __cell_compiler_file,
+            message,
+            type);
+    }
+
     void set(const ConfigStruct& config);
     Types::Optional<ConfigStruct> get();
     void reset();
