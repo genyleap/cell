@@ -199,6 +199,9 @@ private:
     void adjustConfig(ConfigStruct& config);
     static Types::Optional<ConfigStruct> configStruct;
 
+    static std::mutex configMutex;
+    static std::mutex logFileMutex;
+
 };
 
 /**
@@ -256,6 +259,9 @@ private:
     void log(const std::string& message);
     bool validateConfig(const ConfigStruct& config);
     void adjustConfig(ConfigStruct& config);
+
+    static std::mutex configMutex;
+    static std::mutex logFileMutex;
 
     template<typename Func>
     std::string getFunctionName(Func&& func)

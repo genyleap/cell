@@ -118,8 +118,12 @@ public:
      */
     const Cell::Globals::Storage::Cookies& cookies() const;
 
+     std::unordered_map<std::string, std::string> getUploadedFiles() const;
+
 private:
     RequestStructure m_requestStructure {};
+    std::unordered_map<std::string, std::string> m_uploadedFiles;
+
 };
 
 CELL_NAMESPACE_END

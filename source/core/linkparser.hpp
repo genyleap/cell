@@ -11,6 +11,7 @@
 
 #ifndef CELL_LINK_PARSER_HPP
 #define CELL_LINK_PARSER_HPP
+
 #if __has_include("common.hpp")
 #   include "common.hpp"
 #else

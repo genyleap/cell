@@ -44,6 +44,9 @@ if(USE_ZLIB)
     list(APPEND LIB_TARGET_COMPILER_DEFINATION "")
     list(APPEND LIB_TARGET_PROPERTIES "-D_FILE_OFFSET_BITS=64")
 endif()
+set_target_properties(zlib PROPERTIES
+    MACOSX_RPATH TRUE
+)
 if(NOT ZLIB_FOUND)
     return()
 endif()

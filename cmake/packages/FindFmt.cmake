@@ -13,7 +13,7 @@ if(FORCE_UPGRADED_LIBS)
 else()
     set(FMT_TAG "9.1.0")
 endif()
-    set(FMT_LIB_LIST "fmt::fmt-header-only" CACHE STRING "List of modules (separated by a semicolon)")
+    set(FMT_LIB_LIST "fmt::fmt-header-only;" CACHE STRING "List of modules (separated by a semicolon)")
 endif()
 
 if(USE_FMT)

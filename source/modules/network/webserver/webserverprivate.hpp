@@ -79,7 +79,7 @@ enum class HttpMethod
     DELETE
 };
 
-using Handler = std::function<Response(const Request&)>;
+// using Handler = std::function<Response(const Request&)>;
 
 /**
  * @brief The structure representing the server configuration.

@@ -20,12 +20,14 @@ CELL_USING_NAMESPACE Cell::Terminal;
 
 CELL_NAMESPACE_BEGIN(Cell::Utility)
 
+// Initialize static mutexes
+std::mutex Logger::configMutex;
+std::mutex Logger::logFileMutex;
+
 void Logger::set(const ConfigStruct& config)
 {
+    std::lock_guard<std::mutex> lock(configMutex);
     configStruct = config;
-    if(get().has_value()) {
-        get().emplace(config);
-    }
 }
 
 bool Logger::validateConfig(const ConfigStruct& config)
@@ -54,10 +56,9 @@ void Logger::adjustConfig(ConfigStruct& config)
 
 Types::Optional<ConfigStruct> Logger::get()
 {
+    std::lock_guard<std::mutex> lock(configMutex);
     if (configStruct) {
-        // Perform additional validation or modification before returning the configuration.
         if (validateConfig(*configStruct)) {
-            // Optionally perform some modification or adjustment to the configuration.
             adjustConfig(*configStruct);
             return *configStruct;
         }
@@ -202,6 +203,7 @@ void Logger::echo(const unsigned int    counter,
         }
         if(configStruct->storage == Storage::InFile)
         {
+            std::lock_guard<std::mutex> lock(logFileMutex);
             if (logFile.is_open())
             {
                 // Write the current time and the message to the file
@@ -247,6 +249,7 @@ void Logger::echo(const unsigned int    counter,
         }
         if(configStruct->storage == Storage::InFile)
         {
+            std::lock_guard<std::mutex> lock(logFileMutex);
             if (logFile.is_open())
             {
                 // Write the current time and the message to the file
@@ -332,6 +335,9 @@ void Logger::echo(const unsigned int    counter,
     logFile.close();
 }
 
+std::mutex Tracer::configMutex;
+std::mutex Tracer::logFileMutex;
+
 Tracer::Tracer()
 {
     namespace fs = std::filesystem;
@@ -377,21 +383,6 @@ Tracer::~Tracer() {
 
 Types::Optional<ConfigStruct> Tracer::configStruct = ConfigStruct();
 
-void Tracer::set(const ConfigStruct& config)
-{
-    configStruct = config;
-    if(get().has_value()) {
-        get().emplace(config);
-    }
-}
-
-void Tracer::log(const std::string& message)
-{
-    if (m_filestream.is_open()) {
-        m_filestream << message << std::endl;
-    }
-}
-
 bool Tracer::validateConfig(const ConfigStruct& config)
 {
     // Perform validation checks on the configuration and return true if the configuration is valid, false otherwise
@@ -416,12 +407,17 @@ void Tracer::adjustConfig(ConfigStruct& config)
     }
 }
 
+void Tracer::set(const ConfigStruct& config)
+{
+    std::lock_guard<std::mutex> lock(configMutex);
+    configStruct = config;
+}
+
 Types::Optional<ConfigStruct> Tracer::get()
 {
+    std::lock_guard<std::mutex> lock(configMutex);
     if (configStruct) {
-        // Perform additional validation or modification before returning the configuration.
         if (validateConfig(*configStruct)) {
-            // Optionally perform some modification or adjustment to the configuration.
             adjustConfig(*configStruct);
             return *configStruct;
         }
@@ -429,5 +425,12 @@ Types::Optional<ConfigStruct> Tracer::get()
     return __cell_null_optional;
 }
 
+void Tracer::log(const std::string& message)
+{
+    std::lock_guard<std::mutex> lock(logFileMutex);
+    if (m_filestream.is_open()) {
+        m_filestream << message << std::endl;
+    }
+}
 
 CELL_NAMESPACE_END

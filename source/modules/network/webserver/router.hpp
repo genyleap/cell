@@ -44,6 +44,7 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Network::WebServer)
 using Handler = std::function<Response(const Request&)>;
 using ExceptionErrorHandler = std::function<Response(const Request&, const std::exception&)>;
 using Middleware = std::function<void(Request&, Response&, const Handler&)>;
+
 /**
  * Router class for handling HTTP route mapping and request routing.
  *
@@ -125,6 +126,9 @@ private:
      * @return The created regex.
      */
     std::regex createRouteRegex(const std::string& routePath);
+
+    std::vector<std::string> extractParameterNames(const std::string& routePath);
+    Response applyMiddlewares(Request& request, const Handler& handler);
 
     std::unordered_map<std::string, std::unordered_map<std::string, Handler>> m_routes;
     std::vector<Middleware> m_middleWares;

@@ -69,7 +69,7 @@ set(PROJECT_VERSION_STRING ${PROJECT_VERSION}-${PROJECT_VERSION_TYPE})
 set(PROJECT_LANGUAGES CXX)
 
 #Use these keys [application, library]
-set(PROJECT_USAGE_TYPE "application" CACHE STRING "Usage Type.")
+set(PROJECT_USAGE_TYPE "library" CACHE STRING "Usage Type.")
 
 #Use these keys [stl, qt, qtwidget, qtquick]
 set(PROJECT_MAIN_TYPE "stl" CACHE STRING "Library System.")
@@ -584,13 +584,25 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC ${LIB_TARGET_COMPILER_DEFINATI
 #set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS ${LIB_TARGET_PROPERTIES})
 #This command generates installation rules for a project.
 #Install rules specified by calls to the install() command within a source directory. are executed in order during installation.
-install(TARGETS ${PROJECT_NAME} DESTINATION build/bin)
+# Ensure the final directory exists
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/final)
 
+# Install the target executable/library to the final directory
+install(TARGETS ${PROJECT_NAME} DESTINATION final)
+
+# Copy additional files and directories
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config DESTINATION ${CMAKE_BINARY_DIR}/final)
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/translations DESTINATION ${CMAKE_BINARY_DIR}/final)
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/final/server-log)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR}/final)
 install(DIRECTORY DESTINATION ${CMAKE_BINARY_DIR}/final/server-log)
+
+# Copy the built executable/library to the final folder after build
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    $<TARGET_FILE:${PROJECT_NAME}>
+    ${CMAKE_BINARY_DIR}/final
+)
 
 #file(COPY "${PROJECT_SOURCE_DIR}/build/${PLATFORM_FOLDER}/lib" DESTINATION  "${PROJECT_SOURCE_DIR}/build/final")
 
