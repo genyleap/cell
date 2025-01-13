@@ -43,6 +43,5 @@ Thumbs.db
 build/
 build/ProjectTemplate
 third-party/
-application/
 dynamics/
 CMakeLists.txt.user
