@@ -663,7 +663,7 @@ std::string WebServer::sanitizePath(const std::string& requestedPath) {
             sanitized = "/" + sanitized;
         }
 
-               // Remove any ".." or attempts at directory traversal
+        // Remove any ".." or attempts at directory traversal
         std::vector<std::string> pathParts;
         std::istringstream pathStream(sanitized);
         std::string segment;
@@ -680,7 +680,7 @@ std::string WebServer::sanitizePath(const std::string& requestedPath) {
             }
         }
 
-               // Reconstruct the sanitized path
+        // Reconstruct the sanitized path
         std::ostringstream cleanPathStream;
         for (const auto& part : pathParts) {
             cleanPathStream << "/" << part;
@@ -688,17 +688,17 @@ std::string WebServer::sanitizePath(const std::string& requestedPath) {
 
         std::string cleanPath = cleanPathStream.str();
 
-               // If the path resolves to the root, return "/"
+        // If the path resolves to the root, return "/"
         if (cleanPath.empty()) {
             return "/";
         }
 
-               // Only perform canonical path check for static files
+        // Only perform canonical path check for static files
         if (cleanPath.rfind("/static/", 0) == 0) { // Check if the path starts with "/static/"
             std::string fullPath = m_serverStructure.documentRoot + cleanPath;
             std::string canonicalPath = std::filesystem::canonical(fullPath);
 
-                   // Ensure the canonical path is within the document root
+            // Ensure the canonical path is within the document root
             if (canonicalPath.find(m_serverStructure.documentRoot) != 0) {
                 // If the path escapes the document root, return "/" (root) or an error path
                 return "/";
