@@ -726,7 +726,7 @@ void WebServer::handleClientRequestSSL(SocketType clientSocket, SSL* ssl) {
             };
         }
 
-               // Log active clients
+        // Log active clients
         for (const auto& [socket, clientInfo] : m_activeClients) {
             Log("Client: " + clientInfo.ipAddress + ", Connected at: " + std::to_string(clientInfo.connectionTime.time_since_epoch().count()), LoggerType::Info);
         }
@@ -773,7 +773,7 @@ void WebServer::handleClientRequestSSL(SocketType clientSocket, SSL* ssl) {
             return;
         }
 
-               // Check if the requested path is a static file
+        // Check if the requested path is a static file
         std::string filePath = m_serverStructure.documentRoot + requestedPath;
         std::ifstream file(filePath, std::ios::binary);
 
@@ -783,18 +783,18 @@ void WebServer::handleClientRequestSSL(SocketType clientSocket, SSL* ssl) {
             fileContentStream << file.rdbuf();
             std::string fileContent = fileContentStream.str();
 
-                   // Determine the MIME type based on the file extension
+            // Determine the MIME type based on the file extension
             MediaTypes mt;
             std::string extension = filePath.substr(filePath.find_last_of('.') + 1);
             std::string mimeType = mt.getMimeType(extension.empty() ? "bin" : extension);
 
-                   // Create a response with the file content and MIME type
+            // Create a response with the file content and MIME type
             Response response;
             response.setStatusCode(200);
             response.setContentType(mimeType);
             response.setContent(fileContent);
 
-                   // Send the response to the client
+            // Send the response to the client
             sendResponseSSL(ssl, response);
 
             file.close();
