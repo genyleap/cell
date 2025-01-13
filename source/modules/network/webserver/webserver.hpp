@@ -49,6 +49,12 @@ struct WEBSERVER_CONSTANTS final {
     __cell_static_const_constexpr int MAX_CONNECTIONS = 100;
 };
 
+struct ClientInfo {
+    Types::SocketType socket;
+    std::string ipAddress;
+    std::chrono::steady_clock::time_point connectionTime;
+};
+
 /**
  * @class WebServer
  * @brief Represents a web server implementation.
@@ -688,11 +694,15 @@ public:
      */
     std::string getDocumentRoot() const;
 
+    size_t getActiveClientCount() const;
+
 private:
     ServerStructure m_serverStructure;  //!< The server structure object.
     EventLoop m_eventLoop;              //!< The event loop object.
     EventLoopType m_eventLoopType;      //!< The type of event loop used by the server.
 
+    std::unordered_map<Types::SocketType, ClientInfo> m_activeClients;  //!< Track active clients with details
+    mutable std::mutex m_activeClientsMutex;                            //!< Mutex for thread safety (mutable for const methods)
 };
 
 CELL_NAMESPACE_END

@@ -23,7 +23,10 @@ OptionalString Request::method() const
 
 OptionalString Request::path() const
 {
-    return m_requestStructure.uri.value();
+    if (m_requestStructure.uri.has_value()) {
+        return m_requestStructure.uri.value();
+    }
+    return std::nullopt;
 }
 
 const std::unordered_map<std::string, std::string> Request::headers() const
@@ -58,11 +61,26 @@ void Request::setBody(const std::string& body)
 
 void Request::setSessionId(const std::string& sessionId)
 {
+    if (!m_requestStructure.cookies.getSessionIdCookie()) {
+        m_requestStructure.cookies = Cookies();
+    }
     m_requestStructure.cookies.addCookie("sessionId", sessionId);
 }
 
 const Cookies& Request::cookies() const {
+    if (!m_requestStructure.cookies.getSessionIdCookie()) {
+        static Cookies emptyCookies;
+        return emptyCookies;
+    }
     return m_requestStructure.cookies;
+}
+
+void Request::setPathParameters(const std::unordered_map<std::string, std::string>& params) {
+    m_requestStructure.pathParameters = params;
+}
+
+const std::unordered_map<std::string, std::string>& Request::pathParameters() const {
+    return m_requestStructure.pathParameters;
 }
 
 CELL_NAMESPACE_END

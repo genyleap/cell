@@ -1,17 +1,3 @@
-/*!
- * @file        router.hpp
- * @brief       Router manager for the Cell Engine.
- * @details     This file defines the Database interface, which provides methods for interacting with a database.
- * @author      Kambiz Asadzadeh
- * @since       07 Jun 2023
- * @version     1.0
- * @note        This is part of the Cell Engine, developed by Kambiz Asadzadeh.
- *
- * @license     This file is licensed under the terms of the Genyleap License. See the LICENSE.md file for more information.
- * @copyright   Copyright (c) 2025 The Genyleap | Kambiz Asadzadeh. All rights reserved.
- * @see         https://github.com/genyleap/cell
- */
-
 #ifndef CELL_ROUTER_HPP
 #define CELL_ROUTER_HPP
 
@@ -101,6 +87,12 @@ public:
      */
     void setExceptionHandler(const ExceptionErrorHandler& handler);
 
+    /**
+     * @brief Checks if a route exists for the given path.
+     * @param path The path to check.
+     * @return True if a route exists for the path, false otherwise.
+     */
+    bool hasRoute(const std::string& path) const;
 
 private:
     /**
@@ -109,7 +101,7 @@ private:
      * @param path The path to normalize.
      * @return The normalized path.
      */
-    Types::OptionalString normalizePath(const std::string& path);
+    Types::OptionalString normalizePath(const std::string& path) const;
 
     /**
      * Normalize the HTTP method by converting to uppercase.
@@ -127,8 +119,23 @@ private:
      */
     std::regex createRouteRegex(const std::string& routePath);
 
+    /**
+     * Extract parameter names from the route path.
+     *
+     * @param routePath The route path to extract parameter names from.
+     * @return A vector of parameter names.
+     */
     std::vector<std::string> extractParameterNames(const std::string& routePath);
+
+    /**
+     * Apply middlewares to the request and response.
+     *
+     * @param request The request to apply middlewares to.
+     * @param handler The handler function to apply middlewares to.
+     * @return The response generated from the middlewares.
+     */
     Response applyMiddlewares(Request& request, const Handler& handler);
+
 
     std::unordered_map<std::string, std::unordered_map<std::string, Handler>> m_routes;
     std::vector<Middleware> m_middleWares;
@@ -137,8 +144,6 @@ private:
     System::EngineController engineController;
 };
 
-
 CELL_NAMESPACE_END
 
 #endif  // CELL_ROUTER_HPP
-

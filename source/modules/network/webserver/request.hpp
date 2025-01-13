@@ -1,15 +1,3 @@
-/*!
- * @file        request.hpp
- * @brief       This file is part of the Cell Engine.
- * @details     Webserver request for system.
- * @author      <a href='https://github.com/thecompez'>Kambiz Asadzadeh</a>
- * @package     Genyleap
- * @since       29 Apr 2023
- * @copyright   Copyright (c) 2025 The Genyleap. All rights reserved.
- * @license     https://github.com/genyleap/cell/blob/main/LICENSE.md
- *
- */
-
 #ifndef CELL_WEBSERVER_REQUEST_HPP
 #define CELL_WEBSERVER_REQUEST_HPP
 
@@ -32,12 +20,13 @@ CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Network::WebServer)
  */
 struct RequestStructure final
 {
-    Types::Headers              headers     {}; //!< The headers of the request.
-    Types::OptionalString       method      {}; //!< The HTTP method of the request.
-    Types::OptionalString       uri         {}; //!< The URI of the request.
-    Types::OptionalString       httpVersion {}; //!< The HTTP version of the request.
-    Types::OptionalString       body        {}; //!< The body of the request.
-    Globals::Storage::Cookies   cookies     {}; //!< The cookies received in the request.
+    Types::Headers              headers       {}; //!< The headers of the request.
+    Types::OptionalString       method        {}; //!< The HTTP method of the request.
+    Types::OptionalString       uri           {}; //!< The URI of the request.
+    Types::OptionalString       httpVersion   {}; //!< The HTTP version of the request.
+    Types::OptionalString       body          {}; //!< The body of the request.
+    Globals::Storage::Cookies   cookies       {}; //!< The cookies received in the request.
+    std::unordered_map<std::string, std::string> pathParameters {}; //!< Dynamic path parameters (e.g., `/user/{id}`).
 };
 
 /**
@@ -118,12 +107,27 @@ public:
      */
     const Cell::Globals::Storage::Cookies& cookies() const;
 
-     std::unordered_map<std::string, std::string> getUploadedFiles() const;
+    /**
+     * @brief Get the uploaded files in the request.
+     * @return The uploaded files as an unordered map.
+     */
+    std::unordered_map<std::string, std::string> getUploadedFiles() const;
+
+    /**
+     * @brief Set path parameters for the request.
+     * @param params The path parameters to set.
+     */
+    void setPathParameters(const std::unordered_map<std::string, std::string>& params);
+
+    /**
+     * @brief Get the path parameters of the request.
+     * @return The path parameters as an unordered map.
+     */
+    const std::unordered_map<std::string, std::string>& pathParameters() const;
 
 private:
     RequestStructure m_requestStructure {};
     std::unordered_map<std::string, std::string> m_uploadedFiles;
-
 };
 
 CELL_NAMESPACE_END

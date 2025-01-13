@@ -10,9 +10,11 @@
 #   error "Cell's classes/mediatypes.hpp was not found!"
 #endif
 
+#include "core/logger.hpp"
 
 CELL_USING_NAMESPACE Cell;
 CELL_USING_NAMESPACE Cell::Types;
+CELL_USING_NAMESPACE Cell::Utility;
 
 CELL_NAMESPACE_BEGIN(Cell::Modules::BuiltIn::Network::WebServer)
 
@@ -38,28 +40,35 @@ void Router::addMiddleware(const Middleware& middleware)
     m_middleWares.push_back(middleware);
 }
 
-Response Router::routeRequest(const Request& request)
-{
+Response Router::routeRequest(const Request& request) {
     auto& engine = engineController.getEngine();
     std::string methodKey = normalizeMethod(request.method().value()).value();
     std::string path = normalizePath(request.path().value()).value();
 
-    // Find the handler for the requested path and method
+    Log("Routing request: Method=" + methodKey + ", Path=" + path, Utility::LoggerType::Info);
+
     auto methodIt = m_routes.find(methodKey);
     if (methodIt != m_routes.end()) {
         auto& routesByMethod = methodIt->second;
 
-        // Try to match the path with the registered routes
         for (const auto& route : routesByMethod) {
             const std::string& routePath = route.first;
             std::smatch match;
             std::regex routeRegex = createRouteRegex(routePath);
 
             if (std::regex_match(path, match, routeRegex)) {
-                // Call the handler function and return its response
+                Log("Matched route: " + routePath, Utility::LoggerType::Info);
+
+                std::unordered_map<std::string, std::string> pathParams;
+                auto paramNames = extractParameterNames(routePath);
+                for (size_t i = 0; i < paramNames.size(); ++i) {
+                    pathParams[paramNames[i]] = match[i + 1].str();
+                }
+
+                const_cast<Request&>(request).setPathParameters(pathParams);
+
                 Response response = route.second(request);
 
-                // Apply middleware to the request and response
                 for (const auto& middleware : m_middleWares) {
                     middleware(const_cast<Request&>(request), response, route.second);
                 }
@@ -69,18 +78,16 @@ Response Router::routeRequest(const Request& request)
         }
     }
 
-    // If no handler is found, call the custom error page handler if it's set
+    Log("No route matched for path: " + path, Utility::LoggerType::Warning);
+
     if (m_notFoundHandler) {
         return m_notFoundHandler(request);
     }
 
-    //! Todo for exception!?
-    // If no handler is found and no custom error page handler is set, return a default 404 response
     Response response;
     response.setStatusCode(404);
     response.setContentType(engine.meta()->returnView(Globals::ContentTypes::HTML));
-    std::string r = R"(<html><body><h1>Default 404 Not Found</h1><p>The requested page was not found.</p></body></html>)";
-    response.setContent(r);
+    response.setContent("<html><body><h1>404 Not Found</h1><p>The requested page was not found.</p></body></html>");
     return response;
 }
 
@@ -94,12 +101,10 @@ void Router::setExceptionHandler(const ExceptionErrorHandler& handler)
     m_exceptionHandler = handler;
 }
 
-OptionalString Router::normalizePath(const std::string& path)
-{
+Types::OptionalString Router::normalizePath(const std::string& path) const {
     // Normalize the path by removing trailing slashes
     std::string normalizedPath = path;
-    if (!normalizedPath.empty() && normalizedPath.back() == '/')
-    {
+    if (!normalizedPath.empty() && normalizedPath.back() == '/') {
         normalizedPath.pop_back();
     }
     return normalizedPath;
@@ -118,5 +123,31 @@ std::regex Router::createRouteRegex(const std::string& routePath) {
     return std::regex(regexPattern);
 }
 
+std::vector<std::string> Router::extractParameterNames(const std::string& routePath) {
+    std::vector<std::string> paramNames;
+    std::regex paramRegex(R"(\{(\w+)\})");
+    auto words_begin = std::sregex_iterator(routePath.begin(), routePath.end(), paramRegex);
+    auto words_end = std::sregex_iterator();
+
+    for (std::sregex_iterator i = words_begin; i != words_end; ++i) {
+        std::smatch match = *i;
+        paramNames.push_back(match.str(1));
+    }
+
+    return paramNames;
+}
+
+bool Router::hasRoute(const std::string& path) const {
+    std::string normalizedPath = normalizePath(path).value();
+
+           // Iterate through all methods (GET, POST, etc.) and check if the path exists in any of them.
+    for (const auto& methodRoutes : m_routes) {
+        if (methodRoutes.second.find(normalizedPath) != methodRoutes.second.end()) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 CELL_NAMESPACE_END
