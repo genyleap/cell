@@ -112,6 +112,17 @@ endif()
 
 get_filename_component(PARENT_DIR ../ ABSOLUTE)
 
+# Copy templates/* to the final root directory
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/templates")
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+                "${CMAKE_CURRENT_SOURCE_DIR}/templates"
+                "${CMAKE_CURRENT_BINARY_DIR}/final/templates"
+    )
+else()
+    message(WARNING "Templates directory not found: ${CMAKE_CURRENT_SOURCE_DIR}/templates")
+endif()
+
 #Copy from Core Interface.
 add_custom_command(TARGET ${PROJECT_NAME}  POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
