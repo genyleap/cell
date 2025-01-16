@@ -57,7 +57,8 @@ __cell_enum_class MenuItemType : Types::u8
     Button      = 0x2,  //!< Button.
     Dropdown    = 0x3,  //!< Dropdown menu.
     Separator   = 0x4,  //!< Visual separator.
-    Custom      = 0x5   //!< Custom type.
+    Action      = 0x5,  //!< Action type (e.g., run a shell command or function).
+    Custom      = 0x6   //!< Custom type.
 };
 
 /*!
@@ -77,21 +78,48 @@ __cell_enum_class ItemStatus : Types::u8
  */
 struct MenuItemData __cell_final
 {
-    Types::OptionalNumeric              id              {};   //!< Unique ID of the menu item.
-    Types::OptionalNumeric              parentId        {};   //!< Parent ID of the menu item.
-    Types::OptionalBool                 isParent        {};   //!< Whether the item is a parent.
-    Types::OptionalString               title           {};   //!< Title of the menu item.
-    Types::OptionalString               descr           {};   //!< Description of the menu item.
-    Types::OptionalString               url             {};   //!< URL or URI of the menu item.
-    Types::OptionalString               params          {};   //!< Additional parameters (e.g., rel="nofollow").
-    Types::Optional<ItemStatus>         status          {};   //!< Status of the menu item.
-    Types::OptionalNumeric              priority        {};   //!< Priority or position index.
-    Types::OptionalString               language        {};   //!< Language code for localization (e.g., "en", "fa").
-    Types::OptionalBool                 inSiteMap       {};   //!< Whether the item is included in the sitemap.
-    Types::Optional<MenuDisplayGroup>   displayGroup    {};   //!< Display group for role-based access.
-    Types::OptionalString               icon            {};   //!< Icon for the menu item (e.g., "fa-home").
-    Types::Optional<MenuItemType>       type            {};   //!< Type of the menu item (e.g., link, button).
-    Types::OptionalString               layout          {};   //!< Template (layout) for rendering the menu item (e.g., "horizontal", "vertical").
+    Types::OptionalNumeric              id               {};   //!< Unique ID of the menu item.
+    Types::OptionalNumeric              parentId         {};   //!< Parent ID of the menu item.
+    Types::OptionalBool                 isParent         {};   //!< Whether the item is a parent.
+    Types::OptionalString               title            {};   //!< Title of the menu item.
+    Types::OptionalString               descr            {};   //!< Description of the menu item.
+    Types::OptionalString               url              {};   //!< URL or URI of the menu item.
+    Types::OptionalString               params           {};   //!< Additional parameters (e.g., rel="nofollow").
+    Types::Optional<ItemStatus>         status           {};   //!< Status of the menu item.
+    Types::OptionalNumeric              priority         {};   //!< Priority or position index.
+    Types::OptionalString               language         {};   //!< Language code for localization (e.g., "en", "fa").
+
+    Types::OptionalBool                 inSiteMap        {};   //!< Whether the item is included in the sitemap.
+    Types::Optional<MenuDisplayGroup>   displayGroup     {};   //!< Display group for role-based access.
+
+    Types::OptionalString               icon             {};   //!< Icon for the menu item (e.g., "fa-home").
+    Types::Optional<MenuItemType>       type             {};   //!< Type of the menu item (e.g., link, button).
+    Types::OptionalString               layout           {};   //!< Template (layout) for rendering the menu item (e.g., "horizontal", "vertical").
+    Types::OptionalString               expiryDate       {};   //!< Expiry date of the menu item (e.g., "2025-12-31").
+
+    Types::OptionalString               visibleStartTime {};   //!< Start time when the menu item is visible (e.g., "09:00").
+    Types::OptionalString               visibleEndTime   {};   //!< End time when the menu item is visible (e.g., "17:00").
+
+    std::map<Types::OptionalString, Types::OptionalBool>    permissions          {};   //!< Permissions for the menu item (e.g., "view": true, "edit": false).
+    std::map<Types::OptionalString, Types::OptionalString>  customAttributes     {};   //!< Custom attributes for the menu item.
+    std::vector<Types::OptionalNumeric>                     dependencies         {};   //!< List of menu item IDs that this item depends on.
+    std::map<Types::OptionalString, std::shared_ptr<void>>  externalDependencies {};   //!< External dependencies.
+
+    Types::OptionalNumeric                                  accessCount          {};   //!< Number of times the menu item has been accessed.
+    Types::OptionalString                                   visibilityCondition  {};   //!< Condition for visibility (e.g., "device == 'mobile'").
+    std::map<Types::OptionalString, std::function<void()>>  eventHooks           {};   //!< Event hooks (e.g., "onClick": []() { ... }).
+    std::vector<Types::OptionalString>                      tags                 {};   //!< Tags for the menu item (e.g., "admin", "settings").
+
+    Types::OptionalNumeric                                  rateLimit            {};   //!< Rate limit (e.g., 10 accesses per minute).
+    std::map<Types::OptionalString, Types::OptionalString>  geolocationRules     {};   //!< Geolocation rules (e.g., "country == 'US'").
+    std::vector<Types::OptionalString>                      webhooks             {};   //!< Webhooks to trigger (e.g., "https://example.com/webhook").
+    Types::OptionalString                                   templates            {};   //!< Template for dynamic content (e.g., "Hello, {{user}}!").
+    Types::OptionalString                                   apiEndpoint          {};   //!< API endpoint to fetch data from.
+    std::map<Types::OptionalString, Types::OptionalString>  state                {};   //!< State of the menu item (e.g., "open": "true").
+    std::vector<Types::OptionalString>                      collaborators        {};   //!< List of collaborators (e.g., user IDs).
+    Types::OptionalString                                   aiModel              {};   //!< AI model for recommendations (e.g., "recommendation_model").
+
+    Types::OptionalString                                   version              {};   //!< Version of the menu item (e.g., "1.0", "2.0").
 };
 
 /*!
@@ -358,6 +386,308 @@ public:
      */
     __cell_virtual void setLayout(const Types::OptionalString& layout) = __cell_zero;
 
+    /*!
+     * \brief setAction sets a shell command or function to be executed when the menu item is clicked.
+     * \param action The shell command or function to execute.
+     */
+    __cell_virtual void setAction(const Types::OptionalString& action) = __cell_zero;
+
+    /*!
+     * \brief executeAction executes the shell command or function associated with the menu item.
+     * \returns True if the action was successfully executed.
+     */
+    __cell_virtual Types::OptionalBool executeAction() = __cell_zero;
+
+    /*!
+     * \brief setExpiryDate sets the expiry date for the menu item.
+     * \param date The expiry date as a string (e.g., "2023-12-31").
+     */
+    __cell_virtual void setExpiryDate(const Types::OptionalString& date) = __cell_zero;
+
+    /*!
+     * \brief isExpired checks if the menu item has expired.
+     * \returns True if the menu item has expired, false otherwise.
+     */
+    __cell_virtual Types::OptionalBool isExpired() __cell_const = __cell_zero;
+
+    /*!
+     * \brief setVisibilityTime sets the visibility time range for the menu item.
+     * \param startTime The start time as a string (e.g., "09:00").
+     * \param endTime The end time as a string (e.g., "17:00").
+     */
+    __cell_virtual void setVisibilityTime(const Types::OptionalString& startTime, const Types::OptionalString& endTime) = __cell_zero;
+
+    /*!
+     * \brief isVisible checks if the menu item is currently visible based on the time.
+     * \returns True if the menu item is visible, false otherwise.
+     */
+    __cell_virtual Types::OptionalBool isVisible() __cell_const = __cell_zero;
+
+    /*!
+     * \brief logAction logs an action performed on the menu item.
+     * \param action The action to log (e.g., "clicked", "executed").
+     * \param userRole The role of the user performing the action.
+     */
+    __cell_virtual void logAction(const Types::OptionalString& action, const UserRole& userRole) = __cell_zero;
+
+    /*!
+     * \brief getActionLogs retrieves the logs for the menu item.
+     * \returns A vector of log entries.
+     */
+    __cell_virtual std::vector<Types::OptionalString> getActionLogs() __cell_const = __cell_zero;
+
+    /*!
+     * \brief setCustomAttribute sets a custom attribute for the menu item.
+     * \param key The key of the attribute.
+     * \param value The value of the attribute.
+     */
+    __cell_virtual void setCustomAttribute(const Types::OptionalString& key, const Types::OptionalString& value) = __cell_zero;
+
+    /*!
+     * \brief getCustomAttribute retrieves a custom attribute by key.
+     * \param key The key of the attribute.
+     * \returns The value of the attribute as an optional string.
+     */
+    __cell_virtual Types::OptionalString getCustomAttribute(const Types::OptionalString& key) __cell_const = __cell_zero;
+
+    /*!
+     * \brief removeCustomAttribute removes a custom attribute by key.
+     * \param key The key of the attribute to remove.
+     * \returns True if the attribute was successfully removed.
+     */
+    __cell_virtual Types::OptionalBool removeCustomAttribute(const Types::OptionalString& key) = __cell_zero;
+
+    /*!
+     * \brief addDependency adds a dependency to the menu item.
+     * \param itemId The ID of the menu item to depend on.
+     */
+    __cell_virtual void addDependency(const Types::OptionalNumeric itemId) = __cell_zero;
+
+    /*!
+     * \brief removeDependency removes a dependency from the menu item.
+     * \param itemId The ID of the menu item to remove as a dependency.
+     * \returns True if the dependency was successfully removed.
+     */
+    __cell_virtual Types::OptionalBool removeDependency(const Types::OptionalNumeric itemId) = __cell_zero;
+
+    /*!
+     * \brief checkDependencies checks if all dependencies are met.
+     * \returns True if all dependencies are met, false otherwise.
+     */
+    __cell_virtual Types::OptionalBool checkDependencies() __cell_const = __cell_zero;
+
+    /*!
+     * \brief cacheMenu caches the entire menu for faster retrieval.
+     * \returns True if the menu was successfully cached.
+     */
+    __cell_virtual Types::OptionalBool cacheMenu() = __cell_zero;
+
+    /*!
+     * \brief getCachedMenu retrieves the cached menu.
+     * \returns A vector of menu items from the cache.
+     */
+    __cell_virtual std::vector<MenuItemData> getCachedMenu() __cell_const = __cell_zero;
+
+    /*!
+     * \brief clearCache clears the menu cache.
+     * \returns True if the cache was successfully cleared.
+     */
+    __cell_virtual Types::OptionalBool clearCache() = __cell_zero;
+
+    /*!
+     * \brief incrementAccessCount increments the access count for the menu item.
+     */
+    __cell_virtual void incrementAccessCount() = __cell_zero;
+
+    /*!
+     * \brief getAccessCount retrieves the access count for the menu item.
+     * \returns The access count as an optional numeric value.
+     */
+    __cell_virtual Types::OptionalNumeric getAccessCount() __cell_const = __cell_zero;
+
+    /*!
+     * \brief setPermission sets a permission for the menu item.
+     * \param permission The permission name (e.g., "view", "edit").
+     * \param value The value of the permission (true or false).
+     */
+    __cell_virtual void setPermission(const Types::OptionalString& permission, const Types::OptionalBool value) = __cell_zero;
+
+    /*!
+     * \brief hasPermission checks if a specific permission is granted.
+     * \param permission The permission name (e.g., "view", "edit").
+     * \returns True if the permission is granted, false otherwise.
+     */
+    __cell_virtual Types::OptionalBool hasPermission(const Types::OptionalString& permission) __cell_const = __cell_zero;
+
+    /*!
+     * \brief setVisibilityCondition sets a condition for the menu item's visibility.
+     * \param condition The condition as a string (e.g., "device == 'mobile'").
+     */
+    __cell_virtual void setVisibilityCondition(const Types::OptionalString& condition) = __cell_zero;
+
+    /*!
+     * \brief evaluateVisibility evaluates the visibility condition.
+     * \param context A map of contextual data (e.g., device type, user location).
+     * \returns True if the condition is met, false otherwise.
+     */
+    __cell_virtual Types::OptionalBool evaluateVisibility(const std::map<Types::OptionalString, Types::OptionalString>& context) __cell_const = __cell_zero;
+
+    /*!
+     * \brief addEventHook adds an event hook to the menu item.
+     * \param eventName The name of the event (e.g., "onClick", "onHover").
+     * \param callback The callback function to execute.
+     */
+    __cell_virtual void addEventHook(const Types::OptionalString& eventName, std::function<void()> callback) = __cell_zero;
+
+    /*!
+     * \brief triggerEvent triggers an event hook.
+     * \param eventName The name of the event to trigger.
+     * \returns True if the event was triggered successfully.
+     */
+    __cell_virtual Types::OptionalBool triggerEvent(const Types::OptionalString& eventName) = __cell_zero;
+
+    /*!
+     * \brief setVersion sets the version of the menu item.
+     * \param version The version as a string (e.g., "1.0").
+     */
+    __cell_virtual void setVersion(const Types::OptionalString& version) = __cell_zero;
+
+    /*!
+     * \brief getVersion retrieves the version of the menu item.
+     * \returns The version as an optional string.
+     */
+    __cell_virtual Types::OptionalString getVersion() __cell_const = __cell_zero;
+
+    /*!
+     * \brief searchItems searches for menu items by keyword.
+     * \param keyword The keyword to search for.
+     * \returns A vector of matching menu items.
+     */
+    __cell_virtual std::vector<MenuItemData> searchItems(const Types::OptionalString& keyword) __cell_const = __cell_zero;
+
+    /*!
+     * \brief filterItemsByTag filters menu items by tag.
+     * \param tag The tag to filter by.
+     * \returns A vector of matching menu items.
+     */
+    __cell_virtual std::vector<MenuItemData> filterItemsByTag(const Types::OptionalString& tag) __cell_const = __cell_zero;
+
+    /*!
+     * \brief injectDependency injects an external dependency into the menu item.
+     * \param key The key for the dependency.
+     * \param dependency The dependency to inject.
+     */
+    __cell_virtual void injectDependency(const Types::OptionalString& key, std::shared_ptr<void> dependency) = __cell_zero;
+
+    /*!
+     * \brief getDependency retrieves an injected dependency by key.
+     * \param key The key for the dependency.
+     * \returns The dependency as a shared pointer.
+     */
+    __cell_virtual std::shared_ptr<void> getDependency(const Types::OptionalString& key) __cell_const = __cell_zero;
+
+    /*!
+     * \brief setRateLimit sets a rate limit for the menu item.
+     * \param limit The rate limit (e.g., 10).
+     * \param interval The time interval (e.g., "minute").
+     */
+    __cell_virtual void setRateLimit(const Types::OptionalNumeric limit, const Types::OptionalString& interval) = __cell_zero;
+
+    /*!
+     * \brief checkRateLimit checks if the rate limit has been exceeded.
+     * \returns True if the rate limit has not been exceeded, false otherwise.
+     */
+    __cell_virtual Types::OptionalBool checkRateLimit() __cell_const = __cell_zero;
+
+    /*!
+     * \brief addGeolocationRule adds a geolocation rule for the menu item.
+     * \param rule The rule as a string (e.g., "country == 'US'").
+     */
+    __cell_virtual void addGeolocationRule(const Types::OptionalString& rule) = __cell_zero;
+
+    /*!
+     * \brief evaluateGeolocation evaluates geolocation rules for a user.
+     * \param location A map of location data (e.g., "country": "US").
+     * \returns True if the rules are satisfied, false otherwise.
+     */
+    __cell_virtual Types::OptionalBool evaluateGeolocation(const std::map<Types::OptionalString, Types::OptionalString>& location) __cell_const = __cell_zero;
+
+    /*!
+     * \brief addWebhook adds a webhook to the menu item.
+     * \param url The URL of the webhook.
+     */
+    __cell_virtual void addWebhook(const Types::OptionalString& url) = __cell_zero;
+
+    /*!
+     * \brief triggerWebhooks triggers all webhooks associated with the menu item.
+     * \returns True if all webhooks were triggered successfully.
+     */
+    __cell_virtual Types::OptionalBool triggerWebhooks() = __cell_zero;
+
+    /*!
+     * \brief setTemplate sets a template for the menu item.
+     * \param template The template as a string (e.g., "Hello, {{user}}!").
+     */
+    __cell_virtual void setTemplate(const Types::OptionalString& templates) = __cell_zero;
+
+    /*!
+     * \brief renderTemplate renders the template with provided data.
+     * \param data A map of data to inject into the template.
+     * \returns The rendered content as a string.
+     */
+    __cell_virtual Types::OptionalString renderTemplate(const std::map<Types::OptionalString, Types::OptionalString>& data) __cell_const = __cell_zero;
+
+    /*!
+     * \brief setApiEndpoint sets an API endpoint for the menu item.
+     * \param endpoint The API endpoint (e.g., "https://api.example.com/data").
+     */
+    __cell_virtual void setApiEndpoint(const Types::OptionalString& endpoint) = __cell_zero;
+
+    /*!
+     * \brief fetchApiData fetches data from the API endpoint.
+     * \returns The fetched data as a string.
+     */
+    __cell_virtual Types::OptionalString fetchApiData() __cell_const = __cell_zero;
+
+    /*!
+     * \brief setState sets a state value for the menu item.
+     * \param key The state key (e.g., "open").
+     * \param value The state value (e.g., "true").
+     */
+    __cell_virtual void setState(const Types::OptionalString& key, const Types::OptionalString& value) = __cell_zero;
+
+    /*!
+     * \brief getState retrieves a state value by key.
+     * \param key The state key (e.g., "open").
+     * \returns The state value as an optional string.
+     */
+    __cell_virtual Types::OptionalString getState(const Types::OptionalString& key) __cell_const = __cell_zero;
+
+    /*!
+     * \brief addCollaborator adds a collaborator to the menu item.
+     * \param userId The ID of the collaborator.
+     */
+    __cell_virtual void addCollaborator(const Types::OptionalString& userId) = __cell_zero;
+
+    /*!
+     * \brief removeCollaborator removes a collaborator from the menu item.
+     * \param userId The ID of the collaborator.
+     * \returns True if the collaborator was successfully removed.
+     */
+    __cell_virtual Types::OptionalBool removeCollaborator(const Types::OptionalString& userId) = __cell_zero;
+
+    /*!
+     * \brief setAiModel sets an AI model for the menu item.
+     * \param model The AI model identifier.
+     */
+    __cell_virtual void setAiModel(const Types::OptionalString& model) = __cell_zero;
+
+    /*!
+     * \brief generateRecommendations generates recommendations using the AI model.
+     * \returns A vector of recommended menu items.
+     */
+    __cell_virtual std::vector<MenuItemData> generateRecommendations() __cell_const = __cell_zero;
+
 private:
     CELL_DISABLE_COPY(AbstractMenuItem)
 };
@@ -413,6 +743,52 @@ public:
      * \returns A vector of menu items matching the status.
      */
     __cell_virtual std::vector<Types::OptionalString> itemsByStatus(const ItemStatus& status) __cell_const = __cell_zero;
+
+    /*!
+     * \brief generateDynamicItems generates menu items dynamically based on a condition.
+     * \param condition A function that returns true if the condition is met.
+     * \param generator A function that generates menu items.
+     * \returns A vector of dynamically generated menu items.
+     */
+    __cell_virtual std::vector<MenuItemData> generateDynamicItems(std::function<bool()> condition, std::function<std::vector<MenuItemData>()> generator) = __cell_zero;
+
+    /*!
+     * \brief undo reverts the last change made to the menu.
+     * \returns True if the undo operation was successful.
+     */
+    __cell_virtual Types::OptionalBool undo() = __cell_zero;
+
+    /*!
+     * \brief redo reapplies the last undone change.
+     * \returns True if the redo operation was successful.
+     */
+    __cell_virtual Types::OptionalBool redo() = __cell_zero;
+
+    /*!
+     * \brief getHistory retrieves the change history.
+     * \returns A vector of change descriptions.
+     */
+    __cell_virtual std::vector<Types::OptionalString> getHistory() __cell_const = __cell_zero;
+
+    /*!
+     * \brief exportMenu exports the menu to a file.
+     * \param filePath The path to the export file.
+     * \returns True if the export was successful.
+     */
+    __cell_virtual Types::OptionalBool exportMenu(const Types::OptionalString& filePath) __cell_const = __cell_zero;
+
+    /*!
+     * \brief importMenu imports the menu from a file.
+     * \param filePath The path to the import file.
+     * \returns True if the import was successful.
+     */
+    __cell_virtual Types::OptionalBool importMenu(const Types::OptionalString& filePath) = __cell_zero;
+
+    /*!
+     * \brief generateAnalyticsReport generates a report of menu item usage.
+     * \returns A map of analytics data (e.g., "mostAccessedItem", "totalAccesses").
+     */
+    __cell_virtual std::map<Types::OptionalString, Types::OptionalNumeric> generateAnalyticsReport() __cell_const = __cell_zero;
 
 private:
     CELL_DISABLE_COPY(AbstractMenu)

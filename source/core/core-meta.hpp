@@ -19,6 +19,18 @@
 #   error "Cell's "common.hpp" was not found!"
 #endif
 
+#if __has_include("renderer.hpp")
+#   include "renderer.hpp"
+#else
+#   error "Cell's "renderer.hpp" was not found!"
+#endif
+
+#if __has_include("renderformat.hpp")
+#   include "renderformat.hpp"
+#else
+#   error "Cell's "renderformat.hpp" was not found!"
+#endif
+
 #if __has_include("core-concepts.hpp")
 #   include "core-concepts.hpp"
 #else
@@ -147,6 +159,8 @@ public:
 };
 
 class MetaEngine {
+private:
+    std::unordered_map<std::type_index, std::unique_ptr<System::Renderer>> renderers; ///< Map of renderers for different types.
 public:
 
     /**
@@ -313,6 +327,34 @@ public:
 
         return randomString;
     }
+
+    /**
+     * @brief Register a renderer for a specific component type.
+     * @tparam T The type of data the renderer can render.
+     * @param renderer The renderer to register.
+     */
+    template <typename T>
+    void registerRenderer(std::unique_ptr<System::Renderer> renderer) {
+        renderers[typeid(T)] = std::move(renderer);
+    }
+
+    /**
+     * @brief Render a component using the appropriate renderer.
+     * @tparam T The type of data to render.
+     * @param data The data to render.
+     * @param format The desired rendering format.
+     * @return A generic result (e.g., std::string, std::vector<uint8_t>, etc.).
+     * @throws std::runtime_error If no renderer is registered for the given type.
+     */
+    template <typename T>
+    std::any render(const T& data, System::RenderFormat format) const {
+        auto it = renderers.find(typeid(T));
+        if (it == renderers.end()) {
+            throw std::runtime_error("No renderer registered for this type.");
+        }
+        return it->second->render(&data, format);
+    }
+
 
     /**
      * Enum representing the character sets available for UID generation.
